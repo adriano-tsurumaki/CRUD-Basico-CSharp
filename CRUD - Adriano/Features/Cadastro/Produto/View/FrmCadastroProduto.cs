@@ -12,5 +12,24 @@ namespace CRUD___Adriano.Features.Cadastro.Produto.View
             InitializeComponent();
             _produtoCadastroController = produtoCadastroController;
         }
+
+        private void BtnCadastrar_Click(object sender, System.EventArgs e) =>
+            _produtoCadastroController.EfetuarCadastroDoProduto();
+
+        private void BtnCancelar_Click(object sender, System.EventArgs e) =>
+            Close();
+
+        private void FrmCadastroProduto_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch(e.KeyCode)
+            {
+                case Keys.Escape:
+                    Close();
+                    break;
+                case Keys.F5:
+                    _produtoCadastroController.EfetuarCadastroDoProduto();
+                    break;
+            }
+        }
     }
 }
