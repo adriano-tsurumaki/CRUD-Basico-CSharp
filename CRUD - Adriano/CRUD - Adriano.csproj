@@ -7,4 +7,12 @@
     <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\Cadastro\Produto\Dao\" />
+    <Folder Include="Features\Listagem\Produto\Controller\" />
+    <Folder Include="Features\Listagem\Produto\Dao\" />
+    <Folder Include="Features\Listagem\Produto\Model\" />
+    <Folder Include="Features\Listagem\Produto\View\" />
+  </ItemGroup>
+
 </Project>

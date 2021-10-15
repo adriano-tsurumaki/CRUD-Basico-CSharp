@@ -29,13 +29,25 @@ namespace CRUD___Adriano
         /// </summary>
         private void InitializeComponent()
         {
+            this.btnTelaCadastro = new System.Windows.Forms.Button();
             this.SuspendLayout();
+            // 
+            // btnTelaCadastro
+            // 
+            this.btnTelaCadastro.Location = new System.Drawing.Point(135, 193);
+            this.btnTelaCadastro.Name = "btnTelaCadastro";
+            this.btnTelaCadastro.Size = new System.Drawing.Size(140, 23);
+            this.btnTelaCadastro.TabIndex = 0;
+            this.btnTelaCadastro.Text = "Abrir tela de cadastro";
+            this.btnTelaCadastro.UseVisualStyleBackColor = true;
+            this.btnTelaCadastro.Click += new System.EventHandler(this.BtnTelaCadastro_Click);
             // 
             // FrmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnTelaCadastro);
             this.Name = "FrmPrincipal";
             this.Text = "Principal";
             this.ResumeLayout(false);
@@ -43,6 +55,8 @@ namespace CRUD___Adriano
         }
 
         #endregion
+
+        private System.Windows.Forms.Button btnTelaCadastro;
     }
 }
 

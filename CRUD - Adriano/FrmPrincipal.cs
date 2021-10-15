@@ -17,5 +17,9 @@ namespace CRUD___Adriano
             InitializeComponent();
         }
 
+        private void BtnTelaCadastro_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
