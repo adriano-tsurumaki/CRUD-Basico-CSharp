@@ -3,11 +3,11 @@ using System.Windows.Forms;
 
 namespace CRUD___Adriano.Features.Cadastro.Produto.View
 {
-    public partial class FrmCadastroProduto : Form
+    public partial class FrmCadastroCliente : Form
     {
-        private ProdutoCadastroController _produtoCadastroController;
+        private ClienteCadastroController _produtoCadastroController;
 
-        public FrmCadastroProduto(ProdutoCadastroController produtoCadastroController)
+        public FrmCadastroCliente(ClienteCadastroController produtoCadastroController)
         {
             InitializeComponent();
             _produtoCadastroController = produtoCadastroController;

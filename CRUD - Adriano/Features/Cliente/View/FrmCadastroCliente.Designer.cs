@@ -1,7 +1,7 @@
 ﻿
 namespace CRUD___Adriano.Features.Cadastro.Produto.View
 {
-    partial class FrmCadastroProduto
+    partial class FrmCadastroCliente
     {
         /// <summary>
         /// Required designer variable.
@@ -107,7 +107,7 @@ namespace CRUD___Adriano.Features.Cadastro.Produto.View
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.ClientSize = new System.Drawing.Size(435, 174);
+            this.ClientSize = new System.Drawing.Size(411, 174);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnCadastrar);
             this.Controls.Add(this.txtNome);
@@ -115,6 +115,7 @@ namespace CRUD___Adriano.Features.Cadastro.Produto.View
             this.Controls.Add(this.lbQuantidade);
             this.Controls.Add(this.lblNome);
             this.Name = "FrmCadastroProduto";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cadastro do produto";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FrmCadastroProduto_KeyDown);
             this.ResumeLayout(false);

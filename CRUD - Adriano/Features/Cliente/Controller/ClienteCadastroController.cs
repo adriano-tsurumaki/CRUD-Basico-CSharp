@@ -5,12 +5,12 @@ using System.Windows.Forms;
 
 namespace CRUD___Adriano.Features.Cadastro.Produto.Controller
 {
-    public class ProdutoCadastroController
+    public class ClienteCadastroController
     {
-        private FrmCadastroProduto _frmCadastroProduto;
+        private FrmCadastroCliente _frmCadastroProduto;
 
-        public ProdutoCadastroController() =>
-            _frmCadastroProduto = new FrmCadastroProduto(this);
+        public ClienteCadastroController() =>
+            _frmCadastroProduto = new FrmCadastroCliente(this);
 
         public void AbrirFormulario() =>
             _frmCadastroProduto.Show();
@@ -21,17 +21,16 @@ namespace CRUD___Adriano.Features.Cadastro.Produto.Controller
             if (!ValidarCadastro())
                 MessageBox.Show("Campos inválidos!");
 
-            CadastrarProduto(new ProdutoModel
+            CadastrarProduto(new ClienteModel
             {
                 Nome = _frmCadastroProduto.txtNome.Text,
-                Quantidade = quantidade
             });
         }
 
         public bool ValidarCadastro() =>
             !(_frmCadastroProduto.txtNome.Text.Equals(string.Empty) || _frmCadastroProduto.txtQuantidade.Text.Equals(string.Empty));
 
-        public void CadastrarProduto(ProdutoModel produto)
+        public void CadastrarProduto(ClienteModel produto)
         {
             
         }

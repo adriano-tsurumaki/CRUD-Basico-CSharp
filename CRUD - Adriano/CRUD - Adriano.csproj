@@ -8,15 +8,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Cadastro\Produto\Dao\" />
-    <Folder Include="Features\Listagem\Produto\Controller\" />
-    <Folder Include="Features\Listagem\Produto\Dao\" />
-    <Folder Include="Features\Listagem\Produto\Model\" />
-    <Folder Include="Features\Listagem\Produto\View\" />
+    <Compile Remove="Features\Listagem\**" />
+    <EmbeddedResource Remove="Features\Listagem\**" />
+    <None Remove="Features\Listagem\**" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Dapper" Version="2.0.90" />
+    <PackageReference Include="Dapper.FluentMap" Version="2.0.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
   </ItemGroup>
 
 </Project>
