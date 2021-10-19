@@ -24,11 +24,13 @@ namespace CRUD___Adriano.Features.Cadastro.Produto.Controller
         {
             try
             {
-                using (var conexao = SqlConexao.RetornarConexao())
-                {
-                    conexao.Open();
-                    ClienteDao.CadastrarCliente(conexao, clienteModel);
-                }
+                using var conexao = SqlConexao.RetornarConexao();
+                conexao.Open();
+
+                using var transacao = conexao.BeginTransaction();
+                ClienteDao.CadastrarCliente(conexao, transacao, clienteModel);
+
+                transacao.Commit();
             }
             catch (Exception ex)
             {

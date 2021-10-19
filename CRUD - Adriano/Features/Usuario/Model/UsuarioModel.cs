@@ -9,6 +9,7 @@ namespace CRUD___Adriano.Features.Cliente.Model
         public int Id { get; set; }
         public string Nome { get; set; }
         public string Sobrenome { get; set; }
+        public string Cpf { get; set; }
         public UsuarioSexoEnum Sexo { get; set; }
         public IList<EmailModel> Emails { get; set; }
         public DateTime DataNascimento { get; set; }
@@ -19,5 +20,9 @@ namespace CRUD___Adriano.Features.Cliente.Model
             Endereco = new EnderecoModel();
             Emails = new List<EmailModel>();
         }
+
+        public string RetornarCpfFormatado() => 
+            Convert.ToUInt64(Cpf).ToString(@"000\.000\.000\-00");
+
     }
 }

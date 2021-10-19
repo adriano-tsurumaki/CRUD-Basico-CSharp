@@ -57,6 +57,8 @@ namespace CRUD___Adriano.Features.Cadastro.Produto.View
             this.cbSexo = new CRUD___Adriano.Features.Componentes.ComboBoxFlat();
             this.txtCidade = new CRUD___Adriano.Features.Componentes.TextBoxFlat();
             this.txtEstado = new CRUD___Adriano.Features.Componentes.TextBoxFlat();
+            this.txtCpf = new CRUD___Adriano.Features.Componentes.TextBoxFlat();
+            this.lblCpf = new System.Windows.Forms.Label();
             this.pnlBottom.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
@@ -171,7 +173,7 @@ namespace CRUD___Adriano.Features.Cadastro.Produto.View
             this.lblDataNascimento.AutoSize = true;
             this.lblDataNascimento.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblDataNascimento.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            this.lblDataNascimento.Location = new System.Drawing.Point(325, 80);
+            this.lblDataNascimento.Location = new System.Drawing.Point(325, 151);
             this.lblDataNascimento.Name = "lblDataNascimento";
             this.lblDataNascimento.Size = new System.Drawing.Size(161, 21);
             this.lblDataNascimento.TabIndex = 10;
@@ -282,7 +284,7 @@ namespace CRUD___Adriano.Features.Cadastro.Produto.View
             this.lblCidade.AutoSize = true;
             this.lblCidade.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblCidade.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            this.lblCidade.Location = new System.Drawing.Point(325, 151);
+            this.lblCidade.Location = new System.Drawing.Point(325, 222);
             this.lblCidade.Name = "lblCidade";
             this.lblCidade.Size = new System.Drawing.Size(68, 21);
             this.lblCidade.TabIndex = 19;
@@ -293,7 +295,7 @@ namespace CRUD___Adriano.Features.Cadastro.Produto.View
             this.lblEstado.AutoSize = true;
             this.lblEstado.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblEstado.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            this.lblEstado.Location = new System.Drawing.Point(325, 222);
+            this.lblEstado.Location = new System.Drawing.Point(325, 293);
             this.lblEstado.Name = "lblEstado";
             this.lblEstado.Size = new System.Drawing.Size(66, 21);
             this.lblEstado.TabIndex = 20;
@@ -304,7 +306,7 @@ namespace CRUD___Adriano.Features.Cadastro.Produto.View
             this.lblNumero.AutoSize = true;
             this.lblNumero.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblNumero.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            this.lblNumero.Location = new System.Drawing.Point(325, 293);
+            this.lblNumero.Location = new System.Drawing.Point(325, 364);
             this.lblNumero.Name = "lblNumero";
             this.lblNumero.Size = new System.Drawing.Size(77, 21);
             this.lblNumero.TabIndex = 21;
@@ -354,7 +356,7 @@ namespace CRUD___Adriano.Features.Cadastro.Produto.View
             this.txtNumero.BorderSize = 2;
             this.txtNumero.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txtNumero.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.txtNumero.Location = new System.Drawing.Point(325, 321);
+            this.txtNumero.Location = new System.Drawing.Point(325, 392);
             this.txtNumero.Margin = new System.Windows.Forms.Padding(4);
             this.txtNumero.Multiline = false;
             this.txtNumero.Name = "txtNumero";
@@ -372,7 +374,7 @@ namespace CRUD___Adriano.Features.Cadastro.Produto.View
             this.dataNascimento.BorderSize = 0;
             this.dataNascimento.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.dataNascimento.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dataNascimento.Location = new System.Drawing.Point(325, 108);
+            this.dataNascimento.Location = new System.Drawing.Point(325, 179);
             this.dataNascimento.MinimumSize = new System.Drawing.Size(4, 35);
             this.dataNascimento.Name = "dataNascimento";
             this.dataNascimento.Size = new System.Drawing.Size(212, 35);
@@ -416,7 +418,7 @@ namespace CRUD___Adriano.Features.Cadastro.Produto.View
             this.txtCidade.BorderSize = 2;
             this.txtCidade.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txtCidade.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.txtCidade.Location = new System.Drawing.Point(325, 179);
+            this.txtCidade.Location = new System.Drawing.Point(325, 250);
             this.txtCidade.Margin = new System.Windows.Forms.Padding(4);
             this.txtCidade.Multiline = false;
             this.txtCidade.Name = "txtCidade";
@@ -435,7 +437,7 @@ namespace CRUD___Adriano.Features.Cadastro.Produto.View
             this.txtEstado.BorderSize = 2;
             this.txtEstado.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txtEstado.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.txtEstado.Location = new System.Drawing.Point(325, 250);
+            this.txtEstado.Location = new System.Drawing.Point(325, 321);
             this.txtEstado.Margin = new System.Windows.Forms.Padding(4);
             this.txtEstado.Multiline = false;
             this.txtEstado.Name = "txtEstado";
@@ -447,12 +449,44 @@ namespace CRUD___Adriano.Features.Cadastro.Produto.View
             this.txtEstado.UnderlinedStyle = true;
             this.txtEstado.Validating += new System.ComponentModel.CancelEventHandler(this.TxtEstado_Validating);
             // 
+            // txtCpf
+            // 
+            this.txtCpf.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
+            this.txtCpf.BorderColor = System.Drawing.Color.MediumSlateBlue;
+            this.txtCpf.BorderSize = 2;
+            this.txtCpf.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.txtCpf.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.txtCpf.Location = new System.Drawing.Point(325, 107);
+            this.txtCpf.Margin = new System.Windows.Forms.Padding(4);
+            this.txtCpf.Multiline = false;
+            this.txtCpf.Name = "txtCpf";
+            this.txtCpf.Padding = new System.Windows.Forms.Padding(7);
+            this.txtCpf.PasswordChar = false;
+            this.txtCpf.Size = new System.Drawing.Size(212, 36);
+            this.txtCpf.TabIndex = 26;
+            this.txtCpf.Texto = "";
+            this.txtCpf.UnderlinedStyle = true;
+            this.txtCpf.Validating += new System.ComponentModel.CancelEventHandler(this.TxtCpf_Validating);
+            // 
+            // lblCpf
+            // 
+            this.lblCpf.AutoSize = true;
+            this.lblCpf.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblCpf.ForeColor = System.Drawing.Color.MediumSlateBlue;
+            this.lblCpf.Location = new System.Drawing.Point(325, 80);
+            this.lblCpf.Name = "lblCpf";
+            this.lblCpf.Size = new System.Drawing.Size(43, 21);
+            this.lblCpf.TabIndex = 27;
+            this.lblCpf.Text = "Cpf*";
+            // 
             // FrmCadastroCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
             this.ClientSize = new System.Drawing.Size(622, 575);
+            this.Controls.Add(this.lblCpf);
+            this.Controls.Add(this.txtCpf);
             this.Controls.Add(this.txtEstado);
             this.Controls.Add(this.txtCidade);
             this.Controls.Add(this.cbSexo);
@@ -517,5 +551,7 @@ namespace CRUD___Adriano.Features.Cadastro.Produto.View
         private Componentes.ComboBoxFlat cbSexo;
         private Componentes.TextBoxFlat txtEstado;
         private Componentes.TextBoxFlat txtCidade;
+        private System.Windows.Forms.Label lblCpf;
+        private Componentes.TextBoxFlat txtCpf;
     }
 }

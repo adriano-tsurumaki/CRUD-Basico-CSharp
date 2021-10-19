@@ -122,10 +122,16 @@ namespace CRUD___Adriano.Features.Cadastro.Produto.View
                 _clienteModel.Sexo = cbSexo.PegarEnumPorDescricao<UsuarioSexoEnum>();
                 errorProvider.SetError(dataNascimento, null);
             }
-            catch(Exception ex)
+            catch(Exception _)
             {
                 errorProvider.SetError(dataNascimento, "Opção inválida!");
             }
+        }
+
+        private void TxtCpf_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (ValidacaoPadrao(txtCpf, e))
+                _clienteModel.Cpf = txtCpf.Texto;
         }
     }
 }
