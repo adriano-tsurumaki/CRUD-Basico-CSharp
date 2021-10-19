@@ -102,7 +102,7 @@ namespace CRUD___Adriano.Features.Componentes
         }
 
         [Category("Customizado")]
-        public string Texts
+        public string Texto
         { 
             get => textBox1.Text; 
             set => textBox1.Text = value; 
