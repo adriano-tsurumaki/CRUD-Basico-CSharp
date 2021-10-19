@@ -2,7 +2,7 @@
 
 namespace CRUD___Adriano.Features.Usuario.Enum
 {
-    public enum UsuarioEnum
+    public enum UsuarioSexoEnum
     {
         [Description("Masculino")]
         Masculino = 0,

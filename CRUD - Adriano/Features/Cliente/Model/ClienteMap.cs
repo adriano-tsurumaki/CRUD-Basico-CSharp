@@ -1,13 +1,14 @@
 ﻿using CRUD___Adriano.Features.Cadastro.Produto.Model;
 using Dapper.FluentMap.Mapping;
 
-namespace CRUD___Adriano.Features.Produto.Dao
+namespace CRUD___Adriano.Features.Cliente.Dao
 {
-    internal class ClienteMap: EntityMap<ClienteModel>
+    public class ClienteMap : EntityMap<ClienteModel>
     {
         public ClienteMap()
         {
             Map(x => x.Id).ToColumn("id", caseSensitive: false);
+            Map(x => x.ValorLimite).ToColumn("valor_limite", caseSensitive: false);
         }
     }
 }

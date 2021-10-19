@@ -81,11 +81,11 @@ namespace CRUD___Adriano.Features.Cadastro.Produto.View
             this.btnCadastrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCadastrar.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnCadastrar.ForeColor = System.Drawing.Color.White;
-            this.btnCadastrar.Location = new System.Drawing.Point(10, 7);
+            this.btnCadastrar.Location = new System.Drawing.Point(28, 7);
             this.btnCadastrar.Name = "btnCadastrar";
-            this.btnCadastrar.Size = new System.Drawing.Size(105, 38);
+            this.btnCadastrar.Size = new System.Drawing.Size(144, 38);
             this.btnCadastrar.TabIndex = 12;
-            this.btnCadastrar.Text = "Cadastrar";
+            this.btnCadastrar.Text = "Cadastrar (F5)";
             this.btnCadastrar.UseVisualStyleBackColor = false;
             this.btnCadastrar.Click += new System.EventHandler(this.BtnCadastrar_Click);
             // 
@@ -97,11 +97,11 @@ namespace CRUD___Adriano.Features.Cadastro.Produto.View
             this.btnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancelar.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnCancelar.ForeColor = System.Drawing.Color.White;
-            this.btnCancelar.Location = new System.Drawing.Point(142, 7);
+            this.btnCancelar.Location = new System.Drawing.Point(190, 7);
             this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(105, 38);
+            this.btnCancelar.Size = new System.Drawing.Size(144, 38);
             this.btnCancelar.TabIndex = 13;
-            this.btnCancelar.Text = "Cancelar";
+            this.btnCancelar.Text = "Cancelar (ESC)";
             this.btnCancelar.UseVisualStyleBackColor = false;
             this.btnCancelar.Click += new System.EventHandler(this.BtnCancelar_Click);
             // 
@@ -119,9 +119,9 @@ namespace CRUD___Adriano.Features.Cadastro.Produto.View
             this.panel1.Controls.Add(this.btnCadastrar);
             this.panel1.Controls.Add(this.btnCancelar);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel1.Location = new System.Drawing.Point(366, 0);
+            this.panel1.Location = new System.Drawing.Point(276, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(256, 57);
+            this.panel1.Size = new System.Drawing.Size(346, 57);
             this.panel1.TabIndex = 5;
             // 
             // txtNome

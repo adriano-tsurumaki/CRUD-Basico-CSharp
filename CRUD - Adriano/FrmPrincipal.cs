@@ -1,5 +1,4 @@
-﻿using CRUD___Adriano.Features;
-using CRUD___Adriano.Features.Cadastro.Produto.Controller;
+﻿using CRUD___Adriano.Features.Cadastro.Produto.Controller;
 using CRUD___Adriano.Features.Cliente.Controller;
 using System;
 using System.Windows.Forms;
@@ -13,8 +12,6 @@ namespace CRUD___Adriano
         public FrmPrincipal()
         {
             InitializeComponent();
-
-            FluentMap.InicializarMap();
             EsconderSubmenu();
         }
 

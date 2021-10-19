@@ -1,3 +1,4 @@
+using CRUD___Adriano.Features;
 using System;
 using System.Windows.Forms;
 
@@ -11,6 +12,8 @@ namespace CRUD___Adriano
         [STAThread]
         static void Main()
         {
+            FluentMap.InicializarMap();
+
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

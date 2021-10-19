@@ -3,7 +3,7 @@ using CRUD___Adriano.Features.Cliente.Controller;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace CRUD___Adriano.Features.Produto.View
+namespace CRUD___Adriano.Features.Cliente.View
 {
     public partial class FrmListagemCliente : Form
     {

@@ -1,31 +1,33 @@
 ﻿using CRUD___Adriano.Features.Cadastro.Produto.Controller;
-using CRUD___Adriano.Features.Usuario.Enum;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Windows.Forms;
-using CRUD___Adriano.Features.Utils;
+using CRUD___Adriano.Features.Cadastro.Produto.Model;
 using CRUD___Adriano.Features.Componentes;
+using CRUD___Adriano.Features.Usuario.Enum;
+using CRUD___Adriano.Features.Utils;
+using System;
+using System.Windows.Forms;
 
 namespace CRUD___Adriano.Features.Cadastro.Produto.View
 {
     public partial class FrmCadastroCliente : Form
     {
         private ClienteCadastroController _produtoCadastroController;
+        private ClienteModel _clienteModel;
 
         public FrmCadastroCliente(ClienteCadastroController produtoCadastroController)
         {
             InitializeComponent();
             _produtoCadastroController = produtoCadastroController;
+            
+            _clienteModel = new ClienteModel();
+
             txtNome.Focus();
-            cbSexo.AtribuirPeloEnum<UsuarioEnum>();
+            cbSexo.AtribuirPeloEnum<UsuarioSexoEnum>();
         }
 
         private void BtnCadastrar_Click(object sender, System.EventArgs e)
         {
             if (ValidateChildren(ValidationConstraints.Enabled))
-                MessageBox.Show("Validado com sucesso", "Sucesso", MessageBoxButtons.OK);
-                //_produtoCadastroController.EfetuarCadastroDoProduto();
+                _produtoCadastroController.CadastrarCliente(_clienteModel);
         }
 
         private void BtnCancelar_Click(object sender, System.EventArgs e) =>
@@ -39,40 +41,64 @@ namespace CRUD___Adriano.Features.Cadastro.Produto.View
                     Close();
                     break;
                 case Keys.F5:
-                    _produtoCadastroController.EfetuarCadastroDoProduto();
+                    _produtoCadastroController.CadastrarCliente(_clienteModel);
                     break;
             }
         }
 
-        private void TxtNome_Validating(object sender, System.ComponentModel.CancelEventArgs e) =>
-            ValidacaoPadrao(txtNome, e);
+        private void TxtNome_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (ValidacaoPadrao(txtNome, e))
+                _clienteModel.Nome = txtNome.Texto;
+        }
 
-        private void TxtSobrenome_Validating(object sender, System.ComponentModel.CancelEventArgs e) => 
-            ValidacaoPadrao(txtSobrenome, e);
+        private void TxtSobrenome_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (ValidacaoPadrao(txtSobrenome, e))
+                _clienteModel.Sobrenome = txtSobrenome.Texto;
+        }
 
-        private void TxtLogradouro_Validating(object sender, System.ComponentModel.CancelEventArgs e) => 
-            ValidacaoPadrao(txtLogradouro, e);
+        private void TxtLogradouro_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (ValidacaoPadrao(txtLogradouro, e))
+                _clienteModel.Endereco.Logradouro = txtLogradouro.Texto;
+        }
 
-        private void TxtBairro_Validating(object sender, System.ComponentModel.CancelEventArgs e) =>
-            ValidacaoPadrao(txtBairro, e);
+        private void TxtBairro_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (ValidacaoPadrao(txtBairro, e))
+                _clienteModel.Endereco.Bairro = txtBairro.Texto;
+        }
 
-        private void TxtNumero_Validating(object sender, System.ComponentModel.CancelEventArgs e) =>
-            ValidacaoPadrao(txtNumero, e);
+        private void TxtNumero_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (ValidacaoPadrao(txtNumero, e))
+                _clienteModel.Endereco.Numero = txtNumero.Texto;
+        }
 
-        private void TxtCidade_Validating(object sender, System.ComponentModel.CancelEventArgs e) =>
-            ValidacaoPadrao(txtCidade, e);
 
-        private void TxtEstado_Validating(object sender, System.ComponentModel.CancelEventArgs e) =>
-            ValidacaoPadrao(txtEstado, e);
+        private void TxtCidade_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (ValidacaoPadrao(txtCidade, e))
+                _clienteModel.Endereco.Cidade = txtCidade.Texto;
+        }
 
-        private void ValidacaoPadrao(TextBoxFlat textBox, System.ComponentModel.CancelEventArgs e)
+        private void TxtEstado_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (ValidacaoPadrao(txtEstado, e))
+                _clienteModel.Endereco.Uf = txtEstado.Texto;
+        }
+
+        private bool ValidacaoPadrao(TextBoxFlat textBox, System.ComponentModel.CancelEventArgs e)
         {
             if (string.IsNullOrEmpty(textBox.Texto))
             {
                 errorProvider.SetError(textBox, "Número obrigatório!");
-                return;
+                return false;
             }
+
             errorProvider.SetError(textBox, null);
+            return true;
         }
 
         private void DataNascimento_Validating(object sender, System.ComponentModel.CancelEventArgs e)
@@ -80,26 +106,24 @@ namespace CRUD___Adriano.Features.Cadastro.Produto.View
             if (DateTime.MinValue.Equals(dataNascimento.Value) || DateTime.MaxValue.Equals(dataNascimento.Value) ||
                 dataNascimento.Value == null)
             {
-                e.Cancel = true;
                 errorProvider.SetError(dataNascimento, "Data de nascimento inválido!");
                 return;
             }
 
-            e.Cancel = false;
             errorProvider.SetError(dataNascimento, null);
+
+            _clienteModel.DataNascimento = dataNascimento.Value;
         }
 
         private void CbSexo_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
             try
             {
-                cbSexo.PegarEnumPorDescricao<UsuarioEnum>();
-                e.Cancel = false;
+                _clienteModel.Sexo = cbSexo.PegarEnumPorDescricao<UsuarioSexoEnum>();
                 errorProvider.SetError(dataNascimento, null);
             }
             catch(Exception ex)
             {
-                e.Cancel = true;
                 errorProvider.SetError(dataNascimento, "Opção inválida!");
             }
         }

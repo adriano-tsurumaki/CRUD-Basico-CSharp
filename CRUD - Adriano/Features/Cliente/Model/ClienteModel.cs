@@ -4,6 +4,7 @@ namespace CRUD___Adriano.Features.Cadastro.Produto.Model
 {
     public class ClienteModel: UsuarioModel
     {
-        public int Valor_Limite { get; set; }
+        public int ValorLimite { get; set; }
+        public string Observacao { get; set; }
     }
 }

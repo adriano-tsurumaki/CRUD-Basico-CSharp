@@ -1,4 +1,4 @@
-﻿using CRUD___Adriano.Features.Produto.View;
+﻿using CRUD___Adriano.Features.Cliente.View;
 using System.Windows.Forms;
 
 namespace CRUD___Adriano.Features.Cliente.Controller

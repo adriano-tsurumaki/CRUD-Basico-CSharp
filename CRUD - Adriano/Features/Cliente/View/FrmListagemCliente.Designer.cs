@@ -1,5 +1,5 @@
 ﻿
-namespace CRUD___Adriano.Features.Produto.View
+namespace CRUD___Adriano.Features.Cliente.View
 {
     partial class FrmListagemCliente
     {

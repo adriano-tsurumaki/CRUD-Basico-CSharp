@@ -1,5 +1,7 @@
 ﻿using CRUD___Adriano.Features.Cadastro.Produto.Model;
 using CRUD___Adriano.Features.Cadastro.Produto.View;
+using CRUD___Adriano.Features.Configuration;
+using CRUD___Adriano.Features.Cliente.Dao;
 using System;
 using System.Windows.Forms;
 
@@ -18,24 +20,20 @@ namespace CRUD___Adriano.Features.Cadastro.Produto.Controller
         public Form RetornarFormulario() =>
             _frmCadastroProduto;
 
-        public void EfetuarCadastroDoProduto()
+        public void CadastrarCliente(ClienteModel clienteModel)
         {
-            /*int.TryParse(_frmCadastroProduto.txtQuantidade.Text, out int quantidade);
-            if (!ValidarCadastro())
-                MessageBox.Show("Campos inválidos!");
-
-            CadastrarProduto(new ClienteModel
+            try
             {
-                Nome = _frmCadastroProduto.txtNome.Text,
-            });*/
-        }
-
-        /*public bool ValidarCadastro() =>
-            !(_frmCadastroProduto.txtNome.Text.Equals(string.Empty) || _frmCadastroProduto.txtQuantidade.Text.Equals(string.Empty));*/
-
-        public void CadastrarProduto(ClienteModel produto)
-        {
-            
+                using (var conexao = SqlConexao.RetornarConexao())
+                {
+                    conexao.Open();
+                    ClienteDao.CadastrarCliente(conexao, clienteModel);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(_frmCadastroProduto, ex.Message, "Erro ao cadastrar cliente");
+            }
         }
     }
 }
