@@ -11,6 +11,7 @@ namespace CRUD___Adriano.Features.Cadastro.Produto.View
         {
             InitializeComponent();
             _produtoCadastroController = produtoCadastroController;
+            txtNome.Focus();
         }
 
         private void BtnCadastrar_Click(object sender, System.EventArgs e) =>

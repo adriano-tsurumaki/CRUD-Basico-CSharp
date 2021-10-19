@@ -7,8 +7,12 @@ namespace CRUD___Adriano.Features.Cliente.Model
     {
         public int Id { get; set; }
         public string Nome { get; set; }
+        public string Sobrenome { get; set; }
         public string Sexo { get; set; }
         public IList<EmailModel> Emails { get; set; }
         public DateTime DataNascimento { get; set; }
+        public EnderecoModel Endereco { get; set; }
+
+        //8 Toques
     }
 }
