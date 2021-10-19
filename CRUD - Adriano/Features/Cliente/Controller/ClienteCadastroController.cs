@@ -15,6 +15,9 @@ namespace CRUD___Adriano.Features.Cadastro.Produto.Controller
         public void AbrirFormulario() =>
             _frmCadastroProduto.Show();
 
+        public FrmCadastroCliente RetornarFormulario() =>
+            _frmCadastroProduto;
+
         public void EfetuarCadastroDoProduto()
         {
             int.TryParse(_frmCadastroProduto.txtQuantidade.Text, out int quantidade);
