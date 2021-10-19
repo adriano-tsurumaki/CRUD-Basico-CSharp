@@ -55,6 +55,8 @@ namespace CRUD___Adriano.Features.Cadastro.Produto.View
             this.dataNascimento = new CRUD___Adriano.Features.Componentes.DatePickerFlat();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.cbSexo = new CRUD___Adriano.Features.Componentes.ComboBoxFlat();
+            this.txtCidade = new CRUD___Adriano.Features.Componentes.TextBoxFlat();
+            this.txtEstado = new CRUD___Adriano.Features.Componentes.TextBoxFlat();
             this.pnlBottom.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
@@ -124,6 +126,7 @@ namespace CRUD___Adriano.Features.Cadastro.Produto.View
             // 
             // txtNome
             // 
+            this.txtNome.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
             this.txtNome.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
             this.txtNome.BorderColor = System.Drawing.Color.MediumSlateBlue;
             this.txtNome.BorderSize = 2;
@@ -380,6 +383,7 @@ namespace CRUD___Adriano.Features.Cadastro.Produto.View
             // 
             // errorProvider
             // 
+            this.errorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errorProvider.ContainerControl = this;
             // 
             // cbSexo
@@ -405,12 +409,52 @@ namespace CRUD___Adriano.Features.Cadastro.Produto.View
             this.cbSexo.Texto = "";
             this.cbSexo.Validating += new System.ComponentModel.CancelEventHandler(this.CbSexo_Validating);
             // 
+            // txtCidade
+            // 
+            this.txtCidade.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
+            this.txtCidade.BorderColor = System.Drawing.Color.MediumSlateBlue;
+            this.txtCidade.BorderSize = 2;
+            this.txtCidade.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.txtCidade.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.txtCidade.Location = new System.Drawing.Point(325, 179);
+            this.txtCidade.Margin = new System.Windows.Forms.Padding(4);
+            this.txtCidade.Multiline = false;
+            this.txtCidade.Name = "txtCidade";
+            this.txtCidade.Padding = new System.Windows.Forms.Padding(7);
+            this.txtCidade.PasswordChar = false;
+            this.txtCidade.Size = new System.Drawing.Size(212, 36);
+            this.txtCidade.TabIndex = 24;
+            this.txtCidade.Texto = "";
+            this.txtCidade.UnderlinedStyle = true;
+            this.txtCidade.Validating += new System.ComponentModel.CancelEventHandler(this.TxtCidade_Validating);
+            // 
+            // txtEstado
+            // 
+            this.txtEstado.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
+            this.txtEstado.BorderColor = System.Drawing.Color.MediumSlateBlue;
+            this.txtEstado.BorderSize = 2;
+            this.txtEstado.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.txtEstado.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.txtEstado.Location = new System.Drawing.Point(325, 250);
+            this.txtEstado.Margin = new System.Windows.Forms.Padding(4);
+            this.txtEstado.Multiline = false;
+            this.txtEstado.Name = "txtEstado";
+            this.txtEstado.Padding = new System.Windows.Forms.Padding(7);
+            this.txtEstado.PasswordChar = false;
+            this.txtEstado.Size = new System.Drawing.Size(212, 36);
+            this.txtEstado.TabIndex = 25;
+            this.txtEstado.Texto = "";
+            this.txtEstado.UnderlinedStyle = true;
+            this.txtEstado.Validating += new System.ComponentModel.CancelEventHandler(this.TxtEstado_Validating);
+            // 
             // FrmCadastroCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
             this.ClientSize = new System.Drawing.Size(622, 575);
+            this.Controls.Add(this.txtEstado);
+            this.Controls.Add(this.txtCidade);
             this.Controls.Add(this.cbSexo);
             this.Controls.Add(this.dataNascimento);
             this.Controls.Add(this.txtNumero);
@@ -471,5 +515,7 @@ namespace CRUD___Adriano.Features.Cadastro.Produto.View
         private Componentes.DatePickerFlat dataNascimento;
         private System.Windows.Forms.ErrorProvider errorProvider;
         private Componentes.ComboBoxFlat cbSexo;
+        private Componentes.TextBoxFlat txtEstado;
+        private Componentes.TextBoxFlat txtCidade;
     }
 }

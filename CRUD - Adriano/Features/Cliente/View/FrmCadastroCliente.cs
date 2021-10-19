@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using CRUD___Adriano.Features.Utils;
+using CRUD___Adriano.Features.Componentes;
 
 namespace CRUD___Adriano.Features.Cadastro.Produto.View
 {
@@ -43,64 +44,35 @@ namespace CRUD___Adriano.Features.Cadastro.Produto.View
             }
         }
 
-        private void TxtNome_Validating(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            if(string.IsNullOrEmpty(txtNome.Texto))
-            {
-                e.Cancel = true;
-                errorProvider.SetError(txtNome, "Nome obrigatório!");
-                return;
-            }
-            e.Cancel = false;
-            errorProvider.SetError(txtNome, null);
-        }
+        private void TxtNome_Validating(object sender, System.ComponentModel.CancelEventArgs e) =>
+            ValidacaoPadrao(txtNome, e);
 
-        private void TxtSobrenome_Validating(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            if (string.IsNullOrEmpty(txtSobrenome.Texto))
-            {
-                e.Cancel = true;
-                errorProvider.SetError(txtSobrenome, "Sobrenome obrigatório!");
-                return;
-            }
-            e.Cancel = false;
-            errorProvider.SetError(txtSobrenome, null);
-        }
+        private void TxtSobrenome_Validating(object sender, System.ComponentModel.CancelEventArgs e) => 
+            ValidacaoPadrao(txtSobrenome, e);
 
-        private void TxtLogradouro_Validating(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            if (string.IsNullOrEmpty(txtLogradouro.Texto))
-            {
-                e.Cancel = true;
-                errorProvider.SetError(txtLogradouro, "Logradouro obrigatório!");
-                return;
-            }
-            e.Cancel = false;
-            errorProvider.SetError(txtLogradouro, null);
-        }
+        private void TxtLogradouro_Validating(object sender, System.ComponentModel.CancelEventArgs e) => 
+            ValidacaoPadrao(txtLogradouro, e);
 
-        private void TxtBairro_Validating(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            if (string.IsNullOrEmpty(txtBairro.Texto))
-            {
-                e.Cancel = true;
-                errorProvider.SetError(txtBairro, "Bairro obrigatório!");
-                return;
-            }
-            e.Cancel = false;
-            errorProvider.SetError(txtBairro, null);
-        }
+        private void TxtBairro_Validating(object sender, System.ComponentModel.CancelEventArgs e) =>
+            ValidacaoPadrao(txtBairro, e);
 
-        private void TxtNumero_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        private void TxtNumero_Validating(object sender, System.ComponentModel.CancelEventArgs e) =>
+            ValidacaoPadrao(txtNumero, e);
+
+        private void TxtCidade_Validating(object sender, System.ComponentModel.CancelEventArgs e) =>
+            ValidacaoPadrao(txtCidade, e);
+
+        private void TxtEstado_Validating(object sender, System.ComponentModel.CancelEventArgs e) =>
+            ValidacaoPadrao(txtEstado, e);
+
+        private void ValidacaoPadrao(TextBoxFlat textBox, System.ComponentModel.CancelEventArgs e)
         {
-            if (string.IsNullOrEmpty(txtNumero.Texto))
+            if (string.IsNullOrEmpty(textBox.Texto))
             {
-                e.Cancel = true;
-                errorProvider.SetError(txtNumero, "Número obrigatório!");
+                errorProvider.SetError(textBox, "Número obrigatório!");
                 return;
             }
-            e.Cancel = false;
-            errorProvider.SetError(txtNumero, null);
+            errorProvider.SetError(textBox, null);
         }
 
         private void DataNascimento_Validating(object sender, System.ComponentModel.CancelEventArgs e)
