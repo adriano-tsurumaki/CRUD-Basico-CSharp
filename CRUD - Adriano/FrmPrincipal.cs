@@ -24,6 +24,18 @@ namespace CRUD___Adriano
             pnlListagemSubmenu.Visible = false;
         }
 
+        private void BtnClienteCadastro_Click(object sender, EventArgs e)
+        {
+            lblTitulo.Text = "Cadastro de cliente";
+            DocaForm(new ClienteCadastroController().RetornarFormulario());
+        }
+
+        private void BtnClientesListagem_Click(object sender, EventArgs e)
+        {
+            lblTitulo.Text = "Listagem de clientes";
+            DocaForm(new ClienteListagemController().RetornarFormulario());
+        }
+
         public void DocaForm(Form formFilha)
         {
             if (formFilhaAtiva != null)
@@ -40,19 +52,13 @@ namespace CRUD___Adriano
             formFilha.Focus();
         }
 
-        private void BtnClienteCadastro_Click(object sender, EventArgs e) =>
-            DocaForm(new ClienteCadastroController().RetornarFormulario());
-
-        private void BtnClientesListagem_Click(object sender, EventArgs e) =>
-            new ClienteListagemController().AbrirFormulario();
-
-        private void BtnCadastro_Click(object sender, EventArgs e)
+        private void BtnMenuCadastro_Click(object sender, EventArgs e)
         {
             TrocarVisibilidade(pnlCadastroSubmenu);
             EsconderSubmenusRestantes(pnlCadastroSubmenu);
         }
 
-        private void btnListagem_Click(object sender, EventArgs e)
+        private void BtnMenuListagem_Click(object sender, EventArgs e)
         {
             TrocarVisibilidade(pnlListagemSubmenu);
             EsconderSubmenusRestantes(pnlListagemSubmenu);
@@ -69,9 +75,9 @@ namespace CRUD___Adriano
             submenu.Visible = visibilidade;
         }
 
-        private void lblTitle_Click(object sender, EventArgs e)
+        private void PnlChild_ControlRemoved(object sender, ControlEventArgs e)
         {
-
+            lblTitulo.Text = "Dashboard";
         }
     }
 }

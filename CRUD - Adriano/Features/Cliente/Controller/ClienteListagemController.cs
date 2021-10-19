@@ -1,4 +1,5 @@
 ﻿using CRUD___Adriano.Features.Produto.View;
+using System.Windows.Forms;
 
 namespace CRUD___Adriano.Features.Cliente.Controller
 {
@@ -13,5 +14,8 @@ namespace CRUD___Adriano.Features.Cliente.Controller
 
         public void AbrirFormulario() =>
             _frmListagemCliente.Show();
+
+        public Form RetornarFormulario() =>
+            _frmListagemCliente;
     }
 }

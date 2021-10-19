@@ -1,6 +1,10 @@
 ﻿using CRUD___Adriano.Features.Cadastro.Produto.Controller;
+using CRUD___Adriano.Features.Usuario.Enum;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Windows.Forms;
+using CRUD___Adriano.Features.Utils;
 
 namespace CRUD___Adriano.Features.Cadastro.Produto.View
 {
@@ -13,6 +17,7 @@ namespace CRUD___Adriano.Features.Cadastro.Produto.View
             InitializeComponent();
             _produtoCadastroController = produtoCadastroController;
             txtNome.Focus();
+            cbSexo.AtribuirPeloEnum<UsuarioEnum>();
         }
 
         private void BtnCadastrar_Click(object sender, System.EventArgs e)

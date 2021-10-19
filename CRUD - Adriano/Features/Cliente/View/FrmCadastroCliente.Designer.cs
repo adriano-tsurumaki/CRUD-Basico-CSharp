@@ -54,6 +54,7 @@ namespace CRUD___Adriano.Features.Cadastro.Produto.View
             this.txtNumero = new CRUD___Adriano.Features.Componentes.TextBoxFlat();
             this.dataNascimento = new CRUD___Adriano.Features.Componentes.DatePickerFlat();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.cbSexo = new CRUD___Adriano.Features.Componentes.ComboBoxFlat();
             this.pnlBottom.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
@@ -381,12 +382,35 @@ namespace CRUD___Adriano.Features.Cadastro.Produto.View
             // 
             this.errorProvider.ContainerControl = this;
             // 
+            // cbSexo
+            // 
+            this.cbSexo.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.cbSexo.BorderColor = System.Drawing.Color.MediumSlateBlue;
+            this.cbSexo.BorderSize = 2;
+            this.cbSexo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
+            this.cbSexo.ForeColor = System.Drawing.Color.DimGray;
+            this.cbSexo.IconColor = System.Drawing.Color.MediumSlateBlue;
+            this.cbSexo.Items.AddRange(new object[] {
+            "Masculino",
+            "Feminino",
+            "Outro"});
+            this.cbSexo.ListBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(228)))), ((int)(((byte)(245)))));
+            this.cbSexo.ListTextColor = System.Drawing.Color.DimGray;
+            this.cbSexo.Location = new System.Drawing.Point(12, 113);
+            this.cbSexo.MinimumSize = new System.Drawing.Size(200, 30);
+            this.cbSexo.Name = "cbSexo";
+            this.cbSexo.Padding = new System.Windows.Forms.Padding(2);
+            this.cbSexo.Size = new System.Drawing.Size(212, 30);
+            this.cbSexo.TabIndex = 23;
+            this.cbSexo.Texto = "";
+            // 
             // FrmCadastroCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
             this.ClientSize = new System.Drawing.Size(622, 575);
+            this.Controls.Add(this.cbSexo);
             this.Controls.Add(this.dataNascimento);
             this.Controls.Add(this.txtNumero);
             this.Controls.Add(this.txtComplemento);
@@ -445,5 +469,6 @@ namespace CRUD___Adriano.Features.Cadastro.Produto.View
         private Componentes.TextBoxFlat txtNumero;
         private Componentes.DatePickerFlat dataNascimento;
         private System.Windows.Forms.ErrorProvider errorProvider;
+        private Componentes.ComboBoxFlat cbSexo;
     }
 }

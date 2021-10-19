@@ -134,7 +134,7 @@ namespace CRUD___Adriano
             this.btnListagem.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnListagem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnListagem.UseVisualStyleBackColor = true;
-            this.btnListagem.Click += new System.EventHandler(this.btnListagem_Click);
+            this.btnListagem.Click += new System.EventHandler(this.BtnMenuListagem_Click);
             // 
             // pnlCadastroSubmenu
             // 
@@ -204,7 +204,7 @@ namespace CRUD___Adriano
             this.btnCadastro.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnCadastro.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnCadastro.UseVisualStyleBackColor = true;
-            this.btnCadastro.Click += new System.EventHandler(this.BtnCadastro_Click);
+            this.btnCadastro.Click += new System.EventHandler(this.BtnMenuCadastro_Click);
             // 
             // panelLogo
             // 
@@ -244,10 +244,9 @@ namespace CRUD___Adriano
             this.lblTitulo.ForeColor = System.Drawing.Color.White;
             this.lblTitulo.Location = new System.Drawing.Point(317, 21);
             this.lblTitulo.Name = "lblTitulo";
-            this.lblTitulo.Size = new System.Drawing.Size(74, 30);
+            this.lblTitulo.Size = new System.Drawing.Size(118, 30);
             this.lblTitulo.TabIndex = 0;
-            this.lblTitulo.Text = "HOME";
-            this.lblTitulo.Click += new System.EventHandler(this.lblTitle_Click);
+            this.lblTitulo.Text = "Dashboard";
             // 
             // pnlChild
             // 
@@ -257,6 +256,7 @@ namespace CRUD___Adriano
             this.pnlChild.Name = "pnlChild";
             this.pnlChild.Size = new System.Drawing.Size(714, 486);
             this.pnlChild.TabIndex = 4;
+            this.pnlChild.ControlRemoved += new System.Windows.Forms.ControlEventHandler(this.PnlChild_ControlRemoved);
             // 
             // FrmPrincipal
             // 
