@@ -116,5 +116,20 @@ namespace CRUD___Adriano.Features.Cadastro.Produto.View
             e.Cancel = false;
             errorProvider.SetError(dataNascimento, null);
         }
+
+        private void CbSexo_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            try
+            {
+                cbSexo.PegarEnumPorDescricao<UsuarioEnum>();
+                e.Cancel = false;
+                errorProvider.SetError(dataNascimento, null);
+            }
+            catch(Exception ex)
+            {
+                e.Cancel = true;
+                errorProvider.SetError(dataNascimento, "Opção inválida!");
+            }
+        }
     }
 }

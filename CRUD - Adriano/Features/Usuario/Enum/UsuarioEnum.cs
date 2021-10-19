@@ -4,9 +4,9 @@ namespace CRUD___Adriano.Features.Usuario.Enum
 {
     public enum UsuarioEnum
     {
-        [Description("Masculino")]
+        [Description("Mascu lino")]
         Masculino = 0,
-        [Description("Feminino")]
+        [Description("Femi nino")]
         Feminino = 1,
         [Description("Outros")]
         Outros = 2

@@ -403,6 +403,7 @@ namespace CRUD___Adriano.Features.Cadastro.Produto.View
             this.cbSexo.Size = new System.Drawing.Size(212, 30);
             this.cbSexo.TabIndex = 23;
             this.cbSexo.Texto = "";
+            this.cbSexo.Validating += new System.ComponentModel.CancelEventHandler(this.CbSexo_Validating);
             // 
             // FrmCadastroCliente
             // 
