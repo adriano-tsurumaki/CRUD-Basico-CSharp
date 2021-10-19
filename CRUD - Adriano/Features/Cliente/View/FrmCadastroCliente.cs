@@ -31,5 +31,15 @@ namespace CRUD___Adriano.Features.Cadastro.Produto.View
                     break;
             }
         }
+
+        private void textBoxFlat1__TextChanged(object sender, System.EventArgs e)
+        {
+
+        }
+
+        private void lbQuantidade_Click(object sender, System.EventArgs e)
+        {
+
+        }
     }
 }

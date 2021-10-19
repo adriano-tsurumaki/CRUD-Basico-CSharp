@@ -30,13 +30,11 @@ namespace CRUD___Adriano.Features.Cadastro.Produto.View
         private void InitializeComponent()
         {
             this.lblNome = new System.Windows.Forms.Label();
-            this.lbQuantidade = new System.Windows.Forms.Label();
-            this.txtQuantidade = new System.Windows.Forms.TextBox();
-            this.txtNome = new System.Windows.Forms.TextBox();
             this.btnCadastrar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.pnlBottom = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.txt = new CRUD___Adriano.Features.Componentes.TextBoxFlat();
             this.pnlBottom.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -44,41 +42,13 @@ namespace CRUD___Adriano.Features.Cadastro.Produto.View
             // lblNome
             // 
             this.lblNome.AutoSize = true;
-            this.lblNome.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblNome.ForeColor = System.Drawing.Color.White;
-            this.lblNome.Location = new System.Drawing.Point(12, 20);
+            this.lblNome.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblNome.ForeColor = System.Drawing.Color.MediumSlateBlue;
+            this.lblNome.Location = new System.Drawing.Point(14, 16);
             this.lblNome.Name = "lblNome";
-            this.lblNome.Size = new System.Drawing.Size(80, 32);
+            this.lblNome.Size = new System.Drawing.Size(59, 21);
             this.lblNome.TabIndex = 0;
-            this.lblNome.Text = "Nome";
-            // 
-            // lbQuantidade
-            // 
-            this.lbQuantidade.AutoSize = true;
-            this.lbQuantidade.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lbQuantidade.ForeColor = System.Drawing.Color.White;
-            this.lbQuantidade.Location = new System.Drawing.Point(246, 20);
-            this.lbQuantidade.Name = "lbQuantidade";
-            this.lbQuantidade.Size = new System.Drawing.Size(142, 32);
-            this.lbQuantidade.TabIndex = 1;
-            this.lbQuantidade.Text = "Quantidade";
-            // 
-            // txtQuantidade
-            // 
-            this.txtQuantidade.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtQuantidade.Location = new System.Drawing.Point(252, 55);
-            this.txtQuantidade.Name = "txtQuantidade";
-            this.txtQuantidade.Size = new System.Drawing.Size(139, 29);
-            this.txtQuantidade.TabIndex = 2;
-            // 
-            // txtNome
-            // 
-            this.txtNome.BackColor = System.Drawing.Color.White;
-            this.txtNome.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtNome.Location = new System.Drawing.Point(17, 55);
-            this.txtNome.Name = "txtNome";
-            this.txtNome.Size = new System.Drawing.Size(203, 29);
-            this.txtNome.TabIndex = 1;
+            this.lblNome.Text = "Nome:";
             // 
             // btnCadastrar
             // 
@@ -131,16 +101,33 @@ namespace CRUD___Adriano.Features.Cadastro.Produto.View
             this.panel1.Size = new System.Drawing.Size(256, 57);
             this.panel1.TabIndex = 5;
             // 
+            // txt
+            // 
+            this.txt.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
+            this.txt.BorderColor = System.Drawing.Color.MediumSlateBlue;
+            this.txt.BorderSize = 2;
+            this.txt.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.txt.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.txt.Location = new System.Drawing.Point(78, 9);
+            this.txt.Margin = new System.Windows.Forms.Padding(4);
+            this.txt.Multiline = false;
+            this.txt.Name = "txt";
+            this.txt.Padding = new System.Windows.Forms.Padding(7);
+            this.txt.PasswordChar = false;
+            this.txt.Size = new System.Drawing.Size(261, 36);
+            this.txt.TabIndex = 6;
+            this.txt.Texts = "";
+            this.txt.UnderlinedStyle = true;
+            this.txt._TextChanged += new System.EventHandler(this.textBoxFlat1__TextChanged);
+            // 
             // FrmCadastroCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
             this.ClientSize = new System.Drawing.Size(654, 367);
+            this.Controls.Add(this.txt);
             this.Controls.Add(this.pnlBottom);
-            this.Controls.Add(this.txtNome);
-            this.Controls.Add(this.txtQuantidade);
-            this.Controls.Add(this.lbQuantidade);
             this.Controls.Add(this.lblNome);
             this.Name = "FrmCadastroCliente";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -156,12 +143,10 @@ namespace CRUD___Adriano.Features.Cadastro.Produto.View
         #endregion
 
         private System.Windows.Forms.Label lblNome;
-        private System.Windows.Forms.Label lbQuantidade;
         private System.Windows.Forms.Button btnCadastrar;
         private System.Windows.Forms.Button btnCancelar;
-        internal System.Windows.Forms.TextBox txtQuantidade;
-        internal System.Windows.Forms.TextBox txtNome;
         private System.Windows.Forms.Panel pnlBottom;
         private System.Windows.Forms.Panel panel1;
+        private Componentes.TextBoxFlat txt;
     }
 }
