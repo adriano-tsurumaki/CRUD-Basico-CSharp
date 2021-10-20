@@ -1,7 +1,7 @@
 ﻿using CRUD___Adriano.Features.Cadastro.Produto.Model;
 using Dapper.FluentMap.Mapping;
 
-namespace CRUD___Adriano.Features.Cliente.Dao
+namespace CRUD___Adriano.Features.Cliente.Model
 {
     public class ClienteMap : EntityMap<ClienteModel>
     {

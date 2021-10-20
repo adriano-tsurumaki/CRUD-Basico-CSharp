@@ -1,4 +1,8 @@
-﻿namespace CRUD___Adriano.Features.Cliente.Model
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace CRUD___Adriano.Features.Email.Model
 {
     public class EmailModel
     {

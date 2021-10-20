@@ -1,9 +1,6 @@
 ﻿using Dapper.FluentMap.Mapping;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace CRUD___Adriano.Features.Cliente.Model
+namespace CRUD___Adriano.Features.Usuario.Model
 {
     public class UsuarioMap : EntityMap<UsuarioModel>
     {

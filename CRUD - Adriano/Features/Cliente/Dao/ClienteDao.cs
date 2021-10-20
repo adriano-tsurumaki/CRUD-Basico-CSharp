@@ -1,7 +1,6 @@
 ﻿using CRUD___Adriano.Features.Cadastro.Produto.Model;
-using CRUD___Adriano.Features.Cliente.Model;
+using CRUD___Adriano.Features.Endereco.Model;
 using Dapper;
-using Dommel;
 using System.Data;
 using System.Text;
 

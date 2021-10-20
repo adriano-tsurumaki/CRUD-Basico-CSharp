@@ -1,8 +1,10 @@
-﻿using CRUD___Adriano.Features.Usuario.Enum;
+﻿using CRUD___Adriano.Features.Email.Model;
+using CRUD___Adriano.Features.Endereco.Model;
+using CRUD___Adriano.Features.Usuario.Enum;
 using System;
 using System.Collections.Generic;
 
-namespace CRUD___Adriano.Features.Cliente.Model
+namespace CRUD___Adriano.Features.Usuario.Model
 {
     public abstract class UsuarioModel
     {

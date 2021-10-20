@@ -1,4 +1,4 @@
-﻿using CRUD___Adriano.Features.Cliente.Model;
+﻿using CRUD___Adriano.Features.Usuario.Model;
 
 namespace CRUD___Adriano.Features.Cadastro.Produto.Model
 {
