@@ -6,11 +6,11 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace CRUD___Adriano.Features.Cliente.View
+namespace CRUD___Adriano.Features.PageManager.View
 {
-    public partial class FrmCadastroCliente : Form
+    public partial class UcConfirmButton : UserControl
     {
-        public FrmCadastroCliente()
+        public UcConfirmButton()
         {
             InitializeComponent();
         }

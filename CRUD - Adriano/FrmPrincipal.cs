@@ -1,5 +1,9 @@
 ﻿using CRUD___Adriano.Features.Cadastro.Produto.Controller;
+using CRUD___Adriano.Features.Cadastro.Produto.Model;
 using CRUD___Adriano.Features.Cliente.Controller;
+using CRUD___Adriano.Features.Cliente.View;
+using CRUD___Adriano.Features.Controller.PageManager;
+using CRUD___Adriano.Features.Factory;
 using System;
 using System.Windows.Forms;
 
@@ -75,6 +79,14 @@ namespace CRUD___Adriano
         private void PnlChild_ControlRemoved(object sender, ControlEventArgs e)
         {
             lblTitulo.Text = "Dashboard";
+        }
+
+        private void BtnCadastroFuncionario_Click(object sender, EventArgs e)
+        {
+            var pageManager = new PageManager(pnlChild, new ClienteController(), new ClienteModel());
+            pageManager.Add(new FrmCadastroCliente());
+            pageManager.Add(new ClienteListagemController().RetornarFormulario());
+            pageManager.Show();
         }
     }
 }

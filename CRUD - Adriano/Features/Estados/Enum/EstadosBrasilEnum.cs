@@ -1,91 +1,88 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Text;
+﻿using System.ComponentModel;
 
 namespace CRUD___Adriano.Features.Estados.Enum
 {
     public enum EstadosBrasilEnum
     {
         [Description("Acre")]
-        AC = 0,
+        AC,
 
         [Description("Alagoas")]
-        AL = 0,
+        AL,
 
         [Description("Amapá ")]
-        AP = 0,
+        AP,
 
         [Description("Amazonas")]
-        AM = 0,
+        AM,
 
         [Description("Bahia")]
-        BA = 0,
+        BA,
 
         [Description("Ceará")]
-        CE = 0,
+        CE,
 
         [Description("Distrito Federal")]
-        DF = 0,
+        DF,
 
         [Description("Espírito Santo")]
-        ES = 0,
+        ES,
 
         [Description("Goiás")]
-        GO = 0,
+        GO,
 
         [Description("Maranhão")]
-        MA = 0,
+        MA,
 
         [Description("Mato Grosso")]
-        MT = 0,
+        MT,
 
         [Description("Mato Grosso do Sul")]
-        MS = 0,
+        MS,
 
         [Description("Minas Gerais")]
-        MG = 0,
+        MG,
 
         [Description("Pará")]
-        PA = 0,
+        PA,
 
         [Description("Paraíba")]
-        PB = 0,
+        PB,
 
         [Description("Paraná")]
-        PR = 0,
+        PR,
 
         [Description("Pernambuco")]
-        PE = 0,
+        PE,
 
         [Description("Piauí")]
-        PI = 0,
+        PI,
 
         [Description("Rio de Janeiro")]
-        RJ = 0,
+        RJ,
 
         [Description("Rio Grande do Norte")]
-        RN = 0,
+        RN,
 
         [Description("Rio Grande do Sul")]
-        RS = 0,
+        RS,
 
         [Description("Rondônia")]
-        RO = 0,
+        RO,
 
         [Description("Roraima")]
-        RR = 0,
+        RR,
 
         [Description("Santa Catarina")]
-        SC = 0,
+        SC,
 
         [Description("São Paulo")]
-        SP = 0,
+        SP,
 
         [Description("Sergipe")]
-        SE = 0,
+        SE,
 
         [Description("Tocantins")]
-        TO = 0,
+        TO
     }
 }

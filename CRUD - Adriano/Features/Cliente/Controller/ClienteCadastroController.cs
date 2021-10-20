@@ -1,18 +1,20 @@
 ﻿using CRUD___Adriano.Features.Cadastro.Produto.Model;
-using CRUD___Adriano.Features.Cadastro.Produto.View;
+using CRUD___Adriano.Features.Cadastro.Usuario.View;
 using CRUD___Adriano.Features.Configuration;
 using CRUD___Adriano.Features.Cliente.Dao;
 using System;
 using System.Windows.Forms;
+using System.Collections.Generic;
 
 namespace CRUD___Adriano.Features.Cadastro.Produto.Controller
 {
     public class ClienteCadastroController
     {
-        private FrmCadastroCliente _frmCadastroProduto;
+        private FrmCadastroUsuario _frmCadastroProduto;
 
-        public ClienteCadastroController() =>
-            _frmCadastroProduto = new FrmCadastroCliente(this);
+        public ClienteCadastroController()
+        {
+        }
 
         public void AbrirFormulario() =>
             _frmCadastroProduto.Show();

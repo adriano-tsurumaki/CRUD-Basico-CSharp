@@ -165,6 +165,7 @@ namespace CRUD___Adriano
             this.btnCadastroFuncionario.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnCadastroFuncionario.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnCadastroFuncionario.UseVisualStyleBackColor = true;
+            this.btnCadastroFuncionario.Click += new System.EventHandler(this.BtnCadastroFuncionario_Click);
             // 
             // btnCadastroCliente
             // 
