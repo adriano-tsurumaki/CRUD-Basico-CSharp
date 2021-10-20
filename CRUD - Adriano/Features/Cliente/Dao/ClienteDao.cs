@@ -3,6 +3,7 @@ using CRUD___Adriano.Features.Cliente.Model;
 using Dapper;
 using Dommel;
 using System.Data;
+using System.Text;
 
 namespace CRUD___Adriano.Features.Cliente.Dao
 {
@@ -13,26 +14,57 @@ namespace CRUD___Adriano.Features.Cliente.Dao
             output inserted.id
             values(@Nome, @Sobrenome, @Sexo, @DataNascimento, @Cpf)";
 
-        private static string sqlInserirCliente =
-            @"insert into Cliente(id_usuario, valor_limite)
-            values (@Id, @ValorLimite)";
-
-        private static string sqlInserirEndereco =
-            @"insert into Endereco(id_usuario, cep, logradouro, 
-            cidade, uf, complemento, bairro, numero)
-            values (@Id, @Cep, @Logradouro, @Cidade, 
-            @Uf, @Complemento, @Bairro, @Numero)";
-
         public static void CadastrarCliente(IDbConnection conexao, IDbTransaction transacao, ClienteModel clienteModel)
         {
             clienteModel.Id = (int)conexao.ExecuteScalar(sqlInserirUsuario, clienteModel, transacao);
-            conexao.Execute(sqlInserirCliente, clienteModel, transacao);
-            conexao.Execute(sqlInserirEndereco, new { clienteModel.Endereco, clienteModel.Id }, transacao);
+            conexao.Execute(SqlInserirCliente(clienteModel), clienteModel, transacao);
+            conexao.Execute(
+                SqlInserirEndereco(clienteModel.Endereco),
+                new
+                {
+                    clienteModel.Id,
+                    clienteModel.Endereco.Cep,
+                    clienteModel.Endereco.Logradouro,
+                    clienteModel.Endereco.Bairro,
+                    clienteModel.Endereco.Complemento,
+                    clienteModel.Endereco.Cidade,
+                    clienteModel.Endereco.Uf,
+                    clienteModel.Endereco.Numero,
+                },
+                transacao);
         }
 
-        private static void ConstruirSql()
+        private static string SqlInserirCliente(ClienteModel clienteModel)
         {
-            
+            var insertSql = new StringBuilder("insert into Cliente(id_usuario, valor_limite");
+            var valuesSql = new StringBuilder("values (@Id, @ValorLimite");
+
+            if (!string.IsNullOrEmpty(clienteModel.Observacao))
+            {
+                insertSql.Append(", observacao");
+                valuesSql.Append(", @Observacao");
+            }
+
+            insertSql.Append(")");
+            valuesSql.Append(")");
+            return string.Join(' ', insertSql, valuesSql);
         }
+
+        private static string SqlInserirEndereco(EnderecoModel enderecoModel)
+        {
+            var insertSql = new StringBuilder("insert into Endereco(id_usuario, logradouro, cidade, uf, complemento, bairro, numero");
+            var valuesSql = new StringBuilder("values (@Id, @Logradouro, @Cidade, @Uf, @Complemento, @Bairro, @Numero");
+
+            if (!string.IsNullOrEmpty(enderecoModel.Cep))
+            {
+                insertSql.Append(", cep");
+                valuesSql.Append(", @Cep");
+            }
+
+            insertSql.Append(")");
+            valuesSql.Append(")");
+            return string.Join(' ', insertSql, valuesSql);
+        }
+
     }
 }

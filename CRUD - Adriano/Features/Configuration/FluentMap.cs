@@ -12,6 +12,7 @@ namespace CRUD___Adriano.Features
             {
                 config.AddMap(new UsuarioMap());
                 config.AddMap(new ClienteMap());
+                config.AddMap(new EnderecoMap());
                 config.ForDommel();
             });
     }
