@@ -6,7 +6,7 @@
 
         void ValidarComponentes();
 
-        bool Validado { get; }
+        bool Validado { get; set; }
 
         event ValidarHandle ValidarEvent;
     }

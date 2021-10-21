@@ -1,5 +1,6 @@
 ﻿using CRUD___Adriano.Features.Cadastro.Produto.Model;
 using CRUD___Adriano.Features.Factory;
+using CRUD___Adriano.Features.Utils;
 
 namespace CRUD___Adriano.Features.Cliente.View
 {
@@ -22,7 +23,13 @@ namespace CRUD___Adriano.Features.Cliente.View
 
         public void ValidarComponentes()
         {
+            if (txtNome.NuloOuVazio() || txtObservacao.NuloOuVazio())
+            {
+                Validado = false;
+                return;
+            }
 
+            Validado = true;
         }
 
         public override void AdicionarModel(ref ClienteModel clienteModel)

@@ -6,7 +6,7 @@ namespace CRUD___Adriano.Features.Factory
 
     public class FormBase<T> : Form where T : class
     {
-        public bool Validado { get; }
+        public bool Validado { get; set; }
 
         public virtual void AdicionarModel(ref T model) { }
 

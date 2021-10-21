@@ -1,5 +1,4 @@
-﻿using CRUD___Adriano.Features.Componentes;
-using CRUD___Adriano.Features.Estados.Enum;
+﻿using CRUD___Adriano.Features.Estados.Enum;
 using CRUD___Adriano.Features.Factory;
 using CRUD___Adriano.Features.Usuario.Enum;
 using CRUD___Adriano.Features.Usuario.Model;
@@ -29,14 +28,22 @@ namespace CRUD___Adriano.Features.Cadastro.Usuario.View
 
         public void ValidarComponentes()
         {
+            if (txtNumero.NuloOuVazio() || txtSobrenome.NuloOuVazio() ||
+                txtCpf.NuloOuVazio() || txtLogradouro.NuloOuVazio() ||
+                txtCidade.NuloOuVazio() || txtBairro.NuloOuVazio() ||
+                txtNumero.NuloOuVazio())
+            {
+                Validado = false;
+                return;
+            }
+
+            Validado = true;
         }
 
         public override void AdicionarModel(ref T model)
         {
             _model = model;
         }
-
-        private bool TextoNuloOuVazio(TextBoxFlat textBox) => string.IsNullOrEmpty(textBox.Texto);
 
         private void DataNascimento_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
