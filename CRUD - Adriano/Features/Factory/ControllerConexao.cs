@@ -6,7 +6,7 @@ namespace CRUD___Adriano.Features.Factory
 {
     public class ControllerConexao
     {
-        protected void EscopoConexao(Action<IDbConnection> acao)
+        public void EscopoConexao(Action<IDbConnection> acao)
         {
             using(var conexao = SqlConexao.RetornarConexao())
             {
@@ -15,7 +15,7 @@ namespace CRUD___Adriano.Features.Factory
             }
         }
 
-        protected void EscopoTransacao(Action<IDbConnection, IDbTransaction> acao)
+        public void EscopoTransacao(Action<IDbConnection, IDbTransaction> acao)
         {
             using (var conexao = SqlConexao.RetornarConexao())
             {

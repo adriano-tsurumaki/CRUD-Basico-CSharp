@@ -69,6 +69,11 @@ namespace CRUD___Adriano.Features.Controller.PageManager
 
         private void BtnProximo_Click(object sender, EventArgs e)
         {
+            if(!ValidarPagina())
+            {
+                MessageBox.Show("Preencha os campos obrigatórios");
+                return;
+            }
             _indiceAtualPagina++;
             AtualizarRodape();
             AtualizarPagina();
@@ -99,15 +104,14 @@ namespace CRUD___Adriano.Features.Controller.PageManager
         private void AtualizarPagina()
         {
             _paginas.TryGetValue(_indiceAtualPagina, out var page);
-            var teste = page.ValidateChildren();
-
 
             AtualizarControlPagina(page);
         }
 
         private void BtnConfirmar_Click(object sender, EventArgs e)
         {
-            _controller.Salvar(_model);
+            if (ValidarPagina())
+                _controller.Salvar(_model);
         }
 
         private void BtnCancelar_Click(object sender, EventArgs e) =>
@@ -124,6 +128,15 @@ namespace CRUD___Adriano.Features.Controller.PageManager
 
             AdicionarControl(_ucFooter.pnlBottomLeft, _ucBotaoProximo);
             AdicionarControl(_ucFooter.pnlBottomRight, _ucBotaoCancelar);
+        }
+
+        private bool ValidarPagina()
+        {
+            _paginas.TryGetValue(_indiceAtualPagina, out var pagina);
+
+            pagina.Validar();
+
+            return pagina.Validado;
         }
 
         public void AdicionarControl(Panel panel, UserControl formFilha)

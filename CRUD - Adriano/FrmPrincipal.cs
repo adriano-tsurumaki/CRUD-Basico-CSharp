@@ -2,7 +2,9 @@
 using CRUD___Adriano.Features.Cadastro.Usuario.View;
 using CRUD___Adriano.Features.Cliente.Controller;
 using CRUD___Adriano.Features.Cliente.View;
+using CRUD___Adriano.Features.Configuration;
 using CRUD___Adriano.Features.Controller.PageManager;
+using CRUD___Adriano.Features.Factory;
 using System;
 using System.Windows.Forms;
 
@@ -29,7 +31,7 @@ namespace CRUD___Adriano
             lblTitulo.Text = "Cadastro de cliente";
             var pageManager = new GerenciadorDePaginas<ClienteModel>(
                 pnlChild,
-                new ClienteController(),
+                new ClienteController(new ControllerConexao()),
                 new ClienteModel());
 
             pageManager.Add(new FrmCadastroUsuario<ClienteModel>());

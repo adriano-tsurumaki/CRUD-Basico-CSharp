@@ -8,8 +8,15 @@ using System.Windows.Forms;
 
 namespace CRUD___Adriano.Features.Cliente.Controller
 {
-    public class ClienteController : ControllerConexao, IClienteController
+    public class ClienteController : IClienteController
     {
+        private ControllerConexao _conexao;
+
+        public ClienteController(ControllerConexao conexao)
+        {
+            _conexao = conexao;
+        }
+
         public void Atualizar(int id)
         {
             throw new System.NotImplementedException();
@@ -24,7 +31,7 @@ namespace CRUD___Adriano.Features.Cliente.Controller
         {
             try
             {
-                EscopoTransacao((conexao, transacao) => ClienteDao.CadastrarCliente(conexao, transacao, clienteModel));
+                _conexao.EscopoTransacao((conexao, transacao) => ClienteDao.CadastrarCliente(conexao, transacao, clienteModel));
             }
             catch(Exception excecao)
             {

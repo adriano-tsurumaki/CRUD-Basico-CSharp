@@ -87,7 +87,6 @@ namespace CRUD___Adriano.Features.Cadastro.Usuario.View
             this.txtNome.TabIndex = 1;
             this.txtNome.Texto = "";
             this.txtNome.UnderlinedStyle = true;
-            this.txtNome.Validating += new System.ComponentModel.CancelEventHandler(this.TxtNome_Validating);
             // 
             // lblSobrenome
             // 
@@ -139,7 +138,6 @@ namespace CRUD___Adriano.Features.Cadastro.Usuario.View
             this.txtSobrenome.TabIndex = 2;
             this.txtSobrenome.Texto = "";
             this.txtSobrenome.UnderlinedStyle = true;
-            this.txtSobrenome.Validating += new System.ComponentModel.CancelEventHandler(this.TxtSobrenome_Validating);
             // 
             // lblCep
             // 
@@ -198,7 +196,6 @@ namespace CRUD___Adriano.Features.Cadastro.Usuario.View
             this.txtLogradouro.TabIndex = 7;
             this.txtLogradouro.Texto = "";
             this.txtLogradouro.UnderlinedStyle = true;
-            this.txtLogradouro.Validating += new System.ComponentModel.CancelEventHandler(this.TxtLogradouro_Validating);
             // 
             // lblBairro
             // 
@@ -272,7 +269,6 @@ namespace CRUD___Adriano.Features.Cadastro.Usuario.View
             this.txtBairro.TabIndex = 9;
             this.txtBairro.Texto = "";
             this.txtBairro.UnderlinedStyle = true;
-            this.txtBairro.Validating += new System.ComponentModel.CancelEventHandler(this.TxtBairro_Validating);
             // 
             // txtComplemento
             // 
@@ -309,7 +305,6 @@ namespace CRUD___Adriano.Features.Cadastro.Usuario.View
             this.txtNumero.TabIndex = 10;
             this.txtNumero.Texto = "";
             this.txtNumero.UnderlinedStyle = true;
-            this.txtNumero.Validating += new System.ComponentModel.CancelEventHandler(this.TxtNumero_Validating);
             // 
             // dataNascimento
             // 
@@ -352,7 +347,6 @@ namespace CRUD___Adriano.Features.Cadastro.Usuario.View
             this.cbSexo.Size = new System.Drawing.Size(212, 30);
             this.cbSexo.TabIndex = 23;
             this.cbSexo.Texto = "";
-            this.cbSexo.Validating += new System.ComponentModel.CancelEventHandler(this.CbSexo_Validating);
             // 
             // txtCidade
             // 
@@ -371,7 +365,6 @@ namespace CRUD___Adriano.Features.Cadastro.Usuario.View
             this.txtCidade.TabIndex = 24;
             this.txtCidade.Texto = "";
             this.txtCidade.UnderlinedStyle = true;
-            this.txtCidade.Validating += new System.ComponentModel.CancelEventHandler(this.TxtCidade_Validating);
             // 
             // txtCpf
             // 
@@ -390,7 +383,6 @@ namespace CRUD___Adriano.Features.Cadastro.Usuario.View
             this.txtCpf.TabIndex = 26;
             this.txtCpf.Texto = "";
             this.txtCpf.UnderlinedStyle = true;
-            this.txtCpf.Validating += new System.ComponentModel.CancelEventHandler(this.TxtCpf_Validating);
             // 
             // lblCpf
             // 
@@ -424,7 +416,6 @@ namespace CRUD___Adriano.Features.Cadastro.Usuario.View
             this.cbEstado.Size = new System.Drawing.Size(212, 30);
             this.cbEstado.TabIndex = 28;
             this.cbEstado.Texto = "";
-            this.cbEstado.Validating += new System.ComponentModel.CancelEventHandler(this.CbEstado_Validating);
             // 
             // FrmCadastroUsuario
             // 
@@ -459,7 +450,6 @@ namespace CRUD___Adriano.Features.Cadastro.Usuario.View
             this.Name = "FrmCadastroUsuario";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cadastro do produto";
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FrmCadastroProduto_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

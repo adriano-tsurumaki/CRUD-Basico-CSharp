@@ -16,6 +16,7 @@ namespace CRUD___Adriano.Features.Cliente.Dao
         public static void CadastrarCliente(IDbConnection conexao, IDbTransaction transacao, ClienteModel clienteModel)
         {
             clienteModel.Id = (int)conexao.ExecuteScalar(sqlInserirUsuario, clienteModel, transacao);
+
             conexao.Execute(SqlInserirCliente(clienteModel), clienteModel, transacao);
 
             clienteModel.Endereco.IdUsuario = clienteModel.Id;
