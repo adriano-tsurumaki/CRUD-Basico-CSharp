@@ -31,10 +31,6 @@ namespace CRUD___Adriano.Features.Cadastro.Usuario.View
         {
             this.components = new System.ComponentModel.Container();
             this.lblNome = new System.Windows.Forms.Label();
-            this.btnCadastrar = new System.Windows.Forms.Button();
-            this.btnCancelar = new System.Windows.Forms.Button();
-            this.pnlBottom = new System.Windows.Forms.Panel();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.txtNome = new CRUD___Adriano.Features.Componentes.TextBoxFlat();
             this.lblSobrenome = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -59,8 +55,6 @@ namespace CRUD___Adriano.Features.Cadastro.Usuario.View
             this.txtCpf = new CRUD___Adriano.Features.Componentes.TextBoxFlat();
             this.lblCpf = new System.Windows.Forms.Label();
             this.cbEstado = new CRUD___Adriano.Features.Componentes.ComboBoxFlat();
-            this.pnlBottom.SuspendLayout();
-            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
@@ -74,57 +68,6 @@ namespace CRUD___Adriano.Features.Cadastro.Usuario.View
             this.lblNome.Size = new System.Drawing.Size(62, 21);
             this.lblNome.TabIndex = 0;
             this.lblNome.Text = "Nome*";
-            // 
-            // btnCadastrar
-            // 
-            this.btnCadastrar.BackColor = System.Drawing.Color.Lime;
-            this.btnCadastrar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnCadastrar.FlatAppearance.BorderSize = 0;
-            this.btnCadastrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCadastrar.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnCadastrar.ForeColor = System.Drawing.Color.White;
-            this.btnCadastrar.Location = new System.Drawing.Point(28, 7);
-            this.btnCadastrar.Name = "btnCadastrar";
-            this.btnCadastrar.Size = new System.Drawing.Size(144, 38);
-            this.btnCadastrar.TabIndex = 12;
-            this.btnCadastrar.Text = "Cadastrar (F5)";
-            this.btnCadastrar.UseVisualStyleBackColor = false;
-            this.btnCadastrar.Click += new System.EventHandler(this.BtnCadastrar_Click);
-            // 
-            // btnCancelar
-            // 
-            this.btnCancelar.BackColor = System.Drawing.Color.Crimson;
-            this.btnCancelar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnCancelar.FlatAppearance.BorderSize = 0;
-            this.btnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancelar.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnCancelar.ForeColor = System.Drawing.Color.White;
-            this.btnCancelar.Location = new System.Drawing.Point(190, 7);
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(144, 38);
-            this.btnCancelar.TabIndex = 13;
-            this.btnCancelar.Text = "Cancelar (ESC)";
-            this.btnCancelar.UseVisualStyleBackColor = false;
-            this.btnCancelar.Click += new System.EventHandler(this.BtnCancelar_Click);
-            // 
-            // pnlBottom
-            // 
-            this.pnlBottom.Controls.Add(this.panel1);
-            this.pnlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlBottom.Location = new System.Drawing.Point(0, 518);
-            this.pnlBottom.Name = "pnlBottom";
-            this.pnlBottom.Size = new System.Drawing.Size(622, 57);
-            this.pnlBottom.TabIndex = 5;
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.btnCadastrar);
-            this.panel1.Controls.Add(this.btnCancelar);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel1.Location = new System.Drawing.Point(276, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(346, 57);
-            this.panel1.TabIndex = 5;
             // 
             // txtNome
             // 
@@ -483,7 +426,7 @@ namespace CRUD___Adriano.Features.Cadastro.Usuario.View
             this.cbEstado.Texto = "";
             this.cbEstado.Validating += new System.ComponentModel.CancelEventHandler(this.CbEstado_Validating);
             // 
-            // FrmCadastroCliente
+            // FrmCadastroUsuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -512,14 +455,11 @@ namespace CRUD___Adriano.Features.Cadastro.Usuario.View
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lblSobrenome);
             this.Controls.Add(this.txtNome);
-            this.Controls.Add(this.pnlBottom);
             this.Controls.Add(this.lblNome);
-            this.Name = "FrmCadastroCliente";
+            this.Name = "FrmCadastroUsuario";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cadastro do produto";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FrmCadastroProduto_KeyDown);
-            this.pnlBottom.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -529,10 +469,6 @@ namespace CRUD___Adriano.Features.Cadastro.Usuario.View
         #endregion
 
         private System.Windows.Forms.Label lblNome;
-        private System.Windows.Forms.Button btnCadastrar;
-        private System.Windows.Forms.Button btnCancelar;
-        private System.Windows.Forms.Panel pnlBottom;
-        private System.Windows.Forms.Panel panel1;
         private Componentes.TextBoxFlat txtNome;
         private System.Windows.Forms.Label lblSobrenome;
         private System.Windows.Forms.Label label1;

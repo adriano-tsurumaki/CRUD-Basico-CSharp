@@ -27,29 +27,20 @@ namespace CRUD___Adriano
         private void BtnClienteCadastro_Click(object sender, EventArgs e)
         {
             lblTitulo.Text = "Cadastro de cliente";
-            //DocaForm(new ClienteCadastroController().RetornarFormulario());
+            var pageManager = new GerenciadorDePaginas<ClienteModel>(
+                pnlChild,
+                new ClienteController(),
+                new ClienteModel());
+
+            pageManager.Add(new FrmCadastroUsuario<ClienteModel>());
+            pageManager.Add(new FrmCadastroCliente());
+            pageManager.Show();
         }
 
         private void BtnClientesListagem_Click(object sender, EventArgs e)
         {
             lblTitulo.Text = "Listagem de clientes";
             //DocaForm(new ClienteListagemController().RetornarFormulario());
-        }
-
-        public void DocaForm(Form formFilha)
-        {
-            if (formFilhaAtiva != null)
-                formFilhaAtiva.Close();
-            formFilhaAtiva = formFilha;
-
-            formFilha.TopLevel = false;
-            formFilha.FormBorderStyle = FormBorderStyle.None;
-            formFilha.Dock = DockStyle.Fill;
-            pnlChild.Controls.Add(formFilha);
-            pnlChild.Tag = formFilha;
-            formFilha.BringToFront();
-            formFilha.Show();
-            formFilha.Focus();
         }
 
         private void BtnMenuCadastro_Click(object sender, EventArgs e)
@@ -82,14 +73,7 @@ namespace CRUD___Adriano
 
         private void BtnCadastroFuncionario_Click(object sender, EventArgs e)
         {
-            var pageManager = new GerenciadorDePaginas<ClienteModel>(
-                pnlChild, 
-                new ClienteController(), 
-                new ClienteModel());
-
-            pageManager.Add(new FrmCadastroUsuario<ClienteModel>());
-            pageManager.Add(new FrmCadastroCliente());
-            pageManager.Show();
+            
         }
     }
 }

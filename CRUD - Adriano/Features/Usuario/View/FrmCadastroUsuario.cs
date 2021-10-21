@@ -22,19 +22,19 @@ namespace CRUD___Adriano.Features.Cadastro.Usuario.View
             cbEstado.AtribuirPeloEnum<EstadosBrasilEnum>();
         }
 
-        public override void AdicionarModel(T model)
+        public override void AdicionarModel(ref T model)
         {
             _model = model;
         }
 
-        private void BtnCadastrar_Click(object sender, System.EventArgs e)
+        /*private void BtnCadastrar_Click(object sender, System.EventArgs e)
         {
             //if (ValidateChildren(ValidationConstraints.Enabled))
                 //_produtoCadastroController.CadastrarCliente(_usuarioModel);
         }
 
         private void BtnCancelar_Click(object sender, System.EventArgs e) =>
-            Close();
+            Close();*/
 
         private void FrmCadastroProduto_KeyDown(object sender, KeyEventArgs e)
         {

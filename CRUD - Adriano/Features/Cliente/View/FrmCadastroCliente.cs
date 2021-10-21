@@ -19,7 +19,7 @@ namespace CRUD___Adriano.Features.Cliente.View
             InitializeComponent();
         }
 
-        public override void AdicionarModel(ClienteModel clienteModel)
+        public override void AdicionarModel(ref ClienteModel clienteModel)
         {
             _clienteModel = clienteModel;
         }
