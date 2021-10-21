@@ -17,20 +17,10 @@ namespace CRUD___Adriano.Features.Cliente.Dao
         {
             clienteModel.Id = (int)conexao.ExecuteScalar(sqlInserirUsuario, clienteModel, transacao);
             conexao.Execute(SqlInserirCliente(clienteModel), clienteModel, transacao);
-            conexao.Execute(
-                SqlInserirEndereco(clienteModel.Endereco),
-                new
-                {
-                    clienteModel.Id,
-                    clienteModel.Endereco.Cep,
-                    clienteModel.Endereco.Logradouro,
-                    clienteModel.Endereco.Bairro,
-                    clienteModel.Endereco.Complemento,
-                    clienteModel.Endereco.Cidade,
-                    clienteModel.Endereco.Uf,
-                    clienteModel.Endereco.Numero,
-                },
-                transacao);
+
+            clienteModel.Endereco.IdUsuario = clienteModel.Id;
+
+            conexao.Execute(SqlInserirEndereco(clienteModel.Endereco), clienteModel.Endereco, transacao);
         }
 
         private static string SqlInserirCliente(ClienteModel clienteModel)

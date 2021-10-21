@@ -1,9 +1,8 @@
-﻿using CRUD___Adriano.Features.Cadastro.Produto.Controller;
-using CRUD___Adriano.Features.Cadastro.Produto.Model;
+﻿using CRUD___Adriano.Features.Cadastro.Produto.Model;
+using CRUD___Adriano.Features.Cadastro.Usuario.View;
 using CRUD___Adriano.Features.Cliente.Controller;
 using CRUD___Adriano.Features.Cliente.View;
 using CRUD___Adriano.Features.Controller.PageManager;
-using CRUD___Adriano.Features.Factory;
 using System;
 using System.Windows.Forms;
 
@@ -28,13 +27,13 @@ namespace CRUD___Adriano
         private void BtnClienteCadastro_Click(object sender, EventArgs e)
         {
             lblTitulo.Text = "Cadastro de cliente";
-            DocaForm(new ClienteCadastroController().RetornarFormulario());
+            //DocaForm(new ClienteCadastroController().RetornarFormulario());
         }
 
         private void BtnClientesListagem_Click(object sender, EventArgs e)
         {
             lblTitulo.Text = "Listagem de clientes";
-            DocaForm(new ClienteListagemController().RetornarFormulario());
+            //DocaForm(new ClienteListagemController().RetornarFormulario());
         }
 
         public void DocaForm(Form formFilha)
@@ -83,9 +82,13 @@ namespace CRUD___Adriano
 
         private void BtnCadastroFuncionario_Click(object sender, EventArgs e)
         {
-            var pageManager = new PageManager(pnlChild, new ClienteController(), new ClienteModel());
+            var pageManager = new GerenciadorDePaginas<ClienteModel>(
+                pnlChild, 
+                new ClienteController(), 
+                new ClienteModel());
+
+            pageManager.Add(new FrmCadastroUsuario<ClienteModel>());
             pageManager.Add(new FrmCadastroCliente());
-            pageManager.Add(new ClienteListagemController().RetornarFormulario());
             pageManager.Show();
         }
     }

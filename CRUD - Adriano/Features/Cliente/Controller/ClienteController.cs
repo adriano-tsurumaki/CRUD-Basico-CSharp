@@ -1,30 +1,38 @@
-﻿using CRUD___Adriano.Features.Factory;
-using CRUD___Adriano.Features.Usuario.Model;
-using Dapper;
+﻿using CRUD___Adriano.Features.Cadastro.Produto.Model;
+using CRUD___Adriano.Features.Cliente.Dao;
+using CRUD___Adriano.Features.Cliente.Model;
+using CRUD___Adriano.Features.Factory;
+using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Linq;
+using System.Windows.Forms;
 
 namespace CRUD___Adriano.Features.Cliente.Controller
 {
-    public class ClienteController : IControllerFactory
+    public class ClienteController : ControllerConexao, IClienteController
     {
         public void Atualizar(int id)
-        {
-            
-        }
-
-        public IList<T> Listar<T>(int quantidade)
         {
             throw new System.NotImplementedException();
         }
 
-        public void Salvar<T>(T entidade)
+        public IList<ClienteModel> Listar(int quantidade)
         {
-
+            throw new System.NotImplementedException();
         }
 
-        public T Selecionar<T>(int id)
+        public void Salvar(ClienteModel clienteModel)
+        {
+            try
+            {
+                EscopoTransacao((conexao, transacao) => ClienteDao.CadastrarCliente(conexao, transacao, clienteModel));
+            }
+            catch(Exception excecao)
+            {
+                MessageBox.Show(excecao.Message, "Erro ao cadastrar cliente");
+            }
+        }
+
+        public ClienteModel Selecionar(int id)
         {
             throw new System.NotImplementedException();
         }

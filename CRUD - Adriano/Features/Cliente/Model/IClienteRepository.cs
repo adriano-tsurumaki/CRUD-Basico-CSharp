@@ -1,9 +1,9 @@
-﻿using CRUD___Adriano.Features.Factory;
+﻿using CRUD___Adriano.Features.Cadastro.Produto.Model;
+using CRUD___Adriano.Features.Factory;
 
 namespace CRUD___Adriano.Features.Cliente.Model
 {
-    public interface IClienteController : IControllerFactory
+    public interface IClienteController : IControllerBase<ClienteModel>
     {
-        
     }
 }

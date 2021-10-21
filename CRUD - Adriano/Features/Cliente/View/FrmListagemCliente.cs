@@ -7,12 +7,9 @@ namespace CRUD___Adriano.Features.Cliente.View
 {
     public partial class FrmListagemCliente : Form
     {
-        private ClienteListagemController _clienteListagemController;
-
-        public FrmListagemCliente(ClienteListagemController clienteListagemController)
+        public FrmListagemCliente()
         {
             InitializeComponent();
-            _clienteListagemController = clienteListagemController;
             gridView.DataSource = new List<ClienteModel>
             { 
                 new ClienteModel

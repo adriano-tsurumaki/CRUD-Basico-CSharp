@@ -1,35 +1,36 @@
-﻿using CRUD___Adriano.Features.Cadastro.Produto.Controller;
-using CRUD___Adriano.Features.Cadastro.Produto.Model;
-using CRUD___Adriano.Features.Componentes;
+﻿using CRUD___Adriano.Features.Componentes;
 using CRUD___Adriano.Features.Estados.Enum;
+using CRUD___Adriano.Features.Factory;
 using CRUD___Adriano.Features.Usuario.Enum;
+using CRUD___Adriano.Features.Usuario.Model;
 using CRUD___Adriano.Features.Utils;
 using System;
 using System.Windows.Forms;
 
 namespace CRUD___Adriano.Features.Cadastro.Usuario.View
 {
-    public partial class FrmCadastroUsuario : Form
+    public partial class FrmCadastroUsuario<T> : FormBase<T> where T : class
     {
-        private ClienteCadastroController _produtoCadastroController;
-        private ClienteModel _clienteModel;
+        private T _model;
 
-        public FrmCadastroUsuario(ClienteCadastroController produtoCadastroController)
+        public FrmCadastroUsuario()
         {
             InitializeComponent();
-            _produtoCadastroController = produtoCadastroController;
-
-            _clienteModel = new ClienteModel();
 
             txtNome.Focus();
             cbSexo.AtribuirPeloEnum<UsuarioSexoEnum>();
             cbEstado.AtribuirPeloEnum<EstadosBrasilEnum>();
         }
 
+        public override void AdicionarModel(T model)
+        {
+            _model = model;
+        }
+
         private void BtnCadastrar_Click(object sender, System.EventArgs e)
         {
-            if (ValidateChildren(ValidationConstraints.Enabled))
-                _produtoCadastroController.CadastrarCliente(_clienteModel);
+            //if (ValidateChildren(ValidationConstraints.Enabled))
+                //_produtoCadastroController.CadastrarCliente(_usuarioModel);
         }
 
         private void BtnCancelar_Click(object sender, System.EventArgs e) =>
@@ -43,7 +44,7 @@ namespace CRUD___Adriano.Features.Cadastro.Usuario.View
                     Close();
                     break;
                 case Keys.F5:
-                    _produtoCadastroController.CadastrarCliente(_clienteModel);
+                    //_produtoCadastroController.CadastrarCliente(_usuarioModel);
                     break;
             }
         }
@@ -51,44 +52,44 @@ namespace CRUD___Adriano.Features.Cadastro.Usuario.View
         private void TxtNome_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (ValidacaoPadrao(txtNome, e))
-                _clienteModel.Nome = txtNome.Texto;
+                (_model as UsuarioModel).Nome = txtNome.Texto;
         }
 
         private void TxtSobrenome_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (ValidacaoPadrao(txtSobrenome, e))
-                _clienteModel.Sobrenome = txtSobrenome.Texto;
+                (_model as UsuarioModel).Sobrenome = txtSobrenome.Texto;
         }
 
         private void TxtLogradouro_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (ValidacaoPadrao(txtLogradouro, e))
-                _clienteModel.Endereco.Logradouro = txtLogradouro.Texto;
+                (_model as UsuarioModel).Endereco.Logradouro = txtLogradouro.Texto;
         }
 
         private void TxtBairro_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (ValidacaoPadrao(txtBairro, e))
-                _clienteModel.Endereco.Bairro = txtBairro.Texto;
+                (_model as UsuarioModel).Endereco.Bairro = txtBairro.Texto;
         }
 
         private void TxtNumero_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (ValidacaoPadrao(txtNumero, e))
-                _clienteModel.Endereco.Numero = txtNumero.Texto;
+                (_model as UsuarioModel).Endereco.Numero = txtNumero.Texto;
         }
 
 
         private void TxtCidade_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (ValidacaoPadrao(txtCidade, e))
-                _clienteModel.Endereco.Cidade = txtCidade.Texto;
+                (_model as UsuarioModel).Endereco.Cidade = txtCidade.Texto;
         }
 
         private void TxtCpf_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (ValidacaoPadrao(txtCpf, e))
-                _clienteModel.Cpf = txtCpf.Texto;
+                (_model as UsuarioModel).Cpf = txtCpf.Texto;
         }
 
         private bool ValidacaoPadrao(TextBoxFlat textBox, System.ComponentModel.CancelEventArgs e)
@@ -114,14 +115,14 @@ namespace CRUD___Adriano.Features.Cadastro.Usuario.View
 
             errorProvider.SetError(dataNascimento, null);
 
-            _clienteModel.DataNascimento = dataNascimento.Value;
+            (_model as UsuarioModel).DataNascimento = dataNascimento.Value;
         }
 
         private void CbSexo_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
             try
             {
-                _clienteModel.Sexo = cbSexo.PegarEnumPorDescricao<UsuarioSexoEnum>();
+                (_model as UsuarioModel).Sexo = cbSexo.PegarEnumPorDescricao<UsuarioSexoEnum>();
                 errorProvider.SetError(cbSexo, null);
             }
             catch (Exception)
@@ -134,7 +135,7 @@ namespace CRUD___Adriano.Features.Cadastro.Usuario.View
         {
             try
             {
-                _clienteModel.Endereco.Uf = cbEstado.PegarEnumPorDescricao<UsuarioSexoEnum>().ToString();
+                (_model as UsuarioModel).Endereco.Uf = cbEstado.PegarEnumPorDescricao<UsuarioSexoEnum>().ToString();
                 errorProvider.SetError(cbEstado, null);
             }
             catch (Exception)

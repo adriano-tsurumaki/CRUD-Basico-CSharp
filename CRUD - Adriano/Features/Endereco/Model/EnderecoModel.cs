@@ -2,6 +2,7 @@
 {
     public class EnderecoModel
     {
+        public int IdUsuario { get; set; }
         public string Cep { get; set; }
         public string Logradouro { get; set; }
         public string Bairro { get; set; }
