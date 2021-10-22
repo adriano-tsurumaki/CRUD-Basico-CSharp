@@ -9,7 +9,12 @@ namespace CRUD___Adriano.Features.Colaborador.Controller
 {
     public class ColaboradorController : IControllerBase<ColaboradorModel>
     {
-        private ControllerConexao _conexao;
+        private readonly ControllerConexao _conexao;
+
+        public ColaboradorController(ControllerConexao conexao)
+        {
+            _conexao = conexao;
+        }
 
         public void Atualizar(int id)
         {

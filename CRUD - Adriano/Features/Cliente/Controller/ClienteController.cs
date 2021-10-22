@@ -10,7 +10,7 @@ namespace CRUD___Adriano.Features.Cliente.Controller
 {
     public class ClienteController : IControllerBase<ClienteModel>
     {
-        private ControllerConexao _conexao;
+        private readonly ControllerConexao _conexao;
 
         public ClienteController(ControllerConexao conexao)
         {

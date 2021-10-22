@@ -15,7 +15,7 @@ namespace CRUD___Adriano.Features.Colaborador.Dao
 
         private static string sqlInserirColaborador =
             @"insert into Colaborador(id_usuario, salario, comissao)
-            values(@Id, @Salario, @Comissao)";
+            values(@IdUsuario, @Salario, @Comissao)";
 
         private static string sqlInserirEmail =
             @"insert into Email(id_usuario, nome) values (@IdUsuario, @Nome)";
@@ -28,6 +28,8 @@ namespace CRUD___Adriano.Features.Colaborador.Dao
             colaboradorModel.IdUsuario = (int)conexao.ExecuteScalar(sqlInserirUsuario, colaboradorModel, transacao);
 
             conexao.Execute(sqlInserirColaborador, colaboradorModel, transacao);
+
+            colaboradorModel.Endereco.IdUsuario = colaboradorModel.IdUsuario;
 
             foreach (var email in colaboradorModel.Emails)
                 email.IdUsuario = colaboradorModel.IdUsuario;

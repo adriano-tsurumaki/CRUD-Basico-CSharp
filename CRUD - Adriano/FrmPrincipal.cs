@@ -1,7 +1,10 @@
 ﻿using CRUD___Adriano.Features.Cadastro.Produto.Model;
 using CRUD___Adriano.Features.Cadastro.Usuario.View;
 using CRUD___Adriano.Features.Cliente.Controller;
+using CRUD___Adriano.Features.Cliente.Model;
 using CRUD___Adriano.Features.Cliente.View;
+using CRUD___Adriano.Features.Colaborador.Controller;
+using CRUD___Adriano.Features.Colaborador.View;
 using CRUD___Adriano.Features.Configuration;
 using CRUD___Adriano.Features.Controller.PageManager;
 using CRUD___Adriano.Features.Factory;
@@ -77,7 +80,16 @@ namespace CRUD___Adriano
 
         private void BtnCadastroFuncionario_Click(object sender, EventArgs e)
         {
-            
+            lblTitulo.Text = "Cadastro de colaborador";
+            var pageManager = new GerenciadorDePaginas<ColaboradorModel>(
+                pnlChild,
+                new ColaboradorController(new ControllerConexao()),
+                new ColaboradorModel());
+
+            pageManager.Add(new FrmCadastroUsuario<ColaboradorModel>());
+            pageManager.Add(new FrmEmailTelefone<ColaboradorModel>());
+            pageManager.Add(new FrmCadastroColaborador());
+            pageManager.Show();
         }
     }
 }
