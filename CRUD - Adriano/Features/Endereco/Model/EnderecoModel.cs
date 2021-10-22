@@ -1,4 +1,6 @@
-﻿namespace CRUD___Adriano.Features.Endereco.Model
+﻿using CRUD___Adriano.Features.Estados.Enum;
+
+namespace CRUD___Adriano.Features.Endereco.Model
 {
     public class EnderecoModel
     {
@@ -8,7 +10,7 @@
         public string Bairro { get; set; }
         public string Complemento { get; set; }
         public string Cidade { get; set; }
-        public string Uf { get; set; }
+        public EstadosBrasilEnum Uf { get; set; }
         public string Numero { get; set; }
     }
 }

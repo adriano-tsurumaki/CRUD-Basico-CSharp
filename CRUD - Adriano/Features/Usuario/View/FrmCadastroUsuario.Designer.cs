@@ -2,6 +2,7 @@
 namespace CRUD___Adriano.Features.Cadastro.Usuario.View
 {
     partial class FrmCadastroUsuario<T>
+    //partial class FrmCadastroUsuario
     {
         /// <summary>
         /// Required designer variable.
@@ -302,7 +303,7 @@ namespace CRUD___Adriano.Features.Cadastro.Usuario.View
             this.txtNumero.Padding = new System.Windows.Forms.Padding(7);
             this.txtNumero.PasswordChar = false;
             this.txtNumero.Size = new System.Drawing.Size(212, 36);
-            this.txtNumero.TabIndex = 10;
+            this.txtNumero.TabIndex = 12;
             this.txtNumero.Texto = "";
             this.txtNumero.UnderlinedStyle = true;
             // 
@@ -317,7 +318,7 @@ namespace CRUD___Adriano.Features.Cadastro.Usuario.View
             this.dataNascimento.Name = "dataNascimento";
             this.dataNascimento.Size = new System.Drawing.Size(212, 35);
             this.dataNascimento.SkinColor = System.Drawing.Color.MediumSlateBlue;
-            this.dataNascimento.TabIndex = 22;
+            this.dataNascimento.TabIndex = 6;
             this.dataNascimento.TextColor = System.Drawing.Color.White;
             this.dataNascimento.Validating += new System.ComponentModel.CancelEventHandler(this.DataNascimento_Validating);
             // 
@@ -345,7 +346,7 @@ namespace CRUD___Adriano.Features.Cadastro.Usuario.View
             this.cbSexo.Name = "cbSexo";
             this.cbSexo.Padding = new System.Windows.Forms.Padding(2);
             this.cbSexo.Size = new System.Drawing.Size(212, 30);
-            this.cbSexo.TabIndex = 23;
+            this.cbSexo.TabIndex = 3;
             this.cbSexo.Texto = "";
             // 
             // txtCidade
@@ -362,7 +363,7 @@ namespace CRUD___Adriano.Features.Cadastro.Usuario.View
             this.txtCidade.Padding = new System.Windows.Forms.Padding(7);
             this.txtCidade.PasswordChar = false;
             this.txtCidade.Size = new System.Drawing.Size(212, 36);
-            this.txtCidade.TabIndex = 24;
+            this.txtCidade.TabIndex = 8;
             this.txtCidade.Texto = "";
             this.txtCidade.UnderlinedStyle = true;
             // 
@@ -380,7 +381,7 @@ namespace CRUD___Adriano.Features.Cadastro.Usuario.View
             this.txtCpf.Padding = new System.Windows.Forms.Padding(7);
             this.txtCpf.PasswordChar = false;
             this.txtCpf.Size = new System.Drawing.Size(212, 36);
-            this.txtCpf.TabIndex = 26;
+            this.txtCpf.TabIndex = 4;
             this.txtCpf.Texto = "";
             this.txtCpf.UnderlinedStyle = true;
             // 
@@ -414,7 +415,7 @@ namespace CRUD___Adriano.Features.Cadastro.Usuario.View
             this.cbEstado.Name = "cbEstado";
             this.cbEstado.Padding = new System.Windows.Forms.Padding(2);
             this.cbEstado.Size = new System.Drawing.Size(212, 30);
-            this.cbEstado.TabIndex = 28;
+            this.cbEstado.TabIndex = 10;
             this.cbEstado.Texto = "";
             // 
             // FrmCadastroUsuario
@@ -447,6 +448,7 @@ namespace CRUD___Adriano.Features.Cadastro.Usuario.View
             this.Controls.Add(this.lblSobrenome);
             this.Controls.Add(this.txtNome);
             this.Controls.Add(this.lblNome);
+            this.KeyPreview = true;
             this.Name = "FrmCadastroUsuario";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cadastro do produto";

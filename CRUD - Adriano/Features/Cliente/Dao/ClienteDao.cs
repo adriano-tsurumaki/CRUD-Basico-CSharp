@@ -43,7 +43,7 @@ namespace CRUD___Adriano.Features.Cliente.Dao
         private static string SqlInserirEndereco(EnderecoModel enderecoModel)
         {
             var insertSql = new StringBuilder("insert into Endereco(id_usuario, logradouro, cidade, uf, complemento, bairro, numero");
-            var valuesSql = new StringBuilder("values (@Id, @Logradouro, @Cidade, @Uf, @Complemento, @Bairro, @Numero");
+            var valuesSql = new StringBuilder("values (@IdUsuario, @Logradouro, @Cidade, @Uf, @Complemento, @Bairro, @Numero");
 
             if (!string.IsNullOrEmpty(enderecoModel.Cep))
             {

@@ -1,5 +1,6 @@
 ﻿using CRUD___Adriano.Features.Email.Model;
 using CRUD___Adriano.Features.Endereco.Model;
+using CRUD___Adriano.Features.Telefone.Model;
 using CRUD___Adriano.Features.Usuario.Enum;
 using System;
 using System.Collections.Generic;
@@ -14,13 +15,15 @@ namespace CRUD___Adriano.Features.Usuario.Model
         public string Cpf { get; set; }
         public UsuarioSexoEnum Sexo { get; set; }
         public IList<EmailModel> Emails { get; set; }
+        public IList<TelefoneModel> Telefones { get; set; }
         public DateTime DataNascimento { get; set; }
         public EnderecoModel Endereco { get; set; }
 
         public UsuarioModel()
         {
-            Endereco = new EnderecoModel();
             Emails = new List<EmailModel>();
+            Telefones = new List<TelefoneModel>();
+            Endereco = new EnderecoModel();
         }
 
         public string RetornarCpfFormatado() => 

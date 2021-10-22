@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace CRUD___Adriano.Features.Componentes
 {
-    [DefaultEvent("_TextChanged")]
+    [DefaultEvent("_TextChanged, _KeyDown")]
     public partial class TextBoxFlat : UserControl
     {
         private Color borderColor = Color.MediumSlateBlue;
@@ -18,6 +18,7 @@ namespace CRUD___Adriano.Features.Componentes
         }
 
         public event EventHandler _TextChanged;
+        public event KeyEventHandler _KeyDown;
 
         [Category("Customizado")]
         public Color BorderColor
@@ -154,6 +155,12 @@ namespace CRUD___Adriano.Features.Componentes
         {
             if (_TextChanged != null)
                 _TextChanged.Invoke(sender, e);
+        }
+
+        private void TextBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (_KeyDown != null)
+                _KeyDown.Invoke(sender, e);
         }
     }
 }

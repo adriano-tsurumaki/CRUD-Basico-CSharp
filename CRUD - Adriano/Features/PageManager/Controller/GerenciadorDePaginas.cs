@@ -60,6 +60,40 @@ namespace CRUD___Adriano.Features.Controller.PageManager
             _ucBotaoCancelar.btnCancel.Click += new EventHandler(BtnCancelar_Click);
         }
 
+        public void ConstruirLayoutInicial()
+        {
+            _ucCentral.Dock = DockStyle.Fill;
+            _ucBody.Dock = DockStyle.Fill;
+            _ucFooter.Dock = DockStyle.Fill;
+
+            AdicionarControl(_ucCentral.pnlBody, _ucBody);
+            AdicionarControl(_ucCentral.pnlBottom, _ucFooter);
+
+            AdicionarControl(_ucFooter.pnlBottomRight, _ucBotaoProximo);
+            AdicionarControl(_ucFooter.pnlBottomLeft, _ucBotaoCancelar);
+        }
+
+        public void AdicionarControl(Panel panel, UserControl formFilha)
+        {
+            panel.Controls.Add(formFilha);
+            panel.Tag = formFilha;
+
+            formFilha.BringToFront();
+            formFilha.Show();
+        }
+
+        public void AdicionarControl(Panel panel, FormBase<T> formFilha)
+        {
+            formFilha.TopLevel = false;
+            formFilha.FormBorderStyle = FormBorderStyle.None;
+            formFilha.Dock = DockStyle.Fill;
+            panel.Controls.Add(formFilha);
+            panel.Tag = formFilha;
+
+            formFilha.BringToFront();
+            formFilha.Show();
+        }
+
         private void BtnAnterior_Click(object sender, EventArgs e)
         {
             _indiceAtualPagina--;
@@ -69,7 +103,7 @@ namespace CRUD___Adriano.Features.Controller.PageManager
 
         private void BtnProximo_Click(object sender, EventArgs e)
         {
-            if(!ValidarPagina())
+            if (!ValidarPagina())
             {
                 MessageBox.Show("Preencha os campos obrigatórios");
                 return;
@@ -91,8 +125,8 @@ namespace CRUD___Adriano.Features.Controller.PageManager
             }
             else if (_indiceAtualPagina == 1)
             {
-                AdicionarControl(_ucFooter.pnlBottomLeft, _ucBotaoProximo);
-                AdicionarControl(_ucFooter.pnlBottomRight, _ucBotaoCancelar);
+                AdicionarControl(_ucFooter.pnlBottomRight, _ucBotaoProximo);
+                AdicionarControl(_ucFooter.pnlBottomLeft, _ucBotaoCancelar);
             }
             else if (_indiceAtualPagina == _totalDePaginas)
             {
@@ -117,19 +151,6 @@ namespace CRUD___Adriano.Features.Controller.PageManager
         private void BtnCancelar_Click(object sender, EventArgs e) =>
             _ucCentral.Dispose();
 
-        public void ConstruirLayoutInicial()
-        {
-            _ucCentral.Dock = DockStyle.Fill;
-            _ucBody.Dock = DockStyle.Fill;
-            _ucFooter.Dock = DockStyle.Fill;
-
-            AdicionarControl(_ucCentral.pnlBody, _ucBody);
-            AdicionarControl(_ucCentral.pnlBottom, _ucFooter);
-
-            AdicionarControl(_ucFooter.pnlBottomLeft, _ucBotaoProximo);
-            AdicionarControl(_ucFooter.pnlBottomRight, _ucBotaoCancelar);
-        }
-
         private bool ValidarPagina()
         {
             _paginas.TryGetValue(_indiceAtualPagina, out var pagina);
@@ -137,27 +158,6 @@ namespace CRUD___Adriano.Features.Controller.PageManager
             pagina.Validar();
 
             return pagina.Validado;
-        }
-
-        public void AdicionarControl(Panel panel, UserControl formFilha)
-        {
-            panel.Controls.Add(formFilha);
-            panel.Tag = formFilha;
-
-            formFilha.BringToFront();
-            formFilha.Show();
-        }
-
-        public void AdicionarControl(Panel panel, FormBase<T> formFilha)
-        {
-            formFilha.TopLevel = false;
-            formFilha.FormBorderStyle = FormBorderStyle.None;
-            formFilha.Dock = DockStyle.Fill;
-            panel.Controls.Add(formFilha);
-            panel.Tag = formFilha;
-
-            formFilha.BringToFront();
-            formFilha.Show();
         }
 
         public void AtualizarControlPagina(FormBase<T> formFilha)
@@ -173,6 +173,7 @@ namespace CRUD___Adriano.Features.Controller.PageManager
 
             formFilha.BringToFront();
             formFilha.Show();
+            formFilha.Focus();
         }
 
         public void Show()
@@ -181,8 +182,6 @@ namespace CRUD___Adriano.Features.Controller.PageManager
             AdicionarControl(_panelCentral, _ucCentral);
             _totalDePaginas--;
         }
-
-        public void PageInit(FormBase<T> formFilha) => AdicionarControl(_ucBody.pnlBody, formFilha);
 
         public void Add(FormBase<T> formFilha)
         {

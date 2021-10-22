@@ -68,5 +68,8 @@ namespace CRUD___Adriano.Features.Utils
 
             return valor.ToString();
         }
+
+        public static bool EstaSelecionado(this ComboBoxFlat comboBox) =>
+            comboBox.SelectedIndex > 0;
     }
 }

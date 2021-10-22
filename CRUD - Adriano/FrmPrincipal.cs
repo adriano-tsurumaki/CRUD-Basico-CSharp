@@ -5,6 +5,7 @@ using CRUD___Adriano.Features.Cliente.View;
 using CRUD___Adriano.Features.Configuration;
 using CRUD___Adriano.Features.Controller.PageManager;
 using CRUD___Adriano.Features.Factory;
+using CRUD___Adriano.Features.Usuario.View;
 using System;
 using System.Windows.Forms;
 
@@ -35,6 +36,7 @@ namespace CRUD___Adriano
                 new ClienteModel());
 
             pageManager.Add(new FrmCadastroUsuario<ClienteModel>());
+            pageManager.Add(new FrmEmailTelefone<ClienteModel>());
             pageManager.Add(new FrmCadastroCliente());
             pageManager.Show();
         }
