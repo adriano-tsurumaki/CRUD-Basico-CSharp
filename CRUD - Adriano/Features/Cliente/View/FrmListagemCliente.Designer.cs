@@ -65,6 +65,7 @@ namespace CRUD___Adriano.Features.Cliente.View
             this.gridView.RowTemplate.Height = 25;
             this.gridView.Size = new System.Drawing.Size(800, 450);
             this.gridView.TabIndex = 0;
+            this.gridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridView_CellContentClick);
             this.gridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridView_CellDoubleClick);
             // 
             // FrmListagemCliente

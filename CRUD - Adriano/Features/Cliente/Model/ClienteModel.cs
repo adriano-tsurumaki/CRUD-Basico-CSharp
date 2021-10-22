@@ -1,11 +1,19 @@
 ﻿using CRUD___Adriano.Features.Usuario.Model;
+using System.Globalization;
 
 namespace CRUD___Adriano.Features.Cadastro.Produto.Model
 {
     public class ClienteModel: UsuarioModel
     {
         public int Id { get; set; }
-        public int ValorLimite { get; set; }
+        public decimal ValorLimite { get; set; }
         public string Observacao { get; set; }
+
+        public string ValorLimiteMask 
+        { 
+            get => $"{ValorLimite:C2}";
+            set => decimal.TryParse(value, NumberStyles.Currency,
+                CultureInfo.CurrentCulture.NumberFormat, out decimal ValorLimite);
+        }
     }
 }

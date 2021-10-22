@@ -150,5 +150,38 @@ namespace CRUD___Adriano.Features.Cliente.Dao
 
             return clienteModel;
         }
+
+        private static string sqlSelecionarCliente =
+            @"select u.id as IdUsuario, u.nome, u.sobrenome, u.sexo, u.cpf, u.data_nascimento, c.valor_limite as ValorLimite, c.observacao,
+            c.id as split, en.id_usuario as IdUsuario, en.cep, en.logradouro, en.bairro, en.cidade, en.uf, en.complemento, en.numero
+			from Cliente c
+			inner join Usuario u on u.id = c.id_usuario
+			inner join Endereco en on en.id_usuario = u.id
+			where u.id = @id";
+
+
+        public static ClienteModel SelecionarCliente(IDbConnection conexao, int id)
+        {
+            var dicionarioCliente = new Dictionary<int, ClienteModel>();
+
+            conexao.Query<ClienteModel, EnderecoModel, ClienteModel>(
+                sqlSelecionarCliente,
+                (clienteModel, enderecoModel) =>
+                MapearListagemDeClientes(clienteModel, enderecoModel, dicionarioCliente),
+                splitOn: "split",
+                param: new { id });
+
+            conexao.Query<ClienteModel, EmailModel, ClienteModel>(
+                sqlListarEmailsPorId,
+                (clienteModel, emailModel) => MapearListagemDeEmailsDosClientes(clienteModel, emailModel, dicionarioCliente),
+                splitOn: "split");
+
+            conexao.Query<ClienteModel, TelefoneModel, ClienteModel>(
+                sqlListarTelefonesPorId,
+                (clienteModel, telefoneModel) => MapearListagemDeTelefonesDosClientes(clienteModel, telefoneModel, dicionarioCliente),
+                splitOn: "split");
+
+            return dicionarioCliente.Values.First();
+        }
     }
 }
