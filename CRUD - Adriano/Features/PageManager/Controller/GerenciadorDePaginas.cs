@@ -144,8 +144,12 @@ namespace CRUD___Adriano.Features.Controller.PageManager
 
         private void BtnConfirmar_Click(object sender, EventArgs e)
         {
-            if (ValidarPagina())
-                _controller.Salvar(_model);
+            if (!ValidarPagina()) return;
+
+            _controller.Salvar(_model);
+            MessageBox.Show("Sucesso");
+
+            _ucCentral.Dispose();
         }
 
         private void BtnCancelar_Click(object sender, EventArgs e) =>
