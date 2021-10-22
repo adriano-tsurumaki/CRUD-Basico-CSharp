@@ -7,7 +7,7 @@ namespace CRUD___Adriano.Features.Cliente.Model
     {
         public ClienteMap()
         {
-            Map(x => x.Id).ToColumn("id", caseSensitive: false);
+            Map(x => x.IdUsuario).ToColumn("id", caseSensitive: false);
             Map(x => x.ValorLimite).ToColumn("valor_limite", caseSensitive: false);
         }
     }

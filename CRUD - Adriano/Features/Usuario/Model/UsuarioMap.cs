@@ -6,7 +6,7 @@ namespace CRUD___Adriano.Features.Usuario.Model
     {
         public UsuarioMap()
         {
-            Map(x => x.Id).ToColumn("id", caseSensitive: false);
+            Map(x => x.IdUsuario).ToColumn("id", caseSensitive: false);
             Map(x => x.Nome).ToColumn("nome", caseSensitive: false);
             Map(x => x.Sobrenome).ToColumn("sobrenome", caseSensitive: false);
             Map(x => x.Sexo).ToColumn("sexo", caseSensitive: false);

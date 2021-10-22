@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace CRUD___Adriano.Features.Cliente.Controller
 {
-    public class ClienteController : IClienteController
+    public class ClienteController : IControllerBase<ClienteModel>
     {
         private ControllerConexao _conexao;
 

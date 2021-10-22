@@ -3,7 +3,6 @@ using CRUD___Adriano.Features.Endereco.Model;
 using Dapper;
 using System.Data;
 using System.Text;
-using System.Linq;
 
 namespace CRUD___Adriano.Features.Cliente.Dao
 {
@@ -22,17 +21,17 @@ namespace CRUD___Adriano.Features.Cliente.Dao
 
         public static void CadastrarCliente(IDbConnection conexao, IDbTransaction transacao, ClienteModel clienteModel)
         {
-            clienteModel.Id = (int)conexao.ExecuteScalar(sqlInserirUsuario, clienteModel, transacao);
+            clienteModel.IdUsuario = (int)conexao.ExecuteScalar(sqlInserirUsuario, clienteModel, transacao);
 
             conexao.Execute(SqlInserirCliente(clienteModel), clienteModel, transacao);
 
-            clienteModel.Endereco.IdUsuario = clienteModel.Id;
+            clienteModel.Endereco.IdUsuario = clienteModel.IdUsuario;
 
             foreach (var email in clienteModel.Emails)
-                email.IdUsuario = clienteModel.Id;
+                email.IdUsuario = clienteModel.IdUsuario;
 
             foreach (var telefone in clienteModel.Telefones)
-                telefone.IdUsuario = clienteModel.Id;
+                telefone.IdUsuario = clienteModel.IdUsuario;
 
             conexao.Execute(SqlInserirEndereco(clienteModel.Endereco), clienteModel.Endereco, transacao);
             conexao.Execute(sqlInserirEmail, clienteModel.Emails, transacao);
@@ -42,7 +41,7 @@ namespace CRUD___Adriano.Features.Cliente.Dao
         private static string SqlInserirCliente(ClienteModel clienteModel)
         {
             var insertSql = new StringBuilder("insert into Cliente(id_usuario, valor_limite");
-            var valuesSql = new StringBuilder("values (@Id, @ValorLimite");
+            var valuesSql = new StringBuilder("values (@IdUsuario, @ValorLimite");
 
             if (!string.IsNullOrEmpty(clienteModel.Observacao))
             {

@@ -9,7 +9,7 @@ namespace CRUD___Adriano.Features.Usuario.Model
 {
     public abstract class UsuarioModel
     {
-        public int Id { get; set; }
+        public int IdUsuario { get; set; }
         public string Nome { get; set; }
         public string Sobrenome { get; set; }
         public string Cpf { get; set; }
