@@ -3,6 +3,7 @@ using CRUD___Adriano.Features.Endereco.Model;
 using Dapper;
 using System.Data;
 using System.Text;
+using System.Linq;
 
 namespace CRUD___Adriano.Features.Cliente.Dao
 {
@@ -13,6 +14,12 @@ namespace CRUD___Adriano.Features.Cliente.Dao
             output inserted.id
             values(@Nome, @Sobrenome, @Sexo, @DataNascimento, @Cpf)";
 
+        private static string sqlInserirEmail =
+            @"insert into Email(id_usuario, nome) values (@IdUsuario, @Nome)";
+        
+        private static string sqlInserirTelefone =
+            @"insert into Telefone(id_usuario, numero, tipo) values (@IdUsuario, @Numero, @Tipo)";
+
         public static void CadastrarCliente(IDbConnection conexao, IDbTransaction transacao, ClienteModel clienteModel)
         {
             clienteModel.Id = (int)conexao.ExecuteScalar(sqlInserirUsuario, clienteModel, transacao);
@@ -21,7 +28,15 @@ namespace CRUD___Adriano.Features.Cliente.Dao
 
             clienteModel.Endereco.IdUsuario = clienteModel.Id;
 
+            foreach (var email in clienteModel.Emails)
+                email.IdUsuario = clienteModel.Id;
+
+            foreach (var telefone in clienteModel.Telefones)
+                telefone.IdUsuario = clienteModel.Id;
+
             conexao.Execute(SqlInserirEndereco(clienteModel.Endereco), clienteModel.Endereco, transacao);
+            conexao.Execute(sqlInserirEmail, clienteModel.Emails, transacao);
+            conexao.Execute(sqlInserirTelefone, clienteModel.Telefones, transacao);
         }
 
         private static string SqlInserirCliente(ClienteModel clienteModel)
