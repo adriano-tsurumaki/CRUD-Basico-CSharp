@@ -15,6 +15,15 @@ namespace CRUD___Adriano.Features.Factory
             }
         }
 
+        public T EscopoConexaoComRetorno<T>(Func<IDbConnection, T> acao)
+        {
+            using (var conexao = SqlConexao.RetornarConexao())
+            {
+                conexao.Open();
+                return acao(conexao);
+            }
+        }
+
         public void EscopoTransacao(Action<IDbConnection, IDbTransaction> acao)
         {
             using (var conexao = SqlConexao.RetornarConexao())
@@ -24,6 +33,20 @@ namespace CRUD___Adriano.Features.Factory
                 {
                     acao(conexao, transacao);
                     transacao.Commit();
+                }
+            }
+        }
+
+        public T EscopoTransacaoComRetorno<T>(Func<IDbConnection, IDbTransaction, T> acao)
+        {
+            using (var conexao = SqlConexao.RetornarConexao())
+            {
+                conexao.Open();
+                using (var transacao = conexao.BeginTransaction())
+                {
+                    var resultado = acao(conexao, transacao);
+                    transacao.Commit();
+                    return resultado;
                 }
             }
         }

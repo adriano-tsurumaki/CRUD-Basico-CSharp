@@ -22,6 +22,20 @@ namespace CRUD___Adriano.Features.Cliente.Controller
             throw new System.NotImplementedException();
         }
 
+        public IList<ClienteModel> Listar()
+        {
+            try
+            {
+                return _conexao.EscopoConexaoComRetorno((conexao) => ClienteDao.ListarClientes(conexao));
+            }
+            catch (Exception excecao)
+            {
+                MessageBox.Show(excecao.Message, "Erro ao listar clientes");
+            }
+
+            return new List<ClienteModel>();
+        }
+
         public IList<ClienteModel> Listar(int quantidade)
         {
             throw new System.NotImplementedException();

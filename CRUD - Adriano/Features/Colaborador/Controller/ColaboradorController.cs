@@ -21,6 +21,11 @@ namespace CRUD___Adriano.Features.Colaborador.Controller
             throw new System.NotImplementedException();
         }
 
+        public IList<ColaboradorModel> Listar()
+        {
+            throw new System.NotImplementedException();
+        }
+
         public IList<ColaboradorModel> Listar(int quantidade)
         {
             throw new System.NotImplementedException();

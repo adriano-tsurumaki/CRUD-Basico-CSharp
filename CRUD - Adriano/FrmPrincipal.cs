@@ -16,7 +16,7 @@ namespace CRUD___Adriano
 {
     public partial class FrmPrincipal : Form
     {
-        private Form formFilhaAtiva;
+        private Form _formFilhaAtiva;
 
         public FrmPrincipal()
         {
@@ -47,7 +47,7 @@ namespace CRUD___Adriano
         private void BtnClientesListagem_Click(object sender, EventArgs e)
         {
             lblTitulo.Text = "Listagem de clientes";
-            //DocaForm(new ClienteListagemController().RetornarFormulario());
+            DocaForm(new FrmListagemCliente(new ClienteController(new ControllerConexao()), pnlChild));
         }
 
         private void BtnMenuCadastro_Click(object sender, EventArgs e)
@@ -90,6 +90,23 @@ namespace CRUD___Adriano
             pageManager.Add(new FrmEmailTelefone<ColaboradorModel>());
             pageManager.Add(new FrmCadastroColaborador());
             pageManager.Show();
+        }
+
+        private void DocaForm(Form formFilha)
+        {
+            if (_formFilhaAtiva != null)
+                _formFilhaAtiva.Close();
+
+            _formFilhaAtiva = formFilha;
+
+            formFilha.TopLevel = false;
+            formFilha.FormBorderStyle = FormBorderStyle.None;
+            formFilha.Dock = DockStyle.Fill;
+            pnlChild.Controls.Add(formFilha);
+            pnlChild.Tag = formFilha;
+
+            formFilha.BringToFront();
+            formFilha.Show();
         }
     }
 }

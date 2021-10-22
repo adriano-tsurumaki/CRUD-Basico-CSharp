@@ -4,6 +4,7 @@ namespace CRUD___Adriano.Features.Endereco.Model
 {
     public class EnderecoModel
     {
+        public int Id { get; set; }
         public int IdUsuario { get; set; }
         public string Cep { get; set; }
         public string Logradouro { get; set; }
