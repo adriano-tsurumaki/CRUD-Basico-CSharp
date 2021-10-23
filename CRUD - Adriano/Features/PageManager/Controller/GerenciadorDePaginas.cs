@@ -146,9 +146,9 @@ namespace CRUD___Adriano.Features.Controller.PageManager
         {
             if (!ValidarPagina()) return;
 
-            _controller.Salvar(_model);
-            MessageBox.Show("Sucesso");
+            if (!_controller.Salvar(_model)) return;
 
+            MessageBox.Show("Sucesso");
             _ucCentral.Dispose();
         }
 

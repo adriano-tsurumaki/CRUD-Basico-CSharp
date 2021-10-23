@@ -2,7 +2,6 @@
 using CRUD___Adriano.Features.Cliente.Controller;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace CRUD___Adriano.Features.Cliente.View
@@ -38,16 +37,43 @@ namespace CRUD___Adriano.Features.Cliente.View
                 ReadOnly = true,
             };
 
+            DataGridViewButtonColumn botaoExcluirColuna = new DataGridViewButtonColumn()
+            {
+                CellTemplate = new DataGridViewButtonCell(),
+                HeaderText = "Excluir",
+            };
+
             gridView.Columns.Add(idColuna);
             gridView.Columns.Add(nomeColuna);
+            gridView.Columns.Add(botaoExcluirColuna);
 
             var listaDeClientesBinding = new BindingList<ClienteModel>(listaDeClientes);
             gridView.AutoGenerateColumns = false;
             gridView.DataSource = listaDeClientesBinding;
         }
 
+        private void GridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var senderGrid = sender as DataGridView;
+
+            if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn &&
+                e.RowIndex >= 0)
+            {
+                var clienteModelSelecionado = gridView.CurrentRow.DataBoundItem as ClienteModel;
+
+                if (_controller.ExcluirCliente(clienteModelSelecionado.IdUsuario))
+                    MessageBox.Show("Excluído com sucesso");
+            }
+        }
+
         private void GridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+            var senderGrid = sender as DataGridView;
+
+            if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn &&
+                e.RowIndex >= 0)
+                return;
+
             var clienteModelSelecionado = gridView.CurrentRow.DataBoundItem as ClienteModel;
 
             _controller.AbrirFormDeDetalhes(clienteModelSelecionado);

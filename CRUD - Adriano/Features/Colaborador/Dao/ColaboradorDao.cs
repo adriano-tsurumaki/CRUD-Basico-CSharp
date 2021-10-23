@@ -23,7 +23,7 @@ namespace CRUD___Adriano.Features.Colaborador.Dao
         private static string sqlInserirTelefone =
             @"insert into Telefone(id_usuario, numero, tipo) values (@IdUsuario, @Numero, @Tipo)";
 
-        public static void CadastrarColaborador(IDbConnection conexao, IDbTransaction transacao, ColaboradorModel colaboradorModel)
+        public static bool CadastrarColaborador(IDbConnection conexao, IDbTransaction transacao, ColaboradorModel colaboradorModel)
         {
             colaboradorModel.IdUsuario = (int)conexao.ExecuteScalar(sqlInserirUsuario, colaboradorModel, transacao);
 
@@ -40,6 +40,8 @@ namespace CRUD___Adriano.Features.Colaborador.Dao
             conexao.Execute(SqlInserirEndereco(colaboradorModel.Endereco), colaboradorModel.Endereco, transacao);
             conexao.Execute(sqlInserirEmail, colaboradorModel.Emails, transacao);
             conexao.Execute(sqlInserirTelefone, colaboradorModel.Telefones, transacao);
+
+            return true;
         }
 
         private static string SqlInserirEndereco(EnderecoModel enderecoModel)

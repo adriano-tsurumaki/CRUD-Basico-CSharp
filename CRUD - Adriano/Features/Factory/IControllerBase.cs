@@ -4,14 +4,16 @@ namespace CRUD___Adriano.Features.Factory
 {
     public interface IControllerBase<T> where T : class
     {
-        void Salvar(T entidade);
+        bool Salvar(T entidade);
 
         IList<T> Listar();
 
         IList<T> Listar(int quantidade);
 
-        void Atualizar(int id);
+        bool Atualizar(int id);
 
         T Selecionar(int id);
+
+        bool Remover(int id);
     }
 }

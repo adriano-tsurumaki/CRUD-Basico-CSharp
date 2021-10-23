@@ -16,7 +16,7 @@ namespace CRUD___Adriano.Features.Colaborador.Controller
             _conexao = conexao;
         }
 
-        public void Atualizar(int id)
+        public bool Atualizar(int id)
         {
             throw new System.NotImplementedException();
         }
@@ -31,15 +31,22 @@ namespace CRUD___Adriano.Features.Colaborador.Controller
             throw new System.NotImplementedException();
         }
 
-        public void Salvar(ColaboradorModel colaboradorModel)
+        public bool Remover(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Salvar(ColaboradorModel colaboradorModel)
         {
             try
             {
-                _conexao.EscopoTransacao((conexao, transacao) => ColaboradorDao.CadastrarColaborador(conexao, transacao, colaboradorModel));
+                return _conexao.EscopoTransacaoComRetorno((conexao, transacao) => ColaboradorDao.CadastrarColaborador(conexao, transacao, colaboradorModel));
             }
             catch(Exception excecao)
             {
                 MessageBox.Show(excecao.Message, "Erro ao cadastrar colaborador");
+
+                return false;
             }
         }
 

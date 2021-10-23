@@ -52,6 +52,9 @@ namespace CRUD___Adriano.Features.Cliente.Controller
             frmAlterarCliente.Show();
         }
 
+        public bool ExcluirCliente(int id) =>
+            _clienteController.Remover(id);
+
         public Form RetornarFormulario() => _frmListagemCliente;
     }
 }

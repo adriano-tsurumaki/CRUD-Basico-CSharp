@@ -1,6 +1,5 @@
 ﻿using CRUD___Adriano.Features.Cadastro.Produto.Model;
 using CRUD___Adriano.Features.Cliente.Dao;
-using CRUD___Adriano.Features.Cliente.Model;
 using CRUD___Adriano.Features.Factory;
 using System;
 using System.Collections.Generic;
@@ -17,7 +16,7 @@ namespace CRUD___Adriano.Features.Cliente.Controller
             _conexao = conexao;
         }
 
-        public void Atualizar(int id)
+        public bool Atualizar(int id)
         {
             throw new System.NotImplementedException();
         }
@@ -41,15 +40,30 @@ namespace CRUD___Adriano.Features.Cliente.Controller
             throw new System.NotImplementedException();
         }
 
-        public void Salvar(ClienteModel clienteModel)
+        public bool Remover(int id)
         {
             try
             {
-                _conexao.EscopoTransacao((conexao, transacao) => ClienteDao.CadastrarCliente(conexao, transacao, clienteModel));
+                return _conexao.EscopoTransacaoComRetorno((conexao, transacao) => ClienteDao.RemoverCliente(conexao, transacao, id));
+            }
+            catch (Exception excecao)
+            {
+                MessageBox.Show(excecao.Message, "Erro ao remover o cliente");
+                return false;
+            }
+        }
+
+        public bool Salvar(ClienteModel clienteModel)
+        {
+            try
+            {
+                return _conexao.EscopoTransacaoComRetorno((conexao, transacao) => ClienteDao.CadastrarCliente(conexao, transacao, clienteModel));
             }
             catch(Exception excecao)
             {
                 MessageBox.Show(excecao.Message, "Erro ao cadastrar cliente");
+
+                return false;
             }
         }
 

@@ -25,7 +25,7 @@ namespace CRUD___Adriano.Features.Cliente.Dao
         private static string sqlInserirTelefone =
             @"insert into Telefone(id_usuario, numero, tipo) values (@IdUsuario, @Numero, @Tipo)";
 
-        public static void CadastrarCliente(IDbConnection conexao, IDbTransaction transacao, ClienteModel clienteModel)
+        public static bool CadastrarCliente(IDbConnection conexao, IDbTransaction transacao, ClienteModel clienteModel)
         {
             clienteModel.IdUsuario = (int)conexao.ExecuteScalar(sqlInserirUsuario, clienteModel, transacao);
 
@@ -42,6 +42,8 @@ namespace CRUD___Adriano.Features.Cliente.Dao
             conexao.Execute(SqlInserirEndereco(clienteModel.Endereco), clienteModel.Endereco, transacao);
             conexao.Execute(sqlInserirEmail, clienteModel.Emails, transacao);
             conexao.Execute(sqlInserirTelefone, clienteModel.Telefones, transacao);
+
+            return true;
         }
 
         private static string SqlInserirCliente(ClienteModel clienteModel)
@@ -182,6 +184,17 @@ namespace CRUD___Adriano.Features.Cliente.Dao
                 splitOn: "split");
 
             return dicionarioCliente.Values.First();
+        }
+
+        public static bool RemoverCliente(IDbConnection conexao, IDbTransaction transacao, int id)
+        {
+            conexao.Query("delete Cliente where id_usuario = @id", new { id }, transacao);
+            conexao.Query("delete Email where id_usuario = @id;", new { id }, transacao);
+            conexao.Query("delete Endereco where id_usuario = @id", new { id }, transacao);
+            conexao.Query("delete Telefone where id_usuario = @id", new { id }, transacao);
+            conexao.Query("delete Usuario where id = @id", new { id }, transacao);
+
+            return true;
         }
     }
 }
