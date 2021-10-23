@@ -8,19 +8,19 @@ namespace CRUD___Adriano.Features.Colaborador.Dao
 {
     public class ColaboradorDao
     {
-        private static string sqlInserirUsuario =
+        private static readonly string sqlInserirUsuario =
             @"insert into Usuario(nome, sobrenome, sexo, data_nascimento, cpf) 
             output inserted.id
             values(@Nome, @Sobrenome, @Sexo, @DataNascimento, @Cpf)";
 
-        private static string sqlInserirColaborador =
+        private static readonly string sqlInserirColaborador =
             @"insert into Colaborador(id_usuario, salario, comissao)
             values(@IdUsuario, @Salario, @Comissao)";
 
-        private static string sqlInserirEmail =
+        private static readonly string sqlInserirEmail =
             @"insert into Email(id_usuario, nome) values (@IdUsuario, @Nome)";
 
-        private static string sqlInserirTelefone =
+        private static readonly string sqlInserirTelefone =
             @"insert into Telefone(id_usuario, numero, tipo) values (@IdUsuario, @Numero, @Tipo)";
 
         public static bool CadastrarColaborador(IDbConnection conexao, IDbTransaction transacao, ColaboradorModel colaboradorModel)

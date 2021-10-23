@@ -2,9 +2,7 @@
 using CRUD___Adriano.Features.Email.Model;
 using CRUD___Adriano.Features.Endereco.Model;
 using CRUD___Adriano.Features.Telefone.Model;
-using CRUD___Adriano.Features.Usuario.Model;
 using Dapper;
-using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -14,15 +12,15 @@ namespace CRUD___Adriano.Features.Cliente.Dao
 {
     public class ClienteDao
     {
-        private static string sqlInserirUsuario = 
+        private static readonly string sqlInserirUsuario = 
             @"insert into Usuario(nome, sobrenome, sexo, data_nascimento, cpf) 
             output inserted.id
             values(@Nome, @Sobrenome, @Sexo, @DataNascimento, @Cpf)";
 
-        private static string sqlInserirEmail =
+        private static readonly string sqlInserirEmail =
             @"insert into Email(id_usuario, nome) values (@IdUsuario, @Nome)";
         
-        private static string sqlInserirTelefone =
+        private static readonly string sqlInserirTelefone =
             @"insert into Telefone(id_usuario, numero, tipo) values (@IdUsuario, @Numero, @Tipo)";
 
         public static bool CadastrarCliente(IDbConnection conexao, IDbTransaction transacao, ClienteModel clienteModel)
@@ -78,21 +76,21 @@ namespace CRUD___Adriano.Features.Cliente.Dao
             return string.Join(' ', insertSql, valuesSql);
         }
 
-        private static string sqlListarTodosOsClientes =
+        private static readonly string sqlListarTodosOsClientes =
             @"select u.id as IdUsuario, u.nome, u.sobrenome, u.sexo, u.cpf, u.data_nascimento, c.valor_limite as ValorLimite, c.observacao,
             c.id as split, en.id_usuario as IdUsuario, en.cep, en.logradouro, en.bairro, en.cidade, en.uf, en.complemento, en.numero
 			from Cliente c
 			inner join Usuario u on u.id = c.id_usuario
 			inner join Endereco en on en.id_usuario = u.id";
 
-        private static string sqlListarEmailsPorId =
+        private static readonly string sqlListarEmailsPorId =
             @"select u.id as IdUsuario,
 			c.id as split, e.id, e.id_usuario as IdUsuario, e.nome
 			from Usuario u
 			inner join Cliente c on c.id_usuario = u.id
 			inner join Email e on e.id_usuario = u.id";
         
-        private static string sqlListarTelefonesPorId =
+        private static readonly string sqlListarTelefonesPorId =
             @"select u.id as IdUsuario, 
 			c.id as split, t.id, t.id_usuario as IdUsuario, t.numero, t.tipo
 			from Usuario u
