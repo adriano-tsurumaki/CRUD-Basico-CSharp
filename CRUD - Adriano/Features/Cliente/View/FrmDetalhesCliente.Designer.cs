@@ -29,65 +29,55 @@ namespace CRUD___Adriano.Features.Cliente.View
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.Label lblTituloNumero;
-            System.Windows.Forms.Label lblNumero;
-            System.Windows.Forms.Label lblTituloBairro;
-            System.Windows.Forms.Label lblBairro;
-            System.Windows.Forms.Label lblTituloLogradouro;
-            System.Windows.Forms.Label lblLogradouro;
-            System.Windows.Forms.Label lblTituloObservacao;
-            System.Windows.Forms.Label lblObservacao;
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmDetalhesCliente));
-            System.Windows.Forms.Label lblTituloEstado;
-            System.Windows.Forms.Label lblEstado;
-            System.Windows.Forms.Label lblTituloCidade;
-            System.Windows.Forms.Label lblCidade;
-            System.Windows.Forms.Label lblTituloCep;
-            System.Windows.Forms.Label lblCep;
-            System.Windows.Forms.Label lblTituloValorLimite;
-            System.Windows.Forms.Label lblValorLimite;
-            System.Windows.Forms.Label lblTItuloDataNascimento;
-            System.Windows.Forms.Label lblDataNascimento;
-            System.Windows.Forms.Label lbTitulolCpf;
-            System.Windows.Forms.Label lblCpf;
-            System.Windows.Forms.Label lblTituloSexo;
-            System.Windows.Forms.Label lblSexo;
-            System.Windows.Forms.Label lblTituloSobrenome;
-            System.Windows.Forms.Label lblSobrenome;
-            System.Windows.Forms.Label lblTituloNome;
-            System.Windows.Forms.Label lblNome;
+            this.pnlHeader = new System.Windows.Forms.Panel();
             this.btnFechar = new System.Windows.Forms.Button();
             this.pnlCentral = new System.Windows.Forms.Panel();
-            this.pnlHeader = new System.Windows.Forms.Panel();
-            lblTituloNumero = new System.Windows.Forms.Label();
-            lblNumero = new System.Windows.Forms.Label();
-            lblTituloBairro = new System.Windows.Forms.Label();
-            lblBairro = new System.Windows.Forms.Label();
-            lblTituloLogradouro = new System.Windows.Forms.Label();
-            lblLogradouro = new System.Windows.Forms.Label();
-            lblTituloObservacao = new System.Windows.Forms.Label();
-            lblObservacao = new System.Windows.Forms.Label();
-            lblTituloEstado = new System.Windows.Forms.Label();
-            lblEstado = new System.Windows.Forms.Label();
-            lblTituloCidade = new System.Windows.Forms.Label();
-            lblCidade = new System.Windows.Forms.Label();
-            lblTituloCep = new System.Windows.Forms.Label();
-            lblCep = new System.Windows.Forms.Label();
-            lblTituloValorLimite = new System.Windows.Forms.Label();
-            lblValorLimite = new System.Windows.Forms.Label();
-            lblTItuloDataNascimento = new System.Windows.Forms.Label();
-            lblDataNascimento = new System.Windows.Forms.Label();
-            lbTitulolCpf = new System.Windows.Forms.Label();
-            lblCpf = new System.Windows.Forms.Label();
-            lblTituloSexo = new System.Windows.Forms.Label();
-            lblSexo = new System.Windows.Forms.Label();
-            lblTituloSobrenome = new System.Windows.Forms.Label();
-            lblSobrenome = new System.Windows.Forms.Label();
-            lblTituloNome = new System.Windows.Forms.Label();
-            lblNome = new System.Windows.Forms.Label();
-            this.pnlCentral.SuspendLayout();
+            this.pnlEmails = new System.Windows.Forms.Panel();
+            this.lblEmails = new System.Windows.Forms.Label();
+            this.lblTituloTelefones = new System.Windows.Forms.Label();
+            this.lblTelefones = new System.Windows.Forms.Label();
+            this.lblTituloEmails = new System.Windows.Forms.Label();
+            this.lblObservacao = new System.Windows.Forms.Label();
+            this.lblTituloObservacao = new System.Windows.Forms.Label();
+            this.lblValorLimite = new System.Windows.Forms.Label();
+            this.lblTituloDataNascimento = new System.Windows.Forms.Label();
+            this.lblDataNascimento = new System.Windows.Forms.Label();
+            this.lblTituloValorLimite = new System.Windows.Forms.Label();
+            this.lblNumero = new System.Windows.Forms.Label();
+            this.lblBairro = new System.Windows.Forms.Label();
+            this.lblLogradouro = new System.Windows.Forms.Label();
+            this.lblEstado = new System.Windows.Forms.Label();
+            this.lblCidade = new System.Windows.Forms.Label();
+            this.lblCep = new System.Windows.Forms.Label();
+            this.lblCpf = new System.Windows.Forms.Label();
+            this.lblSexo = new System.Windows.Forms.Label();
+            this.lblSobrenome = new System.Windows.Forms.Label();
+            this.lblNome = new System.Windows.Forms.Label();
+            this.lblTituloNumero = new System.Windows.Forms.Label();
+            this.lblTituloBairro = new System.Windows.Forms.Label();
+            this.lblTituloLogradouro = new System.Windows.Forms.Label();
+            this.lblTituloEstado = new System.Windows.Forms.Label();
+            this.lblTituloCidade = new System.Windows.Forms.Label();
+            this.lblTituloCep = new System.Windows.Forms.Label();
+            this.lblTituloCpf = new System.Windows.Forms.Label();
+            this.lblTituloSexo = new System.Windows.Forms.Label();
+            this.lblTituloSobrenome = new System.Windows.Forms.Label();
+            this.lblTituloNome = new System.Windows.Forms.Label();
+            this.pnlTelefones = new System.Windows.Forms.Panel();
             this.pnlHeader.SuspendLayout();
+            this.pnlCentral.SuspendLayout();
+            this.pnlEmails.SuspendLayout();
+            this.pnlTelefones.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // pnlHeader
+            // 
+            this.pnlHeader.Controls.Add(this.btnFechar);
+            this.pnlHeader.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlHeader.Location = new System.Drawing.Point(0, 0);
+            this.pnlHeader.Name = "pnlHeader";
+            this.pnlHeader.Size = new System.Drawing.Size(604, 32);
+            this.pnlHeader.TabIndex = 2;
             // 
             // btnFechar
             // 
@@ -96,7 +86,7 @@ namespace CRUD___Adriano.Features.Cliente.View
             this.btnFechar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnFechar.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnFechar.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            this.btnFechar.Location = new System.Drawing.Point(771, 0);
+            this.btnFechar.Location = new System.Drawing.Point(575, 0);
             this.btnFechar.Name = "btnFechar";
             this.btnFechar.Size = new System.Drawing.Size(29, 32);
             this.btnFechar.TabIndex = 0;
@@ -106,382 +96,444 @@ namespace CRUD___Adriano.Features.Cliente.View
             // 
             // pnlCentral
             // 
-            this.pnlCentral.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
-            this.pnlCentral.Controls.Add(lblTituloNumero);
-            this.pnlCentral.Controls.Add(lblNumero);
-            this.pnlCentral.Controls.Add(lblTituloBairro);
-            this.pnlCentral.Controls.Add(lblBairro);
-            this.pnlCentral.Controls.Add(lblTituloLogradouro);
-            this.pnlCentral.Controls.Add(lblLogradouro);
-            this.pnlCentral.Controls.Add(lblTituloObservacao);
-            this.pnlCentral.Controls.Add(lblObservacao);
-            this.pnlCentral.Controls.Add(lblTituloEstado);
-            this.pnlCentral.Controls.Add(lblEstado);
-            this.pnlCentral.Controls.Add(lblTituloCidade);
-            this.pnlCentral.Controls.Add(lblCidade);
-            this.pnlCentral.Controls.Add(lblTituloCep);
-            this.pnlCentral.Controls.Add(lblCep);
-            this.pnlCentral.Controls.Add(lblTituloValorLimite);
-            this.pnlCentral.Controls.Add(lblValorLimite);
-            this.pnlCentral.Controls.Add(lblTItuloDataNascimento);
-            this.pnlCentral.Controls.Add(lblDataNascimento);
-            this.pnlCentral.Controls.Add(lbTitulolCpf);
-            this.pnlCentral.Controls.Add(lblCpf);
-            this.pnlCentral.Controls.Add(lblTituloSexo);
-            this.pnlCentral.Controls.Add(lblSexo);
-            this.pnlCentral.Controls.Add(lblTituloSobrenome);
-            this.pnlCentral.Controls.Add(lblSobrenome);
-            this.pnlCentral.Controls.Add(lblTituloNome);
-            this.pnlCentral.Controls.Add(lblNome);
-            this.pnlCentral.Controls.Add(this.pnlHeader);
+            this.pnlCentral.AutoScroll = true;
+            this.pnlCentral.Controls.Add(this.pnlTelefones);
+            this.pnlCentral.Controls.Add(this.pnlEmails);
+            this.pnlCentral.Controls.Add(this.lblTituloTelefones);
+            this.pnlCentral.Controls.Add(this.lblTituloEmails);
+            this.pnlCentral.Controls.Add(this.lblObservacao);
+            this.pnlCentral.Controls.Add(this.lblTituloObservacao);
+            this.pnlCentral.Controls.Add(this.lblValorLimite);
+            this.pnlCentral.Controls.Add(this.lblTituloDataNascimento);
+            this.pnlCentral.Controls.Add(this.lblDataNascimento);
+            this.pnlCentral.Controls.Add(this.lblTituloValorLimite);
+            this.pnlCentral.Controls.Add(this.lblNumero);
+            this.pnlCentral.Controls.Add(this.lblBairro);
+            this.pnlCentral.Controls.Add(this.lblLogradouro);
+            this.pnlCentral.Controls.Add(this.lblEstado);
+            this.pnlCentral.Controls.Add(this.lblCidade);
+            this.pnlCentral.Controls.Add(this.lblCep);
+            this.pnlCentral.Controls.Add(this.lblCpf);
+            this.pnlCentral.Controls.Add(this.lblSexo);
+            this.pnlCentral.Controls.Add(this.lblSobrenome);
+            this.pnlCentral.Controls.Add(this.lblNome);
+            this.pnlCentral.Controls.Add(this.lblTituloNumero);
+            this.pnlCentral.Controls.Add(this.lblTituloBairro);
+            this.pnlCentral.Controls.Add(this.lblTituloLogradouro);
+            this.pnlCentral.Controls.Add(this.lblTituloEstado);
+            this.pnlCentral.Controls.Add(this.lblTituloCidade);
+            this.pnlCentral.Controls.Add(this.lblTituloCep);
+            this.pnlCentral.Controls.Add(this.lblTituloCpf);
+            this.pnlCentral.Controls.Add(this.lblTituloSexo);
+            this.pnlCentral.Controls.Add(this.lblTituloSobrenome);
+            this.pnlCentral.Controls.Add(this.lblTituloNome);
             this.pnlCentral.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlCentral.Location = new System.Drawing.Point(0, 0);
+            this.pnlCentral.Location = new System.Drawing.Point(0, 32);
             this.pnlCentral.Name = "pnlCentral";
-            this.pnlCentral.Size = new System.Drawing.Size(800, 450);
-            this.pnlCentral.TabIndex = 1;
+            this.pnlCentral.Size = new System.Drawing.Size(604, 717);
+            this.pnlCentral.TabIndex = 3;
             // 
-            // lblTituloNumero
+            // pnlEmails
             // 
-            lblTituloNumero.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
-            lblTituloNumero.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            lblTituloNumero.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            lblTituloNumero.Location = new System.Drawing.Point(12, 404);
-            lblTituloNumero.Name = "lblTituloNumero";
-            lblTituloNumero.Size = new System.Drawing.Size(100, 23);
-            lblTituloNumero.TabIndex = 27;
-            lblTituloNumero.Text = "Numero:";
+            this.pnlEmails.AutoScroll = true;
+            this.pnlEmails.Controls.Add(this.lblEmails);
+            this.pnlEmails.Location = new System.Drawing.Point(12, 502);
+            this.pnlEmails.Name = "pnlEmails";
+            this.pnlEmails.Size = new System.Drawing.Size(571, 79);
+            this.pnlEmails.TabIndex = 30;
             // 
-            // lblNumero
+            // lblEmails
             // 
-            lblNumero.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
-            lblNumero.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            lblNumero.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            lblNumero.Location = new System.Drawing.Point(118, 404);
-            lblNumero.Name = "lblNumero";
-            lblNumero.Size = new System.Drawing.Size(132, 23);
-            lblNumero.TabIndex = 26;
-            lblNumero.Text = "123456";
+            this.lblEmails.AutoSize = true;
+            this.lblEmails.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblEmails.ForeColor = System.Drawing.Color.MediumSlateBlue;
+            this.lblEmails.Location = new System.Drawing.Point(0, 0);
+            this.lblEmails.Name = "lblEmails";
+            this.lblEmails.Size = new System.Drawing.Size(0, 21);
+            this.lblEmails.TabIndex = 26;
             // 
-            // lblTituloBairro
+            // lblTituloTelefones
             // 
-            lblTituloBairro.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
-            lblTituloBairro.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            lblTituloBairro.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            lblTituloBairro.Location = new System.Drawing.Point(12, 363);
-            lblTituloBairro.Name = "lblTituloBairro";
-            lblTituloBairro.Size = new System.Drawing.Size(65, 23);
-            lblTituloBairro.TabIndex = 25;
-            lblTituloBairro.Text = "Bairro:";
+            this.lblTituloTelefones.AutoSize = true;
+            this.lblTituloTelefones.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblTituloTelefones.ForeColor = System.Drawing.Color.MediumSlateBlue;
+            this.lblTituloTelefones.Location = new System.Drawing.Point(12, 606);
+            this.lblTituloTelefones.Name = "lblTituloTelefones";
+            this.lblTituloTelefones.Size = new System.Drawing.Size(80, 21);
+            this.lblTituloTelefones.TabIndex = 29;
+            this.lblTituloTelefones.Text = "Telefones";
             // 
-            // lblBairro
+            // lblTelefones
             // 
-            lblBairro.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
-            lblBairro.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            lblBairro.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            lblBairro.Location = new System.Drawing.Point(118, 363);
-            lblBairro.Name = "lblBairro";
-            lblBairro.Size = new System.Drawing.Size(132, 23);
-            lblBairro.TabIndex = 24;
-            lblBairro.Text = "Bairro Y";
+            this.lblTelefones.AutoSize = true;
+            this.lblTelefones.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblTelefones.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblTelefones.ForeColor = System.Drawing.Color.MediumSlateBlue;
+            this.lblTelefones.Location = new System.Drawing.Point(3, 0);
+            this.lblTelefones.Name = "lblTelefones";
+            this.lblTelefones.Size = new System.Drawing.Size(2, 23);
+            this.lblTelefones.TabIndex = 28;
             // 
-            // lblTituloLogradouro
+            // lblTituloEmails
             // 
-            lblTituloLogradouro.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
-            lblTituloLogradouro.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            lblTituloLogradouro.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            lblTituloLogradouro.Location = new System.Drawing.Point(12, 322);
-            lblTituloLogradouro.Name = "lblTituloLogradouro";
-            lblTituloLogradouro.Size = new System.Drawing.Size(100, 23);
-            lblTituloLogradouro.TabIndex = 23;
-            lblTituloLogradouro.Text = "Logradouro:";
-            // 
-            // lblLogradouro
-            // 
-            lblLogradouro.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
-            lblLogradouro.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            lblLogradouro.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            lblLogradouro.Location = new System.Drawing.Point(118, 322);
-            lblLogradouro.Name = "lblLogradouro";
-            lblLogradouro.Size = new System.Drawing.Size(132, 23);
-            lblLogradouro.TabIndex = 22;
-            lblLogradouro.Text = "Rua X";
-            // 
-            // lblTituloObservacao
-            // 
-            lblTituloObservacao.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
-            lblTituloObservacao.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            lblTituloObservacao.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            lblTituloObservacao.Location = new System.Drawing.Point(373, 117);
-            lblTituloObservacao.Name = "lblTituloObservacao";
-            lblTituloObservacao.Size = new System.Drawing.Size(116, 23);
-            lblTituloObservacao.TabIndex = 21;
-            lblTituloObservacao.Text = "Observação:";
+            this.lblTituloEmails.AutoSize = true;
+            this.lblTituloEmails.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblTituloEmails.ForeColor = System.Drawing.Color.MediumSlateBlue;
+            this.lblTituloEmails.Location = new System.Drawing.Point(12, 460);
+            this.lblTituloEmails.Name = "lblTituloEmails";
+            this.lblTituloEmails.Size = new System.Drawing.Size(55, 21);
+            this.lblTituloEmails.TabIndex = 27;
+            this.lblTituloEmails.Text = "Emails";
             // 
             // lblObservacao
             // 
-            lblObservacao.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
-            lblObservacao.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            lblObservacao.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            lblObservacao.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            lblObservacao.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            lblObservacao.Location = new System.Drawing.Point(373, 158);
-            lblObservacao.Name = "lblObservacao";
-            lblObservacao.Size = new System.Drawing.Size(377, 269);
-            lblObservacao.TabIndex = 20;
-            lblObservacao.Text = resources.GetString("lblObservacao.Text");
+            this.lblObservacao.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblObservacao.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblObservacao.ForeColor = System.Drawing.Color.MediumSlateBlue;
+            this.lblObservacao.Location = new System.Drawing.Point(12, 297);
+            this.lblObservacao.Name = "lblObservacao";
+            this.lblObservacao.Size = new System.Drawing.Size(571, 144);
+            this.lblObservacao.TabIndex = 25;
             // 
-            // lblTituloEstado
+            // lblTituloObservacao
             // 
-            lblTituloEstado.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
-            lblTituloEstado.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            lblTituloEstado.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            lblTituloEstado.Location = new System.Drawing.Point(12, 281);
-            lblTituloEstado.Name = "lblTituloEstado";
-            lblTituloEstado.Size = new System.Drawing.Size(65, 23);
-            lblTituloEstado.TabIndex = 19;
-            lblTituloEstado.Text = "Estado:";
-            // 
-            // lblEstado
-            // 
-            lblEstado.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
-            lblEstado.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            lblEstado.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            lblEstado.Location = new System.Drawing.Point(118, 281);
-            lblEstado.Name = "lblEstado";
-            lblEstado.Size = new System.Drawing.Size(132, 23);
-            lblEstado.TabIndex = 18;
-            lblEstado.Text = "São Paulo";
-            // 
-            // lblTituloCidade
-            // 
-            lblTituloCidade.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
-            lblTituloCidade.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            lblTituloCidade.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            lblTituloCidade.Location = new System.Drawing.Point(12, 240);
-            lblTituloCidade.Name = "lblTituloCidade";
-            lblTituloCidade.Size = new System.Drawing.Size(65, 23);
-            lblTituloCidade.TabIndex = 17;
-            lblTituloCidade.Text = "Cidade:";
-            // 
-            // lblCidade
-            // 
-            lblCidade.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
-            lblCidade.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            lblCidade.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            lblCidade.Location = new System.Drawing.Point(118, 240);
-            lblCidade.Name = "lblCidade";
-            lblCidade.Size = new System.Drawing.Size(132, 23);
-            lblCidade.TabIndex = 16;
-            lblCidade.Text = "Jales";
-            // 
-            // lblTituloCep
-            // 
-            lblTituloCep.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
-            lblTituloCep.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            lblTituloCep.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            lblTituloCep.Location = new System.Drawing.Point(12, 199);
-            lblTituloCep.Name = "lblTituloCep";
-            lblTituloCep.Size = new System.Drawing.Size(65, 23);
-            lblTituloCep.TabIndex = 15;
-            lblTituloCep.Text = "CEP:";
-            // 
-            // lblCep
-            // 
-            lblCep.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
-            lblCep.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            lblCep.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            lblCep.Location = new System.Drawing.Point(118, 199);
-            lblCep.Name = "lblCep";
-            lblCep.Size = new System.Drawing.Size(132, 23);
-            lblCep.TabIndex = 14;
-            lblCep.Text = "25233-050";
-            // 
-            // lblTituloValorLimite
-            // 
-            lblTituloValorLimite.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
-            lblTituloValorLimite.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            lblTituloValorLimite.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            lblTituloValorLimite.Location = new System.Drawing.Point(373, 35);
-            lblTituloValorLimite.Name = "lblTituloValorLimite";
-            lblTituloValorLimite.Size = new System.Drawing.Size(100, 23);
-            lblTituloValorLimite.TabIndex = 13;
-            lblTituloValorLimite.Text = "Valor limite:";
+            this.lblTituloObservacao.AutoSize = true;
+            this.lblTituloObservacao.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblTituloObservacao.ForeColor = System.Drawing.Color.MediumSlateBlue;
+            this.lblTituloObservacao.Location = new System.Drawing.Point(12, 255);
+            this.lblTituloObservacao.Name = "lblTituloObservacao";
+            this.lblTituloObservacao.Size = new System.Drawing.Size(97, 21);
+            this.lblTituloObservacao.TabIndex = 24;
+            this.lblTituloObservacao.Text = "Observação";
             // 
             // lblValorLimite
             // 
-            lblValorLimite.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
-            lblValorLimite.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            lblValorLimite.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            lblValorLimite.Location = new System.Drawing.Point(543, 35);
-            lblValorLimite.Name = "lblValorLimite";
-            lblValorLimite.Size = new System.Drawing.Size(271, 23);
-            lblValorLimite.TabIndex = 12;
-            lblValorLimite.Text = "R$ 100,00";
+            this.lblValorLimite.AutoSize = true;
+            this.lblValorLimite.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblValorLimite.ForeColor = System.Drawing.Color.MediumSlateBlue;
+            this.lblValorLimite.Location = new System.Drawing.Point(437, 45);
+            this.lblValorLimite.Name = "lblValorLimite";
+            this.lblValorLimite.Size = new System.Drawing.Size(88, 21);
+            this.lblValorLimite.TabIndex = 23;
+            this.lblValorLimite.Text = "R$ 1200,00";
             // 
-            // lblTItuloDataNascimento
+            // lblTituloDataNascimento
             // 
-            lblTItuloDataNascimento.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
-            lblTItuloDataNascimento.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            lblTItuloDataNascimento.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            lblTItuloDataNascimento.Location = new System.Drawing.Point(373, 76);
-            lblTItuloDataNascimento.Name = "lblTItuloDataNascimento";
-            lblTItuloDataNascimento.Size = new System.Drawing.Size(164, 23);
-            lblTItuloDataNascimento.TabIndex = 11;
-            lblTItuloDataNascimento.Text = "Data de nascimento:";
+            this.lblTituloDataNascimento.AutoSize = true;
+            this.lblTituloDataNascimento.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblTituloDataNascimento.ForeColor = System.Drawing.Color.MediumSlateBlue;
+            this.lblTituloDataNascimento.Location = new System.Drawing.Point(333, 3);
+            this.lblTituloDataNascimento.Name = "lblTituloDataNascimento";
+            this.lblTituloDataNascimento.Size = new System.Drawing.Size(158, 21);
+            this.lblTituloDataNascimento.TabIndex = 22;
+            this.lblTituloDataNascimento.Text = "Data de nascimento:";
             // 
             // lblDataNascimento
             // 
-            lblDataNascimento.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
-            lblDataNascimento.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            lblDataNascimento.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            lblDataNascimento.Location = new System.Drawing.Point(543, 76);
-            lblDataNascimento.Name = "lblDataNascimento";
-            lblDataNascimento.Size = new System.Drawing.Size(98, 23);
-            lblDataNascimento.TabIndex = 10;
-            lblDataNascimento.Text = "05/10/1990";
+            this.lblDataNascimento.AutoSize = true;
+            this.lblDataNascimento.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblDataNascimento.ForeColor = System.Drawing.Color.MediumSlateBlue;
+            this.lblDataNascimento.Location = new System.Drawing.Point(497, 3);
+            this.lblDataNascimento.Name = "lblDataNascimento";
+            this.lblDataNascimento.Size = new System.Drawing.Size(90, 21);
+            this.lblDataNascimento.TabIndex = 21;
+            this.lblDataNascimento.Text = "05/12/1988";
             // 
-            // lbTitulolCpf
+            // lblTituloValorLimite
             // 
-            lbTitulolCpf.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
-            lbTitulolCpf.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            lbTitulolCpf.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            lbTitulolCpf.Location = new System.Drawing.Point(12, 158);
-            lbTitulolCpf.Name = "lbTitulolCpf";
-            lbTitulolCpf.Size = new System.Drawing.Size(100, 23);
-            lbTitulolCpf.TabIndex = 9;
-            lbTitulolCpf.Text = "CPF:";
+            this.lblTituloValorLimite.AutoSize = true;
+            this.lblTituloValorLimite.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblTituloValorLimite.ForeColor = System.Drawing.Color.MediumSlateBlue;
+            this.lblTituloValorLimite.Location = new System.Drawing.Point(333, 45);
+            this.lblTituloValorLimite.Name = "lblTituloValorLimite";
+            this.lblTituloValorLimite.Size = new System.Drawing.Size(96, 21);
+            this.lblTituloValorLimite.TabIndex = 20;
+            this.lblTituloValorLimite.Text = "Valor limite:";
+            // 
+            // lblNumero
+            // 
+            this.lblNumero.AutoSize = true;
+            this.lblNumero.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblNumero.ForeColor = System.Drawing.Color.MediumSlateBlue;
+            this.lblNumero.Location = new System.Drawing.Point(437, 213);
+            this.lblNumero.Name = "lblNumero";
+            this.lblNumero.Size = new System.Drawing.Size(61, 21);
+            this.lblNumero.TabIndex = 19;
+            this.lblNumero.Text = "123456";
+            // 
+            // lblBairro
+            // 
+            this.lblBairro.AutoSize = true;
+            this.lblBairro.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblBairro.ForeColor = System.Drawing.Color.MediumSlateBlue;
+            this.lblBairro.Location = new System.Drawing.Point(437, 171);
+            this.lblBairro.Name = "lblBairro";
+            this.lblBairro.Size = new System.Drawing.Size(67, 21);
+            this.lblBairro.TabIndex = 18;
+            this.lblBairro.Text = "Bairro Y";
+            // 
+            // lblLogradouro
+            // 
+            this.lblLogradouro.AutoSize = true;
+            this.lblLogradouro.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblLogradouro.ForeColor = System.Drawing.Color.MediumSlateBlue;
+            this.lblLogradouro.Location = new System.Drawing.Point(116, 213);
+            this.lblLogradouro.Name = "lblLogradouro";
+            this.lblLogradouro.Size = new System.Drawing.Size(51, 21);
+            this.lblLogradouro.TabIndex = 17;
+            this.lblLogradouro.Text = "Rua X";
+            // 
+            // lblEstado
+            // 
+            this.lblEstado.AutoSize = true;
+            this.lblEstado.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblEstado.ForeColor = System.Drawing.Color.MediumSlateBlue;
+            this.lblEstado.Location = new System.Drawing.Point(437, 129);
+            this.lblEstado.Name = "lblEstado";
+            this.lblEstado.Size = new System.Drawing.Size(81, 21);
+            this.lblEstado.TabIndex = 16;
+            this.lblEstado.Text = "São Paulo";
+            // 
+            // lblCidade
+            // 
+            this.lblCidade.AutoSize = true;
+            this.lblCidade.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblCidade.ForeColor = System.Drawing.Color.MediumSlateBlue;
+            this.lblCidade.Location = new System.Drawing.Point(437, 87);
+            this.lblCidade.Name = "lblCidade";
+            this.lblCidade.Size = new System.Drawing.Size(44, 21);
+            this.lblCidade.TabIndex = 15;
+            this.lblCidade.Text = "Jales";
+            // 
+            // lblCep
+            // 
+            this.lblCep.AutoSize = true;
+            this.lblCep.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblCep.ForeColor = System.Drawing.Color.MediumSlateBlue;
+            this.lblCep.Location = new System.Drawing.Point(116, 171);
+            this.lblCep.Name = "lblCep";
+            this.lblCep.Size = new System.Drawing.Size(73, 21);
+            this.lblCep.TabIndex = 14;
+            this.lblCep.Text = "11111-999";
             // 
             // lblCpf
             // 
-            lblCpf.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
-            lblCpf.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            lblCpf.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            lblCpf.Location = new System.Drawing.Point(118, 158);
-            lblCpf.Name = "lblCpf";
-            lblCpf.Size = new System.Drawing.Size(132, 23);
-            lblCpf.TabIndex = 8;
-            lblCpf.Text = "999.999.999-99";
-            // 
-            // lblTituloSexo
-            // 
-            lblTituloSexo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
-            lblTituloSexo.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            lblTituloSexo.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            lblTituloSexo.Location = new System.Drawing.Point(12, 117);
-            lblTituloSexo.Name = "lblTituloSexo";
-            lblTituloSexo.Size = new System.Drawing.Size(100, 23);
-            lblTituloSexo.TabIndex = 7;
-            lblTituloSexo.Text = "Sexo:";
+            this.lblCpf.AutoSize = true;
+            this.lblCpf.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblCpf.ForeColor = System.Drawing.Color.MediumSlateBlue;
+            this.lblCpf.Location = new System.Drawing.Point(116, 129);
+            this.lblCpf.Name = "lblCpf";
+            this.lblCpf.Size = new System.Drawing.Size(120, 21);
+            this.lblCpf.TabIndex = 13;
+            this.lblCpf.Text = "123.456.789-90";
             // 
             // lblSexo
             // 
-            lblSexo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
-            lblSexo.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            lblSexo.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            lblSexo.Location = new System.Drawing.Point(118, 117);
-            lblSexo.Name = "lblSexo";
-            lblSexo.Size = new System.Drawing.Size(132, 23);
-            lblSexo.TabIndex = 6;
-            lblSexo.Text = "Masculino";
-            // 
-            // lblTituloSobrenome
-            // 
-            lblTituloSobrenome.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
-            lblTituloSobrenome.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            lblTituloSobrenome.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            lblTituloSobrenome.Location = new System.Drawing.Point(12, 76);
-            lblTituloSobrenome.Name = "lblTituloSobrenome";
-            lblTituloSobrenome.Size = new System.Drawing.Size(100, 23);
-            lblTituloSobrenome.TabIndex = 5;
-            lblTituloSobrenome.Text = "Sobrenome:";
+            this.lblSexo.AutoSize = true;
+            this.lblSexo.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblSexo.ForeColor = System.Drawing.Color.MediumSlateBlue;
+            this.lblSexo.Location = new System.Drawing.Point(116, 87);
+            this.lblSexo.Name = "lblSexo";
+            this.lblSexo.Size = new System.Drawing.Size(84, 21);
+            this.lblSexo.TabIndex = 12;
+            this.lblSexo.Text = "Masculino";
             // 
             // lblSobrenome
             // 
-            lblSobrenome.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
-            lblSobrenome.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            lblSobrenome.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            lblSobrenome.Location = new System.Drawing.Point(118, 76);
-            lblSobrenome.Name = "lblSobrenome";
-            lblSobrenome.Size = new System.Drawing.Size(249, 23);
-            lblSobrenome.TabIndex = 4;
-            lblSobrenome.Text = "Fashion";
-            // 
-            // lblTituloNome
-            // 
-            lblTituloNome.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
-            lblTituloNome.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            lblTituloNome.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            lblTituloNome.Location = new System.Drawing.Point(12, 35);
-            lblTituloNome.Name = "lblTituloNome";
-            lblTituloNome.Size = new System.Drawing.Size(61, 23);
-            lblTituloNome.TabIndex = 3;
-            lblTituloNome.Text = "Nome:";
+            this.lblSobrenome.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblSobrenome.ForeColor = System.Drawing.Color.MediumSlateBlue;
+            this.lblSobrenome.Location = new System.Drawing.Point(116, 45);
+            this.lblSobrenome.Name = "lblSobrenome";
+            this.lblSobrenome.Size = new System.Drawing.Size(195, 21);
+            this.lblSobrenome.TabIndex = 11;
+            this.lblSobrenome.Text = "Fashion";
             // 
             // lblNome
             // 
-            lblNome.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
-            lblNome.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            lblNome.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            lblNome.Location = new System.Drawing.Point(118, 35);
-            lblNome.Name = "lblNome";
-            lblNome.Size = new System.Drawing.Size(249, 23);
-            lblNome.TabIndex = 2;
-            lblNome.Text = "Augusto";
+            this.lblNome.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblNome.ForeColor = System.Drawing.Color.MediumSlateBlue;
+            this.lblNome.Location = new System.Drawing.Point(116, 3);
+            this.lblNome.Name = "lblNome";
+            this.lblNome.Size = new System.Drawing.Size(195, 21);
+            this.lblNome.TabIndex = 10;
+            this.lblNome.Text = "Augusto";
             // 
-            // pnlHeader
+            // lblTituloNumero
             // 
-            this.pnlHeader.Controls.Add(this.btnFechar);
-            this.pnlHeader.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlHeader.Location = new System.Drawing.Point(0, 0);
-            this.pnlHeader.Name = "pnlHeader";
-            this.pnlHeader.Size = new System.Drawing.Size(800, 32);
-            this.pnlHeader.TabIndex = 1;
+            this.lblTituloNumero.AutoSize = true;
+            this.lblTituloNumero.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblTituloNumero.ForeColor = System.Drawing.Color.MediumSlateBlue;
+            this.lblTituloNumero.Location = new System.Drawing.Point(333, 213);
+            this.lblTituloNumero.Name = "lblTituloNumero";
+            this.lblTituloNumero.Size = new System.Drawing.Size(74, 21);
+            this.lblTituloNumero.TabIndex = 9;
+            this.lblTituloNumero.Text = "Numero:";
+            // 
+            // lblTituloBairro
+            // 
+            this.lblTituloBairro.AutoSize = true;
+            this.lblTituloBairro.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblTituloBairro.ForeColor = System.Drawing.Color.MediumSlateBlue;
+            this.lblTituloBairro.Location = new System.Drawing.Point(333, 171);
+            this.lblTituloBairro.Name = "lblTituloBairro";
+            this.lblTituloBairro.Size = new System.Drawing.Size(58, 21);
+            this.lblTituloBairro.TabIndex = 8;
+            this.lblTituloBairro.Text = "Bairro:";
+            // 
+            // lblTituloLogradouro
+            // 
+            this.lblTituloLogradouro.AutoSize = true;
+            this.lblTituloLogradouro.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblTituloLogradouro.ForeColor = System.Drawing.Color.MediumSlateBlue;
+            this.lblTituloLogradouro.Location = new System.Drawing.Point(12, 213);
+            this.lblTituloLogradouro.Name = "lblTituloLogradouro";
+            this.lblTituloLogradouro.Size = new System.Drawing.Size(101, 21);
+            this.lblTituloLogradouro.TabIndex = 7;
+            this.lblTituloLogradouro.Text = "Logradouro:";
+            // 
+            // lblTituloEstado
+            // 
+            this.lblTituloEstado.AutoSize = true;
+            this.lblTituloEstado.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblTituloEstado.ForeColor = System.Drawing.Color.MediumSlateBlue;
+            this.lblTituloEstado.Location = new System.Drawing.Point(333, 129);
+            this.lblTituloEstado.Name = "lblTituloEstado";
+            this.lblTituloEstado.Size = new System.Drawing.Size(63, 21);
+            this.lblTituloEstado.TabIndex = 6;
+            this.lblTituloEstado.Text = "Estado:";
+            // 
+            // lblTituloCidade
+            // 
+            this.lblTituloCidade.AutoSize = true;
+            this.lblTituloCidade.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblTituloCidade.ForeColor = System.Drawing.Color.MediumSlateBlue;
+            this.lblTituloCidade.Location = new System.Drawing.Point(333, 87);
+            this.lblTituloCidade.Name = "lblTituloCidade";
+            this.lblTituloCidade.Size = new System.Drawing.Size(65, 21);
+            this.lblTituloCidade.TabIndex = 5;
+            this.lblTituloCidade.Text = "Cidade:";
+            // 
+            // lblTituloCep
+            // 
+            this.lblTituloCep.AutoSize = true;
+            this.lblTituloCep.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblTituloCep.ForeColor = System.Drawing.Color.MediumSlateBlue;
+            this.lblTituloCep.Location = new System.Drawing.Point(12, 171);
+            this.lblTituloCep.Name = "lblTituloCep";
+            this.lblTituloCep.Size = new System.Drawing.Size(41, 21);
+            this.lblTituloCep.TabIndex = 4;
+            this.lblTituloCep.Text = "CEP:";
+            // 
+            // lblTituloCpf
+            // 
+            this.lblTituloCpf.AutoSize = true;
+            this.lblTituloCpf.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblTituloCpf.ForeColor = System.Drawing.Color.MediumSlateBlue;
+            this.lblTituloCpf.Location = new System.Drawing.Point(12, 129);
+            this.lblTituloCpf.Name = "lblTituloCpf";
+            this.lblTituloCpf.Size = new System.Drawing.Size(41, 21);
+            this.lblTituloCpf.TabIndex = 3;
+            this.lblTituloCpf.Text = "CPF:";
+            // 
+            // lblTituloSexo
+            // 
+            this.lblTituloSexo.AutoSize = true;
+            this.lblTituloSexo.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblTituloSexo.ForeColor = System.Drawing.Color.MediumSlateBlue;
+            this.lblTituloSexo.Location = new System.Drawing.Point(12, 87);
+            this.lblTituloSexo.Name = "lblTituloSexo";
+            this.lblTituloSexo.Size = new System.Drawing.Size(50, 21);
+            this.lblTituloSexo.TabIndex = 2;
+            this.lblTituloSexo.Text = "Sexo:";
+            // 
+            // lblTituloSobrenome
+            // 
+            this.lblTituloSobrenome.AutoSize = true;
+            this.lblTituloSobrenome.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblTituloSobrenome.ForeColor = System.Drawing.Color.MediumSlateBlue;
+            this.lblTituloSobrenome.Location = new System.Drawing.Point(12, 45);
+            this.lblTituloSobrenome.Name = "lblTituloSobrenome";
+            this.lblTituloSobrenome.Size = new System.Drawing.Size(100, 21);
+            this.lblTituloSobrenome.TabIndex = 1;
+            this.lblTituloSobrenome.Text = "Sobrenome:";
+            // 
+            // lblTituloNome
+            // 
+            this.lblTituloNome.AutoSize = true;
+            this.lblTituloNome.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblTituloNome.ForeColor = System.Drawing.Color.MediumSlateBlue;
+            this.lblTituloNome.Location = new System.Drawing.Point(12, 3);
+            this.lblTituloNome.Name = "lblTituloNome";
+            this.lblTituloNome.Size = new System.Drawing.Size(59, 21);
+            this.lblTituloNome.TabIndex = 0;
+            this.lblTituloNome.Text = "Nome:";
+            // 
+            // pnlTelefones
+            // 
+            this.pnlTelefones.AutoScroll = true;
+            this.pnlTelefones.Controls.Add(this.lblTelefones);
+            this.pnlTelefones.Location = new System.Drawing.Point(12, 648);
+            this.pnlTelefones.Name = "pnlTelefones";
+            this.pnlTelefones.Size = new System.Drawing.Size(571, 79);
+            this.pnlTelefones.TabIndex = 31;
             // 
             // FrmDetalhesCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(75)))), ((int)(((byte)(160)))));
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
+            this.ClientSize = new System.Drawing.Size(604, 749);
             this.Controls.Add(this.pnlCentral);
+            this.Controls.Add(this.pnlHeader);
             this.Name = "FrmDetalhesCliente";
-            this.Text = "FrmDetalhesCliente";
-            this.pnlCentral.ResumeLayout(false);
+            this.Text = "FrmDetalhesCaceteCliente";
             this.pnlHeader.ResumeLayout(false);
+            this.pnlCentral.ResumeLayout(false);
+            this.pnlCentral.PerformLayout();
+            this.pnlEmails.ResumeLayout(false);
+            this.pnlEmails.PerformLayout();
+            this.pnlTelefones.ResumeLayout(false);
+            this.pnlTelefones.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
+        private System.Windows.Forms.Panel pnlHeader;
         private System.Windows.Forms.Button btnFechar;
         private System.Windows.Forms.Panel pnlCentral;
-        private System.Windows.Forms.Panel pnlHeader;
-        private System.Windows.Forms.Label lblNome;
         private System.Windows.Forms.Label lblTituloNome;
-        private System.Windows.Forms.Label lblTituloSobrenome;
-        private System.Windows.Forms.Label lblSobrenome;
+        private System.Windows.Forms.Label lblTituloCidade;
+        private System.Windows.Forms.Label lblTituloCep;
+        private System.Windows.Forms.Label lblTituloCpf;
         private System.Windows.Forms.Label lblTituloSexo;
-        private System.Windows.Forms.Label lblSexo;
-        private System.Windows.Forms.Label lbTitulolCpf;
+        private System.Windows.Forms.Label lblTituloSobrenome;
+        private System.Windows.Forms.Label lblTituloNumero;
+        private System.Windows.Forms.Label lblTituloBairro;
+        private System.Windows.Forms.Label lblTituloLogradouro;
+        private System.Windows.Forms.Label lblTituloEstado;
+        private System.Windows.Forms.Label lblNumero;
+        private System.Windows.Forms.Label lblBairro;
+        private System.Windows.Forms.Label lblLogradouro;
+        private System.Windows.Forms.Label lblEstado;
+        private System.Windows.Forms.Label lblCidade;
+        private System.Windows.Forms.Label lblCep;
         private System.Windows.Forms.Label lblCpf;
-        private System.Windows.Forms.Label lblTItuloDataNascimento;
+        private System.Windows.Forms.Label lblSexo;
+        private System.Windows.Forms.Label lblSobrenome;
+        private System.Windows.Forms.Label lblNome;
+        private System.Windows.Forms.Label lblValorLimite;
+        private System.Windows.Forms.Label lblTituloDataNascimento;
         private System.Windows.Forms.Label lblDataNascimento;
         private System.Windows.Forms.Label lblTituloValorLimite;
-        private System.Windows.Forms.Label lblValorLimite;
-        private System.Windows.Forms.Label lblTituloCep;
-        private System.Windows.Forms.Label lblCep;
-        private System.Windows.Forms.Label lblTituloCidade;
-        private System.Windows.Forms.Label lblCidade;
-        private System.Windows.Forms.Label lblTituloEstado;
-        private System.Windows.Forms.Label lblEstado;
         private System.Windows.Forms.Label lblTituloObservacao;
         private System.Windows.Forms.Label lblObservacao;
-        private System.Windows.Forms.Label lblTituloLogradouro;
-        private System.Windows.Forms.Label lblLogradouro;
-        private System.Windows.Forms.Label lblTituloBairro;
-        private System.Windows.Forms.Label lblBairro;
-        private System.Windows.Forms.Label lblTituloNumero;
-        private System.Windows.Forms.Label lblNumero;
+        private System.Windows.Forms.Label lblTituloEmails;
+        private System.Windows.Forms.Label lblEmails;
+        private System.Windows.Forms.Label lblTituloTelefones;
+        private System.Windows.Forms.Label lblTelefones;
+        private System.Windows.Forms.Panel pnlEmails;
+        private System.Windows.Forms.Panel pnlTelefones;
     }
 }

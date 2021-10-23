@@ -1,6 +1,7 @@
 ﻿using CRUD___Adriano.Features.Cadastro.Produto.Model;
 using CRUD___Adriano.Features.Cliente.Dao;
 using CRUD___Adriano.Features.Cliente.View;
+using CRUD___Adriano.Features.Controller.PageManager;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -40,7 +41,7 @@ namespace CRUD___Adriano.Features.Cliente.Controller
                 return;
             }
 
-            FrmDetalhesCliente frmAlterarCliente = new FrmDetalhesCliente(clienteModel);
+            var frmAlterarCliente = new FrmDetalhesCliente(clienteModel);
             frmAlterarCliente.TopLevel = false;
             frmAlterarCliente.FormBorderStyle = FormBorderStyle.None;
             frmAlterarCliente.Dock = DockStyle.Fill;

@@ -1,16 +1,11 @@
-﻿using CRUD___Adriano.Features.Cadastro.Produto.Model;
-using CRUD___Adriano.Features.Email.Model;
+﻿using CRUD___Adriano.Features.Email.Model;
 using CRUD___Adriano.Features.Factory;
 using CRUD___Adriano.Features.Telefone.Enum;
 using CRUD___Adriano.Features.Telefone.Model;
 using CRUD___Adriano.Features.Usuario.Model;
 using CRUD___Adriano.Features.Utils;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 
 namespace CRUD___Adriano.Features.Usuario.View

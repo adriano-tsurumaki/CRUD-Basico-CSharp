@@ -52,10 +52,5 @@ namespace CRUD___Adriano.Features.Cliente.View
 
             _controller.AbrirFormDeDetalhes(clienteModelSelecionado);
         }
-
-        private void gridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
     }
 }

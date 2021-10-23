@@ -1,6 +1,6 @@
 ﻿using CRUD___Adriano.Features.Cadastro.Produto.Model;
 using CRUD___Adriano.Features.Utils;
-using System;
+using System.Text;
 using System.Windows.Forms;
 
 namespace CRUD___Adriano.Features.Cliente.View
@@ -30,9 +30,31 @@ namespace CRUD___Adriano.Features.Cliente.View
             lblValorLimite.Text = $"{_clienteModel.ValorLimite:c2}";
             lblObservacao.Text = _clienteModel.Observacao;
             lblDataNascimento.Text = $"{_clienteModel.DataNascimento:dd/mm/YY}";
+            lblEmails.Text = RetornarEmailsFormatado();
+            lblTelefones.Text = RetornarTelefonesFormatado();
         }
 
-        private void BtnFechar_Click(object sender, EventArgs e) =>
+        private void BtnFechar_Click(object sender, System.EventArgs e) =>
             Close();
+
+        private string RetornarEmailsFormatado()
+        {
+            var textoFormatado = new StringBuilder();
+
+            foreach (var email in _clienteModel.Emails)
+                textoFormatado.AppendLine(email.Nome);
+
+            return textoFormatado.ToString();
+        }
+
+        private string RetornarTelefonesFormatado()
+        {
+            var textoFormatado = new StringBuilder();
+
+            foreach (var telefone in _clienteModel.Telefones)
+                textoFormatado.AppendLine(telefone.Numero);
+
+            return textoFormatado.ToString();
+        }
     }
 }
