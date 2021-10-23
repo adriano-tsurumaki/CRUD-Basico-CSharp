@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 
 namespace CRUD___Adriano.Features.Utils
 {
@@ -16,7 +15,7 @@ namespace CRUD___Adriano.Features.Utils
                 throw new Exception("T não é um tipo enum");
 
             var listaDeEnum = new List<string>();
-            listaDeEnum.Add("Selecione uma opção abaixo");
+            listaDeEnum.Add("Selecione uma opção");
 
             foreach (Enum item in Enum.GetValues(typeof(T)))
             {
@@ -69,5 +68,8 @@ namespace CRUD___Adriano.Features.Utils
 
             return valor.ToString();
         }
+
+        public static bool EstaSelecionado(this ComboBoxFlat comboBox) =>
+            comboBox.SelectedIndex > 0;
     }
 }

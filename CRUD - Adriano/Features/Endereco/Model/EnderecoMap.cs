@@ -1,6 +1,6 @@
 ﻿using Dapper.FluentMap.Mapping;
 
-namespace CRUD___Adriano.Features.Cliente.Model
+namespace CRUD___Adriano.Features.Endereco.Model
 {
     public class EnderecoMap : EntityMap<EnderecoModel>
     {

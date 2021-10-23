@@ -1,5 +1,14 @@
-﻿using CRUD___Adriano.Features.Cadastro.Produto.Controller;
+﻿using CRUD___Adriano.Features.Cadastro.Produto.Model;
+using CRUD___Adriano.Features.Cadastro.Usuario.View;
 using CRUD___Adriano.Features.Cliente.Controller;
+using CRUD___Adriano.Features.Cliente.Model;
+using CRUD___Adriano.Features.Cliente.View;
+using CRUD___Adriano.Features.Colaborador.Controller;
+using CRUD___Adriano.Features.Colaborador.View;
+using CRUD___Adriano.Features.Configuration;
+using CRUD___Adriano.Features.Controller.PageManager;
+using CRUD___Adriano.Features.Factory;
+using CRUD___Adriano.Features.Usuario.View;
 using System;
 using System.Windows.Forms;
 
@@ -7,7 +16,7 @@ namespace CRUD___Adriano
 {
     public partial class FrmPrincipal : Form
     {
-        private Form formFilhaAtiva;
+        private Form _formFilhaAtiva;
 
         public FrmPrincipal()
         {
@@ -24,29 +33,21 @@ namespace CRUD___Adriano
         private void BtnClienteCadastro_Click(object sender, EventArgs e)
         {
             lblTitulo.Text = "Cadastro de cliente";
-            DocaForm(new ClienteCadastroController().RetornarFormulario());
+            var pageManager = new GerenciadorDePaginas<ClienteModel>(
+                pnlChild,
+                new ClienteController(new ControllerConexao()),
+                new ClienteModel());
+
+            pageManager.Add(new FrmCadastroUsuario<ClienteModel>());
+            pageManager.Add(new FrmEmailTelefone<ClienteModel>());
+            pageManager.Add(new FrmCadastroCliente());
+            pageManager.Show();
         }
 
         private void BtnClientesListagem_Click(object sender, EventArgs e)
         {
             lblTitulo.Text = "Listagem de clientes";
-            DocaForm(new ClienteListagemController().RetornarFormulario());
-        }
-
-        public void DocaForm(Form formFilha)
-        {
-            if (formFilhaAtiva != null)
-                formFilhaAtiva.Close();
-            formFilhaAtiva = formFilha;
-
-            formFilha.TopLevel = false;
-            formFilha.FormBorderStyle = FormBorderStyle.None;
-            formFilha.Dock = DockStyle.Fill;
-            pnlChild.Controls.Add(formFilha);
-            pnlChild.Tag = formFilha;
-            formFilha.BringToFront();
-            formFilha.Show();
-            formFilha.Focus();
+            DocaForm(new ClienteListagemController(new ClienteController(new ControllerConexao()), pnlChild).RetornarFormulario());
         }
 
         private void BtnMenuCadastro_Click(object sender, EventArgs e)
@@ -75,6 +76,37 @@ namespace CRUD___Adriano
         private void PnlChild_ControlRemoved(object sender, ControlEventArgs e)
         {
             lblTitulo.Text = "Dashboard";
+        }
+
+        private void BtnCadastroFuncionario_Click(object sender, EventArgs e)
+        {
+            lblTitulo.Text = "Cadastro de colaborador";
+            var pageManager = new GerenciadorDePaginas<ColaboradorModel>(
+                pnlChild,
+                new ColaboradorController(new ControllerConexao()),
+                new ColaboradorModel());
+
+            pageManager.Add(new FrmCadastroUsuario<ColaboradorModel>());
+            pageManager.Add(new FrmEmailTelefone<ColaboradorModel>());
+            pageManager.Add(new FrmCadastroColaborador());
+            pageManager.Show();
+        }
+
+        private void DocaForm(Form formFilha)
+        {
+            if (_formFilhaAtiva != null)
+                _formFilhaAtiva.Close();
+
+            _formFilhaAtiva = formFilha;
+
+            formFilha.TopLevel = false;
+            formFilha.FormBorderStyle = FormBorderStyle.None;
+            formFilha.Dock = DockStyle.Fill;
+            pnlChild.Controls.Add(formFilha);
+            pnlChild.Tag = formFilha;
+
+            formFilha.BringToFront();
+            formFilha.Show();
         }
     }
 }
