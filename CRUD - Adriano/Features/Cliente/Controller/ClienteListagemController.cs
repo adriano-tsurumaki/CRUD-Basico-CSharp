@@ -68,6 +68,7 @@ namespace CRUD___Adriano.Features.Cliente.Controller
             pageManager.Add(new FrmCadastroUsuario<ClienteModel>());
             pageManager.Add(new FrmEmailTelefone<ClienteModel>());
             pageManager.Add(new FrmCadastroCliente());
+            pageManager.SetConfirm(Factory.ControllerEnum.Atualizar);
             pageManager.Show();
         }
     }

@@ -18,7 +18,15 @@ namespace CRUD___Adriano.Features.Cliente.Controller
 
         public bool Atualizar(ClienteModel clienteModel)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                return _conexao.EscopoTransacaoComRetorno((conexao, transacao) => ClienteDao.AtualizarCliente(conexao, transacao, clienteModel));
+            }
+            catch (Exception excecao)
+            {
+                MessageBox.Show(excecao.Message, "Erro ao atualizar o cliente");
+            }
+            return false;
         }
 
         public IList<ClienteModel> Listar()
@@ -49,8 +57,8 @@ namespace CRUD___Adriano.Features.Cliente.Controller
             catch (Exception excecao)
             {
                 MessageBox.Show(excecao.Message, "Erro ao remover o cliente");
-                return false;
             }
+            return false;
         }
 
         public bool Salvar(ClienteModel clienteModel)
@@ -62,9 +70,8 @@ namespace CRUD___Adriano.Features.Cliente.Controller
             catch(Exception excecao)
             {
                 MessageBox.Show(excecao.Message, "Erro ao cadastrar cliente");
-
-                return false;
             }
+            return false;
         }
 
         public ClienteModel Selecionar(int id)
