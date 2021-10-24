@@ -25,6 +25,7 @@ namespace CRUD___Adriano.Features.Controller.PageManager
         private int _indiceAtualPagina = 1;
 
         private readonly IControllerBase<T> _controller;
+        private ControllerEnum _tipoCrud;
         private T _model;
 
         public GerenciadorDePaginas(Panel panelCentral, IControllerBase<T> controller, T model)
@@ -146,10 +147,30 @@ namespace CRUD___Adriano.Features.Controller.PageManager
         {
             if (!ValidarPagina()) return;
 
-            if (!_controller.Salvar(_model)) return;
+            bool validar;
+
+            switch(_tipoCrud)
+            {
+                case ControllerEnum.Salvar:
+                    validar = _controller.Salvar(_model);
+                    break;
+                case ControllerEnum.Atualizar:
+                    validar = _controller.Atualizar(_model);
+                    break;
+                default:
+                    validar = false;
+                    break;
+            }
+
+            if (!validar) return;
 
             MessageBox.Show("Sucesso");
             _ucCentral.Dispose();
+        }
+
+        public void SetConfirm(ControllerEnum tipoCrud)
+        {
+            _tipoCrud = tipoCrud;
         }
 
         private void BtnCancelar_Click(object sender, EventArgs e) =>

@@ -10,10 +10,18 @@ namespace CRUD___Adriano.Features.Factory
 
         IList<T> Listar(int quantidade);
 
-        bool Atualizar(int id);
+        bool Atualizar(T entidade);
 
         T Selecionar(int id);
 
         bool Remover(int id);
+    }
+
+    public enum ControllerEnum
+    {
+        Salvar = 1,
+        Listar = 2,
+        Atualizar = 3,
+        Remover = 4
     }
 }

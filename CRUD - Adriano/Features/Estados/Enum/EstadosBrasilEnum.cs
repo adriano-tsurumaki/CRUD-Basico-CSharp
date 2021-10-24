@@ -5,84 +5,84 @@ namespace CRUD___Adriano.Features.Estados.Enum
     public enum EstadosBrasilEnum
     {
         [Description("Acre")]
-        AC,
+        AC = 1,
 
         [Description("Alagoas")]
-        AL,
+        AL = 2,
 
         [Description("Amapá ")]
-        AP,
+        AP = 3,
 
         [Description("Amazonas")]
-        AM,
+        AM = 4,
 
         [Description("Bahia")]
-        BA,
+        BA = 5,
 
         [Description("Ceará")]
-        CE,
+        CE = 6,
 
         [Description("Distrito Federal")]
-        DF,
+        DF = 7,
 
         [Description("Espírito Santo")]
-        ES,
+        ES = 8,
 
         [Description("Goiás")]
-        GO,
+        GO = 9,
 
         [Description("Maranhão")]
-        MA,
+        MA = 10,
 
         [Description("Mato Grosso")]
-        MT,
+        MT = 11,
 
         [Description("Mato Grosso do Sul")]
-        MS,
+        MS = 12,
 
         [Description("Minas Gerais")]
-        MG,
+        MG = 13,
 
         [Description("Pará")]
-        PA,
+        PA = 14,
 
         [Description("Paraíba")]
-        PB,
+        PB = 15,
 
         [Description("Paraná")]
-        PR,
+        PR = 16,
 
         [Description("Pernambuco")]
-        PE,
+        PE = 17,
 
         [Description("Piauí")]
-        PI,
+        PI = 18,
 
         [Description("Rio de Janeiro")]
-        RJ,
-
+        RJ = 19,
+        
         [Description("Rio Grande do Norte")]
-        RN,
+        RN = 20,
 
         [Description("Rio Grande do Sul")]
-        RS,
+        RS = 21,
 
         [Description("Rondônia")]
-        RO,
+        RO = 22,
 
         [Description("Roraima")]
-        RR,
+        RR = 23,
 
         [Description("Santa Catarina")]
-        SC,
+        SC = 24,
 
         [Description("São Paulo")]
-        SP,
-
+        SP = 25,
+        
         [Description("Sergipe")]
-        SE,
+        SE = 26,
 
         [Description("Tocantins")]
-        TO
+        TO = 27
     }
 }

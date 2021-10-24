@@ -16,7 +16,7 @@ namespace CRUD___Adriano.Features.Colaborador.Controller
             _conexao = conexao;
         }
 
-        public bool Atualizar(int id)
+        public bool Atualizar(ColaboradorModel colaboradorModel)
         {
             throw new System.NotImplementedException();
         }

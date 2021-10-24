@@ -47,7 +47,11 @@ namespace CRUD___Adriano
         private void BtnClientesListagem_Click(object sender, EventArgs e)
         {
             lblTitulo.Text = "Listagem de clientes";
-            DocaForm(new ClienteListagemController(new ClienteController(new ControllerConexao()), pnlChild).RetornarFormulario());
+            DocaForm(
+                new ClienteListagemController(
+                    new ClienteController(new ControllerConexao()), 
+                    pnlChild)
+                .RetornarFormulario());
         }
 
         private void BtnMenuCadastro_Click(object sender, EventArgs e)

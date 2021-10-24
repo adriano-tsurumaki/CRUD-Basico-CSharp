@@ -19,6 +19,5 @@ namespace CRUD___Adriano.Features.Utils
 
             return valor.ToString();
         }
-
     }
 }

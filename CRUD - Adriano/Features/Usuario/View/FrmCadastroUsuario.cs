@@ -59,6 +59,8 @@ namespace CRUD___Adriano.Features.Cadastro.Usuario.View
             txtNumero.DataBindings.Add("Texto", model, "Endereco.Numero");
             txtCep.DataBindings.Add("Texto", model, "Endereco.Cep");
             txtComplemento.DataBindings.Add("Texto", model, "Endereco.Complemento");
+            cbSexo.SelectedIndex = ((int)(_model as UsuarioModel).Sexo);
+            cbEstado.SelectedIndex = ((int)(_model as UsuarioModel).Endereco.Uf);
         }
 
         private void DataNascimento_Validating(object sender, System.ComponentModel.CancelEventArgs e)

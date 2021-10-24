@@ -37,14 +37,23 @@ namespace CRUD___Adriano.Features.Cliente.View
                 ReadOnly = true,
             };
 
+            DataGridViewButtonColumn botaoAlterarColuna = new DataGridViewButtonColumn()
+            {
+                CellTemplate = new DataGridViewButtonCell(),
+                HeaderText = "Alterar",
+                Name = "Alterar"
+            };
+
             DataGridViewButtonColumn botaoExcluirColuna = new DataGridViewButtonColumn()
             {
                 CellTemplate = new DataGridViewButtonCell(),
                 HeaderText = "Excluir",
+                Name = "Excluir"
             };
 
             gridView.Columns.Add(idColuna);
             gridView.Columns.Add(nomeColuna);
+            gridView.Columns.Add(botaoAlterarColuna);
             gridView.Columns.Add(botaoExcluirColuna);
 
             var listaDeClientesBinding = new BindingList<ClienteModel>(listaDeClientes);
@@ -56,14 +65,20 @@ namespace CRUD___Adriano.Features.Cliente.View
         {
             var senderGrid = sender as DataGridView;
 
-            if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn &&
-                e.RowIndex >= 0)
-            {
-                var clienteModelSelecionado = gridView.CurrentRow.DataBoundItem as ClienteModel;
+            if (e.RowIndex < 0) return;
 
+            if (!(senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn)) return;
+
+            var botao = senderGrid.Columns[e.ColumnIndex] as DataGridViewButtonColumn;
+            var clienteModelSelecionado = gridView.CurrentRow.DataBoundItem as ClienteModel;
+
+            if (botao.Name.Equals("Excluir"))
+            {
                 if (_controller.ExcluirCliente(clienteModelSelecionado.IdUsuario))
                     MessageBox.Show("Excluído com sucesso");
             }
+            else if (botao.Name.Equals("Alterar"))
+                _controller.AlterarCliente(clienteModelSelecionado);
         }
 
         private void GridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)

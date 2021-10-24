@@ -32,10 +32,11 @@ namespace CRUD___Adriano.Features.Cliente.View
             this.pnlHeader = new System.Windows.Forms.Panel();
             this.btnFechar = new System.Windows.Forms.Button();
             this.pnlCentral = new System.Windows.Forms.Panel();
+            this.pnlTelefones = new System.Windows.Forms.Panel();
+            this.lblTelefones = new System.Windows.Forms.Label();
             this.pnlEmails = new System.Windows.Forms.Panel();
             this.lblEmails = new System.Windows.Forms.Label();
             this.lblTituloTelefones = new System.Windows.Forms.Label();
-            this.lblTelefones = new System.Windows.Forms.Label();
             this.lblTituloEmails = new System.Windows.Forms.Label();
             this.lblObservacao = new System.Windows.Forms.Label();
             this.lblTituloObservacao = new System.Windows.Forms.Label();
@@ -63,11 +64,10 @@ namespace CRUD___Adriano.Features.Cliente.View
             this.lblTituloSexo = new System.Windows.Forms.Label();
             this.lblTituloSobrenome = new System.Windows.Forms.Label();
             this.lblTituloNome = new System.Windows.Forms.Label();
-            this.pnlTelefones = new System.Windows.Forms.Panel();
             this.pnlHeader.SuspendLayout();
             this.pnlCentral.SuspendLayout();
-            this.pnlEmails.SuspendLayout();
             this.pnlTelefones.SuspendLayout();
+            this.pnlEmails.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlHeader
@@ -133,6 +133,26 @@ namespace CRUD___Adriano.Features.Cliente.View
             this.pnlCentral.Size = new System.Drawing.Size(604, 717);
             this.pnlCentral.TabIndex = 3;
             // 
+            // pnlTelefones
+            // 
+            this.pnlTelefones.AutoScroll = true;
+            this.pnlTelefones.Controls.Add(this.lblTelefones);
+            this.pnlTelefones.Location = new System.Drawing.Point(12, 648);
+            this.pnlTelefones.Name = "pnlTelefones";
+            this.pnlTelefones.Size = new System.Drawing.Size(571, 79);
+            this.pnlTelefones.TabIndex = 31;
+            // 
+            // lblTelefones
+            // 
+            this.lblTelefones.AutoSize = true;
+            this.lblTelefones.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblTelefones.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblTelefones.ForeColor = System.Drawing.Color.MediumSlateBlue;
+            this.lblTelefones.Location = new System.Drawing.Point(3, 0);
+            this.lblTelefones.Name = "lblTelefones";
+            this.lblTelefones.Size = new System.Drawing.Size(2, 23);
+            this.lblTelefones.TabIndex = 28;
+            // 
             // pnlEmails
             // 
             this.pnlEmails.AutoScroll = true;
@@ -162,17 +182,6 @@ namespace CRUD___Adriano.Features.Cliente.View
             this.lblTituloTelefones.Size = new System.Drawing.Size(80, 21);
             this.lblTituloTelefones.TabIndex = 29;
             this.lblTituloTelefones.Text = "Telefones";
-            // 
-            // lblTelefones
-            // 
-            this.lblTelefones.AutoSize = true;
-            this.lblTelefones.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblTelefones.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblTelefones.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            this.lblTelefones.Location = new System.Drawing.Point(3, 0);
-            this.lblTelefones.Name = "lblTelefones";
-            this.lblTelefones.Size = new System.Drawing.Size(2, 23);
-            this.lblTelefones.TabIndex = 28;
             // 
             // lblTituloEmails
             // 
@@ -468,15 +477,6 @@ namespace CRUD___Adriano.Features.Cliente.View
             this.lblTituloNome.TabIndex = 0;
             this.lblTituloNome.Text = "Nome:";
             // 
-            // pnlTelefones
-            // 
-            this.pnlTelefones.AutoScroll = true;
-            this.pnlTelefones.Controls.Add(this.lblTelefones);
-            this.pnlTelefones.Location = new System.Drawing.Point(12, 648);
-            this.pnlTelefones.Name = "pnlTelefones";
-            this.pnlTelefones.Size = new System.Drawing.Size(571, 79);
-            this.pnlTelefones.TabIndex = 31;
-            // 
             // FrmDetalhesCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -490,10 +490,10 @@ namespace CRUD___Adriano.Features.Cliente.View
             this.pnlHeader.ResumeLayout(false);
             this.pnlCentral.ResumeLayout(false);
             this.pnlCentral.PerformLayout();
-            this.pnlEmails.ResumeLayout(false);
-            this.pnlEmails.PerformLayout();
             this.pnlTelefones.ResumeLayout(false);
             this.pnlTelefones.PerformLayout();
+            this.pnlEmails.ResumeLayout(false);
+            this.pnlEmails.PerformLayout();
             this.ResumeLayout(false);
 
         }

@@ -16,7 +16,7 @@ namespace CRUD___Adriano.Features.Cliente.Controller
             _conexao = conexao;
         }
 
-        public bool Atualizar(int id)
+        public bool Atualizar(ClienteModel clienteModel)
         {
             throw new System.NotImplementedException();
         }
