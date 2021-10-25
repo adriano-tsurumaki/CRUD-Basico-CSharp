@@ -143,6 +143,7 @@ namespace CRUD___Adriano.Features.Colaborador.Dao
             conexao.Query(EmailSql.Remover, new { id }, transacao);
             conexao.Query(TelefoneSql.Remover, new { id }, transacao);
             conexao.Query(UsuarioSql.Remover, new { id }, transacao);
+            conexao.Query("delete DadosBancarios where id_usuario = @id", new { id }, transacao);
 
             return true;
         }
@@ -153,11 +154,20 @@ namespace CRUD___Adriano.Features.Colaborador.Dao
             comissao = @Comissao
             where id_usuario = @IdUsuario";
 
+        private static readonly string sqlAtualizarDadosBancarios =
+            @"update DadosBancarios set
+            agencia = @Agencia
+            conta = @Conta
+            tipo_conta = @TipoConta
+            banco = @Banco
+            where id_usuario = @IdUsuario";
+
         public static bool AtualizarColaborador(IDbConnection conexao, IDbTransaction transacao, ColaboradorModel colaboradorModel)
         {
             conexao.Execute(UsuarioSql.Atualizar, colaboradorModel, transacao);
             conexao.Execute(sqlAtualizarColaborador, colaboradorModel, transacao);
             conexao.Execute(EnderecoSql.Atualizar(colaboradorModel.Endereco), colaboradorModel.Endereco, transacao);
+            conexao.Execute(sqlAtualizarDadosBancarios, colaboradorModel.DadosBancarios, transacao);
 
             foreach (var email in colaboradorModel.Emails)
             {
