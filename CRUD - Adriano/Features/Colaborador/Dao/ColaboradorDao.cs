@@ -79,7 +79,7 @@ namespace CRUD___Adriano.Features.Colaborador.Dao
             return dicionarioColaborador.Values.ToList();
         }
 
-        private static ColaboradorModel MapearListagemDeColaborador(ColaboradorModel colaboradorModel, EnderecoModel enderecoModel, Dictionary<int, ColaboradorModel> dicionarioColaborador)
+        public static ColaboradorModel MapearListagemDeColaborador(ColaboradorModel colaboradorModel, EnderecoModel enderecoModel, Dictionary<int, ColaboradorModel> dicionarioColaborador)
         {
             if (dicionarioColaborador.TryGetValue(colaboradorModel.IdUsuario, out var colaborador) && colaborador.Endereco.Id != enderecoModel.Id)
                 colaborador.Endereco = enderecoModel;
@@ -92,7 +92,7 @@ namespace CRUD___Adriano.Features.Colaborador.Dao
             return colaboradorModel;
         }
 
-        private static ColaboradorModel MapearListagemDeEmailsDosColaboradores(ColaboradorModel colaboradorModel, EmailModel emailModel, Dictionary<int, ColaboradorModel> dicionarioColaborador)
+        public static ColaboradorModel MapearListagemDeEmailsDosColaboradores(ColaboradorModel colaboradorModel, EmailModel emailModel, Dictionary<int, ColaboradorModel> dicionarioColaborador)
         {
             if(dicionarioColaborador.TryGetValue(colaboradorModel.IdUsuario, out var colaborador))
                 colaborador.Emails.Add(emailModel);
@@ -100,7 +100,7 @@ namespace CRUD___Adriano.Features.Colaborador.Dao
             return colaboradorModel;
         }
 
-        private static ColaboradorModel MapearListagemDeTelefonesDosClientes(ColaboradorModel colaboradorModel, TelefoneModel telefoneModel, Dictionary<int, ColaboradorModel> dicionarioCliente)
+        public static ColaboradorModel MapearListagemDeTelefonesDosClientes(ColaboradorModel colaboradorModel, TelefoneModel telefoneModel, Dictionary<int, ColaboradorModel> dicionarioCliente)
         {
             if(dicionarioCliente.TryGetValue(colaboradorModel.IdUsuario, out var colaborador))
                 colaborador.Telefones.Add(telefoneModel);
