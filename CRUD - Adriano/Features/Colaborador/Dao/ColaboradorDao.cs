@@ -26,12 +26,6 @@ namespace CRUD___Adriano.Features.Colaborador.Dao
             @"insert into Colaborador(id_usuario, salario, comissao)
             values(@IdUsuario, @Salario, @Comissao)";
 
-        private static readonly string sqlInserirEmail =
-            @"insert into Email(id_usuario, nome) values (@IdUsuario, @Nome)";
-
-        private static readonly string sqlInserirTelefone =
-            @"insert into Telefone(id_usuario, numero, tipo) values (@IdUsuario, @Numero, @Tipo)";
-
         private static readonly string sqlListarTodosOsColaboradores =
             @"select u.id as IdUsuario, u.nome, u.sobrenome, u.sexo, u.cpf, u.data_nascimento, c.salario, c.comissao,
             c.id as split, en.id_usuario as IdUsuario, en.cep, en.logradouro, en.bairro, en.cidade, en.uf, en.complemento, en.numero
@@ -53,27 +47,11 @@ namespace CRUD___Adriano.Features.Colaborador.Dao
             foreach (var telefone in colaboradorModel.Telefones)
                 telefone.IdUsuario = colaboradorModel.IdUsuario;
 
-            conexao.Execute(SqlInserirEndereco(colaboradorModel.Endereco), colaboradorModel.Endereco, transacao);
-            conexao.Execute(sqlInserirEmail, colaboradorModel.Emails, transacao);
-            conexao.Execute(sqlInserirTelefone, colaboradorModel.Telefones, transacao);
+            conexao.Execute(EnderecoSql.Inserir(colaboradorModel.Endereco), colaboradorModel.Endereco, transacao);
+            conexao.Execute(EmailSql.Inserir, colaboradorModel.Emails, transacao);
+            conexao.Execute(TelefoneSql.Inserir, colaboradorModel.Telefones, transacao);
 
             return true;
-        }
-
-        private static string SqlInserirEndereco(EnderecoModel enderecoModel)
-        {
-            var insertSql = new StringBuilder("insert into Endereco(id_usuario, logradouro, cidade, uf, complemento, bairro, numero");
-            var valuesSql = new StringBuilder("values (@IdUsuario, @Logradouro, @Cidade, @Uf, @Complemento, @Bairro, @Numero");
-
-            if (!string.IsNullOrEmpty(enderecoModel.Cep))
-            {
-                insertSql.Append(", cep");
-                valuesSql.Append(", @Cep");
-            }
-
-            insertSql.Append(")");
-            valuesSql.Append(")");
-            return string.Join(' ', insertSql, valuesSql);
         }
 
         public static IList<ColaboradorModel> ListarColaborador(IDbConnection conexao)
@@ -100,8 +78,6 @@ namespace CRUD___Adriano.Features.Colaborador.Dao
 
             return dicionarioColaborador.Values.ToList();
         }
-
-        
 
         private static ColaboradorModel MapearListagemDeColaborador(ColaboradorModel colaboradorModel, EnderecoModel enderecoModel, Dictionary<int, ColaboradorModel> dicionarioColaborador)
         {

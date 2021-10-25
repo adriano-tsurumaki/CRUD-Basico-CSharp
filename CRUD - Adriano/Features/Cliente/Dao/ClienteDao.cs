@@ -49,7 +49,7 @@ namespace CRUD___Adriano.Features.Cliente.Dao
             return true;
         }
 
-        private static string SqlInserirCliente(ClienteModel clienteModel)
+        public static string SqlInserirCliente(ClienteModel clienteModel)
         {
             var insertSql = new StringBuilder("insert into Cliente(id_usuario, valor_limite");
             var valuesSql = new StringBuilder("values (@IdUsuario, @ValorLimite");

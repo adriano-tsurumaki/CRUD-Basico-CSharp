@@ -1,10 +1,6 @@
-﻿using CRUD___Adriano.Features.Componentes;
-using CRUD___Adriano.Features.Estados.Enum;
+﻿using CRUD___Adriano.Features.Estados.Enum;
 using CRUD___Adriano.Features.Utils;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Teste_Unitário.Extensão
 {
