@@ -7,9 +7,8 @@
 
         public static readonly string ListarTodosPorId =
             @"select u.id as IdUsuario, 
-			c.id as split, t.id, t.id_usuario as IdUsuario, t.numero, t.tipo
+			u.id as split, t.id, t.id_usuario as IdUsuario, t.numero, t.tipo
 			from Usuario u
-			inner join Cliente c on c.id_usuario = u.id
             inner join Telefone t on t.id_usuario = u.id";
 
         public static readonly string Remover =

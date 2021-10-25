@@ -18,12 +18,29 @@ namespace CRUD___Adriano.Features.Colaborador.Controller
 
         public bool Atualizar(ColaboradorModel colaboradorModel)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                return _conexao.EscopoTransacaoComRetorno((conexao, transacao) => ColaboradorDao.AtualizarColaborador(conexao, transacao, colaboradorModel));
+            }
+            catch (Exception excecao)
+            {
+                MessageBox.Show(excecao.Message, "Erro ao atualizar o colaborador");
+            }
+            return false;
         }
 
         public IList<ColaboradorModel> Listar()
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                return _conexao.EscopoConexaoComRetorno((conexao) => ColaboradorDao.ListarColaborador(conexao));
+            }
+            catch (Exception excecao)
+            {
+                MessageBox.Show(excecao.Message, "Erro ao listar colaboradores");
+            }
+
+            return new List<ColaboradorModel>();
         }
 
         public IList<ColaboradorModel> Listar(int quantidade)
@@ -33,7 +50,15 @@ namespace CRUD___Adriano.Features.Colaborador.Controller
 
         public bool Remover(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return _conexao.EscopoTransacaoComRetorno((conexao, transacao) => ColaboradorDao.RemoverColaborador(conexao, transacao, id));
+            }
+            catch (Exception excecao)
+            {
+                MessageBox.Show(excecao.Message, "Erro ao remover o colaborador");
+            }
+            return false;
         }
 
         public bool Salvar(ColaboradorModel colaboradorModel)

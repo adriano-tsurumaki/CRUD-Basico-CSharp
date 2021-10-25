@@ -31,15 +31,15 @@ namespace CRUD___Adriano.Features.Cliente.Controller
             _frmListagemCliente.BindGrid(_clienteController.Listar());
         }
 
-        public void AbrirFormDeDetalhes(ClienteModel clienteModel)
+        public void AbrirFormDeDetalhes(ClienteModel clienteModelSelecionado)
         {
             if (_dock == null)
             {
-                new FrmDetalhesCliente(clienteModel).Show();
+                new FrmDetalhesCliente(clienteModelSelecionado).Show();
                 return;
             }
 
-            var frmAlterarCliente = new FrmDetalhesCliente(clienteModel)
+            var frmAlterarCliente = new FrmDetalhesCliente(clienteModelSelecionado)
             {
                 TopLevel = false,
                 FormBorderStyle = FormBorderStyle.None,
@@ -58,12 +58,12 @@ namespace CRUD___Adriano.Features.Cliente.Controller
 
         public Form RetornarFormulario() => _frmListagemCliente;
 
-        public void AlterarCliente(ClienteModel clienteModel)
+        public void AlterarCliente(ClienteModel clienteModelSelecionado)
         {
             var pageManager = new GerenciadorDePaginas<ClienteModel>(
                 _dock,
                 _clienteController,
-                clienteModel);
+                clienteModelSelecionado);
 
             pageManager.Add(new FrmCadastroUsuario<ClienteModel>());
             pageManager.Add(new FrmEmailTelefone<ClienteModel>());

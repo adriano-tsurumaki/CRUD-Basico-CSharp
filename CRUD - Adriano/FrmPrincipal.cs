@@ -98,6 +98,16 @@ namespace CRUD___Adriano
             pageManager.Show();
         }
 
+        private void BtnListagemFuncionario_Click(object sender, EventArgs e)
+        {
+            lblTitulo.Text = "Listagem de clientes";
+            DocaForm(
+                new ColaboradorListagemController(
+                    new ColaboradorController(new ControllerConexao()),
+                    pnlChild)
+                .RetornarFormulario());
+        }
+
         private void DocaForm(Form formFilha)
         {
             if (_formFilhaAtiva != null)

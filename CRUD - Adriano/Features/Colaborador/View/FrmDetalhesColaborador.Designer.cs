@@ -1,7 +1,7 @@
 ﻿
-namespace CRUD___Adriano.Features.Cliente.View
+namespace CRUD___Adriano.Features.Colaborador.View
 {
-    partial class FrmDetalhesCliente
+    partial class FrmDetalhesColaborador
     {
         /// <summary>
         /// Required designer variable.
@@ -29,21 +29,19 @@ namespace CRUD___Adriano.Features.Cliente.View
         /// </summary>
         private void InitializeComponent()
         {
-            this.pnlHeader = new System.Windows.Forms.Panel();
-            this.btnFechar = new System.Windows.Forms.Button();
             this.pnlCentral = new System.Windows.Forms.Panel();
+            this.lblSalario = new System.Windows.Forms.Label();
+            this.lblTituloSalario = new System.Windows.Forms.Label();
             this.pnlTelefones = new System.Windows.Forms.Panel();
             this.lblTelefones = new System.Windows.Forms.Label();
             this.pnlEmails = new System.Windows.Forms.Panel();
             this.lblEmails = new System.Windows.Forms.Label();
             this.lblTituloTelefones = new System.Windows.Forms.Label();
             this.lblTituloEmails = new System.Windows.Forms.Label();
-            this.lblObservacao = new System.Windows.Forms.Label();
-            this.lblTituloObservacao = new System.Windows.Forms.Label();
-            this.lblValorLimite = new System.Windows.Forms.Label();
+            this.lblComissao = new System.Windows.Forms.Label();
             this.lblTituloDataNascimento = new System.Windows.Forms.Label();
             this.lblDataNascimento = new System.Windows.Forms.Label();
-            this.lblTituloValorLimite = new System.Windows.Forms.Label();
+            this.lblTituloComissao = new System.Windows.Forms.Label();
             this.lblNumero = new System.Windows.Forms.Label();
             this.lblBairro = new System.Windows.Forms.Label();
             this.lblLogradouro = new System.Windows.Forms.Label();
@@ -64,49 +62,27 @@ namespace CRUD___Adriano.Features.Cliente.View
             this.lblTituloSexo = new System.Windows.Forms.Label();
             this.lblTituloSobrenome = new System.Windows.Forms.Label();
             this.lblTituloNome = new System.Windows.Forms.Label();
-            this.pnlHeader.SuspendLayout();
+            this.pnlHeader = new System.Windows.Forms.Panel();
+            this.btnFechar = new System.Windows.Forms.Button();
             this.pnlCentral.SuspendLayout();
             this.pnlTelefones.SuspendLayout();
             this.pnlEmails.SuspendLayout();
+            this.pnlHeader.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // pnlHeader
-            // 
-            this.pnlHeader.Controls.Add(this.btnFechar);
-            this.pnlHeader.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlHeader.Location = new System.Drawing.Point(0, 0);
-            this.pnlHeader.Name = "pnlHeader";
-            this.pnlHeader.Size = new System.Drawing.Size(604, 32);
-            this.pnlHeader.TabIndex = 2;
-            // 
-            // btnFechar
-            // 
-            this.btnFechar.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnFechar.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
-            this.btnFechar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnFechar.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnFechar.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            this.btnFechar.Location = new System.Drawing.Point(575, 0);
-            this.btnFechar.Name = "btnFechar";
-            this.btnFechar.Size = new System.Drawing.Size(29, 32);
-            this.btnFechar.TabIndex = 0;
-            this.btnFechar.Text = "X";
-            this.btnFechar.UseVisualStyleBackColor = true;
-            this.btnFechar.Click += new System.EventHandler(this.BtnFechar_Click);
             // 
             // pnlCentral
             // 
             this.pnlCentral.AutoScroll = true;
+            this.pnlCentral.Controls.Add(this.lblSalario);
+            this.pnlCentral.Controls.Add(this.lblTituloSalario);
             this.pnlCentral.Controls.Add(this.pnlTelefones);
             this.pnlCentral.Controls.Add(this.pnlEmails);
             this.pnlCentral.Controls.Add(this.lblTituloTelefones);
             this.pnlCentral.Controls.Add(this.lblTituloEmails);
-            this.pnlCentral.Controls.Add(this.lblObservacao);
-            this.pnlCentral.Controls.Add(this.lblTituloObservacao);
-            this.pnlCentral.Controls.Add(this.lblValorLimite);
+            this.pnlCentral.Controls.Add(this.lblComissao);
             this.pnlCentral.Controls.Add(this.lblTituloDataNascimento);
             this.pnlCentral.Controls.Add(this.lblDataNascimento);
-            this.pnlCentral.Controls.Add(this.lblTituloValorLimite);
+            this.pnlCentral.Controls.Add(this.lblTituloComissao);
             this.pnlCentral.Controls.Add(this.lblNumero);
             this.pnlCentral.Controls.Add(this.lblBairro);
             this.pnlCentral.Controls.Add(this.lblLogradouro);
@@ -130,14 +106,36 @@ namespace CRUD___Adriano.Features.Cliente.View
             this.pnlCentral.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlCentral.Location = new System.Drawing.Point(0, 32);
             this.pnlCentral.Name = "pnlCentral";
-            this.pnlCentral.Size = new System.Drawing.Size(604, 717);
-            this.pnlCentral.TabIndex = 3;
+            this.pnlCentral.Size = new System.Drawing.Size(800, 418);
+            this.pnlCentral.TabIndex = 4;
+            // 
+            // lblSalario
+            // 
+            this.lblSalario.AutoSize = true;
+            this.lblSalario.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblSalario.ForeColor = System.Drawing.Color.MediumSlateBlue;
+            this.lblSalario.Location = new System.Drawing.Point(437, 213);
+            this.lblSalario.Name = "lblSalario";
+            this.lblSalario.Size = new System.Drawing.Size(88, 21);
+            this.lblSalario.TabIndex = 33;
+            this.lblSalario.Text = "R$ 1200,00";
+            // 
+            // lblTituloSalario
+            // 
+            this.lblTituloSalario.AutoSize = true;
+            this.lblTituloSalario.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblTituloSalario.ForeColor = System.Drawing.Color.MediumSlateBlue;
+            this.lblTituloSalario.Location = new System.Drawing.Point(333, 213);
+            this.lblTituloSalario.Name = "lblTituloSalario";
+            this.lblTituloSalario.Size = new System.Drawing.Size(63, 21);
+            this.lblTituloSalario.TabIndex = 32;
+            this.lblTituloSalario.Text = "Salário:";
             // 
             // pnlTelefones
             // 
             this.pnlTelefones.AutoScroll = true;
             this.pnlTelefones.Controls.Add(this.lblTelefones);
-            this.pnlTelefones.Location = new System.Drawing.Point(12, 648);
+            this.pnlTelefones.Location = new System.Drawing.Point(12, 486);
             this.pnlTelefones.Name = "pnlTelefones";
             this.pnlTelefones.Size = new System.Drawing.Size(571, 79);
             this.pnlTelefones.TabIndex = 31;
@@ -156,7 +154,7 @@ namespace CRUD___Adriano.Features.Cliente.View
             // 
             this.pnlEmails.AutoScroll = true;
             this.pnlEmails.Controls.Add(this.lblEmails);
-            this.pnlEmails.Location = new System.Drawing.Point(12, 502);
+            this.pnlEmails.Location = new System.Drawing.Point(12, 340);
             this.pnlEmails.Name = "pnlEmails";
             this.pnlEmails.Size = new System.Drawing.Size(571, 79);
             this.pnlEmails.TabIndex = 30;
@@ -176,7 +174,7 @@ namespace CRUD___Adriano.Features.Cliente.View
             this.lblTituloTelefones.AutoSize = true;
             this.lblTituloTelefones.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblTituloTelefones.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            this.lblTituloTelefones.Location = new System.Drawing.Point(12, 606);
+            this.lblTituloTelefones.Location = new System.Drawing.Point(12, 444);
             this.lblTituloTelefones.Name = "lblTituloTelefones";
             this.lblTituloTelefones.Size = new System.Drawing.Size(80, 21);
             this.lblTituloTelefones.TabIndex = 29;
@@ -187,43 +185,22 @@ namespace CRUD___Adriano.Features.Cliente.View
             this.lblTituloEmails.AutoSize = true;
             this.lblTituloEmails.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblTituloEmails.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            this.lblTituloEmails.Location = new System.Drawing.Point(12, 460);
+            this.lblTituloEmails.Location = new System.Drawing.Point(12, 298);
             this.lblTituloEmails.Name = "lblTituloEmails";
             this.lblTituloEmails.Size = new System.Drawing.Size(55, 21);
             this.lblTituloEmails.TabIndex = 27;
             this.lblTituloEmails.Text = "Emails";
             // 
-            // lblObservacao
+            // lblComissao
             // 
-            this.lblObservacao.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblObservacao.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblObservacao.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            this.lblObservacao.Location = new System.Drawing.Point(12, 297);
-            this.lblObservacao.Name = "lblObservacao";
-            this.lblObservacao.Size = new System.Drawing.Size(571, 144);
-            this.lblObservacao.TabIndex = 25;
-            // 
-            // lblTituloObservacao
-            // 
-            this.lblTituloObservacao.AutoSize = true;
-            this.lblTituloObservacao.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblTituloObservacao.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            this.lblTituloObservacao.Location = new System.Drawing.Point(12, 255);
-            this.lblTituloObservacao.Name = "lblTituloObservacao";
-            this.lblTituloObservacao.Size = new System.Drawing.Size(97, 21);
-            this.lblTituloObservacao.TabIndex = 24;
-            this.lblTituloObservacao.Text = "Observação";
-            // 
-            // lblValorLimite
-            // 
-            this.lblValorLimite.AutoSize = true;
-            this.lblValorLimite.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblValorLimite.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            this.lblValorLimite.Location = new System.Drawing.Point(437, 45);
-            this.lblValorLimite.Name = "lblValorLimite";
-            this.lblValorLimite.Size = new System.Drawing.Size(88, 21);
-            this.lblValorLimite.TabIndex = 23;
-            this.lblValorLimite.Text = "R$ 1200,00";
+            this.lblComissao.AutoSize = true;
+            this.lblComissao.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblComissao.ForeColor = System.Drawing.Color.MediumSlateBlue;
+            this.lblComissao.Location = new System.Drawing.Point(116, 255);
+            this.lblComissao.Name = "lblComissao";
+            this.lblComissao.Size = new System.Drawing.Size(73, 21);
+            this.lblComissao.TabIndex = 23;
+            this.lblComissao.Text = "R$ 20,00";
             // 
             // lblTituloDataNascimento
             // 
@@ -247,23 +224,23 @@ namespace CRUD___Adriano.Features.Cliente.View
             this.lblDataNascimento.TabIndex = 21;
             this.lblDataNascimento.Text = "05/12/1988";
             // 
-            // lblTituloValorLimite
+            // lblTituloComissao
             // 
-            this.lblTituloValorLimite.AutoSize = true;
-            this.lblTituloValorLimite.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblTituloValorLimite.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            this.lblTituloValorLimite.Location = new System.Drawing.Point(333, 45);
-            this.lblTituloValorLimite.Name = "lblTituloValorLimite";
-            this.lblTituloValorLimite.Size = new System.Drawing.Size(96, 21);
-            this.lblTituloValorLimite.TabIndex = 20;
-            this.lblTituloValorLimite.Text = "Valor limite:";
+            this.lblTituloComissao.AutoSize = true;
+            this.lblTituloComissao.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblTituloComissao.ForeColor = System.Drawing.Color.MediumSlateBlue;
+            this.lblTituloComissao.Location = new System.Drawing.Point(12, 255);
+            this.lblTituloComissao.Name = "lblTituloComissao";
+            this.lblTituloComissao.Size = new System.Drawing.Size(84, 21);
+            this.lblTituloComissao.TabIndex = 20;
+            this.lblTituloComissao.Text = "Comissão:";
             // 
             // lblNumero
             // 
             this.lblNumero.AutoSize = true;
             this.lblNumero.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblNumero.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            this.lblNumero.Location = new System.Drawing.Point(437, 213);
+            this.lblNumero.Location = new System.Drawing.Point(437, 171);
             this.lblNumero.Name = "lblNumero";
             this.lblNumero.Size = new System.Drawing.Size(61, 21);
             this.lblNumero.TabIndex = 19;
@@ -274,7 +251,7 @@ namespace CRUD___Adriano.Features.Cliente.View
             this.lblBairro.AutoSize = true;
             this.lblBairro.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblBairro.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            this.lblBairro.Location = new System.Drawing.Point(437, 171);
+            this.lblBairro.Location = new System.Drawing.Point(437, 129);
             this.lblBairro.Name = "lblBairro";
             this.lblBairro.Size = new System.Drawing.Size(67, 21);
             this.lblBairro.TabIndex = 18;
@@ -296,7 +273,7 @@ namespace CRUD___Adriano.Features.Cliente.View
             this.lblEstado.AutoSize = true;
             this.lblEstado.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblEstado.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            this.lblEstado.Location = new System.Drawing.Point(437, 129);
+            this.lblEstado.Location = new System.Drawing.Point(437, 87);
             this.lblEstado.Name = "lblEstado";
             this.lblEstado.Size = new System.Drawing.Size(81, 21);
             this.lblEstado.TabIndex = 16;
@@ -307,7 +284,7 @@ namespace CRUD___Adriano.Features.Cliente.View
             this.lblCidade.AutoSize = true;
             this.lblCidade.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblCidade.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            this.lblCidade.Location = new System.Drawing.Point(437, 87);
+            this.lblCidade.Location = new System.Drawing.Point(437, 45);
             this.lblCidade.Name = "lblCidade";
             this.lblCidade.Size = new System.Drawing.Size(44, 21);
             this.lblCidade.TabIndex = 15;
@@ -371,7 +348,7 @@ namespace CRUD___Adriano.Features.Cliente.View
             this.lblTituloNumero.AutoSize = true;
             this.lblTituloNumero.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblTituloNumero.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            this.lblTituloNumero.Location = new System.Drawing.Point(333, 213);
+            this.lblTituloNumero.Location = new System.Drawing.Point(333, 171);
             this.lblTituloNumero.Name = "lblTituloNumero";
             this.lblTituloNumero.Size = new System.Drawing.Size(74, 21);
             this.lblTituloNumero.TabIndex = 9;
@@ -382,7 +359,7 @@ namespace CRUD___Adriano.Features.Cliente.View
             this.lblTituloBairro.AutoSize = true;
             this.lblTituloBairro.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblTituloBairro.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            this.lblTituloBairro.Location = new System.Drawing.Point(333, 171);
+            this.lblTituloBairro.Location = new System.Drawing.Point(333, 129);
             this.lblTituloBairro.Name = "lblTituloBairro";
             this.lblTituloBairro.Size = new System.Drawing.Size(58, 21);
             this.lblTituloBairro.TabIndex = 8;
@@ -404,7 +381,7 @@ namespace CRUD___Adriano.Features.Cliente.View
             this.lblTituloEstado.AutoSize = true;
             this.lblTituloEstado.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblTituloEstado.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            this.lblTituloEstado.Location = new System.Drawing.Point(333, 129);
+            this.lblTituloEstado.Location = new System.Drawing.Point(333, 87);
             this.lblTituloEstado.Name = "lblTituloEstado";
             this.lblTituloEstado.Size = new System.Drawing.Size(63, 21);
             this.lblTituloEstado.TabIndex = 6;
@@ -415,7 +392,7 @@ namespace CRUD___Adriano.Features.Cliente.View
             this.lblTituloCidade.AutoSize = true;
             this.lblTituloCidade.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblTituloCidade.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            this.lblTituloCidade.Location = new System.Drawing.Point(333, 87);
+            this.lblTituloCidade.Location = new System.Drawing.Point(333, 45);
             this.lblTituloCidade.Name = "lblTituloCidade";
             this.lblTituloCidade.Size = new System.Drawing.Size(65, 21);
             this.lblTituloCidade.TabIndex = 5;
@@ -476,42 +453,66 @@ namespace CRUD___Adriano.Features.Cliente.View
             this.lblTituloNome.TabIndex = 0;
             this.lblTituloNome.Text = "Nome:";
             // 
-            // FrmDetalhesCliente
+            // pnlHeader
+            // 
+            this.pnlHeader.Controls.Add(this.btnFechar);
+            this.pnlHeader.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlHeader.Location = new System.Drawing.Point(0, 0);
+            this.pnlHeader.Name = "pnlHeader";
+            this.pnlHeader.Size = new System.Drawing.Size(800, 32);
+            this.pnlHeader.TabIndex = 5;
+            // 
+            // btnFechar
+            // 
+            this.btnFechar.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnFechar.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
+            this.btnFechar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnFechar.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnFechar.ForeColor = System.Drawing.Color.MediumSlateBlue;
+            this.btnFechar.Location = new System.Drawing.Point(771, 0);
+            this.btnFechar.Name = "btnFechar";
+            this.btnFechar.Size = new System.Drawing.Size(29, 32);
+            this.btnFechar.TabIndex = 0;
+            this.btnFechar.Text = "X";
+            this.btnFechar.UseVisualStyleBackColor = true;
+            this.btnFechar.Click += new System.EventHandler(this.BtnFechar_Click);
+            // 
+            // FrmDetalhesColaborador
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
-            this.ClientSize = new System.Drawing.Size(604, 749);
+            this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.pnlCentral);
             this.Controls.Add(this.pnlHeader);
-            this.Name = "FrmDetalhesCliente";
-            this.Text = "FrmDetalhesCaceteCliente";
-            this.pnlHeader.ResumeLayout(false);
+            this.Name = "FrmDetalhesColaborador";
+            this.Text = "FrmDetalhesColaborador";
             this.pnlCentral.ResumeLayout(false);
             this.pnlCentral.PerformLayout();
             this.pnlTelefones.ResumeLayout(false);
             this.pnlTelefones.PerformLayout();
             this.pnlEmails.ResumeLayout(false);
             this.pnlEmails.PerformLayout();
+            this.pnlHeader.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Panel pnlHeader;
-        private System.Windows.Forms.Button btnFechar;
         private System.Windows.Forms.Panel pnlCentral;
-        private System.Windows.Forms.Label lblTituloNome;
-        private System.Windows.Forms.Label lblTituloCidade;
-        private System.Windows.Forms.Label lblTituloCep;
-        private System.Windows.Forms.Label lblTituloCpf;
-        private System.Windows.Forms.Label lblTituloSexo;
-        private System.Windows.Forms.Label lblTituloSobrenome;
-        private System.Windows.Forms.Label lblTituloNumero;
-        private System.Windows.Forms.Label lblTituloBairro;
-        private System.Windows.Forms.Label lblTituloLogradouro;
-        private System.Windows.Forms.Label lblTituloEstado;
+        private System.Windows.Forms.Label lblSalario;
+        private System.Windows.Forms.Label lblTituloSalario;
+        private System.Windows.Forms.Panel pnlTelefones;
+        private System.Windows.Forms.Label lblTelefones;
+        private System.Windows.Forms.Panel pnlEmails;
+        private System.Windows.Forms.Label lblEmails;
+        private System.Windows.Forms.Label lblTituloTelefones;
+        private System.Windows.Forms.Label lblTituloEmails;
+        private System.Windows.Forms.Label lblComissao;
+        private System.Windows.Forms.Label lblTituloDataNascimento;
+        private System.Windows.Forms.Label lblDataNascimento;
+        private System.Windows.Forms.Label lblTituloComissao;
         private System.Windows.Forms.Label lblNumero;
         private System.Windows.Forms.Label lblBairro;
         private System.Windows.Forms.Label lblLogradouro;
@@ -522,17 +523,17 @@ namespace CRUD___Adriano.Features.Cliente.View
         private System.Windows.Forms.Label lblSexo;
         private System.Windows.Forms.Label lblSobrenome;
         private System.Windows.Forms.Label lblNome;
-        private System.Windows.Forms.Label lblValorLimite;
-        private System.Windows.Forms.Label lblTituloDataNascimento;
-        private System.Windows.Forms.Label lblDataNascimento;
-        private System.Windows.Forms.Label lblTituloValorLimite;
-        private System.Windows.Forms.Label lblTituloObservacao;
-        private System.Windows.Forms.Label lblObservacao;
-        private System.Windows.Forms.Label lblTituloEmails;
-        private System.Windows.Forms.Label lblEmails;
-        private System.Windows.Forms.Label lblTituloTelefones;
-        private System.Windows.Forms.Label lblTelefones;
-        private System.Windows.Forms.Panel pnlEmails;
-        private System.Windows.Forms.Panel pnlTelefones;
+        private System.Windows.Forms.Label lblTituloNumero;
+        private System.Windows.Forms.Label lblTituloBairro;
+        private System.Windows.Forms.Label lblTituloLogradouro;
+        private System.Windows.Forms.Label lblTituloEstado;
+        private System.Windows.Forms.Label lblTituloCidade;
+        private System.Windows.Forms.Label lblTituloCep;
+        private System.Windows.Forms.Label lblTituloCpf;
+        private System.Windows.Forms.Label lblTituloSexo;
+        private System.Windows.Forms.Label lblTituloSobrenome;
+        private System.Windows.Forms.Label lblTituloNome;
+        private System.Windows.Forms.Panel pnlHeader;
+        private System.Windows.Forms.Button btnFechar;
     }
 }

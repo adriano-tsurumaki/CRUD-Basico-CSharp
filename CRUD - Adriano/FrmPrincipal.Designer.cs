@@ -95,6 +95,7 @@ namespace CRUD___Adriano
             this.btnListagemFuncionario.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnListagemFuncionario.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnListagemFuncionario.UseVisualStyleBackColor = true;
+            this.btnListagemFuncionario.Click += new System.EventHandler(this.BtnListagemFuncionario_Click);
             // 
             // btnListagemCliente
             // 

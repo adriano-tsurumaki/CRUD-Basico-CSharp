@@ -7,7 +7,6 @@ using CRUD___Adriano.Features.Telefone.Model;
 using CRUD___Adriano.Features.Telefone.Sql;
 using CRUD___Adriano.Features.Usuario.Sql;
 using Dapper;
-using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -104,18 +103,16 @@ namespace CRUD___Adriano.Features.Cliente.Dao
 
         private static ClienteModel MapearListagemDeEmailsDosClientes(ClienteModel clienteModel, EmailModel emailModel, Dictionary<int, ClienteModel> dicionarioCliente)
         {
-            dicionarioCliente.TryGetValue(clienteModel.IdUsuario, out var cliente);
-
-            cliente.Emails.Add(emailModel);
+            if(dicionarioCliente.TryGetValue(clienteModel.IdUsuario, out var cliente))
+                cliente.Emails.Add(emailModel);
 
             return clienteModel;
         }
 
         private static ClienteModel MapearListagemDeTelefonesDosClientes(ClienteModel clienteModel, TelefoneModel telefoneModel, Dictionary<int, ClienteModel> dicionarioCliente)
         {
-            dicionarioCliente.TryGetValue(clienteModel.IdUsuario, out var cliente);
-
-            cliente.Telefones.Add(telefoneModel);
+            if(dicionarioCliente.TryGetValue(clienteModel.IdUsuario, out var cliente))
+                cliente.Telefones.Add(telefoneModel);
 
             return clienteModel;
         }

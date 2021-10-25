@@ -1,22 +1,22 @@
-﻿using CRUD___Adriano.Features.Cadastro.Produto.Model;
-using CRUD___Adriano.Features.Cliente.Controller;
+﻿using CRUD___Adriano.Features.Cliente.Model;
+using CRUD___Adriano.Features.Colaborador.Controller;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
 
-namespace CRUD___Adriano.Features.Cliente.View
+namespace CRUD___Adriano.Features.Colaborador.View
 {
-    public partial class FrmListagemCliente : Form
+    public partial class FrmListagemColaborador : Form
     {
-        private ClienteListagemController _controller { get; set; }
+        private ColaboradorListagemController _controller { get; set; }
 
-        public FrmListagemCliente(ClienteListagemController controller)
+        public FrmListagemColaborador(ColaboradorListagemController controller)
         {
             InitializeComponent();
             _controller = controller;
         }
 
-        public void BindGrid(IList<ClienteModel> listaDeClientes)
+        public void BindGrid(IList<ColaboradorModel> listaDeClientes)
         {
             gridView.Columns.Clear();
             DataGridViewCell celula = new DataGridViewTextBoxCell();
@@ -57,7 +57,7 @@ namespace CRUD___Adriano.Features.Cliente.View
             gridView.Columns.Add(botaoAlterarColuna);
             gridView.Columns.Add(botaoExcluirColuna);
 
-            var listaDeClientesBinding = new BindingList<ClienteModel>(listaDeClientes);
+            var listaDeClientesBinding = new BindingList<ColaboradorModel>(listaDeClientes);
             gridView.AutoGenerateColumns = false;
             gridView.DataSource = listaDeClientesBinding;
         }
@@ -71,15 +71,15 @@ namespace CRUD___Adriano.Features.Cliente.View
             if (!(senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn)) return;
 
             var botao = senderGrid.Columns[e.ColumnIndex] as DataGridViewButtonColumn;
-            var clienteModelSelecionado = gridView.CurrentRow.DataBoundItem as ClienteModel;
+            var colaboradorModelSelecionado = gridView.CurrentRow.DataBoundItem as ColaboradorModel;
 
             if (botao.Name.Equals("Excluir"))
             {
-                if (_controller.ExcluirCliente(clienteModelSelecionado.IdUsuario))
+                if (_controller.ExcluirCliente(colaboradorModelSelecionado.IdUsuario))
                     MessageBox.Show("Excluído com sucesso");
             }
             else if (botao.Name.Equals("Alterar"))
-                _controller.AlterarCliente(clienteModelSelecionado);
+                _controller.AlterarCliente(colaboradorModelSelecionado);
         }
 
         private void GridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -90,9 +90,9 @@ namespace CRUD___Adriano.Features.Cliente.View
                 e.RowIndex >= 0)
                 return;
 
-            var clienteModelSelecionado = gridView.CurrentRow.DataBoundItem as ClienteModel;
+            var colaboradorModelSelecionado = gridView.CurrentRow.DataBoundItem as ColaboradorModel;
 
-            _controller.AbrirFormDeDetalhes(clienteModelSelecionado);
+            _controller.AbrirFormDeDetalhes(colaboradorModelSelecionado);
         }
     }
 }
