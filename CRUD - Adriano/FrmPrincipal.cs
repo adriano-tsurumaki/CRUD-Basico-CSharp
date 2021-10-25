@@ -33,6 +33,7 @@ namespace CRUD___Adriano
         private void BtnClienteCadastro_Click(object sender, EventArgs e)
         {
             lblTitulo.Text = "Cadastro de cliente";
+            LimparPanel();
             var pageManager = new GerenciadorDePaginas<ClienteModel>(
                 pnlChild,
                 new ClienteController(new ControllerConexao()),
@@ -48,6 +49,7 @@ namespace CRUD___Adriano
         private void BtnClientesListagem_Click(object sender, EventArgs e)
         {
             lblTitulo.Text = "Listagem de clientes";
+            LimparPanel();
             DocaForm(
                 new ClienteListagemController(
                     new ClienteController(new ControllerConexao()), 
@@ -86,6 +88,7 @@ namespace CRUD___Adriano
         private void BtnCadastroFuncionario_Click(object sender, EventArgs e)
         {
             lblTitulo.Text = "Cadastro de colaborador";
+            LimparPanel();
             var pageManager = new GerenciadorDePaginas<ColaboradorModel>(
                 pnlChild,
                 new ColaboradorController(new ControllerConexao()),
@@ -101,12 +104,15 @@ namespace CRUD___Adriano
         private void BtnListagemFuncionario_Click(object sender, EventArgs e)
         {
             lblTitulo.Text = "Listagem de clientes";
+            LimparPanel();
             DocaForm(
                 new ColaboradorListagemController(
                     new ColaboradorController(new ControllerConexao()),
                     pnlChild)
                 .RetornarFormulario());
         }
+
+        private void LimparPanel() => pnlChild.Controls.Clear();
 
         private void DocaForm(Form formFilha)
         {
