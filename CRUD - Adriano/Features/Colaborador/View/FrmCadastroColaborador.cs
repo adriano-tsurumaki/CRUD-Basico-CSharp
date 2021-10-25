@@ -45,6 +45,7 @@ namespace CRUD___Adriano.Features.Colaborador.View
             txtConta.DataBindings.Add("Texto", colaboradorModel.DadosBancarios, "Conta");
             txtBanco.DataBindings.Add("Texto", colaboradorModel.DadosBancarios, "Banco");
             cbTipoConta.AtribuirPeloEnum<TipoContaEnum>();
+            cbTipoConta.SelectedIndex = (int)colaboradorModel.DadosBancarios.TipoConta;
         }
     }
 }

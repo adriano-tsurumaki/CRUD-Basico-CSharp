@@ -138,12 +138,13 @@ namespace CRUD___Adriano.Features.Colaborador.Dao
 
         public static bool RemoverColaborador(IDbConnection conexao, IDbTransaction transacao, int id)
         {
-            conexao.Query("delete Colaborador where id_usuario = @id", new { id }, transacao);
             conexao.Query(EnderecoSql.Remover, new { id }, transacao);
             conexao.Query(EmailSql.Remover, new { id }, transacao);
             conexao.Query(TelefoneSql.Remover, new { id }, transacao);
+            var idColaborador = conexao.Query<int>("select id from Colaborador where id_usuario = @id", new { id }, transacao).First();
+            conexao.Query("delete DadosBancarios where id_colaborador = @idColaborador", new { idColaborador }, transacao);
+            conexao.Query("delete Colaborador where id_usuario = @id", new { id }, transacao);
             conexao.Query(UsuarioSql.Remover, new { id }, transacao);
-            conexao.Query("delete DadosBancarios where id_usuario = @id", new { id }, transacao);
 
             return true;
         }
@@ -156,11 +157,11 @@ namespace CRUD___Adriano.Features.Colaborador.Dao
 
         private static readonly string sqlAtualizarDadosBancarios =
             @"update DadosBancarios set
-            agencia = @Agencia
-            conta = @Conta
-            tipo_conta = @TipoConta
+            agencia = @Agencia,
+            conta = @Conta,
+            tipo_conta = @TipoConta,
             banco = @Banco
-            where id_usuario = @IdUsuario";
+            where id_colaborador = @IdColaborador";
 
         public static bool AtualizarColaborador(IDbConnection conexao, IDbTransaction transacao, ColaboradorModel colaboradorModel)
         {
