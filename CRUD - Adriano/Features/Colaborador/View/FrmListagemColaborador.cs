@@ -8,6 +8,7 @@ namespace CRUD___Adriano.Features.Colaborador.View
 {
     public partial class FrmListagemColaborador : Form
     {
+        private BindingList<ColaboradorModel> _colaboradoresBinding;
         private ColaboradorListagemController _controller { get; set; }
 
         public FrmListagemColaborador(ColaboradorListagemController controller)
@@ -57,9 +58,9 @@ namespace CRUD___Adriano.Features.Colaborador.View
             gridView.Columns.Add(botaoAlterarColuna);
             gridView.Columns.Add(botaoExcluirColuna);
 
-            var listaDeClientesBinding = new BindingList<ColaboradorModel>(listaDeClientes);
+            _colaboradoresBinding = new BindingList<ColaboradorModel>(listaDeClientes);
             gridView.AutoGenerateColumns = false;
-            gridView.DataSource = listaDeClientesBinding;
+            gridView.DataSource = _colaboradoresBinding;
         }
 
         private void GridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -76,7 +77,10 @@ namespace CRUD___Adriano.Features.Colaborador.View
             if (botao.Name.Equals("Excluir"))
             {
                 if (_controller.ExcluirCliente(colaboradorModelSelecionado.IdUsuario))
+                {
+                    _colaboradoresBinding.Remove(colaboradorModelSelecionado);
                     MessageBox.Show("Excluído com sucesso");
+                }
             }
             else if (botao.Name.Equals("Alterar"))
                 _controller.AlterarCliente(colaboradorModelSelecionado);
