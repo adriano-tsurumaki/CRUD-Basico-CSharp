@@ -1,4 +1,5 @@
-﻿using CRUD___Adriano.Features.Usuario.Model;
+﻿using CRUD___Adriano.Features.Colaborador.Model;
+using CRUD___Adriano.Features.Usuario.Model;
 
 namespace CRUD___Adriano.Features.Cliente.Model
 {
@@ -7,5 +8,6 @@ namespace CRUD___Adriano.Features.Cliente.Model
         public int Id { get; set; }
         public float Salario { get; set; }
         public float Comissao { get; set; }
+        public DadosBancariosModel DadosBancarios { get; set; }
     }
 }
