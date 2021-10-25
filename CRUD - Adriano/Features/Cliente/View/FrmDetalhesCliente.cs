@@ -29,7 +29,7 @@ namespace CRUD___Adriano.Features.Cliente.View
             lblNumero.Text = _clienteModel.Endereco.Numero;
             lblValorLimite.Text = $"{_clienteModel.ValorLimite:c2}";
             lblObservacao.Text = _clienteModel.Observacao;
-            lblDataNascimento.Text = $"{_clienteModel.DataNascimento:dd/mm/yyyy}";
+            lblDataNascimento.Text = $"{_clienteModel.DataNascimento:dd/MM/yyyy}";
             lblEmails.Text = RetornarEmailsFormatado();
             lblTelefones.Text = RetornarTelefonesFormatado();
         }

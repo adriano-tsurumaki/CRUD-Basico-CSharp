@@ -27,7 +27,7 @@ namespace CRUD___Adriano.Features.Colaborador.Dao
             values(@IdUsuario, @Salario, @Comissao)";
 
         private static readonly string sqlListarTodosOsColaboradores =
-            @"select u.id as IdUsuario, u.nome, u.sobrenome, u.sexo, u.cpf, u.data_nascimento, c.salario, c.comissao,
+            @"select u.id as IdUsuario, u.nome, u.sobrenome, u.sexo, u.cpf, u.data_nascimento as DataNascimento, c.salario, c.comissao,
             c.id as split, en.id_usuario as IdUsuario, en.cep, en.logradouro, en.bairro, en.cidade, en.uf, en.complemento, en.numero
 			from Colaborador c
 			inner join Usuario u on u.id = c.id_usuario
