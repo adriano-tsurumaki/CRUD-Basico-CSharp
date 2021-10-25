@@ -136,6 +136,7 @@ namespace CRUD___Adriano.Features.Usuario.View
             this.dgvTelefones.RowTemplate.Height = 25;
             this.dgvTelefones.Size = new System.Drawing.Size(287, 164);
             this.dgvTelefones.TabIndex = 23;
+            this.dgvTelefones.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvTelefones_CellContentClick);
             // 
             // txtEmail
             // 
@@ -181,6 +182,7 @@ namespace CRUD___Adriano.Features.Usuario.View
             this.dgvEmails.RowTemplate.ReadOnly = true;
             this.dgvEmails.Size = new System.Drawing.Size(287, 164);
             this.dgvEmails.TabIndex = 21;
+            this.dgvEmails.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvEmails_CellContentClick);
             // 
             // FrmEmailTelefone
             // 

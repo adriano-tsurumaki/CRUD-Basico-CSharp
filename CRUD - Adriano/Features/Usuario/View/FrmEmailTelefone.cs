@@ -49,6 +49,78 @@ namespace CRUD___Adriano.Features.Usuario.View
 
             dgvEmails.DataSource = _emailsBinding;
             dgvTelefones.DataSource = _telefonesBinding;
+            
+            CustomizarGrids();
+        }
+
+        private void CustomizarGrids()
+        {
+            CustomizarGridEmail();
+            CustomizarGridTelefone();
+        }
+
+        private void CustomizarGridEmail()
+        {
+            dgvEmails.Columns.Clear();
+            
+            DataGridViewCell celula = new DataGridViewTextBoxCell();
+
+            DataGridViewTextBoxColumn nomeColuna = new DataGridViewTextBoxColumn()
+            {
+                CellTemplate = celula,
+                Name = "clnColuna",
+                HeaderText = "Nome",
+                DataPropertyName = "Nome",
+                ReadOnly = true,
+            };
+
+            DataGridViewButtonColumn botaoExcluirColuna = new DataGridViewButtonColumn()
+            {
+                CellTemplate = new DataGridViewButtonCell(),
+                HeaderText = "Excluir",
+                Name = "Excluir"
+            };
+
+            dgvEmails.Columns.Add(nomeColuna);
+            dgvEmails.Columns.Add(botaoExcluirColuna);
+            dgvEmails.AutoGenerateColumns = false;
+        }
+
+        private void CustomizarGridTelefone()
+        {
+            dgvTelefones.Columns.Clear();
+
+            DataGridViewCell celula = new DataGridViewTextBoxCell();
+
+            DataGridViewTextBoxColumn numeroColuna = new DataGridViewTextBoxColumn()
+            {
+                CellTemplate = celula,
+                Name = "clnColuna",
+                HeaderText = "Numero",
+                DataPropertyName = "Numero",
+                ReadOnly = true,
+            };
+
+            DataGridViewTextBoxColumn tipoColuna = new DataGridViewTextBoxColumn()
+            {
+                CellTemplate = celula,
+                Name = "clnColuna",
+                HeaderText = "Tipo",
+                DataPropertyName = "Tipo",
+                ReadOnly = true,
+            };
+
+            DataGridViewButtonColumn botaoExcluirColuna = new DataGridViewButtonColumn()
+            {
+                CellTemplate = new DataGridViewButtonCell(),
+                HeaderText = "Excluir",
+                Name = "Excluir"
+            };
+
+            dgvTelefones.Columns.Add(numeroColuna);
+            dgvTelefones.Columns.Add(tipoColuna);
+            dgvTelefones.Columns.Add(botaoExcluirColuna);
+            dgvTelefones.AutoGenerateColumns = false;
         }
 
         private void BtnAdicionarEmail_Click(object sender, EventArgs e)
@@ -74,6 +146,36 @@ namespace CRUD___Adriano.Features.Usuario.View
                 return;
             }
             _telefonesBinding.Add(new TelefoneModel { Numero = txtTelefone.Texto, Tipo = cbTelefone.PegarEnumPorDescricao<TipoTelefoneEnum>() });
+        }
+
+        private void DgvEmails_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var senderGrid = sender as DataGridView;
+
+            if (e.RowIndex < 0) return;
+
+            if (!(senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn)) return;
+
+            var botao = senderGrid.Columns[e.ColumnIndex] as DataGridViewButtonColumn;
+            var emailModelSelecionado = dgvEmails.CurrentRow.DataBoundItem as EmailModel;
+
+            if (botao.Name.Equals("Excluir"))
+                _emailsBinding.Remove(emailModelSelecionado);
+        }
+
+        private void DgvTelefones_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var senderGrid = sender as DataGridView;
+
+            if (e.RowIndex < 0) return;
+
+            if (!(senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn)) return;
+
+            var botao = senderGrid.Columns[e.ColumnIndex] as DataGridViewButtonColumn;
+            var telefoneModelSelecionado = dgvTelefones.CurrentRow.DataBoundItem as TelefoneModel;
+
+            if (botao.Name.Equals("Excluir"))
+                _telefonesBinding.Remove(telefoneModelSelecionado);
         }
     }
 }
