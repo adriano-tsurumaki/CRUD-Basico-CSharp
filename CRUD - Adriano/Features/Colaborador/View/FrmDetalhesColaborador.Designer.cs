@@ -30,6 +30,14 @@ namespace CRUD___Adriano.Features.Colaborador.View
         private void InitializeComponent()
         {
             this.pnlCentral = new System.Windows.Forms.Panel();
+            this.lblBanco = new System.Windows.Forms.Label();
+            this.lblTituloBanco = new System.Windows.Forms.Label();
+            this.lblTipoConta = new System.Windows.Forms.Label();
+            this.lblTituloTipoConta = new System.Windows.Forms.Label();
+            this.lblConta = new System.Windows.Forms.Label();
+            this.lblTituloConta = new System.Windows.Forms.Label();
+            this.lblAgencia = new System.Windows.Forms.Label();
+            this.lblTituloAgencia = new System.Windows.Forms.Label();
             this.lblSalario = new System.Windows.Forms.Label();
             this.lblTituloSalario = new System.Windows.Forms.Label();
             this.pnlTelefones = new System.Windows.Forms.Panel();
@@ -73,6 +81,14 @@ namespace CRUD___Adriano.Features.Colaborador.View
             // pnlCentral
             // 
             this.pnlCentral.AutoScroll = true;
+            this.pnlCentral.Controls.Add(this.lblBanco);
+            this.pnlCentral.Controls.Add(this.lblTituloBanco);
+            this.pnlCentral.Controls.Add(this.lblTipoConta);
+            this.pnlCentral.Controls.Add(this.lblTituloTipoConta);
+            this.pnlCentral.Controls.Add(this.lblConta);
+            this.pnlCentral.Controls.Add(this.lblTituloConta);
+            this.pnlCentral.Controls.Add(this.lblAgencia);
+            this.pnlCentral.Controls.Add(this.lblTituloAgencia);
             this.pnlCentral.Controls.Add(this.lblSalario);
             this.pnlCentral.Controls.Add(this.lblTituloSalario);
             this.pnlCentral.Controls.Add(this.pnlTelefones);
@@ -109,6 +125,94 @@ namespace CRUD___Adriano.Features.Colaborador.View
             this.pnlCentral.Size = new System.Drawing.Size(800, 418);
             this.pnlCentral.TabIndex = 4;
             // 
+            // lblBanco
+            // 
+            this.lblBanco.AutoSize = true;
+            this.lblBanco.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblBanco.ForeColor = System.Drawing.Color.MediumSlateBlue;
+            this.lblBanco.Location = new System.Drawing.Point(116, 339);
+            this.lblBanco.Name = "lblBanco";
+            this.lblBanco.Size = new System.Drawing.Size(73, 21);
+            this.lblBanco.TabIndex = 41;
+            this.lblBanco.Text = "R$ 20,00";
+            // 
+            // lblTituloBanco
+            // 
+            this.lblTituloBanco.AutoSize = true;
+            this.lblTituloBanco.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblTituloBanco.ForeColor = System.Drawing.Color.MediumSlateBlue;
+            this.lblTituloBanco.Location = new System.Drawing.Point(12, 339);
+            this.lblTituloBanco.Name = "lblTituloBanco";
+            this.lblTituloBanco.Size = new System.Drawing.Size(84, 21);
+            this.lblTituloBanco.TabIndex = 40;
+            this.lblTituloBanco.Text = "Comissão:";
+            // 
+            // lblTipoConta
+            // 
+            this.lblTipoConta.AutoSize = true;
+            this.lblTipoConta.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblTipoConta.ForeColor = System.Drawing.Color.MediumSlateBlue;
+            this.lblTipoConta.Location = new System.Drawing.Point(437, 297);
+            this.lblTipoConta.Name = "lblTipoConta";
+            this.lblTipoConta.Size = new System.Drawing.Size(122, 21);
+            this.lblTipoConta.TabIndex = 39;
+            this.lblTipoConta.Text = "Conta Corrente";
+            // 
+            // lblTituloTipoConta
+            // 
+            this.lblTituloTipoConta.AutoSize = true;
+            this.lblTituloTipoConta.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblTituloTipoConta.ForeColor = System.Drawing.Color.MediumSlateBlue;
+            this.lblTituloTipoConta.Location = new System.Drawing.Point(333, 297);
+            this.lblTituloTipoConta.Name = "lblTituloTipoConta";
+            this.lblTituloTipoConta.Size = new System.Drawing.Size(84, 21);
+            this.lblTituloTipoConta.TabIndex = 38;
+            this.lblTituloTipoConta.Text = "Comissão:";
+            // 
+            // lblConta
+            // 
+            this.lblConta.AutoSize = true;
+            this.lblConta.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblConta.ForeColor = System.Drawing.Color.MediumSlateBlue;
+            this.lblConta.Location = new System.Drawing.Point(116, 297);
+            this.lblConta.Name = "lblConta";
+            this.lblConta.Size = new System.Drawing.Size(34, 21);
+            this.lblConta.TabIndex = 37;
+            this.lblConta.Text = "123";
+            // 
+            // lblTituloConta
+            // 
+            this.lblTituloConta.AutoSize = true;
+            this.lblTituloConta.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblTituloConta.ForeColor = System.Drawing.Color.MediumSlateBlue;
+            this.lblTituloConta.Location = new System.Drawing.Point(12, 297);
+            this.lblTituloConta.Name = "lblTituloConta";
+            this.lblTituloConta.Size = new System.Drawing.Size(57, 21);
+            this.lblTituloConta.TabIndex = 36;
+            this.lblTituloConta.Text = "Conta:";
+            // 
+            // lblAgencia
+            // 
+            this.lblAgencia.AutoSize = true;
+            this.lblAgencia.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblAgencia.ForeColor = System.Drawing.Color.MediumSlateBlue;
+            this.lblAgencia.Location = new System.Drawing.Point(437, 255);
+            this.lblAgencia.Name = "lblAgencia";
+            this.lblAgencia.Size = new System.Drawing.Size(34, 21);
+            this.lblAgencia.TabIndex = 35;
+            this.lblAgencia.Text = "123";
+            // 
+            // lblTituloAgencia
+            // 
+            this.lblTituloAgencia.AutoSize = true;
+            this.lblTituloAgencia.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblTituloAgencia.ForeColor = System.Drawing.Color.MediumSlateBlue;
+            this.lblTituloAgencia.Location = new System.Drawing.Point(333, 255);
+            this.lblTituloAgencia.Name = "lblTituloAgencia";
+            this.lblTituloAgencia.Size = new System.Drawing.Size(73, 21);
+            this.lblTituloAgencia.TabIndex = 34;
+            this.lblTituloAgencia.Text = "Agência:";
+            // 
             // lblSalario
             // 
             this.lblSalario.AutoSize = true;
@@ -135,7 +239,7 @@ namespace CRUD___Adriano.Features.Colaborador.View
             // 
             this.pnlTelefones.AutoScroll = true;
             this.pnlTelefones.Controls.Add(this.lblTelefones);
-            this.pnlTelefones.Location = new System.Drawing.Point(12, 486);
+            this.pnlTelefones.Location = new System.Drawing.Point(12, 567);
             this.pnlTelefones.Name = "pnlTelefones";
             this.pnlTelefones.Size = new System.Drawing.Size(571, 79);
             this.pnlTelefones.TabIndex = 31;
@@ -154,7 +258,7 @@ namespace CRUD___Adriano.Features.Colaborador.View
             // 
             this.pnlEmails.AutoScroll = true;
             this.pnlEmails.Controls.Add(this.lblEmails);
-            this.pnlEmails.Location = new System.Drawing.Point(12, 340);
+            this.pnlEmails.Location = new System.Drawing.Point(12, 421);
             this.pnlEmails.Name = "pnlEmails";
             this.pnlEmails.Size = new System.Drawing.Size(571, 79);
             this.pnlEmails.TabIndex = 30;
@@ -174,7 +278,7 @@ namespace CRUD___Adriano.Features.Colaborador.View
             this.lblTituloTelefones.AutoSize = true;
             this.lblTituloTelefones.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblTituloTelefones.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            this.lblTituloTelefones.Location = new System.Drawing.Point(12, 444);
+            this.lblTituloTelefones.Location = new System.Drawing.Point(12, 525);
             this.lblTituloTelefones.Name = "lblTituloTelefones";
             this.lblTituloTelefones.Size = new System.Drawing.Size(80, 21);
             this.lblTituloTelefones.TabIndex = 29;
@@ -185,7 +289,7 @@ namespace CRUD___Adriano.Features.Colaborador.View
             this.lblTituloEmails.AutoSize = true;
             this.lblTituloEmails.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblTituloEmails.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            this.lblTituloEmails.Location = new System.Drawing.Point(12, 298);
+            this.lblTituloEmails.Location = new System.Drawing.Point(12, 379);
             this.lblTituloEmails.Name = "lblTituloEmails";
             this.lblTituloEmails.Size = new System.Drawing.Size(55, 21);
             this.lblTituloEmails.TabIndex = 27;
@@ -535,5 +639,13 @@ namespace CRUD___Adriano.Features.Colaborador.View
         private System.Windows.Forms.Label lblTituloNome;
         private System.Windows.Forms.Panel pnlHeader;
         private System.Windows.Forms.Button btnFechar;
+        private System.Windows.Forms.Label lblBanco;
+        private System.Windows.Forms.Label lblTituloBanco;
+        private System.Windows.Forms.Label lblTipoConta;
+        private System.Windows.Forms.Label lblTituloTipoConta;
+        private System.Windows.Forms.Label lblConta;
+        private System.Windows.Forms.Label lblTituloConta;
+        private System.Windows.Forms.Label lblAgencia;
+        private System.Windows.Forms.Label lblTituloAgencia;
     }
 }

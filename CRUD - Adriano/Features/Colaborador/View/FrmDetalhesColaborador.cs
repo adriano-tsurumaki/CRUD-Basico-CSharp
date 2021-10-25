@@ -32,6 +32,10 @@ namespace CRUD___Adriano.Features.Colaborador.View
             lblDataNascimento.Text = $"{_colaboradorModel.DataNascimento:dd/mm/yyyy}";
             lblEmails.Text = RetornarEmailsFormatado();
             lblTelefones.Text = RetornarTelefonesFormatado();
+            lblAgencia.Text = _colaboradorModel.DadosBancarios.Agencia.ToString();
+            lblConta.Text = _colaboradorModel.DadosBancarios.Conta.ToString();
+            lblTipoConta.Text = _colaboradorModel.DadosBancarios.TipoConta.RetornarDescricao();
+            lblBanco.Text = _colaboradorModel.DadosBancarios.Banco;
         }
 
         private string RetornarEmailsFormatado()
