@@ -9,5 +9,10 @@ namespace CRUD___Adriano.Features.Cliente.Model
         public float Salario { get; set; }
         public float Comissao { get; set; }
         public DadosBancariosModel DadosBancarios { get; set; }
+
+        public ColaboradorModel()
+        {
+            DadosBancarios = new DadosBancariosModel();
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using CRUD___Adriano.Features.Cliente.Model;
+using CRUD___Adriano.Features.Colaborador.Model;
 using CRUD___Adriano.Features.Email.Model;
 using CRUD___Adriano.Features.Email.Sql;
 using CRUD___Adriano.Features.Endereco.Model;
@@ -24,7 +25,12 @@ namespace CRUD___Adriano.Features.Colaborador.Dao
 
         private static readonly string sqlInserirColaborador =
             @"insert into Colaborador(id_usuario, salario, comissao)
+            output inserted.id
             values(@IdUsuario, @Salario, @Comissao)";
+
+        private static readonly string sqlInserirDadosBancarios =
+            @"insert into DadosBancarios(id_colaborador, agencia, conta, tipo_conta, banco)
+            values(@IdColaborador, @Agencia, @Conta, @TipoConta, @Banco)";
 
         private static readonly string sqlListarTodosOsColaboradores =
             @"select u.id as IdUsuario, u.nome, u.sobrenome, u.sexo, u.cpf, u.data_nascimento as DataNascimento, c.salario, c.comissao,
@@ -33,11 +39,18 @@ namespace CRUD___Adriano.Features.Colaborador.Dao
 			inner join Usuario u on u.id = c.id_usuario
 			inner join Endereco en on en.id_usuario = u.id";
 
+        private static readonly string sqlListarTodosOsDadosBancariosDosColaboradores =
+            @"select u.id as IdUsuario, 
+            u.id as split, db.agencia, db.conta, db.tipo_conta as TipoConta, db.banco
+            from Colaborador c
+            inner join Usuario u on u.id = c.id_usuario
+            inner join DadosBancarios db on db.id_colaborador = c.id";
+
         public static bool CadastrarColaborador(IDbConnection conexao, IDbTransaction transacao, ColaboradorModel colaboradorModel)
         {
             colaboradorModel.IdUsuario = (int)conexao.ExecuteScalar(sqlInserirUsuario, colaboradorModel, transacao);
 
-            conexao.Execute(sqlInserirColaborador, colaboradorModel, transacao);
+            colaboradorModel.DadosBancarios.IdColaborador = (int)conexao.ExecuteScalar(sqlInserirColaborador, colaboradorModel, transacao);
 
             colaboradorModel.Endereco.IdUsuario = colaboradorModel.IdUsuario;
 
@@ -50,6 +63,7 @@ namespace CRUD___Adriano.Features.Colaborador.Dao
             conexao.Execute(EnderecoSql.Inserir(colaboradorModel.Endereco), colaboradorModel.Endereco, transacao);
             conexao.Execute(EmailSql.Inserir, colaboradorModel.Emails, transacao);
             conexao.Execute(TelefoneSql.Inserir, colaboradorModel.Telefones, transacao);
+            conexao.Execute(sqlInserirDadosBancarios, colaboradorModel.DadosBancarios, transacao);
 
             return true;
         }
@@ -73,7 +87,13 @@ namespace CRUD___Adriano.Features.Colaborador.Dao
             conexao.Query<ColaboradorModel, TelefoneModel, ColaboradorModel>(
                 TelefoneSql.ListarTodosPorId,
                 (colaboradorModel, telefoneModel) =>
-                MapearListagemDeTelefonesDosClientes(colaboradorModel, telefoneModel, dicionarioColaborador),
+                MapearListagemDeTelefonesDosColaboradores(colaboradorModel, telefoneModel, dicionarioColaborador),
+                splitOn: "split");
+
+            conexao.Query<ColaboradorModel, DadosBancariosModel, ColaboradorModel>(
+                sqlListarTodosOsDadosBancariosDosColaboradores,
+                (colaboradorModel, dadosBancariosModel) => 
+                MapearListagemDeDadosBancariosDosColaboradores(colaboradorModel, dadosBancariosModel, dicionarioColaborador),
                 splitOn: "split");
 
             return dicionarioColaborador.Values.ToList();
@@ -100,10 +120,18 @@ namespace CRUD___Adriano.Features.Colaborador.Dao
             return colaboradorModel;
         }
 
-        public static ColaboradorModel MapearListagemDeTelefonesDosClientes(ColaboradorModel colaboradorModel, TelefoneModel telefoneModel, Dictionary<int, ColaboradorModel> dicionarioCliente)
+        public static ColaboradorModel MapearListagemDeTelefonesDosColaboradores(ColaboradorModel colaboradorModel, TelefoneModel telefoneModel, Dictionary<int, ColaboradorModel> dicionarioColaborador)
         {
-            if(dicionarioCliente.TryGetValue(colaboradorModel.IdUsuario, out var colaborador))
+            if(dicionarioColaborador.TryGetValue(colaboradorModel.IdUsuario, out var colaborador))
                 colaborador.Telefones.Add(telefoneModel);
+
+            return colaboradorModel;
+        }
+
+        private static ColaboradorModel MapearListagemDeDadosBancariosDosColaboradores(ColaboradorModel colaboradorModel, DadosBancariosModel dadosBancariosModel, Dictionary<int, ColaboradorModel> dicionarioColaborador)
+        {
+            if (dicionarioColaborador.TryGetValue(colaboradorModel.IdUsuario, out var colaborador))
+                colaborador.DadosBancarios = dadosBancariosModel;
 
             return colaboradorModel;
         }
