@@ -1,4 +1,5 @@
-﻿using CRUD___Adriano.Features.Estados.Enum;
+﻿using CRUD___Adriano.Features.Componentes;
+using CRUD___Adriano.Features.Estados.Enum;
 using CRUD___Adriano.Features.Utils;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
@@ -15,9 +16,7 @@ namespace Teste_Unitário.Extensão
         [DataRow(EstadosBrasilEnum.AL, "Alagoas")]
         [DataRow(EstadosBrasilEnum.SP, "São Paulo")]
         [DataRow(EstadosBrasilEnum.TO, "Tocantins")]
-        public void Deveria_retornar_descricao_do_enum_EstadosBrasilEnum(EstadosBrasilEnum estadoEnum, string estadoEsperado)
-        {
+        public void Deveria_retornar_descricao_correta_do_enum_EstadosBrasilEnum(EstadosBrasilEnum estadoEnum, string estadoEsperado) =>
             Assert.AreEqual(estadoEnum.RetornarDescricao(), estadoEsperado);
-        }
     }
 }
