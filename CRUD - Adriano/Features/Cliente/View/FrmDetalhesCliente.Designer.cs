@@ -64,6 +64,8 @@ namespace CRUD___Adriano.Features.Cliente.View
             this.lblTituloSexo = new System.Windows.Forms.Label();
             this.lblTituloSobrenome = new System.Windows.Forms.Label();
             this.lblTituloNome = new System.Windows.Forms.Label();
+            this.lblIdade = new System.Windows.Forms.Label();
+            this.lblTituloIdade = new System.Windows.Forms.Label();
             this.pnlHeader.SuspendLayout();
             this.pnlCentral.SuspendLayout();
             this.pnlTelefones.SuspendLayout();
@@ -97,6 +99,8 @@ namespace CRUD___Adriano.Features.Cliente.View
             // pnlCentral
             // 
             this.pnlCentral.AutoScroll = true;
+            this.pnlCentral.Controls.Add(this.lblIdade);
+            this.pnlCentral.Controls.Add(this.lblTituloIdade);
             this.pnlCentral.Controls.Add(this.pnlTelefones);
             this.pnlCentral.Controls.Add(this.pnlEmails);
             this.pnlCentral.Controls.Add(this.lblTituloTelefones);
@@ -137,7 +141,7 @@ namespace CRUD___Adriano.Features.Cliente.View
             // 
             this.pnlTelefones.AutoScroll = true;
             this.pnlTelefones.Controls.Add(this.lblTelefones);
-            this.pnlTelefones.Location = new System.Drawing.Point(12, 648);
+            this.pnlTelefones.Location = new System.Drawing.Point(12, 693);
             this.pnlTelefones.Name = "pnlTelefones";
             this.pnlTelefones.Size = new System.Drawing.Size(571, 79);
             this.pnlTelefones.TabIndex = 31;
@@ -156,7 +160,7 @@ namespace CRUD___Adriano.Features.Cliente.View
             // 
             this.pnlEmails.AutoScroll = true;
             this.pnlEmails.Controls.Add(this.lblEmails);
-            this.pnlEmails.Location = new System.Drawing.Point(12, 502);
+            this.pnlEmails.Location = new System.Drawing.Point(12, 547);
             this.pnlEmails.Name = "pnlEmails";
             this.pnlEmails.Size = new System.Drawing.Size(571, 79);
             this.pnlEmails.TabIndex = 30;
@@ -176,7 +180,7 @@ namespace CRUD___Adriano.Features.Cliente.View
             this.lblTituloTelefones.AutoSize = true;
             this.lblTituloTelefones.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblTituloTelefones.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            this.lblTituloTelefones.Location = new System.Drawing.Point(12, 606);
+            this.lblTituloTelefones.Location = new System.Drawing.Point(12, 651);
             this.lblTituloTelefones.Name = "lblTituloTelefones";
             this.lblTituloTelefones.Size = new System.Drawing.Size(80, 21);
             this.lblTituloTelefones.TabIndex = 29;
@@ -187,7 +191,7 @@ namespace CRUD___Adriano.Features.Cliente.View
             this.lblTituloEmails.AutoSize = true;
             this.lblTituloEmails.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblTituloEmails.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            this.lblTituloEmails.Location = new System.Drawing.Point(12, 460);
+            this.lblTituloEmails.Location = new System.Drawing.Point(12, 505);
             this.lblTituloEmails.Name = "lblTituloEmails";
             this.lblTituloEmails.Size = new System.Drawing.Size(55, 21);
             this.lblTituloEmails.TabIndex = 27;
@@ -198,7 +202,7 @@ namespace CRUD___Adriano.Features.Cliente.View
             this.lblObservacao.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblObservacao.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblObservacao.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            this.lblObservacao.Location = new System.Drawing.Point(12, 297);
+            this.lblObservacao.Location = new System.Drawing.Point(12, 342);
             this.lblObservacao.Name = "lblObservacao";
             this.lblObservacao.Size = new System.Drawing.Size(571, 144);
             this.lblObservacao.TabIndex = 25;
@@ -208,7 +212,7 @@ namespace CRUD___Adriano.Features.Cliente.View
             this.lblTituloObservacao.AutoSize = true;
             this.lblTituloObservacao.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblTituloObservacao.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            this.lblTituloObservacao.Location = new System.Drawing.Point(12, 255);
+            this.lblTituloObservacao.Location = new System.Drawing.Point(12, 300);
             this.lblTituloObservacao.Name = "lblTituloObservacao";
             this.lblTituloObservacao.Size = new System.Drawing.Size(97, 21);
             this.lblTituloObservacao.TabIndex = 24;
@@ -285,7 +289,7 @@ namespace CRUD___Adriano.Features.Cliente.View
             this.lblLogradouro.AutoSize = true;
             this.lblLogradouro.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblLogradouro.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            this.lblLogradouro.Location = new System.Drawing.Point(116, 213);
+            this.lblLogradouro.Location = new System.Drawing.Point(116, 255);
             this.lblLogradouro.Name = "lblLogradouro";
             this.lblLogradouro.Size = new System.Drawing.Size(51, 21);
             this.lblLogradouro.TabIndex = 17;
@@ -318,7 +322,7 @@ namespace CRUD___Adriano.Features.Cliente.View
             this.lblCep.AutoSize = true;
             this.lblCep.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblCep.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            this.lblCep.Location = new System.Drawing.Point(116, 171);
+            this.lblCep.Location = new System.Drawing.Point(116, 213);
             this.lblCep.Name = "lblCep";
             this.lblCep.Size = new System.Drawing.Size(73, 21);
             this.lblCep.TabIndex = 14;
@@ -329,7 +333,7 @@ namespace CRUD___Adriano.Features.Cliente.View
             this.lblCpf.AutoSize = true;
             this.lblCpf.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblCpf.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            this.lblCpf.Location = new System.Drawing.Point(116, 129);
+            this.lblCpf.Location = new System.Drawing.Point(116, 171);
             this.lblCpf.Name = "lblCpf";
             this.lblCpf.Size = new System.Drawing.Size(120, 21);
             this.lblCpf.TabIndex = 13;
@@ -340,7 +344,7 @@ namespace CRUD___Adriano.Features.Cliente.View
             this.lblSexo.AutoSize = true;
             this.lblSexo.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblSexo.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            this.lblSexo.Location = new System.Drawing.Point(116, 87);
+            this.lblSexo.Location = new System.Drawing.Point(116, 129);
             this.lblSexo.Name = "lblSexo";
             this.lblSexo.Size = new System.Drawing.Size(84, 21);
             this.lblSexo.TabIndex = 12;
@@ -393,7 +397,7 @@ namespace CRUD___Adriano.Features.Cliente.View
             this.lblTituloLogradouro.AutoSize = true;
             this.lblTituloLogradouro.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblTituloLogradouro.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            this.lblTituloLogradouro.Location = new System.Drawing.Point(12, 213);
+            this.lblTituloLogradouro.Location = new System.Drawing.Point(12, 255);
             this.lblTituloLogradouro.Name = "lblTituloLogradouro";
             this.lblTituloLogradouro.Size = new System.Drawing.Size(101, 21);
             this.lblTituloLogradouro.TabIndex = 7;
@@ -426,7 +430,7 @@ namespace CRUD___Adriano.Features.Cliente.View
             this.lblTituloCep.AutoSize = true;
             this.lblTituloCep.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblTituloCep.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            this.lblTituloCep.Location = new System.Drawing.Point(12, 171);
+            this.lblTituloCep.Location = new System.Drawing.Point(12, 213);
             this.lblTituloCep.Name = "lblTituloCep";
             this.lblTituloCep.Size = new System.Drawing.Size(41, 21);
             this.lblTituloCep.TabIndex = 4;
@@ -437,7 +441,7 @@ namespace CRUD___Adriano.Features.Cliente.View
             this.lblTituloCpf.AutoSize = true;
             this.lblTituloCpf.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblTituloCpf.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            this.lblTituloCpf.Location = new System.Drawing.Point(12, 129);
+            this.lblTituloCpf.Location = new System.Drawing.Point(12, 171);
             this.lblTituloCpf.Name = "lblTituloCpf";
             this.lblTituloCpf.Size = new System.Drawing.Size(41, 21);
             this.lblTituloCpf.TabIndex = 3;
@@ -448,7 +452,7 @@ namespace CRUD___Adriano.Features.Cliente.View
             this.lblTituloSexo.AutoSize = true;
             this.lblTituloSexo.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblTituloSexo.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            this.lblTituloSexo.Location = new System.Drawing.Point(12, 87);
+            this.lblTituloSexo.Location = new System.Drawing.Point(12, 129);
             this.lblTituloSexo.Name = "lblTituloSexo";
             this.lblTituloSexo.Size = new System.Drawing.Size(50, 21);
             this.lblTituloSexo.TabIndex = 2;
@@ -475,6 +479,27 @@ namespace CRUD___Adriano.Features.Cliente.View
             this.lblTituloNome.Size = new System.Drawing.Size(59, 21);
             this.lblTituloNome.TabIndex = 0;
             this.lblTituloNome.Text = "Nome:";
+            // 
+            // lblIdade
+            // 
+            this.lblIdade.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblIdade.ForeColor = System.Drawing.Color.MediumSlateBlue;
+            this.lblIdade.Location = new System.Drawing.Point(116, 87);
+            this.lblIdade.Name = "lblIdade";
+            this.lblIdade.Size = new System.Drawing.Size(195, 21);
+            this.lblIdade.TabIndex = 33;
+            this.lblIdade.Text = "18 anos";
+            // 
+            // lblTituloIdade
+            // 
+            this.lblTituloIdade.AutoSize = true;
+            this.lblTituloIdade.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblTituloIdade.ForeColor = System.Drawing.Color.MediumSlateBlue;
+            this.lblTituloIdade.Location = new System.Drawing.Point(12, 87);
+            this.lblTituloIdade.Name = "lblTituloIdade";
+            this.lblTituloIdade.Size = new System.Drawing.Size(56, 21);
+            this.lblTituloIdade.TabIndex = 32;
+            this.lblTituloIdade.Text = "Idade:";
             // 
             // FrmDetalhesCliente
             // 
@@ -534,5 +559,7 @@ namespace CRUD___Adriano.Features.Cliente.View
         private System.Windows.Forms.Label lblTelefones;
         private System.Windows.Forms.Panel pnlEmails;
         private System.Windows.Forms.Panel pnlTelefones;
+        private System.Windows.Forms.Label lblIdade;
+        private System.Windows.Forms.Label lblTituloIdade;
     }
 }

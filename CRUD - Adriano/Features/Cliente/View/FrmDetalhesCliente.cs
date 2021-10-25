@@ -1,5 +1,6 @@
 ﻿using CRUD___Adriano.Features.Cadastro.Produto.Model;
 using CRUD___Adriano.Features.Utils;
+using System;
 using System.Text;
 using System.Windows.Forms;
 
@@ -18,8 +19,11 @@ namespace CRUD___Adriano.Features.Cliente.View
 
         private void AtribuirModelParaCampo()
         {
+            var idade = DateTime.Now.Year - _clienteModel.DataNascimento.Year;
+
             lblNome.Text = _clienteModel.Nome;
             lblSobrenome.Text = _clienteModel.Sobrenome;
+            lblIdade.Text = $"{idade} {(idade > 0 ? "anos" : "ano")}";
             lblSexo.Text = _clienteModel.Sexo.RetornarDescricao();
             lblCpf.Text = _clienteModel.Cpf;
             lblCidade.Text = _clienteModel.Endereco.Cidade;
