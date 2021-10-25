@@ -8,11 +8,9 @@ using CRUD___Adriano.Features.Telefone.Model;
 using CRUD___Adriano.Features.Telefone.Sql;
 using CRUD___Adriano.Features.Usuario.Sql;
 using Dapper;
-using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Text;
 
 namespace CRUD___Adriano.Features.Colaborador.Dao
 {
@@ -163,6 +161,11 @@ namespace CRUD___Adriano.Features.Colaborador.Dao
             banco = @Banco
             where id_colaborador = @IdColaborador";
 
+        private static readonly string sqlVerificarEmailExistente =
+            @"select * from Email e
+			inner join Usuario u on u.id = e.id_usuario
+			where e.id = @Id";
+
         public static bool AtualizarColaborador(IDbConnection conexao, IDbTransaction transacao, ColaboradorModel colaboradorModel)
         {
             conexao.Execute(UsuarioSql.Atualizar, colaboradorModel, transacao);
@@ -172,13 +175,23 @@ namespace CRUD___Adriano.Features.Colaborador.Dao
 
             foreach (var email in colaboradorModel.Emails)
             {
-                email.Nome = "123456789";
-                conexao.Execute(EmailSql.Atualizar, email, transacao);
+                if (email.Id > 0)
+                    conexao.Execute(EmailSql.Atualizar, email, transacao);
+                else
+                {
+                    email.IdUsuario = colaboradorModel.IdUsuario;
+                    conexao.Execute(EmailSql.Inserir, email, transacao);
+                }
             }
             foreach (var telefone in colaboradorModel.Telefones)
             {
-                telefone.Numero = "1234568";
-                conexao.Execute(TelefoneSql.Atualizar, telefone, transacao);
+                if (telefone.Id > 0)
+                    conexao.Execute(TelefoneSql.Atualizar, telefone, transacao);
+                else
+                {
+                    telefone.IdUsuario = colaboradorModel.IdUsuario;
+                    conexao.Execute(TelefoneSql.Inserir, telefone, transacao);
+                }
             }
 
             return true;

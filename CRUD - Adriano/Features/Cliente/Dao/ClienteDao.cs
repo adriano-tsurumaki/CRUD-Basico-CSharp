@@ -168,13 +168,23 @@ namespace CRUD___Adriano.Features.Cliente.Dao
 
             foreach (var email in clienteModel.Emails)
             {
-                email.Nome = "123456789";
-                conexao.Execute(EmailSql.Atualizar, email, transacao);
+                if (email.Id > 0)
+                    conexao.Execute(EmailSql.Atualizar, email, transacao);
+                else
+                {
+                    email.IdUsuario = clienteModel.IdUsuario;
+                    conexao.Execute(EmailSql.Inserir, email, transacao);
+                }
             }
             foreach (var telefone in clienteModel.Telefones)
             {
-                telefone.Numero = "1234568";
-                conexao.Execute(TelefoneSql.Atualizar, telefone, transacao);
+                if (telefone.Id > 0)
+                    conexao.Execute(TelefoneSql.Atualizar, telefone, transacao);
+                else
+                {
+                    telefone.IdUsuario = clienteModel.IdUsuario;
+                    conexao.Execute(TelefoneSql.Inserir, telefone, transacao);
+                }
             }
 
             return true;
@@ -188,7 +198,7 @@ namespace CRUD___Adriano.Features.Cliente.Dao
             if (!string.IsNullOrEmpty(clienteModel.Observacao))
                 updateSql.Append(", observacao = @Observacao ");
 
-            updateSql.Append("where id_usuario = @IdUsuario");
+            updateSql.Append(" where id_usuario = @IdUsuario");
 
             return updateSql.ToString();
         }
