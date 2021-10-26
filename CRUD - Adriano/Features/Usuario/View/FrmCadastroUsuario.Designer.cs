@@ -84,6 +84,8 @@ namespace CRUD___Adriano.Features.Cadastro.Usuario.View
             this.txtNome.Name = "txtNome";
             this.txtNome.Padding = new System.Windows.Forms.Padding(7);
             this.txtNome.PasswordChar = false;
+            this.txtNome.SelectionLength = 0;
+            this.txtNome.SelectionStart = 0;
             this.txtNome.Size = new System.Drawing.Size(212, 36);
             this.txtNome.TabIndex = 1;
             this.txtNome.Texto = "";
@@ -135,6 +137,8 @@ namespace CRUD___Adriano.Features.Cadastro.Usuario.View
             this.txtSobrenome.Name = "txtSobrenome";
             this.txtSobrenome.Padding = new System.Windows.Forms.Padding(7);
             this.txtSobrenome.PasswordChar = false;
+            this.txtSobrenome.SelectionLength = 0;
+            this.txtSobrenome.SelectionStart = 0;
             this.txtSobrenome.Size = new System.Drawing.Size(212, 36);
             this.txtSobrenome.TabIndex = 2;
             this.txtSobrenome.Texto = "";
@@ -164,10 +168,13 @@ namespace CRUD___Adriano.Features.Cadastro.Usuario.View
             this.txtCep.Name = "txtCep";
             this.txtCep.Padding = new System.Windows.Forms.Padding(7);
             this.txtCep.PasswordChar = false;
+            this.txtCep.SelectionLength = 0;
+            this.txtCep.SelectionStart = 0;
             this.txtCep.Size = new System.Drawing.Size(212, 36);
             this.txtCep.TabIndex = 5;
             this.txtCep.Texto = "";
             this.txtCep.UnderlinedStyle = true;
+            this.txtCep._TextChanged += new System.EventHandler(this.TxtCep__TextChanged);
             // 
             // lblLogradouro
             // 
@@ -193,6 +200,8 @@ namespace CRUD___Adriano.Features.Cadastro.Usuario.View
             this.txtLogradouro.Name = "txtLogradouro";
             this.txtLogradouro.Padding = new System.Windows.Forms.Padding(7);
             this.txtLogradouro.PasswordChar = false;
+            this.txtLogradouro.SelectionLength = 0;
+            this.txtLogradouro.SelectionStart = 0;
             this.txtLogradouro.Size = new System.Drawing.Size(212, 36);
             this.txtLogradouro.TabIndex = 7;
             this.txtLogradouro.Texto = "";
@@ -266,6 +275,8 @@ namespace CRUD___Adriano.Features.Cadastro.Usuario.View
             this.txtBairro.Name = "txtBairro";
             this.txtBairro.Padding = new System.Windows.Forms.Padding(7);
             this.txtBairro.PasswordChar = false;
+            this.txtBairro.SelectionLength = 0;
+            this.txtBairro.SelectionStart = 0;
             this.txtBairro.Size = new System.Drawing.Size(212, 36);
             this.txtBairro.TabIndex = 9;
             this.txtBairro.Texto = "";
@@ -284,6 +295,8 @@ namespace CRUD___Adriano.Features.Cadastro.Usuario.View
             this.txtComplemento.Name = "txtComplemento";
             this.txtComplemento.Padding = new System.Windows.Forms.Padding(7);
             this.txtComplemento.PasswordChar = false;
+            this.txtComplemento.SelectionLength = 0;
+            this.txtComplemento.SelectionStart = 0;
             this.txtComplemento.Size = new System.Drawing.Size(212, 36);
             this.txtComplemento.TabIndex = 11;
             this.txtComplemento.Texto = "";
@@ -302,6 +315,8 @@ namespace CRUD___Adriano.Features.Cadastro.Usuario.View
             this.txtNumero.Name = "txtNumero";
             this.txtNumero.Padding = new System.Windows.Forms.Padding(7);
             this.txtNumero.PasswordChar = false;
+            this.txtNumero.SelectionLength = 0;
+            this.txtNumero.SelectionStart = 0;
             this.txtNumero.Size = new System.Drawing.Size(212, 36);
             this.txtNumero.TabIndex = 12;
             this.txtNumero.Texto = "";
@@ -362,6 +377,8 @@ namespace CRUD___Adriano.Features.Cadastro.Usuario.View
             this.txtCidade.Name = "txtCidade";
             this.txtCidade.Padding = new System.Windows.Forms.Padding(7);
             this.txtCidade.PasswordChar = false;
+            this.txtCidade.SelectionLength = 0;
+            this.txtCidade.SelectionStart = 0;
             this.txtCidade.Size = new System.Drawing.Size(212, 36);
             this.txtCidade.TabIndex = 8;
             this.txtCidade.Texto = "";
@@ -380,10 +397,13 @@ namespace CRUD___Adriano.Features.Cadastro.Usuario.View
             this.txtCpf.Name = "txtCpf";
             this.txtCpf.Padding = new System.Windows.Forms.Padding(7);
             this.txtCpf.PasswordChar = false;
+            this.txtCpf.SelectionLength = 0;
+            this.txtCpf.SelectionStart = 0;
             this.txtCpf.Size = new System.Drawing.Size(212, 36);
             this.txtCpf.TabIndex = 4;
             this.txtCpf.Texto = "";
             this.txtCpf.UnderlinedStyle = true;
+            this.txtCpf._TextChanged += new System.EventHandler(this.TxtCpf__TextChanged);
             // 
             // lblCpf
             // 

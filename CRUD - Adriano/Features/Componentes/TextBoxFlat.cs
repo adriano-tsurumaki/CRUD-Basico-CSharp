@@ -109,6 +109,18 @@ namespace CRUD___Adriano.Features.Componentes
             set => textBox1.Text = value; 
         }
 
+        public int SelectionStart
+        {
+            get => textBox1.SelectionStart;
+            set => textBox1.SelectionStart = value;
+        }
+
+        public int SelectionLength
+        {
+            get => textBox1.SelectionLength;
+            set => textBox1.SelectionLength = value;
+        }
+
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);

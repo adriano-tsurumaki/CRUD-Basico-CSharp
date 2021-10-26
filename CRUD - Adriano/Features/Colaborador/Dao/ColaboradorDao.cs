@@ -161,11 +161,6 @@ namespace CRUD___Adriano.Features.Colaborador.Dao
             banco = @Banco
             where id_colaborador = @IdColaborador";
 
-        private static readonly string sqlVerificarEmailExistente =
-            @"select * from Email e
-			inner join Usuario u on u.id = e.id_usuario
-			where e.id = @Id";
-
         public static bool AtualizarColaborador(IDbConnection conexao, IDbTransaction transacao, ColaboradorModel colaboradorModel)
         {
             conexao.Execute(UsuarioSql.Atualizar, colaboradorModel, transacao);

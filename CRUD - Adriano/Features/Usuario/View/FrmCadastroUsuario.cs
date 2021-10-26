@@ -4,6 +4,8 @@ using CRUD___Adriano.Features.Usuario.Enum;
 using CRUD___Adriano.Features.Usuario.Model;
 using CRUD___Adriano.Features.Utils;
 using System;
+using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace CRUD___Adriano.Features.Cadastro.Usuario.View
@@ -75,6 +77,74 @@ namespace CRUD___Adriano.Features.Cadastro.Usuario.View
             errorProvider.SetError(dataNascimento, null);
 
             (_model as UsuarioModel).DataNascimento = dataNascimento.Value;
+        }
+
+        private bool evitarLoopCep;
+        private bool evitarLoopCpf;
+
+        private void TxtCep__TextChanged(object sender, EventArgs e)
+        {
+            if (evitarLoopCep)
+            {
+                txtCep.SelectionStart = txtCep.Texto.Length;
+                evitarLoopCep = false;
+                return;
+            }
+
+            if (txtCep.Texto.Length == 10)
+            {
+                evitarLoopCep = true;
+                txtCep.Texto = txtCep.Texto.Remove(txtCep.SelectionStart - 1, 1);
+            }
+
+            var textoFormatado = string.Join("", new Regex(@"[0-9]+").Matches(txtCep.Texto).Select(x => x.Value));
+
+            if (textoFormatado.Length > 5)
+                textoFormatado = textoFormatado.Insert(5, "-");
+
+            if (textoFormatado != txtCep.Texto)
+                evitarLoopCep = true;
+
+
+            var posicaoCursor = txtCep.SelectionStart;
+
+            txtCep.SelectionLength = 0;
+            txtCep.Texto = textoFormatado;
+        }
+
+        private void TxtCpf__TextChanged(object sender, EventArgs e)
+        {
+            if (evitarLoopCpf)
+            {
+                txtCpf.SelectionStart = txtCpf.Texto.Length;
+                evitarLoopCpf = false;
+                return;
+            }
+
+            if (txtCpf.Texto.Length == 15)
+            {
+                evitarLoopCpf = true;
+                txtCpf.Texto = txtCpf.Texto.Remove(txtCpf.SelectionStart - 1, 1);
+            }
+
+            var textoFormatado = string.Join("", new Regex(@"[0-9]+").Matches(txtCpf.Texto).Select(x => x.Value));
+
+            if (textoFormatado.Length > 3)
+                textoFormatado = textoFormatado.Insert(3, ".");
+            
+            if (textoFormatado.Length > 7)
+                textoFormatado = textoFormatado.Insert(7, ".");
+            
+            if (textoFormatado.Length > 11)
+                textoFormatado = textoFormatado.Insert(11, "-");
+
+            if (textoFormatado != txtCpf.Texto)
+                evitarLoopCpf = true;
+
+            var posicaoCursor = txtCpf.SelectionStart;
+
+            txtCpf.SelectionLength = 0;
+            txtCpf.Texto = textoFormatado;
         }
     }
 }
