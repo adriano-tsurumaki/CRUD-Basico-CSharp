@@ -27,16 +27,8 @@ namespace CRUD___Adriano.Features.Cliente.View
                 Validado = false;
                 return;
             }
-            else if (!txtValorLimite.Numerico())
-            {
-                MessageBox.Show("Valor limite deve ser numérico!");
-                Validado = false;
-                return;
-            }
-
-            int.TryParse(txtValorLimite.Texto.RetornarSomenteNumeros(), out int resultado);
-            
-            _clienteModel.ValorLimite = resultado;
+            var valorLimite = txtValorLimite.Texto.RetornarSomenteNumeros();
+            _clienteModel.ValorLimite = valorLimite.Length > 2 ? valorLimite.Insert(valorLimite.Length - 2, ".") : valorLimite;
 
             Validado = true;
         }

@@ -57,10 +57,13 @@ namespace CRUD___Adriano.Features.Colaborador.View
             this.txtSalario.Name = "txtSalario";
             this.txtSalario.Padding = new System.Windows.Forms.Padding(7);
             this.txtSalario.PasswordChar = false;
+            this.txtSalario.SelectionLength = 0;
+            this.txtSalario.SelectionStart = 0;
             this.txtSalario.Size = new System.Drawing.Size(287, 36);
             this.txtSalario.TabIndex = 5;
             this.txtSalario.Texto = "";
             this.txtSalario.UnderlinedStyle = true;
+            this.txtSalario._TextChanged += new System.EventHandler(this.TxtSalario__TextChanged);
             // 
             // lblSalario
             // 
@@ -87,10 +90,13 @@ namespace CRUD___Adriano.Features.Colaborador.View
             this.txtComissao.Name = "txtComissao";
             this.txtComissao.Padding = new System.Windows.Forms.Padding(7);
             this.txtComissao.PasswordChar = false;
+            this.txtComissao.SelectionLength = 0;
+            this.txtComissao.SelectionStart = 0;
             this.txtComissao.Size = new System.Drawing.Size(287, 36);
             this.txtComissao.TabIndex = 7;
             this.txtComissao.Texto = "";
             this.txtComissao.UnderlinedStyle = true;
+            this.txtComissao._TextChanged += new System.EventHandler(this.TxtComissao__TextChanged);
             // 
             // lblComissao
             // 
@@ -160,10 +166,13 @@ namespace CRUD___Adriano.Features.Colaborador.View
             this.txtAgencia.Name = "txtAgencia";
             this.txtAgencia.Padding = new System.Windows.Forms.Padding(7);
             this.txtAgencia.PasswordChar = false;
+            this.txtAgencia.SelectionLength = 0;
+            this.txtAgencia.SelectionStart = 0;
             this.txtAgencia.Size = new System.Drawing.Size(212, 36);
             this.txtAgencia.TabIndex = 15;
             this.txtAgencia.Texto = "";
             this.txtAgencia.UnderlinedStyle = true;
+            this.txtAgencia._TextChanged += new System.EventHandler(this.TxtAgencia__TextChanged);
             // 
             // lblConta
             // 
@@ -189,10 +198,13 @@ namespace CRUD___Adriano.Features.Colaborador.View
             this.txtConta.Name = "txtConta";
             this.txtConta.Padding = new System.Windows.Forms.Padding(7);
             this.txtConta.PasswordChar = false;
+            this.txtConta.SelectionLength = 0;
+            this.txtConta.SelectionStart = 0;
             this.txtConta.Size = new System.Drawing.Size(212, 36);
             this.txtConta.TabIndex = 17;
             this.txtConta.Texto = "";
             this.txtConta.UnderlinedStyle = true;
+            this.txtConta._TextChanged += new System.EventHandler(this.TxtConta__TextChanged);
             // 
             // lblBanco
             // 
@@ -218,6 +230,8 @@ namespace CRUD___Adriano.Features.Colaborador.View
             this.txtBanco.Name = "txtBanco";
             this.txtBanco.Padding = new System.Windows.Forms.Padding(7);
             this.txtBanco.PasswordChar = false;
+            this.txtBanco.SelectionLength = 0;
+            this.txtBanco.SelectionStart = 0;
             this.txtBanco.Size = new System.Drawing.Size(212, 36);
             this.txtBanco.TabIndex = 19;
             this.txtBanco.Texto = "";

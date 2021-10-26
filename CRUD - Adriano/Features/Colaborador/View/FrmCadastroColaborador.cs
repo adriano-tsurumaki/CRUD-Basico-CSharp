@@ -33,6 +33,13 @@ namespace CRUD___Adriano.Features.Colaborador.View
 
             _colaboradorModel.DadosBancarios.TipoConta = cbTipoConta.PegarEnumPorDescricao<TipoContaEnum>();
 
+
+            var salario = txtSalario.Texto.RetornarSomenteNumeros();
+            var comissao = txtComissao.Texto.RetornarSomenteNumeros();
+
+            _colaboradorModel.Salario = salario.Length > 2 ? salario.Insert(salario.Length - 2, ".") : salario;
+            _colaboradorModel.Comissao = comissao.Length > 2 ? comissao.Insert(comissao.Length - 2, ".") : comissao;
+
             Validado = true;
         }
 
@@ -46,6 +53,104 @@ namespace CRUD___Adriano.Features.Colaborador.View
             txtBanco.DataBindings.Add("Texto", colaboradorModel.DadosBancarios, "Banco");
             cbTipoConta.AtribuirPeloEnum<TipoContaEnum>();
             cbTipoConta.SelectedIndex = (int)colaboradorModel.DadosBancarios.TipoConta;
+        }
+
+        private bool evitarLoopSalario;
+
+        private void TxtSalario__TextChanged(object sender, System.EventArgs e)
+        {
+            if (evitarLoopSalario)
+            {
+                txtSalario.SelectionStart = txtSalario.Texto.Length;
+                evitarLoopSalario = false;
+                return;
+            }
+
+            var textoFormatado = "R$ " + txtSalario.Texto.RetornarSomenteNumeros();
+
+            if (textoFormatado.Length > 5)
+                textoFormatado = textoFormatado.Insert(textoFormatado.Length - 2, ",");
+
+            if (textoFormatado != txtSalario.Texto)
+                evitarLoopSalario = true;
+
+            txtSalario.SelectionLength = 0;
+            txtSalario.Texto = textoFormatado;
+        }
+
+        private bool evitarLoopConta;
+
+        private void TxtConta__TextChanged(object sender, System.EventArgs e)
+        {
+            if (evitarLoopConta)
+            {
+                txtConta.SelectionStart = txtConta.Texto.Length;
+                evitarLoopConta = false;
+                return;
+            }
+
+            if (txtConta.Texto.Length == 13)
+            {
+                evitarLoopConta = true;
+                txtConta.Texto = txtConta.Texto.Remove(txtConta.SelectionStart - 1, 1);
+            }
+
+            var textoFormatado = txtConta.Texto.RetornarSomenteNumeros();
+
+            if (textoFormatado != txtConta.Texto)
+                evitarLoopConta = true;
+
+            txtConta.SelectionLength = 0;
+            txtConta.Texto = textoFormatado;
+        }
+
+        private bool evitarLoopComissao;
+
+        private void TxtComissao__TextChanged(object sender, System.EventArgs e)
+        {
+            if (evitarLoopComissao)
+            {
+                txtComissao.SelectionStart = txtComissao.Texto.Length;
+                evitarLoopComissao = false;
+                return;
+            }
+
+            var textoFormatado = txtComissao.Texto.RetornarSomenteNumeros() + "%";
+
+            if (textoFormatado.Length > 3)
+                textoFormatado = textoFormatado.Insert(textoFormatado.Length - 3, ",");
+
+            if (textoFormatado != txtComissao.Texto)
+                evitarLoopComissao = true;
+
+            txtComissao.SelectionLength = 0;
+            txtComissao.Texto = textoFormatado;
+        }
+
+        private bool evitarLoopAgencia;
+
+        private void TxtAgencia__TextChanged(object sender, System.EventArgs e)
+        {
+            if (evitarLoopAgencia)
+            {
+                txtAgencia.SelectionStart = txtAgencia.Texto.Length;
+                evitarLoopAgencia = false;
+                return;
+            }
+
+            if (txtAgencia.Texto.Length == 5)
+            {
+                evitarLoopAgencia = true;
+                txtAgencia.Texto = txtAgencia.Texto.Remove(txtAgencia.SelectionStart - 1, 1);
+            }
+
+            var textoFormatado = txtAgencia.Texto.RetornarSomenteNumeros();
+
+            if (textoFormatado != txtAgencia.Texto)
+                evitarLoopAgencia = true;
+
+            txtAgencia.SelectionLength = 0;
+            txtAgencia.Texto = textoFormatado;
         }
     }
 }

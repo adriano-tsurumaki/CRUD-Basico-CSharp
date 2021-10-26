@@ -6,8 +6,8 @@ namespace CRUD___Adriano.Features.Cliente.Model
     public class ColaboradorModel: UsuarioModel
     {
         public int Id { get; set; }
-        public float Salario { get; set; }
-        public float Comissao { get; set; }
+        public string Salario { get; set; }
+        public string Comissao { get; set; }
         public DadosBancariosModel DadosBancarios { get; set; }
 
         public ColaboradorModel()
