@@ -52,7 +52,7 @@ namespace CRUD___Adriano.Features.Cliente.View
             this.txtValorLimite.SelectionLength = 0;
             this.txtValorLimite.SelectionStart = 0;
             this.txtValorLimite.Size = new System.Drawing.Size(287, 36);
-            this.txtValorLimite.TabIndex = 3;
+            this.txtValorLimite.TabIndex = 1;
             this.txtValorLimite.Texto = "";
             this.txtValorLimite.UnderlinedStyle = true;
             this.txtValorLimite._TextChanged += new System.EventHandler(this.TxtValorLimite__TextChanged);
@@ -85,7 +85,7 @@ namespace CRUD___Adriano.Features.Cliente.View
             this.txtObservacao.SelectionLength = 0;
             this.txtObservacao.SelectionStart = 0;
             this.txtObservacao.Size = new System.Drawing.Size(617, 134);
-            this.txtObservacao.TabIndex = 4;
+            this.txtObservacao.TabIndex = 2;
             this.txtObservacao.Texto = "";
             this.txtObservacao.UnderlinedStyle = false;
             // 

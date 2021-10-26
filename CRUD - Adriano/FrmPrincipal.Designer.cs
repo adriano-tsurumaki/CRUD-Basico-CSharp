@@ -241,14 +241,15 @@ namespace CRUD___Adriano
             // 
             // lblTitulo
             // 
-            this.lblTitulo.AutoSize = true;
+            this.lblTitulo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblTitulo.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblTitulo.ForeColor = System.Drawing.Color.White;
-            this.lblTitulo.Location = new System.Drawing.Point(317, 21);
+            this.lblTitulo.Location = new System.Drawing.Point(0, 0);
             this.lblTitulo.Name = "lblTitulo";
-            this.lblTitulo.Size = new System.Drawing.Size(118, 30);
+            this.lblTitulo.Size = new System.Drawing.Size(714, 75);
             this.lblTitulo.TabIndex = 0;
             this.lblTitulo.Text = "Dashboard";
+            this.lblTitulo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pnlChild
             // 
@@ -279,7 +280,6 @@ namespace CRUD___Adriano
             this.panelLogo.ResumeLayout(false);
             this.panelLogo.PerformLayout();
             this.pnlTitlebar.ResumeLayout(false);
-            this.pnlTitlebar.PerformLayout();
             this.ResumeLayout(false);
 
         }

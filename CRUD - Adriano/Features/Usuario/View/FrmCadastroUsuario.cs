@@ -4,6 +4,7 @@ using CRUD___Adriano.Features.Usuario.Enum;
 using CRUD___Adriano.Features.Usuario.Model;
 using CRUD___Adriano.Features.Utils;
 using System;
+using System.Text.RegularExpressions;
 
 namespace CRUD___Adriano.Features.Cadastro.Usuario.View
 {

@@ -60,7 +60,7 @@ namespace CRUD___Adriano.Features.Colaborador.View
             this.txtSalario.SelectionLength = 0;
             this.txtSalario.SelectionStart = 0;
             this.txtSalario.Size = new System.Drawing.Size(287, 36);
-            this.txtSalario.TabIndex = 5;
+            this.txtSalario.TabIndex = 1;
             this.txtSalario.Texto = "";
             this.txtSalario.UnderlinedStyle = true;
             this.txtSalario._TextChanged += new System.EventHandler(this.TxtSalario__TextChanged);
@@ -93,7 +93,7 @@ namespace CRUD___Adriano.Features.Colaborador.View
             this.txtComissao.SelectionLength = 0;
             this.txtComissao.SelectionStart = 0;
             this.txtComissao.Size = new System.Drawing.Size(287, 36);
-            this.txtComissao.TabIndex = 7;
+            this.txtComissao.TabIndex = 3;
             this.txtComissao.Texto = "";
             this.txtComissao.UnderlinedStyle = true;
             this.txtComissao._TextChanged += new System.EventHandler(this.TxtComissao__TextChanged);
@@ -128,7 +128,7 @@ namespace CRUD___Adriano.Features.Colaborador.View
             this.cbTipoConta.Name = "cbTipoConta";
             this.cbTipoConta.Padding = new System.Windows.Forms.Padding(2);
             this.cbTipoConta.Size = new System.Drawing.Size(212, 30);
-            this.cbTipoConta.TabIndex = 10;
+            this.cbTipoConta.TabIndex = 4;
             this.cbTipoConta.Texto = "";
             // 
             // lblTipoConta
@@ -169,7 +169,7 @@ namespace CRUD___Adriano.Features.Colaborador.View
             this.txtAgencia.SelectionLength = 0;
             this.txtAgencia.SelectionStart = 0;
             this.txtAgencia.Size = new System.Drawing.Size(212, 36);
-            this.txtAgencia.TabIndex = 15;
+            this.txtAgencia.TabIndex = 5;
             this.txtAgencia.Texto = "";
             this.txtAgencia.UnderlinedStyle = true;
             this.txtAgencia._TextChanged += new System.EventHandler(this.TxtAgencia__TextChanged);
@@ -201,7 +201,7 @@ namespace CRUD___Adriano.Features.Colaborador.View
             this.txtConta.SelectionLength = 0;
             this.txtConta.SelectionStart = 0;
             this.txtConta.Size = new System.Drawing.Size(212, 36);
-            this.txtConta.TabIndex = 17;
+            this.txtConta.TabIndex = 2;
             this.txtConta.Texto = "";
             this.txtConta.UnderlinedStyle = true;
             this.txtConta._TextChanged += new System.EventHandler(this.TxtConta__TextChanged);
@@ -233,7 +233,7 @@ namespace CRUD___Adriano.Features.Colaborador.View
             this.txtBanco.SelectionLength = 0;
             this.txtBanco.SelectionStart = 0;
             this.txtBanco.Size = new System.Drawing.Size(212, 36);
-            this.txtBanco.TabIndex = 19;
+            this.txtBanco.TabIndex = 6;
             this.txtBanco.Texto = "";
             this.txtBanco.UnderlinedStyle = true;
             // 
