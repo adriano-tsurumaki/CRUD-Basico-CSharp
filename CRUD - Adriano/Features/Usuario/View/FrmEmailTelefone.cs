@@ -202,7 +202,7 @@ namespace CRUD___Adriano.Features.Usuario.View
 
             if (txtTelefone.NuloOuVazio()) return;
 
-            txtTelefone.Texto = string.Join("", new Regex(@"[0-9]+").Matches(txtTelefone.Texto).Select(x => x.Value));
+            txtTelefone.Texto = txtTelefone.Texto.RetornarSomenteNumeros();
 
             if(txtTelefone.Texto.Length > 0)
                 btnAdicionarTelefone.Enabled = true;

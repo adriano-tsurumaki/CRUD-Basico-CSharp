@@ -8,6 +8,8 @@ namespace CRUD___Adriano.Features.Cliente.View
     public partial class FrmCadastroCliente : FormBase<ClienteModel>, IFormBase
     //public partial class FrmCadastroCliente : Form
     {
+        private ClienteModel _clienteModel;
+        
         public event ValidarHandle ValidarEvent;
 
         public FrmCadastroCliente()
@@ -32,6 +34,10 @@ namespace CRUD___Adriano.Features.Cliente.View
                 return;
             }
 
+            int.TryParse(txtValorLimite.Texto.RetornarSomenteNumeros(), out int resultado);
+            
+            _clienteModel.ValorLimite = resultado;
+
             Validado = true;
         }
 
@@ -39,6 +45,30 @@ namespace CRUD___Adriano.Features.Cliente.View
         {
             txtValorLimite.DataBindings.Add("Texto", clienteModel, "ValorLimite");
             txtObservacao.DataBindings.Add("Texto", clienteModel, "Observacao");
+            _clienteModel = clienteModel;
+        }
+
+        private bool evitarLoopValorLimite;
+
+        private void TxtValorLimite__TextChanged(object sender, System.EventArgs e)
+        {
+            if (evitarLoopValorLimite)
+            {
+                txtValorLimite.SelectionStart = txtValorLimite.Texto.Length;
+                evitarLoopValorLimite = false;
+                return;
+            }
+
+            var textoFormatado = "R$ " + txtValorLimite.Texto.RetornarSomenteNumeros();
+
+            if (textoFormatado.Length > 5)
+                textoFormatado = textoFormatado.Insert(textoFormatado.Length - 2, ",");
+
+            if (textoFormatado != txtValorLimite.Texto)
+                evitarLoopValorLimite = true;
+
+            txtValorLimite.SelectionLength = 0;
+            txtValorLimite.Texto = textoFormatado;
         }
     }
 }

@@ -4,9 +4,6 @@ using CRUD___Adriano.Features.Usuario.Enum;
 using CRUD___Adriano.Features.Usuario.Model;
 using CRUD___Adriano.Features.Utils;
 using System;
-using System.Linq;
-using System.Text.RegularExpressions;
-using System.Windows.Forms;
 
 namespace CRUD___Adriano.Features.Cadastro.Usuario.View
 {
@@ -45,6 +42,8 @@ namespace CRUD___Adriano.Features.Cadastro.Usuario.View
             (_model as UsuarioModel).Endereco.Uf = cbEstado.PegarEnumPorDescricao<EstadosBrasilEnum>();
             (_model as UsuarioModel).Sexo = cbSexo.PegarEnumPorDescricao<UsuarioSexoEnum>();
             (_model as UsuarioModel).DataNascimento = dataNascimento.Value;
+            (_model as UsuarioModel).Cpf = txtCpf.Texto.RetornarSomenteNumeros();
+            (_model as UsuarioModel).Endereco.Cep = txtCep.Texto.RetornarSomenteNumeros();
 
             Validado = true;
         }
@@ -96,7 +95,7 @@ namespace CRUD___Adriano.Features.Cadastro.Usuario.View
                 txtCep.Texto = txtCep.Texto.Remove(txtCep.SelectionStart - 1, 1);
             }
 
-            var textoFormatado = string.Join("", new Regex(@"[0-9]+").Matches(txtCep.Texto).Select(x => x.Value));
+            var textoFormatado = txtCep.Texto.RetornarSomenteNumeros();
 
             if (textoFormatado.Length > 5)
                 textoFormatado = textoFormatado.Insert(5, "-");
@@ -125,7 +124,7 @@ namespace CRUD___Adriano.Features.Cadastro.Usuario.View
                 txtCpf.Texto = txtCpf.Texto.Remove(txtCpf.SelectionStart - 1, 1);
             }
 
-            var textoFormatado = string.Join("", new Regex(@"[0-9]+").Matches(txtCpf.Texto).Select(x => x.Value));
+            var textoFormatado = txtCpf.Texto.RetornarSomenteNumeros();
 
             if (textoFormatado.Length > 3)
                 textoFormatado = textoFormatado.Insert(3, ".");
@@ -139,13 +138,11 @@ namespace CRUD___Adriano.Features.Cadastro.Usuario.View
             if (textoFormatado != txtCpf.Texto)
                 evitarLoopCpf = true;
 
-            var posicaoCursor = txtCpf.SelectionStart;
-
             txtCpf.SelectionLength = 0;
             txtCpf.Texto = textoFormatado;
         }
 
         private void TxtNumero__TextChanged(object sender, EventArgs e) =>
-            txtNumero.Texto = string.Join("", new Regex(@"[0-9]+").Matches(txtNumero.Texto).Select(x => x.Value));
+            txtNumero.Texto = txtNumero.Texto.RetornarSomenteNumeros();
     }
 }

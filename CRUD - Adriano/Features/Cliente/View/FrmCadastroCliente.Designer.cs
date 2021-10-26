@@ -49,10 +49,13 @@ namespace CRUD___Adriano.Features.Cliente.View
             this.txtValorLimite.Name = "txtValorLimite";
             this.txtValorLimite.Padding = new System.Windows.Forms.Padding(7);
             this.txtValorLimite.PasswordChar = false;
+            this.txtValorLimite.SelectionLength = 0;
+            this.txtValorLimite.SelectionStart = 0;
             this.txtValorLimite.Size = new System.Drawing.Size(287, 36);
             this.txtValorLimite.TabIndex = 3;
             this.txtValorLimite.Texto = "";
             this.txtValorLimite.UnderlinedStyle = true;
+            this.txtValorLimite._TextChanged += new System.EventHandler(this.TxtValorLimite__TextChanged);
             // 
             // lblValorLimite
             // 
@@ -61,9 +64,9 @@ namespace CRUD___Adriano.Features.Cliente.View
             this.lblValorLimite.ForeColor = System.Drawing.Color.MediumSlateBlue;
             this.lblValorLimite.Location = new System.Drawing.Point(12, 9);
             this.lblValorLimite.Name = "lblValorLimite";
-            this.lblValorLimite.Size = new System.Drawing.Size(237, 21);
+            this.lblValorLimite.Size = new System.Drawing.Size(216, 21);
             this.lblValorLimite.TabIndex = 2;
-            this.lblValorLimite.Text = "Valor limite para conta a prazo*";
+            this.lblValorLimite.Text = "Valor limite compra a prazo*";
             // 
             // txtObservacao
             // 
@@ -79,6 +82,8 @@ namespace CRUD___Adriano.Features.Cliente.View
             this.txtObservacao.Name = "txtObservacao";
             this.txtObservacao.Padding = new System.Windows.Forms.Padding(7);
             this.txtObservacao.PasswordChar = false;
+            this.txtObservacao.SelectionLength = 0;
+            this.txtObservacao.SelectionStart = 0;
             this.txtObservacao.Size = new System.Drawing.Size(617, 134);
             this.txtObservacao.TabIndex = 4;
             this.txtObservacao.Texto = "";
