@@ -6,6 +6,8 @@ using CRUD___Adriano.Features.Usuario.Model;
 using CRUD___Adriano.Features.Utils;
 using System;
 using System.ComponentModel;
+using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace CRUD___Adriano.Features.Usuario.View
@@ -22,6 +24,8 @@ namespace CRUD___Adriano.Features.Usuario.View
         {
             InitializeComponent();
 
+            btnAdicionarEmail.Enabled = false;
+            btnAdicionarTelefone.Enabled = false;
             cbTelefone.AtribuirPeloEnum<TipoTelefoneEnum>();
             ValidarEvent += new ValidarHandle(ValidarComponentes);
         }
@@ -130,7 +134,9 @@ namespace CRUD___Adriano.Features.Usuario.View
                 MessageBox.Show("Insira um email!");
                 return;
             }
+
             _emailsBinding.Add(new EmailModel { Nome = txtEmail.Texto });
+            txtEmail.Texto = string.Empty;
         }
 
         private void BtnAdicionarTelefone_Click(object sender, EventArgs e)
@@ -145,7 +151,9 @@ namespace CRUD___Adriano.Features.Usuario.View
                 MessageBox.Show("Selecione o tipo do telefone!");
                 return;
             }
+
             _telefonesBinding.Add(new TelefoneModel { Numero = txtTelefone.Texto, Tipo = cbTelefone.PegarEnumPorDescricao<TipoTelefoneEnum>() });
+            txtTelefone.Texto = string.Empty;
         }
 
         private void DgvEmails_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -176,6 +184,28 @@ namespace CRUD___Adriano.Features.Usuario.View
 
             if (botao.Name.Equals("Excluir"))
                 _telefonesBinding.Remove(telefoneModelSelecionado);
+        }
+
+        private void TxtEmail__TextChanged(object sender, EventArgs e)
+        {
+            btnAdicionarEmail.Enabled = false;
+
+            if (txtEmail.NuloOuVazio()) return;
+
+            if (new Regex(@"^[a-zA-Z0-9.]+[@][a-z]+[.][a-zA-Z]+").Match(txtEmail.Texto).Success)
+                btnAdicionarEmail.Enabled = true;
+        }
+
+        private void TxtTelefone__TextChanged(object sender, EventArgs e)
+        {
+            btnAdicionarTelefone.Enabled = false;
+
+            if (txtTelefone.NuloOuVazio()) return;
+
+            txtTelefone.Texto = string.Join("", new Regex(@"[0-9]+").Matches(txtTelefone.Texto).Select(x => x.Value));
+
+            if(txtTelefone.Texto.Length > 0)
+                btnAdicionarTelefone.Enabled = true;
         }
     }
 }

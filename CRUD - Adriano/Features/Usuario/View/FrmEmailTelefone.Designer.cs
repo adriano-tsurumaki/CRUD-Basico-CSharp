@@ -107,10 +107,13 @@ namespace CRUD___Adriano.Features.Usuario.View
             this.txtTelefone.Name = "txtTelefone";
             this.txtTelefone.Padding = new System.Windows.Forms.Padding(7);
             this.txtTelefone.PasswordChar = false;
+            this.txtTelefone.SelectionLength = 0;
+            this.txtTelefone.SelectionStart = 0;
             this.txtTelefone.Size = new System.Drawing.Size(187, 36);
             this.txtTelefone.TabIndex = 19;
             this.txtTelefone.Texto = "";
             this.txtTelefone.UnderlinedStyle = true;
+            this.txtTelefone._TextChanged += new System.EventHandler(this.TxtTelefone__TextChanged);
             // 
             // lblTelefone
             // 
@@ -152,10 +155,13 @@ namespace CRUD___Adriano.Features.Usuario.View
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Padding = new System.Windows.Forms.Padding(7);
             this.txtEmail.PasswordChar = false;
+            this.txtEmail.SelectionLength = 0;
+            this.txtEmail.SelectionStart = 0;
             this.txtEmail.Size = new System.Drawing.Size(187, 36);
             this.txtEmail.TabIndex = 18;
             this.txtEmail.Texto = "";
             this.txtEmail.UnderlinedStyle = true;
+            this.txtEmail._TextChanged += new System.EventHandler(this.TxtEmail__TextChanged);
             // 
             // lblEmail
             // 

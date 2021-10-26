@@ -80,7 +80,6 @@ namespace CRUD___Adriano.Features.Cadastro.Usuario.View
         }
 
         private bool evitarLoopCep;
-        private bool evitarLoopCpf;
 
         private void TxtCep__TextChanged(object sender, EventArgs e)
         {
@@ -105,12 +104,11 @@ namespace CRUD___Adriano.Features.Cadastro.Usuario.View
             if (textoFormatado != txtCep.Texto)
                 evitarLoopCep = true;
 
-
-            var posicaoCursor = txtCep.SelectionStart;
-
             txtCep.SelectionLength = 0;
             txtCep.Texto = textoFormatado;
         }
+
+        private bool evitarLoopCpf;
 
         private void TxtCpf__TextChanged(object sender, EventArgs e)
         {
@@ -146,5 +144,8 @@ namespace CRUD___Adriano.Features.Cadastro.Usuario.View
             txtCpf.SelectionLength = 0;
             txtCpf.Texto = textoFormatado;
         }
+
+        private void TxtNumero__TextChanged(object sender, EventArgs e) =>
+            txtNumero.Texto = string.Join("", new Regex(@"[0-9]+").Matches(txtNumero.Texto).Select(x => x.Value));
     }
 }

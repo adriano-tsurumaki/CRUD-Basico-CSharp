@@ -321,6 +321,7 @@ namespace CRUD___Adriano.Features.Cadastro.Usuario.View
             this.txtNumero.TabIndex = 12;
             this.txtNumero.Texto = "";
             this.txtNumero.UnderlinedStyle = true;
+            this.txtNumero._TextChanged += new System.EventHandler(this.TxtNumero__TextChanged);
             // 
             // dataNascimento
             // 
