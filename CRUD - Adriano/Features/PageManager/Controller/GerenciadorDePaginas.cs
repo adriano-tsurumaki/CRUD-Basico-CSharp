@@ -147,6 +147,8 @@ namespace CRUD___Adriano.Features.Controller.PageManager
         {
             if (!ValidarPagina()) return;
 
+            if (MessageBox.Show("Deseja cadastrar o usuário?", "Aviso", MessageBoxButtons.YesNo) == DialogResult.No) return;
+
             bool validar;
 
             switch(_tipoCrud)

@@ -77,6 +77,8 @@ namespace CRUD___Adriano.Features.Cliente.View
 
             if (botao.Name.Equals("Excluir"))
             {
+                if (MessageBox.Show("Deseja realmente excluir?", "Aviso", MessageBoxButtons.YesNo) == DialogResult.No) return;
+
                 if (_controller.ExcluirCliente(clienteModelSelecionado.IdUsuario))
                 {
                     _clientesBinding.Remove(clienteModelSelecionado);

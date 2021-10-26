@@ -76,6 +76,8 @@ namespace CRUD___Adriano.Features.Colaborador.View
 
             if (botao.Name.Equals("Excluir"))
             {
+                if (MessageBox.Show("Deseja realmente excluir?", "Aviso", MessageBoxButtons.YesNo) == DialogResult.No) return;
+
                 if (_controller.ExcluirCliente(colaboradorModelSelecionado.IdUsuario))
                 {
                     _colaboradoresBinding.Remove(colaboradorModelSelecionado);
