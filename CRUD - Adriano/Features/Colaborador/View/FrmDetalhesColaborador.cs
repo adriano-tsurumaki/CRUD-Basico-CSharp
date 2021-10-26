@@ -31,8 +31,8 @@ namespace CRUD___Adriano.Features.Colaborador.View
             lblLogradouro.Text = _colaboradorModel.Endereco.Logradouro;
             lblBairro.Text = _colaboradorModel.Endereco.Bairro;
             lblNumero.Text = _colaboradorModel.Endereco.Numero;
-            lblSalario.Text = $"{_colaboradorModel.Salario:c2}";
-            lblComissao.Text = $"{_colaboradorModel.Comissao:c2}";
+            lblSalario.Text = $"R$ {_colaboradorModel.Salario.Replace(".", ",")}";
+            lblComissao.Text = $"{_colaboradorModel.Comissao.Replace(".", ",")}%";
             lblDataNascimento.Text = $"{_colaboradorModel.DataNascimento:dd/mm/yyyy}";
             lblEmails.Text = RetornarEmailsFormatado();
             lblTelefones.Text = RetornarTelefonesFormatado();

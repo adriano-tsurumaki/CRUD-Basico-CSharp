@@ -103,7 +103,7 @@ namespace CRUD___Adriano
         private void BtnListagemFuncionario_Click(object sender, EventArgs e)
         {
             LimparPanel();
-            lblTitulo.Text = "Listagem de clientes";
+            lblTitulo.Text = "Listagem de Funcionários";
             DocaForm(
                 new ColaboradorListagemController(
                     new ColaboradorController(new ControllerConexao()),
