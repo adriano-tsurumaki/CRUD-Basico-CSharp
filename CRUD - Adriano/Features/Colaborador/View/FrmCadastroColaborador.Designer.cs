@@ -53,6 +53,7 @@ namespace CRUD___Adriano.Features.Colaborador.View
             this.txtSalario.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.txtSalario.Location = new System.Drawing.Point(12, 44);
             this.txtSalario.Margin = new System.Windows.Forms.Padding(4);
+            this.txtSalario.MaxLength = 15;
             this.txtSalario.Multiline = false;
             this.txtSalario.Name = "txtSalario";
             this.txtSalario.Padding = new System.Windows.Forms.Padding(7);
@@ -86,6 +87,7 @@ namespace CRUD___Adriano.Features.Colaborador.View
             this.txtComissao.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.txtComissao.Location = new System.Drawing.Point(12, 129);
             this.txtComissao.Margin = new System.Windows.Forms.Padding(4);
+            this.txtComissao.MaxLength = 6;
             this.txtComissao.Multiline = false;
             this.txtComissao.Name = "txtComissao";
             this.txtComissao.Padding = new System.Windows.Forms.Padding(7);
@@ -162,6 +164,7 @@ namespace CRUD___Adriano.Features.Colaborador.View
             this.txtAgencia.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.txtAgencia.Location = new System.Drawing.Point(12, 214);
             this.txtAgencia.Margin = new System.Windows.Forms.Padding(4);
+            this.txtAgencia.MaxLength = 4;
             this.txtAgencia.Multiline = false;
             this.txtAgencia.Name = "txtAgencia";
             this.txtAgencia.Padding = new System.Windows.Forms.Padding(7);
@@ -194,6 +197,7 @@ namespace CRUD___Adriano.Features.Colaborador.View
             this.txtConta.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.txtConta.Location = new System.Drawing.Point(345, 45);
             this.txtConta.Margin = new System.Windows.Forms.Padding(4);
+            this.txtConta.MaxLength = 12;
             this.txtConta.Multiline = false;
             this.txtConta.Name = "txtConta";
             this.txtConta.Padding = new System.Windows.Forms.Padding(7);
@@ -226,6 +230,7 @@ namespace CRUD___Adriano.Features.Colaborador.View
             this.txtBanco.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.txtBanco.Location = new System.Drawing.Point(345, 213);
             this.txtBanco.Margin = new System.Windows.Forms.Padding(4);
+            this.txtBanco.MaxLength = 50;
             this.txtBanco.Multiline = false;
             this.txtBanco.Name = "txtBanco";
             this.txtBanco.Padding = new System.Windows.Forms.Padding(7);

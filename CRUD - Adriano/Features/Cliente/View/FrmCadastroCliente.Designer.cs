@@ -45,6 +45,7 @@ namespace CRUD___Adriano.Features.Cliente.View
             this.txtValorLimite.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.txtValorLimite.Location = new System.Drawing.Point(12, 34);
             this.txtValorLimite.Margin = new System.Windows.Forms.Padding(4);
+            this.txtValorLimite.MaxLength = 13;
             this.txtValorLimite.Multiline = false;
             this.txtValorLimite.Name = "txtValorLimite";
             this.txtValorLimite.Padding = new System.Windows.Forms.Padding(7);
@@ -78,6 +79,7 @@ namespace CRUD___Adriano.Features.Cliente.View
             this.txtObservacao.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.txtObservacao.Location = new System.Drawing.Point(12, 110);
             this.txtObservacao.Margin = new System.Windows.Forms.Padding(4);
+            this.txtObservacao.MaxLength = 500;
             this.txtObservacao.Multiline = true;
             this.txtObservacao.Name = "txtObservacao";
             this.txtObservacao.Padding = new System.Windows.Forms.Padding(7);
