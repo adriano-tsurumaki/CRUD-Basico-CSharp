@@ -40,6 +40,20 @@ namespace CRUD___Adriano.Features.Cadastro.Usuario.View
                 return;
             }
 
+            if (txtCpf.Texto.Length != 14)
+            {
+                MessageBox.Show("Cpf inválido, preencha todos os números.", "Aviso");
+                Validado = false;
+                return;
+            }
+
+            if (!txtCep.NuloOuVazio() && txtCep.Texto.Length != 9)
+            {
+                MessageBox.Show("Cep inválido, preencha todos os números ou deixe o campo vazio.", "Aviso");
+                Validado = false;
+                return;
+            }
+
             (_model as UsuarioModel).Endereco.Uf = cbEstado.PegarEnumPorDescricao<EstadosBrasilEnum>();
             (_model as UsuarioModel).Sexo = cbSexo.PegarEnumPorDescricao<UsuarioSexoEnum>();
             (_model as UsuarioModel).DataNascimento = dataNascimento.Value;

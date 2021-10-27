@@ -80,6 +80,7 @@ namespace CRUD___Adriano.Features.Cadastro.Usuario.View
             this.txtNome.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.txtNome.Location = new System.Drawing.Point(13, 37);
             this.txtNome.Margin = new System.Windows.Forms.Padding(4);
+            this.txtNome.MaxLength = 50;
             this.txtNome.Multiline = false;
             this.txtNome.Name = "txtNome";
             this.txtNome.Padding = new System.Windows.Forms.Padding(7);
@@ -133,6 +134,7 @@ namespace CRUD___Adriano.Features.Cadastro.Usuario.View
             this.txtSobrenome.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.txtSobrenome.Location = new System.Drawing.Point(325, 37);
             this.txtSobrenome.Margin = new System.Windows.Forms.Padding(4);
+            this.txtSobrenome.MaxLength = 50;
             this.txtSobrenome.Multiline = false;
             this.txtSobrenome.Name = "txtSobrenome";
             this.txtSobrenome.Padding = new System.Windows.Forms.Padding(7);
@@ -164,6 +166,7 @@ namespace CRUD___Adriano.Features.Cadastro.Usuario.View
             this.txtCep.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.txtCep.Location = new System.Drawing.Point(13, 179);
             this.txtCep.Margin = new System.Windows.Forms.Padding(4);
+            this.txtCep.MaxLength = 9;
             this.txtCep.Multiline = false;
             this.txtCep.Name = "txtCep";
             this.txtCep.Padding = new System.Windows.Forms.Padding(7);
@@ -196,6 +199,7 @@ namespace CRUD___Adriano.Features.Cadastro.Usuario.View
             this.txtLogradouro.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.txtLogradouro.Location = new System.Drawing.Point(13, 250);
             this.txtLogradouro.Margin = new System.Windows.Forms.Padding(4);
+            this.txtLogradouro.MaxLength = 50;
             this.txtLogradouro.Multiline = false;
             this.txtLogradouro.Name = "txtLogradouro";
             this.txtLogradouro.Padding = new System.Windows.Forms.Padding(7);
@@ -271,6 +275,7 @@ namespace CRUD___Adriano.Features.Cadastro.Usuario.View
             this.txtBairro.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.txtBairro.Location = new System.Drawing.Point(13, 321);
             this.txtBairro.Margin = new System.Windows.Forms.Padding(4);
+            this.txtBairro.MaxLength = 50;
             this.txtBairro.Multiline = false;
             this.txtBairro.Name = "txtBairro";
             this.txtBairro.Padding = new System.Windows.Forms.Padding(7);
@@ -291,6 +296,7 @@ namespace CRUD___Adriano.Features.Cadastro.Usuario.View
             this.txtComplemento.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.txtComplemento.Location = new System.Drawing.Point(13, 392);
             this.txtComplemento.Margin = new System.Windows.Forms.Padding(4);
+            this.txtComplemento.MaxLength = 50;
             this.txtComplemento.Multiline = false;
             this.txtComplemento.Name = "txtComplemento";
             this.txtComplemento.Padding = new System.Windows.Forms.Padding(7);
@@ -311,6 +317,7 @@ namespace CRUD___Adriano.Features.Cadastro.Usuario.View
             this.txtNumero.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.txtNumero.Location = new System.Drawing.Point(325, 392);
             this.txtNumero.Margin = new System.Windows.Forms.Padding(4);
+            this.txtNumero.MaxLength = 12;
             this.txtNumero.Multiline = false;
             this.txtNumero.Name = "txtNumero";
             this.txtNumero.Padding = new System.Windows.Forms.Padding(7);
@@ -374,6 +381,7 @@ namespace CRUD___Adriano.Features.Cadastro.Usuario.View
             this.txtCidade.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.txtCidade.Location = new System.Drawing.Point(325, 250);
             this.txtCidade.Margin = new System.Windows.Forms.Padding(4);
+            this.txtCidade.MaxLength = 50;
             this.txtCidade.Multiline = false;
             this.txtCidade.Name = "txtCidade";
             this.txtCidade.Padding = new System.Windows.Forms.Padding(7);
@@ -394,6 +402,7 @@ namespace CRUD___Adriano.Features.Cadastro.Usuario.View
             this.txtCpf.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.txtCpf.Location = new System.Drawing.Point(325, 107);
             this.txtCpf.Margin = new System.Windows.Forms.Padding(4);
+            this.txtCpf.MaxLength = 14;
             this.txtCpf.Multiline = false;
             this.txtCpf.Name = "txtCpf";
             this.txtCpf.Padding = new System.Windows.Forms.Padding(7);

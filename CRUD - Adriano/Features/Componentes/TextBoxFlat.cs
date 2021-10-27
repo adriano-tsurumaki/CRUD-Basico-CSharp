@@ -121,6 +121,12 @@ namespace CRUD___Adriano.Features.Componentes
             set => textBox1.SelectionLength = value;
         }
 
+        public int MaxLength
+        {
+            get => textBox1.MaxLength;
+            set => textBox1.MaxLength = value;
+        }
+
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
