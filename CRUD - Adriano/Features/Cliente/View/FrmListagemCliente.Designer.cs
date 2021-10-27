@@ -71,6 +71,7 @@ namespace CRUD___Adriano.Features.Cliente.View
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.White;
             this.gridView.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.gridView.RowTemplate.Height = 25;
+            this.gridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gridView.Size = new System.Drawing.Size(800, 450);
             this.gridView.TabIndex = 0;
             this.gridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridView_CellContentClick);

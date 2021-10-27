@@ -114,6 +114,7 @@ namespace CRUD___Adriano.Features.Usuario.View
             this.txtTelefone.Texto = "";
             this.txtTelefone.UnderlinedStyle = true;
             this.txtTelefone._TextChanged += new System.EventHandler(this.TxtTelefone__TextChanged);
+            this.txtTelefone._KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtTelefone__KeyDown);
             // 
             // lblTelefone
             // 
@@ -162,6 +163,7 @@ namespace CRUD___Adriano.Features.Usuario.View
             this.txtEmail.Texto = "";
             this.txtEmail.UnderlinedStyle = true;
             this.txtEmail._TextChanged += new System.EventHandler(this.TxtEmail__TextChanged);
+            this.txtEmail._KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtEmail__KeyDown);
             // 
             // lblEmail
             // 

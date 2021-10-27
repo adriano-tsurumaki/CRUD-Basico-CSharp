@@ -127,7 +127,17 @@ namespace CRUD___Adriano.Features.Usuario.View
             dgvTelefones.AutoGenerateColumns = false;
         }
 
-        private void BtnAdicionarEmail_Click(object sender, EventArgs e)
+        private void BtnAdicionarEmail_Click(object sender, EventArgs e) =>
+            AdicionarEmailNaGrid();
+
+        private void TxtEmail__KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode != Keys.Enter || btnAdicionarEmail.Enabled != true) return;
+
+            AdicionarEmailNaGrid();
+        }
+
+        private void AdicionarEmailNaGrid()
         {
             if (txtEmail.NuloOuVazio())
             {
@@ -139,7 +149,17 @@ namespace CRUD___Adriano.Features.Usuario.View
             txtEmail.Texto = string.Empty;
         }
 
-        private void BtnAdicionarTelefone_Click(object sender, EventArgs e)
+        private void BtnAdicionarTelefone_Click(object sender, EventArgs e) =>
+            AdicionarTelefoneNaGrid();
+
+        private void TxtTelefone__KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode != Keys.Enter || btnAdicionarTelefone.Enabled != true) return;
+
+            AdicionarTelefoneNaGrid();
+        }
+
+        private void AdicionarTelefoneNaGrid()
         {
             if (txtTelefone.NuloOuVazio())
             {
@@ -192,7 +212,7 @@ namespace CRUD___Adriano.Features.Usuario.View
 
             if (txtEmail.NuloOuVazio()) return;
 
-            if (new Regex(@"^[a-zA-Z0-9.]+[@][a-z]+[.][a-zA-Z]+").Match(txtEmail.Texto).Success)
+            if (new Regex(@"^[a-zA-Z0-9.]+[@][a-z]+[.][a-zA-Z]{2,3}").Match(txtEmail.Texto).Success)
                 btnAdicionarEmail.Enabled = true;
         }
 
