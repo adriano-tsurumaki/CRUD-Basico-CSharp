@@ -74,6 +74,22 @@ namespace CRUD___Adriano.Features.Cliente.Controller
             return false;
         }
 
+        public bool SalvarLista(IList<ClienteModel> listaDeClientes)
+        {
+            try
+            {
+                foreach (var clienteModel in listaDeClientes)
+                    _conexao.EscopoTransacao((conexao, transacao) => ClienteDao.CadastrarCliente(conexao, transacao, clienteModel));
+
+                return true;
+            }
+            catch(Exception excecao)
+            {
+                MessageBox.Show(excecao.Message, "Erro ao cadastrar lista de clientes");
+            }
+            return false;
+        }
+
         public ClienteModel Selecionar(int id)
         {
             throw new System.NotImplementedException();

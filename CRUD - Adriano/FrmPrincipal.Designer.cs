@@ -44,6 +44,7 @@ namespace CRUD___Adriano
             this.pnlTitlebar = new System.Windows.Forms.Panel();
             this.lblTitulo = new System.Windows.Forms.Label();
             this.pnlChild = new System.Windows.Forms.Panel();
+            this.btnAtalho = new System.Windows.Forms.Button();
             this.pnlSideMenu.SuspendLayout();
             this.pnlListagemSubmenu.SuspendLayout();
             this.pnlCadastroSubmenu.SuspendLayout();
@@ -55,6 +56,7 @@ namespace CRUD___Adriano
             // 
             this.pnlSideMenu.AutoScroll = true;
             this.pnlSideMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(76)))));
+            this.pnlSideMenu.Controls.Add(this.btnAtalho);
             this.pnlSideMenu.Controls.Add(this.pnlListagemSubmenu);
             this.pnlSideMenu.Controls.Add(this.btnListagem);
             this.pnlSideMenu.Controls.Add(this.pnlCadastroSubmenu);
@@ -261,6 +263,26 @@ namespace CRUD___Adriano
             this.pnlChild.TabIndex = 4;
             this.pnlChild.ControlRemoved += new System.Windows.Forms.ControlEventHandler(this.PnlChild_ControlRemoved);
             // 
+            // btnAtalho
+            // 
+            this.btnAtalho.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnAtalho.FlatAppearance.BorderSize = 0;
+            this.btnAtalho.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAtalho.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnAtalho.ForeColor = System.Drawing.Color.Gainsboro;
+            this.btnAtalho.Image = ((System.Drawing.Image)(resources.GetObject("btnAtalho.Image")));
+            this.btnAtalho.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAtalho.Location = new System.Drawing.Point(0, 443);
+            this.btnAtalho.Name = "btnAtalho";
+            this.btnAtalho.Padding = new System.Windows.Forms.Padding(6, 0, 0, 0);
+            this.btnAtalho.Size = new System.Drawing.Size(220, 60);
+            this.btnAtalho.TabIndex = 7;
+            this.btnAtalho.Text = "Atalhos";
+            this.btnAtalho.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAtalho.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnAtalho.UseVisualStyleBackColor = true;
+            this.btnAtalho.Click += new System.EventHandler(this.btnAtalho_Click);
+            // 
             // FrmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -300,6 +322,7 @@ namespace CRUD___Adriano
         private System.Windows.Forms.Panel pnlChild;
         private System.Windows.Forms.Label lblTitulo;
         private System.Windows.Forms.Label lblNomeEmpresa;
+        private System.Windows.Forms.Button btnAtalho;
     }
 }
 
