@@ -41,7 +41,7 @@ namespace CRUD___Adriano.Features.Cliente.Dao
                 .RuleFor(c => c.Sobrenome, f => f.Person.LastName)
                 .RuleFor(c => c.DataNascimento, _ => GerarDataNascimentoAleatorio())
                 .RuleFor(c => c.ValorLimite, f => new Random().Next(10, 1000).ToString())
-                .RuleFor(c => c.Cpf, f => f.Person.Cpf())
+                .RuleFor(c => c.Cpf, f => f.Person.Cpf().RetornarSomenteNumeros())
                 .RuleFor(c => c.Sexo, f => f.Person.Gender == Bogus.DataSets.Name.Gender.Male ? UsuarioSexoEnum.Masculino : UsuarioSexoEnum.Feminino)
                 .RuleFor(c => c.Endereco, f => enderecoFaker)
                 .RuleFor(c => c.Emails, f => emailFaker.Generate(new Random().Next(1, 10)))
