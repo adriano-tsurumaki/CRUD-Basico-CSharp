@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Bogus" Version="33.1.1" />
     <PackageReference Include="Dapper" Version="2.0.90" />
     <PackageReference Include="Dapper.FluentMap" Version="2.0.0" />
     <PackageReference Include="Dapper.FluentMap.Dommel" Version="2.0.0" />

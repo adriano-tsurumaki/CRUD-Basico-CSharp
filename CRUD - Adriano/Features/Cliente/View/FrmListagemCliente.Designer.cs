@@ -33,7 +33,11 @@ namespace CRUD___Adriano.Features.Cliente.View
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.gridView = new System.Windows.Forms.DataGridView();
+            this.txtPesquisar = new CRUD___Adriano.Features.Componentes.TextBoxFlat();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.btnPesquisar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.gridView)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // gridView
@@ -77,16 +81,67 @@ namespace CRUD___Adriano.Features.Cliente.View
             this.gridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridView_CellContentClick);
             this.gridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridView_CellDoubleClick);
             // 
+            // txtPesquisar
+            // 
+            this.txtPesquisar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
+            this.txtPesquisar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.txtPesquisar.BorderColor = System.Drawing.Color.MediumSlateBlue;
+            this.txtPesquisar.BorderSize = 2;
+            this.txtPesquisar.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtPesquisar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.txtPesquisar.ForeColor = System.Drawing.Color.DimGray;
+            this.txtPesquisar.Location = new System.Drawing.Point(0, 0);
+            this.txtPesquisar.Margin = new System.Windows.Forms.Padding(4);
+            this.txtPesquisar.MaxLength = 32767;
+            this.txtPesquisar.Multiline = false;
+            this.txtPesquisar.Name = "txtPesquisar";
+            this.txtPesquisar.Padding = new System.Windows.Forms.Padding(7);
+            this.txtPesquisar.PasswordChar = false;
+            this.txtPesquisar.SelectionLength = 0;
+            this.txtPesquisar.SelectionStart = 0;
+            this.txtPesquisar.Size = new System.Drawing.Size(800, 36);
+            this.txtPesquisar.TabIndex = 1;
+            this.txtPesquisar.Texto = "";
+            this.txtPesquisar.UnderlinedStyle = false;
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
+            this.panel1.Controls.Add(this.btnPesquisar);
+            this.panel1.Controls.Add(this.txtPesquisar);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(800, 36);
+            this.panel1.TabIndex = 2;
+            // 
+            // btnPesquisar
+            // 
+            this.btnPesquisar.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnPesquisar.FlatAppearance.BorderColor = System.Drawing.Color.MediumSlateBlue;
+            this.btnPesquisar.FlatAppearance.BorderSize = 2;
+            this.btnPesquisar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPesquisar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnPesquisar.ForeColor = System.Drawing.Color.White;
+            this.btnPesquisar.Location = new System.Drawing.Point(708, 0);
+            this.btnPesquisar.Name = "btnPesquisar";
+            this.btnPesquisar.Size = new System.Drawing.Size(92, 36);
+            this.btnPesquisar.TabIndex = 2;
+            this.btnPesquisar.Text = "Pesquisar";
+            this.btnPesquisar.UseVisualStyleBackColor = true;
+            // 
             // FrmListagemCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(75)))), ((int)(((byte)(160)))));
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.gridView);
             this.Name = "FrmListagemCliente";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.gridView)).EndInit();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -94,5 +149,8 @@ namespace CRUD___Adriano.Features.Cliente.View
         #endregion
 
         private System.Windows.Forms.DataGridView gridView;
+        private Componentes.TextBoxFlat txtPesquisar;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button btnPesquisar;
     }
 }

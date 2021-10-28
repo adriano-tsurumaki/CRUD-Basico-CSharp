@@ -25,9 +25,5 @@ namespace CRUD___Adriano.Features.Usuario.Model
             Telefones = new List<TelefoneModel>();
             Endereco = new EnderecoModel();
         }
-
-        public string RetornarCpfFormatado() => 
-            Convert.ToUInt64(Cpf).ToString(@"000\.000\.000\-00");
-
     }
 }

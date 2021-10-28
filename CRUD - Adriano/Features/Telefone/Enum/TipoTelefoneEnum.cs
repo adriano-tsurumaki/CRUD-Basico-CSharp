@@ -5,10 +5,10 @@ namespace CRUD___Adriano.Features.Telefone.Enum
     public enum TipoTelefoneEnum
     {
         [Description("Comercial")]
-        Comercial,
+        Comercial = 1,
         [Description("Fixo")]
-        Fixo,
+        Fixo = 2,
         [Description("Celular")]
-        Celular
+        Celular = 3
     }
 }
