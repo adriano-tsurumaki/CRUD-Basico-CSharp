@@ -33,7 +33,7 @@ namespace CRUD___Adriano.Features.Cliente.Dao
                 .RuleFor(e => e.Nome, f => f.Person.Email);
 
             var telefoneFaker = new Faker<TelefoneModel>("pt_BR")
-                .RuleFor(t => t.Numero, f => f.Person.Phone.RetornarSomenteNumeros())
+                .RuleFor(t => t.Numero, f => f.Person.Phone.RetornarSomenteTextoEmNumeros())
                 .RuleFor(t => t.Tipo, _ => (TipoTelefoneEnum)new Random().Next(1, 4));
 
             var clienteFaker = new Faker<ClienteModel>("pt_BR")
@@ -41,7 +41,7 @@ namespace CRUD___Adriano.Features.Cliente.Dao
                 .RuleFor(c => c.Sobrenome, f => f.Person.LastName)
                 .RuleFor(c => c.DataNascimento, _ => GerarDataNascimentoAleatorio())
                 .RuleFor(c => c.ValorLimite, f => new Random().Next(10, 1000).ToString())
-                .RuleFor(c => c.Cpf, f => f.Person.Cpf().RetornarSomenteNumeros())
+                .RuleFor(c => c.Cpf, f => f.Person.Cpf().RetornarSomenteTextoEmNumeros())
                 .RuleFor(c => c.Sexo, f => f.Person.Gender == Bogus.DataSets.Name.Gender.Male ? UsuarioSexoEnum.Masculino : UsuarioSexoEnum.Feminino)
                 .RuleFor(c => c.Endereco, f => enderecoFaker)
                 .RuleFor(c => c.Emails, f => emailFaker.Generate(new Random().Next(1, 10)))

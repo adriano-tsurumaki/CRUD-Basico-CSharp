@@ -34,6 +34,6 @@ namespace CRUD___Adriano.Features.Cliente.View
         }
 
         private void TxtQuantidade__TextChanged(object sender, System.EventArgs e) =>
-            txtQuantidade.Texto = txtQuantidade.Texto.RetornarSomenteNumeros();
+            txtQuantidade.Texto = txtQuantidade.Texto.RetornarSomenteTextoEmNumeros();
     }
 }

@@ -222,7 +222,7 @@ namespace CRUD___Adriano.Features.Usuario.View
 
             if (txtTelefone.NuloOuVazio()) return;
 
-            txtTelefone.Texto = txtTelefone.Texto.RetornarSomenteNumeros();
+            txtTelefone.Texto = txtTelefone.Texto.RetornarSomenteTextoEmNumeros();
 
             if(txtTelefone.Texto.Length > 0)
                 btnAdicionarTelefone.Enabled = true;

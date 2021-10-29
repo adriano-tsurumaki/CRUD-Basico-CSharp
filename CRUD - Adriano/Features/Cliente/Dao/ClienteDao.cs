@@ -1,4 +1,5 @@
 ﻿using CRUD___Adriano.Features.Cadastro.Produto.Model;
+using CRUD___Adriano.Features.Cliente.Sql;
 using CRUD___Adriano.Features.Email.Model;
 using CRUD___Adriano.Features.Email.Sql;
 using CRUD___Adriano.Features.Endereco.Model;
@@ -16,21 +17,9 @@ namespace CRUD___Adriano.Features.Cliente.Dao
 {
     public class ClienteDao
     {
-        private static readonly string sqlInserirUsuario = 
-            @"insert into Usuario(nome, sobrenome, sexo, data_nascimento, cpf) 
-            output inserted.id
-            values(@Nome, @Sobrenome, @Sexo, @DataNascimento, @Cpf)";
-
-        private static readonly string sqlListarTodosOsClientes =
-            @"select u.id as IdUsuario, u.nome, u.sobrenome, u.sexo, u.cpf, u.data_nascimento as DataNascimento, c.valor_limite as ValorLimite, c.observacao,
-            c.id as split, en.id_usuario as IdUsuario, en.cep, en.logradouro, en.bairro, en.cidade, en.uf, en.complemento, en.numero
-			from Cliente c
-			inner join Usuario u on u.id = c.id_usuario
-			inner join Endereco en on en.id_usuario = u.id";
-
         public static bool CadastrarCliente(IDbConnection conexao, IDbTransaction transacao, ClienteModel clienteModel)
         {
-            clienteModel.IdUsuario = (int)conexao.ExecuteScalar(sqlInserirUsuario, clienteModel, transacao);
+            clienteModel.IdUsuario = (int)conexao.ExecuteScalar(UsuarioSql.Inserir, clienteModel, transacao);
 
             conexao.Execute(SqlInserirCliente(clienteModel), clienteModel, transacao);
 
@@ -49,28 +38,12 @@ namespace CRUD___Adriano.Features.Cliente.Dao
             return true;
         }
 
-        public static string SqlInserirCliente(ClienteModel clienteModel)
-        {
-            var insertSql = new StringBuilder("insert into Cliente(id_usuario, valor_limite");
-            var valuesSql = new StringBuilder("values (@IdUsuario, @ValorLimite");
-
-            if (!string.IsNullOrEmpty(clienteModel.Observacao))
-            {
-                insertSql.Append(", observacao");
-                valuesSql.Append(", @Observacao");
-            }
-
-            insertSql.Append(")");
-            valuesSql.Append(")");
-            return string.Join(' ', insertSql, valuesSql);
-        }
-
         public static IList<ClienteModel> ListarClientes(IDbConnection conexao)
         {
             var dicionarioCliente = new Dictionary<int, ClienteModel>();
 
             conexao.Query<ClienteModel, EnderecoModel, ClienteModel>(
-                sqlListarTodosOsClientes, 
+                ClienteSql.sqlListarTodosOsClientes, 
                 (clienteModel, enderecoModel) => 
                 MapearListagemDeClientes(clienteModel, enderecoModel, dicionarioCliente),
                 splitOn: "split");
@@ -117,37 +90,13 @@ namespace CRUD___Adriano.Features.Cliente.Dao
             return clienteModel;
         }
 
-        private static readonly string sqlSelecionarCliente =
-            @"select u.id as IdUsuario, u.nome, u.sobrenome, u.sexo, u.cpf, u.data_nascimento, c.valor_limite as ValorLimite, c.observacao,
-            c.id as split, en.id_usuario as IdUsuario, en.cep, en.logradouro, en.bairro, en.cidade, en.uf, en.complemento, en.numero
-			from Cliente c
-			inner join Usuario u on u.id = c.id_usuario
-			inner join Endereco en on en.id_usuario = u.id
-			where u.id = @id";
-
-        public static ClienteModel SelecionarCliente(IDbConnection conexao, int id)
+        public static IList<ClienteModel> ListarClientesSomenteIdENome(IDbConnection conexao)
         {
-            var dicionarioCliente = new Dictionary<int, ClienteModel>();
-
-            conexao.Query<ClienteModel, EnderecoModel, ClienteModel>(
-                sqlSelecionarCliente,
-                (clienteModel, enderecoModel) =>
-                MapearListagemDeClientes(clienteModel, enderecoModel, dicionarioCliente),
-                splitOn: "split",
-                param: new { id });
-
-            conexao.Query<ClienteModel, EmailModel, ClienteModel>(
-                EmailSql.ListarTodosPorId,
-                (clienteModel, emailModel) => MapearListagemDeEmailsDosClientes(clienteModel, emailModel, dicionarioCliente),
-                splitOn: "split");
-
-            conexao.Query<ClienteModel, TelefoneModel, ClienteModel>(
-                TelefoneSql.ListarTodosPorId,
-                (clienteModel, telefoneModel) => MapearListagemDeTelefonesDosClientes(clienteModel, telefoneModel, dicionarioCliente),
-                splitOn: "split");
-
-            return dicionarioCliente.Values.First();
+            return conexao.Query<ClienteModel>(ClienteSql.sqlListarTodosOsClientesSomenteIdENome).ToList();
         }
+
+        public static ClienteModel SelecionarClienteSomenteIdENome(IDbConnection conexao, int id) =>
+            conexao.QuerySingle<ClienteModel>(ClienteSql.sqlSelecionarClienteSomenteIdENome, new { id });
 
         public static bool RemoverCliente(IDbConnection conexao, IDbTransaction transacao, int id)
         {
@@ -188,6 +137,22 @@ namespace CRUD___Adriano.Features.Cliente.Dao
             }
 
             return true;
+        }
+
+        public static string SqlInserirCliente(ClienteModel clienteModel)
+        {
+            var insertSql = new StringBuilder("insert into Cliente(id_usuario, valor_limite");
+            var valuesSql = new StringBuilder("values (@IdUsuario, @ValorLimite");
+
+            if (!string.IsNullOrEmpty(clienteModel.Observacao))
+            {
+                insertSql.Append(", observacao");
+                valuesSql.Append(", @Observacao");
+            }
+
+            insertSql.Append(")");
+            valuesSql.Append(")");
+            return string.Join(' ', insertSql, valuesSql);
         }
 
         private static string SqlAtualizarCliente(ClienteModel clienteModel)

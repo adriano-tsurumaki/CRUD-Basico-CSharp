@@ -57,8 +57,8 @@ namespace CRUD___Adriano.Features.Cadastro.Usuario.View
             (_model as UsuarioModel).Endereco.Uf = cbEstado.PegarEnumPorDescricao<EstadosBrasilEnum>();
             (_model as UsuarioModel).Sexo = cbSexo.PegarEnumPorDescricao<UsuarioSexoEnum>();
             (_model as UsuarioModel).DataNascimento = dataNascimento.Value;
-            (_model as UsuarioModel).Cpf = txtCpf.Texto.RetornarSomenteNumeros();
-            (_model as UsuarioModel).Endereco.Cep = txtCep.Texto.RetornarSomenteNumeros();
+            (_model as UsuarioModel).Cpf = txtCpf.Texto.RetornarSomenteTextoEmNumeros();
+            (_model as UsuarioModel).Endereco.Cep = txtCep.Texto.RetornarSomenteTextoEmNumeros();
 
             Validado = true;
         }
@@ -110,7 +110,7 @@ namespace CRUD___Adriano.Features.Cadastro.Usuario.View
                 txtCep.Texto = txtCep.Texto.Remove(txtCep.SelectionStart - 1, 1);
             }
 
-            var textoFormatado = txtCep.Texto.RetornarSomenteNumeros();
+            var textoFormatado = txtCep.Texto.RetornarSomenteTextoEmNumeros();
 
             if (textoFormatado.Length > 5)
                 textoFormatado = textoFormatado.Insert(5, "-");
@@ -139,7 +139,7 @@ namespace CRUD___Adriano.Features.Cadastro.Usuario.View
                 txtCpf.Texto = txtCpf.Texto.Remove(txtCpf.SelectionStart - 1, 1);
             }
 
-            var textoFormatado = txtCpf.Texto.RetornarSomenteNumeros();
+            var textoFormatado = txtCpf.Texto.RetornarSomenteTextoEmNumeros();
 
             if (textoFormatado.Length > 3)
                 textoFormatado = textoFormatado.Insert(3, ".");
@@ -158,6 +158,6 @@ namespace CRUD___Adriano.Features.Cadastro.Usuario.View
         }
 
         private void TxtNumero__TextChanged(object sender, EventArgs e) =>
-            txtNumero.Texto = txtNumero.Texto.RetornarSomenteNumeros();
+            txtNumero.Texto = txtNumero.Texto.RetornarSomenteTextoEmNumeros();
     }
 }

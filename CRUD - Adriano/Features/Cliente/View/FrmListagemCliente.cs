@@ -1,5 +1,6 @@
 ﻿using CRUD___Adriano.Features.Cadastro.Produto.Model;
 using CRUD___Adriano.Features.Cliente.Controller;
+using CRUD___Adriano.Features.Utils;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
@@ -100,6 +101,21 @@ namespace CRUD___Adriano.Features.Cliente.View
             var clienteModelSelecionado = gridView.CurrentRow.DataBoundItem as ClienteModel;
 
             _controller.AbrirFormDeDetalhes(clienteModelSelecionado);
+        }
+
+        private void BtnPesquisar_Click(object sender, System.EventArgs e)
+        {
+
+        }
+
+        private void TxtPesquisar__KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode != Keys.Enter) return;
+
+            if (txtPesquisar.Texto == "%")
+                _controller.ListarTodosOsClientes(_clientesBinding);
+            else if (txtPesquisar.Numerico())
+                _controller.SelecionarPeloId(_clientesBinding, txtPesquisar.Texto.IntOuZero());
         }
     }
 }

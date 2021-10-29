@@ -3,6 +3,9 @@ using CRUD___Adriano.Features.Cadastro.Usuario.View;
 using CRUD___Adriano.Features.Cliente.View;
 using CRUD___Adriano.Features.Controller.PageManager;
 using CRUD___Adriano.Features.Usuario.View;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Windows.Forms;
 
 namespace CRUD___Adriano.Features.Cliente.Controller
@@ -28,7 +31,7 @@ namespace CRUD___Adriano.Features.Cliente.Controller
         {
             _clienteController = clienteController;
             _frmListagemCliente = new FrmListagemCliente(this);
-            _frmListagemCliente.BindGrid(_clienteController.Listar());
+            _frmListagemCliente.BindGrid(new List<ClienteModel>());
         }
 
         public void AbrirFormDeDetalhes(ClienteModel clienteModelSelecionado)
@@ -70,6 +73,19 @@ namespace CRUD___Adriano.Features.Cliente.Controller
             pageManager.Add(new FrmCadastroCliente());
             pageManager.SetConfirm(Factory.ControllerEnum.Atualizar);
             pageManager.Show();
+        }
+
+        public void ListarTodosOsClientes(BindingList<ClienteModel> clientesBinding)
+        {
+            clientesBinding.Clear();
+            foreach (var clienteModel in _clienteController.ListarSomenteIdENome())
+                clientesBinding.Add(clienteModel);
+        }
+
+        public void SelecionarPeloId(BindingList<ClienteModel> clientesBinding, int id)
+        {
+            clientesBinding.Clear();
+            clientesBinding.Add(_clienteController.SelecionarSomenteIdENome(id));
         }
     }
 }

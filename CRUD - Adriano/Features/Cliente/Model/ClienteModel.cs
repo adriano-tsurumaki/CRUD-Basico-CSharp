@@ -1,5 +1,4 @@
 ﻿using CRUD___Adriano.Features.Usuario.Model;
-using System.Globalization;
 
 namespace CRUD___Adriano.Features.Cadastro.Produto.Model
 {

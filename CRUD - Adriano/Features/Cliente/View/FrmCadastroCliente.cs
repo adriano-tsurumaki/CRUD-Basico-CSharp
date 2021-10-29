@@ -27,7 +27,7 @@ namespace CRUD___Adriano.Features.Cliente.View
                 Validado = false;
                 return;
             }
-            var valorLimite = txtValorLimite.Texto.RetornarSomenteNumeros();
+            var valorLimite = txtValorLimite.Texto.RetornarSomenteTextoEmNumeros();
             _clienteModel.ValorLimite = valorLimite.Length > 2 ? valorLimite.Insert(valorLimite.Length - 2, ".") : valorLimite;
 
             Validado = true;
@@ -51,7 +51,7 @@ namespace CRUD___Adriano.Features.Cliente.View
                 return;
             }
 
-            var textoFormatado = "R$ " + txtValorLimite.Texto.RetornarSomenteNumeros();
+            var textoFormatado = "R$ " + txtValorLimite.Texto.RetornarSomenteTextoEmNumeros();
 
             if (textoFormatado.Length > 5)
                 textoFormatado = textoFormatado.Insert(textoFormatado.Length - 2, ",");

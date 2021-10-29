@@ -34,8 +34,8 @@ namespace CRUD___Adriano.Features.Colaborador.View
             _colaboradorModel.DadosBancarios.TipoConta = cbTipoConta.PegarEnumPorDescricao<TipoContaEnum>();
 
 
-            var salario = txtSalario.Texto.RetornarSomenteNumeros();
-            var comissao = txtComissao.Texto.RetornarSomenteNumeros();
+            var salario = txtSalario.Texto.RetornarSomenteTextoEmNumeros();
+            var comissao = txtComissao.Texto.RetornarSomenteTextoEmNumeros();
 
             _colaboradorModel.Salario = salario.Length > 2 ? salario.Insert(salario.Length - 2, ".") : salario;
             _colaboradorModel.Comissao = comissao.Length > 2 ? comissao.Insert(comissao.Length - 2, ".") : comissao;
@@ -66,7 +66,7 @@ namespace CRUD___Adriano.Features.Colaborador.View
                 return;
             }
 
-            var textoFormatado = "R$ " + txtSalario.Texto.RetornarSomenteNumeros();
+            var textoFormatado = "R$ " + txtSalario.Texto.RetornarSomenteTextoEmNumeros();
 
             if (textoFormatado.Length > 5)
                 textoFormatado = textoFormatado.Insert(textoFormatado.Length - 2, ",");
@@ -95,7 +95,7 @@ namespace CRUD___Adriano.Features.Colaborador.View
                 txtConta.Texto = txtConta.Texto.Remove(txtConta.SelectionStart - 1, 1);
             }
 
-            var textoFormatado = txtConta.Texto.RetornarSomenteNumeros();
+            var textoFormatado = txtConta.Texto.RetornarSomenteTextoEmNumeros();
 
             if (textoFormatado != txtConta.Texto)
                 evitarLoopConta = true;
@@ -115,7 +115,7 @@ namespace CRUD___Adriano.Features.Colaborador.View
                 return;
             }
 
-            var textoFormatado = txtComissao.Texto.RetornarSomenteNumeros() + "%";
+            var textoFormatado = txtComissao.Texto.RetornarSomenteTextoEmNumeros() + "%";
 
             if (textoFormatado.Length > 3)
                 textoFormatado = textoFormatado.Insert(textoFormatado.Length - 3, ",");
@@ -144,7 +144,7 @@ namespace CRUD___Adriano.Features.Colaborador.View
                 txtAgencia.Texto = txtAgencia.Texto.Remove(txtAgencia.SelectionStart - 1, 1);
             }
 
-            var textoFormatado = txtAgencia.Texto.RetornarSomenteNumeros();
+            var textoFormatado = txtAgencia.Texto.RetornarSomenteTextoEmNumeros();
 
             if (textoFormatado != txtAgencia.Texto)
                 evitarLoopAgencia = true;

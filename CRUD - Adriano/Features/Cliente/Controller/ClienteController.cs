@@ -43,6 +43,20 @@ namespace CRUD___Adriano.Features.Cliente.Controller
             return new List<ClienteModel>();
         }
 
+        public IList<ClienteModel> ListarSomenteIdENome()
+        {
+            try
+            {
+                return _conexao.EscopoConexaoComRetorno((conexao) => ClienteDao.ListarClientesSomenteIdENome(conexao));
+            }
+            catch (Exception excecao)
+            {
+                MessageBox.Show(excecao.Message, "Erro ao listar clientes");
+            }
+
+            return new List<ClienteModel>();
+        }
+
         public IList<ClienteModel> Listar(int quantidade)
         {
             throw new System.NotImplementedException();
@@ -93,6 +107,19 @@ namespace CRUD___Adriano.Features.Cliente.Controller
         public ClienteModel Selecionar(int id)
         {
             throw new System.NotImplementedException();
+        }
+
+        public ClienteModel SelecionarSomenteIdENome(int id)
+        {
+            try
+            {
+                return _conexao.EscopoConexaoComRetorno((conexao) => ClienteDao.SelecionarClienteSomenteIdENome(conexao, id));
+            }
+            catch (Exception excecao)
+            {
+                MessageBox.Show(excecao.Message, "Erro ao buscar o cliente");
+            }
+            return new ClienteModel();
         }
     }
 }

@@ -2,6 +2,11 @@
 {
     public static class UsuarioSql
     {
+        public static readonly string Inserir =
+            @"insert into Usuario(nome, sobrenome, sexo, data_nascimento, cpf) 
+            output inserted.id
+            values(@Nome, @Sobrenome, @Sexo, @DataNascimento, @Cpf)";
+
         public static readonly string Remover =
             @"delete Usuario where id = @id";
 
