@@ -9,12 +9,23 @@
 			inner join Usuario u on u.id = c.id_usuario
 			inner join Endereco en on en.id_usuario = u.id";
 
-        public static readonly string sqlListarTodosOsClientesSomenteIdENome =
+        public static readonly string sqlListarTodosOsClientesComCamposSomenteIdENome =
             @"select u.id as IdUsuario, u.nome
 			from Cliente c
 			inner join Usuario u on u.id = c.id_usuario";
+        
+        public static readonly string sqlListarClientesPeloNomeComCamposSomenteIdENome =
+            @"select u.id as IdUsuario, u.nome
+			from Cliente c
+			inner join Usuario u on u.id = c.id_usuario
+            where u.nome Like @Nome + '%'";
 
-        public static readonly string sqlSelecionarClienteSomenteIdENome =
+        public static readonly string sqlListarAlgunsClientesComCamposSomenteIdENome =
+            @"select top {=Quantidade} u.id as IdUsuario, u.nome
+            from Cliente c
+			inner join Usuario u on u.id = c.id_usuario";
+
+        public static readonly string sqlSelecionarClienteComCamposSomenteIdENome =
             @"select u.id as IdUsuario, u.nome
 			from Cliente c
 			inner join Usuario u on u.id = c.id_usuario

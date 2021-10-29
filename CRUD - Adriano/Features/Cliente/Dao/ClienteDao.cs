@@ -38,7 +38,7 @@ namespace CRUD___Adriano.Features.Cliente.Dao
             return true;
         }
 
-        public static IList<ClienteModel> ListarClientes(IDbConnection conexao)
+        public static IList<ClienteModel> ListarTodosOsClientes(IDbConnection conexao)
         {
             var dicionarioCliente = new Dictionary<int, ClienteModel>();
 
@@ -90,13 +90,17 @@ namespace CRUD___Adriano.Features.Cliente.Dao
             return clienteModel;
         }
 
-        public static IList<ClienteModel> ListarClientesSomenteIdENome(IDbConnection conexao)
-        {
-            return conexao.Query<ClienteModel>(ClienteSql.sqlListarTodosOsClientesSomenteIdENome).ToList();
-        }
+        public static IList<ClienteModel> ListarTodosOsClientesSomenteIdENome(IDbConnection conexao) =>
+            conexao.Query<ClienteModel>(ClienteSql.sqlListarTodosOsClientesComCamposSomenteIdENome).ToList();
+
+        public static IList<ClienteModel> ListarClientesPeloNomeSomenteIdENome(IDbConnection conexao, string Nome) =>
+            conexao.Query<ClienteModel>(ClienteSql.sqlListarClientesPeloNomeComCamposSomenteIdENome, new { Nome }).ToList();
+
+        public static IList<ClienteModel> ListarAlgunsClientesSomenteIdENome(IDbConnection conexao, int Quantidade) =>
+            conexao.Query<ClienteModel>(ClienteSql.sqlListarAlgunsClientesComCamposSomenteIdENome, new { Quantidade }).ToList();
 
         public static ClienteModel SelecionarClienteSomenteIdENome(IDbConnection conexao, int id) =>
-            conexao.QuerySingle<ClienteModel>(ClienteSql.sqlSelecionarClienteSomenteIdENome, new { id });
+            conexao.QuerySingleOrDefault<ClienteModel>(ClienteSql.sqlSelecionarClienteComCamposSomenteIdENome, new { id });
 
         public static bool RemoverCliente(IDbConnection conexao, IDbTransaction transacao, int id)
         {

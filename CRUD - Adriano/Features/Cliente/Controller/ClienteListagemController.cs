@@ -82,10 +82,27 @@ namespace CRUD___Adriano.Features.Cliente.Controller
                 clientesBinding.Add(clienteModel);
         }
 
+        public void ListarPeloNomeSomenteIdENome(BindingList<ClienteModel> clientesBinding, string nome)
+        {
+            clientesBinding.Clear();
+            foreach(var clienteModel in _clienteController.ListarPeloNomeSomenteIdENome(nome))
+                clientesBinding.Add(clienteModel);
+        }
+
+        public void ListarQuantidadeDeClientes(BindingList<ClienteModel> clientesBinding, int quantidade)
+        {
+            clientesBinding.Clear();
+            foreach (var clienteModel in _clienteController.Listar(quantidade))
+                clientesBinding.Add(clienteModel);
+        }
+
         public void SelecionarPeloId(BindingList<ClienteModel> clientesBinding, int id)
         {
             clientesBinding.Clear();
-            clientesBinding.Add(_clienteController.SelecionarSomenteIdENome(id));
+            var cliente = _clienteController.SelecionarSomenteIdENome(id);
+            if (cliente == null) return;
+
+            clientesBinding.Add(cliente);
         }
     }
 }

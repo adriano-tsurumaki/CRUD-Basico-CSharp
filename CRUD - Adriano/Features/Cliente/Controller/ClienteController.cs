@@ -33,7 +33,7 @@ namespace CRUD___Adriano.Features.Cliente.Controller
         {
             try
             {
-                return _conexao.EscopoConexaoComRetorno((conexao) => ClienteDao.ListarClientes(conexao));
+                return _conexao.EscopoConexaoComRetorno((conexao) => ClienteDao.ListarTodosOsClientes(conexao));
             }
             catch (Exception excecao)
             {
@@ -47,7 +47,21 @@ namespace CRUD___Adriano.Features.Cliente.Controller
         {
             try
             {
-                return _conexao.EscopoConexaoComRetorno((conexao) => ClienteDao.ListarClientesSomenteIdENome(conexao));
+                return _conexao.EscopoConexaoComRetorno((conexao) => ClienteDao.ListarTodosOsClientesSomenteIdENome(conexao));
+            }
+            catch (Exception excecao)
+            {
+                MessageBox.Show(excecao.Message, "Erro ao listar clientes");
+            }
+
+            return new List<ClienteModel>();
+        }
+
+        public IList<ClienteModel> ListarPeloNomeSomenteIdENome(string nome)
+        {
+            try
+            {
+                return _conexao.EscopoConexaoComRetorno((conexao) => ClienteDao.ListarClientesPeloNomeSomenteIdENome(conexao, nome));
             }
             catch (Exception excecao)
             {
@@ -59,7 +73,16 @@ namespace CRUD___Adriano.Features.Cliente.Controller
 
         public IList<ClienteModel> Listar(int quantidade)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                return _conexao.EscopoConexaoComRetorno((conexao) => ClienteDao.ListarAlgunsClientesSomenteIdENome(conexao, quantidade));
+            }
+            catch (Exception excecao)
+            {
+                MessageBox.Show(excecao.Message, "Erro ao listar clientes");
+            }
+
+            return new List<ClienteModel>();
         }
 
         public bool Remover(int id)
