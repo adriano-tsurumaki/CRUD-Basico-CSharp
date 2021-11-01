@@ -101,7 +101,7 @@ namespace CRUD___Adriano.Features.Cliente.Dao
 
         public static ClienteModel SelecionarCliente(IDbConnection conexao, int id)
         {
-            var cliente = conexao.QuerySingleOrDefault<ClienteModel>(ClienteSql.sqlSelecionarCliente, new { id });
+            var cliente = conexao.QuerySingleOrDefault<ClienteModel>(ClienteSql.Selecionar, new { id });
 
             cliente.Endereco = conexao.QuerySingleOrDefault<EnderecoModel>(EnderecoSql.SelecionarUm, new { id });
             cliente.Emails = conexao.Query<EmailModel>(EmailSql.ListarTodosPorId, new { id }).ToList();

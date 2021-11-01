@@ -130,7 +130,15 @@ namespace CRUD___Adriano.Features.Colaborador.Controller
 
         public ColaboradorModel Selecionar(int id)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                return _conexao.EscopoConexaoComRetorno((conexao) => ColaboradorDao.SelecionarColaborador(conexao, id));
+            }
+            catch (Exception excecao)
+            {
+                MessageBox.Show(excecao.Message, "Erro ao buscar o colaborador");
+            }
+            return new ColaboradorModel();
         }
 
         public ColaboradorModel SelecionarSomenteIdENome(int id)

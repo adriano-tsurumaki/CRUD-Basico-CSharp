@@ -11,6 +11,7 @@ namespace CRUD___Adriano.Features.Colaborador.View
     public partial class FrmListagemColaborador : Form
     {
         private BindingList<ColaboradorModel> _colaboradoresBinding;
+
         private ColaboradorListagemController _controller { get; set; }
 
         public FrmListagemColaborador(ColaboradorListagemController controller)
@@ -100,7 +101,7 @@ namespace CRUD___Adriano.Features.Colaborador.View
 
             var colaboradorModelSelecionado = gridView.CurrentRow.DataBoundItem as ColaboradorModel;
 
-            _controller.AbrirFormDeDetalhes(colaboradorModelSelecionado);
+            _controller.AbrirFormDeDetalhes(colaboradorModelSelecionado.IdUsuario);
         }
 
         private void BtnPesquisar_Click(object sender, System.EventArgs e) =>

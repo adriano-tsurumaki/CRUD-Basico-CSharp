@@ -4,6 +4,7 @@ using CRUD___Adriano.Features.Colaborador.View;
 using CRUD___Adriano.Features.Controller.PageManager;
 using CRUD___Adriano.Features.Usuario.View;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
 
@@ -30,7 +31,7 @@ namespace CRUD___Adriano.Features.Colaborador.Controller
         {
             _colaboradorController = colaboradorController;
             _frmListagemColaborador = new FrmListagemColaborador(this);
-            _frmListagemColaborador.BindGrid(colaboradorController.Listar());
+            _frmListagemColaborador.BindGrid(new List<ColaboradorModel>());
         }
 
         public bool ExcluirCliente(int id) =>
@@ -52,8 +53,10 @@ namespace CRUD___Adriano.Features.Colaborador.Controller
             pageManager.Show();
         }
 
-        public void AbrirFormDeDetalhes(ColaboradorModel colaboradorModelSelecionado)
+        public void AbrirFormDeDetalhes(int id)
         {
+            var colaboradorModelSelecionado = _colaboradorController.Selecionar(id);
+
             if (_dock == null)
             {
                 new FrmDetalhesColaborador(colaboradorModelSelecionado).Show();

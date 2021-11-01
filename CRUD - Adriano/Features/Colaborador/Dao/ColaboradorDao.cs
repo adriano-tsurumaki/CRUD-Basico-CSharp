@@ -131,6 +131,18 @@ namespace CRUD___Adriano.Features.Colaborador.Dao
         public static IList<ColaboradorModel> ListarColaboradoresPeloNomeSomenteIdENome(IDbConnection conexao, string nome) =>
             conexao.Query<ColaboradorModel>(ColaboradorSql.ListarPeloNomeComCamposSomenteIdENome, new { nome }).ToList();
 
+        public static ColaboradorModel SelecionarColaborador(IDbConnection conexao, int id)
+        {
+            var colaborador = conexao.QuerySingleOrDefault<ColaboradorModel>(ColaboradorSql.Selecionar, new { id });
+
+            colaborador.DadosBancarios = conexao.QuerySingleOrDefault<DadosBancariosModel>(DadosBancariosSql.SelecionarUm, new { id });
+            colaborador.Endereco = conexao.QuerySingleOrDefault<EnderecoModel>(EnderecoSql.SelecionarUm, new { id });
+            colaborador.Emails = conexao.Query<EmailModel>(EmailSql.ListarTodosPorId, new { id }).ToList();
+            colaborador.Telefones = conexao.Query<TelefoneModel>(TelefoneSql.ListarTodosPorId, new { id }).ToList();
+
+            return colaborador;
+        }
+
         public static ColaboradorModel SelecionarColaboradorSomenteIdENome(IDbConnection conexao, int id) =>
             conexao.QuerySingleOrDefault<ColaboradorModel>(ColaboradorSql.SelecionarComCamposSomenteIdENome, new { id });
 
