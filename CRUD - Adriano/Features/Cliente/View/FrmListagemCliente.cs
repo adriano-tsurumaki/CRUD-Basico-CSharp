@@ -88,7 +88,7 @@ namespace CRUD___Adriano.Features.Cliente.View
                 }
             }
             else if (botao.Name.Equals("Alterar"))
-                _controller.AlterarCliente(clienteModelSelecionado);
+                _controller.AlterarCliente(clienteModelSelecionado.IdUsuario);
         }
 
         private void GridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)

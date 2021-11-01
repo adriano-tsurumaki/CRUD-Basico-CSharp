@@ -1,8 +1,8 @@
 ﻿using Bogus;
 using Bogus.Extensions.Brazil;
 using CRUD___Adriano.Features.Cadastro.Produto.Model;
-using CRUD___Adriano.Features.Cliente.Model;
 using CRUD___Adriano.Features.Colaborador.Enum;
+using CRUD___Adriano.Features.Colaborador.Model;
 using CRUD___Adriano.Features.Entidades.DadosBancarios.Model;
 using CRUD___Adriano.Features.Entidades.Email.Model;
 using CRUD___Adriano.Features.Entidades.Endereco.Model;

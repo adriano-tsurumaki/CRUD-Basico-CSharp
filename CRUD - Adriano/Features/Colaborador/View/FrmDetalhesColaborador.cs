@@ -1,4 +1,4 @@
-﻿using CRUD___Adriano.Features.Cliente.Model;
+﻿using CRUD___Adriano.Features.Colaborador.Model;
 using CRUD___Adriano.Features.Utils;
 using System;
 using System.Text;

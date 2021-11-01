@@ -62,8 +62,10 @@ namespace CRUD___Adriano.Features.Cliente.Controller
 
         public Form RetornarFormulario() => _frmListagemCliente;
 
-        public void AlterarCliente(ClienteModel clienteModelSelecionado)
+        public void AlterarCliente(int id)
         {
+            var clienteModelSelecionado = _clienteController.Selecionar(id);
+            
             var pageManager = new GerenciadorDePaginas<ClienteModel>(
                 _dock,
                 _clienteController,

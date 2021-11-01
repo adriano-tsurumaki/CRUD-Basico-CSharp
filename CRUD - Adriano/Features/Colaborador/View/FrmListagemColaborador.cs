@@ -1,5 +1,5 @@
-﻿using CRUD___Adriano.Features.Cliente.Model;
-using CRUD___Adriano.Features.Colaborador.Controller;
+﻿using CRUD___Adriano.Features.Colaborador.Controller;
+using CRUD___Adriano.Features.Colaborador.Model;
 using CRUD___Adriano.Features.Utils;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,7 +20,7 @@ namespace CRUD___Adriano.Features.Colaborador.View
             _controller = controller;
         }
 
-        public void BindGrid(IList<ColaboradorModel> listaDeClientes)
+        public void BindGrid(IList<ColaboradorModel> listaDeColaboradores)
         {
             gridView.Columns.Clear();
             DataGridViewCell celula = new DataGridViewTextBoxCell();
@@ -61,7 +61,7 @@ namespace CRUD___Adriano.Features.Colaborador.View
             gridView.Columns.Add(botaoAlterarColuna);
             gridView.Columns.Add(botaoExcluirColuna);
 
-            _colaboradoresBinding = new BindingList<ColaboradorModel>(listaDeClientes);
+            _colaboradoresBinding = new BindingList<ColaboradorModel>(listaDeColaboradores);
             gridView.AutoGenerateColumns = false;
             gridView.DataSource = _colaboradoresBinding;
         }
@@ -81,14 +81,14 @@ namespace CRUD___Adriano.Features.Colaborador.View
             {
                 if (MessageBox.Show("Deseja realmente excluir?", "Aviso", MessageBoxButtons.YesNo) == DialogResult.No) return;
 
-                if (_controller.ExcluirCliente(colaboradorModelSelecionado.IdUsuario))
+                if (_controller.ExcluirColaborador(colaboradorModelSelecionado.IdUsuario))
                 {
                     _colaboradoresBinding.Remove(colaboradorModelSelecionado);
                     MessageBox.Show("Excluído com sucesso");
                 }
             }
             else if (botao.Name.Equals("Alterar"))
-                _controller.AlterarCliente(colaboradorModelSelecionado);
+                _controller.AlterarColaborador(colaboradorModelSelecionado.IdUsuario);
         }
 
         private void GridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -123,7 +123,7 @@ namespace CRUD___Adriano.Features.Colaborador.View
             {
                 var quantidade = txtPesquisar.Texto.RetornarSomenteTextoEmNumeros().IntOuZero();
                 if (quantidade > 0)
-                    _controller.ListarQuantidadeDeClientes(_colaboradoresBinding, quantidade);
+                    _controller.ListarQuantidadeDeColaboradores(_colaboradoresBinding, quantidade);
             }
             else if (txtPesquisar.Numerico())
                 _controller.SelecionarPeloId(_colaboradoresBinding, txtPesquisar.Texto.IntOuZero());

@@ -1,5 +1,5 @@
-﻿using CRUD___Adriano.Features.Cliente.Model;
-using CRUD___Adriano.Features.Colaborador.Dao;
+﻿using CRUD___Adriano.Features.Colaborador.Dao;
+using CRUD___Adriano.Features.Colaborador.Model;
 using CRUD___Adriano.Features.Factory;
 using System;
 using System.Collections.Generic;

@@ -1,9 +1,9 @@
 ﻿using CRUD___Adriano.Features.Cadastro.Produto.Model;
 using CRUD___Adriano.Features.Cadastro.Usuario.View;
 using CRUD___Adriano.Features.Cliente.Controller;
-using CRUD___Adriano.Features.Cliente.Model;
 using CRUD___Adriano.Features.Cliente.View;
 using CRUD___Adriano.Features.Colaborador.Controller;
+using CRUD___Adriano.Features.Colaborador.Model;
 using CRUD___Adriano.Features.Colaborador.View;
 using CRUD___Adriano.Features.Controller.PageManager;
 using CRUD___Adriano.Features.Factory;

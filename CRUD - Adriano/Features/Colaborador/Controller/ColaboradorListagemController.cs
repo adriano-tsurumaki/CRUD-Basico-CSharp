@@ -1,9 +1,8 @@
 ﻿using CRUD___Adriano.Features.Cadastro.Usuario.View;
-using CRUD___Adriano.Features.Cliente.Model;
+using CRUD___Adriano.Features.Colaborador.Model;
 using CRUD___Adriano.Features.Colaborador.View;
 using CRUD___Adriano.Features.Controller.PageManager;
 using CRUD___Adriano.Features.Usuario.View;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
@@ -34,17 +33,19 @@ namespace CRUD___Adriano.Features.Colaborador.Controller
             _frmListagemColaborador.BindGrid(new List<ColaboradorModel>());
         }
 
-        public bool ExcluirCliente(int id) =>
+        public bool ExcluirColaborador(int id) =>
             _colaboradorController.Remover(id);
 
         public Form RetornarFormulario() => _frmListagemColaborador;
 
-        public void AlterarCliente(ColaboradorModel clienteModelSelecionado)
+        public void AlterarColaborador(int id)
         {
+            var colaboradorModelSelecionado = _colaboradorController.Selecionar(id);
+
             var pageManager = new GerenciadorDePaginas<ColaboradorModel>(
                 _dock,
                 _colaboradorController,
-                clienteModelSelecionado);
+                colaboradorModelSelecionado);
 
             pageManager.Add(new FrmCadastroUsuario<ColaboradorModel>());
             pageManager.Add(new FrmEmailTelefone<ColaboradorModel>());
@@ -84,7 +85,7 @@ namespace CRUD___Adriano.Features.Colaborador.Controller
                 colaboradoresBinding.Add(colaboradorModel);
         }
 
-        public void ListarQuantidadeDeClientes(BindingList<ColaboradorModel> colaboradoresBinding, int quantidade)
+        public void ListarQuantidadeDeColaboradores(BindingList<ColaboradorModel> colaboradoresBinding, int quantidade)
         {
             colaboradoresBinding.Clear();
             foreach (var colaboradorModel in _colaboradorController.ListarPelaQuantidadeSomenteIdENome(quantidade))
