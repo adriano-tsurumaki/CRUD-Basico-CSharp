@@ -25,7 +25,7 @@ namespace CRUD___Adriano.Features.Cliente.View
             lblSobrenome.Text = _clienteModel.Sobrenome;
             lblIdade.Text = $"{idade} {(idade > 0 ? "anos" : "ano")}";
             lblSexo.Text = _clienteModel.Sexo.RetornarDescricao();
-            lblCpf.Text = _clienteModel.Cpf;
+            lblCpf.Text = _clienteModel.Cpf.ValorFormatado;
             lblCidade.Text = _clienteModel.Endereco.Cidade;
             lblEstado.Text = _clienteModel.Endereco.Uf.RetornarDescricao();
             lblLogradouro.Text = _clienteModel.Endereco.Logradouro;

@@ -68,7 +68,6 @@ namespace CRUD___Adriano.Features.Cadastro.Usuario.View
             _model = model;
             txtNome.DataBindings.Add("Texto", model, "Nome");
             txtSobrenome.DataBindings.Add("Texto", model, "Sobrenome");
-            txtCpf.DataBindings.Add("Texto", model, "Cpf");
             txtLogradouro.DataBindings.Add("Texto", model, "Endereco.Logradouro");
             txtCidade.DataBindings.Add("Texto", model, "Endereco.Cidade");
             txtBairro.DataBindings.Add("Texto", model, "Endereco.Bairro");
@@ -155,6 +154,7 @@ namespace CRUD___Adriano.Features.Cadastro.Usuario.View
 
             txtCpf.SelectionLength = 0;
             txtCpf.Texto = textoFormatado;
+            (_model as UsuarioModel).Cpf = textoFormatado;
         }
 
         private void TxtNumero__TextChanged(object sender, EventArgs e) =>
