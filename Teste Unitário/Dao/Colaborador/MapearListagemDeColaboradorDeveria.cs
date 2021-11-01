@@ -1,10 +1,8 @@
 ﻿using CRUD___Adriano.Features.Cliente.Model;
 using CRUD___Adriano.Features.Colaborador.Dao;
-using CRUD___Adriano.Features.Endereco.Model;
+using CRUD___Adriano.Features.Entidades.Endereco.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Teste_Unitário.Dao.Colaborador
 {

@@ -1,7 +1,7 @@
-﻿using CRUD___Adriano.Features.Endereco.Model;
+﻿using CRUD___Adriano.Features.Entidades.Endereco.Model;
 using System.Text;
 
-namespace CRUD___Adriano.Features.Endereco.Sql
+namespace CRUD___Adriano.Features.Entidades.Endereco.Sql
 {
     public static class EnderecoSql
     {

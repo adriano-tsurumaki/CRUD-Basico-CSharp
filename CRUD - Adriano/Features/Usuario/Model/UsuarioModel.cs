@@ -1,6 +1,6 @@
-﻿using CRUD___Adriano.Features.Email.Model;
-using CRUD___Adriano.Features.Endereco.Model;
-using CRUD___Adriano.Features.Telefone.Model;
+﻿using CRUD___Adriano.Features.Entidades.Email.Model;
+using CRUD___Adriano.Features.Entidades.Endereco.Model;
+using CRUD___Adriano.Features.Entidades.Telefone.Model;
 using CRUD___Adriano.Features.Usuario.Enum;
 using System;
 using System.Collections.Generic;

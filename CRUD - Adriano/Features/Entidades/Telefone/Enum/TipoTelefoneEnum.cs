@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace CRUD___Adriano.Features.Telefone.Enum
+namespace CRUD___Adriano.Features.Entidades.Telefone.Enum
 {
     public enum TipoTelefoneEnum
     {

@@ -1,12 +1,11 @@
-﻿using CRUD___Adriano.Features.Email.Model;
+﻿using CRUD___Adriano.Features.Entidades.Email.Model;
+using CRUD___Adriano.Features.Entidades.Telefone.Enum;
+using CRUD___Adriano.Features.Entidades.Telefone.Model;
 using CRUD___Adriano.Features.Factory;
-using CRUD___Adriano.Features.Telefone.Enum;
-using CRUD___Adriano.Features.Telefone.Model;
 using CRUD___Adriano.Features.Usuario.Model;
 using CRUD___Adriano.Features.Utils;
 using System;
 using System.ComponentModel;
-using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 

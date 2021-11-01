@@ -1,5 +1,5 @@
 ﻿using CRUD___Adriano.Features.Cliente.Model;
-using CRUD___Adriano.Features.Endereco.Model;
+using CRUD___Adriano.Features.Entidades.Endereco.Model;
 using CRUD___Adriano.Features.Usuario.Model;
 using Dapper.FluentMap;
 using Dapper.FluentMap.Dommel;

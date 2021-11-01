@@ -1,4 +1,4 @@
-﻿namespace CRUD___Adriano.Features.Email.Model
+﻿namespace CRUD___Adriano.Features.Entidades.Email.Model
 {
     public class EmailModel
     {

@@ -1,4 +1,4 @@
-﻿namespace CRUD___Adriano.Features.Email.Sql
+﻿namespace CRUD___Adriano.Features.Entidades.Email.Sql
 {
     public static class EmailSql
     {

@@ -1,6 +1,6 @@
-﻿using CRUD___Adriano.Features.Telefone.Enum;
+﻿using CRUD___Adriano.Features.Entidades.Telefone.Enum;
 
-namespace CRUD___Adriano.Features.Telefone.Model
+namespace CRUD___Adriano.Features.Entidades.Telefone.Model
 {
     public class TelefoneModel
     {

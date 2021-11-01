@@ -1,11 +1,11 @@
 ﻿using CRUD___Adriano.Features.Cadastro.Produto.Model;
 using CRUD___Adriano.Features.Cliente.Sql;
-using CRUD___Adriano.Features.Email.Model;
-using CRUD___Adriano.Features.Email.Sql;
-using CRUD___Adriano.Features.Endereco.Model;
-using CRUD___Adriano.Features.Endereco.Sql;
-using CRUD___Adriano.Features.Telefone.Model;
-using CRUD___Adriano.Features.Telefone.Sql;
+using CRUD___Adriano.Features.Entidades.Email.Model;
+using CRUD___Adriano.Features.Entidades.Email.Sql;
+using CRUD___Adriano.Features.Entidades.Endereco.Model;
+using CRUD___Adriano.Features.Entidades.Endereco.Sql;
+using CRUD___Adriano.Features.Entidades.Telefone.Model;
+using CRUD___Adriano.Features.Entidades.Telefone.Sql;
 using CRUD___Adriano.Features.Usuario.Sql;
 using Dapper;
 using System.Collections.Generic;

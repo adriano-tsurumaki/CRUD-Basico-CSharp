@@ -1,6 +1,6 @@
 ﻿using CRUD___Adriano.Features.Estados.Enum;
 
-namespace CRUD___Adriano.Features.Endereco.Model
+namespace CRUD___Adriano.Features.Entidades.Endereco.Model
 {
     public class EnderecoModel
     {

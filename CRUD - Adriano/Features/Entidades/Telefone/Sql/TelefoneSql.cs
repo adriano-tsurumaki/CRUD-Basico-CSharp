@@ -1,4 +1,4 @@
-﻿namespace CRUD___Adriano.Features.Telefone.Sql
+﻿namespace CRUD___Adriano.Features.Entidades.Telefone.Sql
 {
     public static class TelefoneSql
     {
