@@ -1,6 +1,6 @@
 ﻿using CRUD___Adriano.Features.Colaborador.Enum;
 
-namespace CRUD___Adriano.Features.Colaborador.Model
+namespace CRUD___Adriano.Features.Entidades.DadosBancarios.Model
 {
     public class DadosBancariosModel
     {

@@ -1,7 +1,9 @@
 ﻿using CRUD___Adriano.Features.Cliente.Model;
 using CRUD___Adriano.Features.Colaborador.Controller;
+using CRUD___Adriano.Features.Utils;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace CRUD___Adriano.Features.Colaborador.View
@@ -99,6 +101,33 @@ namespace CRUD___Adriano.Features.Colaborador.View
             var colaboradorModelSelecionado = gridView.CurrentRow.DataBoundItem as ColaboradorModel;
 
             _controller.AbrirFormDeDetalhes(colaboradorModelSelecionado);
+        }
+
+        private void BtnPesquisar_Click(object sender, System.EventArgs e) =>
+            PesquisarDeAcordoComOTexto();
+
+        private void TxtPesquisar__KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode != Keys.Enter) return;
+            PesquisarDeAcordoComOTexto();
+        }
+
+        private void PesquisarDeAcordoComOTexto()
+        {
+            if (txtPesquisar.NuloOuVazio())
+                return;
+            else if (txtPesquisar.Texto == "%")
+                _controller.ListarTodosOsColaboradores(_colaboradoresBinding);
+            else if (new Regex(@"^[%][0-9]+$").Match(txtPesquisar.Texto).Success)
+            {
+                var quantidade = txtPesquisar.Texto.RetornarSomenteTextoEmNumeros().IntOuZero();
+                //if (quantidade > 0)
+                    //_controller.ListarQuantidadeDeClientes(_clientesBinding, quantidade);
+            }
+            //else if (txtPesquisar.Numerico())
+                //_controller.SelecionarPeloId(_clientesBinding, txtPesquisar.Texto.IntOuZero());
+            //else
+                //_controller.ListarPeloNomeSomenteIdENome(_clientesBinding, txtPesquisar.Texto);
         }
     }
 }

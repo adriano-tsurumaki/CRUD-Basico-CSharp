@@ -4,6 +4,7 @@ using CRUD___Adriano.Features.Colaborador.View;
 using CRUD___Adriano.Features.Controller.PageManager;
 using CRUD___Adriano.Features.Usuario.View;
 using System;
+using System.ComponentModel;
 using System.Windows.Forms;
 
 namespace CRUD___Adriano.Features.Colaborador.Controller
@@ -71,6 +72,13 @@ namespace CRUD___Adriano.Features.Colaborador.Controller
 
             frmAlterarColaborador.BringToFront();
             frmAlterarColaborador.Show();
+        }
+
+        public void ListarTodosOsColaboradores(BindingList<ColaboradorModel> colaboradoresBinding)
+        {
+            colaboradoresBinding.Clear();
+            foreach (var colaboradorModel in _colaboradorController.ListarSomenteIdENome())
+                colaboradoresBinding.Add(colaboradorModel);
         }
     }
 }

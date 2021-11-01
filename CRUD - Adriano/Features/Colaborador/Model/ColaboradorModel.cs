@@ -1,4 +1,4 @@
-﻿using CRUD___Adriano.Features.Colaborador.Model;
+﻿using CRUD___Adriano.Features.Entidades.DadosBancarios.Model;
 using CRUD___Adriano.Features.Usuario.Model;
 
 namespace CRUD___Adriano.Features.Cliente.Model

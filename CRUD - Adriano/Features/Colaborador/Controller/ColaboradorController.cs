@@ -43,6 +43,20 @@ namespace CRUD___Adriano.Features.Colaborador.Controller
             return new List<ColaboradorModel>();
         }
 
+        public IList<ColaboradorModel> ListarSomenteIdENome()
+        {
+            try
+            {
+                return _conexao.EscopoConexaoComRetorno((conexao) => ColaboradorDao.ListarTodosOsColaboradoresSomenteIdENome(conexao));
+            }
+            catch (Exception excecao)
+            {
+                MessageBox.Show(excecao.Message, "Erro ao listar colaboradores");
+            }
+
+            return new List<ColaboradorModel>();
+        }
+
         public IList<ColaboradorModel> Listar(int quantidade)
         {
             throw new System.NotImplementedException();

@@ -1,9 +1,11 @@
 ﻿using CRUD___Adriano.Features.Cliente.Model;
-using CRUD___Adriano.Features.Colaborador.Model;
+using CRUD___Adriano.Features.Colaborador.Sql;
 using CRUD___Adriano.Features.Email.Model;
 using CRUD___Adriano.Features.Email.Sql;
 using CRUD___Adriano.Features.Endereco.Model;
 using CRUD___Adriano.Features.Endereco.Sql;
+using CRUD___Adriano.Features.Entidades.DadosBancarios.Model;
+using CRUD___Adriano.Features.Entidades.DadosBancarios.Sql;
 using CRUD___Adriano.Features.Telefone.Model;
 using CRUD___Adriano.Features.Telefone.Sql;
 using CRUD___Adriano.Features.Usuario.Sql;
@@ -16,20 +18,6 @@ namespace CRUD___Adriano.Features.Colaborador.Dao
 {
     public class ColaboradorDao
     {
-        private static readonly string sqlInserirUsuario =
-            @"insert into Usuario(nome, sobrenome, sexo, data_nascimento, cpf) 
-            output inserted.id
-            values(@Nome, @Sobrenome, @Sexo, @DataNascimento, @Cpf)";
-
-        private static readonly string sqlInserirColaborador =
-            @"insert into Colaborador(id_usuario, salario, comissao)
-            output inserted.id
-            values(@IdUsuario, @Salario, @Comissao)";
-
-        private static readonly string sqlInserirDadosBancarios =
-            @"insert into DadosBancarios(id_colaborador, agencia, conta, tipo_conta, banco)
-            values(@IdColaborador, @Agencia, @Conta, @TipoConta, @Banco)";
-
         private static readonly string sqlListarTodosOsColaboradores =
             @"select u.id as IdUsuario, u.nome, u.sobrenome, u.sexo, u.cpf, u.data_nascimento as DataNascimento, c.salario, c.comissao,
             c.id as split, en.id_usuario as IdUsuario, en.cep, en.logradouro, en.bairro, en.cidade, en.uf, en.complemento, en.numero
@@ -46,9 +34,9 @@ namespace CRUD___Adriano.Features.Colaborador.Dao
 
         public static bool CadastrarColaborador(IDbConnection conexao, IDbTransaction transacao, ColaboradorModel colaboradorModel)
         {
-            colaboradorModel.IdUsuario = (int)conexao.ExecuteScalar(sqlInserirUsuario, colaboradorModel, transacao);
+            colaboradorModel.IdUsuario = (int)conexao.ExecuteScalar(UsuarioSql.Inserir, colaboradorModel, transacao);
 
-            colaboradorModel.DadosBancarios.IdColaborador = (int)conexao.ExecuteScalar(sqlInserirColaborador, colaboradorModel, transacao);
+            colaboradorModel.DadosBancarios.IdColaborador = (int)conexao.ExecuteScalar(ColaboradorSql.Inserir, colaboradorModel, transacao);
 
             colaboradorModel.Endereco.IdUsuario = colaboradorModel.IdUsuario;
 
@@ -61,7 +49,7 @@ namespace CRUD___Adriano.Features.Colaborador.Dao
             conexao.Execute(EnderecoSql.Inserir(colaboradorModel.Endereco), colaboradorModel.Endereco, transacao);
             conexao.Execute(EmailSql.Inserir, colaboradorModel.Emails, transacao);
             conexao.Execute(TelefoneSql.Inserir, colaboradorModel.Telefones, transacao);
-            conexao.Execute(sqlInserirDadosBancarios, colaboradorModel.DadosBancarios, transacao);
+            conexao.Execute(DadosBancariosSql.Inserir, colaboradorModel.DadosBancarios, transacao);
 
             return true;
         }
@@ -133,6 +121,9 @@ namespace CRUD___Adriano.Features.Colaborador.Dao
 
             return colaboradorModel;
         }
+
+        public static IList<ColaboradorModel> ListarTodosOsColaboradoresSomenteIdENome(IDbConnection conexao) =>
+            conexao.Query<ColaboradorModel>(ColaboradorSql.ListarTodosOsColaboradoresComCamposSomenteIdENome).ToList();
 
         public static bool RemoverColaborador(IDbConnection conexao, IDbTransaction transacao, int id)
         {
