@@ -43,6 +43,22 @@ namespace CRUD___Adriano.Features.Colaborador.Controller
             return new List<ColaboradorModel>();
         }
 
+        public bool SalvarLista(IList<ColaboradorModel> listaDeColaboradores)
+        {
+            try
+            {
+                foreach (var colaboradorModel in listaDeColaboradores)
+                    _conexao.EscopoTransacao((conexao, transacao) => ColaboradorDao.CadastrarColaborador(conexao, transacao, colaboradorModel));
+
+                return true;
+            }
+            catch (Exception excecao)
+            {
+                MessageBox.Show(excecao.Message, "Erro ao cadastrar lista de colaboradores");
+            }
+            return false;
+        }
+
         public IList<ColaboradorModel> ListarSomenteIdENome()
         {
             try

@@ -281,7 +281,7 @@ namespace CRUD___Adriano
             this.btnAtalho.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnAtalho.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnAtalho.UseVisualStyleBackColor = true;
-            this.btnAtalho.Click += new System.EventHandler(this.btnAtalho_Click);
+            this.btnAtalho.Click += new System.EventHandler(this.BtnAtalho_Click);
             // 
             // FrmPrincipal
             // 

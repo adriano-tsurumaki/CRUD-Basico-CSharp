@@ -14,10 +14,10 @@ namespace CRUD___Adriano.Features.Cliente.View
             _controller = controller;
         }
 
-        private void BtnCadastrar_Click(object sender, System.EventArgs e) =>
+        private void BtnCadastrarClientes_Click(object sender, System.EventArgs e) =>
             CadastrarClientes();
 
-        private void TxtQuantidade__KeyDown(object sender, KeyEventArgs e)
+        private void TxtQuantidadeClientes__KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode != Keys.Enter) return;
 
@@ -26,14 +26,36 @@ namespace CRUD___Adriano.Features.Cliente.View
 
         private void CadastrarClientes()
         {
-            if (txtQuantidade.NuloOuVazio())
+            if (txtQuantidadeClientes.NuloOuVazio())
                 return;
 
-            int.TryParse(txtQuantidade.Texto, out int quantidade);
-            _controller.CadastrarLista(quantidade);
+            int.TryParse(txtQuantidadeClientes.Texto, out int quantidade);
+            _controller.CadastrarListaDeClientes(quantidade);
         }
 
         private void TxtQuantidade__TextChanged(object sender, System.EventArgs e) =>
-            txtQuantidade.Texto = txtQuantidade.Texto.RetornarSomenteTextoEmNumeros();
+            txtQuantidadeClientes.Texto = txtQuantidadeClientes.Texto.RetornarSomenteTextoEmNumeros();
+
+        private void BtnCadastrarColaboradores_Click(object sender, System.EventArgs e) =>
+            CadastrarColaboradores();
+
+        private void TxtQuantidadeColaboradores__KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode != Keys.Enter) return;
+
+            CadastrarColaboradores();
+        }
+
+        private void CadastrarColaboradores()
+        {
+            if (txtQuantidadeColaboradores.NuloOuVazio())
+                return;
+
+            int.TryParse(txtQuantidadeColaboradores.Texto, out int quantidade);
+            _controller.CadastrarListaDeColaboradores(quantidade);
+        }
+
+        private void TxtQuantidadeColaboradores__TextChanged(object sender, System.EventArgs e) =>
+            txtQuantidadeColaboradores.Texto = txtQuantidadeColaboradores.Texto.RetornarSomenteTextoEmNumeros();
     }
 }

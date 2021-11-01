@@ -130,11 +130,10 @@ namespace CRUD___Adriano
             formFilha.Show();
         }
 
-        private void btnAtalho_Click(object sender, EventArgs e)
+        private void BtnAtalho_Click(object sender, EventArgs e)
         {
             DocaForm(new ClienteCadastroListaController(
-                new ClienteController(new ControllerConexao())
-                ).RetornarFormulario());
+                new ControllerConexao()).RetornarFormulario());
         }
     }
 }
