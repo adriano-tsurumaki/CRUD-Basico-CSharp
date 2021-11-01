@@ -43,7 +43,7 @@ namespace CRUD___Adriano.Features.Cliente.Dao
             var dicionarioCliente = new Dictionary<int, ClienteModel>();
 
             conexao.Query<ClienteModel, EnderecoModel, ClienteModel>(
-                ClienteSql.sqlListarTodosOsClientes, 
+                ClienteSql.ListarTodos, 
                 (clienteModel, enderecoModel) => 
                 MapearListagemDeClientes(clienteModel, enderecoModel, dicionarioCliente),
                 splitOn: "split");
@@ -91,13 +91,13 @@ namespace CRUD___Adriano.Features.Cliente.Dao
         }
 
         public static IList<ClienteModel> ListarTodosOsClientesSomenteIdENome(IDbConnection conexao) =>
-            conexao.Query<ClienteModel>(ClienteSql.sqlListarTodosOsClientesComCamposSomenteIdENome).ToList();
+            conexao.Query<ClienteModel>(ClienteSql.ListarTodosComCamposSomenteIdENome).ToList();
+
+        public static IList<ClienteModel> ListarPelaQuantidadeSomenteIdENome(IDbConnection conexao, int Quantidade) =>
+            conexao.Query<ClienteModel>(ClienteSql.ListarPelaQuantidadeComCamposSomenteIdENome, new { Quantidade }).ToList();
 
         public static IList<ClienteModel> ListarClientesPeloNomeSomenteIdENome(IDbConnection conexao, string Nome) =>
-            conexao.Query<ClienteModel>(ClienteSql.sqlListarClientesPeloNomeComCamposSomenteIdENome, new { Nome }).ToList();
-
-        public static IList<ClienteModel> ListarAlgunsClientesSomenteIdENome(IDbConnection conexao, int Quantidade) =>
-            conexao.Query<ClienteModel>(ClienteSql.sqlListarAlgunsClientesComCamposSomenteIdENome, new { Quantidade }).ToList();
+            conexao.Query<ClienteModel>(ClienteSql.ListarPeloNomeComCamposSomenteIdENome, new { Nome }).ToList();
 
         public static ClienteModel SelecionarCliente(IDbConnection conexao, int id)
         {
@@ -111,7 +111,7 @@ namespace CRUD___Adriano.Features.Cliente.Dao
         }
 
         public static ClienteModel SelecionarClienteSomenteIdENome(IDbConnection conexao, int id) =>
-            conexao.QuerySingleOrDefault<ClienteModel>(ClienteSql.sqlSelecionarClienteComCamposSomenteIdENome, new { id });
+            conexao.QuerySingleOrDefault<ClienteModel>(ClienteSql.SelecionarComCamposSomenteIdENome, new { id });
 
         public static bool RemoverCliente(IDbConnection conexao, IDbTransaction transacao, int id)
         {

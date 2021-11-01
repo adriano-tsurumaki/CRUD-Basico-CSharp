@@ -80,5 +80,28 @@ namespace CRUD___Adriano.Features.Colaborador.Controller
             foreach (var colaboradorModel in _colaboradorController.ListarSomenteIdENome())
                 colaboradoresBinding.Add(colaboradorModel);
         }
+
+        public void ListarQuantidadeDeClientes(BindingList<ColaboradorModel> colaboradoresBinding, int quantidade)
+        {
+            colaboradoresBinding.Clear();
+            foreach (var colaboradorModel in _colaboradorController.ListarPelaQuantidadeSomenteIdENome(quantidade))
+                colaboradoresBinding.Add(colaboradorModel);
+        }
+
+        public void SelecionarPeloId(BindingList<ColaboradorModel> colaboradoresBinding, int id)
+        {
+            colaboradoresBinding.Clear();
+            var colaboradorModel = _colaboradorController.SelecionarSomenteIdENome(id);
+            if (colaboradorModel == null) return;
+
+            colaboradoresBinding.Add(colaboradorModel);
+        }
+
+        public void ListarPeloNomeSomenteIdENome(BindingList<ColaboradorModel> colaboradoresBinding, string nome)
+        {
+            colaboradoresBinding.Clear();
+            foreach (var colaboradorModel in _colaboradorController.ListarPeloNomeSomenteIdENome(nome))
+                colaboradoresBinding.Add(colaboradorModel);
+        }
     }
 }

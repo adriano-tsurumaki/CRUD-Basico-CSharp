@@ -8,7 +8,7 @@ namespace CRUD___Adriano.Features.Factory
 
         IList<T> Listar();
 
-        IList<T> Listar(int quantidade);
+        IList<T> ListarPelaQuantidadeSomenteIdENome(int quantidade);
 
         bool Atualizar(T entidade);
 

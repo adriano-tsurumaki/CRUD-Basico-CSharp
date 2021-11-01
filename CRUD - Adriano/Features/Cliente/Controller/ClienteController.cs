@@ -71,11 +71,11 @@ namespace CRUD___Adriano.Features.Cliente.Controller
             return new List<ClienteModel>();
         }
 
-        public IList<ClienteModel> Listar(int quantidade)
+        public IList<ClienteModel> ListarPelaQuantidadeSomenteIdENome(int quantidade)
         {
             try
             {
-                return _conexao.EscopoConexaoComRetorno((conexao) => ClienteDao.ListarAlgunsClientesSomenteIdENome(conexao, quantidade));
+                return _conexao.EscopoConexaoComRetorno((conexao) => ClienteDao.ListarPelaQuantidadeSomenteIdENome(conexao, quantidade));
             }
             catch (Exception excecao)
             {

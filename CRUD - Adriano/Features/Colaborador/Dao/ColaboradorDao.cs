@@ -123,7 +123,16 @@ namespace CRUD___Adriano.Features.Colaborador.Dao
         }
 
         public static IList<ColaboradorModel> ListarTodosOsColaboradoresSomenteIdENome(IDbConnection conexao) =>
-            conexao.Query<ColaboradorModel>(ColaboradorSql.ListarTodosOsColaboradoresComCamposSomenteIdENome).ToList();
+            conexao.Query<ColaboradorModel>(ColaboradorSql.ListarTodosComCamposSomenteIdENome).ToList();
+
+        public static IList<ColaboradorModel> ListarPelaQuantidadeSomenteIdENome(IDbConnection conexao, int quantidade) =>
+            conexao.Query<ColaboradorModel>(ColaboradorSql.ListarPelaQuantidadeComCamposSomenteIdENome, new { quantidade }).ToList();
+
+        public static IList<ColaboradorModel> ListarColaboradoresPeloNomeSomenteIdENome(IDbConnection conexao, string nome) =>
+            conexao.Query<ColaboradorModel>(ColaboradorSql.ListarPeloNomeComCamposSomenteIdENome, new { nome }).ToList();
+
+        public static ColaboradorModel SelecionarColaboradorSomenteIdENome(IDbConnection conexao, int id) =>
+            conexao.QuerySingleOrDefault<ColaboradorModel>(ColaboradorSql.SelecionarComCamposSomenteIdENome, new { id });
 
         public static bool RemoverColaborador(IDbConnection conexao, IDbTransaction transacao, int id)
         {

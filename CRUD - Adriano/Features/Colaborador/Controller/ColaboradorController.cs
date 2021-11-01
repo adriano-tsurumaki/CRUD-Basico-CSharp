@@ -73,9 +73,32 @@ namespace CRUD___Adriano.Features.Colaborador.Controller
             return new List<ColaboradorModel>();
         }
 
-        public IList<ColaboradorModel> Listar(int quantidade)
+        public IList<ColaboradorModel> ListarPelaQuantidadeSomenteIdENome(int quantidade)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                return _conexao.EscopoConexaoComRetorno((conexao) => ColaboradorDao.ListarPelaQuantidadeSomenteIdENome(conexao, quantidade));
+            }
+            catch (Exception excecao)
+            {
+                MessageBox.Show(excecao.Message, "Erro ao listar colaboradores");
+            }
+
+            return new List<ColaboradorModel>();
+        }
+
+        public IList<ColaboradorModel> ListarPeloNomeSomenteIdENome(string nome)
+        {
+            try
+            {
+                return _conexao.EscopoConexaoComRetorno((conexao) => ColaboradorDao.ListarColaboradoresPeloNomeSomenteIdENome(conexao, nome));
+            }
+            catch (Exception excecao)
+            {
+                MessageBox.Show(excecao.Message, "Erro ao listar colaboradores");
+            }
+
+            return new List<ColaboradorModel>();
         }
 
         public bool Remover(int id)
@@ -108,6 +131,19 @@ namespace CRUD___Adriano.Features.Colaborador.Controller
         public ColaboradorModel Selecionar(int id)
         {
             throw new System.NotImplementedException();
+        }
+
+        public ColaboradorModel SelecionarSomenteIdENome(int id)
+        {
+            try
+            {
+                return _conexao.EscopoConexaoComRetorno((conexao) => ColaboradorDao.SelecionarColaboradorSomenteIdENome(conexao, id));
+            }
+            catch (Exception excecao)
+            {
+                MessageBox.Show(excecao.Message, "Erro ao buscar o colaborador");
+            }
+            return new ColaboradorModel();
         }
     }
 }

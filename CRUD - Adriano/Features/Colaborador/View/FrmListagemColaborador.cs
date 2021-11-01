@@ -121,13 +121,13 @@ namespace CRUD___Adriano.Features.Colaborador.View
             else if (new Regex(@"^[%][0-9]+$").Match(txtPesquisar.Texto).Success)
             {
                 var quantidade = txtPesquisar.Texto.RetornarSomenteTextoEmNumeros().IntOuZero();
-                //if (quantidade > 0)
-                    //_controller.ListarQuantidadeDeClientes(_clientesBinding, quantidade);
+                if (quantidade > 0)
+                    _controller.ListarQuantidadeDeClientes(_colaboradoresBinding, quantidade);
             }
-            //else if (txtPesquisar.Numerico())
-                //_controller.SelecionarPeloId(_clientesBinding, txtPesquisar.Texto.IntOuZero());
-            //else
-                //_controller.ListarPeloNomeSomenteIdENome(_clientesBinding, txtPesquisar.Texto);
+            else if (txtPesquisar.Numerico())
+                _controller.SelecionarPeloId(_colaboradoresBinding, txtPesquisar.Texto.IntOuZero());
+            else
+                _controller.ListarPeloNomeSomenteIdENome(_colaboradoresBinding, txtPesquisar.Texto);
         }
     }
 }
