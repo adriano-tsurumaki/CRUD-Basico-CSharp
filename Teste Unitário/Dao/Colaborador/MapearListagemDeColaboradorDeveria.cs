@@ -1,5 +1,5 @@
-﻿using CRUD___Adriano.Features.Cliente.Model;
-using CRUD___Adriano.Features.Colaborador.Dao;
+﻿using CRUD___Adriano.Features.Colaborador.Dao;
+using CRUD___Adriano.Features.Colaborador.Model;
 using CRUD___Adriano.Features.Entidades.Endereco.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;

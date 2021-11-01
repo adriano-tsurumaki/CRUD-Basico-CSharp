@@ -1,5 +1,5 @@
-﻿using CRUD___Adriano.Features.Endereco.Model;
-using CRUD___Adriano.Features.Endereco.Sql;
+﻿using CRUD___Adriano.Features.Entidades.Endereco.Model;
+using CRUD___Adriano.Features.Entidades.Endereco.Sql;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 
