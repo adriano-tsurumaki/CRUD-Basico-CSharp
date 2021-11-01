@@ -34,8 +34,10 @@ namespace CRUD___Adriano.Features.Cliente.Controller
             _frmListagemCliente.BindGrid(new List<ClienteModel>());
         }
 
-        public void AbrirFormDeDetalhes(ClienteModel clienteModelSelecionado)
+        public void AbrirFormDeDetalhes(int id)
         {
+            var clienteModelSelecionado = _clienteController.Selecionar(id);
+            
             if (_dock == null)
             {
                 new FrmDetalhesCliente(clienteModelSelecionado).Show();

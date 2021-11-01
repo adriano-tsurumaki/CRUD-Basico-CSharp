@@ -30,5 +30,11 @@
 			from Cliente c
 			inner join Usuario u on u.id = c.id_usuario
 			where u.id = @id";
+
+        public static readonly string sqlSelecionarCliente =
+           @"select u.id as IdUsuario, u.nome, u.sobrenome, u.sexo, u.cpf, u.data_nascimento as DataNascimento, c.valor_limite as ValorLimite, c.observacao
+			from Cliente c
+			inner join Usuario u on u.id = c.id_usuario
+            where u.id = @id";
     }
 }

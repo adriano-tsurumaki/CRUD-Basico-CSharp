@@ -95,13 +95,13 @@ namespace CRUD___Adriano.Features.Cliente.View
         {
             var senderGrid = sender as DataGridView;
 
-            if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn &&
-                e.RowIndex >= 0)
+            if ((senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn &&
+                e.RowIndex >= 0) || gridView.CurrentRow == null)
                 return;
 
             var clienteModelSelecionado = gridView.CurrentRow.DataBoundItem as ClienteModel;
 
-            _controller.AbrirFormDeDetalhes(clienteModelSelecionado);
+            _controller.AbrirFormDeDetalhes(clienteModelSelecionado.IdUsuario);
         }
 
         private void BtnPesquisar_Click(object sender, System.EventArgs e) =>

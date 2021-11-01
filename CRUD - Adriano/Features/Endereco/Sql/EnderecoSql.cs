@@ -5,6 +5,14 @@ namespace CRUD___Adriano.Features.Endereco.Sql
 {
     public static class EnderecoSql
     {
+
+        public static readonly string SelecionarUm =
+            @"select en.id_usuario as IdUsuario, en.cep, en.logradouro, en.bairro, en.cidade, en.uf, en.complemento, en.numero
+			from Endereco en
+			inner join Usuario u on u.id = en.id_usuario
+			inner join Cliente c on c.id_usuario = en.id_usuario
+            where en.id_usuario = @id";
+
         public static string Inserir(EnderecoModel enderecoModel)
         {
             var insertSql = new StringBuilder("insert into Endereco(id_usuario, logradouro, cidade, uf, complemento, bairro, numero");

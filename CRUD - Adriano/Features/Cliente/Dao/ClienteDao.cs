@@ -49,12 +49,12 @@ namespace CRUD___Adriano.Features.Cliente.Dao
                 splitOn: "split");
 
             conexao.Query<ClienteModel, EmailModel, ClienteModel>(
-                EmailSql.ListarTodosPorId,
+                EmailSql.ListarTodos,
                 (clienteModel, emailModel) => MapearListagemDeEmailsDosClientes(clienteModel, emailModel, dicionarioCliente),
                 splitOn: "split");
             
             conexao.Query<ClienteModel, TelefoneModel, ClienteModel>(
-                TelefoneSql.ListarTodosPorId,
+                TelefoneSql.ListarTodos,
                 (clienteModel, telefoneModel) => MapearListagemDeTelefonesDosClientes(clienteModel, telefoneModel, dicionarioCliente),
                 splitOn: "split");
 
@@ -98,6 +98,17 @@ namespace CRUD___Adriano.Features.Cliente.Dao
 
         public static IList<ClienteModel> ListarAlgunsClientesSomenteIdENome(IDbConnection conexao, int Quantidade) =>
             conexao.Query<ClienteModel>(ClienteSql.sqlListarAlgunsClientesComCamposSomenteIdENome, new { Quantidade }).ToList();
+
+        public static ClienteModel SelecionarCliente(IDbConnection conexao, int id)
+        {
+            var cliente = conexao.QuerySingleOrDefault<ClienteModel>(ClienteSql.sqlSelecionarCliente, new { id });
+
+            cliente.Endereco = conexao.QuerySingleOrDefault<EnderecoModel>(EnderecoSql.SelecionarUm, new { id });
+            cliente.Emails = conexao.Query<EmailModel>(EmailSql.ListarTodosPorId, new { id }).ToList();
+            cliente.Telefones = conexao.Query<TelefoneModel>(TelefoneSql.ListarTodosPorId, new { id }).ToList();
+
+            return cliente;
+        }
 
         public static ClienteModel SelecionarClienteSomenteIdENome(IDbConnection conexao, int id) =>
             conexao.QuerySingleOrDefault<ClienteModel>(ClienteSql.sqlSelecionarClienteComCamposSomenteIdENome, new { id });

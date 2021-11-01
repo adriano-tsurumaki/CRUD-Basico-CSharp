@@ -129,7 +129,15 @@ namespace CRUD___Adriano.Features.Cliente.Controller
 
         public ClienteModel Selecionar(int id)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                return _conexao.EscopoConexaoComRetorno((conexao) => ClienteDao.SelecionarCliente(conexao, id));
+            }
+            catch (Exception excecao)
+            {
+                MessageBox.Show(excecao.Message, "Erro ao buscar o cliente");
+            }
+            return new ClienteModel();
         }
 
         public ClienteModel SelecionarSomenteIdENome(int id)

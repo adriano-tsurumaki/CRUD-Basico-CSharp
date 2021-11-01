@@ -77,13 +77,13 @@ namespace CRUD___Adriano.Features.Colaborador.Dao
                 splitOn: "split");
 
             conexao.Query<ColaboradorModel, EmailModel, ColaboradorModel>(
-                EmailSql.ListarTodosPorId,
+                EmailSql.ListarTodos,
                 (colaboradorModel, emailModel) => 
                 MapearListagemDeEmailsDosColaboradores(colaboradorModel, emailModel, dicionarioColaborador),
                 splitOn: "split");
 
             conexao.Query<ColaboradorModel, TelefoneModel, ColaboradorModel>(
-                TelefoneSql.ListarTodosPorId,
+                TelefoneSql.ListarTodos,
                 (colaboradorModel, telefoneModel) =>
                 MapearListagemDeTelefonesDosColaboradores(colaboradorModel, telefoneModel, dicionarioColaborador),
                 splitOn: "split");
