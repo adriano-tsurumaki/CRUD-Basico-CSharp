@@ -1,8 +1,4 @@
 ﻿using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Text.RegularExpressions;
 
 namespace CRUD___Adriano.Features.ValueObject.Cpf
 {
@@ -13,7 +9,7 @@ namespace CRUD___Adriano.Features.ValueObject.Cpf
             RuleFor(x => x.ToString()).NotNull().NotEmpty().WithMessage("Cpf não deve ser nulo ou vazio!");
             RuleFor(x => x.ToString()).Length(11).WithMessage("Cpf deve conter 11 números!");
             RuleFor(x => x.ToString()).Must(NumerosNaoRepetidos).WithMessage("Cpf não pode conter todos os números repetidos!");
-            RuleFor(x => x.Valido()).Equal(true).WithMessage("Cpf inválido!");
+            RuleFor(x => x.ValidarCpf()).Equal(true).WithMessage("Cpf inválido!");
         }
 
         private static bool NumerosNaoRepetidos(string valor) =>

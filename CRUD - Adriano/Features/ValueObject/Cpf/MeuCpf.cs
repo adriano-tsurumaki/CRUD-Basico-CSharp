@@ -1,4 +1,6 @@
 ﻿using CRUD___Adriano.Features.Utils;
+using FluentValidation;
+using FluentValidation.Results;
 using System;
 using System.Text.RegularExpressions;
 
@@ -7,9 +9,8 @@ namespace CRUD___Adriano.Features.ValueObject.Cpf
     public struct MeuCpf
     {
         private readonly string _valor;
-        private string _error;
 
-        public string ValorFormatado 
+        public string ValorFormatado
         {
             get
             {
@@ -19,30 +20,19 @@ namespace CRUD___Adriano.Features.ValueObject.Cpf
             }
         }
 
-        public string Error
-        {
-            get => _error;
-        }
-
         public MeuCpf(string valor)
         {
            _valor = valor.RetornarSomenteTextoEmNumeros();
-           _error = "";
         }
 
-        public bool Valido()
+        public ValidationResult ValidarTudo()
         {
-            if (string.IsNullOrEmpty(_valor))
-            {
-                _error = "O Cpf não pode ser nulo ou vazio!";
-                return false;
-            }
-            
-            if (_valor.Length != 11)
-            {
-                _error = "O Cpf não possui exatos 11 números!";
-                return false;
-            }
+            return new CpfValidator().Validate(this);
+        }
+
+        public bool ValidarCpf()
+        {
+            if (string.IsNullOrEmpty(_valor) || _valor.Length != 11) return false;
 
             if (_valor.Equals("00000000000") ||
                 _valor.Equals("11111111111") ||
@@ -53,17 +43,9 @@ namespace CRUD___Adriano.Features.ValueObject.Cpf
                 _valor.Equals("66666666666") ||
                 _valor.Equals("77777777777") ||
                 _valor.Equals("88888888888") ||
-                _valor.Equals("99999999999"))
-            {
-                _error = "O Cpf não pode ter todos os números repetidos!";
-                return false;
-            }
+                _valor.Equals("99999999999")) return false;
 
-            if (!ValidarPorPartes(10, 9) || !ValidarPorPartes(11, 10))
-            {
-                _error = "O Cpf não é válido!";
-                return false;
-            }
+            if (!ValidarPorPartes(10, 9) || !ValidarPorPartes(11, 10)) return false;
 
             return true;
         }
@@ -82,7 +64,7 @@ namespace CRUD___Adriano.Features.ValueObject.Cpf
             resultado = (resultado * 10 % 11) == 10 ? 0 : resultado * 10 % 11;
             return resultado == _valor[posicaoDigito] - '0';
         }
-
+        
         public override string ToString() =>
             _valor;
 
