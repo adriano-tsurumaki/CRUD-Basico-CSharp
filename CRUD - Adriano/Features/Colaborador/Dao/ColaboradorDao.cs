@@ -34,7 +34,7 @@ namespace CRUD___Adriano.Features.Colaborador.Dao
 
         public static bool CadastrarColaborador(IDbConnection conexao, IDbTransaction transacao, ColaboradorModel colaboradorModel)
         {
-            colaboradorModel.IdUsuario = (int)conexao.ExecuteScalar(UsuarioSql.Inserir, colaboradorModel, transacao);
+            colaboradorModel.IdUsuario = (int)conexao.ExecuteScalar(UsuarioSql.Inserir, UsuarioSql.RetornarParametroDinamico(colaboradorModel), transacao);
 
             colaboradorModel.DadosBancarios.IdColaborador = (int)conexao.ExecuteScalar(ColaboradorSql.Inserir, colaboradorModel, transacao);
 
