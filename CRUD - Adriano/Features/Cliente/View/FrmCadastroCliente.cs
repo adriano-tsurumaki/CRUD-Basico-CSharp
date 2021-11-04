@@ -1,39 +1,34 @@
 ﻿using CRUD___Adriano.Features.Cadastro.Produto.Model;
 using CRUD___Adriano.Features.Factory;
+using CRUD___Adriano.Features.Interface;
 using CRUD___Adriano.Features.Utils;
 using System.Windows.Forms;
 
 namespace CRUD___Adriano.Features.Cliente.View
 {
-    public partial class FrmCadastroCliente : FormBase<ClienteModel>, IFormBase
-    //public partial class FrmCadastroCliente : Form
+    public partial class FrmCadastroCliente : Form, IViewPage<ClienteModel>
     {
         private ClienteModel _clienteModel;
-        
-        public event ValidarHandle ValidarEvent;
 
-        public FrmCadastroCliente()
+        private readonly IControllerPage<ClienteModel> _controllerPage;
+
+        public FrmCadastroCliente(IControllerPage<ClienteModel> controllerPage)
         {
             InitializeComponent();
-            ValidarEvent += new ValidarHandle(ValidarComponentes);
+            _controllerPage = controllerPage;
         }
 
-        public override void Validar() => ValidarEvent?.Invoke();
-
-        public void ValidarComponentes()
+        public bool ValidarComponentes()
         {
-            if (txtValorLimite.NuloOuVazio())
-            {
-                Validado = false;
-                return;
-            }
+            if (txtValorLimite.NuloOuVazio()) return false;
+
             var valorLimite = txtValorLimite.Texto.RetornarSomenteTextoEmNumeros();
             _clienteModel.ValorLimite = valorLimite.Length > 2 ? valorLimite.Insert(valorLimite.Length - 2, ".") : valorLimite;
 
-            Validado = true;
+            return true;
         }
 
-        public override void AdicionarModel(ref ClienteModel clienteModel)
+        public void BindModel(ref ClienteModel clienteModel)
         {
             txtValorLimite.DataBindings.Add("Texto", clienteModel, "ValorLimite");
             txtObservacao.DataBindings.Add("Texto", clienteModel, "Observacao");

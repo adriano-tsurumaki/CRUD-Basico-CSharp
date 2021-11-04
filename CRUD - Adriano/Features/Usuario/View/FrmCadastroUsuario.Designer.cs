@@ -2,7 +2,6 @@
 namespace CRUD___Adriano.Features.Cadastro.Usuario.View
 {
     partial class FrmCadastroUsuario<T>
-    //partial class FrmCadastroUsuario
     {
         /// <summary>
         /// Required designer variable.

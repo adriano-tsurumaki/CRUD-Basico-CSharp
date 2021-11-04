@@ -2,7 +2,6 @@
 namespace CRUD___Adriano.Features.Usuario.View
 {
     partial class FrmEmailTelefone<T>
-    //partial class FrmEmailTelefone
     {
         /// <summary>
         /// Required designer variable.
