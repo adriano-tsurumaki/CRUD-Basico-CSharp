@@ -20,7 +20,7 @@ namespace CRUD___Adriano.Features.Cliente.Dao
         public static bool CadastrarCliente(IDbConnection conexao, IDbTransaction transacao, ClienteModel clienteModel)
         {
 
-            clienteModel.IdUsuario = (int)conexao.ExecuteScalar(UsuarioSql.Inserir, UsuarioSql.RetornarParametroDinamico(clienteModel), transacao);
+            clienteModel.IdUsuario = (int)conexao.ExecuteScalar(UsuarioSql.Inserir, UsuarioSql.RetornarParametroDinamicoParaInserirUm(clienteModel), transacao);
 
             conexao.Execute(SqlInserirCliente(clienteModel), clienteModel, transacao);
 
