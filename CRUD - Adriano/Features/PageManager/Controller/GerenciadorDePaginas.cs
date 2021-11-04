@@ -1,4 +1,5 @@
 ﻿using CRUD___Adriano.Features.Factory;
+using CRUD___Adriano.Features.Interface;
 using CRUD___Adriano.Features.PageManager.View;
 using System;
 using System.Collections.Generic;
@@ -20,7 +21,7 @@ namespace CRUD___Adriano.Features.Controller.PageManager
 
         private readonly Panel _panelCentral;
 
-        private readonly Dictionary<int, FormBase<T>> _paginas;
+        private readonly Dictionary<int, IControllerPage<T>> _paginas;
         private int _totalDePaginas = 1;
         private int _indiceAtualPagina = 1;
 
@@ -31,7 +32,7 @@ namespace CRUD___Adriano.Features.Controller.PageManager
         public GerenciadorDePaginas(Panel panelCentral, IControllerBase<T> controller, T model)
         {
             _panelCentral = panelCentral;
-            _paginas = new Dictionary<int, FormBase<T>>();
+            _paginas = new Dictionary<int, IControllerPage<T>>();
             _controller = controller;
             _model = model;
             InstanciarUsersControls();
@@ -83,18 +84,6 @@ namespace CRUD___Adriano.Features.Controller.PageManager
             formFilha.Show();
         }
 
-        public void AdicionarControl(Panel panel, FormBase<T> formFilha)
-        {
-            formFilha.TopLevel = false;
-            formFilha.FormBorderStyle = FormBorderStyle.None;
-            formFilha.Dock = DockStyle.Fill;
-            panel.Controls.Add(formFilha);
-            panel.Tag = formFilha;
-
-            formFilha.BringToFront();
-            formFilha.Show();
-        }
-
         private void BtnAnterior_Click(object sender, EventArgs e)
         {
             _indiceAtualPagina--;
@@ -138,9 +127,9 @@ namespace CRUD___Adriano.Features.Controller.PageManager
 
         private void AtualizarPagina()
         {
-            _paginas.TryGetValue(_indiceAtualPagina, out var page);
+            _paginas.TryGetValue(_indiceAtualPagina, out var controllerPage);
 
-            AtualizarControlPagina(page);
+            AtualizarControlPagina(controllerPage.RetornarFormulario() as Form);
         }
 
         private void BtnConfirmar_Click(object sender, EventArgs e)
@@ -180,14 +169,12 @@ namespace CRUD___Adriano.Features.Controller.PageManager
 
         private bool ValidarPagina()
         {
-            _paginas.TryGetValue(_indiceAtualPagina, out var pagina);
+            _paginas.TryGetValue(_indiceAtualPagina, out var controllerPage);
 
-            pagina.Validar();
-
-            return pagina.Validado;
+            return controllerPage.ValidarForm();
         }
 
-        public void AtualizarControlPagina(FormBase<T> formFilha)
+        public void AtualizarControlPagina(Form formFilha)
         {
             _ucBody.pnlBody.Controls.Clear();
 
@@ -205,15 +192,15 @@ namespace CRUD___Adriano.Features.Controller.PageManager
 
         public void Show()
         {
-            AtualizarControlPagina(_paginas.First().Value);
+            AtualizarControlPagina(_paginas.First().Value.RetornarFormulario() as Form);
             AdicionarControl(_panelCentral, _ucCentral);
             _totalDePaginas--;
         }
 
-        public void Add(FormBase<T> formFilha)
+        public void Add(IControllerPage<T> controllerPage)
         {
-            formFilha.AdicionarModel(ref _model);
-            _paginas.Add(_totalDePaginas, formFilha);
+            controllerPage.AdicionarModel(ref _model);
+            _paginas.Add(_totalDePaginas, controllerPage);
             _totalDePaginas++;
         }
     }

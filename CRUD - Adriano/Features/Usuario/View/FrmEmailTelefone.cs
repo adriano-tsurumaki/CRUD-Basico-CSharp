@@ -11,13 +11,10 @@ using System.Windows.Forms;
 
 namespace CRUD___Adriano.Features.Usuario.View
 {
-    public partial class FrmEmailTelefone<T> : FormBase<T>, IFormBase where T : class
-    //public partial class FrmEmailTelefone : Form
+    public partial class FrmEmailTelefone<T> : Form, IViewPage<T> where T : class
     {
         private BindingList<EmailModel> _emailsBinding;
         private BindingList<TelefoneModel> _telefonesBinding;
-
-        public event ValidarHandle ValidarEvent;
 
         public FrmEmailTelefone()
         {
@@ -26,28 +23,22 @@ namespace CRUD___Adriano.Features.Usuario.View
             btnAdicionarEmail.Enabled = false;
             btnAdicionarTelefone.Enabled = false;
             cbTelefone.AtribuirPeloEnum<TipoTelefoneEnum>();
-            ValidarEvent += new ValidarHandle(ValidarComponentes);
         }
 
-        public override void Validar() => ValidarEvent?.Invoke();
-
-        public void ValidarComponentes()
+        public bool ValidarComponentes()
         {
             if (_emailsBinding.Count == 0 || _telefonesBinding.Count == 0)
-            {
-                Validado = false;
-                return;
-            }
+                return false;
 
-            Validado = true;
+            return true;
         }
 
-        public override void AdicionarModel(ref T model)
+        public void BindModel(ref T model)
         {
-            _emailsBinding = new BindingList<EmailModel>((model as UsuarioModel).Emails);
+            _emailsBinding = new BindingList<EmailModel>((model as Model.UsuarioModel).Emails);
             _emailsBinding.ConfiguracaoPadrao();
 
-            _telefonesBinding = new BindingList<TelefoneModel>((model as UsuarioModel).Telefones);
+            _telefonesBinding = new BindingList<TelefoneModel>((model as Model.UsuarioModel).Telefones);
             _telefonesBinding.ConfiguracaoPadrao();
 
             dgvEmails.DataSource = _emailsBinding;

@@ -1,34 +1,31 @@
 ﻿using CRUD___Adriano.Features.Colaborador.Enum;
 using CRUD___Adriano.Features.Colaborador.Model;
 using CRUD___Adriano.Features.Factory;
+using CRUD___Adriano.Features.Interface;
 using CRUD___Adriano.Features.Utils;
 using System.Windows.Forms;
 
 namespace CRUD___Adriano.Features.Colaborador.View
 {
-    public partial class FrmCadastroColaborador : FormBase<ColaboradorModel>, IFormBase
-    //public partial class FrmCadastroColaborador : Form
+    public partial class FrmCadastroColaborador : Form, IViewPage<ColaboradorModel>
     {
         public ColaboradorModel _colaboradorModel{ get; set; }
 
-        public event ValidarHandle ValidarEvent;
+        private readonly IControllerPage<ColaboradorModel> _controllerPage;
 
-        public FrmCadastroColaborador()
+        public FrmCadastroColaborador(IControllerPage<ColaboradorModel> controllerPage)
         {
             InitializeComponent();
-            ValidarEvent += new ValidarHandle(ValidarComponentes);
+            _controllerPage = controllerPage;
         }
 
-        public override void Validar() => ValidarEvent?.Invoke();
-
-        public void ValidarComponentes()
+        public bool ValidarComponentes()
         {
             if (txtSalario.NuloOuVazio() || txtComissao.NuloOuVazio() ||
                 txtAgencia.NuloOuVazio() || txtConta.NuloOuVazio() ||
                 txtBanco.NuloOuVazio() || !cbTipoConta.EstaSelecionado())
             {
-                Validado = false;
-                return;
+                return false;
             }
 
             _colaboradorModel.DadosBancarios.TipoConta = cbTipoConta.PegarEnumPorDescricao<TipoContaEnum>();
@@ -40,10 +37,10 @@ namespace CRUD___Adriano.Features.Colaborador.View
             _colaboradorModel.Salario = salario.Length > 2 ? salario.Insert(salario.Length - 2, ".") : salario;
             _colaboradorModel.Comissao = comissao.Length > 2 ? comissao.Insert(comissao.Length - 2, ".") : comissao;
 
-            Validado = true;
+            return true;
         }
 
-        public override void AdicionarModel(ref ColaboradorModel colaboradorModel)
+        public void BindModel(ref ColaboradorModel colaboradorModel)
         {
             _colaboradorModel = colaboradorModel;
             txtSalario.DataBindings.Add("Texto", colaboradorModel, "Salario");

@@ -1,14 +1,11 @@
 ﻿using CRUD___Adriano.Features.Atalhos.Controller;
 using CRUD___Adriano.Features.Cadastro.Produto.Model;
-using CRUD___Adriano.Features.Cadastro.Usuario.View;
 using CRUD___Adriano.Features.Cliente.Controller;
-using CRUD___Adriano.Features.Cliente.View;
 using CRUD___Adriano.Features.Colaborador.Controller;
 using CRUD___Adriano.Features.Colaborador.Model;
-using CRUD___Adriano.Features.Colaborador.View;
 using CRUD___Adriano.Features.Controller.PageManager;
 using CRUD___Adriano.Features.Factory;
-using CRUD___Adriano.Features.Usuario.View;
+using CRUD___Adriano.Features.Usuario.Controller;
 using Ninject;
 using System;
 using System.Reflection;
@@ -44,9 +41,9 @@ namespace CRUD___Adriano
                 _kernel.Get<ClienteController>(),
                 new ClienteModel());
 
-            pageManager.Add(new FrmCadastroUsuario<ClienteModel>());
-            pageManager.Add(new FrmEmailTelefone<ClienteModel>());
-            pageManager.Add(new FrmCadastroCliente());
+            pageManager.Add(_kernel.Get<UsuarioControllerPage<ClienteModel>>());
+            pageManager.Add(_kernel.Get<EmailTelefoneControllerPage<ClienteModel>>());
+            pageManager.Add(_kernel.Get<ClienteControllerPage>());
             pageManager.SetConfirm(ControllerEnum.Salvar);
             pageManager.Show();
         }
@@ -99,9 +96,9 @@ namespace CRUD___Adriano
                 _kernel.Get<ColaboradorController>(),
                 new ColaboradorModel());
 
-            pageManager.Add(new FrmCadastroUsuario<ColaboradorModel>());
-            pageManager.Add(new FrmEmailTelefone<ColaboradorModel>());
-            pageManager.Add(new FrmCadastroColaborador());
+            pageManager.Add(_kernel.Get<UsuarioControllerPage<ColaboradorModel>>());
+            pageManager.Add(_kernel.Get<EmailTelefoneControllerPage<ColaboradorModel>>());
+            pageManager.Add(_kernel.Get<ColaboradorControllerPage>());
             pageManager.SetConfirm(ControllerEnum.Salvar);
             pageManager.Show();
         }

@@ -1,10 +1,11 @@
-﻿using CRUD___Adriano.Features.Cadastro.Usuario.View;
-using CRUD___Adriano.Features.Colaborador.Model;
+﻿using CRUD___Adriano.Features.Colaborador.Model;
 using CRUD___Adriano.Features.Colaborador.View;
 using CRUD___Adriano.Features.Controller.PageManager;
-using CRUD___Adriano.Features.Usuario.View;
+using CRUD___Adriano.Features.Usuario.Controller;
+using Ninject;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace CRUD___Adriano.Features.Colaborador.Controller
@@ -42,14 +43,17 @@ namespace CRUD___Adriano.Features.Colaborador.Controller
         {
             var colaboradorModelSelecionado = _colaboradorController.Selecionar(id);
 
+            var kernel = new StandardKernel();
+            kernel.Load(Assembly.GetExecutingAssembly());
+
             var pageManager = new GerenciadorDePaginas<ColaboradorModel>(
                 _dock,
                 _colaboradorController,
                 colaboradorModelSelecionado);
 
-            pageManager.Add(new FrmCadastroUsuario<ColaboradorModel>());
-            pageManager.Add(new FrmEmailTelefone<ColaboradorModel>());
-            pageManager.Add(new FrmCadastroColaborador());
+            pageManager.Add(kernel.Get<UsuarioControllerPage<ColaboradorModel>>());
+            pageManager.Add(kernel.Get<EmailTelefoneControllerPage<ColaboradorModel>>());
+            pageManager.Add(kernel.Get<ColaboradorControllerPage>());
             pageManager.SetConfirm(Factory.ControllerEnum.Atualizar);
             pageManager.Show();
         }
