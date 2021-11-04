@@ -1,7 +1,7 @@
 ﻿
 namespace CRUD___Adriano.Features.Cliente.View
 {
-    partial class FrmCadastroListaDeClientes
+    partial class FrmAtalhos
     {
         /// <summary>
         /// Required designer variable.

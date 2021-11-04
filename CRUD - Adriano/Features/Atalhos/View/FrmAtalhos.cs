@@ -1,14 +1,14 @@
-﻿using CRUD___Adriano.Features.Cliente.Controller;
+﻿using CRUD___Adriano.Features.Atalhos.Controller;
 using CRUD___Adriano.Features.Utils;
 using System.Windows.Forms;
 
 namespace CRUD___Adriano.Features.Cliente.View
 {
-    public partial class FrmCadastroListaDeClientes : Form
+    public partial class FrmAtalhos : Form
     {
-        private readonly ClienteCadastroListaController _controller;
+        private readonly AtalhoController _controller;
         
-        public FrmCadastroListaDeClientes(ClienteCadastroListaController controller)
+        public FrmAtalhos(AtalhoController controller)
         {
             InitializeComponent();
             _controller = controller;

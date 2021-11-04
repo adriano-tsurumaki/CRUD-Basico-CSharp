@@ -1,24 +1,23 @@
-﻿using CRUD___Adriano.Features.Cliente.View;
+﻿using CRUD___Adriano.Features.Cliente.Controller;
+using CRUD___Adriano.Features.Cliente.View;
 using CRUD___Adriano.Features.Colaborador.Controller;
 using CRUD___Adriano.Features.Configuration;
-using CRUD___Adriano.Features.Factory;
 using System.Windows.Forms;
 
-namespace CRUD___Adriano.Features.Cliente.Controller
+namespace CRUD___Adriano.Features.Atalhos.Controller
 {
-    public class ClienteCadastroListaController
+    public class AtalhoController
     {
-        private ClienteController _clienteController;
-        private ColaboradorController _colaboradorController;
-        private ControllerConexao _controllerConexao;
+        private readonly ClienteController _clienteController;
+        private readonly ColaboradorController _colaboradorController;
 
-        public ClienteCadastroListaController(ControllerConexao controllerConexao)
+        public AtalhoController(ClienteController clienteController, ColaboradorController colaboradorController)
         {
-            _clienteController = new ClienteController(controllerConexao);
-            _colaboradorController = new ColaboradorController(controllerConexao);
+            _clienteController = clienteController;
+            _colaboradorController = colaboradorController;
         }
 
-        public Form RetornarFormulario() => new FrmCadastroListaDeClientes(this);
+        public Form RetornarFormulario() => new FrmAtalhos(this);
 
         public void CadastrarListaDeClientes(int quantidade)
         {

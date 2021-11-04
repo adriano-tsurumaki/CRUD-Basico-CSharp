@@ -3,9 +3,7 @@ using CRUD___Adriano.Features.Factory;
 using CRUD___Adriano.Features.Usuario.Enum;
 using CRUD___Adriano.Features.Usuario.Model;
 using CRUD___Adriano.Features.Utils;
-using CRUD___Adriano.Features.ValueObject.Cpf;
 using System;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace CRUD___Adriano.Features.Cadastro.Usuario.View

@@ -1,4 +1,5 @@
-﻿using CRUD___Adriano.Features.Cadastro.Produto.Model;
+﻿using CRUD___Adriano.Features.Atalhos.Controller;
+using CRUD___Adriano.Features.Cadastro.Produto.Model;
 using CRUD___Adriano.Features.Cadastro.Usuario.View;
 using CRUD___Adriano.Features.Cliente.Controller;
 using CRUD___Adriano.Features.Cliente.View;
@@ -137,8 +138,7 @@ namespace CRUD___Adriano
 
         private void BtnAtalho_Click(object sender, EventArgs e)
         {
-            DocaForm(new ClienteCadastroListaController(
-                _kernel.Get<ControllerConexao>()).RetornarFormulario());
+            DocaForm(_kernel.Get<AtalhoController>().RetornarFormulario());
         }
     }
 }
