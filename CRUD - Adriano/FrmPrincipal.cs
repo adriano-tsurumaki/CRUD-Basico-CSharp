@@ -40,7 +40,7 @@ namespace CRUD___Adriano
             lblTitulo.Text = "Cadastro de cliente";
             var pageManager = new GerenciadorDePaginas<ClienteModel>(
                 pnlChild,
-                new ClienteController(_kernel.Get<ControllerConexao>()),
+                _kernel.Get<ClienteController>(),
                 new ClienteModel());
 
             pageManager.Add(new FrmCadastroUsuario<ClienteModel>());
@@ -56,7 +56,7 @@ namespace CRUD___Adriano
             lblTitulo.Text = "Listagem de clientes";
             DocaForm(
                 new ClienteListagemController(
-                    new ClienteController(_kernel.Get<ControllerConexao>()), 
+                    _kernel.Get<ClienteController>(),
                     pnlChild)
                 .RetornarFormulario());
         }
@@ -95,7 +95,7 @@ namespace CRUD___Adriano
             lblTitulo.Text = "Cadastro de colaborador";
             var pageManager = new GerenciadorDePaginas<ColaboradorModel>(
                 pnlChild,
-                new ColaboradorController(_kernel.Get<ControllerConexao>()),
+                _kernel.Get<ColaboradorController>(),
                 new ColaboradorModel());
 
             pageManager.Add(new FrmCadastroUsuario<ColaboradorModel>());
@@ -111,7 +111,7 @@ namespace CRUD___Adriano
             lblTitulo.Text = "Listagem de Funcionários";
             DocaForm(
                 new ColaboradorListagemController(
-                    new ColaboradorController(_kernel.Get<ControllerConexao>()),
+                    _kernel.Get<ColaboradorController>(),
                     pnlChild)
                 .RetornarFormulario());
         }
