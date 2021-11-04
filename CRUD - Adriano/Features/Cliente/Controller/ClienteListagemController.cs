@@ -1,10 +1,11 @@
 ﻿using CRUD___Adriano.Features.Cadastro.Produto.Model;
-using CRUD___Adriano.Features.Cadastro.Usuario.View;
 using CRUD___Adriano.Features.Cliente.View;
 using CRUD___Adriano.Features.Controller.PageManager;
-using CRUD___Adriano.Features.Usuario.View;
+using CRUD___Adriano.Features.Usuario.Controller;
+using Ninject;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace CRUD___Adriano.Features.Cliente.Controller
@@ -66,14 +67,17 @@ namespace CRUD___Adriano.Features.Cliente.Controller
         {
             var clienteModelSelecionado = _clienteController.Selecionar(id);
             
+            var kernel = new StandardKernel();
+            kernel.Load(Assembly.GetExecutingAssembly());
+
             var pageManager = new GerenciadorDePaginas<ClienteModel>(
                 _dock,
                 _clienteController,
                 clienteModelSelecionado);
 
-            pageManager.Add(new FrmCadastroUsuario<ClienteModel>());
-            pageManager.Add(new FrmEmailTelefone<ClienteModel>());
-            pageManager.Add(new FrmCadastroCliente());
+            pageManager.Add(kernel.Get<UsuarioControllerPage<ClienteModel>>());
+            pageManager.Add(kernel.Get<EmailTelefoneControllerPage<ClienteModel>>());
+            pageManager.Add(kernel.Get<ClienteControllerPage>());
             pageManager.SetConfirm(Factory.ControllerEnum.Atualizar);
             pageManager.Show();
         }

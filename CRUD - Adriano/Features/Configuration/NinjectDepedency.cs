@@ -7,8 +7,10 @@ using CRUD___Adriano.Features.Factory;
 using CRUD___Adriano.Features.Interface;
 using CRUD___Adriano.Features.Usuario.Controller;
 using CRUD___Adriano.Features.Usuario.View;
+using Ninject;
 using Ninject.Modules;
 using System.Data;
+using System.Reflection;
 
 namespace CRUD___Adriano.Features.Configuration
 {
