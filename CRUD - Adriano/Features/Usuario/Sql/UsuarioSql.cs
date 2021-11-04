@@ -1,4 +1,7 @@
-﻿namespace CRUD___Adriano.Features.Usuario.Sql
+﻿using CRUD___Adriano.Features.Usuario.Model;
+using Dapper;
+
+namespace CRUD___Adriano.Features.Usuario.Sql
 {
     public static class UsuarioSql
     {
@@ -18,5 +21,20 @@
             sexo = @Sexo,
             data_nascimento = @DataNascimento
             where id = @IdUsuario";
+
+        public static DynamicParameters RetornarParametroDinamico(UsuarioModel usuarioModel)
+        {
+            var parametros = new DynamicParameters();
+
+            parametros.AddDynamicParams(new {
+                usuarioModel.Nome,
+                usuarioModel.Sobrenome,
+                Cpf = usuarioModel.Cpf.ToString(),
+                usuarioModel.Sexo,
+                usuarioModel.DataNascimento
+            });
+
+            return parametros;
+        }
     }
 }

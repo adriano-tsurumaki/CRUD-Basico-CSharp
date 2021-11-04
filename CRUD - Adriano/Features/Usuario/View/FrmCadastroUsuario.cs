@@ -3,7 +3,9 @@ using CRUD___Adriano.Features.Factory;
 using CRUD___Adriano.Features.Usuario.Enum;
 using CRUD___Adriano.Features.Usuario.Model;
 using CRUD___Adriano.Features.Utils;
+using CRUD___Adriano.Features.ValueObject.Cpf;
 using System;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace CRUD___Adriano.Features.Cadastro.Usuario.View
@@ -40,9 +42,8 @@ namespace CRUD___Adriano.Features.Cadastro.Usuario.View
                 return;
             }
 
-            if (txtCpf.Texto.Length != 14)
+            if (!ValidarCpf())
             {
-                MessageBox.Show("Cpf inválido, preencha todos os números.", "Aviso");
                 Validado = false;
                 return;
             }
@@ -61,6 +62,16 @@ namespace CRUD___Adriano.Features.Cadastro.Usuario.View
             (_model as UsuarioModel).Endereco.Cep = txtCep.Texto.RetornarSomenteTextoEmNumeros();
 
             Validado = true;
+        }
+
+        private bool ValidarCpf()
+        {
+            var resultado = (_model as UsuarioModel).Cpf.ValidarTudo();
+
+            if (resultado.IsValid) return true;
+
+            MessageBox.Show(resultado.Errors[0].ErrorMessage);
+            return false;
         }
 
         public override void AdicionarModel(ref T model)

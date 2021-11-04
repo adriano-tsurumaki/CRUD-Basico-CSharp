@@ -19,7 +19,8 @@ namespace CRUD___Adriano.Features.Cliente.Dao
     {
         public static bool CadastrarCliente(IDbConnection conexao, IDbTransaction transacao, ClienteModel clienteModel)
         {
-            clienteModel.IdUsuario = (int)conexao.ExecuteScalar(UsuarioSql.Inserir, clienteModel, transacao);
+
+            clienteModel.IdUsuario = (int)conexao.ExecuteScalar(UsuarioSql.Inserir, UsuarioSql.RetornarParametroDinamico(clienteModel), transacao);
 
             conexao.Execute(SqlInserirCliente(clienteModel), clienteModel, transacao);
 
@@ -182,5 +183,12 @@ namespace CRUD___Adriano.Features.Cliente.Dao
 
             return updateSql.ToString();
         }
+
+        public static ClienteModel TestandoMap(IDbConnection conexao) =>
+            conexao.QuerySingleOrDefault(
+                @"select u.data_nascimento 
+                from Cliente c 
+                inner join Usuario u on u.id = c.id_usuario where u.id = 60");
+
     }
 }
