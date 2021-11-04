@@ -18,23 +18,7 @@ namespace Teste_Unitário.ValueObject.CpfDeveria
         {
             MeuCpf cpf = valor;
 
-            var teste = cpf.ValorFormatado;
-
             Assert.AreEqual(valorEsperado, cpf.ValorFormatado);
-        }
-
-        [DataTestMethod]
-        [DataRow("", false)]
-        [DataRow("123", false)]
-        [DataRow("1234567891234", false)]
-        [DataRow("11111111111", false)]
-        [DataRow("37543212376", false)]
-        [DataRow("22893114806", true)]
-        public void Deveria_validar_cpf_corretamente(string valor, bool validacaoEsperada)
-        {
-            MeuCpf cpf = valor;
-
-            Assert.AreEqual(cpf.ValidarTudo(), validacaoEsperada);
         }
     }
 }
