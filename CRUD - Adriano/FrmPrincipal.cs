@@ -8,7 +8,9 @@ using CRUD___Adriano.Features.Colaborador.View;
 using CRUD___Adriano.Features.Controller.PageManager;
 using CRUD___Adriano.Features.Factory;
 using CRUD___Adriano.Features.Usuario.View;
+using Ninject;
 using System;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace CRUD___Adriano
@@ -16,11 +18,14 @@ namespace CRUD___Adriano
     public partial class FrmPrincipal : Form
     {
         private Form _formFilhaAtiva;
+        private readonly StandardKernel _kernel;
 
         public FrmPrincipal()
         {
             InitializeComponent();
             EsconderSubmenu();
+            _kernel = new StandardKernel();
+            _kernel.Load(Assembly.GetExecutingAssembly());
         }
 
         private void EsconderSubmenu()
@@ -35,7 +40,7 @@ namespace CRUD___Adriano
             lblTitulo.Text = "Cadastro de cliente";
             var pageManager = new GerenciadorDePaginas<ClienteModel>(
                 pnlChild,
-                new ClienteController(new ControllerConexao()),
+                new ClienteController(_kernel.Get<ControllerConexao>()),
                 new ClienteModel());
 
             pageManager.Add(new FrmCadastroUsuario<ClienteModel>());
@@ -51,7 +56,7 @@ namespace CRUD___Adriano
             lblTitulo.Text = "Listagem de clientes";
             DocaForm(
                 new ClienteListagemController(
-                    new ClienteController(new ControllerConexao()), 
+                    new ClienteController(_kernel.Get<ControllerConexao>()), 
                     pnlChild)
                 .RetornarFormulario());
         }
@@ -90,7 +95,7 @@ namespace CRUD___Adriano
             lblTitulo.Text = "Cadastro de colaborador";
             var pageManager = new GerenciadorDePaginas<ColaboradorModel>(
                 pnlChild,
-                new ColaboradorController(new ControllerConexao()),
+                new ColaboradorController(_kernel.Get<ControllerConexao>()),
                 new ColaboradorModel());
 
             pageManager.Add(new FrmCadastroUsuario<ColaboradorModel>());
@@ -106,7 +111,7 @@ namespace CRUD___Adriano
             lblTitulo.Text = "Listagem de Funcionários";
             DocaForm(
                 new ColaboradorListagemController(
-                    new ColaboradorController(new ControllerConexao()),
+                    new ColaboradorController(_kernel.Get<ControllerConexao>()),
                     pnlChild)
                 .RetornarFormulario());
         }
@@ -133,7 +138,7 @@ namespace CRUD___Adriano
         private void BtnAtalho_Click(object sender, EventArgs e)
         {
             DocaForm(new ClienteCadastroListaController(
-                new ControllerConexao()).RetornarFormulario());
+                _kernel.Get<ControllerConexao>()).RetornarFormulario());
         }
     }
 }

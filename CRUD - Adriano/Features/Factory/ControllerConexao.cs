@@ -1,53 +1,75 @@
-﻿using CRUD___Adriano.Features.Configuration;
-using System;
+﻿using System;
 using System.Data;
 
 namespace CRUD___Adriano.Features.Factory
 {
     public class ControllerConexao
     {
+        private IDbConnection _conexao;
+
+        public ControllerConexao(IDbConnection conexao)
+        {
+            _conexao = conexao;
+        }
+
         public void EscopoConexao(Action<IDbConnection> acao)
         {
-            using(var conexao = SqlConexao.RetornarConexao())
+            try
             {
-                conexao.Open();
-                acao(conexao);
+                _conexao.Open();
+                acao(_conexao);
+            }
+            finally
+            {
+                _conexao.Close();
             }
         }
 
         public T EscopoConexaoComRetorno<T>(Func<IDbConnection, T> acao)
         {
-            using (var conexao = SqlConexao.RetornarConexao())
+            try
             {
-                conexao.Open();
-                return acao(conexao);
+                _conexao.Open();
+                return acao(_conexao);
+            }
+            finally
+            {
+                _conexao.Close();
             }
         }
 
         public void EscopoTransacao(Action<IDbConnection, IDbTransaction> acao)
         {
-            using (var conexao = SqlConexao.RetornarConexao())
+            try
             {
-                conexao.Open();
-                using (var transacao = conexao.BeginTransaction())
-                {
-                    acao(conexao, transacao);
-                    transacao.Commit();
-                }
+                _conexao.Open();
+                
+                using var transacao = _conexao.BeginTransaction();
+                
+                acao(_conexao, transacao);
+                transacao.Commit();
+            }
+            finally
+            {
+                _conexao.Close();
             }
         }
 
         public T EscopoTransacaoComRetorno<T>(Func<IDbConnection, IDbTransaction, T> acao)
         {
-            using (var conexao = SqlConexao.RetornarConexao())
+            try
             {
-                conexao.Open();
-                using (var transacao = conexao.BeginTransaction())
-                {
-                    var resultado = acao(conexao, transacao);
-                    transacao.Commit();
-                    return resultado;
-                }
+                _conexao.Open();
+                
+                using var transacao = _conexao.BeginTransaction();
+
+                var resultado = acao(_conexao, transacao);
+                transacao.Commit();
+                return resultado;
+            }
+            finally
+            {
+                _conexao.Close();
             }
         }
     }
