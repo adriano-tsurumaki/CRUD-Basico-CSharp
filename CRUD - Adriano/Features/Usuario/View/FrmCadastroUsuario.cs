@@ -43,18 +43,18 @@ namespace CRUD___Adriano.Features.Cadastro.Usuario.View
                 return false;
             }
 
-            (_model as Features.Usuario.Model.UsuarioModel).Endereco.Uf = cbEstado.PegarEnumPorDescricao<EstadosBrasilEnum>();
-            (_model as Features.Usuario.Model.UsuarioModel).Sexo = cbSexo.PegarEnumPorDescricao<UsuarioSexoEnum>();
-            (_model as Features.Usuario.Model.UsuarioModel).DataNascimento = dataNascimento.Value;
-            (_model as Features.Usuario.Model.UsuarioModel).Cpf = txtCpf.Texto.RetornarSomenteTextoEmNumeros();
-            (_model as Features.Usuario.Model.UsuarioModel).Endereco.Cep = txtCep.Texto.RetornarSomenteTextoEmNumeros();
+            (_model as UsuarioModel).Endereco.Uf = cbEstado.PegarEnumPorDescricao<EstadosBrasilEnum>();
+            (_model as UsuarioModel).Sexo = cbSexo.PegarEnumPorDescricao<UsuarioSexoEnum>();
+            (_model as UsuarioModel).DataNascimento = dataNascimento.Value;
+            (_model as UsuarioModel).Cpf = txtCpf.Texto.RetornarSomenteTextoEmNumeros();
+            (_model as UsuarioModel).Endereco.Cep = txtCep.Texto.RetornarSomenteTextoEmNumeros();
 
             return true;
         }
 
         private bool ValidarCpf()
         {
-            var resultado = (_model as Features.Usuario.Model.UsuarioModel).Cpf.ValidarTudo();
+            var resultado = (_model as UsuarioModel).Cpf.ValidarTudo();
 
             if (resultado.IsValid) return true;
 
@@ -65,6 +65,7 @@ namespace CRUD___Adriano.Features.Cadastro.Usuario.View
         public void BindModel(ref T model)
         {
             _model = model;
+            txtCpf.DataBindings.Add("Texto", model, "Cpf");
             txtNome.DataBindings.Add("Texto", model, "Nome");
             txtSobrenome.DataBindings.Add("Texto", model, "Sobrenome");
             txtLogradouro.DataBindings.Add("Texto", model, "Endereco.Logradouro");
@@ -73,8 +74,8 @@ namespace CRUD___Adriano.Features.Cadastro.Usuario.View
             txtNumero.DataBindings.Add("Texto", model, "Endereco.Numero");
             txtCep.DataBindings.Add("Texto", model, "Endereco.Cep");
             txtComplemento.DataBindings.Add("Texto", model, "Endereco.Complemento");
-            cbSexo.SelectedIndex = ((int)(_model as Features.Usuario.Model.UsuarioModel).Sexo);
-            cbEstado.SelectedIndex = ((int)(_model as Features.Usuario.Model.UsuarioModel).Endereco.Uf);
+            cbSexo.SelectedIndex = ((int)(_model as UsuarioModel).Sexo);
+            cbEstado.SelectedIndex = ((int)(_model as UsuarioModel).Endereco.Uf);
         }
 
         private void DataNascimento_Validating(object sender, System.ComponentModel.CancelEventArgs e)
@@ -88,7 +89,7 @@ namespace CRUD___Adriano.Features.Cadastro.Usuario.View
 
             errorProvider.SetError(dataNascimento, null);
 
-            (_model as Features.Usuario.Model.UsuarioModel).DataNascimento = dataNascimento.Value;
+            (_model as UsuarioModel).DataNascimento = dataNascimento.Value;
         }
 
         private bool evitarLoopCep;
@@ -153,7 +154,7 @@ namespace CRUD___Adriano.Features.Cadastro.Usuario.View
 
             txtCpf.SelectionLength = 0;
             txtCpf.Texto = textoFormatado;
-            (_model as Features.Usuario.Model.UsuarioModel).Cpf = textoFormatado;
+            (_model as UsuarioModel).Cpf = textoFormatado;
         }
 
         private void TxtNumero__TextChanged(object sender, EventArgs e) =>
