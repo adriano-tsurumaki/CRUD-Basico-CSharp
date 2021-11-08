@@ -5,6 +5,7 @@ using CRUD___Adriano.Features.Colaborador.Controller;
 using CRUD___Adriano.Features.Colaborador.Model;
 using CRUD___Adriano.Features.Controller.PageManager;
 using CRUD___Adriano.Features.Factory;
+using CRUD___Adriano.Features.IoC;
 using CRUD___Adriano.Features.Usuario.Controller;
 using Ninject;
 using System;
@@ -16,14 +17,11 @@ namespace CRUD___Adriano
     public partial class FrmPrincipal : Form
     {
         private Form _formFilhaAtiva;
-        private readonly StandardKernel _kernel;
 
         public FrmPrincipal()
         {
             InitializeComponent();
             EsconderSubmenu();
-            _kernel = new StandardKernel();
-            _kernel.Load(Assembly.GetExecutingAssembly());
         }
 
         private void EsconderSubmenu()
@@ -38,12 +36,12 @@ namespace CRUD___Adriano
             lblTitulo.Text = "Cadastro de cliente";
             var pageManager = new GerenciadorDePaginas<ClienteModel>(
                 pnlChild,
-                _kernel.Get<ClienteController>(),
+                ConfigNinject.ObterInstancia<ClienteController>(),
                 new ClienteModel());
 
-            pageManager.Add(_kernel.Get<UsuarioControllerPage<ClienteModel>>());
-            pageManager.Add(_kernel.Get<EmailTelefoneControllerPage<ClienteModel>>());
-            pageManager.Add(_kernel.Get<ClienteControllerPage>());
+            pageManager.Add(ConfigNinject.ObterInstancia<UsuarioControllerPage<ClienteModel>>());
+            pageManager.Add(ConfigNinject.ObterInstancia<EmailTelefoneControllerPage<ClienteModel>>());
+            pageManager.Add(ConfigNinject.ObterInstancia<ClienteControllerPage>());
             pageManager.SetConfirm(ControllerEnum.Salvar);
             pageManager.Show();
         }
@@ -54,7 +52,7 @@ namespace CRUD___Adriano
             lblTitulo.Text = "Listagem de clientes";
             DocaForm(
                 new ClienteListagemController(
-                    _kernel.Get<ClienteController>(),
+                    ConfigNinject.ObterInstancia<ClienteController>(),
                     pnlChild)
                 .RetornarFormulario());
         }
@@ -93,12 +91,12 @@ namespace CRUD___Adriano
             lblTitulo.Text = "Cadastro de colaborador";
             var pageManager = new GerenciadorDePaginas<ColaboradorModel>(
                 pnlChild,
-                _kernel.Get<ColaboradorController>(),
+                ConfigNinject.ObterInstancia<ColaboradorController>(),
                 new ColaboradorModel());
 
-            pageManager.Add(_kernel.Get<UsuarioControllerPage<ColaboradorModel>>());
-            pageManager.Add(_kernel.Get<EmailTelefoneControllerPage<ColaboradorModel>>());
-            pageManager.Add(_kernel.Get<ColaboradorControllerPage>());
+            pageManager.Add(ConfigNinject.ObterInstancia<UsuarioControllerPage<ColaboradorModel>>());
+            pageManager.Add(ConfigNinject.ObterInstancia<EmailTelefoneControllerPage<ColaboradorModel>>());
+            pageManager.Add(ConfigNinject.ObterInstancia<ColaboradorControllerPage>());
             pageManager.SetConfirm(ControllerEnum.Salvar);
             pageManager.Show();
         }
@@ -109,7 +107,7 @@ namespace CRUD___Adriano
             lblTitulo.Text = "Listagem de Funcionários";
             DocaForm(
                 new ColaboradorListagemController(
-                    _kernel.Get<ColaboradorController>(),
+                    ConfigNinject.ObterInstancia<ColaboradorController>(),
                     pnlChild)
                 .RetornarFormulario());
         }
@@ -135,7 +133,7 @@ namespace CRUD___Adriano
 
         private void BtnAtalho_Click(object sender, EventArgs e)
         {
-            DocaForm(_kernel.Get<AtalhoController>().RetornarFormulario());
+            DocaForm(ConfigNinject.ObterInstancia<AtalhoController>().RetornarFormulario());
         }
     }
 }

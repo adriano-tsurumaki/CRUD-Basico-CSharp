@@ -1,6 +1,7 @@
 ﻿using CRUD___Adriano.Features.Cadastro.Produto.Model;
 using CRUD___Adriano.Features.Cliente.View;
 using CRUD___Adriano.Features.Controller.PageManager;
+using CRUD___Adriano.Features.IoC;
 using CRUD___Adriano.Features.Usuario.Controller;
 using Ninject;
 using System.Collections.Generic;
@@ -66,18 +67,15 @@ namespace CRUD___Adriano.Features.Cliente.Controller
         public void AlterarCliente(int id)
         {
             var clienteModelSelecionado = _clienteController.Selecionar(id);
-            
-            var kernel = new StandardKernel();
-            kernel.Load(Assembly.GetExecutingAssembly());
 
             var pageManager = new GerenciadorDePaginas<ClienteModel>(
                 _dock,
                 _clienteController,
                 clienteModelSelecionado);
 
-            pageManager.Add(kernel.Get<UsuarioControllerPage<ClienteModel>>());
-            pageManager.Add(kernel.Get<EmailTelefoneControllerPage<ClienteModel>>());
-            pageManager.Add(kernel.Get<ClienteControllerPage>());
+            pageManager.Add(ConfigNinject.ObterInstancia<UsuarioControllerPage<ClienteModel>>());
+            pageManager.Add(ConfigNinject.ObterInstancia<EmailTelefoneControllerPage<ClienteModel>>());
+            pageManager.Add(ConfigNinject.ObterInstancia<ClienteControllerPage>());
             pageManager.SetConfirm(Factory.ControllerEnum.Atualizar);
             pageManager.Show();
         }

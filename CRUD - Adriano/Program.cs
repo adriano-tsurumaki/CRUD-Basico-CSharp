@@ -1,4 +1,6 @@
 using CRUD___Adriano.Features;
+using CRUD___Adriano.Features.Configuration;
+using CRUD___Adriano.Features.IoC;
 using System;
 using System.Windows.Forms;
 
@@ -17,7 +19,10 @@ namespace CRUD___Adriano
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FrmPrincipal());
+
+            ConfigNinject.Registrar(new SqlConexao());
+
+            Application.Run(ConfigNinject.ObterInstancia<FrmPrincipal>());
         }
     }
 }

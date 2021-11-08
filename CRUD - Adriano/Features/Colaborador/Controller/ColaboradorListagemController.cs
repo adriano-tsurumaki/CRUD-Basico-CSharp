@@ -1,6 +1,7 @@
 ﻿using CRUD___Adriano.Features.Colaborador.Model;
 using CRUD___Adriano.Features.Colaborador.View;
 using CRUD___Adriano.Features.Controller.PageManager;
+using CRUD___Adriano.Features.IoC;
 using CRUD___Adriano.Features.Usuario.Controller;
 using Ninject;
 using System.Collections.Generic;
@@ -43,17 +44,14 @@ namespace CRUD___Adriano.Features.Colaborador.Controller
         {
             var colaboradorModelSelecionado = _colaboradorController.Selecionar(id);
 
-            var kernel = new StandardKernel();
-            kernel.Load(Assembly.GetExecutingAssembly());
-
             var pageManager = new GerenciadorDePaginas<ColaboradorModel>(
                 _dock,
                 _colaboradorController,
                 colaboradorModelSelecionado);
 
-            pageManager.Add(kernel.Get<UsuarioControllerPage<ColaboradorModel>>());
-            pageManager.Add(kernel.Get<EmailTelefoneControllerPage<ColaboradorModel>>());
-            pageManager.Add(kernel.Get<ColaboradorControllerPage>());
+            pageManager.Add(ConfigNinject.ObterInstancia<UsuarioControllerPage<ColaboradorModel>>());
+            pageManager.Add(ConfigNinject.ObterInstancia<EmailTelefoneControllerPage<ColaboradorModel>>());
+            pageManager.Add(ConfigNinject.ObterInstancia<ColaboradorControllerPage>());
             pageManager.SetConfirm(Factory.ControllerEnum.Atualizar);
             pageManager.Show();
         }
