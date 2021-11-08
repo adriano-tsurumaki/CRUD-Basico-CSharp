@@ -3,10 +3,8 @@ using CRUD___Adriano.Features.Cliente.View;
 using CRUD___Adriano.Features.Controller.PageManager;
 using CRUD___Adriano.Features.IoC;
 using CRUD___Adriano.Features.Usuario.Controller;
-using Ninject;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Reflection;
 using System.Windows.Forms;
 
 namespace CRUD___Adriano.Features.Cliente.Controller

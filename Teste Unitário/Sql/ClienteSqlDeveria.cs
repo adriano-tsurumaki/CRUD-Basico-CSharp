@@ -1,5 +1,5 @@
 ﻿using CRUD___Adriano.Features.Cadastro.Produto.Model;
-using CRUD___Adriano.Features.Cliente.Dao;
+using CRUD___Adriano.Features.Cliente.Sql;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 
@@ -11,7 +11,7 @@ namespace Teste_Unitário.Sql
         [DataTestMethod]
         [DynamicData(nameof(Lista_para_Deveria_retornar_sql_inserir_corretamente), DynamicDataSourceType.Method)]
         public void Deveria_retornar_sql_inserir_corretamente(ClienteModel clienteModel, string sqlEsperado) =>
-            Assert.AreEqual(ClienteDao.SqlInserirCliente(clienteModel), sqlEsperado);
+            Assert.AreEqual(ClienteSql.InserirCliente(clienteModel), sqlEsperado);
 
         public static IEnumerable<object[]> Lista_para_Deveria_retornar_sql_inserir_corretamente() =>
             new List<object[]>

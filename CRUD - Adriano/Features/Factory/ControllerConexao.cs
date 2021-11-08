@@ -19,6 +19,10 @@ namespace CRUD___Adriano.Features.Factory
                 _conexao.Open();
                 acao(_conexao);
             }
+            catch(Exception excecao)
+            {
+                throw excecao;
+            }
             finally
             {
                 _conexao.Close();

@@ -17,52 +17,77 @@ namespace CRUD___Adriano.Features.Cliente.Dao
 {
     public class ClienteDao
     {
-        public static bool CadastrarCliente(IDbConnection conexao, IDbTransaction transacao, ClienteModel clienteModel)
+        private IDbConnection _conexao;
+
+        public ClienteDao(IDbConnection conexao)
         {
-
-            clienteModel.IdUsuario = (int)conexao.ExecuteScalar(UsuarioSql.Inserir, UsuarioSql.RetornarParametroDinamicoParaInserirUm(clienteModel), transacao);
-
-            conexao.Execute(SqlInserirCliente(clienteModel), clienteModel, transacao);
-
-            clienteModel.Endereco.IdUsuario = clienteModel.IdUsuario;
-
-            foreach (var email in clienteModel.Emails)
-                email.IdUsuario = clienteModel.IdUsuario;
-
-            foreach (var telefone in clienteModel.Telefones)
-                telefone.IdUsuario = clienteModel.IdUsuario;
-
-            conexao.Execute(EnderecoSql.Inserir(clienteModel.Endereco), clienteModel.Endereco, transacao);
-            conexao.Execute(EmailSql.Inserir, clienteModel.Emails, transacao);
-            conexao.Execute(TelefoneSql.Inserir, clienteModel.Telefones, transacao);
-
-            return true;
+            _conexao = conexao;
         }
 
-        public static IList<ClienteModel> ListarTodosOsClientes(IDbConnection conexao)
+        public bool CadastrarCliente(ClienteModel clienteModel)
         {
-            var dicionarioCliente = new Dictionary<int, ClienteModel>();
+            try
+            {
+                _conexao.Open();
+                using var transacao = _conexao.BeginTransaction();
 
-            conexao.Query<ClienteModel, EnderecoModel, ClienteModel>(
-                ClienteSql.ListarTodos, 
-                (clienteModel, enderecoModel) => 
-                MapearListagemDeClientes(clienteModel, enderecoModel, dicionarioCliente),
-                splitOn: "split");
+                clienteModel.IdUsuario = (int)_conexao.ExecuteScalar(UsuarioSql.Inserir, UsuarioSql.RetornarParametroDinamicoParaInserirUm(clienteModel), transacao);
 
-            conexao.Query<ClienteModel, EmailModel, ClienteModel>(
-                EmailSql.ListarTodos,
-                (clienteModel, emailModel) => MapearListagemDeEmailsDosClientes(clienteModel, emailModel, dicionarioCliente),
-                splitOn: "split");
-            
-            conexao.Query<ClienteModel, TelefoneModel, ClienteModel>(
-                TelefoneSql.ListarTodos,
-                (clienteModel, telefoneModel) => MapearListagemDeTelefonesDosClientes(clienteModel, telefoneModel, dicionarioCliente),
-                splitOn: "split");
+                _conexao.Execute(ClienteSql.InserirCliente(clienteModel), clienteModel, transacao);
 
-            return dicionarioCliente.Values.ToList();
+                clienteModel.Endereco.IdUsuario = clienteModel.IdUsuario;
+
+                foreach (var email in clienteModel.Emails)
+                    email.IdUsuario = clienteModel.IdUsuario;
+
+                foreach (var telefone in clienteModel.Telefones)
+                    telefone.IdUsuario = clienteModel.IdUsuario;
+
+                _conexao.Execute(EnderecoSql.Inserir(clienteModel.Endereco), clienteModel.Endereco, transacao);
+                _conexao.Execute(EmailSql.Inserir, clienteModel.Emails, transacao);
+                _conexao.Execute(TelefoneSql.Inserir, clienteModel.Telefones, transacao);
+
+                transacao.Commit();
+                return true;
+            }
+            finally
+            {
+                _conexao.Close();
+            }
         }
 
-        private static ClienteModel MapearListagemDeClientes(ClienteModel clienteModel, EnderecoModel enderecoModel, Dictionary<int, ClienteModel> dicionarioCliente)
+        public IList<ClienteModel> ListarTodosOsClientes()
+        {
+            try
+            {
+                _conexao.Open();
+                var dicionarioCliente = new Dictionary<int, ClienteModel>();
+
+                _conexao.Query<ClienteModel, EnderecoModel, ClienteModel>(
+                    ClienteSql.ListarTodos,
+                    (clienteModel, enderecoModel) =>
+                    MapearListagemDeClientes(clienteModel, enderecoModel, dicionarioCliente),
+                    splitOn: "split");
+
+                _conexao.Query<ClienteModel, EmailModel, ClienteModel>(
+                    EmailSql.ListarTodos,
+                    (clienteModel, emailModel) => MapearListagemDeEmailsDosClientes(clienteModel, emailModel, dicionarioCliente),
+                    splitOn: "split");
+
+                _conexao.Query<ClienteModel, TelefoneModel, ClienteModel>(
+                    TelefoneSql.ListarTodos,
+                    (clienteModel, telefoneModel) => MapearListagemDeTelefonesDosClientes(clienteModel, telefoneModel, dicionarioCliente),
+                    splitOn: "split");
+                
+                return dicionarioCliente.Values.ToList();
+            }
+            finally
+            {
+                _conexao.Close();
+            }
+        }
+
+        private ClienteModel MapearListagemDeClientes(ClienteModel clienteModel, EnderecoModel enderecoModel, Dictionary<int, ClienteModel> dicionarioCliente)
         {
             if (dicionarioCliente.TryGetValue(clienteModel.IdUsuario, out var cliente) && cliente.Endereco.Id != enderecoModel.Id)
                     cliente.Endereco = enderecoModel;
@@ -75,7 +100,7 @@ namespace CRUD___Adriano.Features.Cliente.Dao
             return clienteModel;
         }
 
-        private static ClienteModel MapearListagemDeEmailsDosClientes(ClienteModel clienteModel, EmailModel emailModel, Dictionary<int, ClienteModel> dicionarioCliente)
+        private ClienteModel MapearListagemDeEmailsDosClientes(ClienteModel clienteModel, EmailModel emailModel, Dictionary<int, ClienteModel> dicionarioCliente)
         {
             if(dicionarioCliente.TryGetValue(clienteModel.IdUsuario, out var cliente))
                 cliente.Emails.Add(emailModel);
@@ -83,7 +108,7 @@ namespace CRUD___Adriano.Features.Cliente.Dao
             return clienteModel;
         }
 
-        private static ClienteModel MapearListagemDeTelefonesDosClientes(ClienteModel clienteModel, TelefoneModel telefoneModel, Dictionary<int, ClienteModel> dicionarioCliente)
+        private ClienteModel MapearListagemDeTelefonesDosClientes(ClienteModel clienteModel, TelefoneModel telefoneModel, Dictionary<int, ClienteModel> dicionarioCliente)
         {
             if(dicionarioCliente.TryGetValue(clienteModel.IdUsuario, out var cliente))
                 cliente.Telefones.Add(telefoneModel);
@@ -91,104 +116,91 @@ namespace CRUD___Adriano.Features.Cliente.Dao
             return clienteModel;
         }
 
-        public static IList<ClienteModel> ListarTodosOsClientesSomenteIdENome(IDbConnection conexao) =>
-            conexao.Query<ClienteModel>(ClienteSql.ListarTodosComCamposSomenteIdENome).ToList();
+        public IList<ClienteModel> ListarTodosOsClientesSomenteIdENome() =>
+            _conexao.Query<ClienteModel>(ClienteSql.ListarTodosComCamposSomenteIdENome).ToList();
 
-        public static IList<ClienteModel> ListarPelaQuantidadeSomenteIdENome(IDbConnection conexao, int Quantidade) =>
-            conexao.Query<ClienteModel>(ClienteSql.ListarPelaQuantidadeComCamposSomenteIdENome, new { Quantidade }).ToList();
+        public IList<ClienteModel> ListarPelaQuantidadeSomenteIdENome(int quantidade) =>
+            _conexao.Query<ClienteModel>(ClienteSql.ListarPelaQuantidadeComCamposSomenteIdENome, new { quantidade }).ToList();
 
-        public static IList<ClienteModel> ListarClientesPeloNomeSomenteIdENome(IDbConnection conexao, string Nome) =>
-            conexao.Query<ClienteModel>(ClienteSql.ListarPeloNomeComCamposSomenteIdENome, new { Nome }).ToList();
+        public IList<ClienteModel> ListarClientesPeloNomeSomenteIdENome(string nome) =>
+            _conexao.Query<ClienteModel>(ClienteSql.ListarPeloNomeComCamposSomenteIdENome, new { nome }).ToList();
 
-        public static ClienteModel SelecionarCliente(IDbConnection conexao, int id)
+        public ClienteModel SelecionarCliente(int id)
         {
-            var cliente = conexao.QuerySingleOrDefault<ClienteModel>(ClienteSql.Selecionar, new { id });
+            var cliente = _conexao.QuerySingleOrDefault<ClienteModel>(ClienteSql.Selecionar, new { id });
 
-            cliente.Endereco = conexao.QuerySingleOrDefault<EnderecoModel>(EnderecoSql.SelecionarUm, new { id });
-            cliente.Emails = conexao.Query<EmailModel>(EmailSql.ListarTodosPorId, new { id }).ToList();
-            cliente.Telefones = conexao.Query<TelefoneModel>(TelefoneSql.ListarTodosPorId, new { id }).ToList();
+            cliente.Endereco = _conexao.QuerySingleOrDefault<EnderecoModel>(EnderecoSql.SelecionarUm, new { id });
+            cliente.Emails = _conexao.Query<EmailModel>(EmailSql.ListarTodosPorId, new { id }).ToList();
+            cliente.Telefones = _conexao.Query<TelefoneModel>(TelefoneSql.ListarTodosPorId, new { id }).ToList();
 
             return cliente;
         }
 
-        public static ClienteModel SelecionarClienteSomenteIdENome(IDbConnection conexao, int id) =>
-            conexao.QuerySingleOrDefault<ClienteModel>(ClienteSql.SelecionarComCamposSomenteIdENome, new { id });
+        public ClienteModel SelecionarClienteSomenteIdENome(int id) =>
+            _conexao.QuerySingleOrDefault<ClienteModel>(ClienteSql.SelecionarComCamposSomenteIdENome, new { id });
 
-        public static bool RemoverCliente(IDbConnection conexao, IDbTransaction transacao, int id)
+        public bool RemoverCliente(int id)
         {
-            conexao.Query("delete Cliente where id_usuario = @id", new { id }, transacao);
-            conexao.Query(EnderecoSql.Remover, new { id }, transacao);
-            conexao.Query(EmailSql.Remover, new { id }, transacao);
-            conexao.Query(TelefoneSql.Remover, new { id }, transacao);
-            conexao.Query(UsuarioSql.Remover, new { id }, transacao);
+            try
+            {
+                _conexao.Open();
+                using var transacao = _conexao.BeginTransaction();
 
-            return true;
+                _conexao.Query("delete Cliente where id_usuario = @id", new { id }, transacao);
+                _conexao.Query(EnderecoSql.Remover, new { id }, transacao);
+                _conexao.Query(EmailSql.Remover, new { id }, transacao);
+                _conexao.Query(TelefoneSql.Remover, new { id }, transacao);
+                _conexao.Query(UsuarioSql.Remover, new { id }, transacao);
+
+                transacao.Commit();
+                return true;
+            }
+            finally
+            {
+                _conexao.Close();
+            }
         }
 
-        public static bool AtualizarCliente(IDbConnection conexao, IDbTransaction transacao, ClienteModel clienteModel)
+        public bool AtualizarCliente(ClienteModel clienteModel)
         {
-            conexao.Execute(UsuarioSql.Atualizar, clienteModel, transacao);
-            conexao.Execute(SqlAtualizarCliente(clienteModel), clienteModel, transacao);
-            conexao.Execute(EnderecoSql.Atualizar(clienteModel.Endereco), clienteModel.Endereco, transacao);
-
-            foreach (var email in clienteModel.Emails)
+            try
             {
-                if (email.Id > 0)
-                    conexao.Execute(EmailSql.Atualizar, email, transacao);
-                else
+                _conexao.Open();
+                using var transacao = _conexao.BeginTransaction();
+
+                _conexao.Execute(UsuarioSql.Atualizar, clienteModel, transacao);
+                _conexao.Execute(ClienteSql.AtualizarCliente(clienteModel), clienteModel, transacao);
+                _conexao.Execute(EnderecoSql.Atualizar(clienteModel.Endereco), clienteModel.Endereco, transacao);
+
+                foreach (var email in clienteModel.Emails)
                 {
-                    email.IdUsuario = clienteModel.IdUsuario;
-                    conexao.Execute(EmailSql.Inserir, email, transacao);
+                    if (email.Id > 0)
+                        _conexao.Execute(EmailSql.Atualizar, email, transacao);
+                    else
+                    {
+                        email.IdUsuario = clienteModel.IdUsuario;
+                        _conexao.Execute(EmailSql.Inserir, email, transacao);
+                    }
                 }
-            }
-            foreach (var telefone in clienteModel.Telefones)
-            {
-                if (telefone.Id > 0)
-                    conexao.Execute(TelefoneSql.Atualizar, telefone, transacao);
-                else
+                foreach (var telefone in clienteModel.Telefones)
                 {
-                    telefone.IdUsuario = clienteModel.IdUsuario;
-                    conexao.Execute(TelefoneSql.Inserir, telefone, transacao);
+                    if (telefone.Id > 0)
+                        _conexao.Execute(TelefoneSql.Atualizar, telefone, transacao);
+                    else
+                    {
+                        telefone.IdUsuario = clienteModel.IdUsuario;
+                        _conexao.Execute(TelefoneSql.Inserir, telefone, transacao);
+                    }
                 }
+
+                transacao.Commit();
+
+                return true;
             }
-
-            return true;
-        }
-
-        public static string SqlInserirCliente(ClienteModel clienteModel)
-        {
-            var insertSql = new StringBuilder("insert into Cliente(id_usuario, valor_limite");
-            var valuesSql = new StringBuilder("values (@IdUsuario, @ValorLimite");
-
-            if (!string.IsNullOrEmpty(clienteModel.Observacao))
+            finally
             {
-                insertSql.Append(", observacao");
-                valuesSql.Append(", @Observacao");
+                _conexao.Close();
             }
-
-            insertSql.Append(")");
-            valuesSql.Append(")");
-            return string.Join(' ', insertSql, valuesSql);
         }
-
-        private static string SqlAtualizarCliente(ClienteModel clienteModel)
-        {
-            var updateSql = new StringBuilder(@"update Cliente set 
-            valor_limite = @ValorLimite");
-
-            if (!string.IsNullOrEmpty(clienteModel.Observacao))
-                updateSql.Append(", observacao = @Observacao ");
-
-            updateSql.Append(" where id_usuario = @IdUsuario");
-
-            return updateSql.ToString();
-        }
-
-        public static ClienteModel TestandoMap(IDbConnection conexao) =>
-            conexao.QuerySingleOrDefault(
-                @"select u.data_nascimento 
-                from Cliente c 
-                inner join Usuario u on u.id = c.id_usuario where u.id = 60");
-
     }
 }

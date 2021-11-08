@@ -9,18 +9,18 @@ namespace CRUD___Adriano.Features.Cliente.Controller
 {
     public class ClienteController : IControllerBase<ClienteModel>
     {
-        private readonly ControllerConexao _conexao;
+        private readonly ClienteDao _clienteDao;
 
-        public ClienteController(ControllerConexao conexao)
+        public ClienteController(ClienteDao clienteDao)
         {
-            _conexao = conexao;
+            _clienteDao = clienteDao;
         }
 
         public bool Atualizar(ClienteModel clienteModel)
         {
             try
             {
-                return _conexao.EscopoTransacaoComRetorno((conexao, transacao) => ClienteDao.AtualizarCliente(conexao, transacao, clienteModel));
+                return _clienteDao.AtualizarCliente(clienteModel);
             }
             catch (Exception excecao)
             {
@@ -33,7 +33,7 @@ namespace CRUD___Adriano.Features.Cliente.Controller
         {
             try
             {
-                return _conexao.EscopoConexaoComRetorno((conexao) => ClienteDao.ListarTodosOsClientes(conexao));
+                return _clienteDao.ListarTodosOsClientes();
             }
             catch (Exception excecao)
             {
@@ -47,7 +47,7 @@ namespace CRUD___Adriano.Features.Cliente.Controller
         {
             try
             {
-                return _conexao.EscopoConexaoComRetorno((conexao) => ClienteDao.ListarTodosOsClientesSomenteIdENome(conexao));
+                return _clienteDao.ListarTodosOsClientesSomenteIdENome();
             }
             catch (Exception excecao)
             {
@@ -61,7 +61,7 @@ namespace CRUD___Adriano.Features.Cliente.Controller
         {
             try
             {
-                return _conexao.EscopoConexaoComRetorno((conexao) => ClienteDao.ListarClientesPeloNomeSomenteIdENome(conexao, nome));
+                return _clienteDao.ListarClientesPeloNomeSomenteIdENome(nome);
             }
             catch (Exception excecao)
             {
@@ -75,7 +75,7 @@ namespace CRUD___Adriano.Features.Cliente.Controller
         {
             try
             {
-                return _conexao.EscopoConexaoComRetorno((conexao) => ClienteDao.ListarPelaQuantidadeSomenteIdENome(conexao, quantidade));
+                return _clienteDao.ListarPelaQuantidadeSomenteIdENome(quantidade);
             }
             catch (Exception excecao)
             {
@@ -89,7 +89,7 @@ namespace CRUD___Adriano.Features.Cliente.Controller
         {
             try
             {
-                return _conexao.EscopoTransacaoComRetorno((conexao, transacao) => ClienteDao.RemoverCliente(conexao, transacao, id));
+                return _clienteDao.RemoverCliente(id);
             }
             catch (Exception excecao)
             {
@@ -102,7 +102,7 @@ namespace CRUD___Adriano.Features.Cliente.Controller
         {
             try
             {
-                return _conexao.EscopoTransacaoComRetorno((conexao, transacao) => ClienteDao.CadastrarCliente(conexao, transacao, clienteModel));
+                return _clienteDao.CadastrarCliente(clienteModel);
             }
             catch(Exception excecao)
             {
@@ -116,7 +116,7 @@ namespace CRUD___Adriano.Features.Cliente.Controller
             try
             {
                 foreach (var clienteModel in listaDeClientes)
-                    _conexao.EscopoTransacao((conexao, transacao) => ClienteDao.CadastrarCliente(conexao, transacao, clienteModel));
+                    _clienteDao.CadastrarCliente(clienteModel);
 
                 return true;
             }
@@ -131,7 +131,7 @@ namespace CRUD___Adriano.Features.Cliente.Controller
         {
             try
             {
-                return _conexao.EscopoConexaoComRetorno((conexao) => ClienteDao.SelecionarCliente(conexao, id));
+                return _clienteDao.SelecionarCliente(id);
             }
             catch (Exception excecao)
             {
@@ -144,7 +144,7 @@ namespace CRUD___Adriano.Features.Cliente.Controller
         {
             try
             {
-                return _conexao.EscopoConexaoComRetorno((conexao) => ClienteDao.SelecionarClienteSomenteIdENome(conexao, id));
+                return _clienteDao.SelecionarClienteSomenteIdENome(id);
             }
             catch (Exception excecao)
             {

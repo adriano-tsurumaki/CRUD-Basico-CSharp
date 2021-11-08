@@ -1,4 +1,7 @@
-﻿namespace CRUD___Adriano.Features.Cliente.Sql
+﻿using CRUD___Adriano.Features.Cadastro.Produto.Model;
+using System.Text;
+
+namespace CRUD___Adriano.Features.Cliente.Sql
 {
     public static class ClienteSql
     {
@@ -36,5 +39,34 @@
 			from Cliente c
 			inner join Usuario u on u.id = c.id_usuario
             where u.id = @id";
+
+        public static string InserirCliente(ClienteModel clienteModel)
+        {
+            var insertSql = new StringBuilder("insert into Cliente(id_usuario, valor_limite");
+            var valuesSql = new StringBuilder("values (@IdUsuario, @ValorLimite");
+
+            if (!string.IsNullOrEmpty(clienteModel.Observacao))
+            {
+                insertSql.Append(", observacao");
+                valuesSql.Append(", @Observacao");
+            }
+
+            insertSql.Append(")");
+            valuesSql.Append(")");
+            return string.Join(' ', insertSql, valuesSql);
+        }
+
+        public static string AtualizarCliente(ClienteModel clienteModel)
+        {
+            var updateSql = new StringBuilder(@"update Cliente set 
+            valor_limite = @ValorLimite");
+
+            if (!string.IsNullOrEmpty(clienteModel.Observacao))
+                updateSql.Append(", observacao = @Observacao ");
+
+            updateSql.Append(" where id_usuario = @IdUsuario");
+
+            return updateSql.ToString();
+        }
     }
 }
