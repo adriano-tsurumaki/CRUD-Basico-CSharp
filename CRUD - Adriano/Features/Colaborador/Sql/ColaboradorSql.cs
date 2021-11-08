@@ -7,6 +7,13 @@
             output inserted.id
             values(@IdUsuario, @Salario, @Comissao)";
 
+        public static string ListarTodos =
+            @"select u.id as IdUsuario, u.nome, u.sobrenome, u.sexo, u.cpf, u.data_nascimento as DataNascimento, c.salario, c.comissao,
+            c.id as split, en.id_usuario as IdUsuario, en.cep, en.logradouro, en.bairro, en.cidade, en.uf, en.complemento, en.numero
+			from Colaborador c
+			inner join Usuario u on u.id = c.id_usuario
+			inner join Endereco en on en.id_usuario = u.id";
+
         public static string ListarTodosComCamposSomenteIdENome =
             @"select u.id as IdUsuario, u.nome
             from Colaborador c
@@ -34,5 +41,11 @@
 			from Colaborador c
 			inner join Usuario u on u.id = c.id_usuario
             where u.id = @id";
+
+        public static string Atualizar =
+            @"update Colaborador set
+            salario = @Salario,
+            comissao = @Comissao
+            where id_usuario = @IdUsuario";
     }
 }

@@ -18,71 +18,98 @@ namespace CRUD___Adriano.Features.Colaborador.Dao
 {
     public class ColaboradorDao
     {
-        private static readonly string sqlListarTodosOsColaboradores =
-            @"select u.id as IdUsuario, u.nome, u.sobrenome, u.sexo, u.cpf, u.data_nascimento as DataNascimento, c.salario, c.comissao,
-            c.id as split, en.id_usuario as IdUsuario, en.cep, en.logradouro, en.bairro, en.cidade, en.uf, en.complemento, en.numero
-			from Colaborador c
-			inner join Usuario u on u.id = c.id_usuario
-			inner join Endereco en on en.id_usuario = u.id";
-
-        private static readonly string sqlListarTodosOsDadosBancariosDosColaboradores =
+        public static readonly string sqlListarTodosOsDadosBancariosDosColaboradores =
             @"select u.id as IdUsuario, 
             u.id as split, db.agencia, db.conta, db.tipo_conta as TipoConta, db.banco
             from Colaborador c
             inner join Usuario u on u.id = c.id_usuario
             inner join DadosBancarios db on db.id_colaborador = c.id";
 
-        public static bool CadastrarColaborador(IDbConnection conexao, IDbTransaction transacao, ColaboradorModel colaboradorModel)
+        public static readonly string sqlAtualizarDadosBancarios =
+            @"update DadosBancarios set
+            agencia = @Agencia,
+            conta = @Conta,
+            tipo_conta = @TipoConta,
+            banco = @Banco
+            where id_colaborador = @IdColaborador";
+
+        private IDbConnection _conexao;
+
+        public ColaboradorDao(IDbConnection conexao)
         {
-            colaboradorModel.IdUsuario = (int)conexao.ExecuteScalar(UsuarioSql.Inserir, UsuarioSql.RetornarParametroDinamicoParaInserirUm(colaboradorModel), transacao);
-
-            colaboradorModel.DadosBancarios.IdColaborador = (int)conexao.ExecuteScalar(ColaboradorSql.Inserir, colaboradorModel, transacao);
-
-            colaboradorModel.Endereco.IdUsuario = colaboradorModel.IdUsuario;
-
-            foreach (var email in colaboradorModel.Emails)
-                email.IdUsuario = colaboradorModel.IdUsuario;
-
-            foreach (var telefone in colaboradorModel.Telefones)
-                telefone.IdUsuario = colaboradorModel.IdUsuario;
-
-            conexao.Execute(EnderecoSql.Inserir(colaboradorModel.Endereco), colaboradorModel.Endereco, transacao);
-            conexao.Execute(EmailSql.Inserir, colaboradorModel.Emails, transacao);
-            conexao.Execute(TelefoneSql.Inserir, colaboradorModel.Telefones, transacao);
-            conexao.Execute(DadosBancariosSql.Inserir, colaboradorModel.DadosBancarios, transacao);
-
-            return true;
+            _conexao = conexao;
         }
 
-        public static IList<ColaboradorModel> ListarColaborador(IDbConnection conexao)
+        public bool CadastrarColaborador(ColaboradorModel colaboradorModel)
         {
-            var dicionarioColaborador = new Dictionary<int, ColaboradorModel>();
+            try
+            {
+                _conexao.Open();
+                using var transacao = _conexao.BeginTransaction();
+                colaboradorModel.IdUsuario = (int)_conexao.ExecuteScalar(UsuarioSql.Inserir, UsuarioSql.RetornarParametroDinamicoParaInserirUm(colaboradorModel), transacao);
 
-            conexao.Query<ColaboradorModel, EnderecoModel, ColaboradorModel>(
-                sqlListarTodosOsColaboradores,
-                (colaboradorModel, enderecoModel) =>
-                MapearListagemDeColaborador(colaboradorModel, enderecoModel, dicionarioColaborador),
-                splitOn: "split");
+                colaboradorModel.DadosBancarios.IdColaborador = (int)_conexao.ExecuteScalar(ColaboradorSql.Inserir, colaboradorModel, transacao);
 
-            conexao.Query<ColaboradorModel, EmailModel, ColaboradorModel>(
-                EmailSql.ListarTodos,
-                (colaboradorModel, emailModel) => 
-                MapearListagemDeEmailsDosColaboradores(colaboradorModel, emailModel, dicionarioColaborador),
-                splitOn: "split");
+                colaboradorModel.Endereco.IdUsuario = colaboradorModel.IdUsuario;
 
-            conexao.Query<ColaboradorModel, TelefoneModel, ColaboradorModel>(
-                TelefoneSql.ListarTodos,
-                (colaboradorModel, telefoneModel) =>
-                MapearListagemDeTelefonesDosColaboradores(colaboradorModel, telefoneModel, dicionarioColaborador),
-                splitOn: "split");
+                foreach (var email in colaboradorModel.Emails)
+                    email.IdUsuario = colaboradorModel.IdUsuario;
 
-            conexao.Query<ColaboradorModel, DadosBancariosModel, ColaboradorModel>(
-                sqlListarTodosOsDadosBancariosDosColaboradores,
-                (colaboradorModel, dadosBancariosModel) => 
-                MapearListagemDeDadosBancariosDosColaboradores(colaboradorModel, dadosBancariosModel, dicionarioColaborador),
-                splitOn: "split");
+                foreach (var telefone in colaboradorModel.Telefones)
+                    telefone.IdUsuario = colaboradorModel.IdUsuario;
 
-            return dicionarioColaborador.Values.ToList();
+                _conexao.Execute(EnderecoSql.Inserir(colaboradorModel.Endereco), colaboradorModel.Endereco, transacao);
+                _conexao.Execute(EmailSql.Inserir, colaboradorModel.Emails, transacao);
+                _conexao.Execute(TelefoneSql.Inserir, colaboradorModel.Telefones, transacao);
+                _conexao.Execute(DadosBancariosSql.Inserir, colaboradorModel.DadosBancarios, transacao);
+                
+                transacao.Commit();
+                return true;
+            }
+            finally
+            {
+                _conexao.Close();
+            }
+            
+        }
+
+        public IList<ColaboradorModel> ListarColaborador()
+        {
+            try
+            {
+                _conexao.Open();
+                var dicionarioColaborador = new Dictionary<int, ColaboradorModel>();
+
+                _conexao.Query<ColaboradorModel, EnderecoModel, ColaboradorModel>(
+                    ColaboradorSql.ListarTodos,
+                    (colaboradorModel, enderecoModel) =>
+                    MapearListagemDeColaborador(colaboradorModel, enderecoModel, dicionarioColaborador),
+                    splitOn: "split");
+
+                _conexao.Query<ColaboradorModel, EmailModel, ColaboradorModel>(
+                    EmailSql.ListarTodos,
+                    (colaboradorModel, emailModel) =>
+                    MapearListagemDeEmailsDosColaboradores(colaboradorModel, emailModel, dicionarioColaborador),
+                    splitOn: "split");
+
+                _conexao.Query<ColaboradorModel, TelefoneModel, ColaboradorModel>(
+                    TelefoneSql.ListarTodos,
+                    (colaboradorModel, telefoneModel) =>
+                    MapearListagemDeTelefonesDosColaboradores(colaboradorModel, telefoneModel, dicionarioColaborador),
+                    splitOn: "split");
+
+                _conexao.Query<ColaboradorModel, DadosBancariosModel, ColaboradorModel>(
+                    sqlListarTodosOsDadosBancariosDosColaboradores,
+                    (colaboradorModel, dadosBancariosModel) =>
+                    MapearListagemDeDadosBancariosDosColaboradores(colaboradorModel, dadosBancariosModel, dicionarioColaborador),
+                    splitOn: "split");
+
+                return dicionarioColaborador.Values.ToList();
+            }
+            finally
+            {
+                _conexao.Close();
+            }
         }
 
         public static ColaboradorModel MapearListagemDeColaborador(ColaboradorModel colaboradorModel, EnderecoModel enderecoModel, Dictionary<int, ColaboradorModel> dicionarioColaborador)
@@ -122,86 +149,97 @@ namespace CRUD___Adriano.Features.Colaborador.Dao
             return colaboradorModel;
         }
 
-        public static IList<ColaboradorModel> ListarTodosOsColaboradoresSomenteIdENome(IDbConnection conexao) =>
-            conexao.Query<ColaboradorModel>(ColaboradorSql.ListarTodosComCamposSomenteIdENome).ToList();
+        public IList<ColaboradorModel> ListarTodosOsColaboradoresSomenteIdENome() =>
+            _conexao.Query<ColaboradorModel>(ColaboradorSql.ListarTodosComCamposSomenteIdENome).ToList();
 
-        public static IList<ColaboradorModel> ListarPelaQuantidadeSomenteIdENome(IDbConnection conexao, int quantidade) =>
-            conexao.Query<ColaboradorModel>(ColaboradorSql.ListarPelaQuantidadeComCamposSomenteIdENome, new { quantidade }).ToList();
+        public IList<ColaboradorModel> ListarPelaQuantidadeSomenteIdENome(int quantidade) =>
+            _conexao.Query<ColaboradorModel>(ColaboradorSql.ListarPelaQuantidadeComCamposSomenteIdENome, new { quantidade }).ToList();
 
-        public static IList<ColaboradorModel> ListarColaboradoresPeloNomeSomenteIdENome(IDbConnection conexao, string nome) =>
-            conexao.Query<ColaboradorModel>(ColaboradorSql.ListarPeloNomeComCamposSomenteIdENome, new { nome }).ToList();
+        public IList<ColaboradorModel> ListarColaboradoresPeloNomeSomenteIdENome(string nome) =>
+            _conexao.Query<ColaboradorModel>(ColaboradorSql.ListarPeloNomeComCamposSomenteIdENome, new { nome }).ToList();
 
-        public static ColaboradorModel SelecionarColaborador(IDbConnection conexao, int id)
+        public ColaboradorModel SelecionarColaborador(int id)
         {
-            var colaborador = conexao.QuerySingleOrDefault<ColaboradorModel>(ColaboradorSql.Selecionar, new { id });
+            var colaborador = _conexao.QuerySingleOrDefault<ColaboradorModel>(ColaboradorSql.Selecionar, new { id });
 
-            colaborador.DadosBancarios = conexao.QuerySingleOrDefault<DadosBancariosModel>(DadosBancariosSql.SelecionarUm, new { id });
-            colaborador.Endereco = conexao.QuerySingleOrDefault<EnderecoModel>(EnderecoSql.SelecionarUm, new { id });
-            colaborador.Emails = conexao.Query<EmailModel>(EmailSql.ListarTodosPorId, new { id }).ToList();
-            colaborador.Telefones = conexao.Query<TelefoneModel>(TelefoneSql.ListarTodosPorId, new { id }).ToList();
+            colaborador.DadosBancarios = _conexao.QuerySingleOrDefault<DadosBancariosModel>(DadosBancariosSql.SelecionarUm, new { id });
+            colaborador.Endereco = _conexao.QuerySingleOrDefault<EnderecoModel>(EnderecoSql.SelecionarUm, new { id });
+            colaborador.Emails = _conexao.Query<EmailModel>(EmailSql.ListarTodosPorId, new { id }).ToList();
+            colaborador.Telefones = _conexao.Query<TelefoneModel>(TelefoneSql.ListarTodosPorId, new { id }).ToList();
 
             return colaborador;
         }
 
-        public static ColaboradorModel SelecionarColaboradorSomenteIdENome(IDbConnection conexao, int id) =>
-            conexao.QuerySingleOrDefault<ColaboradorModel>(ColaboradorSql.SelecionarComCamposSomenteIdENome, new { id });
+        public ColaboradorModel SelecionarColaboradorSomenteIdENome(int id) =>
+            _conexao.QuerySingleOrDefault<ColaboradorModel>(ColaboradorSql.SelecionarComCamposSomenteIdENome, new { id });
 
-        public static bool RemoverColaborador(IDbConnection conexao, IDbTransaction transacao, int id)
+        public bool RemoverColaborador(int id)
         {
-            conexao.Query(EnderecoSql.Remover, new { id }, transacao);
-            conexao.Query(EmailSql.Remover, new { id }, transacao);
-            conexao.Query(TelefoneSql.Remover, new { id }, transacao);
-            var idColaborador = conexao.Query<int>("select id from Colaborador where id_usuario = @id", new { id }, transacao).First();
-            conexao.Query("delete DadosBancarios where id_colaborador = @idColaborador", new { idColaborador }, transacao);
-            conexao.Query("delete Colaborador where id_usuario = @id", new { id }, transacao);
-            conexao.Query(UsuarioSql.Remover, new { id }, transacao);
+            try
+            {
+                _conexao.Open();
+                using var transacao = _conexao.BeginTransaction();
 
-            return true;
+                _conexao.Query(EnderecoSql.Remover, new { id }, transacao);
+                _conexao.Query(EmailSql.Remover, new { id }, transacao);
+                _conexao.Query(TelefoneSql.Remover, new { id }, transacao);
+
+                var idColaborador = _conexao.Query<int>("select id from Colaborador where id_usuario = @id", new { id }, transacao).First();
+
+                _conexao.Query("delete DadosBancarios where id_colaborador = @idColaborador", new { idColaborador }, transacao);
+                _conexao.Query("delete Colaborador where id_usuario = @id", new { id }, transacao);
+                _conexao.Query(UsuarioSql.Remover, new { id }, transacao);
+
+                transacao.Commit();
+                return true;
+            }
+            finally
+            {
+                _conexao.Close();
+            }
+
         }
 
-        private static readonly string sqlAtualizarColaborador = 
-            @"update Colaborador set
-            salario = @Salario,
-            comissao = @Comissao
-            where id_usuario = @IdUsuario";
-
-        private static readonly string sqlAtualizarDadosBancarios =
-            @"update DadosBancarios set
-            agencia = @Agencia,
-            conta = @Conta,
-            tipo_conta = @TipoConta,
-            banco = @Banco
-            where id_colaborador = @IdColaborador";
-
-        public static bool AtualizarColaborador(IDbConnection conexao, IDbTransaction transacao, ColaboradorModel colaboradorModel)
+        public bool AtualizarColaborador(ColaboradorModel colaboradorModel)
         {
-            conexao.Execute(UsuarioSql.Atualizar, colaboradorModel, transacao);
-            conexao.Execute(sqlAtualizarColaborador, colaboradorModel, transacao);
-            conexao.Execute(EnderecoSql.Atualizar(colaboradorModel.Endereco), colaboradorModel.Endereco, transacao);
-            conexao.Execute(sqlAtualizarDadosBancarios, colaboradorModel.DadosBancarios, transacao);
-
-            foreach (var email in colaboradorModel.Emails)
+            try
             {
-                if (email.Id > 0)
-                    conexao.Execute(EmailSql.Atualizar, email, transacao);
-                else
-                {
-                    email.IdUsuario = colaboradorModel.IdUsuario;
-                    conexao.Execute(EmailSql.Inserir, email, transacao);
-                }
-            }
-            foreach (var telefone in colaboradorModel.Telefones)
-            {
-                if (telefone.Id > 0)
-                    conexao.Execute(TelefoneSql.Atualizar, telefone, transacao);
-                else
-                {
-                    telefone.IdUsuario = colaboradorModel.IdUsuario;
-                    conexao.Execute(TelefoneSql.Inserir, telefone, transacao);
-                }
-            }
+                _conexao.Open();
+                using var transacao = _conexao.BeginTransaction();
 
-            return true;
+                _conexao.Execute(UsuarioSql.Atualizar, colaboradorModel, transacao);
+                _conexao.Execute(ColaboradorSql.Atualizar, colaboradorModel, transacao);
+                _conexao.Execute(EnderecoSql.Atualizar(colaboradorModel.Endereco), colaboradorModel.Endereco, transacao);
+                _conexao.Execute(sqlAtualizarDadosBancarios, colaboradorModel.DadosBancarios, transacao);
+
+                foreach (var email in colaboradorModel.Emails)
+                {
+                    if (email.Id > 0)
+                        _conexao.Execute(EmailSql.Atualizar, email, transacao);
+                    else
+                    {
+                        email.IdUsuario = colaboradorModel.IdUsuario;
+                        _conexao.Execute(EmailSql.Inserir, email, transacao);
+                    }
+                }
+                foreach (var telefone in colaboradorModel.Telefones)
+                {
+                    if (telefone.Id > 0)
+                        _conexao.Execute(TelefoneSql.Atualizar, telefone, transacao);
+                    else
+                    {
+                        telefone.IdUsuario = colaboradorModel.IdUsuario;
+                        _conexao.Execute(TelefoneSql.Inserir, telefone, transacao);
+                    }
+                }
+
+                transacao.Commit();
+                return true;
+            }
+            finally
+            {
+                _conexao.Close();
+            }
         }
     }
 }

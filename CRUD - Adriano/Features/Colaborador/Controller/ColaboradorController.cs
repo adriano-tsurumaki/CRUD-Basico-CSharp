@@ -9,18 +9,18 @@ namespace CRUD___Adriano.Features.Colaborador.Controller
 {
     public class ColaboradorController : IControllerBase<ColaboradorModel>
     {
-        private readonly ControllerConexao _conexao;
+        private readonly ColaboradorDao _colaboradorDao;
 
-        public ColaboradorController(ControllerConexao conexao)
+        public ColaboradorController(ColaboradorDao colaboradorDao)
         {
-            _conexao = conexao;
+            _colaboradorDao = colaboradorDao;
         }
 
         public bool Atualizar(ColaboradorModel colaboradorModel)
         {
             try
             {
-                return _conexao.EscopoTransacaoComRetorno((conexao, transacao) => ColaboradorDao.AtualizarColaborador(conexao, transacao, colaboradorModel));
+                return _colaboradorDao.AtualizarColaborador(colaboradorModel);
             }
             catch (Exception excecao)
             {
@@ -33,7 +33,7 @@ namespace CRUD___Adriano.Features.Colaborador.Controller
         {
             try
             {
-                return _conexao.EscopoConexaoComRetorno((conexao) => ColaboradorDao.ListarColaborador(conexao));
+                return _colaboradorDao.ListarColaborador();
             }
             catch (Exception excecao)
             {
@@ -48,7 +48,7 @@ namespace CRUD___Adriano.Features.Colaborador.Controller
             try
             {
                 foreach (var colaboradorModel in listaDeColaboradores)
-                    _conexao.EscopoTransacao((conexao, transacao) => ColaboradorDao.CadastrarColaborador(conexao, transacao, colaboradorModel));
+                    _colaboradorDao.CadastrarColaborador(colaboradorModel);
 
                 return true;
             }
@@ -63,7 +63,7 @@ namespace CRUD___Adriano.Features.Colaborador.Controller
         {
             try
             {
-                return _conexao.EscopoConexaoComRetorno((conexao) => ColaboradorDao.ListarTodosOsColaboradoresSomenteIdENome(conexao));
+                return _colaboradorDao.ListarTodosOsColaboradoresSomenteIdENome();
             }
             catch (Exception excecao)
             {
@@ -77,7 +77,7 @@ namespace CRUD___Adriano.Features.Colaborador.Controller
         {
             try
             {
-                return _conexao.EscopoConexaoComRetorno((conexao) => ColaboradorDao.ListarPelaQuantidadeSomenteIdENome(conexao, quantidade));
+                return _colaboradorDao.ListarPelaQuantidadeSomenteIdENome(quantidade);
             }
             catch (Exception excecao)
             {
@@ -91,7 +91,7 @@ namespace CRUD___Adriano.Features.Colaborador.Controller
         {
             try
             {
-                return _conexao.EscopoConexaoComRetorno((conexao) => ColaboradorDao.ListarColaboradoresPeloNomeSomenteIdENome(conexao, nome));
+                return _colaboradorDao.ListarColaboradoresPeloNomeSomenteIdENome(nome);
             }
             catch (Exception excecao)
             {
@@ -105,7 +105,7 @@ namespace CRUD___Adriano.Features.Colaborador.Controller
         {
             try
             {
-                return _conexao.EscopoTransacaoComRetorno((conexao, transacao) => ColaboradorDao.RemoverColaborador(conexao, transacao, id));
+                return _colaboradorDao.RemoverColaborador(id);
             }
             catch (Exception excecao)
             {
@@ -118,7 +118,7 @@ namespace CRUD___Adriano.Features.Colaborador.Controller
         {
             try
             {
-                return _conexao.EscopoTransacaoComRetorno((conexao, transacao) => ColaboradorDao.CadastrarColaborador(conexao, transacao, colaboradorModel));
+                return _colaboradorDao.CadastrarColaborador(colaboradorModel);
             }
             catch(Exception excecao)
             {
@@ -132,7 +132,7 @@ namespace CRUD___Adriano.Features.Colaborador.Controller
         {
             try
             {
-                return _conexao.EscopoConexaoComRetorno((conexao) => ColaboradorDao.SelecionarColaborador(conexao, id));
+                return _colaboradorDao.SelecionarColaborador(id);
             }
             catch (Exception excecao)
             {
@@ -145,7 +145,7 @@ namespace CRUD___Adriano.Features.Colaborador.Controller
         {
             try
             {
-                return _conexao.EscopoConexaoComRetorno((conexao) => ColaboradorDao.SelecionarColaboradorSomenteIdENome(conexao, id));
+                return _colaboradorDao.SelecionarColaboradorSomenteIdENome(id);
             }
             catch (Exception excecao)
             {
