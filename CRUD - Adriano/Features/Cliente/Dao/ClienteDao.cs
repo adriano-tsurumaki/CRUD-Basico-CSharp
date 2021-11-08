@@ -11,7 +11,6 @@ using Dapper;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Text;
 
 namespace CRUD___Adriano.Features.Cliente.Dao
 {

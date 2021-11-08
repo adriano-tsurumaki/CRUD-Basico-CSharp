@@ -20,8 +20,6 @@ namespace CRUD___Adriano.Features.Configuration
         {
             Bind<IDbConnection>().ToMethod(ctx => SqlConexao.RetornarConexao());
             
-            Bind<ControllerConexao>().To<ControllerConexao>();
-         
             Bind(typeof(IControllerBase<ClienteModel>)).To(typeof(ClienteController));
             Bind(typeof(IControllerBase<ColaboradorModel>)).To(typeof(ColaboradorModel));
 

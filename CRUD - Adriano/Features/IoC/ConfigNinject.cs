@@ -63,8 +63,6 @@ namespace CRUD___Adriano.Features.IoC
 
             kernel.Bind<IDbConnection>().ToMethod(ctx => SqlConexao.RetornarConexao());
 
-            kernel.Bind<ControllerConexao>().To<ControllerConexao>();
-
             return kernel;
         }
 
