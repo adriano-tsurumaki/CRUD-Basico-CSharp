@@ -31,6 +31,7 @@ namespace CRUD___Adriano
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmPrincipal));
             this.pnlSideMenu = new System.Windows.Forms.Panel();
+            this.btnAtalho = new System.Windows.Forms.Button();
             this.pnlListagemSubmenu = new System.Windows.Forms.Panel();
             this.btnListagemFuncionario = new System.Windows.Forms.Button();
             this.btnListagemCliente = new System.Windows.Forms.Button();
@@ -44,7 +45,6 @@ namespace CRUD___Adriano
             this.pnlTitlebar = new System.Windows.Forms.Panel();
             this.lblTitulo = new System.Windows.Forms.Label();
             this.pnlChild = new System.Windows.Forms.Panel();
-            this.btnAtalho = new System.Windows.Forms.Button();
             this.pnlSideMenu.SuspendLayout();
             this.pnlListagemSubmenu.SuspendLayout();
             this.pnlCadastroSubmenu.SuspendLayout();
@@ -67,6 +67,26 @@ namespace CRUD___Adriano
             this.pnlSideMenu.Name = "pnlSideMenu";
             this.pnlSideMenu.Size = new System.Drawing.Size(220, 561);
             this.pnlSideMenu.TabIndex = 2;
+            // 
+            // btnAtalho
+            // 
+            this.btnAtalho.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnAtalho.FlatAppearance.BorderSize = 0;
+            this.btnAtalho.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAtalho.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnAtalho.ForeColor = System.Drawing.Color.Gainsboro;
+            this.btnAtalho.Image = ((System.Drawing.Image)(resources.GetObject("btnAtalho.Image")));
+            this.btnAtalho.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAtalho.Location = new System.Drawing.Point(0, 443);
+            this.btnAtalho.Name = "btnAtalho";
+            this.btnAtalho.Padding = new System.Windows.Forms.Padding(6, 0, 0, 0);
+            this.btnAtalho.Size = new System.Drawing.Size(220, 60);
+            this.btnAtalho.TabIndex = 7;
+            this.btnAtalho.Text = "Atalhos";
+            this.btnAtalho.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAtalho.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnAtalho.UseVisualStyleBackColor = true;
+            this.btnAtalho.Click += new System.EventHandler(this.BtnAtalho_Click);
             // 
             // pnlListagemSubmenu
             // 
@@ -223,6 +243,7 @@ namespace CRUD___Adriano
             // lblNomeEmpresa
             // 
             this.lblNomeEmpresa.AutoSize = true;
+            this.lblNomeEmpresa.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblNomeEmpresa.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblNomeEmpresa.ForeColor = System.Drawing.Color.White;
             this.lblNomeEmpresa.Location = new System.Drawing.Point(19, 21);
@@ -230,6 +251,7 @@ namespace CRUD___Adriano
             this.lblNomeEmpresa.Size = new System.Drawing.Size(183, 30);
             this.lblNomeEmpresa.TabIndex = 1;
             this.lblNomeEmpresa.Text = "Augusto\'s Fashion";
+            this.lblNomeEmpresa.Click += new System.EventHandler(this.LblNomeEmpresa_Click);
             // 
             // pnlTitlebar
             // 
@@ -262,26 +284,6 @@ namespace CRUD___Adriano
             this.pnlChild.Size = new System.Drawing.Size(714, 486);
             this.pnlChild.TabIndex = 4;
             this.pnlChild.ControlRemoved += new System.Windows.Forms.ControlEventHandler(this.PnlChild_ControlRemoved);
-            // 
-            // btnAtalho
-            // 
-            this.btnAtalho.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnAtalho.FlatAppearance.BorderSize = 0;
-            this.btnAtalho.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAtalho.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnAtalho.ForeColor = System.Drawing.Color.Gainsboro;
-            this.btnAtalho.Image = ((System.Drawing.Image)(resources.GetObject("btnAtalho.Image")));
-            this.btnAtalho.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAtalho.Location = new System.Drawing.Point(0, 443);
-            this.btnAtalho.Name = "btnAtalho";
-            this.btnAtalho.Padding = new System.Windows.Forms.Padding(6, 0, 0, 0);
-            this.btnAtalho.Size = new System.Drawing.Size(220, 60);
-            this.btnAtalho.TabIndex = 7;
-            this.btnAtalho.Text = "Atalhos";
-            this.btnAtalho.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAtalho.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnAtalho.UseVisualStyleBackColor = true;
-            this.btnAtalho.Click += new System.EventHandler(this.BtnAtalho_Click);
             // 
             // FrmPrincipal
             // 

@@ -4,6 +4,7 @@ using CRUD___Adriano.Features.Cliente.Controller;
 using CRUD___Adriano.Features.Colaborador.Controller;
 using CRUD___Adriano.Features.Colaborador.Model;
 using CRUD___Adriano.Features.Controller.PageManager;
+using CRUD___Adriano.Features.Dashboards.Controller;
 using CRUD___Adriano.Features.Factory;
 using CRUD___Adriano.Features.IoC;
 using CRUD___Adriano.Features.Usuario.Controller;
@@ -82,7 +83,7 @@ namespace CRUD___Adriano
 
         private void PnlChild_ControlRemoved(object sender, ControlEventArgs e)
         {
-            lblTitulo.Text = "Dashboard";
+            lblTitulo.Text = "";
         }
 
         private void BtnCadastroFuncionario_Click(object sender, EventArgs e)
@@ -112,6 +113,20 @@ namespace CRUD___Adriano
                 .RetornarFormulario());
         }
 
+        private void BtnAtalho_Click(object sender, EventArgs e)
+        {
+            LimparPanel();
+            lblTitulo.Text = "Atalhos";
+            DocaForm(ConfigNinject.ObterInstancia<AtalhoController>().RetornarFormulario());
+        }
+
+        private void LblNomeEmpresa_Click(object sender, EventArgs e)
+        {
+            LimparPanel();
+            lblTitulo.Text = "Dashboard";
+            DocaForm(ConfigNinject.ObterInstancia<DashboardController>().RetornarFormulario());
+        }
+
         private void LimparPanel() => pnlChild.Controls.Clear();
 
         private void DocaForm(Form formFilha)
@@ -129,11 +144,6 @@ namespace CRUD___Adriano
 
             formFilha.BringToFront();
             formFilha.Show();
-        }
-
-        private void BtnAtalho_Click(object sender, EventArgs e)
-        {
-            DocaForm(ConfigNinject.ObterInstancia<AtalhoController>().RetornarFormulario());
         }
     }
 }

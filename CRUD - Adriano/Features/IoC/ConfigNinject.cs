@@ -9,6 +9,8 @@ using CRUD___Adriano.Features.Colaborador.Dao;
 using CRUD___Adriano.Features.Colaborador.Model;
 using CRUD___Adriano.Features.Colaborador.View;
 using CRUD___Adriano.Features.Configuration;
+using CRUD___Adriano.Features.Dashboards.Controller;
+using CRUD___Adriano.Features.Dashboards.View;
 using CRUD___Adriano.Features.Factory;
 using CRUD___Adriano.Features.Usuario.Controller;
 using CRUD___Adriano.Features.Usuario.View;
@@ -28,12 +30,14 @@ namespace CRUD___Adriano.Features.IoC
                 {
                     AllowNullInjection = true
                 });
+
             kernel.Bind(typeof(IControllerBase<ColaboradorModel>)).To(typeof(ColaboradorModel));
 
             //Database
             kernel.Bind<SqlConexao>().ToConstant(connectionString);
 
             //Controllers
+            kernel.Bind<DashboardController>().ToSelf();
             kernel.Bind<AtalhoController>().ToSelf();
             kernel.Bind<ClienteController>().ToSelf();
             kernel.Bind<ClienteControllerPage>().ToSelf();
@@ -59,7 +63,7 @@ namespace CRUD___Adriano.Features.IoC
             kernel.Bind<FrmDetalhesColaborador>().ToSelf();
             kernel.Bind<FrmListagemColaborador>().ToSelf();
             kernel.Bind<FrmPrincipal>().ToSelf();
-
+            kernel.Bind<FrmDashboard>().ToSelf();
 
             kernel.Bind<IDbConnection>().ToMethod(ctx => SqlConexao.RetornarConexao());
 
