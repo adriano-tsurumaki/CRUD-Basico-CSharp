@@ -84,7 +84,7 @@ namespace CRUD___Adriano.Features.Dashboards.View
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
-            this.ClientSize = new System.Drawing.Size(1029, 548);
+            this.ClientSize = new System.Drawing.Size(708, 555);
             this.Controls.Add(this.lblQuantidadeFuncionarios);
             this.Controls.Add(this.lblQuantidadeClientes);
             this.Controls.Add(this.lblTituloQuantidadeFuncionarios);

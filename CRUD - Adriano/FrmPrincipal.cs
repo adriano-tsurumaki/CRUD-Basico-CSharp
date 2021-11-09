@@ -8,9 +8,7 @@ using CRUD___Adriano.Features.Dashboards.Controller;
 using CRUD___Adriano.Features.Factory;
 using CRUD___Adriano.Features.IoC;
 using CRUD___Adriano.Features.Usuario.Controller;
-using Ninject;
 using System;
-using System.Reflection;
 using System.Windows.Forms;
 
 namespace CRUD___Adriano
