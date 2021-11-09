@@ -7,22 +7,15 @@ namespace CRUD___Adriano.Features.Cliente.Controller
 {
     public class ClienteControllerPage : IControllerPage<ClienteModel>
     {
-        private ClienteModel _clienteModel;
+        private readonly IViewPage<ClienteModel> _frmClientePage;
 
-        private IViewPage<ClienteModel> _frmClientePage;
-
-        public ClienteControllerPage()
-        {
+        public ClienteControllerPage() =>
             _frmClientePage = new FrmCadastroCliente(this);
-        }
 
         public IViewPage<ClienteModel> RetornarFormulario() => _frmClientePage;
 
-        public void AdicionarModel(ref ClienteModel clienteModel)
-        {
-            _clienteModel = clienteModel;
+        public void AdicionarModel(ref ClienteModel clienteModel) =>
             _frmClientePage.BindModel(ref clienteModel);
-        }
 
         public bool ValidarForm() =>
             _frmClientePage.ValidarComponentes();

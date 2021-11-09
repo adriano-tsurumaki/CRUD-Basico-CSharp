@@ -10,12 +10,11 @@ namespace CRUD___Adriano.Features.Colaborador.Controller
     {
         private ColaboradorModel _colaboradorModel;
 
-        private IViewPage<ColaboradorModel> _frmColaboradorPage;
+        private readonly IViewPage<ColaboradorModel> _frmColaboradorPage;
 
-        public ColaboradorControllerPage()
-        {
+        public ColaboradorControllerPage() =>
             _frmColaboradorPage = new FrmCadastroColaborador(this);
-        }
+
         public void AdicionarModel(ref ColaboradorModel colaboradorModel)
         {
             _colaboradorModel = colaboradorModel;
