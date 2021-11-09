@@ -40,7 +40,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Configuration\Login\Dao\" />
     <Folder Include="Features\Dashboards\Dao\" />
   </ItemGroup>
 

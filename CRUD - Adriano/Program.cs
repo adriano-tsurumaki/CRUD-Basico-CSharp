@@ -1,7 +1,6 @@
 using CRUD___Adriano.Features;
 using CRUD___Adriano.Features.Configuration;
 using CRUD___Adriano.Features.Configuration.Login.Controller;
-using CRUD___Adriano.Features.Configuration.Login.View;
 using CRUD___Adriano.Features.IoC;
 using System;
 using System.Windows.Forms;
@@ -24,9 +23,9 @@ namespace CRUD___Adriano
 
             ConfigNinject.Registrar(new SqlConexao());
 
-            var result = new LoginController().RetornarFormulario().ShowDialog();
+            var loginResultado = ConfigNinject.ObterInstancia<LoginController>().RetornarFormulario().ShowDialog();
 
-            if(result == DialogResult.OK)
+            if(loginResultado == DialogResult.OK)
                 Application.Run(ConfigNinject.ObterInstancia<FrmPrincipal>());
         }
     }
