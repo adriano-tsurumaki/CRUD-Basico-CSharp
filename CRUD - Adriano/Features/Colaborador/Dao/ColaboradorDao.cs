@@ -173,6 +173,9 @@ namespace CRUD___Adriano.Features.Colaborador.Dao
         public ColaboradorModel SelecionarColaboradorSomenteIdENome(int id) =>
             _conexao.QuerySingleOrDefault<ColaboradorModel>(ColaboradorSql.SelecionarComCamposSomenteIdENome, new { id });
 
+        public int SelecionarQuantidadeDeTodosOsColaboradores() =>
+            _conexao.QuerySingleOrDefault<int>(ColaboradorSql.SelecionarQuantidadeDeTodos);
+
         public bool RemoverColaborador(int id)
         {
             try

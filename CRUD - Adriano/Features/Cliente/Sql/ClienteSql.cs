@@ -40,6 +40,9 @@ namespace CRUD___Adriano.Features.Cliente.Sql
 			inner join Usuario u on u.id = c.id_usuario
             where u.id = @id";
 
+        public static readonly string SelecionarQuantidadeDeTodos =
+            @"select count(*) from Cliente";
+
         public static string InserirCliente(ClienteModel clienteModel)
         {
             var insertSql = new StringBuilder("insert into Cliente(id_usuario, valor_limite");

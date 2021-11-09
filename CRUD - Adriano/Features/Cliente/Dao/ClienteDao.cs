@@ -138,6 +138,9 @@ namespace CRUD___Adriano.Features.Cliente.Dao
         public ClienteModel SelecionarClienteSomenteIdENome(int id) =>
             _conexao.QuerySingleOrDefault<ClienteModel>(ClienteSql.SelecionarComCamposSomenteIdENome, new { id });
 
+        public int SelecionarQuantidadeDeTodosOsClientes() =>
+            _conexao.QuerySingleOrDefault<int>(ClienteSql.SelecionarQuantidadeDeTodos);
+
         public bool RemoverCliente(int id)
         {
             try

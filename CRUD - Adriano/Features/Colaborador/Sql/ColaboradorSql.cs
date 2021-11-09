@@ -7,42 +7,45 @@
             output inserted.id
             values(@IdUsuario, @Salario, @Comissao)";
 
-        public static string ListarTodos =
+        public static readonly string ListarTodos =
             @"select u.id as IdUsuario, u.nome, u.sobrenome, u.sexo, u.cpf, u.data_nascimento as DataNascimento, c.salario, c.comissao,
             c.id as split, en.id_usuario as IdUsuario, en.cep, en.logradouro, en.bairro, en.cidade, en.uf, en.complemento, en.numero
 			from Colaborador c
 			inner join Usuario u on u.id = c.id_usuario
 			inner join Endereco en on en.id_usuario = u.id";
 
-        public static string ListarTodosComCamposSomenteIdENome =
+        public static readonly string ListarTodosComCamposSomenteIdENome =
             @"select u.id as IdUsuario, u.nome
             from Colaborador c
             inner join Usuario u on u.id = c.id_usuario";
 
-        public static string ListarPelaQuantidadeComCamposSomenteIdENome =
+        public static readonly string ListarPelaQuantidadeComCamposSomenteIdENome =
             @"select top {=Quantidade} u.id as IdUsuario, u.nome
             from Colaborador c
 			inner join Usuario u on u.id = c.id_usuario";
 
-        public static string ListarPeloNomeComCamposSomenteIdENome =
+        public static readonly string ListarPeloNomeComCamposSomenteIdENome =
             @"select u.id as IdUsuario, u.nome
 			from Colaborador c
 			inner join Usuario u on u.id = c.id_usuario
             where u.nome Like @Nome + '%'";
 
-        public static string SelecionarComCamposSomenteIdENome =
+        public static readonly string SelecionarComCamposSomenteIdENome =
             @"select u.id as IdUsuario, u.nome
 			from Colaborador c
 			inner join Usuario u on u.id = c.id_usuario
 			where u.id = @id";
 
-        public static string Selecionar =
+        public static readonly string Selecionar =
             @"select u.id as IdUsuario, u.nome, u.sobrenome, u.sexo, u.cpf, u.data_nascimento as DataNascimento, c.salario, c.comissao
 			from Colaborador c
 			inner join Usuario u on u.id = c.id_usuario
             where u.id = @id";
 
-        public static string Atualizar =
+        public static readonly string SelecionarQuantidadeDeTodos =
+            @"select count(*) from Colaborador";
+
+        public static readonly string Atualizar =
             @"update Colaborador set
             salario = @Salario,
             comissao = @Comissao
