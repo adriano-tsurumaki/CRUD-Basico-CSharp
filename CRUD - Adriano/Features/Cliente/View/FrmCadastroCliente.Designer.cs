@@ -33,6 +33,7 @@ namespace CRUD___Adriano.Features.Cliente.View
             this.lblValorLimite = new System.Windows.Forms.Label();
             this.txtObservacao = new CRUD___Adriano.Features.Componentes.TextBoxFlat();
             this.lblObservacao = new System.Windows.Forms.Label();
+            this.lblCaracteresObservacao = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // txtValorLimite
@@ -90,6 +91,7 @@ namespace CRUD___Adriano.Features.Cliente.View
             this.txtObservacao.TabIndex = 2;
             this.txtObservacao.Texto = "";
             this.txtObservacao.UnderlinedStyle = false;
+            this.txtObservacao._TextChanged += new System.EventHandler(this.TxtObservacao__TextChanged);
             // 
             // lblObservacao
             // 
@@ -102,12 +104,24 @@ namespace CRUD___Adriano.Features.Cliente.View
             this.lblObservacao.TabIndex = 4;
             this.lblObservacao.Text = "Observação";
             // 
+            // lblCaracteresObservacao
+            // 
+            this.lblCaracteresObservacao.AutoSize = true;
+            this.lblCaracteresObservacao.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblCaracteresObservacao.ForeColor = System.Drawing.Color.MediumSlateBlue;
+            this.lblCaracteresObservacao.Location = new System.Drawing.Point(115, 85);
+            this.lblCaracteresObservacao.Name = "lblCaracteresObservacao";
+            this.lblCaracteresObservacao.Size = new System.Drawing.Size(185, 21);
+            this.lblCaracteresObservacao.TabIndex = 5;
+            this.lblCaracteresObservacao.Text = "500 caracteres restando";
+            // 
             // FrmCadastroCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
             this.ClientSize = new System.Drawing.Size(665, 450);
+            this.Controls.Add(this.lblCaracteresObservacao);
             this.Controls.Add(this.txtObservacao);
             this.Controls.Add(this.lblObservacao);
             this.Controls.Add(this.txtValorLimite);
@@ -126,5 +140,6 @@ namespace CRUD___Adriano.Features.Cliente.View
         private System.Windows.Forms.Label lblValorLimite;
         private Componentes.TextBoxFlat txtObservacao;
         private System.Windows.Forms.Label lblObservacao;
+        private System.Windows.Forms.Label lblCaracteresObservacao;
     }
 }
