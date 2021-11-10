@@ -41,6 +41,8 @@ namespace CRUD___Adriano
             this.btnCadastroFuncionario = new System.Windows.Forms.Button();
             this.btnCadastroCliente = new System.Windows.Forms.Button();
             this.btnCadastro = new System.Windows.Forms.Button();
+            this.pnlUsuarioLogado = new System.Windows.Forms.Panel();
+            this.lblUsuarioLogado = new System.Windows.Forms.Label();
             this.panelLogo = new System.Windows.Forms.Panel();
             this.lblNomeEmpresa = new System.Windows.Forms.Label();
             this.pnlTitlebar = new System.Windows.Forms.Panel();
@@ -49,6 +51,7 @@ namespace CRUD___Adriano
             this.pnlSideMenu.SuspendLayout();
             this.pnlListagemSubmenu.SuspendLayout();
             this.pnlCadastroSubmenu.SuspendLayout();
+            this.pnlUsuarioLogado.SuspendLayout();
             this.panelLogo.SuspendLayout();
             this.pnlTitlebar.SuspendLayout();
             this.SuspendLayout();
@@ -63,6 +66,7 @@ namespace CRUD___Adriano
             this.pnlSideMenu.Controls.Add(this.btnListagem);
             this.pnlSideMenu.Controls.Add(this.pnlCadastroSubmenu);
             this.pnlSideMenu.Controls.Add(this.btnCadastro);
+            this.pnlSideMenu.Controls.Add(this.pnlUsuarioLogado);
             this.pnlSideMenu.Controls.Add(this.panelLogo);
             this.pnlSideMenu.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlSideMenu.Location = new System.Drawing.Point(0, 0);
@@ -78,10 +82,10 @@ namespace CRUD___Adriano
             this.btnLogout.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnLogout.ForeColor = System.Drawing.Color.Gainsboro;
             this.btnLogout.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnLogout.Location = new System.Drawing.Point(0, 503);
+            this.btnLogout.Location = new System.Drawing.Point(0, 540);
             this.btnLogout.Name = "btnLogout";
             this.btnLogout.Padding = new System.Windows.Forms.Padding(6, 0, 0, 0);
-            this.btnLogout.Size = new System.Drawing.Size(203, 60);
+            this.btnLogout.Size = new System.Drawing.Size(203, 46);
             this.btnLogout.TabIndex = 8;
             this.btnLogout.Text = "Sair";
             this.btnLogout.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -98,7 +102,7 @@ namespace CRUD___Adriano
             this.btnAtalho.ForeColor = System.Drawing.Color.Gainsboro;
             this.btnAtalho.Image = ((System.Drawing.Image)(resources.GetObject("btnAtalho.Image")));
             this.btnAtalho.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAtalho.Location = new System.Drawing.Point(0, 443);
+            this.btnAtalho.Location = new System.Drawing.Point(0, 480);
             this.btnAtalho.Name = "btnAtalho";
             this.btnAtalho.Padding = new System.Windows.Forms.Padding(6, 0, 0, 0);
             this.btnAtalho.Size = new System.Drawing.Size(203, 60);
@@ -115,7 +119,7 @@ namespace CRUD___Adriano
             this.pnlListagemSubmenu.Controls.Add(this.btnListagemFuncionario);
             this.pnlListagemSubmenu.Controls.Add(this.btnListagemCliente);
             this.pnlListagemSubmenu.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlListagemSubmenu.Location = new System.Drawing.Point(0, 319);
+            this.pnlListagemSubmenu.Location = new System.Drawing.Point(0, 356);
             this.pnlListagemSubmenu.Name = "pnlListagemSubmenu";
             this.pnlListagemSubmenu.Size = new System.Drawing.Size(203, 124);
             this.pnlListagemSubmenu.TabIndex = 6;
@@ -169,7 +173,7 @@ namespace CRUD___Adriano
             this.btnListagem.ForeColor = System.Drawing.Color.Gainsboro;
             this.btnListagem.Image = ((System.Drawing.Image)(resources.GetObject("btnListagem.Image")));
             this.btnListagem.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnListagem.Location = new System.Drawing.Point(0, 259);
+            this.btnListagem.Location = new System.Drawing.Point(0, 296);
             this.btnListagem.Name = "btnListagem";
             this.btnListagem.Padding = new System.Windows.Forms.Padding(6, 0, 0, 0);
             this.btnListagem.Size = new System.Drawing.Size(203, 60);
@@ -186,7 +190,7 @@ namespace CRUD___Adriano
             this.pnlCadastroSubmenu.Controls.Add(this.btnCadastroFuncionario);
             this.pnlCadastroSubmenu.Controls.Add(this.btnCadastroCliente);
             this.pnlCadastroSubmenu.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlCadastroSubmenu.Location = new System.Drawing.Point(0, 135);
+            this.pnlCadastroSubmenu.Location = new System.Drawing.Point(0, 172);
             this.pnlCadastroSubmenu.Name = "pnlCadastroSubmenu";
             this.pnlCadastroSubmenu.Size = new System.Drawing.Size(203, 124);
             this.pnlCadastroSubmenu.TabIndex = 4;
@@ -240,7 +244,7 @@ namespace CRUD___Adriano
             this.btnCadastro.ForeColor = System.Drawing.Color.Gainsboro;
             this.btnCadastro.Image = ((System.Drawing.Image)(resources.GetObject("btnCadastro.Image")));
             this.btnCadastro.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCadastro.Location = new System.Drawing.Point(0, 75);
+            this.btnCadastro.Location = new System.Drawing.Point(0, 112);
             this.btnCadastro.Name = "btnCadastro";
             this.btnCadastro.Padding = new System.Windows.Forms.Padding(6, 0, 0, 0);
             this.btnCadastro.Size = new System.Drawing.Size(203, 60);
@@ -250,6 +254,30 @@ namespace CRUD___Adriano
             this.btnCadastro.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnCadastro.UseVisualStyleBackColor = true;
             this.btnCadastro.Click += new System.EventHandler(this.BtnMenuCadastro_Click);
+            // 
+            // pnlUsuarioLogado
+            // 
+            this.pnlUsuarioLogado.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(58)))));
+            this.pnlUsuarioLogado.Controls.Add(this.lblUsuarioLogado);
+            this.pnlUsuarioLogado.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlUsuarioLogado.Location = new System.Drawing.Point(0, 75);
+            this.pnlUsuarioLogado.Name = "pnlUsuarioLogado";
+            this.pnlUsuarioLogado.Size = new System.Drawing.Size(203, 37);
+            this.pnlUsuarioLogado.TabIndex = 4;
+            // 
+            // lblUsuarioLogado
+            // 
+            this.lblUsuarioLogado.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
+            this.lblUsuarioLogado.Cursor = System.Windows.Forms.Cursors.Default;
+            this.lblUsuarioLogado.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblUsuarioLogado.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblUsuarioLogado.ForeColor = System.Drawing.Color.White;
+            this.lblUsuarioLogado.Location = new System.Drawing.Point(0, 0);
+            this.lblUsuarioLogado.Name = "lblUsuarioLogado";
+            this.lblUsuarioLogado.Size = new System.Drawing.Size(203, 37);
+            this.lblUsuarioLogado.TabIndex = 1;
+            this.lblUsuarioLogado.Text = "Admin";
+            this.lblUsuarioLogado.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panelLogo
             // 
@@ -263,15 +291,16 @@ namespace CRUD___Adriano
             // 
             // lblNomeEmpresa
             // 
-            this.lblNomeEmpresa.AutoSize = true;
             this.lblNomeEmpresa.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lblNomeEmpresa.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblNomeEmpresa.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblNomeEmpresa.ForeColor = System.Drawing.Color.White;
-            this.lblNomeEmpresa.Location = new System.Drawing.Point(19, 21);
+            this.lblNomeEmpresa.Location = new System.Drawing.Point(0, 0);
             this.lblNomeEmpresa.Name = "lblNomeEmpresa";
-            this.lblNomeEmpresa.Size = new System.Drawing.Size(183, 30);
+            this.lblNomeEmpresa.Size = new System.Drawing.Size(203, 75);
             this.lblNomeEmpresa.TabIndex = 1;
             this.lblNomeEmpresa.Text = "Augusto\'s Fashion";
+            this.lblNomeEmpresa.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblNomeEmpresa.Click += new System.EventHandler(this.LblNomeEmpresa_Click);
             // 
             // pnlTitlebar
@@ -319,11 +348,12 @@ namespace CRUD___Adriano
             this.Name = "FrmPrincipal";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Principal";
+            this.Load += new System.EventHandler(this.FrmPrincipal_Load);
             this.pnlSideMenu.ResumeLayout(false);
             this.pnlListagemSubmenu.ResumeLayout(false);
             this.pnlCadastroSubmenu.ResumeLayout(false);
+            this.pnlUsuarioLogado.ResumeLayout(false);
             this.panelLogo.ResumeLayout(false);
-            this.panelLogo.PerformLayout();
             this.pnlTitlebar.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -347,6 +377,8 @@ namespace CRUD___Adriano
         private System.Windows.Forms.Label lblNomeEmpresa;
         private System.Windows.Forms.Button btnAtalho;
         private System.Windows.Forms.Button btnLogout;
+        private System.Windows.Forms.Panel pnlUsuarioLogado;
+        private System.Windows.Forms.Label lblUsuarioLogado;
     }
 }
 

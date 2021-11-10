@@ -157,5 +157,18 @@ namespace CRUD___Adriano
                 MessageBox.Show(excecao.Message, "Ocorre um erro ao tentar deslogar");
             }
         }
+
+        private void FrmPrincipal_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                lblUsuarioLogado.Text = ConfigNinject.ObterInstancia<LoginDao>().RetornarUsuarioLogadoSomenteNome();
+            }
+            catch(Exception excecao)
+            {
+                lblUsuarioLogado.Text = string.Empty;
+                MessageBox.Show(excecao.Message, "Ocorre um erro ao tentar buscar o nome do usuário logado");
+            }
+        }
     }
 }

@@ -117,5 +117,20 @@ namespace CRUD___Adriano.Features.Configuration.Login.Dao
                 _conexao.Close();
             }
         }
+
+        public string RetornarUsuarioLogadoSomenteNome()
+        {
+            try
+            {
+                _conexao.Open();
+                return _conexao.QuerySingleOrDefault<string>(@"select us.nome from Login_Sistema ls 
+                                        inner join Usuario_Sistema us 
+                                        on us.id = ls.id_usuario_sistema");
+            }
+            finally
+            {
+                _conexao.Close();
+            }
+        }
     }
 }
