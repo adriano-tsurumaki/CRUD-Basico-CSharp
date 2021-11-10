@@ -15,7 +15,7 @@ namespace CRUD___Adriano.Features.ValueObject.Cpf
             get
             {
                 if (_valor.Length != 11 || string.IsNullOrEmpty(_valor))
-                    return "";
+                    return string.Empty;
                 return Convert.ToUInt64(_valor).ToString(@"000\.000\.000\-00");
             }
         }
