@@ -27,5 +27,10 @@ namespace CRUD___Adriano.Features.Configuration.Login.View
 
         private void BtnEntrar_Click(object sender, EventArgs e) =>
             _controller.ValidarLogin(usuarioSistemaModel);
+
+        private void FrmLogin_Load(object sender, EventArgs e)
+        {
+            _controller.VerificarSeExisteUsuarioJaConectado();
+        }
     }
 }

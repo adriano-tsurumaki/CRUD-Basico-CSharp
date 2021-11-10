@@ -3,6 +3,7 @@ using CRUD___Adriano.Features.Cadastro.Produto.Model;
 using CRUD___Adriano.Features.Cliente.Controller;
 using CRUD___Adriano.Features.Colaborador.Controller;
 using CRUD___Adriano.Features.Colaborador.Model;
+using CRUD___Adriano.Features.Configuration.Login.Dao;
 using CRUD___Adriano.Features.Controller.PageManager;
 using CRUD___Adriano.Features.Dashboards.Controller;
 using CRUD___Adriano.Features.Factory;
@@ -142,6 +143,19 @@ namespace CRUD___Adriano
 
             formFilha.BringToFront();
             formFilha.Show();
+        }
+
+        private void BtnLogout_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ConfigNinject.ObterInstancia<LoginDao>().Deslogar();
+                Close();
+            }
+            catch(Exception excecao)
+            {
+                MessageBox.Show(excecao.Message, "Ocorre um erro ao tentar deslogar");
+            }
         }
     }
 }
