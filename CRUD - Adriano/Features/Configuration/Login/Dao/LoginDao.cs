@@ -23,7 +23,7 @@ namespace CRUD___Adriano.Features.Configuration.Login.Dao
 
                 var usuarioSistemaModel = _conexao.QueryFirstOrDefault<UsuarioSistemaModel>("select manter_logado as ManterLogado from Login_Sistema");
                     
-                    if (usuarioSistemaModel == null) return false;
+                if (usuarioSistemaModel == null) return false;
 
                 return usuarioSistemaModel.ManterLogado;
             }
@@ -37,8 +37,7 @@ namespace CRUD___Adriano.Features.Configuration.Login.Dao
         {
             usuarioSistemaModel.IdUsuarioSistema = SelecionarIdDoUsuarioSistema(usuarioSistemaModel);
             
-            if (usuarioSistemaModel.IdUsuarioSistema == 0)
-                return false;
+            if (usuarioSistemaModel.IdUsuarioSistema == 0) return false;
 
             if (!VerificarSeUsuarioSistemaEstaRegistradoNoLoginSistema(usuarioSistemaModel.IdUsuarioSistema))
                 RegistrarUsuarioSistemaNoLoginSistema(usuarioSistemaModel);
