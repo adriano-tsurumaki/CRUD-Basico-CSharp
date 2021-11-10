@@ -15,6 +15,10 @@ using CRUD___Adriano.Features.Configuration.Login.View;
 using CRUD___Adriano.Features.Dashboards.Controller;
 using CRUD___Adriano.Features.Dashboards.View;
 using CRUD___Adriano.Features.Factory;
+using CRUD___Adriano.Features.Fornecedor.Controller;
+using CRUD___Adriano.Features.Fornecedor.Dao;
+using CRUD___Adriano.Features.Fornecedor.Model;
+using CRUD___Adriano.Features.Fornecedor.View;
 using CRUD___Adriano.Features.Usuario.Controller;
 using CRUD___Adriano.Features.Usuario.View;
 using Ninject;
@@ -49,15 +53,20 @@ namespace CRUD___Adriano.Features.IoC
             kernel.Bind<ColaboradorController>().ToSelf();
             kernel.Bind<ColaboradorControllerPage>().ToSelf();
             kernel.Bind<ColaboradorListagemController>().ToSelf();
+            kernel.Bind<FornecedorController>().ToSelf();
+            kernel.Bind<FornecedorControllerPage>().ToSelf();
             kernel.Bind<UsuarioControllerPage<ClienteModel>>().ToConstructor(ctx => new UsuarioControllerPage<ClienteModel>(new FrmCadastroUsuario<ClienteModel>()));
             kernel.Bind<UsuarioControllerPage<ColaboradorModel>>().ToConstructor(ctx => new UsuarioControllerPage<ColaboradorModel>(new FrmCadastroUsuario<ColaboradorModel>()));
+            kernel.Bind<UsuarioControllerPage<FornecedorModel>>().ToConstructor(ctx => new UsuarioControllerPage<FornecedorModel>(new FrmCadastroUsuario<FornecedorModel>()));
             kernel.Bind<EmailTelefoneControllerPage<ClienteModel>>().ToConstructor(ctx => new EmailTelefoneControllerPage<ClienteModel>(new FrmEmailTelefone<ClienteModel>()));
             kernel.Bind<EmailTelefoneControllerPage<ColaboradorModel>>().ToConstructor(ctx => new EmailTelefoneControllerPage<ColaboradorModel>(new FrmEmailTelefone<ColaboradorModel>()));
+            kernel.Bind<EmailTelefoneControllerPage<FornecedorModel>>().ToConstructor(ctx => new EmailTelefoneControllerPage<FornecedorModel>(new FrmEmailTelefone<FornecedorModel>()));
 
             //DAOs
             kernel.Bind<LoginDao>().ToSelf();
             kernel.Bind<ClienteDao>().ToSelf();
             kernel.Bind<ColaboradorDao>().ToSelf();
+            kernel.Bind<FornecedorDao>().ToSelf();
 
             //Views
             kernel.Bind<FrmLogin>().ToSelf();
@@ -69,6 +78,7 @@ namespace CRUD___Adriano.Features.IoC
             kernel.Bind<FrmCadastroColaborador>().ToSelf();
             kernel.Bind<FrmDetalhesColaborador>().ToSelf();
             kernel.Bind<FrmListagemColaborador>().ToSelf();
+            kernel.Bind<FrmCadastroFornecedor>().ToSelf();
             kernel.Bind<FrmPrincipal>().ToSelf();
 
             kernel.Bind<IDbConnection>().ToMethod(ctx => SqlConexao.RetornarConexao());

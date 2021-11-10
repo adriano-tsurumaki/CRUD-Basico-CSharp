@@ -7,6 +7,8 @@ using CRUD___Adriano.Features.Configuration.Login.Dao;
 using CRUD___Adriano.Features.Controller.PageManager;
 using CRUD___Adriano.Features.Dashboards.Controller;
 using CRUD___Adriano.Features.Factory;
+using CRUD___Adriano.Features.Fornecedor.Controller;
+using CRUD___Adriano.Features.Fornecedor.Model;
 using CRUD___Adriano.Features.IoC;
 using CRUD___Adriano.Features.Usuario.Controller;
 using System;
@@ -57,34 +59,6 @@ namespace CRUD___Adriano
                 .RetornarFormulario());
         }
 
-        private void BtnMenuCadastro_Click(object sender, EventArgs e)
-        {
-            TrocarVisibilidade(pnlCadastroSubmenu);
-            EsconderSubmenusRestantes(pnlCadastroSubmenu);
-        }
-
-        private void BtnMenuListagem_Click(object sender, EventArgs e)
-        {
-            TrocarVisibilidade(pnlListagemSubmenu);
-            EsconderSubmenusRestantes(pnlListagemSubmenu);
-        }
-
-        private void TrocarVisibilidade(Panel subMenu) =>
-            subMenu.Visible = !subMenu.Visible;
-
-        private void EsconderSubmenusRestantes(Panel submenu)
-        {
-            var visibilidade = submenu.Visible;
-            pnlCadastroSubmenu.Visible = false;
-            pnlListagemSubmenu.Visible = false;
-            submenu.Visible = visibilidade;
-        }
-
-        private void PnlChild_ControlRemoved(object sender, ControlEventArgs e)
-        {
-            lblTitulo.Text = "";
-        }
-
         private void BtnCadastroFuncionario_Click(object sender, EventArgs e)
         {
             LimparPanel();
@@ -112,6 +86,22 @@ namespace CRUD___Adriano
                 .RetornarFormulario());
         }
 
+        private void BtnCadastroFornecedor_Click(object sender, EventArgs e)
+        {
+            LimparPanel();
+            lblTitulo.Text = "Cadastro de fornecedor";
+            var pageManager = new GerenciadorDePaginas<FornecedorModel>(
+                pnlChild,
+                ConfigNinject.ObterInstancia<FornecedorController>(),
+                new FornecedorModel());
+
+            pageManager.Add(ConfigNinject.ObterInstancia<UsuarioControllerPage<FornecedorModel>>());
+            pageManager.Add(ConfigNinject.ObterInstancia<EmailTelefoneControllerPage<FornecedorModel>>());
+            pageManager.Add(ConfigNinject.ObterInstancia<FornecedorControllerPage>());
+            pageManager.SetConfirm(ControllerEnum.Salvar);
+            pageManager.Show();
+        }
+
         private void BtnAtalho_Click(object sender, EventArgs e)
         {
             LimparPanel();
@@ -124,6 +114,34 @@ namespace CRUD___Adriano
             LimparPanel();
             lblTitulo.Text = "Dashboard";
             DocaForm(ConfigNinject.ObterInstancia<DashboardController>().RetornarFormulario());
+        }
+
+        private void BtnMenuCadastro_Click(object sender, EventArgs e)
+        {
+            TrocarVisibilidade(pnlCadastroSubmenu);
+            EsconderSubmenusRestantes(pnlCadastroSubmenu);
+        }
+
+        private void BtnMenuListagem_Click(object sender, EventArgs e)
+        {
+            TrocarVisibilidade(pnlListagemSubmenu);
+            EsconderSubmenusRestantes(pnlListagemSubmenu);
+        }
+
+        private void TrocarVisibilidade(Panel subMenu) =>
+            subMenu.Visible = !subMenu.Visible;
+
+        private void EsconderSubmenusRestantes(Panel submenu)
+        {
+            var visibilidade = submenu.Visible;
+            pnlCadastroSubmenu.Visible = false;
+            pnlListagemSubmenu.Visible = false;
+            submenu.Visible = visibilidade;
+        }
+
+        private void PnlChild_ControlRemoved(object sender, ControlEventArgs e)
+        {
+            lblTitulo.Text = "";
         }
 
         private void LimparPanel() => pnlChild.Controls.Clear();
