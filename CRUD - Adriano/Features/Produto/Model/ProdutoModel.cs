@@ -1,4 +1,5 @@
 ﻿using CRUD___Adriano.Features.Fornecedor.Model;
+using CRUD___Adriano.Features.ValueObject.Precos;
 
 namespace CRUD___Adriano.Features.Produto.Model
 {
@@ -9,7 +10,7 @@ namespace CRUD___Adriano.Features.Produto.Model
         public string CodigoBarras { get; set; }
         public bool Ativo { get; set; }
         public string Nome { get; set; }
-        public float PrecoBruto { get; set; }
+        public Preco PrecoBruto { get; set; }
         public float Lucro { get; set; }
         public int Quantidade { get; set; }
 

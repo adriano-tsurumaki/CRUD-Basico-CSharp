@@ -34,7 +34,7 @@ namespace CRUD___Adriano.Features.Produto.View
             this.lblCodigoBarras = new System.Windows.Forms.Label();
             this.txtCodigoBarras = new CRUD___Adriano.Features.Componentes.TextBoxFlat();
             this.txtFornecedor = new CRUD___Adriano.Features.Componentes.TextBoxFlat();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnGerarCodigoBarra = new System.Windows.Forms.Button();
             this.lblNome = new System.Windows.Forms.Label();
             this.txtNome = new CRUD___Adriano.Features.Componentes.TextBoxFlat();
             this.lblPrecoBruto = new System.Windows.Forms.Label();
@@ -123,17 +123,18 @@ namespace CRUD___Adriano.Features.Produto.View
             this.txtFornecedor.UnderlinedStyle = false;
             this.txtFornecedor._KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtFornecedor__KeyDown);
             // 
-            // button1
+            // btnGerarCodigoBarra
             // 
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(294, 147);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(105, 36);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "Gerar";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnGerarCodigoBarra.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGerarCodigoBarra.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnGerarCodigoBarra.ForeColor = System.Drawing.Color.White;
+            this.btnGerarCodigoBarra.Location = new System.Drawing.Point(294, 147);
+            this.btnGerarCodigoBarra.Name = "btnGerarCodigoBarra";
+            this.btnGerarCodigoBarra.Size = new System.Drawing.Size(105, 36);
+            this.btnGerarCodigoBarra.TabIndex = 4;
+            this.btnGerarCodigoBarra.Text = "Gerar";
+            this.btnGerarCodigoBarra.UseVisualStyleBackColor = true;
+            this.btnGerarCodigoBarra.Click += new System.EventHandler(this.BtnGerarCodigoBarra_Click);
             // 
             // lblNome
             // 
@@ -198,6 +199,7 @@ namespace CRUD___Adriano.Features.Produto.View
             this.txtPrecoBruto.TabIndex = 8;
             this.txtPrecoBruto.Texto = "";
             this.txtPrecoBruto.UnderlinedStyle = true;
+            this.txtPrecoBruto._TextChanged += new System.EventHandler(this.TxtPrecoBruto__TextChanged);
             // 
             // lblLucro
             // 
@@ -278,7 +280,7 @@ namespace CRUD___Adriano.Features.Produto.View
             this.Controls.Add(this.lblNome);
             this.Controls.Add(this.txtNome);
             this.Controls.Add(this.lblCodigoBarras);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnGerarCodigoBarra);
             this.Controls.Add(this.txtCodigoBarras);
             this.Controls.Add(this.lblFornecedor);
             this.Controls.Add(this.btnProcurarFornecedor);
@@ -296,7 +298,7 @@ namespace CRUD___Adriano.Features.Produto.View
         private System.Windows.Forms.Label lblCodigoBarras;
         private Componentes.TextBoxFlat txtCodigoBarras;
         private Componentes.TextBoxFlat txtFornecedor;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnGerarCodigoBarra;
         private System.Windows.Forms.Label lblNome;
         private Componentes.TextBoxFlat txtNome;
         private System.Windows.Forms.Label lblPrecoBruto;

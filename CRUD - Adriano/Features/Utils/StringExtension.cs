@@ -19,5 +19,11 @@ namespace CRUD___Adriano.Features.Utils
             double.TryParse(valor, out double resultado);
             return resultado;
         }
+
+        public static float FloatOuZero(this string valor)
+        {
+            float.TryParse(valor, out float resultado);
+            return resultado;
+        }
     }
 }

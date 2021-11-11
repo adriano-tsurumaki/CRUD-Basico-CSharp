@@ -116,7 +116,7 @@ namespace CRUD___Adriano.Features.Configuration
                 .RuleFor(t => t.Numero, f => f.Person.Phone.RetornarSomenteTextoEmNumeros())
                 .RuleFor(t => t.Tipo, _ => (TipoTelefoneEnum)new Random().Next(1, 4));
 
-        // TODO: Fazer um gerador de cnpj definitivo
+        // TODO: Fazer um gerador de cnpj!
         // precisa validar se já existe o cnpj gerado no banco!
         public static MeuCnpj GerarCnpjAleatoriamente()
         {

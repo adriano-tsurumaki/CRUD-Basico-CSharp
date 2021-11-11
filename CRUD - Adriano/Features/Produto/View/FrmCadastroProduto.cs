@@ -27,7 +27,6 @@ namespace CRUD___Adriano.Features.Produto.View
             txtFornecedor.DataBindings.Add("Texto", fornecedor, "Nome");
             txtCodigoBarras.DataBindings.Add("Texto", produtoModel, "CodigoBarras");
             txtNome.DataBindings.Add("Texto", produtoModel, "Nome");
-            txtPrecoBruto.DataBindings.Add("Texto", produtoModel, "PrecoBruto");
             txtLucro.DataBindings.Add("Texto", produtoModel, "Lucro");
             txtQuantidade.DataBindings.Add("Texto", produtoModel, "Quantidade");
         }
@@ -38,6 +37,8 @@ namespace CRUD___Adriano.Features.Produto.View
                 txtCodigoBarras.NuloOuVazio() || txtNome.NuloOuVazio() ||
                 txtPrecoBruto.NuloOuVazio() || txtLucro.NuloOuVazio()) 
                 return false;
+
+            _produtoModel.PrecoBruto = txtPrecoBruto.Texto;
 
             return true;
         }
@@ -57,5 +58,34 @@ namespace CRUD___Adriano.Features.Produto.View
 
         private string BuscarNomeDoFornecedor(string nome) =>
             ConfigNinject.ObterInstancia<BuscarUsuarioController<FornecedorModel>>().DefinirNomePrevio(nome).RetornarUsuarioSelecionado()?.Nome;
+
+        // TODO: Fazer o gerador de código de barra!
+        private void BtnGerarCodigoBarra_Click(object sender, System.EventArgs e)
+        {
+
+        }
+        
+        private bool evitarLoopPrecoBruto;
+
+        private void TxtPrecoBruto__TextChanged(object sender, System.EventArgs e)
+        {
+            if (evitarLoopPrecoBruto)
+            {
+                txtPrecoBruto.SelectionStart = txtPrecoBruto.Texto.Length;
+                evitarLoopPrecoBruto = false;
+                return;
+            }
+
+            var textoFormatado = "R$ " + txtPrecoBruto.Texto.RetornarSomenteTextoEmNumeros();
+
+            if (textoFormatado.Length > 5)
+                textoFormatado = textoFormatado.Insert(textoFormatado.Length - 2, ",");
+
+            if (textoFormatado != txtPrecoBruto.Texto)
+                evitarLoopPrecoBruto = true;
+
+            txtPrecoBruto.SelectionLength = 0;
+            txtPrecoBruto.Texto = textoFormatado;
+        }
     }
 }
