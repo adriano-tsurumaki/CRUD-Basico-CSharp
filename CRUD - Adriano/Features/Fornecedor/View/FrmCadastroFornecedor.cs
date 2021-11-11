@@ -1,6 +1,5 @@
 ﻿using CRUD___Adriano.Features.Factory;
 using CRUD___Adriano.Features.Fornecedor.Model;
-using CRUD___Adriano.Features.Interface;
 using CRUD___Adriano.Features.Utils;
 using System.Windows.Forms;
 
@@ -13,9 +12,22 @@ namespace CRUD___Adriano.Features.Fornecedor.View
             InitializeComponent();
         }
 
-        public void BindModel(ref FornecedorModel fornecedorModel) =>
+        public void BindModel(ref FornecedorModel fornecedorModel)
+        {
             txtObservacao.DataBindings.Add("Texto", fornecedorModel, "Observacao");
+            txtCnpj.DataBindings.Add("Texto", fornecedorModel, "Cnpj");
+        }
 
-        public bool ValidarComponentes() => true;
+        public bool ValidarComponentes()
+        {
+            if (txtCnpj.NuloOuVazio()) return false;
+
+            return true;
+        }
+
+        private void TxtCnpj__TextChanged(object sender, System.EventArgs e)
+        {
+
+        }
     }
 }
