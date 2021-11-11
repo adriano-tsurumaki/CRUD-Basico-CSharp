@@ -3,10 +3,8 @@ using CRUD___Adriano.Features.Colaborador.View;
 using CRUD___Adriano.Features.Controller.PageManager;
 using CRUD___Adriano.Features.IoC;
 using CRUD___Adriano.Features.Usuario.Controller;
-using Ninject;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Reflection;
 using System.Windows.Forms;
 
 namespace CRUD___Adriano.Features.Colaborador.Controller
@@ -16,11 +14,6 @@ namespace CRUD___Adriano.Features.Colaborador.Controller
         private readonly Panel _dock;
         private ColaboradorController _colaboradorController;
         private FrmListagemColaborador _frmListagemColaborador;
-
-        public ColaboradorListagemController(ColaboradorController colaboradorController)
-        {
-            ConfiguracaoInicial(colaboradorController);
-        }
 
         public ColaboradorListagemController(ColaboradorController colaboradorController, Panel dock)
         {
