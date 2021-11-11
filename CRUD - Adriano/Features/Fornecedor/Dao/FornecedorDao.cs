@@ -54,5 +54,8 @@ namespace CRUD___Adriano.Features.Fornecedor.Dao
 
         public IList<FornecedorModel> ListarTodosOsFornecedoresSomenteIdENome() =>
             _conexao.Query<FornecedorModel>(FornecedorSql.ListarTodosComCamposSomenteIdENome).ToList();
+
+        public IList<FornecedorModel> ListarClientesPeloNomeSomenteIdENome(string nome) =>
+            _conexao.Query<FornecedorModel>(FornecedorSql.ListarPeloNomeComCamposSomenteIdENome, new { nome }).ToList();
     }
 }

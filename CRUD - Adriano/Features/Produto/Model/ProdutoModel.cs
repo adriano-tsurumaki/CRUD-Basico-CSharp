@@ -12,5 +12,10 @@ namespace CRUD___Adriano.Features.Produto.Model
         public float PrecoBruto { get; set; }
         public float Lucro { get; set; }
         public int Quantidade { get; set; }
+
+        public ProdutoModel()
+        {
+            Fornecedor = new FornecedorModel();
+        }
     }
 }

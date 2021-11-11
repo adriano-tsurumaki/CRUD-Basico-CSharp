@@ -29,6 +29,11 @@ namespace CRUD___Adriano.Features.Produto.Controller
             throw new System.NotImplementedException();
         }
 
+        public IList<ProdutoModel> ListarPeloNomeSomenteIdENome(string nome)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public IList<ProdutoModel> ListarSomenteIdENome()
         {
             throw new System.NotImplementedException();

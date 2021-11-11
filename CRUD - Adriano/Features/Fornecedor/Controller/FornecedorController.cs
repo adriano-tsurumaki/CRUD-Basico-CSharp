@@ -41,6 +41,20 @@ namespace CRUD___Adriano.Features.Fornecedor.Controller
             return new List<FornecedorModel>();
         }
 
+        public IList<FornecedorModel> ListarPeloNomeSomenteIdENome(string nome)
+        {
+            try
+            {
+                return _fornecedorDao.ListarClientesPeloNomeSomenteIdENome(nome);
+            }
+            catch (Exception excecao)
+            {
+                MessageBox.Show(excecao.Message, "Erro ao listar os fornecedores");
+            }
+
+            return new List<FornecedorModel>();
+        }
+
         public IList<FornecedorModel> ListarPelaQuantidadeSomenteIdENome(int quantidade)
         {
             throw new NotImplementedException();

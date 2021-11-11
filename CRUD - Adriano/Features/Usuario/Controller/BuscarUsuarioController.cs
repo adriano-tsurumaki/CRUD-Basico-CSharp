@@ -13,8 +13,17 @@ namespace CRUD___Adriano.Features.Usuario.Controller
         {
             _controller = controller;
             _frmBuscarUsuario = new FrmBuscarUsuario<T>(this);
-            _frmBuscarUsuario.BindGrid(_controller.ListarSomenteIdENome());
         }
+
+        public BuscarUsuarioController<T> DefinirNomePrevio(string nome)
+        {
+            _frmBuscarUsuario.DefinirNomePrevio(nome);
+            ListarPeloNomeSomenteIdENome(nome);
+            return this;
+        }
+
+        public void ListarPeloNomeSomenteIdENome(string nome) =>
+            _frmBuscarUsuario.BindGrid(_controller.ListarPeloNomeSomenteIdENome(nome));
 
         public void AtribuirUsuarioSelecionado(T usuario)
         {

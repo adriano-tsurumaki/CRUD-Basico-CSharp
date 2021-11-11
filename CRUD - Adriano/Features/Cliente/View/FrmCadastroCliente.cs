@@ -58,9 +58,7 @@ namespace CRUD___Adriano.Features.Cliente.View
             txtValorLimite.Texto = textoFormatado;
         }
 
-        private void TxtObservacao__TextChanged(object sender, System.EventArgs e)
-        {
+        private void TxtObservacao__TextChanged(object sender, System.EventArgs e) =>
             lblCaracteresObservacao.Text = $"{500 - txtObservacao.Texto.Length} caracteres restando";
-        }
     }
 }

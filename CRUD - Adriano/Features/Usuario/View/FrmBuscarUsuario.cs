@@ -17,6 +17,8 @@ namespace CRUD___Adriano.Features.Usuario.View
             _controller = controller;
         }
 
+        public void DefinirNomePrevio(string nome) => txtPesquisar.Texto = nome;
+
         public void BindGrid(IList<T> listaDeUsuario)
         {
             gridView.Columns.Clear();
@@ -56,6 +58,13 @@ namespace CRUD___Adriano.Features.Usuario.View
                 return;
 
             _controller.AtribuirUsuarioSelecionado(gridView.CurrentRow.DataBoundItem as T);
+        }
+
+        private void TxtPesquisar__KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode != Keys.Enter) return;
+
+            _controller.ListarPeloNomeSomenteIdENome(txtPesquisar.Texto);
         }
     }
 }

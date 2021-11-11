@@ -76,6 +76,7 @@ namespace CRUD___Adriano.Features.Usuario.View
             this.txtPesquisar.TabIndex = 1;
             this.txtPesquisar.Texto = "";
             this.txtPesquisar.UnderlinedStyle = false;
+            this.txtPesquisar._KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtPesquisar__KeyDown);
             // 
             // btnPesquisar
             // 
@@ -163,6 +164,7 @@ namespace CRUD___Adriano.Features.Usuario.View
             this.Controls.Add(this.pnlPesquisa);
             this.Controls.Add(this.pnlTitulo);
             this.Name = "FrmBuscarUsuario";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FrmBuscarUsuario";
             this.pnlPesquisa.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridView)).EndInit();

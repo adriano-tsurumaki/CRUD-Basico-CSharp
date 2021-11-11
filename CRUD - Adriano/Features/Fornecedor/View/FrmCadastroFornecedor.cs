@@ -29,5 +29,8 @@ namespace CRUD___Adriano.Features.Fornecedor.View
         {
 
         }
+
+        private void TxtObservacao__TextChanged(object sender, System.EventArgs e) =>
+            lblCaracteresObservacao.Text = $"{500 - txtObservacao.Texto.Length} caracteres restando";
     }
 }
