@@ -130,6 +130,7 @@ namespace CRUD___Adriano.Features.Usuario.View
             this.gridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gridView.Size = new System.Drawing.Size(800, 350);
             this.gridView.TabIndex = 4;
+            this.gridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridView_CellDoubleClick);
             // 
             // pnlTitulo
             // 

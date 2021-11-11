@@ -39,28 +39,23 @@ namespace CRUD___Adriano.Features.Usuario.View
                 ReadOnly = true,
             };
 
-            DataGridViewButtonColumn botaoAlterarColuna = new DataGridViewButtonColumn()
-            {
-                CellTemplate = new DataGridViewButtonCell(),
-                HeaderText = "Alterar",
-                Name = "Alterar"
-            };
-
-            DataGridViewButtonColumn botaoExcluirColuna = new DataGridViewButtonColumn()
-            {
-                CellTemplate = new DataGridViewButtonCell(),
-                HeaderText = "Excluir",
-                Name = "Excluir"
-            };
-
             gridView.Columns.Add(idColuna);
             gridView.Columns.Add(nomeColuna);
-            gridView.Columns.Add(botaoAlterarColuna);
-            gridView.Columns.Add(botaoExcluirColuna);
 
             _usuariosBinding = new BindingList<T>(listaDeUsuario);
             gridView.AutoGenerateColumns = false;
             gridView.DataSource = _usuariosBinding;
+        }
+
+        private void GridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var senderGrid = sender as DataGridView;
+
+            if ((senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn &&
+                e.RowIndex >= 0) || gridView.CurrentRow == null)
+                return;
+
+            _controller.AtribuirUsuarioSelecionado(gridView.CurrentRow.DataBoundItem as T);
         }
     }
 }
