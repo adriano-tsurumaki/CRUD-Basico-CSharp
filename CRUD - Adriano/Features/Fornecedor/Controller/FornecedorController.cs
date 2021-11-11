@@ -1,4 +1,5 @@
-﻿using CRUD___Adriano.Features.Factory;
+﻿using CRUD___Adriano.Features.Colaborador.Model;
+using CRUD___Adriano.Features.Factory;
 using CRUD___Adriano.Features.Fornecedor.Dao;
 using CRUD___Adriano.Features.Fornecedor.Model;
 using System;
@@ -28,7 +29,16 @@ namespace CRUD___Adriano.Features.Fornecedor.Controller
 
         public IList<FornecedorModel> ListarSomenteIdENome()
         {
-            throw new NotImplementedException();
+            try
+            {
+                return _fornecedorDao.ListarTodosOsFornecedoresSomenteIdENome();
+            }
+            catch(Exception excecao)
+            {
+                MessageBox.Show(excecao.Message, "Erro ao listar os fornecedores");
+            }
+
+            return new List<FornecedorModel>();
         }
 
         public IList<FornecedorModel> ListarPelaQuantidadeSomenteIdENome(int quantidade)
@@ -50,6 +60,22 @@ namespace CRUD___Adriano.Features.Fornecedor.Controller
             catch(Exception excecao)
             {
                 MessageBox.Show(excecao.Message, "Erro ao cadastrar o fornecedor");
+            }
+            return false;
+        }
+
+        public bool SalvarLista(IList<FornecedorModel> listaDeFornecedores)
+        {
+            try
+            {
+                foreach (var fornecedorModel in listaDeFornecedores)
+                    _fornecedorDao.CadastrarFornecedor(fornecedorModel);
+
+                return true;
+            }
+            catch (Exception excecao)
+            {
+                MessageBox.Show(excecao.Message, "Erro ao cadastrar lista de colaboradores");
             }
             return false;
         }

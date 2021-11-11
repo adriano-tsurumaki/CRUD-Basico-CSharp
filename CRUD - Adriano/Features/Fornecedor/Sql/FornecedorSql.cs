@@ -6,6 +6,11 @@ namespace CRUD___Adriano.Features.Fornecedor.Sql
 {
     public static class FornecedorSql
     {
+        public static string ListarTodosComCamposSomenteIdENome =
+            @"select u.id as IdUsuario, u.nome
+            from Fornecedor f
+            inner join Usuario u on u.id = f.id_usuario";
+
         public static string InserirFornecedor(FornecedorModel fornecedorModel)
         {
             var insertSql = new StringBuilder("insert into Fornecedor(id_usuario, cnpj");
@@ -28,6 +33,7 @@ namespace CRUD___Adriano.Features.Fornecedor.Sql
 
             parametros.AddDynamicParams(new
             {
+                fornecedorModel.IdUsuario,
                 fornecedorModel.Observacao,
                 Cnpj = fornecedorModel.Cnpj.ToString(),
             });

@@ -5,7 +5,9 @@ using CRUD___Adriano.Features.Fornecedor.Model;
 using CRUD___Adriano.Features.Fornecedor.Sql;
 using CRUD___Adriano.Features.Usuario.Sql;
 using Dapper;
+using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 
 namespace CRUD___Adriano.Features.Fornecedor.Dao
 {
@@ -49,5 +51,8 @@ namespace CRUD___Adriano.Features.Fornecedor.Dao
                 _conexao.Close();
             }
         }
+
+        public IList<FornecedorModel> ListarTodosOsFornecedoresSomenteIdENome() =>
+            _conexao.Query<FornecedorModel>(FornecedorSql.ListarTodosComCamposSomenteIdENome).ToList();
     }
 }
