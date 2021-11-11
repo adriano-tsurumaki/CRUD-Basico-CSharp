@@ -19,6 +19,9 @@ using CRUD___Adriano.Features.Fornecedor.Controller;
 using CRUD___Adriano.Features.Fornecedor.Dao;
 using CRUD___Adriano.Features.Fornecedor.Model;
 using CRUD___Adriano.Features.Fornecedor.View;
+using CRUD___Adriano.Features.Produto.Controller;
+using CRUD___Adriano.Features.Produto.Dao;
+using CRUD___Adriano.Features.Produto.View;
 using CRUD___Adriano.Features.Usuario.Controller;
 using CRUD___Adriano.Features.Usuario.View;
 using Ninject;
@@ -62,6 +65,8 @@ namespace CRUD___Adriano.Features.IoC
             kernel.Bind<ColaboradorListagemController>().ToSelf();
             kernel.Bind<FornecedorController>().ToSelf();
             kernel.Bind<FornecedorControllerPage>().ToSelf();
+            kernel.Bind<ProdutoController>().ToSelf();
+            kernel.Bind<ProdutoControllerPage>().ToSelf();
             kernel.Bind<UsuarioControllerPage<ClienteModel>>().ToConstructor(ctx => new UsuarioControllerPage<ClienteModel>(new FrmCadastroUsuario<ClienteModel>()));
             kernel.Bind<UsuarioControllerPage<ColaboradorModel>>().ToConstructor(ctx => new UsuarioControllerPage<ColaboradorModel>(new FrmCadastroUsuario<ColaboradorModel>()));
             kernel.Bind<UsuarioControllerPage<FornecedorModel>>().ToConstructor(ctx => new UsuarioControllerPage<FornecedorModel>(new FrmCadastroUsuario<FornecedorModel>()));
@@ -74,6 +79,7 @@ namespace CRUD___Adriano.Features.IoC
             kernel.Bind<ClienteDao>().ToSelf();
             kernel.Bind<ColaboradorDao>().ToSelf();
             kernel.Bind<FornecedorDao>().ToSelf();
+            kernel.Bind<ProdutoDao>().ToSelf();
 
             //Views
             kernel.Bind<FrmLogin>().ToSelf();
@@ -86,6 +92,7 @@ namespace CRUD___Adriano.Features.IoC
             kernel.Bind<FrmDetalhesColaborador>().ToSelf();
             kernel.Bind<FrmListagemColaborador>().ToSelf();
             kernel.Bind<FrmCadastroFornecedor>().ToSelf();
+            kernel.Bind<FrmCadastroProduto>().ToSelf();
             kernel.Bind<FrmPrincipal>().ToSelf();
 
             kernel.Bind<IDbConnection>().ToMethod(ctx => SqlConexao.RetornarConexao());
