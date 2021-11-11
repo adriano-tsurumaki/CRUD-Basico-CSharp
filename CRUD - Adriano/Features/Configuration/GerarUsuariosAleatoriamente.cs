@@ -9,8 +9,10 @@ using CRUD___Adriano.Features.Entidades.Endereco.Model;
 using CRUD___Adriano.Features.Entidades.Telefone.Enum;
 using CRUD___Adriano.Features.Entidades.Telefone.Model;
 using CRUD___Adriano.Features.Estados.Enum;
+using CRUD___Adriano.Features.Fornecedor.Model;
 using CRUD___Adriano.Features.Usuario.Enum;
 using CRUD___Adriano.Features.Utils;
+using CRUD___Adriano.Features.ValueObject.Cnpj;
 using System;
 using System.Collections.Generic;
 
@@ -70,6 +72,28 @@ namespace CRUD___Adriano.Features.Configuration
             return colaboradorFaker.Generate(quantidade);
         }
 
+        public static IList<FornecedorModel> RetornarListaDeFornecedores(int quantidade)
+        {
+            var enderecoFaker = RetornarFakerEnderecoModel();
+
+            var emailFaker = RetornarFakerEmailModel();
+
+            var telefoneFaker = RetornarFakerTelefoneModel();
+
+            var fornecedorFaker = new Faker<FornecedorModel>("pt_BR")
+                .RuleFor(c => c.Nome, f => f.Person.FirstName)
+                .RuleFor(c => c.Sobrenome, f => f.Person.LastName)
+                .RuleFor(c => c.DataNascimento, _ => GerarDataNascimentoAleatorio())
+                .RuleFor(c => c.Cpf, f => f.Person.Cpf().RetornarSomenteTextoEmNumeros())
+                .RuleFor(c => c.Cnpj, f => GerarCnpjAleatoriamente())
+                .RuleFor(c => c.Sexo, f => f.Person.Gender == Bogus.DataSets.Name.Gender.Male ? UsuarioSexoEnum.Masculino : UsuarioSexoEnum.Feminino)
+                .RuleFor(c => c.Endereco, _ => enderecoFaker)
+                .RuleFor(c => c.Emails, _ => emailFaker.Generate(new Random().Next(1, 10)))
+                .RuleFor(c => c.Telefones, _ => telefoneFaker.Generate(new Random().Next(1, 10)));
+
+            return fornecedorFaker.Generate(quantidade);
+        }
+
         public static Faker<EnderecoModel> RetornarFakerEnderecoModel() =>
             new Faker<EnderecoModel>("pt_BR")
                 .RuleFor(e => e.Cidade, f => f.Address.City())
@@ -91,6 +115,13 @@ namespace CRUD___Adriano.Features.Configuration
             new Faker<TelefoneModel>("pt_BR")
                 .RuleFor(t => t.Numero, f => f.Person.Phone.RetornarSomenteTextoEmNumeros())
                 .RuleFor(t => t.Tipo, _ => (TipoTelefoneEnum)new Random().Next(1, 4));
+
+        // TODO: Fazer um gerador de cnpj definitivo
+        // precisa validar se já existe o cnpj gerado no banco!
+        public static MeuCnpj GerarCnpjAleatoriamente()
+        {
+            return new Random().Next(1, 1_000_000_000).ToString();
+        }
 
         public static DateTime GerarDataNascimentoAleatorio()
         {
