@@ -49,6 +49,7 @@ namespace CRUD___Adriano
             this.pnlTitlebar = new System.Windows.Forms.Panel();
             this.lblTitulo = new System.Windows.Forms.Label();
             this.pnlChild = new System.Windows.Forms.Panel();
+            this.btnCadastroProduto = new System.Windows.Forms.Button();
             this.pnlSideMenu.SuspendLayout();
             this.pnlListagemSubmenu.SuspendLayout();
             this.pnlCadastroSubmenu.SuspendLayout();
@@ -83,7 +84,7 @@ namespace CRUD___Adriano
             this.btnLogout.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnLogout.ForeColor = System.Drawing.Color.Gainsboro;
             this.btnLogout.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnLogout.Location = new System.Drawing.Point(0, 600);
+            this.btnLogout.Location = new System.Drawing.Point(0, 654);
             this.btnLogout.Name = "btnLogout";
             this.btnLogout.Padding = new System.Windows.Forms.Padding(6, 0, 0, 0);
             this.btnLogout.Size = new System.Drawing.Size(203, 46);
@@ -103,7 +104,7 @@ namespace CRUD___Adriano
             this.btnAtalho.ForeColor = System.Drawing.Color.Gainsboro;
             this.btnAtalho.Image = ((System.Drawing.Image)(resources.GetObject("btnAtalho.Image")));
             this.btnAtalho.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAtalho.Location = new System.Drawing.Point(0, 540);
+            this.btnAtalho.Location = new System.Drawing.Point(0, 594);
             this.btnAtalho.Name = "btnAtalho";
             this.btnAtalho.Padding = new System.Windows.Forms.Padding(6, 0, 0, 0);
             this.btnAtalho.Size = new System.Drawing.Size(203, 60);
@@ -120,7 +121,7 @@ namespace CRUD___Adriano
             this.pnlListagemSubmenu.Controls.Add(this.btnListagemFuncionario);
             this.pnlListagemSubmenu.Controls.Add(this.btnListagemCliente);
             this.pnlListagemSubmenu.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlListagemSubmenu.Location = new System.Drawing.Point(0, 416);
+            this.pnlListagemSubmenu.Location = new System.Drawing.Point(0, 470);
             this.pnlListagemSubmenu.Name = "pnlListagemSubmenu";
             this.pnlListagemSubmenu.Size = new System.Drawing.Size(203, 124);
             this.pnlListagemSubmenu.TabIndex = 6;
@@ -174,7 +175,7 @@ namespace CRUD___Adriano
             this.btnListagem.ForeColor = System.Drawing.Color.Gainsboro;
             this.btnListagem.Image = ((System.Drawing.Image)(resources.GetObject("btnListagem.Image")));
             this.btnListagem.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnListagem.Location = new System.Drawing.Point(0, 356);
+            this.btnListagem.Location = new System.Drawing.Point(0, 410);
             this.btnListagem.Name = "btnListagem";
             this.btnListagem.Padding = new System.Windows.Forms.Padding(6, 0, 0, 0);
             this.btnListagem.Size = new System.Drawing.Size(203, 60);
@@ -188,13 +189,14 @@ namespace CRUD___Adriano
             // pnlCadastroSubmenu
             // 
             this.pnlCadastroSubmenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(32)))), ((int)(((byte)(39)))));
+            this.pnlCadastroSubmenu.Controls.Add(this.btnCadastroProduto);
             this.pnlCadastroSubmenu.Controls.Add(this.btnCadastroFornecedor);
             this.pnlCadastroSubmenu.Controls.Add(this.btnCadastroFuncionario);
             this.pnlCadastroSubmenu.Controls.Add(this.btnCadastroCliente);
             this.pnlCadastroSubmenu.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlCadastroSubmenu.Location = new System.Drawing.Point(0, 172);
             this.pnlCadastroSubmenu.Name = "pnlCadastroSubmenu";
-            this.pnlCadastroSubmenu.Size = new System.Drawing.Size(203, 184);
+            this.pnlCadastroSubmenu.Size = new System.Drawing.Size(203, 238);
             this.pnlCadastroSubmenu.TabIndex = 4;
             // 
             // btnCadastroFornecedor
@@ -357,6 +359,26 @@ namespace CRUD___Adriano
             this.pnlChild.TabIndex = 4;
             this.pnlChild.ControlRemoved += new System.Windows.Forms.ControlEventHandler(this.PnlChild_ControlRemoved);
             // 
+            // btnCadastroProduto
+            // 
+            this.btnCadastroProduto.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnCadastroProduto.FlatAppearance.BorderSize = 0;
+            this.btnCadastroProduto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCadastroProduto.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnCadastroProduto.ForeColor = System.Drawing.Color.Gainsboro;
+            this.btnCadastroProduto.Image = ((System.Drawing.Image)(resources.GetObject("btnCadastroProduto.Image")));
+            this.btnCadastroProduto.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnCadastroProduto.Location = new System.Drawing.Point(0, 180);
+            this.btnCadastroProduto.Name = "btnCadastroProduto";
+            this.btnCadastroProduto.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.btnCadastroProduto.Size = new System.Drawing.Size(203, 60);
+            this.btnCadastroProduto.TabIndex = 3;
+            this.btnCadastroProduto.Text = "Produto";
+            this.btnCadastroProduto.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnCadastroProduto.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnCadastroProduto.UseVisualStyleBackColor = true;
+            this.btnCadastroProduto.Click += new System.EventHandler(this.BtnCadastroProduto_Click);
+            // 
             // FrmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -402,6 +424,7 @@ namespace CRUD___Adriano
         private System.Windows.Forms.Panel pnlUsuarioLogado;
         private System.Windows.Forms.Label lblUsuarioLogado;
         private System.Windows.Forms.Button btnCadastroFornecedor;
+        private System.Windows.Forms.Button btnCadastroProduto;
     }
 }
 

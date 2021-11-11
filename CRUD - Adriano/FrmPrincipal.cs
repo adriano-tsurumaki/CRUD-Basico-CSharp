@@ -10,6 +10,8 @@ using CRUD___Adriano.Features.Factory;
 using CRUD___Adriano.Features.Fornecedor.Controller;
 using CRUD___Adriano.Features.Fornecedor.Model;
 using CRUD___Adriano.Features.IoC;
+using CRUD___Adriano.Features.Produto.Controller;
+using CRUD___Adriano.Features.Produto.Model;
 using CRUD___Adriano.Features.Usuario.Controller;
 using System;
 using System.Windows.Forms;
@@ -98,6 +100,20 @@ namespace CRUD___Adriano
             pageManager.Add(ConfigNinject.ObterInstancia<UsuarioControllerPage<FornecedorModel>>());
             pageManager.Add(ConfigNinject.ObterInstancia<EmailTelefoneControllerPage<FornecedorModel>>());
             pageManager.Add(ConfigNinject.ObterInstancia<FornecedorControllerPage>());
+            pageManager.SetConfirm(ControllerEnum.Salvar);
+            pageManager.Show();
+        }
+
+        private void BtnCadastroProduto_Click(object sender, EventArgs e)
+        {
+            LimparPanel();
+            lblTitulo.Text = "Cadastro de produto";
+            var pageManager = new GerenciadorDePaginas<ProdutoModel>(
+                pnlChild,
+                ConfigNinject.ObterInstancia<ProdutoController>(),
+                new ProdutoModel());
+
+            pageManager.Add(ConfigNinject.ObterInstancia<ProdutoControllerPage>());
             pageManager.SetConfirm(ControllerEnum.Salvar);
             pageManager.Show();
         }
