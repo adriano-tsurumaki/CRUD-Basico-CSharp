@@ -1,7 +1,10 @@
-﻿namespace CRUD___Adriano.Features.Produto.Model
+﻿using CRUD___Adriano.Features.Fornecedor.Model;
+
+namespace CRUD___Adriano.Features.Produto.Model
 {
     public class ProdutoModel
     {
+        public FornecedorModel Fornecedor { get; set; }
         public int Id { get; set; }
         public string CodigoBarras { get; set; }
         public bool Ativo { get; set; }
