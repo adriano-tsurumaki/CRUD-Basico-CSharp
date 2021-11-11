@@ -1,7 +1,7 @@
 ﻿
 namespace CRUD___Adriano.Features.Usuario.View
 {
-    partial class FrmBuscarUsuario
+    partial class FrmBuscarUsuario<T>
     {
         /// <summary>
         /// Required designer variable.
