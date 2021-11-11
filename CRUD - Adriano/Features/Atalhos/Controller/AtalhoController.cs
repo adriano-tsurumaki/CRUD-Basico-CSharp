@@ -2,6 +2,8 @@
 using CRUD___Adriano.Features.Cliente.View;
 using CRUD___Adriano.Features.Colaborador.Controller;
 using CRUD___Adriano.Features.Configuration;
+using CRUD___Adriano.Features.Fornecedor.Controller;
+using System;
 using System.Windows.Forms;
 
 namespace CRUD___Adriano.Features.Atalhos.Controller
@@ -10,11 +12,13 @@ namespace CRUD___Adriano.Features.Atalhos.Controller
     {
         private readonly ClienteController _clienteController;
         private readonly ColaboradorController _colaboradorController;
+        private readonly FornecedorController _fornecedorController;
 
-        public AtalhoController(ClienteController clienteController, ColaboradorController colaboradorController)
+        public AtalhoController(ClienteController clienteController, ColaboradorController colaboradorController, FornecedorController fornecedorController)
         {
             _clienteController = clienteController;
             _colaboradorController = colaboradorController;
+            _fornecedorController = fornecedorController;
         }
 
         public Form RetornarFormulario() => new FrmAtalhos(this);
@@ -28,6 +32,12 @@ namespace CRUD___Adriano.Features.Atalhos.Controller
         public void CadastrarListaDeColaboradores(int quantidade)
         {
             if(_colaboradorController.SalvarLista(GerarUsuariosAleatoriamente.RetornarListaDeColaboradores(quantidade)))
+                MessageBox.Show("Cadastrado com sucesso");
+        }
+
+        public void CadastrarListaDeFornecedores(int quantidade)
+        {
+            if (_fornecedorController.SalvarLista(GerarUsuariosAleatoriamente.RetornarListaDeFornecedores(quantidade)))
                 MessageBox.Show("Cadastrado com sucesso");
         }
     }

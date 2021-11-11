@@ -14,8 +14,8 @@ namespace CRUD___Adriano.Features.Cliente.View
             _controller = controller;
         }
 
-        private void BtnCadastrarClientes_Click(object sender, System.EventArgs e) =>
-            CadastrarClientes();
+        private void TxtQuantidadeClientes__TextChanged(object sender, System.EventArgs e) =>
+            txtQuantidadeClientes.Texto = txtQuantidadeClientes.Texto.RetornarSomenteTextoEmNumeros();
 
         private void TxtQuantidadeClientes__KeyDown(object sender, KeyEventArgs e)
         {
@@ -23,6 +23,9 @@ namespace CRUD___Adriano.Features.Cliente.View
 
             CadastrarClientes();
         }
+
+        private void BtnCadastrarClientes_Click(object sender, System.EventArgs e) =>
+            CadastrarClientes();
 
         private void CadastrarClientes()
         {
@@ -33,11 +36,8 @@ namespace CRUD___Adriano.Features.Cliente.View
             _controller.CadastrarListaDeClientes(quantidade);
         }
 
-        private void TxtQuantidade__TextChanged(object sender, System.EventArgs e) =>
-            txtQuantidadeClientes.Texto = txtQuantidadeClientes.Texto.RetornarSomenteTextoEmNumeros();
-
-        private void BtnCadastrarColaboradores_Click(object sender, System.EventArgs e) =>
-            CadastrarColaboradores();
+        private void TxtQuantidadeColaboradores__TextChanged(object sender, System.EventArgs e) =>
+            txtQuantidadeColaboradores.Texto = txtQuantidadeColaboradores.Texto.RetornarSomenteTextoEmNumeros();
 
         private void TxtQuantidadeColaboradores__KeyDown(object sender, KeyEventArgs e)
         {
@@ -45,6 +45,9 @@ namespace CRUD___Adriano.Features.Cliente.View
 
             CadastrarColaboradores();
         }
+
+        private void BtnCadastrarColaboradores_Click(object sender, System.EventArgs e) =>
+            CadastrarColaboradores();
 
         private void CadastrarColaboradores()
         {
@@ -55,7 +58,26 @@ namespace CRUD___Adriano.Features.Cliente.View
             _controller.CadastrarListaDeColaboradores(quantidade);
         }
 
-        private void TxtQuantidadeColaboradores__TextChanged(object sender, System.EventArgs e) =>
-            txtQuantidadeColaboradores.Texto = txtQuantidadeColaboradores.Texto.RetornarSomenteTextoEmNumeros();
+        private void TxtQuantidadeFornecedores__TextChanged(object sender, System.EventArgs e) =>
+            txtQuantidadeFornecedores.Texto = txtQuantidadeFornecedores.Texto.RetornarSomenteTextoEmNumeros();
+
+        private void TxtQuantidadeFornecedores__KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode != Keys.Enter) return;
+
+            CadastrarFornecedores();
+        }
+
+        private void BtnCadastrarFornecedores_Click(object sender, System.EventArgs e) =>
+            CadastrarFornecedores();
+
+        private void CadastrarFornecedores()
+        {
+            if (txtQuantidadeFornecedores.NuloOuVazio())
+                return;
+
+            int.TryParse(txtQuantidadeFornecedores.Texto, out int quantidade);
+            _controller.CadastrarListaDeFornecedores(quantidade);
+        }
     }
 }
