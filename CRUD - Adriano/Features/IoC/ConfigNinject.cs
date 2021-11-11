@@ -38,7 +38,13 @@ namespace CRUD___Adriano.Features.IoC
                     AllowNullInjection = true
                 });
 
+            //Interfaces
             kernel.Bind(typeof(IControllerBase<ColaboradorModel>)).To(typeof(ColaboradorModel));
+            kernel.Bind(typeof(IControllerBase<ClienteModel>)).To(typeof(ClienteModel));
+
+            kernel.Bind(typeof(IControllerListarIdNome<ColaboradorModel>)).To<ColaboradorController>();
+            kernel.Bind(typeof(IControllerListarIdNome<ClienteModel>)).To<ClienteController>();
+            kernel.Bind(typeof(IControllerListarIdNome<FornecedorModel>)).To<FornecedorController>();
 
             //Database
             kernel.Bind<SqlConexao>().ToConstant(connectionString);
