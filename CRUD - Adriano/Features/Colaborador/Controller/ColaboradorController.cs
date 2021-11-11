@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace CRUD___Adriano.Features.Colaborador.Controller
 {
-    public class ColaboradorController : IControllerBase<ColaboradorModel>
+    public class ColaboradorController : IControllerBase<ColaboradorModel>, IControllerListarIdNome<ColaboradorModel>
     {
         private readonly ColaboradorDao _colaboradorDao;
 

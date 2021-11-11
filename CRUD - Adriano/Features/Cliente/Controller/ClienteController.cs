@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace CRUD___Adriano.Features.Cliente.Controller
 {
-    public class ClienteController : IControllerBase<ClienteModel>
+    public class ClienteController : IControllerBase<ClienteModel>, IControllerListarIdNome<ClienteModel>
     {
         private readonly ClienteDao _clienteDao;
 

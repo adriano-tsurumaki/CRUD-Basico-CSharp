@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace CRUD___Adriano.Features.Fornecedor.Controller
 {
-    public class FornecedorController : IControllerBase<FornecedorModel>
+    public class FornecedorController : IControllerBase<FornecedorModel>, IControllerListarIdNome<FornecedorModel>
     {
         private readonly FornecedorDao _fornecedorDao;
 
@@ -22,6 +22,11 @@ namespace CRUD___Adriano.Features.Fornecedor.Controller
         }
 
         public IList<FornecedorModel> Listar()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IList<FornecedorModel> ListarSomenteIdENome()
         {
             throw new NotImplementedException();
         }
