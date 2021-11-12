@@ -123,6 +123,12 @@ namespace CRUD___Adriano.Features.Configuration
             return new Random().Next(1, 1_000_000_000).ToString();
         }
 
+        // TODO: Fazer o gerador de código de barras!
+        public static string GerarCodigoDeBarrasAleatorio()
+        {
+            return $"789{new Random().Next(10000, 99999)}{new Random().Next(1000, 9999)}{new Random().Next(1, 9)}";
+        }
+
         public static DateTime GerarDataNascimentoAleatorio()
         {
             var random = new Random();

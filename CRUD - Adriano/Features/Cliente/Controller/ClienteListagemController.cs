@@ -71,11 +71,12 @@ namespace CRUD___Adriano.Features.Cliente.Controller
                 _clienteController,
                 clienteModelSelecionado);
 
-            pageManager.Add(ConfigNinject.ObterInstancia<UsuarioControllerPage<ClienteModel>>());
-            pageManager.Add(ConfigNinject.ObterInstancia<EmailTelefoneControllerPage<ClienteModel>>());
-            pageManager.Add(ConfigNinject.ObterInstancia<ClienteControllerPage>());
-            pageManager.SetConfirm(Factory.ControllerEnum.Atualizar);
-            pageManager.Show();
+            pageManager.Adicionar(ConfigNinject.ObterInstancia<UsuarioControllerPage<ClienteModel>>());
+            pageManager.Adicionar(ConfigNinject.ObterInstancia<EmailTelefoneControllerPage<ClienteModel>>());
+            pageManager.Adicionar(ConfigNinject.ObterInstancia<ClienteControllerPage>());
+            pageManager.DefinirTipoCrud(Factory.ControllerEnum.Atualizar);
+            pageManager.DefinirMensagemConfirmacao("Deseja alterar o cliente?");
+            pageManager.Mostrar();
         }
 
         public void ListarTodosOsClientes(BindingList<ClienteModel> clientesBinding)

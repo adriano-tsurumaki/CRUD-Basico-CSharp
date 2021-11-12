@@ -42,11 +42,12 @@ namespace CRUD___Adriano.Features.Colaborador.Controller
                 _colaboradorController,
                 colaboradorModelSelecionado);
 
-            pageManager.Add(ConfigNinject.ObterInstancia<UsuarioControllerPage<ColaboradorModel>>());
-            pageManager.Add(ConfigNinject.ObterInstancia<EmailTelefoneControllerPage<ColaboradorModel>>());
-            pageManager.Add(ConfigNinject.ObterInstancia<ColaboradorControllerPage>());
-            pageManager.SetConfirm(Factory.ControllerEnum.Atualizar);
-            pageManager.Show();
+            pageManager.Adicionar(ConfigNinject.ObterInstancia<UsuarioControllerPage<ColaboradorModel>>());
+            pageManager.Adicionar(ConfigNinject.ObterInstancia<EmailTelefoneControllerPage<ColaboradorModel>>());
+            pageManager.Adicionar(ConfigNinject.ObterInstancia<ColaboradorControllerPage>());
+            pageManager.DefinirTipoCrud(Factory.ControllerEnum.Atualizar);
+            pageManager.DefinirMensagemConfirmacao("Deseja alterar o funcionário?");
+            pageManager.Mostrar();
         }
 
         public void AbrirFormDeDetalhes(int id)

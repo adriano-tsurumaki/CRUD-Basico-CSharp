@@ -43,11 +43,12 @@ namespace CRUD___Adriano
                 ConfigNinject.ObterInstancia<ClienteController>(),
                 new ClienteModel());
 
-            pageManager.Add(ConfigNinject.ObterInstancia<UsuarioControllerPage<ClienteModel>>());
-            pageManager.Add(ConfigNinject.ObterInstancia<EmailTelefoneControllerPage<ClienteModel>>());
-            pageManager.Add(ConfigNinject.ObterInstancia<ClienteControllerPage>());
-            pageManager.SetConfirm(ControllerEnum.Salvar);
-            pageManager.Show();
+            pageManager.Adicionar(ConfigNinject.ObterInstancia<UsuarioControllerPage<ClienteModel>>());
+            pageManager.Adicionar(ConfigNinject.ObterInstancia<EmailTelefoneControllerPage<ClienteModel>>());
+            pageManager.Adicionar(ConfigNinject.ObterInstancia<ClienteControllerPage>());
+            pageManager.DefinirTipoCrud(ControllerEnum.Salvar);
+            pageManager.DefinirMensagemConfirmacao("Deseja cadastrar o cliente?");
+            pageManager.Mostrar();
         }
 
         private void BtnClientesListagem_Click(object sender, EventArgs e)
@@ -70,11 +71,12 @@ namespace CRUD___Adriano
                 ConfigNinject.ObterInstancia<ColaboradorController>(),
                 new ColaboradorModel());
 
-            pageManager.Add(ConfigNinject.ObterInstancia<UsuarioControllerPage<ColaboradorModel>>());
-            pageManager.Add(ConfigNinject.ObterInstancia<EmailTelefoneControllerPage<ColaboradorModel>>());
-            pageManager.Add(ConfigNinject.ObterInstancia<ColaboradorControllerPage>());
-            pageManager.SetConfirm(ControllerEnum.Salvar);
-            pageManager.Show();
+            pageManager.Adicionar(ConfigNinject.ObterInstancia<UsuarioControllerPage<ColaboradorModel>>());
+            pageManager.Adicionar(ConfigNinject.ObterInstancia<EmailTelefoneControllerPage<ColaboradorModel>>());
+            pageManager.Adicionar(ConfigNinject.ObterInstancia<ColaboradorControllerPage>());
+            pageManager.DefinirTipoCrud(ControllerEnum.Salvar);
+            pageManager.DefinirMensagemConfirmacao("Deseja cadastrar o funcionário?");
+            pageManager.Mostrar();
         }
 
         private void BtnListagemFuncionario_Click(object sender, EventArgs e)
@@ -97,11 +99,12 @@ namespace CRUD___Adriano
                 ConfigNinject.ObterInstancia<FornecedorController>(),
                 new FornecedorModel());
 
-            pageManager.Add(ConfigNinject.ObterInstancia<UsuarioControllerPage<FornecedorModel>>());
-            pageManager.Add(ConfigNinject.ObterInstancia<EmailTelefoneControllerPage<FornecedorModel>>());
-            pageManager.Add(ConfigNinject.ObterInstancia<FornecedorControllerPage>());
-            pageManager.SetConfirm(ControllerEnum.Salvar);
-            pageManager.Show();
+            pageManager.Adicionar(ConfigNinject.ObterInstancia<UsuarioControllerPage<FornecedorModel>>());
+            pageManager.Adicionar(ConfigNinject.ObterInstancia<EmailTelefoneControllerPage<FornecedorModel>>());
+            pageManager.Adicionar(ConfigNinject.ObterInstancia<FornecedorControllerPage>());
+            pageManager.DefinirTipoCrud(ControllerEnum.Salvar);
+            pageManager.DefinirMensagemConfirmacao("Deseja cadastrar o fornecedor?");
+            pageManager.Mostrar();
         }
 
         private void BtnCadastroProduto_Click(object sender, EventArgs e)
@@ -113,9 +116,10 @@ namespace CRUD___Adriano
                 ConfigNinject.ObterInstancia<ProdutoController>(),
                 new ProdutoModel());
 
-            pageManager.Add(ConfigNinject.ObterInstancia<ProdutoControllerPage>());
-            pageManager.SetConfirm(ControllerEnum.Salvar);
-            pageManager.Show();
+            pageManager.Adicionar(ConfigNinject.ObterInstancia<ProdutoControllerPage>());
+            pageManager.DefinirTipoCrud(ControllerEnum.Salvar);
+            pageManager.DefinirMensagemConfirmacao("Deseja cadastrar o produto?");
+            pageManager.Mostrar();
         }
 
         private void BtnAtalho_Click(object sender, EventArgs e)

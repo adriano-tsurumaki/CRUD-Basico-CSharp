@@ -29,6 +29,8 @@ namespace CRUD___Adriano.Features.Controller.PageManager
         private ControllerEnum _tipoCrud;
         private T _model;
 
+        private string _mensagemConfirmacao;
+
         public GerenciadorDePaginas(Panel panelCentral, IControllerBase<T> controller, T model)
         {
             _panelCentral = panelCentral;
@@ -93,11 +95,8 @@ namespace CRUD___Adriano.Features.Controller.PageManager
 
         private void BtnProximo_Click(object sender, EventArgs e)
         {
-            if (!ValidarPagina())
-            {
-                MessageBox.Show("Preencha os campos obrigatórios");
-                return;
-            }
+            if (!ValidarPagina()) return;
+
             _indiceAtualPagina++;
             AtualizarRodape();
             AtualizarPagina();
@@ -136,7 +135,7 @@ namespace CRUD___Adriano.Features.Controller.PageManager
         {
             if (!ValidarPagina()) return;
 
-            if (MessageBox.Show("Deseja cadastrar o usuário?", "Aviso", MessageBoxButtons.YesNo) == DialogResult.No) return;
+            if (MessageBox.Show(_mensagemConfirmacao, "Aviso", MessageBoxButtons.YesNo) == DialogResult.No) return;
 
             bool validar;
 
@@ -159,10 +158,12 @@ namespace CRUD___Adriano.Features.Controller.PageManager
             _ucCentral.Dispose();
         }
 
-        public void SetConfirm(ControllerEnum tipoCrud)
+        public void DefinirTipoCrud(ControllerEnum tipoCrud)
         {
             _tipoCrud = tipoCrud;
         }
+
+        public void DefinirMensagemConfirmacao(string mensagem) => _mensagemConfirmacao = mensagem;
 
         private void BtnCancelar_Click(object sender, EventArgs e) =>
             _ucCentral.Dispose();
@@ -190,14 +191,14 @@ namespace CRUD___Adriano.Features.Controller.PageManager
             formFilha.Focus();
         }
 
-        public void Show()
+        public void Mostrar()
         {
             AtualizarControlPagina(_paginas.First().Value.RetornarFormulario() as Form);
             AdicionarControl(_panelCentral, _ucCentral);
             _totalDePaginas--;
         }
 
-        public void Add(IControllerPage<T> controllerPage)
+        public void Adicionar(IControllerPage<T> controllerPage)
         {
             controllerPage.AdicionarModel(ref _model);
             _paginas.Add(_totalDePaginas, controllerPage);
