@@ -1,5 +1,7 @@
 ﻿using CRUD___Adriano.Features.Utils;
+using System;
 using System.Globalization;
+using System.Text.RegularExpressions;
 
 namespace CRUD___Adriano.Features.ValueObject.Precos
 {
@@ -18,9 +20,16 @@ namespace CRUD___Adriano.Features.ValueObject.Precos
 
         public Preco(string preco)
         {
-            var valorString = preco.RetornarSomenteTextoEmNumeros();
-            valorString = valorString.Length > 2 ? valorString.Insert(valorString.Length - 2, ".") : valorString;
-            _preco = valorString.FloatOuZero();
+            preco = preco.Trim();
+
+            if (Regex.IsMatch(preco, @"^([R][$])?\s?\d+[,]\d{1,2}$"))
+                _preco = float.Parse(preco, NumberStyles.Currency);
+            else
+            {
+                var valorString = preco.RetornarSomenteTextoEmNumeros();
+                valorString = valorString.Length > 2 ? valorString.Insert(valorString.Length - 2, ",") : valorString;
+                _preco = valorString.FloatOuZero();
+            }
         }
 
         public static implicit operator Preco(float preco) => new Preco(preco);
@@ -28,8 +37,8 @@ namespace CRUD___Adriano.Features.ValueObject.Precos
 
         public static Preco operator +(Preco precoA, Preco precoB) => new Preco(precoA.Valor + precoB.Valor);
         public static Preco operator -(Preco precoA, Preco precoB) => new Preco(precoA.Valor - precoB.Valor);
-        public static Preco operator %(Preco precoA, Preco precoB) => new Preco(precoA.Valor % precoB.Valor);
-        public static Preco operator *(Preco precoA, Preco precoB) => new Preco(precoA.Valor * precoB.Valor);
-        public static Preco operator /(Preco precoA, Preco precoB) => new Preco(precoA.Valor / precoB.Valor);
+        public static Preco operator %(Preco precoA, Preco precoB) => new Preco((float)Math.Round(precoA.Valor % precoB.Valor, 2));
+        public static Preco operator *(Preco precoA, Preco precoB) => new Preco((float)Math.Round(precoA.Valor * precoB.Valor, 2));
+        public static Preco operator /(Preco precoA, Preco precoB) => new Preco((float)Math.Round(precoA.Valor / precoB.Valor, 2));
     }
 }
