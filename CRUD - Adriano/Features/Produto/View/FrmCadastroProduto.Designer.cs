@@ -200,7 +200,6 @@ namespace CRUD___Adriano.Features.Produto.View
             this.txtPrecoBruto.Texto = "";
             this.txtPrecoBruto.UnderlinedStyle = true;
             this.txtPrecoBruto._TextChanged += new System.EventHandler(this.TxtPrecoBruto__TextChanged);
-            this.txtPrecoBruto._KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtPrecoBruto__KeyPress);
             // 
             // lblLucro
             // 

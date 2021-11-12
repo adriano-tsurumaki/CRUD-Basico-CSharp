@@ -1,12 +1,11 @@
-﻿using CRUD___Adriano.Features.Factory;
+﻿using CRUD___Adriano.Features.Configuration;
+using CRUD___Adriano.Features.Factory;
 using CRUD___Adriano.Features.Fornecedor.Model;
 using CRUD___Adriano.Features.Interface;
 using CRUD___Adriano.Features.IoC;
 using CRUD___Adriano.Features.Produto.Model;
 using CRUD___Adriano.Features.Usuario.Controller;
 using CRUD___Adriano.Features.Utils;
-using CRUD___Adriano.Features.ValueObject.Precos;
-using System.Diagnostics;
 using System.Windows.Forms;
 
 namespace CRUD___Adriano.Features.Produto.View
@@ -36,75 +35,91 @@ namespace CRUD___Adriano.Features.Produto.View
 
         public bool ValidarComponentes()
         {
-            if (txtFornecedor.NuloOuVazio() || txtQuantidade.NuloOuVazio() ||
-                txtCodigoBarras.NuloOuVazio() || txtNome.NuloOuVazio() ||
-                txtPrecoBruto.NuloOuVazio() || txtLucro.NuloOuVazio()) 
+            if (_produtoModel.Fornecedor.Id == 0)
+            {
+                MessageBox.Show("Obrigatório selecionar um fornecedor para o produto!");
                 return false;
+            }
+            else if (txtCodigoBarras.NuloOuVazio())
+            {
+                MessageBox.Show("O campo codigo de barras não pode ser nula ou vazia!");
+                return false;
+            }
+            else if (txtNome.NuloOuVazio())
+            {
+                MessageBox.Show("O campo nome não pode ser nula ou vazia!");
+                return false;
+            }
+            else if (txtQuantidade.NuloOuVazio())
+            {
+                MessageBox.Show("O campo quantidade não pode ser nula ou vazia!");
+                return false;
+            }
+            else if (txtPrecoBruto.NuloOuVazio())
+            {
+                MessageBox.Show("O campo preco bruto não pode ser nula ou vazia!");
+                return false;
+            }
+            else if (txtLucro.NuloOuVazio())
+            {
+                MessageBox.Show("O campo lucro não pode ser nula ou vazia!");
+                return false;
+            }
 
             _produtoModel.PrecoBruto = txtPrecoBruto.Texto;
-
             return true;
         }
 
         private void BtnProcurarFornecedor_Click(object sender, System.EventArgs e) =>
-            txtFornecedor.Texto = _produtoModel.Fornecedor.Nome = BuscarNomeDoFornecedor();
+            AtribuirFornecedor(BuscarFornecedor());
 
         private void TxtFornecedor__KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode != Keys.Enter) return;
+            if (e.KeyCode != Keys.Enter)
+            {
+                _produtoModel.Fornecedor.Id = 0;
+            }
 
-            txtFornecedor.Texto = _produtoModel.Fornecedor.Nome = BuscarNomeDoFornecedor(txtFornecedor.Texto);
+            AtribuirFornecedor(BuscarNomeDoFornecedor(txtFornecedor.Texto));
         }
 
-        private string BuscarNomeDoFornecedor() =>
-            ConfigNinject.ObterInstancia<BuscarUsuarioController<FornecedorModel>>().RetornarUsuarioSelecionado()?.Nome;
+        private void AtribuirFornecedor(FornecedorModel fornecedorModel)
+        {
+            txtFornecedor.Texto = _produtoModel.Fornecedor.Nome = fornecedorModel.Nome;
+            _produtoModel.Fornecedor.Id = fornecedorModel.Id;
+        }
 
-        private string BuscarNomeDoFornecedor(string nome) =>
-            ConfigNinject.ObterInstancia<BuscarUsuarioController<FornecedorModel>>().DefinirNomePrevio(nome).RetornarUsuarioSelecionado()?.Nome;
+        private FornecedorModel BuscarFornecedor() =>
+            ConfigNinject.ObterInstancia<BuscarUsuarioController<FornecedorModel>>().RetornarUsuarioSelecionado();
+
+        private FornecedorModel BuscarNomeDoFornecedor(string nome) =>
+            ConfigNinject.ObterInstancia<BuscarUsuarioController<FornecedorModel>>().DefinirNomePrevio(nome).RetornarUsuarioSelecionado();
 
         // TODO: Fazer o gerador de código de barra!
-        private void BtnGerarCodigoBarra_Click(object sender, System.EventArgs e)
-        {
+        private void BtnGerarCodigoBarra_Click(object sender, System.EventArgs e) =>
+            txtCodigoBarras.Texto = GerarUsuariosAleatoriamente.GerarCodigoDeBarrasAleatorio();
 
-        }
-        
-        //private bool evitarLoopPrecoBruto;
+        private bool evitarLoopPrecoBruto;
 
         private void TxtPrecoBruto__TextChanged(object sender, System.EventArgs e)
         {
+            if (evitarLoopPrecoBruto)
+            {
+                txtPrecoBruto.SelectionStart = txtPrecoBruto.Texto.Length;
+                evitarLoopPrecoBruto = false;
+                return;
+            }
+
+            var textoFormatado = "R$ " + txtPrecoBruto.Texto.RetornarSomenteTextoEmNumeros();
+
+            if (textoFormatado.Length > 5)
+                textoFormatado = textoFormatado.Insert(textoFormatado.Length - 2, ",");
+
+            if (textoFormatado != txtPrecoBruto.Texto)
+                evitarLoopPrecoBruto = true;
+
             txtPrecoBruto.SelectionLength = 0;
-            Preco precoBruto = txtPrecoBruto.Texto;
-            txtPrecoBruto.Texto = precoBruto.Formatado;
-
-            //txtPrecoBruto.SelectionStart = txtPrecoBruto.Texto.Length;
-            //txtPrecoBruto.SelectionStart++;
-
-
-            //if (evitarLoopPrecoBruto)
-            //{
-            //    txtPrecoBruto.SelectionStart = txtPrecoBruto.Texto.Length;
-            //    evitarLoopPrecoBruto = false;
-            //    return;
-            //}
-
-            //var textoFormatado = "R$ " + txtPrecoBruto.Texto.RetornarSomenteTextoEmNumeros();
-
-            //if (textoFormatado.Length > 5)
-            //    textoFormatado = textoFormatado.Insert(textoFormatado.Length - 2, ",");
-
-            //if (textoFormatado != txtPrecoBruto.Texto)
-            //    evitarLoopPrecoBruto = true;
-
-
-            //txtPrecoBruto.Texto = textoFormatado;
-            Debug.WriteLine(txtPrecoBruto.SelectionStart);
-        }
-
-        private void TxtPrecoBruto__KeyPress(object sender, KeyPressEventArgs e)
-        {
-            //if (!char.IsDigit(e.KeyChar)) e.Handled = true;
-
-            
+            txtPrecoBruto.Texto = textoFormatado;
         }
     }
 }
