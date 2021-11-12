@@ -11,7 +11,7 @@ namespace CRUD___Adriano.Features.ValueObject.Precos
 
         public float Valor { get => _preco; }
 
-        public string ValorFormatado { get => _preco.ToString("C", CultureInfo.CurrentCulture); }
+        public string Formatado { get => _preco.ToString("C", CultureInfo.CurrentCulture); }
 
         public Preco(float preco)
         {

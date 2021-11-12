@@ -5,6 +5,8 @@ using CRUD___Adriano.Features.IoC;
 using CRUD___Adriano.Features.Produto.Model;
 using CRUD___Adriano.Features.Usuario.Controller;
 using CRUD___Adriano.Features.Utils;
+using CRUD___Adriano.Features.ValueObject.Precos;
+using System.Diagnostics;
 using System.Windows.Forms;
 
 namespace CRUD___Adriano.Features.Produto.View
@@ -28,6 +30,7 @@ namespace CRUD___Adriano.Features.Produto.View
             txtCodigoBarras.DataBindings.Add("Texto", produtoModel, "CodigoBarras");
             txtNome.DataBindings.Add("Texto", produtoModel, "Nome");
             txtLucro.DataBindings.Add("Texto", produtoModel, "Lucro");
+            txtPrecoBruto.Texto = produtoModel.PrecoBruto.Formatado;
             txtQuantidade.DataBindings.Add("Texto", produtoModel, "Quantidade");
         }
 
@@ -65,27 +68,43 @@ namespace CRUD___Adriano.Features.Produto.View
 
         }
         
-        private bool evitarLoopPrecoBruto;
+        //private bool evitarLoopPrecoBruto;
 
         private void TxtPrecoBruto__TextChanged(object sender, System.EventArgs e)
         {
-            if (evitarLoopPrecoBruto)
-            {
-                txtPrecoBruto.SelectionStart = txtPrecoBruto.Texto.Length;
-                evitarLoopPrecoBruto = false;
-                return;
-            }
-
-            var textoFormatado = "R$ " + txtPrecoBruto.Texto.RetornarSomenteTextoEmNumeros();
-
-            if (textoFormatado.Length > 5)
-                textoFormatado = textoFormatado.Insert(textoFormatado.Length - 2, ",");
-
-            if (textoFormatado != txtPrecoBruto.Texto)
-                evitarLoopPrecoBruto = true;
-
             txtPrecoBruto.SelectionLength = 0;
-            txtPrecoBruto.Texto = textoFormatado;
+            Preco precoBruto = txtPrecoBruto.Texto;
+            txtPrecoBruto.Texto = precoBruto.Formatado;
+
+            //txtPrecoBruto.SelectionStart = txtPrecoBruto.Texto.Length;
+            //txtPrecoBruto.SelectionStart++;
+
+
+            //if (evitarLoopPrecoBruto)
+            //{
+            //    txtPrecoBruto.SelectionStart = txtPrecoBruto.Texto.Length;
+            //    evitarLoopPrecoBruto = false;
+            //    return;
+            //}
+
+            //var textoFormatado = "R$ " + txtPrecoBruto.Texto.RetornarSomenteTextoEmNumeros();
+
+            //if (textoFormatado.Length > 5)
+            //    textoFormatado = textoFormatado.Insert(textoFormatado.Length - 2, ",");
+
+            //if (textoFormatado != txtPrecoBruto.Texto)
+            //    evitarLoopPrecoBruto = true;
+
+
+            //txtPrecoBruto.Texto = textoFormatado;
+            Debug.WriteLine(txtPrecoBruto.SelectionStart);
+        }
+
+        private void TxtPrecoBruto__KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //if (!char.IsDigit(e.KeyChar)) e.Handled = true;
+
+            
         }
     }
 }
