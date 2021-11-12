@@ -25,7 +25,7 @@ namespace CRUD___Adriano.Features.Colaborador.View
             lblSobrenome.Text = _colaboradorModel.Sobrenome;
             lblIdade.Text = $"{idade} {(idade > 0 ? "anos" : "ano")}";
             lblSexo.Text = _colaboradorModel.Sexo.RetornarDescricao();
-            lblCpf.Text = _colaboradorModel.Cpf.ValorFormatado;
+            lblCpf.Text = _colaboradorModel.Cpf.Formatado;
             lblCidade.Text = _colaboradorModel.Endereco.Cidade;
             lblEstado.Text = _colaboradorModel.Endereco.Uf.RetornarDescricao();
             lblLogradouro.Text = _colaboradorModel.Endereco.Logradouro;

@@ -10,7 +10,7 @@ namespace CRUD___Adriano.Features.ValueObject.Cpf
     {
         private readonly string _valor;
 
-        public string ValorFormatado
+        public string Formatado
         {
             get
             {

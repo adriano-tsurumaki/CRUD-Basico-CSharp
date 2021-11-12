@@ -18,7 +18,7 @@ namespace Teste_Unitário.ValueObject.CpfDeveria
         {
             MeuCpf cpf = valor;
 
-            Assert.AreEqual(valorEsperado, cpf.ValorFormatado);
+            Assert.AreEqual(valorEsperado, cpf.Formatado);
         }
     }
 }
