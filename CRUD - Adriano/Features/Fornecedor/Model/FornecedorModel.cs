@@ -5,6 +5,7 @@ namespace CRUD___Adriano.Features.Fornecedor.Model
 {
     public class FornecedorModel : UsuarioModel
     {
+        public int Id { get; set; }
         public string Observacao { get; set; }
         public MeuCnpj Cnpj { get; set; }
     }

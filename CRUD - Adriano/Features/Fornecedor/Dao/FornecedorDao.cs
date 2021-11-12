@@ -55,7 +55,13 @@ namespace CRUD___Adriano.Features.Fornecedor.Dao
         public IList<FornecedorModel> ListarTodosOsFornecedoresSomenteIdENome() =>
             _conexao.Query<FornecedorModel>(FornecedorSql.ListarTodosComCamposSomenteIdENome).ToList();
 
-        public IList<FornecedorModel> ListarClientesPeloNomeSomenteIdENome(string nome) =>
+        public IList<FornecedorModel> ListarPelaQuantidadeSomenteIdENome(int quantidade) =>
+            _conexao.Query<FornecedorModel>(FornecedorSql.ListarPelaQuantidadeComCamposSomenteIdENome, new { quantidade }).ToList();
+
+        public IList<FornecedorModel> ListarFornecedoresPeloNomeSomenteIdENome(string nome) =>
             _conexao.Query<FornecedorModel>(FornecedorSql.ListarPeloNomeComCamposSomenteIdENome, new { nome }).ToList();
+
+        public FornecedorModel SelecionarClienteSomenteIdENome(int id) =>
+           _conexao.QuerySingleOrDefault<FornecedorModel>(FornecedorSql.SelecionarComCamposSomenteIdENome, new { id });
     }
 }

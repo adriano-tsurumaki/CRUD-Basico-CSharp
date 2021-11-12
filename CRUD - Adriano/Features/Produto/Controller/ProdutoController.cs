@@ -63,5 +63,10 @@ namespace CRUD___Adriano.Features.Produto.Controller
         {
             throw new System.NotImplementedException();
         }
+
+        public ProdutoModel SelecionarPeloIdSomenteIdENome(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

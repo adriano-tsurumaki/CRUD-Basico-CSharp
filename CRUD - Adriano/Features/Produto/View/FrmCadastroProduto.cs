@@ -28,8 +28,8 @@ namespace CRUD___Adriano.Features.Produto.View
             txtFornecedor.DataBindings.Add("Texto", fornecedor, "Nome");
             txtCodigoBarras.DataBindings.Add("Texto", produtoModel, "CodigoBarras");
             txtNome.DataBindings.Add("Texto", produtoModel, "Nome");
-            txtLucro.DataBindings.Add("Texto", produtoModel, "Lucro");
             txtPrecoBruto.Texto = produtoModel.PrecoBruto.Formatado;
+            txtLucro.Texto = produtoModel.Lucro.Formatado;
             txtQuantidade.DataBindings.Add("Texto", produtoModel, "Quantidade");
         }
 
@@ -67,20 +67,27 @@ namespace CRUD___Adriano.Features.Produto.View
             }
 
             _produtoModel.PrecoBruto = txtPrecoBruto.Texto;
+            _produtoModel.Lucro = txtLucro.Texto;
             return true;
         }
 
-        private void BtnProcurarFornecedor_Click(object sender, System.EventArgs e) =>
-            AtribuirFornecedor(BuscarFornecedor());
+        private void BtnProcurarFornecedor_Click(object sender, System.EventArgs e)
+        {
+            if (txtFornecedor.NuloOuVazio())
+                AtribuirFornecedor(BuscarFornecedor());
+            else
+                AtribuirFornecedor(BuscarFornecedorPeloNome(txtFornecedor.Texto));
+        }
 
         private void TxtFornecedor__KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode != Keys.Enter)
             {
                 _produtoModel.Fornecedor.Id = 0;
+                return;
             }
 
-            AtribuirFornecedor(BuscarNomeDoFornecedor(txtFornecedor.Texto));
+            AtribuirFornecedor(BuscarFornecedorPeloNome(txtFornecedor.Texto));
         }
 
         private void AtribuirFornecedor(FornecedorModel fornecedorModel)
@@ -92,12 +99,14 @@ namespace CRUD___Adriano.Features.Produto.View
         private FornecedorModel BuscarFornecedor() =>
             ConfigNinject.ObterInstancia<BuscarUsuarioController<FornecedorModel>>().RetornarUsuarioSelecionado();
 
-        private FornecedorModel BuscarNomeDoFornecedor(string nome) =>
+        private FornecedorModel BuscarFornecedorPeloNome(string nome) =>
             ConfigNinject.ObterInstancia<BuscarUsuarioController<FornecedorModel>>().DefinirNomePrevio(nome).RetornarUsuarioSelecionado();
 
-        // TODO: Fazer o gerador de código de barra!
-        private void BtnGerarCodigoBarra_Click(object sender, System.EventArgs e) =>
-            txtCodigoBarras.Texto = GerarUsuariosAleatoriamente.GerarCodigoDeBarrasAleatorio();
+        private void BtnGerarCodigoBarra_Click(object sender, System.EventArgs e)
+        {
+            _produtoModel.CodigoBarras = GerarUsuariosAleatoriamente.GerarCodigoDeBarrasAleatorio();
+            txtCodigoBarras.Texto = _produtoModel.CodigoBarras;
+        }
 
         private bool evitarLoopPrecoBruto;
 

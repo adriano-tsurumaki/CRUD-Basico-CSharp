@@ -45,11 +45,11 @@ namespace CRUD___Adriano.Features.Fornecedor.Controller
         {
             try
             {
-                return _fornecedorDao.ListarClientesPeloNomeSomenteIdENome(nome);
+                return _fornecedorDao.ListarFornecedoresPeloNomeSomenteIdENome(nome);
             }
             catch (Exception excecao)
             {
-                MessageBox.Show(excecao.Message, "Erro ao listar os fornecedores");
+                MessageBox.Show(excecao.Message, "Erro ao listar fornecedores");
             }
 
             return new List<FornecedorModel>();
@@ -57,7 +57,16 @@ namespace CRUD___Adriano.Features.Fornecedor.Controller
 
         public IList<FornecedorModel> ListarPelaQuantidadeSomenteIdENome(int quantidade)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return _fornecedorDao.ListarPelaQuantidadeSomenteIdENome(quantidade);
+            }
+            catch (Exception excecao)
+            {
+                MessageBox.Show(excecao.Message, "Erro ao listar fornecedores");
+            }
+
+            return new List<FornecedorModel>();
         }
 
         public bool Remover(int id)
@@ -97,6 +106,19 @@ namespace CRUD___Adriano.Features.Fornecedor.Controller
         public FornecedorModel Selecionar(int id)
         {
             throw new NotImplementedException();
+        }
+
+        public FornecedorModel SelecionarPeloIdSomenteIdENome(int id)
+        {
+            try
+            {
+                return _fornecedorDao.SelecionarClienteSomenteIdENome(id);
+            }
+            catch (Exception excecao)
+            {
+                MessageBox.Show(excecao.Message, "Erro ao buscar o fornecedor");
+            }
+            return new FornecedorModel();
         }
     }
 }

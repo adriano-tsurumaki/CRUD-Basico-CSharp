@@ -118,7 +118,7 @@ namespace CRUD___Adriano.Features.Cliente.View
             if (txtPesquisar.NuloOuVazio())
                 return;
             else if (txtPesquisar.Texto == "%")
-                _controller.ListarTodosOsClientes(_clientesBinding);
+                _controller.ListarSomenteIdENome(_clientesBinding);
             else if (new Regex(@"^[%][0-9]+$").Match(txtPesquisar.Texto).Success)
             {
                 var quantidade = txtPesquisar.Texto.RetornarSomenteTextoEmNumeros().IntOuZero();

@@ -1,5 +1,6 @@
 ﻿using CRUD___Adriano.Features.Factory;
 using CRUD___Adriano.Features.Usuario.View;
+using System.ComponentModel;
 
 namespace CRUD___Adriano.Features.Usuario.Controller
 {
@@ -13,17 +14,44 @@ namespace CRUD___Adriano.Features.Usuario.Controller
         {
             _controller = controller;
             _frmBuscarUsuario = new FrmBuscarUsuario<T>(this);
+            _frmBuscarUsuario.BindGrid(new BindingList<T>());
         }
 
         public BuscarUsuarioController<T> DefinirNomePrevio(string nome)
         {
             _frmBuscarUsuario.DefinirNomePrevio(nome);
-            ListarPeloNomeSomenteIdENome(nome);
             return this;
         }
 
-        public void ListarPeloNomeSomenteIdENome(string nome) =>
-            _frmBuscarUsuario.BindGrid(_controller.ListarPeloNomeSomenteIdENome(nome));
+        public void ListarPeloNomeSomenteIdENome(BindingList<T> usuariosBinding, string nome)
+        {
+            usuariosBinding.Clear();
+            foreach(var usuarioModel in _controller.ListarPeloNomeSomenteIdENome(nome))
+                usuariosBinding.Add(usuarioModel);
+        }
+
+        public void ListarSomenteIdENome(BindingList<T> usuariosBinding)
+        {
+            usuariosBinding.Clear();
+            foreach (var usuarioModel in _controller.ListarSomenteIdENome())
+                usuariosBinding.Add(usuarioModel);
+        }
+
+        public void ListarPorQuantidade(BindingList<T> usuariosBinding, int quantidade)
+        {
+            usuariosBinding.Clear();
+            foreach (var usuarioModel in _controller.ListarPelaQuantidadeSomenteIdENome(quantidade))
+                usuariosBinding.Add(usuarioModel);
+        }
+
+        public void SelecionarPeloId(BindingList<T> usuariosBinding, int id)
+        {
+            usuariosBinding.Clear();
+            var usuarioModel = _controller.SelecionarPeloIdSomenteIdENome(id);
+            if (usuarioModel == null) return;
+
+            usuariosBinding.Add(usuarioModel);
+        }
 
         public void AtribuirUsuarioSelecionado(T usuario)
         {

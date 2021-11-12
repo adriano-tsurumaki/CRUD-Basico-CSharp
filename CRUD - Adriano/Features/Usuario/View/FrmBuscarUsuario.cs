@@ -1,6 +1,7 @@
 ﻿using CRUD___Adriano.Features.Usuario.Controller;
-using System.Collections.Generic;
+using CRUD___Adriano.Features.Utils;
 using System.ComponentModel;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace CRUD___Adriano.Features.Usuario.View
@@ -16,9 +17,13 @@ namespace CRUD___Adriano.Features.Usuario.View
             _controller = controller;
         }
 
-        public void DefinirNomePrevio(string nome) => txtPesquisar.Texto = nome;
+        public void DefinirNomePrevio(string nome)
+        {
+            txtPesquisar.Texto = nome;
+            PesquisarDeAcordoComOTexto();
+        }
 
-        public void BindGrid(IList<T> listaDeUsuario)
+        public void BindGrid(BindingList<T> usuariosBinding)
         {
             gridView.Columns.Clear();
             DataGridViewCell celula = new DataGridViewTextBoxCell();
@@ -43,9 +48,8 @@ namespace CRUD___Adriano.Features.Usuario.View
             gridView.Columns.Add(idColuna);
             gridView.Columns.Add(nomeColuna);
 
-            _usuariosBinding = new BindingList<T>(listaDeUsuario);
             gridView.AutoGenerateColumns = false;
-            gridView.DataSource = _usuariosBinding;
+            gridView.DataSource = _usuariosBinding = usuariosBinding;
         }
 
         private void GridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -62,8 +66,25 @@ namespace CRUD___Adriano.Features.Usuario.View
         private void TxtPesquisar__KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode != Keys.Enter) return;
+            PesquisarDeAcordoComOTexto();
+        }
 
-            _controller.ListarPeloNomeSomenteIdENome(txtPesquisar.Texto);
+        private void PesquisarDeAcordoComOTexto()
+        {
+            if (txtPesquisar.NuloOuVazio())
+                return;
+            else if (txtPesquisar.Texto == "%")
+                _controller.ListarSomenteIdENome(_usuariosBinding);
+            else if (new Regex(@"^[%][0-9]+$").Match(txtPesquisar.Texto).Success)
+            {
+                var quantidade = txtPesquisar.Texto.RetornarSomenteTextoEmNumeros().IntOuZero();
+                if (quantidade > 0)
+                    _controller.ListarPorQuantidade(_usuariosBinding, quantidade);
+            }
+            else if (txtPesquisar.Numerico())
+                _controller.SelecionarPeloId(_usuariosBinding, txtPesquisar.Texto.IntOuZero());
+            else
+                _controller.ListarPeloNomeSomenteIdENome(_usuariosBinding, txtPesquisar.Texto);
         }
     }
 }

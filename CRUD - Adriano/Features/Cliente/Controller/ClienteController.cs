@@ -140,7 +140,7 @@ namespace CRUD___Adriano.Features.Cliente.Controller
             return new ClienteModel();
         }
 
-        public ClienteModel SelecionarSomenteIdENome(int id)
+        public ClienteModel SelecionarPeloIdSomenteIdENome(int id)
         {
             try
             {

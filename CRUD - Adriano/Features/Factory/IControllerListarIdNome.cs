@@ -6,8 +6,10 @@ namespace CRUD___Adriano.Features.Factory
     {
         public IList<T> ListarSomenteIdENome();
 
-        IList<T> ListarPelaQuantidadeSomenteIdENome(int quantidade);
+        public IList<T> ListarPelaQuantidadeSomenteIdENome(int quantidade);
 
-        IList<T> ListarPeloNomeSomenteIdENome(string nome);
+        public IList<T> ListarPeloNomeSomenteIdENome(string nome);
+
+        public T SelecionarPeloIdSomenteIdENome(int id);
     }
 }

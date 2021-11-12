@@ -153,5 +153,10 @@ namespace CRUD___Adriano.Features.Colaborador.Controller
             }
             return new ColaboradorModel();
         }
+
+        public ColaboradorModel SelecionarPeloIdSomenteIdENome(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

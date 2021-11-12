@@ -39,7 +39,6 @@ namespace CRUD___Adriano.Features.Controller.PageManager
             _model = model;
             InstanciarUsersControls();
             AtribuirEventos();
-            ConstruirLayoutInicial();
         }
 
         public void InstanciarUsersControls()
@@ -62,19 +61,6 @@ namespace CRUD___Adriano.Features.Controller.PageManager
 
             _ucBotaoCancelar = new UcCancelButton();
             _ucBotaoCancelar.btnCancel.Click += new EventHandler(BtnCancelar_Click);
-        }
-
-        public void ConstruirLayoutInicial()
-        {
-            _ucCentral.Dock = DockStyle.Fill;
-            _ucBody.Dock = DockStyle.Fill;
-            _ucFooter.Dock = DockStyle.Fill;
-
-            AdicionarControl(_ucCentral.pnlBody, _ucBody);
-            AdicionarControl(_ucCentral.pnlBottom, _ucFooter);
-
-            AdicionarControl(_ucFooter.pnlBottomRight, _ucBotaoProximo);
-            AdicionarControl(_ucFooter.pnlBottomLeft, _ucBotaoCancelar);
         }
 
         public void AdicionarControl(Panel panel, UserControl formFilha)
@@ -191,18 +177,35 @@ namespace CRUD___Adriano.Features.Controller.PageManager
             formFilha.Focus();
         }
 
-        public void Mostrar()
-        {
-            AtualizarControlPagina(_paginas.First().Value.RetornarFormulario() as Form);
-            AdicionarControl(_panelCentral, _ucCentral);
-            _totalDePaginas--;
-        }
-
         public void Adicionar(IControllerPage<T> controllerPage)
         {
             controllerPage.AdicionarModel(ref _model);
             _paginas.Add(_totalDePaginas, controllerPage);
             _totalDePaginas++;
+        }
+
+        public void Mostrar()
+        {
+            AtualizarControlPagina(_paginas.First().Value.RetornarFormulario() as Form);
+            AdicionarControl(_panelCentral, _ucCentral);
+            _totalDePaginas--;
+            ConstruirLayoutInicial();
+        }
+
+        public void ConstruirLayoutInicial()
+        {
+            _ucCentral.Dock = DockStyle.Fill;
+            _ucBody.Dock = DockStyle.Fill;
+            _ucFooter.Dock = DockStyle.Fill;
+
+            AdicionarControl(_ucCentral.pnlBody, _ucBody);
+            AdicionarControl(_ucCentral.pnlBottom, _ucFooter);
+
+            if (_totalDePaginas == 1)
+                AdicionarControl(_ucFooter.pnlBottomRight, _ucBotaoConfirmar);
+            else
+                AdicionarControl(_ucFooter.pnlBottomRight, _ucBotaoProximo);
+            AdicionarControl(_ucFooter.pnlBottomLeft, _ucBotaoCancelar);
         }
     }
 }
