@@ -17,7 +17,8 @@ namespace CRUD___Adriano.Features.Fornecedor.View
             txtObservacao.DataBindings.Add("Texto", fornecedorModel, "Observacao");
             txtCnpj.DataBindings.Add("Texto", fornecedorModel, "Cnpj");
         }
-
+        
+        // TODO: Mostrar mensagens de erro
         public bool ValidarComponentes()
         {
             if (txtCnpj.NuloOuVazio()) return false;
@@ -25,6 +26,7 @@ namespace CRUD___Adriano.Features.Fornecedor.View
             return true;
         }
 
+        // TODO: Aplicar máscara no CNPJ
         private void TxtCnpj__TextChanged(object sender, System.EventArgs e)
         {
 

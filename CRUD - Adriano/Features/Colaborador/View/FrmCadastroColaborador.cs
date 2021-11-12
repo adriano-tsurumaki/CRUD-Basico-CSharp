@@ -19,6 +19,7 @@ namespace CRUD___Adriano.Features.Colaborador.View
             _controllerPage = controllerPage;
         }
 
+        // TODO: Mostrar mensagens de erro
         public bool ValidarComponentes()
         {
             if (txtSalario.NuloOuVazio() || txtComissao.NuloOuVazio() ||

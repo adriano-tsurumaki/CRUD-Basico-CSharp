@@ -1,6 +1,7 @@
 ﻿using CRUD___Adriano.Features.Factory;
 using CRUD___Adriano.Features.Usuario.View;
 using System.ComponentModel;
+using System.Windows.Forms;
 
 namespace CRUD___Adriano.Features.Usuario.Controller
 {
@@ -16,6 +17,8 @@ namespace CRUD___Adriano.Features.Usuario.Controller
             _frmBuscarUsuario = new FrmBuscarUsuario<T>(this);
             _frmBuscarUsuario.BindGrid(new BindingList<T>());
         }
+
+        public Form RetornarFormulario() => _frmBuscarUsuario;
 
         public BuscarUsuarioController<T> DefinirNomePrevio(string nome)
         {

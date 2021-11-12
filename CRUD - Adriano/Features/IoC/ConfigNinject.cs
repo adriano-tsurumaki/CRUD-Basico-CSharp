@@ -21,6 +21,7 @@ using CRUD___Adriano.Features.Fornecedor.Model;
 using CRUD___Adriano.Features.Fornecedor.View;
 using CRUD___Adriano.Features.Produto.Controller;
 using CRUD___Adriano.Features.Produto.Dao;
+using CRUD___Adriano.Features.Produto.Model;
 using CRUD___Adriano.Features.Produto.View;
 using CRUD___Adriano.Features.Usuario.Controller;
 using CRUD___Adriano.Features.Usuario.View;
@@ -49,6 +50,8 @@ namespace CRUD___Adriano.Features.IoC
             kernel.Bind(typeof(IControllerListarIdNome<ClienteModel>)).To<ClienteController>();
             kernel.Bind(typeof(IControllerListarIdNome<ColaboradorModel>)).To<ColaboradorController>();
             kernel.Bind(typeof(IControllerListarIdNome<FornecedorModel>)).To<FornecedorController>();
+            
+            kernel.Bind(typeof(IControllerListarIdNome<ProdutoModel>)).To<ProdutoController>();
 
             //Database
             kernel.Bind<SqlConexao>().ToConstant(connectionString);

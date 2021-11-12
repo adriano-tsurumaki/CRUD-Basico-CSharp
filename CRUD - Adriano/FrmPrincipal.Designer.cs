@@ -38,6 +38,7 @@ namespace CRUD___Adriano
             this.btnListagemCliente = new System.Windows.Forms.Button();
             this.btnListagem = new System.Windows.Forms.Button();
             this.pnlCadastroSubmenu = new System.Windows.Forms.Panel();
+            this.btnCadastroProduto = new System.Windows.Forms.Button();
             this.btnCadastroFornecedor = new System.Windows.Forms.Button();
             this.btnCadastroFuncionario = new System.Windows.Forms.Button();
             this.btnCadastroCliente = new System.Windows.Forms.Button();
@@ -49,7 +50,7 @@ namespace CRUD___Adriano
             this.pnlTitlebar = new System.Windows.Forms.Panel();
             this.lblTitulo = new System.Windows.Forms.Label();
             this.pnlChild = new System.Windows.Forms.Panel();
-            this.btnCadastroProduto = new System.Windows.Forms.Button();
+            this.btnVendas = new System.Windows.Forms.Button();
             this.pnlSideMenu.SuspendLayout();
             this.pnlListagemSubmenu.SuspendLayout();
             this.pnlCadastroSubmenu.SuspendLayout();
@@ -64,6 +65,7 @@ namespace CRUD___Adriano
             this.pnlSideMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(76)))));
             this.pnlSideMenu.Controls.Add(this.btnLogout);
             this.pnlSideMenu.Controls.Add(this.btnAtalho);
+            this.pnlSideMenu.Controls.Add(this.btnVendas);
             this.pnlSideMenu.Controls.Add(this.pnlListagemSubmenu);
             this.pnlSideMenu.Controls.Add(this.btnListagem);
             this.pnlSideMenu.Controls.Add(this.pnlCadastroSubmenu);
@@ -84,7 +86,7 @@ namespace CRUD___Adriano
             this.btnLogout.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnLogout.ForeColor = System.Drawing.Color.Gainsboro;
             this.btnLogout.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnLogout.Location = new System.Drawing.Point(0, 654);
+            this.btnLogout.Location = new System.Drawing.Point(0, 714);
             this.btnLogout.Name = "btnLogout";
             this.btnLogout.Padding = new System.Windows.Forms.Padding(6, 0, 0, 0);
             this.btnLogout.Size = new System.Drawing.Size(203, 46);
@@ -104,7 +106,7 @@ namespace CRUD___Adriano
             this.btnAtalho.ForeColor = System.Drawing.Color.Gainsboro;
             this.btnAtalho.Image = ((System.Drawing.Image)(resources.GetObject("btnAtalho.Image")));
             this.btnAtalho.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAtalho.Location = new System.Drawing.Point(0, 594);
+            this.btnAtalho.Location = new System.Drawing.Point(0, 654);
             this.btnAtalho.Name = "btnAtalho";
             this.btnAtalho.Padding = new System.Windows.Forms.Padding(6, 0, 0, 0);
             this.btnAtalho.Size = new System.Drawing.Size(203, 60);
@@ -198,6 +200,26 @@ namespace CRUD___Adriano
             this.pnlCadastroSubmenu.Name = "pnlCadastroSubmenu";
             this.pnlCadastroSubmenu.Size = new System.Drawing.Size(203, 238);
             this.pnlCadastroSubmenu.TabIndex = 4;
+            // 
+            // btnCadastroProduto
+            // 
+            this.btnCadastroProduto.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnCadastroProduto.FlatAppearance.BorderSize = 0;
+            this.btnCadastroProduto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCadastroProduto.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnCadastroProduto.ForeColor = System.Drawing.Color.Gainsboro;
+            this.btnCadastroProduto.Image = ((System.Drawing.Image)(resources.GetObject("btnCadastroProduto.Image")));
+            this.btnCadastroProduto.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnCadastroProduto.Location = new System.Drawing.Point(0, 180);
+            this.btnCadastroProduto.Name = "btnCadastroProduto";
+            this.btnCadastroProduto.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.btnCadastroProduto.Size = new System.Drawing.Size(203, 60);
+            this.btnCadastroProduto.TabIndex = 3;
+            this.btnCadastroProduto.Text = "Produto";
+            this.btnCadastroProduto.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnCadastroProduto.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnCadastroProduto.UseVisualStyleBackColor = true;
+            this.btnCadastroProduto.Click += new System.EventHandler(this.BtnCadastroProduto_Click);
             // 
             // btnCadastroFornecedor
             // 
@@ -359,25 +381,25 @@ namespace CRUD___Adriano
             this.pnlChild.TabIndex = 4;
             this.pnlChild.ControlRemoved += new System.Windows.Forms.ControlEventHandler(this.PnlChild_ControlRemoved);
             // 
-            // btnCadastroProduto
+            // btnVendas
             // 
-            this.btnCadastroProduto.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnCadastroProduto.FlatAppearance.BorderSize = 0;
-            this.btnCadastroProduto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCadastroProduto.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnCadastroProduto.ForeColor = System.Drawing.Color.Gainsboro;
-            this.btnCadastroProduto.Image = ((System.Drawing.Image)(resources.GetObject("btnCadastroProduto.Image")));
-            this.btnCadastroProduto.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCadastroProduto.Location = new System.Drawing.Point(0, 180);
-            this.btnCadastroProduto.Name = "btnCadastroProduto";
-            this.btnCadastroProduto.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.btnCadastroProduto.Size = new System.Drawing.Size(203, 60);
-            this.btnCadastroProduto.TabIndex = 3;
-            this.btnCadastroProduto.Text = "Produto";
-            this.btnCadastroProduto.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCadastroProduto.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnCadastroProduto.UseVisualStyleBackColor = true;
-            this.btnCadastroProduto.Click += new System.EventHandler(this.BtnCadastroProduto_Click);
+            this.btnVendas.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnVendas.FlatAppearance.BorderSize = 0;
+            this.btnVendas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnVendas.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnVendas.ForeColor = System.Drawing.Color.Gainsboro;
+            this.btnVendas.Image = ((System.Drawing.Image)(resources.GetObject("btnVendas.Image")));
+            this.btnVendas.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnVendas.Location = new System.Drawing.Point(0, 594);
+            this.btnVendas.Name = "btnVendas";
+            this.btnVendas.Padding = new System.Windows.Forms.Padding(6, 0, 0, 0);
+            this.btnVendas.Size = new System.Drawing.Size(203, 60);
+            this.btnVendas.TabIndex = 9;
+            this.btnVendas.Text = "Venda";
+            this.btnVendas.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnVendas.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnVendas.UseVisualStyleBackColor = true;
+            this.btnVendas.Click += new System.EventHandler(this.BtnVendas_Click);
             // 
             // FrmPrincipal
             // 
@@ -425,6 +447,7 @@ namespace CRUD___Adriano
         private System.Windows.Forms.Label lblUsuarioLogado;
         private System.Windows.Forms.Button btnCadastroFornecedor;
         private System.Windows.Forms.Button btnCadastroProduto;
+        private System.Windows.Forms.Button btnVendas;
     }
 }
 
