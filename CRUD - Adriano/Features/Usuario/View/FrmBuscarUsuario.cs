@@ -1,12 +1,11 @@
 ﻿using CRUD___Adriano.Features.Usuario.Controller;
-using CRUD___Adriano.Features.Usuario.Model;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
 
 namespace CRUD___Adriano.Features.Usuario.View
 {
-    public partial class FrmBuscarUsuario<T> : Form where T : class
+    public partial class FrmBuscarUsuario<T> : Form where T : class, new()
     {
         private readonly BuscarUsuarioController<T> _controller;
         private BindingList<T> _usuariosBinding;

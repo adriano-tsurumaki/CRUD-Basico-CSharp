@@ -3,9 +3,9 @@ using CRUD___Adriano.Features.Usuario.View;
 
 namespace CRUD___Adriano.Features.Usuario.Controller
 {
-    public class BuscarUsuarioController<T> where T : class
+    public class BuscarUsuarioController<T> where T : class, new()
     {
-        private IControllerListarIdNome<T> _controller;
+        private readonly IControllerListarIdNome<T> _controller;
         private readonly FrmBuscarUsuario<T> _frmBuscarUsuario;
         public T usuarioSelecionado;
 
@@ -35,7 +35,7 @@ namespace CRUD___Adriano.Features.Usuario.Controller
         {
             _frmBuscarUsuario.ShowDialog();
 
-            return usuarioSelecionado;
+            return usuarioSelecionado ?? new T();
         }
     }
 }
