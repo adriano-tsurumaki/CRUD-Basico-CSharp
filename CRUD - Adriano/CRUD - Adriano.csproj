@@ -41,9 +41,6 @@
 
   <ItemGroup>
     <Folder Include="Features\Dashboards\Dao\" />
-    <Folder Include="Features\Vendas\Controller\" />
-    <Folder Include="Features\Vendas\Dao\" />
-    <Folder Include="Features\Vendas\Model\" />
   </ItemGroup>
 
 </Project>

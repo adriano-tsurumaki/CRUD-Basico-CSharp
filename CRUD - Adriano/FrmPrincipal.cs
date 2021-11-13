@@ -13,6 +13,7 @@ using CRUD___Adriano.Features.IoC;
 using CRUD___Adriano.Features.Produto.Controller;
 using CRUD___Adriano.Features.Produto.Model;
 using CRUD___Adriano.Features.Usuario.Controller;
+using CRUD___Adriano.Features.Vendas.Controller;
 using CRUD___Adriano.Features.Vendas.View;
 using System;
 using System.Windows.Forms;
@@ -152,7 +153,7 @@ namespace CRUD___Adriano
         private void BtnVendas_Click(object sender, EventArgs e)
         {
             LimparPanel();
-            new FrmVendaPrincipal().ShowDialog();
+            new VendaPrincipalController();
         }
 
         private void TrocarVisibilidade(Panel subMenu) =>

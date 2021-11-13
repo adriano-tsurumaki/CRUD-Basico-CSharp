@@ -33,6 +33,7 @@ namespace CRUD___Adriano.Features.Vendas.View
             this.pnlLeftCentral = new System.Windows.Forms.Panel();
             this.pnlFooter = new System.Windows.Forms.Panel();
             this.pnlRightCentral = new System.Windows.Forms.Panel();
+            this.pnlDivisor = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
             // pnlHeader
@@ -48,7 +49,7 @@ namespace CRUD___Adriano.Features.Vendas.View
             this.pnlLeftCentral.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlLeftCentral.Location = new System.Drawing.Point(0, 96);
             this.pnlLeftCentral.Name = "pnlLeftCentral";
-            this.pnlLeftCentral.Size = new System.Drawing.Size(601, 547);
+            this.pnlLeftCentral.Size = new System.Drawing.Size(613, 547);
             this.pnlLeftCentral.TabIndex = 1;
             // 
             // pnlFooter
@@ -62,10 +63,18 @@ namespace CRUD___Adriano.Features.Vendas.View
             // pnlRightCentral
             // 
             this.pnlRightCentral.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlRightCentral.Location = new System.Drawing.Point(601, 96);
+            this.pnlRightCentral.Location = new System.Drawing.Point(636, 96);
             this.pnlRightCentral.Name = "pnlRightCentral";
-            this.pnlRightCentral.Size = new System.Drawing.Size(582, 547);
+            this.pnlRightCentral.Size = new System.Drawing.Size(547, 547);
             this.pnlRightCentral.TabIndex = 2;
+            // 
+            // pnlDivisor
+            // 
+            this.pnlDivisor.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pnlDivisor.Location = new System.Drawing.Point(613, 96);
+            this.pnlDivisor.Name = "pnlDivisor";
+            this.pnlDivisor.Size = new System.Drawing.Size(23, 547);
+            this.pnlDivisor.TabIndex = 2;
             // 
             // FrmVendaPrincipal
             // 
@@ -74,6 +83,7 @@ namespace CRUD___Adriano.Features.Vendas.View
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
             this.ClientSize = new System.Drawing.Size(1183, 743);
             this.Controls.Add(this.pnlRightCentral);
+            this.Controls.Add(this.pnlDivisor);
             this.Controls.Add(this.pnlLeftCentral);
             this.Controls.Add(this.pnlFooter);
             this.Controls.Add(this.pnlHeader);
@@ -91,9 +101,10 @@ namespace CRUD___Adriano.Features.Vendas.View
 
         #endregion
 
-        private System.Windows.Forms.Panel pnlHeader;
-        private System.Windows.Forms.Panel pnlLeftCentral;
-        private System.Windows.Forms.Panel pnlFooter;
-        private System.Windows.Forms.Panel pnlRightCentral;
+        internal System.Windows.Forms.Panel pnlHeader;
+        internal System.Windows.Forms.Panel pnlLeftCentral;
+        internal System.Windows.Forms.Panel pnlFooter;
+        internal System.Windows.Forms.Panel pnlRightCentral;
+        internal System.Windows.Forms.Panel pnlDivisor;
     }
 }
