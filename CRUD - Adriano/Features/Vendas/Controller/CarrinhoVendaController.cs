@@ -2,9 +2,7 @@
 using CRUD___Adriano.Features.Vendas.Dao;
 using CRUD___Adriano.Features.Vendas.Model;
 using CRUD___Adriano.Features.Vendas.View;
-using System;
 using System.ComponentModel;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace CRUD___Adriano.Features.Vendas.Controller

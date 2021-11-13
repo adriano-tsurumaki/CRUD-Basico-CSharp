@@ -28,7 +28,11 @@ namespace CRUD___Adriano.Features.Vendas.View
             {
                 CellTemplate = new DataGridViewButtonCell(),
                 HeaderText = "Decrementar",
-                Name = "Decrementar"
+                Name = "Decrementar",
+                DefaultCellStyle = new DataGridViewCellStyle
+                {
+                    BackColor = System.Drawing.Color.FromArgb(45, 66, 91),
+                },
             };
 
             DataGridViewTextBoxColumn quantidadeColuna = new DataGridViewTextBoxColumn()
@@ -36,7 +40,12 @@ namespace CRUD___Adriano.Features.Vendas.View
                 CellTemplate = celula,
                 Name = "clnQuantidade",
                 DataPropertyName = "Quantidade",
-                DefaultCellStyle = new DataGridViewCellStyle { Alignment = DataGridViewContentAlignment.MiddleCenter, Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point) },
+                DefaultCellStyle = new DataGridViewCellStyle 
+                { 
+                    Alignment = DataGridViewContentAlignment.MiddleCenter, 
+                    Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point),
+                    BackColor = System.Drawing.Color.FromArgb(45, 66, 91),
+                },
                 ReadOnly = true,
             };
 
@@ -45,6 +54,10 @@ namespace CRUD___Adriano.Features.Vendas.View
                 CellTemplate = new DataGridViewButtonCell(),
                 HeaderText = "Incrementar",
                 Name = "Incrementar",
+                DefaultCellStyle = new DataGridViewCellStyle
+                {
+                    BackColor = System.Drawing.Color.FromArgb(45, 66, 91),
+                },
             };
 
             DataGridViewTextBoxColumn nomeColuna = new DataGridViewTextBoxColumn()
@@ -53,8 +66,11 @@ namespace CRUD___Adriano.Features.Vendas.View
                 Name = "clnNome",
                 DataPropertyName = "Nome",
                 AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill,
-                DefaultCellStyle = new DataGridViewCellStyle { Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point) },
-
+                DefaultCellStyle = new DataGridViewCellStyle 
+                { 
+                    Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point),
+                    BackColor = System.Drawing.Color.FromArgb(45, 66, 91),
+                },
                 ReadOnly = true,
             };
 
@@ -63,7 +79,12 @@ namespace CRUD___Adriano.Features.Vendas.View
                 CellTemplate = celula,
                 Name = "clnDesconto",
                 DataPropertyName = "Desconto.Formatado",
-                DefaultCellStyle = new DataGridViewCellStyle { Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point), ForeColor = System.Drawing.Color.Crimson },
+                DefaultCellStyle = new DataGridViewCellStyle 
+                { 
+                    Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point), 
+                    ForeColor = System.Drawing.Color.Crimson,
+                    BackColor = System.Drawing.Color.FromArgb(45, 66, 91),
+                },
                 ReadOnly = true,
             };
 
@@ -76,6 +97,7 @@ namespace CRUD___Adriano.Features.Vendas.View
                 { 
                     Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point), 
                     ForeColor = System.Drawing.Color.DodgerBlue,
+                    BackColor = System.Drawing.Color.FromArgb(45, 66, 91),
                 },
                 ReadOnly = true,
             };
