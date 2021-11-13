@@ -22,7 +22,7 @@ namespace CRUD___Adriano.Features.Vendas.View
         {
             if (e.KeyCode != Keys.Enter || txtPesquisar.NuloOuVazio()) return;
 
-            EventEnviarProduto?.Invoke(new VendaProdutoModel { Nome = "ProdutoSendoPassado" });
+            EventEnviarProduto?.Invoke(new VendaProdutoModel { Nome = "ProdutoSendoPassado", PrecoVenda = 12.34f, Desconto = 5f, Quantidade = 1 });
         }
     }
 }

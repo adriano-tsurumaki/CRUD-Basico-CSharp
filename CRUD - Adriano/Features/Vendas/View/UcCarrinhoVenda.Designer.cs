@@ -34,8 +34,8 @@ namespace CRUD___Adriano.Features.Vendas.View
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.gridView = new System.Windows.Forms.DataGridView();
             this.pnlBottom = new System.Windows.Forms.Panel();
-            this.lblSubTotal = new System.Windows.Forms.Label();
             this.pnlSubTotal = new System.Windows.Forms.Panel();
+            this.lblSubTotal = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.gridView)).BeginInit();
             this.pnlBottom.SuspendLayout();
             this.pnlSubTotal.SuspendLayout();
@@ -45,7 +45,9 @@ namespace CRUD___Adriano.Features.Vendas.View
             // 
             this.gridView.AllowUserToAddRows = false;
             this.gridView.AllowUserToDeleteRows = false;
-            this.gridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.gridView.AllowUserToResizeColumns = false;
+            this.gridView.AllowUserToResizeRows = false;
+            this.gridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.gridView.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(75)))), ((int)(((byte)(160)))));
@@ -71,6 +73,7 @@ namespace CRUD___Adriano.Features.Vendas.View
             this.gridView.GridColor = System.Drawing.Color.SteelBlue;
             this.gridView.Location = new System.Drawing.Point(0, 0);
             this.gridView.Name = "gridView";
+            this.gridView.RowHeadersVisible = false;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(66)))), ((int)(((byte)(91)))));
             dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.SteelBlue;
@@ -78,29 +81,19 @@ namespace CRUD___Adriano.Features.Vendas.View
             this.gridView.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.gridView.RowTemplate.Height = 25;
             this.gridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridView.Size = new System.Drawing.Size(474, 318);
+            this.gridView.Size = new System.Drawing.Size(474, 324);
             this.gridView.TabIndex = 6;
+            this.gridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridView_CellContentClick);
+            this.gridView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.GridView_CellFormatting);
             // 
             // pnlBottom
             // 
             this.pnlBottom.Controls.Add(this.pnlSubTotal);
             this.pnlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlBottom.Location = new System.Drawing.Point(0, 318);
+            this.pnlBottom.Location = new System.Drawing.Point(0, 324);
             this.pnlBottom.Name = "pnlBottom";
-            this.pnlBottom.Size = new System.Drawing.Size(474, 55);
+            this.pnlBottom.Size = new System.Drawing.Size(474, 49);
             this.pnlBottom.TabIndex = 7;
-            // 
-            // lblSubTotal
-            // 
-            this.lblSubTotal.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblSubTotal.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblSubTotal.ForeColor = System.Drawing.Color.White;
-            this.lblSubTotal.Location = new System.Drawing.Point(0, 0);
-            this.lblSubTotal.Name = "lblSubTotal";
-            this.lblSubTotal.Size = new System.Drawing.Size(246, 55);
-            this.lblSubTotal.TabIndex = 0;
-            this.lblSubTotal.Text = "SubTotal (12 itens): R$ 9999,00";
-            this.lblSubTotal.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pnlSubTotal
             // 
@@ -108,8 +101,20 @@ namespace CRUD___Adriano.Features.Vendas.View
             this.pnlSubTotal.Dock = System.Windows.Forms.DockStyle.Right;
             this.pnlSubTotal.Location = new System.Drawing.Point(228, 0);
             this.pnlSubTotal.Name = "pnlSubTotal";
-            this.pnlSubTotal.Size = new System.Drawing.Size(246, 55);
+            this.pnlSubTotal.Size = new System.Drawing.Size(246, 49);
             this.pnlSubTotal.TabIndex = 1;
+            // 
+            // lblSubTotal
+            // 
+            this.lblSubTotal.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblSubTotal.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblSubTotal.ForeColor = System.Drawing.Color.White;
+            this.lblSubTotal.Location = new System.Drawing.Point(0, 0);
+            this.lblSubTotal.Name = "lblSubTotal";
+            this.lblSubTotal.Size = new System.Drawing.Size(246, 49);
+            this.lblSubTotal.TabIndex = 0;
+            this.lblSubTotal.Text = "SubTotal (12 itens): R$ 9999,00";
+            this.lblSubTotal.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // UcCarrinhoVenda
             // 
@@ -132,6 +137,6 @@ namespace CRUD___Adriano.Features.Vendas.View
         private System.Windows.Forms.DataGridView gridView;
         private System.Windows.Forms.Panel pnlBottom;
         private System.Windows.Forms.Panel pnlSubTotal;
-        private System.Windows.Forms.Label lblSubTotal;
+        internal System.Windows.Forms.Label lblSubTotal;
     }
 }
