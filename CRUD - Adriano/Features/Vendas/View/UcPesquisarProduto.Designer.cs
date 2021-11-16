@@ -48,7 +48,7 @@ namespace CRUD___Adriano.Features.Vendas.View
             this.pnlPesquisa.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlPesquisa.Location = new System.Drawing.Point(0, 0);
             this.pnlPesquisa.Name = "pnlPesquisa";
-            this.pnlPesquisa.Size = new System.Drawing.Size(421, 36);
+            this.pnlPesquisa.Size = new System.Drawing.Size(560, 36);
             this.pnlPesquisa.TabIndex = 4;
             // 
             // txtPesquisar
@@ -69,7 +69,7 @@ namespace CRUD___Adriano.Features.Vendas.View
             this.txtPesquisar.PasswordChar = false;
             this.txtPesquisar.SelectionLength = 0;
             this.txtPesquisar.SelectionStart = 0;
-            this.txtPesquisar.Size = new System.Drawing.Size(329, 36);
+            this.txtPesquisar.Size = new System.Drawing.Size(468, 36);
             this.txtPesquisar.TabIndex = 1;
             this.txtPesquisar.Texto = "";
             this.txtPesquisar.UnderlinedStyle = false;
@@ -83,7 +83,7 @@ namespace CRUD___Adriano.Features.Vendas.View
             this.btnPesquisar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPesquisar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnPesquisar.ForeColor = System.Drawing.Color.White;
-            this.btnPesquisar.Location = new System.Drawing.Point(329, 0);
+            this.btnPesquisar.Location = new System.Drawing.Point(468, 0);
             this.btnPesquisar.Name = "btnPesquisar";
             this.btnPesquisar.Size = new System.Drawing.Size(92, 36);
             this.btnPesquisar.TabIndex = 2;
@@ -128,8 +128,9 @@ namespace CRUD___Adriano.Features.Vendas.View
             this.gridView.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.gridView.RowTemplate.Height = 25;
             this.gridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridView.Size = new System.Drawing.Size(421, 265);
+            this.gridView.Size = new System.Drawing.Size(560, 426);
             this.gridView.TabIndex = 5;
+            this.gridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridView_CellDoubleClick);
             this.gridView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.GridView_CellFormatting);
             // 
             // UcPesquisarProduto
@@ -140,7 +141,7 @@ namespace CRUD___Adriano.Features.Vendas.View
             this.Controls.Add(this.gridView);
             this.Controls.Add(this.pnlPesquisa);
             this.Name = "UcPesquisarProduto";
-            this.Size = new System.Drawing.Size(421, 301);
+            this.Size = new System.Drawing.Size(560, 462);
             this.Load += new System.EventHandler(this.UcPesquisarProduto_Load);
             this.pnlPesquisa.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridView)).EndInit();

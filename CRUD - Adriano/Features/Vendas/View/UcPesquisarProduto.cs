@@ -149,5 +149,18 @@ namespace CRUD___Adriano.Features.Vendas.View
 
             gridView.AutoGenerateColumns = false;
         }
+
+        private void GridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (gridView.CurrentRow == null)
+                return;
+
+            var vendaProdutoModelSelecionado = _controller.PesquisarProdutoPeloId((gridView.CurrentRow.DataBoundItem as VendaProdutoModel).Id);
+
+            if (vendaProdutoModelSelecionado.Vazio())
+                EventEnviarProduto?.Invoke(vendaProdutoModelSelecionado);
+
+            txtPesquisar.Texto = string.Empty;
+        }
     }
 }
