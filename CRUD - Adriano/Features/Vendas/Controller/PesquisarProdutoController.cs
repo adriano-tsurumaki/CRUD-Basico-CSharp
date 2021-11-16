@@ -2,6 +2,7 @@
 using CRUD___Adriano.Features.Vendas.Model;
 using CRUD___Adriano.Features.Vendas.View;
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace CRUD___Adriano.Features.Vendas.Controller
@@ -31,6 +32,20 @@ namespace CRUD___Adriano.Features.Vendas.Controller
             }
 
             return new VendaProdutoModel();
+        }
+
+        public IList<VendaProdutoModel> PesquisarProdutoPeloNome(string nome)
+        {
+            try
+            {
+                return _vendaProdutoDao.SelecionarProdutoPeloNome(nome);
+            }
+            catch (Exception excecao)
+            {
+                MessageBox.Show(excecao.Message, "Erro ao pesquisar os produtos pelo nome!");
+            }
+
+            return new List<VendaProdutoModel>();
         }
     }
 }

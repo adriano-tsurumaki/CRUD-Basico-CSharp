@@ -89,6 +89,7 @@ namespace CRUD___Adriano.Features.Vendas.View
             this.btnPesquisar.TabIndex = 2;
             this.btnPesquisar.Text = "Pesquisar";
             this.btnPesquisar.UseVisualStyleBackColor = true;
+            this.btnPesquisar.Click += new System.EventHandler(this.BtnPesquisar_Click);
             // 
             // gridView
             // 
@@ -129,6 +130,7 @@ namespace CRUD___Adriano.Features.Vendas.View
             this.gridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gridView.Size = new System.Drawing.Size(421, 265);
             this.gridView.TabIndex = 5;
+            this.gridView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.GridView_CellFormatting);
             // 
             // UcPesquisarProduto
             // 
@@ -139,6 +141,7 @@ namespace CRUD___Adriano.Features.Vendas.View
             this.Controls.Add(this.pnlPesquisa);
             this.Name = "UcPesquisarProduto";
             this.Size = new System.Drawing.Size(421, 301);
+            this.Load += new System.EventHandler(this.UcPesquisarProduto_Load);
             this.pnlPesquisa.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridView)).EndInit();
             this.ResumeLayout(false);
