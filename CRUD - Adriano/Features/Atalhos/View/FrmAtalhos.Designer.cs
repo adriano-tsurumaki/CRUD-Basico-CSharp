@@ -38,6 +38,9 @@ namespace CRUD___Adriano.Features.Cliente.View
             this.btnCadastrarFornecedores = new System.Windows.Forms.Button();
             this.lblQuantidadeFornecedores = new System.Windows.Forms.Label();
             this.txtQuantidadeFornecedores = new CRUD___Adriano.Features.Componentes.TextBoxFlat();
+            this.btnCadastrarProdutos = new System.Windows.Forms.Button();
+            this.lblQuantidadeProdutos = new System.Windows.Forms.Label();
+            this.txtQuantidadeProdutos = new CRUD___Adriano.Features.Componentes.TextBoxFlat();
             this.SuspendLayout();
             // 
             // txtQuantidadeClientes
@@ -184,12 +187,63 @@ namespace CRUD___Adriano.Features.Cliente.View
             this.txtQuantidadeFornecedores._TextChanged += new System.EventHandler(this.TxtQuantidadeFornecedores__TextChanged);
             this.txtQuantidadeFornecedores._KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtQuantidadeFornecedores__KeyDown);
             // 
+            // btnCadastrarProdutos
+            // 
+            this.btnCadastrarProdutos.FlatAppearance.BorderSize = 2;
+            this.btnCadastrarProdutos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCadastrarProdutos.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnCadastrarProdutos.ForeColor = System.Drawing.Color.MediumSlateBlue;
+            this.btnCadastrarProdutos.Location = new System.Drawing.Point(270, 343);
+            this.btnCadastrarProdutos.Name = "btnCadastrarProdutos";
+            this.btnCadastrarProdutos.Size = new System.Drawing.Size(91, 34);
+            this.btnCadastrarProdutos.TabIndex = 11;
+            this.btnCadastrarProdutos.Text = "Cadastrar";
+            this.btnCadastrarProdutos.UseVisualStyleBackColor = true;
+            this.btnCadastrarProdutos.Click += new System.EventHandler(this.BtnCadastrarProdutos_Click);
+            // 
+            // lblQuantidadeProdutos
+            // 
+            this.lblQuantidadeProdutos.AutoSize = true;
+            this.lblQuantidadeProdutos.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblQuantidadeProdutos.ForeColor = System.Drawing.Color.MediumSlateBlue;
+            this.lblQuantidadeProdutos.Location = new System.Drawing.Point(12, 300);
+            this.lblQuantidadeProdutos.Name = "lblQuantidadeProdutos";
+            this.lblQuantidadeProdutos.Size = new System.Drawing.Size(523, 21);
+            this.lblQuantidadeProdutos.TabIndex = 10;
+            this.lblQuantidadeProdutos.Text = "Digite a quantidade de fornecedores que deseja gerar aleatoriamente.";
+            // 
+            // txtQuantidadeProdutos
+            // 
+            this.txtQuantidadeProdutos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
+            this.txtQuantidadeProdutos.BorderColor = System.Drawing.Color.MediumSlateBlue;
+            this.txtQuantidadeProdutos.BorderSize = 2;
+            this.txtQuantidadeProdutos.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.txtQuantidadeProdutos.ForeColor = System.Drawing.Color.DimGray;
+            this.txtQuantidadeProdutos.Location = new System.Drawing.Point(13, 341);
+            this.txtQuantidadeProdutos.Margin = new System.Windows.Forms.Padding(4);
+            this.txtQuantidadeProdutos.MaxLength = 10;
+            this.txtQuantidadeProdutos.Multiline = false;
+            this.txtQuantidadeProdutos.Name = "txtQuantidadeProdutos";
+            this.txtQuantidadeProdutos.Padding = new System.Windows.Forms.Padding(7);
+            this.txtQuantidadeProdutos.PasswordChar = false;
+            this.txtQuantidadeProdutos.SelectionLength = 0;
+            this.txtQuantidadeProdutos.SelectionStart = 0;
+            this.txtQuantidadeProdutos.Size = new System.Drawing.Size(250, 36);
+            this.txtQuantidadeProdutos.TabIndex = 9;
+            this.txtQuantidadeProdutos.Texto = "";
+            this.txtQuantidadeProdutos.UnderlinedStyle = true;
+            this.txtQuantidadeProdutos._TextChanged += new System.EventHandler(this.TxtQuantidadeProdutos__TextChanged);
+            this.txtQuantidadeProdutos._KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtQuantidadeProdutos__KeyDown);
+            // 
             // FrmAtalhos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnCadastrarProdutos);
+            this.Controls.Add(this.lblQuantidadeProdutos);
+            this.Controls.Add(this.txtQuantidadeProdutos);
             this.Controls.Add(this.btnCadastrarFornecedores);
             this.Controls.Add(this.lblQuantidadeFornecedores);
             this.Controls.Add(this.txtQuantidadeFornecedores);
@@ -217,5 +271,8 @@ namespace CRUD___Adriano.Features.Cliente.View
         private System.Windows.Forms.Button btnCadastrarFornecedores;
         private System.Windows.Forms.Label lblQuantidadeFornecedores;
         private Componentes.TextBoxFlat txtQuantidadeFornecedores;
+        private System.Windows.Forms.Button btnCadastrarProdutos;
+        private System.Windows.Forms.Label lblQuantidadeProdutos;
+        private Componentes.TextBoxFlat txtQuantidadeProdutos;
     }
 }

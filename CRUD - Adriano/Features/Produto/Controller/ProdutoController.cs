@@ -68,5 +68,21 @@ namespace CRUD___Adriano.Features.Produto.Controller
         {
             throw new NotImplementedException();
         }
+
+        public bool SalvarLista(IList<ProdutoModel> listaDeProdutos)
+        {
+            try
+            {
+                foreach (var produtoModel in listaDeProdutos)
+                    _produtoDao.CadastrarProduto(produtoModel);
+
+                return true;
+            }
+            catch (Exception excecao)
+            {
+                MessageBox.Show(excecao.Message, "Erro ao cadastrar lista de produtos");
+            }
+            return false;
+        }
     }
 }

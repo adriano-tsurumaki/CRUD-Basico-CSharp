@@ -54,8 +54,7 @@ namespace CRUD___Adriano.Features.Cliente.View
             if (txtQuantidadeColaboradores.NuloOuVazio())
                 return;
 
-            int.TryParse(txtQuantidadeColaboradores.Texto, out int quantidade);
-            _controller.CadastrarListaDeColaboradores(quantidade);
+            _controller.CadastrarListaDeColaboradores(txtQuantidadeColaboradores.Texto.IntOuZero());
         }
 
         private void TxtQuantidadeFornecedores__TextChanged(object sender, System.EventArgs e) =>
@@ -76,8 +75,28 @@ namespace CRUD___Adriano.Features.Cliente.View
             if (txtQuantidadeFornecedores.NuloOuVazio())
                 return;
 
-            int.TryParse(txtQuantidadeFornecedores.Texto, out int quantidade);
-            _controller.CadastrarListaDeFornecedores(quantidade);
+            _controller.CadastrarListaDeFornecedores(txtQuantidadeFornecedores.Texto.IntOuZero());
+        }
+
+        private void TxtQuantidadeProdutos__TextChanged(object sender, System.EventArgs e) =>
+            txtQuantidadeProdutos.Texto = txtQuantidadeProdutos.Texto.RetornarSomenteTextoEmNumeros();
+
+        private void TxtQuantidadeProdutos__KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode != Keys.Enter) return;
+
+            CadastrarProdutos();
+        }
+
+        private void BtnCadastrarProdutos_Click(object sender, System.EventArgs e) =>
+            CadastrarProdutos();
+
+        private void CadastrarProdutos()
+        {
+            if (txtQuantidadeProdutos.NuloOuVazio())
+                return;
+
+            _controller.CadastrarListaDeProdutos(txtQuantidadeProdutos.Texto.IntOuZero());
         }
     }
 }

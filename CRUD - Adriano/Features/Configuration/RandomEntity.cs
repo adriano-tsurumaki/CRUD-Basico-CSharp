@@ -9,12 +9,16 @@ using CRUD___Adriano.Features.Entidades.Endereco.Model;
 using CRUD___Adriano.Features.Entidades.Telefone.Enum;
 using CRUD___Adriano.Features.Entidades.Telefone.Model;
 using CRUD___Adriano.Features.Estados.Enum;
+using CRUD___Adriano.Features.Fornecedor.Dao;
 using CRUD___Adriano.Features.Fornecedor.Model;
+using CRUD___Adriano.Features.IoC;
+using CRUD___Adriano.Features.Produto.Model;
 using CRUD___Adriano.Features.Usuario.Enum;
 using CRUD___Adriano.Features.Utils;
 using CRUD___Adriano.Features.ValueObject.Cnpj;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CRUD___Adriano.Features.Configuration
 {
@@ -92,6 +96,29 @@ namespace CRUD___Adriano.Features.Configuration
                 .RuleFor(c => c.Telefones, _ => telefoneFaker.Generate(new Random().Next(1, 10)));
 
             return fornecedorFaker.Generate(quantidade);
+        }
+
+        public static IList<ProdutoModel> RetornarListaDeProdutos(int quantidade)
+        {
+
+            var produtoFaker = new Faker<ProdutoModel>("pt_BR")
+                .RuleFor(p => p.Fornecedor, _ => RetornarFakerFornecedorId())
+                .RuleFor(p => p.Nome, f => f.Commerce.Product())
+                .RuleFor(p => p.CodigoBarras, _ => GerarCodigoDeBarrasAleatorio())
+                .RuleFor(p => p.Ativo, _ => true)
+                .RuleFor(p => p.PrecoBruto, f => f.Commerce.Price(10, 1000, 2))
+                .RuleFor(p => p.Lucro, f => f.Random.Double())
+                .RuleFor(p => p.Quantidade, f => f.Random.Int(5, 500));
+                
+            return produtoFaker.Generate(quantidade);
+        }
+
+        private static Faker<FornecedorModel> RetornarFakerFornecedorId()
+        {
+            var listaDeIds = ConfigNinject.ObterInstancia<FornecedorDao>().ListarTodosOsFornecedoresSomenteIdENome().Select(x => x.Id).ToList();
+
+            return new Faker<FornecedorModel>()
+                .RuleFor(c => c.Id, _ => listaDeIds[new Random().Next(listaDeIds.Count)]);
         }
 
         public static Faker<EnderecoModel> RetornarFakerEnderecoModel() =>
