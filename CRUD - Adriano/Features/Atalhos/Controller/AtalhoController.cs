@@ -25,19 +25,19 @@ namespace CRUD___Adriano.Features.Atalhos.Controller
 
         public void CadastrarListaDeClientes(int quantidade)
         {
-            if(_clienteController.SalvarLista(GerarUsuariosAleatoriamente.RetornarListaDeClientes(quantidade)))
+            if(_clienteController.SalvarLista(RandomEntity.RetornarListaDeClientes(quantidade)))
                 MessageBox.Show("Cadastrado com sucesso");
         }
 
         public void CadastrarListaDeColaboradores(int quantidade)
         {
-            if(_colaboradorController.SalvarLista(GerarUsuariosAleatoriamente.RetornarListaDeColaboradores(quantidade)))
+            if(_colaboradorController.SalvarLista(RandomEntity.RetornarListaDeColaboradores(quantidade)))
                 MessageBox.Show("Cadastrado com sucesso");
         }
 
         public void CadastrarListaDeFornecedores(int quantidade)
         {
-            if (_fornecedorController.SalvarLista(GerarUsuariosAleatoriamente.RetornarListaDeFornecedores(quantidade)))
+            if (_fornecedorController.SalvarLista(RandomEntity.RetornarListaDeFornecedores(quantidade)))
                 MessageBox.Show("Cadastrado com sucesso");
         }
     }

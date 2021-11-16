@@ -18,7 +18,7 @@ using System.Collections.Generic;
 
 namespace CRUD___Adriano.Features.Configuration
 {
-    public static class GerarUsuariosAleatoriamente
+    public static class RandomEntity
     {
         public static IList<ClienteModel> RetornarListaDeClientes(int quantidade)
         {

@@ -104,7 +104,7 @@ namespace CRUD___Adriano.Features.Produto.View
 
         private void BtnGerarCodigoBarra_Click(object sender, System.EventArgs e)
         {
-            _produtoModel.CodigoBarras = GerarUsuariosAleatoriamente.GerarCodigoDeBarrasAleatorio();
+            _produtoModel.CodigoBarras = RandomEntity.GerarCodigoDeBarrasAleatorio();
             txtCodigoBarras.Texto = _produtoModel.CodigoBarras;
         }
 
