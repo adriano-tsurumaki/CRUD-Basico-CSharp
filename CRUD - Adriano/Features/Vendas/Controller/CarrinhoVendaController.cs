@@ -36,15 +36,8 @@ namespace CRUD___Adriano.Features.Vendas.Controller
             _ucCarrinhoVenda.lblSubTotal.Text = $"SubTotal ({quantidadeTotal} {(quantidadeTotal > 1 ? "itens" : "item")}): {RetornarSomaTotal()}";
         }
 
-        public int RetornarQuantidadeTotal()
-        {
-            int quantidade = 0;
-
-            foreach (var vendaProdutoModel in _vendaProdutosBinding)
-                quantidade += vendaProdutoModel.Quantidade;
-
-            return quantidade;
-        }
+        public int RetornarQuantidadeTotal() =>
+            _vendaProdutosBinding.Sum(x => x.Quantidade);
 
         public string RetornarSomaTotal()
         {
