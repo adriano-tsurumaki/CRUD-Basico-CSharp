@@ -21,8 +21,16 @@ namespace CRUD___Adriano.Features.Vendas.View
         private void TxtPesquisar__KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode != Keys.Enter || txtPesquisar.NuloOuVazio()) return;
+            
+            VendaProdutoModel vendaProdutoModelSelecionado = null;
 
-            EventEnviarProduto?.Invoke(new VendaProdutoModel { Nome = "ProdutoSendoPassado", PrecoVenda = 12.34f, Desconto = 5f, Quantidade = 1 });
+            if (txtPesquisar.Numerico())
+                vendaProdutoModelSelecionado = _controller.PesquisarProdutoPeloId(txtPesquisar.Texto.IntOuZero());
+
+            //EventEnviarProduto?.Invoke(new VendaProdutoModel { Nome = "ProdutoSendoPassado", PrecoVenda = 12.34f, Desconto = 5f, Quantidade = 1 });
+
+            if (vendaProdutoModelSelecionado is null)
+                EventEnviarProduto?.Invoke(vendaProdutoModelSelecionado);
         }
     }
 }

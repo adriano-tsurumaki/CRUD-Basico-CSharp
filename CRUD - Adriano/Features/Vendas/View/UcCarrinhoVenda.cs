@@ -32,6 +32,7 @@ namespace CRUD___Adriano.Features.Vendas.View
                 DefaultCellStyle = new DataGridViewCellStyle
                 {
                     BackColor = System.Drawing.Color.FromArgb(45, 66, 91),
+                    SelectionBackColor = System.Drawing.Color.LightSeaGreen,
                 },
             };
 
@@ -45,6 +46,8 @@ namespace CRUD___Adriano.Features.Vendas.View
                     Alignment = DataGridViewContentAlignment.MiddleCenter, 
                     Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point),
                     BackColor = System.Drawing.Color.FromArgb(45, 66, 91),
+                    SelectionForeColor = System.Drawing.Color.Black,
+                    SelectionBackColor = System.Drawing.Color.LightSeaGreen,
                 },
                 ReadOnly = true,
             };
@@ -57,6 +60,7 @@ namespace CRUD___Adriano.Features.Vendas.View
                 DefaultCellStyle = new DataGridViewCellStyle
                 {
                     BackColor = System.Drawing.Color.FromArgb(45, 66, 91),
+                    SelectionBackColor = System.Drawing.Color.LightSeaGreen,
                 },
             };
 
@@ -70,6 +74,8 @@ namespace CRUD___Adriano.Features.Vendas.View
                 { 
                     Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point),
                     BackColor = System.Drawing.Color.FromArgb(45, 66, 91),
+                    SelectionForeColor = System.Drawing.Color.Black,
+                    SelectionBackColor = System.Drawing.Color.LightSeaGreen,
                 },
                 ReadOnly = true,
             };
@@ -84,6 +90,7 @@ namespace CRUD___Adriano.Features.Vendas.View
                     Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point), 
                     ForeColor = System.Drawing.Color.Crimson,
                     BackColor = System.Drawing.Color.FromArgb(45, 66, 91),
+                    SelectionBackColor = System.Drawing.Color.LightSeaGreen,
                 },
                 ReadOnly = true,
             };
@@ -98,6 +105,7 @@ namespace CRUD___Adriano.Features.Vendas.View
                     Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point), 
                     ForeColor = System.Drawing.Color.DodgerBlue,
                     BackColor = System.Drawing.Color.FromArgb(45, 66, 91),
+                    SelectionBackColor = System.Drawing.Color.LightSeaGreen,
                 },
                 ReadOnly = true,
             };
