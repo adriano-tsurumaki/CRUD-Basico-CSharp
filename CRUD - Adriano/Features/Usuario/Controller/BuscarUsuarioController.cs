@@ -26,6 +26,12 @@ namespace CRUD___Adriano.Features.Usuario.Controller
             return this;
         }
 
+        public BuscarUsuarioController<T> DefinirTituloDoForm(string nome)
+        {
+            _frmBuscarUsuario.DefinirTituloDoForm(nome);
+            return this;
+        }
+
         public void ListarPeloNomeSomenteIdENome(BindingList<T> usuariosBinding, string nome)
         {
             usuariosBinding.Clear();

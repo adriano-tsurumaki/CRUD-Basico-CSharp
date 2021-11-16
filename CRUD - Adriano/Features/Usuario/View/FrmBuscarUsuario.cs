@@ -23,6 +23,12 @@ namespace CRUD___Adriano.Features.Usuario.View
             PesquisarDeAcordoComOTexto();
         }
 
+        public void DefinirTituloDoForm(string nome)
+        {
+            Text = nome;
+            lblTitulo.Text = nome;
+        }
+
         public void BindGrid(BindingList<T> usuariosBinding)
         {
             gridView.Columns.Clear();

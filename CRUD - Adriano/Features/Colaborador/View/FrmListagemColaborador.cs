@@ -72,9 +72,8 @@ namespace CRUD___Adriano.Features.Colaborador.View
 
             if (e.RowIndex < 0) return;
 
-            if (!(senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn)) return;
+            if (!(senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn botao)) return;
 
-            var botao = senderGrid.Columns[e.ColumnIndex] as DataGridViewButtonColumn;
             var colaboradorModelSelecionado = gridView.CurrentRow.DataBoundItem as ColaboradorModel;
 
             if (botao.Name.Equals("Excluir"))
