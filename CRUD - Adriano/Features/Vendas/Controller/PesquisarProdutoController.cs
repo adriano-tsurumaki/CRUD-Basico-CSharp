@@ -40,9 +40,23 @@ namespace CRUD___Adriano.Features.Vendas.Controller
             {
                 return _vendaProdutoDao.SelecionarProdutoPeloNome(nome);
             }
-            catch (Exception excecao)
+            catch(Exception excecao)
             {
                 MessageBox.Show(excecao.Message, "Erro ao pesquisar os produtos pelo nome!");
+            }
+
+            return new List<VendaProdutoModel>();
+        }
+
+        public IList<VendaProdutoModel> PesquisarTodosOsProdutos()
+        {
+            try
+            {
+                return _vendaProdutoDao.ListarTodosParaVenda();
+            }
+            catch(Exception excecao)
+            {
+                MessageBox.Show(excecao.Message, "Erro ao listar todos os produtos!");
             }
 
             return new List<VendaProdutoModel>();

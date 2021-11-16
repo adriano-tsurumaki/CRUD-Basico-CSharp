@@ -3,6 +3,7 @@ using CRUD___Adriano.Features.Vendas.Dao;
 using CRUD___Adriano.Features.Vendas.Model;
 using CRUD___Adriano.Features.Vendas.View;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace CRUD___Adriano.Features.Vendas.Controller
@@ -29,12 +30,26 @@ namespace CRUD___Adriano.Features.Vendas.Controller
             AtualizarSubTotal();
         }
 
-        public void AtualizarSubTotal() =>
-            _ucCarrinhoVenda.lblSubTotal.Text = $"SubTotal ({_vendaProdutosBinding.Count} {(_vendaProdutosBinding.Count > 1 ? "itens" : "item")}): {RetornarSomaTotal()}";
+        public void AtualizarSubTotal()
+        {
+            var quantidadeTotal = RetornarQuantidadeTotal();
+            _ucCarrinhoVenda.lblSubTotal.Text = $"SubTotal ({quantidadeTotal} {(quantidadeTotal > 1 ? "itens" : "item")}): {RetornarSomaTotal()}";
+        }
+
+        public int RetornarQuantidadeTotal()
+        {
+            int quantidade = 0;
+
+            foreach (var vendaProdutoModel in _vendaProdutosBinding)
+                quantidade += vendaProdutoModel.Quantidade;
+
+            return quantidade;
+        }
 
         public string RetornarSomaTotal()
         {
             Preco total = 0;
+
             foreach (var vendaProdutoModel in _vendaProdutosBinding)
                 total += ((vendaProdutoModel.PrecoVenda - vendaProdutoModel.Desconto) *
                         vendaProdutoModel.Quantidade);

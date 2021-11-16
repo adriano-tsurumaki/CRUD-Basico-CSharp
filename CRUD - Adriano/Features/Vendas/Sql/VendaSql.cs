@@ -7,5 +7,8 @@
 
         public readonly static string SelecionarProdutoVendaPeloNome =
             @"select id, nome, preco_bruto as PrecoVenda from Produto where nome Like @nome + '%' and ativo = 1";
+
+        public static readonly string ListarTodosParaVenda =
+            @"select id, nome, preco_bruto as PrecoVenda from Produto";
     }
 }

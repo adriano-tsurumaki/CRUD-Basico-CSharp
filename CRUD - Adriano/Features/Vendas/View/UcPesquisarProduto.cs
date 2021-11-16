@@ -41,6 +41,11 @@ namespace CRUD___Adriano.Features.Vendas.View
 
             if (txtPesquisar.Numerico())
                 vendaProdutoModelSelecionado = _controller.PesquisarProdutoPeloId(txtPesquisar.Texto.IntOuZero());
+            else if (txtPesquisar.Texto == "%")
+            {
+                gridView.DataSource = _controller.PesquisarTodosOsProdutos();
+                return;
+            }
             else
             {
                 gridView.DataSource = _controller.PesquisarProdutoPeloNome(txtPesquisar.Texto);
