@@ -3,6 +3,7 @@ using CRUD___Adriano.Features.Vendas.Controller;
 using CRUD___Adriano.Features.Vendas.Model;
 using System;
 using System.ComponentModel;
+using System.Drawing;
 using System.Reflection;
 using System.Windows.Forms;
 
@@ -17,6 +18,7 @@ namespace CRUD___Adriano.Features.Vendas.View
         {
             InitializeComponent();
             _controller = controller;
+
         }
 
         public void BindModel(BindingList<VendaProdutoModel> vendaProdutosBinding)
@@ -31,8 +33,8 @@ namespace CRUD___Adriano.Features.Vendas.View
                 Name = "Decrementar",
                 DefaultCellStyle = new DataGridViewCellStyle
                 {
-                    BackColor = System.Drawing.Color.FromArgb(45, 66, 91),
-                    SelectionBackColor = System.Drawing.Color.LightSeaGreen,
+                    BackColor = Color.FromArgb(45, 66, 91),
+                    SelectionBackColor = Color.LightSeaGreen,
                 },
             };
 
@@ -44,10 +46,10 @@ namespace CRUD___Adriano.Features.Vendas.View
                 DefaultCellStyle = new DataGridViewCellStyle 
                 { 
                     Alignment = DataGridViewContentAlignment.MiddleCenter, 
-                    Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point),
-                    BackColor = System.Drawing.Color.FromArgb(45, 66, 91),
-                    SelectionForeColor = System.Drawing.Color.Black,
-                    SelectionBackColor = System.Drawing.Color.LightSeaGreen,
+                    Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point),
+                    BackColor = Color.FromArgb(45, 66, 91),
+                    SelectionForeColor = Color.Black,
+                    SelectionBackColor = Color.LightSeaGreen,
                 },
                 ReadOnly = true,
             };
@@ -59,8 +61,8 @@ namespace CRUD___Adriano.Features.Vendas.View
                 Name = "Incrementar",
                 DefaultCellStyle = new DataGridViewCellStyle
                 {
-                    BackColor = System.Drawing.Color.FromArgb(45, 66, 91),
-                    SelectionBackColor = System.Drawing.Color.LightSeaGreen,
+                    BackColor = Color.FromArgb(45, 66, 91),
+                    SelectionBackColor = Color.LightSeaGreen,
                 },
             };
 
@@ -72,10 +74,10 @@ namespace CRUD___Adriano.Features.Vendas.View
                 AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill,
                 DefaultCellStyle = new DataGridViewCellStyle 
                 { 
-                    Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point),
-                    BackColor = System.Drawing.Color.FromArgb(45, 66, 91),
-                    SelectionForeColor = System.Drawing.Color.Black,
-                    SelectionBackColor = System.Drawing.Color.LightSeaGreen,
+                    Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point),
+                    BackColor = Color.FromArgb(45, 66, 91),
+                    SelectionForeColor = Color.Black,
+                    SelectionBackColor = Color.LightSeaGreen,
                 },
                 ReadOnly = true,
             };
@@ -87,10 +89,10 @@ namespace CRUD___Adriano.Features.Vendas.View
                 DataPropertyName = "Desconto.Formatado",
                 DefaultCellStyle = new DataGridViewCellStyle 
                 { 
-                    Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point), 
-                    ForeColor = System.Drawing.Color.Crimson,
-                    BackColor = System.Drawing.Color.FromArgb(45, 66, 91),
-                    SelectionBackColor = System.Drawing.Color.LightSeaGreen,
+                    Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point), 
+                    ForeColor = Color.Crimson,
+                    BackColor = Color.FromArgb(45, 66, 91),
+                    SelectionBackColor = Color.LightSeaGreen,
                 },
                 ReadOnly = true,
             };
@@ -102,10 +104,10 @@ namespace CRUD___Adriano.Features.Vendas.View
                 DataPropertyName = "PrecoVenda.Formatado",
                 DefaultCellStyle = new DataGridViewCellStyle 
                 { 
-                    Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point), 
-                    ForeColor = System.Drawing.Color.DodgerBlue,
-                    BackColor = System.Drawing.Color.FromArgb(45, 66, 91),
-                    SelectionBackColor = System.Drawing.Color.LightSeaGreen,
+                    Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point), 
+                    ForeColor = Color.DodgerBlue,
+                    BackColor = Color.FromArgb(45, 66, 91),
+                    SelectionBackColor = Color.LightSeaGreen,
                 },
                 ReadOnly = true,
             };
@@ -125,44 +127,42 @@ namespace CRUD___Adriano.Features.Vendas.View
 
         private void GridView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if ((gridView.Rows[e.RowIndex].DataBoundItem != null) && (gridView.Columns[e.ColumnIndex].DataPropertyName.Contains(".")))
-            {
-                if(gridView.Columns[e.ColumnIndex].DataPropertyName == "Desconto.Formatado")
-                    e.Value = "-" + BindProperty(gridView.Rows[e.RowIndex].DataBoundItem, gridView.Columns[e.ColumnIndex].DataPropertyName);
-                else
-                    e.Value = BindProperty(gridView.Rows[e.RowIndex].DataBoundItem, gridView.Columns[e.ColumnIndex].DataPropertyName);
-            }
+            if (!(gridView.Rows[e.RowIndex].DataBoundItem is VendaProdutoModel model) || !gridView.Columns[e.ColumnIndex].DataPropertyName.Contains(".")) return;
+
+            if (gridView.Columns[e.ColumnIndex].DataPropertyName == "Desconto.Formatado")
+                e.Value = model.Desconto.Valor == 0 ? string.Empty : $"-{model.Desconto.Formatado}";
+            else
+                e.Value = BindProperty(gridView.Rows[e.RowIndex].DataBoundItem, gridView.Columns[e.ColumnIndex].DataPropertyName);
         }
 
-        private object BindProperty(object property, string propertyName)
+        private object BindProperty(object propriedade, string nomeDaPropriedade)
         {
-            string retValue = "";
-            if (propertyName.Contains("."))
+            string valorDeRetorno = "";
+
+            if (nomeDaPropriedade.Contains("."))
             {
-                PropertyInfo[] arrayProperties;
-                string leftPropertyName;
-                leftPropertyName = propertyName.Substring(0, propertyName.IndexOf("."));
-                arrayProperties = property.GetType().GetProperties();
-                foreach (PropertyInfo propertyInfo in arrayProperties)
+                var leftPropertyName = nomeDaPropriedade.Substring(0, nomeDaPropriedade.IndexOf("."));
+                var arrayDePropriedades = propriedade.GetType().GetProperties();
+                foreach (var informacaoDaPropriedade in arrayDePropriedades)
                 {
-                    if (propertyInfo.Name == leftPropertyName)
+                    if (informacaoDaPropriedade.Name == leftPropertyName)
                     {
-                        retValue = (string)BindProperty(
-                          propertyInfo.GetValue(property, null),
-                          propertyName.Substring(propertyName.IndexOf(".") + 1));
+                        valorDeRetorno = (string)BindProperty(
+                          informacaoDaPropriedade.GetValue(propriedade, null),
+                          nomeDaPropriedade[(nomeDaPropriedade.IndexOf(".") + 1)..]);
                         break;
                     }
                 }
             }
             else
             {
-                Type propertyType;
-                PropertyInfo propertyInfo;
-                propertyType = property.GetType();
-                propertyInfo = propertyType.GetProperty(propertyName);
-                retValue = propertyInfo.GetValue(property, null).ToString();
+                Type tipoDePropriedade;
+                PropertyInfo informacaoDaPropriedade;
+                tipoDePropriedade = propriedade.GetType();
+                informacaoDaPropriedade = tipoDePropriedade.GetProperty(nomeDaPropriedade);
+                valorDeRetorno = informacaoDaPropriedade.GetValue(propriedade, null).ToString();
             }
-            return retValue;
+            return valorDeRetorno;
         }
 
         private void GridView_CellContentClick(object sender, DataGridViewCellEventArgs e)

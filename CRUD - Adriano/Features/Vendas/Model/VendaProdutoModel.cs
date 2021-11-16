@@ -15,6 +15,7 @@ namespace CRUD___Adriano.Features.Vendas.Model
         public VendaProdutoModel()
         {
             DataEmissao = DateTime.Now;
+            Quantidade = 1;
         }
     }
 }
