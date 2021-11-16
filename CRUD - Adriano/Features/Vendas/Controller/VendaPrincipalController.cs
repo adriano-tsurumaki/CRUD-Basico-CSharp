@@ -1,32 +1,53 @@
-﻿using CRUD___Adriano.Features.IoC;
+﻿using CRUD___Adriano.Features.Cadastro.Produto.Model;
+using CRUD___Adriano.Features.IoC;
 using CRUD___Adriano.Features.Vendas.Model;
 using CRUD___Adriano.Features.Vendas.View;
+using System;
 using System.Windows.Forms;
 
 namespace CRUD___Adriano.Features.Vendas.Controller
 {
     public class VendaPrincipalController
     {
-        private readonly FrmVendaPrincipal _frmVendaPrincipal;
-        private readonly PesquisarProdutoController _controllerPesquisarProduto;
-        private readonly CarrinhoVendaController _controllerCarrinhoVenda;
+        private FrmVendaPrincipal _frmVendaPrincipal;
+        private PesquisarProdutoController _controllerPesquisarProduto;
+        private CarrinhoVendaController _controllerCarrinhoVenda;
+        private VendaHeaderController _controllerVendaHeader;
+
+        private ClienteModel _clienteModelSelecionado;
 
         public VendaPrincipalController()
         {
             _frmVendaPrincipal = new FrmVendaPrincipal();
-            _controllerPesquisarProduto = ConfigNinject.ObterInstancia<PesquisarProdutoController>();
-            _controllerCarrinhoVenda = ConfigNinject.ObterInstancia<CarrinhoVendaController>();
 
-            _controllerPesquisarProduto.RetornarUserControl().EventEnviarProduto += EventEnviarProduto;
+            InstanciarControllers();
 
-            AdicionarControl(_frmVendaPrincipal.pnlHeader, new UcVendaHeader());
+            AdicionarControl(_frmVendaPrincipal.pnlHeader, _controllerVendaHeader.RetornarUserControl());
             AdicionarControl(_frmVendaPrincipal.pnlLeftCentral, _controllerPesquisarProduto.RetornarUserControl());
             AdicionarControl(_frmVendaPrincipal.pnlRightCentral, _controllerCarrinhoVenda.RetornarUserControl());
+
+            DefinirEventosDosUserControls();
 
             _frmVendaPrincipal.ShowDialog();
         }
 
-        public void EventEnviarProduto(VendaProdutoModel vendaProdutoSelecionado) =>
+        private void InstanciarControllers()
+        {
+            _controllerPesquisarProduto = ConfigNinject.ObterInstancia<PesquisarProdutoController>();
+            _controllerCarrinhoVenda = ConfigNinject.ObterInstancia<CarrinhoVendaController>();
+            _controllerVendaHeader = ConfigNinject.ObterInstancia<VendaHeaderController>();
+        }
+
+        private void DefinirEventosDosUserControls()
+        {
+            _controllerVendaHeader.RetornarUserControl().EventDefinirCliente += EventDefinirCliente;
+            _controllerPesquisarProduto.RetornarUserControl().EventEnviarProduto += EventEnviarProduto;
+        }
+
+        private void EventDefinirCliente(ClienteModel clienteModelSelecionado) =>
+            _clienteModelSelecionado = clienteModelSelecionado;
+
+        private void EventEnviarProduto(VendaProdutoModel vendaProdutoSelecionado) =>
             _controllerCarrinhoVenda.AdicionarProdutoNoCarrinho(vendaProdutoSelecionado);
 
         public void AdicionarControl(Panel panel, UserControl formFilha)
