@@ -167,5 +167,10 @@ namespace CRUD___Adriano.Features.Vendas.View
 
             txtPesquisar.Texto = string.Empty;
         }
+
+        private void UcPesquisarProduto_KeyDown(object sender, KeyEventArgs e)
+        {
+
+        }
     }
 }

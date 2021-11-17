@@ -79,10 +79,10 @@ namespace CRUD___Adriano.Features.Vendas.View
             this.gridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gridView.Size = new System.Drawing.Size(572, 375);
             this.gridView.TabIndex = 6;
-            this.gridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridView_CellContentClick);
             this.gridView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.GridView_CellFormatting);
             this.gridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridView_CellValueChanged);
             this.gridView.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.GridView_DataError);
+            this.gridView.MouseDown += new System.Windows.Forms.MouseEventHandler(this.GridView_MouseDown);
             // 
             // pnlBottom
             // 

@@ -50,5 +50,9 @@ namespace CRUD___Adriano.Features.Vendas.Controller
         }
 
         public UserControl RetornarUserControl() => _ucCarrinhoVenda;
+
+        public void AbrirFormDeDesconto()
+        {
+        }
     }
 }

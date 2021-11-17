@@ -2,7 +2,6 @@
 using CRUD___Adriano.Features.IoC;
 using CRUD___Adriano.Features.Vendas.Model;
 using CRUD___Adriano.Features.Vendas.View;
-using System;
 using System.Windows.Forms;
 
 namespace CRUD___Adriano.Features.Vendas.Controller
@@ -18,7 +17,7 @@ namespace CRUD___Adriano.Features.Vendas.Controller
 
         public VendaPrincipalController()
         {
-            _frmVendaPrincipal = new FrmVendaPrincipal();
+            _frmVendaPrincipal = new FrmVendaPrincipal(this);
 
             InstanciarControllers();
 
@@ -29,6 +28,16 @@ namespace CRUD___Adriano.Features.Vendas.Controller
             DefinirEventosDosUserControls();
 
             _frmVendaPrincipal.ShowDialog();
+        }
+
+        public void GerenciarKeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Escape:
+                    _frmVendaPrincipal.Close();
+                    break;
+            }
         }
 
         private void InstanciarControllers()

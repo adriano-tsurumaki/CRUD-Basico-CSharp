@@ -146,6 +146,7 @@ namespace CRUD___Adriano.Features.Vendas.View
             this.Name = "UcPesquisarProduto";
             this.Size = new System.Drawing.Size(560, 462);
             this.Load += new System.EventHandler(this.UcPesquisarProduto_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.UcPesquisarProduto_KeyDown);
             this.pnlPesquisa.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridView)).EndInit();
             this.ResumeLayout(false);

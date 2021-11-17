@@ -1,5 +1,4 @@
-﻿using CRUD___Adriano.Features.ValueObject.Precos;
-using CRUD___Adriano.Features.Vendas.Controller;
+﻿using CRUD___Adriano.Features.Vendas.Controller;
 using CRUD___Adriano.Features.Vendas.Model;
 using System;
 using System.ComponentModel;
@@ -18,7 +17,6 @@ namespace CRUD___Adriano.Features.Vendas.View
         {
             InitializeComponent();
             _controller = controller;
-
         }
 
         public void BindModel(BindingList<VendaProdutoModel> vendaProdutosBinding)
@@ -143,24 +141,6 @@ namespace CRUD___Adriano.Features.Vendas.View
             return valorDeRetorno;
         }
 
-        private void GridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            var senderGrid = sender as DataGridView;
-
-            if (e.RowIndex < 0) return;
-
-            if (!(senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn botao)) return;
-
-            var vendaProdutoModel = gridView.CurrentRow.DataBoundItem as VendaProdutoModel;
-
-            if (botao.Name.Equals("Incrementar"))
-                vendaProdutoModel.Quantidade++;
-            else if (botao.Name.Equals("Decrementar") && vendaProdutoModel.Quantidade > 1)
-                vendaProdutoModel.Quantidade--;
-            _controller.AtualizarSubTotal();
-            gridView.Refresh();
-        }
-
         private void GridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             var senderGrid = sender as DataGridView;
@@ -170,9 +150,44 @@ namespace CRUD___Adriano.Features.Vendas.View
             _controller.AtualizarSubTotal();
         }
 
-        private void GridView_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        private void GridView_DataError(object sender, DataGridViewDataErrorEventArgs e) { }
+
+        private void GridView_MouseDown(object sender, MouseEventArgs e)
         {
 
+            if (e.Button == MouseButtons.Right && gridView.HitTest(e.X, e.Y).RowIndex >= 0 )
+            {
+                var mouseXY = gridView.HitTest(e.X, e.Y);
+                
+                gridView.ClearSelection();
+                gridView.Rows[mouseXY.RowIndex].Selected = true;
+
+                var menuPopup = new ContextMenuStrip();
+
+                menuPopup.ItemClicked += MenuPopup_ItemClicked;
+
+                var item = new ToolStripMenuItem();
+
+                menuPopup.Items.Add("Desconto").Name = "Desconto";
+                menuPopup.Items.Add("Deletar").Name = "Deletar";
+                menuPopup.Show(gridView, new Point(e.X, e.Y));
+            }
+        }
+
+        private void MenuPopup_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            switch (e.ClickedItem.Name)
+            {
+                case "Desconto":
+                    _controller.AbrirFormDeDesconto();
+                    break;
+                case "Deletar":
+                    _vendaProdutosBinding.Remove(gridView.CurrentRow.DataBoundItem as VendaProdutoModel);
+                    break;
+                default:
+                    return;
+            }
+            _controller.AtualizarSubTotal();
         }
     }
 }

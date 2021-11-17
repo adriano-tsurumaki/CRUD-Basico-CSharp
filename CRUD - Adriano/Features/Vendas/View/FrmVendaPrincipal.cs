@@ -1,24 +1,21 @@
-﻿using System.Drawing;
+﻿using CRUD___Adriano.Features.Vendas.Controller;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace CRUD___Adriano.Features.Vendas.View
 {
     public partial class FrmVendaPrincipal : Form
     {
-        public FrmVendaPrincipal()
+        private readonly VendaPrincipalController _controller;
+
+        public FrmVendaPrincipal(VendaPrincipalController controller)
         {
             InitializeComponent();
+            _controller = controller;
         }
 
-        private void FrmVendaPrincipal_KeyDown(object sender, KeyEventArgs e)
-        {
-            switch(e.KeyCode)
-            {
-                case Keys.Escape:
-                    Close();
-                    break;
-            }
-        }
+        private void FrmVendaPrincipal_KeyDown(object sender, KeyEventArgs e) =>
+            _controller.GerenciarKeyDown(sender, e);
 
         private void FrmVendaPrincipal_Load(object sender, System.EventArgs e)
         {
