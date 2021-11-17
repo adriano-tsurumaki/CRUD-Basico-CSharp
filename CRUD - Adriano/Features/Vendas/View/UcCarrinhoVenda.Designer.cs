@@ -82,6 +82,7 @@ namespace CRUD___Adriano.Features.Vendas.View
             this.gridView.TabIndex = 6;
             this.gridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridView_CellContentClick);
             this.gridView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.GridView_CellFormatting);
+            this.gridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridView_CellValueChanged);
             // 
             // pnlBottom
             // 

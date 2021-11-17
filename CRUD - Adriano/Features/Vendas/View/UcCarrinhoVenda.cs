@@ -26,44 +26,20 @@ namespace CRUD___Adriano.Features.Vendas.View
             gridView.Columns.Clear();
             DataGridViewCell celula = new DataGridViewTextBoxCell();
 
-            DataGridViewButtonColumn botaoDecrementar = new DataGridViewButtonColumn()
-            {
-                CellTemplate = new DataGridViewButtonCell(),
-                HeaderText = "Decrementar",
-                Name = "Decrementar",
-                DefaultCellStyle = new DataGridViewCellStyle
-                {
-                    BackColor = Color.FromArgb(45, 66, 91),
-                    SelectionBackColor = Color.LightSeaGreen,
-                },
-            };
-
             DataGridViewTextBoxColumn quantidadeColuna = new DataGridViewTextBoxColumn()
             {
                 CellTemplate = celula,
                 Name = "clnQuantidade",
                 DataPropertyName = "Quantidade",
                 DefaultCellStyle = new DataGridViewCellStyle 
-                { 
+                {
                     Alignment = DataGridViewContentAlignment.MiddleCenter, 
                     Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point),
                     BackColor = Color.FromArgb(45, 66, 91),
                     SelectionForeColor = Color.Black,
                     SelectionBackColor = Color.LightSeaGreen,
                 },
-                ReadOnly = true,
-            };
-
-            DataGridViewButtonColumn botaoIncrementar = new DataGridViewButtonColumn()
-            {
-                CellTemplate = new DataGridViewButtonCell(),
-                HeaderText = "Incrementar",
-                Name = "Incrementar",
-                DefaultCellStyle = new DataGridViewCellStyle
-                {
-                    BackColor = Color.FromArgb(45, 66, 91),
-                    SelectionBackColor = Color.LightSeaGreen,
-                },
+                ReadOnly = false,
             };
 
             DataGridViewTextBoxColumn nomeColuna = new DataGridViewTextBoxColumn()
@@ -112,9 +88,7 @@ namespace CRUD___Adriano.Features.Vendas.View
                 ReadOnly = true,
             };
 
-            gridView.Columns.Add(botaoDecrementar);
             gridView.Columns.Add(quantidadeColuna);
-            gridView.Columns.Add(botaoIncrementar);
             gridView.Columns.Add(nomeColuna);
             gridView.Columns.Add(descontoColuna);
             gridView.Columns.Add(precoColuna);
@@ -130,7 +104,7 @@ namespace CRUD___Adriano.Features.Vendas.View
             if (!(gridView.Rows[e.RowIndex].DataBoundItem is VendaProdutoModel model) || !gridView.Columns[e.ColumnIndex].DataPropertyName.Contains(".")) return;
 
             if (gridView.Columns[e.ColumnIndex].DataPropertyName == "Desconto.Formatado")
-                e.Value = model.Desconto.Valor == 0 ? string.Empty : $"-{model.Desconto.Formatado}";
+                e.Value = "-" + model.Desconto.Formatado;
             else
                 e.Value = BindProperty(gridView.Rows[e.RowIndex].DataBoundItem, gridView.Columns[e.ColumnIndex].DataPropertyName);
         }
@@ -171,9 +145,8 @@ namespace CRUD___Adriano.Features.Vendas.View
 
             if (e.RowIndex < 0) return;
 
-            if (!(senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn)) return;
+            if (!(senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn botao)) return;
 
-            var botao = senderGrid.Columns[e.ColumnIndex] as DataGridViewButtonColumn;
             var vendaProdutoModel = gridView.CurrentRow.DataBoundItem as VendaProdutoModel;
 
             if (botao.Name.Equals("Incrementar"))
@@ -182,6 +155,15 @@ namespace CRUD___Adriano.Features.Vendas.View
                 vendaProdutoModel.Quantidade--;
             _controller.AtualizarSubTotal();
             gridView.Refresh();
+        }
+
+        private void GridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            var senderGrid = sender as DataGridView;
+
+            if (senderGrid.Columns[e.ColumnIndex].Name != "clnQuantidade") return;
+
+            _controller.AtualizarSubTotal();
         }
     }
 }
