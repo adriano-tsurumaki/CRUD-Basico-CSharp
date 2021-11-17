@@ -10,6 +10,8 @@ namespace CRUD___Adriano.Features.Vendas.View
 {
     public partial class UcCarrinhoVenda : UserControl
     {
+        public event HabilitarUserControlHandler EventHabilitarUcDesconto;
+
         private readonly CarrinhoVendaController _controller;
         private BindingList<VendaProdutoModel> _vendaProdutosBinding;
 
@@ -74,7 +76,7 @@ namespace CRUD___Adriano.Features.Vendas.View
                 ReadOnly = true,
             };
 
-            DataGridViewTextBoxColumn precoColuna = new DataGridViewTextBoxColumn()
+            DataGridViewTextBoxColumn precoVendaColuna = new DataGridViewTextBoxColumn()
             {
                 CellTemplate = celula,
                 Name = "Preço de venda",
@@ -89,11 +91,28 @@ namespace CRUD___Adriano.Features.Vendas.View
                 },
                 ReadOnly = true,
             };
+            
+            DataGridViewTextBoxColumn precoLiquidoColuna = new DataGridViewTextBoxColumn()
+            {
+                CellTemplate = celula,
+                Name = "Preço líquido",
+                DataPropertyName = "PrecoLiquido.Formatado",
+                DefaultCellStyle = new DataGridViewCellStyle 
+                { 
+                    Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point), 
+                    ForeColor = Color.DodgerBlue,
+                    BackColor = Color.FromArgb(23, 31, 32),
+                    SelectionBackColor = Color.LightSeaGreen,
+                    Padding = new Padding(2)
+                },
+                ReadOnly = true,
+            };
 
             gridView.Columns.Add(quantidadeColuna);
             gridView.Columns.Add(nomeColuna);
             gridView.Columns.Add(descontoColuna);
-            gridView.Columns.Add(precoColuna);
+            gridView.Columns.Add(precoVendaColuna);
+            gridView.Columns.Add(precoLiquidoColuna);
 
             _vendaProdutosBinding = new BindingList<VendaProdutoModel>(vendaProdutosBinding);
             gridView.AutoGenerateColumns = false;
@@ -179,7 +198,7 @@ namespace CRUD___Adriano.Features.Vendas.View
             switch (e.ClickedItem.Name)
             {
                 case "Desconto":
-                    _controller.AbrirFormDeDesconto();
+                    EventHabilitarUcDesconto?.Invoke();
                     break;
                 case "Deletar":
                     _vendaProdutosBinding.Remove(gridView.CurrentRow.DataBoundItem as VendaProdutoModel);

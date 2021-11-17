@@ -17,5 +17,7 @@ namespace CRUD___Adriano.Features.Vendas.Model
             DataEmissao = DateTime.Now;
             Quantidade = 1;
         }
+
+        public Preco PrecoLiquido { get => PrecoVenda - Desconto; }
     }
 }

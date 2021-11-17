@@ -6,12 +6,15 @@ using System.Windows.Forms;
 
 namespace CRUD___Adriano.Features.Vendas.Controller
 {
+    public delegate void HabilitarUserControlHandler();
+
     public class VendaPrincipalController
     {
         private FrmVendaPrincipal _frmVendaPrincipal;
         private PesquisarProdutoController _controllerPesquisarProduto;
         private CarrinhoVendaController _controllerCarrinhoVenda;
         private VendaHeaderController _controllerVendaHeader;
+        private DescontoVendaController _controllerDescontoVenda;
 
         private ClienteModel _clienteModelSelecionado;
 
@@ -30,27 +33,20 @@ namespace CRUD___Adriano.Features.Vendas.Controller
             _frmVendaPrincipal.ShowDialog();
         }
 
-        public void GerenciarKeyDown(object sender, KeyEventArgs e)
-        {
-            switch (e.KeyCode)
-            {
-                case Keys.Escape:
-                    _frmVendaPrincipal.Close();
-                    break;
-            }
-        }
-
         private void InstanciarControllers()
         {
             _controllerPesquisarProduto = ConfigNinject.ObterInstancia<PesquisarProdutoController>();
             _controllerCarrinhoVenda = ConfigNinject.ObterInstancia<CarrinhoVendaController>();
             _controllerVendaHeader = ConfigNinject.ObterInstancia<VendaHeaderController>();
+            _controllerDescontoVenda = ConfigNinject.ObterInstancia<DescontoVendaController>();
         }
 
         private void DefinirEventosDosUserControls()
         {
             _controllerVendaHeader.RetornarUserControl().EventDefinirCliente += EventDefinirCliente;
             _controllerPesquisarProduto.RetornarUserControl().EventEnviarProduto += EventEnviarProduto;
+            _controllerCarrinhoVenda.RetornarUserControl().EventHabilitarUcDesconto += EventHabilitarUcDesconto;
+            _controllerDescontoVenda.RetornarUserControl().EventDesabilitarUcDesconto += EventDesabilitarUcDesconto;
         }
 
         private void EventDefinirCliente(ClienteModel clienteModelSelecionado) =>
@@ -58,6 +54,12 @@ namespace CRUD___Adriano.Features.Vendas.Controller
 
         private void EventEnviarProduto(VendaProdutoModel vendaProdutoSelecionado) =>
             _controllerCarrinhoVenda.AdicionarProdutoNoCarrinho(vendaProdutoSelecionado);
+
+        private void EventHabilitarUcDesconto() =>
+            AdicionarControl(_frmVendaPrincipal.pnlLeftCentral, _controllerDescontoVenda.RetornarUserControl());
+
+        private void EventDesabilitarUcDesconto() =>
+            AdicionarControl(_frmVendaPrincipal.pnlLeftCentral, _controllerPesquisarProduto.RetornarUserControl());
 
         public void AdicionarControl(Panel panel, UserControl formFilha)
         {
@@ -83,6 +85,16 @@ namespace CRUD___Adriano.Features.Vendas.Controller
             formFilha.BringToFront();
             formFilha.Show();
             formFilha.Focus();
+        }
+
+        public void GerenciarKeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Escape:
+                    _frmVendaPrincipal.Close();
+                    break;
+            }
         }
     }
 }

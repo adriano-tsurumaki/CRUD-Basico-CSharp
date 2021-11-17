@@ -34,7 +34,7 @@ namespace CRUD___Adriano.Features.PageManager.View
             // 
             // btnConfirm
             // 
-            this.btnConfirm.BackColor = System.Drawing.Color.Lime;
+            this.btnConfirm.BackColor = System.Drawing.Color.LimeGreen;
             this.btnConfirm.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnConfirm.FlatAppearance.BorderSize = 0;
             this.btnConfirm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
