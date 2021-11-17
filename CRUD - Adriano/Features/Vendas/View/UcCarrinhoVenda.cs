@@ -29,15 +29,16 @@ namespace CRUD___Adriano.Features.Vendas.View
             DataGridViewTextBoxColumn quantidadeColuna = new DataGridViewTextBoxColumn()
             {
                 CellTemplate = celula,
-                Name = "clnQuantidade",
+                Name = "Quantidade",
                 DataPropertyName = "Quantidade",
-                DefaultCellStyle = new DataGridViewCellStyle 
+                DefaultCellStyle = new DataGridViewCellStyle
                 {
-                    Alignment = DataGridViewContentAlignment.MiddleCenter, 
+                    Alignment = DataGridViewContentAlignment.MiddleCenter,
                     Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point),
-                    BackColor = Color.FromArgb(45, 66, 91),
+                    BackColor = Color.FromArgb(23, 31, 32),
                     SelectionForeColor = Color.Black,
                     SelectionBackColor = Color.LightSeaGreen,
+                    Padding = new Padding(2)
                 },
                 ReadOnly = false,
             };
@@ -45,15 +46,16 @@ namespace CRUD___Adriano.Features.Vendas.View
             DataGridViewTextBoxColumn nomeColuna = new DataGridViewTextBoxColumn()
             {
                 CellTemplate = celula,
-                Name = "clnNome",
+                Name = "Nome",
                 DataPropertyName = "Nome",
                 AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill,
                 DefaultCellStyle = new DataGridViewCellStyle 
                 { 
                     Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point),
-                    BackColor = Color.FromArgb(45, 66, 91),
+                    BackColor = Color.FromArgb(23, 31, 32),
                     SelectionForeColor = Color.Black,
                     SelectionBackColor = Color.LightSeaGreen,
+                    Padding = new Padding(2)
                 },
                 ReadOnly = true,
             };
@@ -61,14 +63,15 @@ namespace CRUD___Adriano.Features.Vendas.View
             DataGridViewTextBoxColumn descontoColuna = new DataGridViewTextBoxColumn()
             {
                 CellTemplate = celula,
-                Name = "clnDesconto",
+                Name = "Desconto",
                 DataPropertyName = "Desconto.Formatado",
                 DefaultCellStyle = new DataGridViewCellStyle 
                 { 
                     Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point), 
                     ForeColor = Color.Crimson,
-                    BackColor = Color.FromArgb(45, 66, 91),
+                    BackColor = Color.FromArgb(23, 31, 32),
                     SelectionBackColor = Color.LightSeaGreen,
+                    Padding = new Padding(2)
                 },
                 ReadOnly = true,
             };
@@ -76,14 +79,15 @@ namespace CRUD___Adriano.Features.Vendas.View
             DataGridViewTextBoxColumn precoColuna = new DataGridViewTextBoxColumn()
             {
                 CellTemplate = celula,
-                Name = "clnPrecaVenda",
+                Name = "Preço de venda",
                 DataPropertyName = "PrecoVenda.Formatado",
                 DefaultCellStyle = new DataGridViewCellStyle 
                 { 
                     Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point), 
                     ForeColor = Color.DodgerBlue,
-                    BackColor = Color.FromArgb(45, 66, 91),
+                    BackColor = Color.FromArgb(23, 31, 32),
                     SelectionBackColor = Color.LightSeaGreen,
+                    Padding = new Padding(2)
                 },
                 ReadOnly = true,
             };
@@ -161,9 +165,14 @@ namespace CRUD___Adriano.Features.Vendas.View
         {
             var senderGrid = sender as DataGridView;
 
-            if (senderGrid.Columns[e.ColumnIndex].Name != "clnQuantidade") return;
+            if (senderGrid.Columns[e.ColumnIndex].Name != "Quantidade") return;
 
             _controller.AtualizarSubTotal();
+        }
+
+        private void GridView_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+
         }
     }
 }

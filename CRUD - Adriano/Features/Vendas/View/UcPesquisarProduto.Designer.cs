@@ -55,7 +55,7 @@ namespace CRUD___Adriano.Features.Vendas.View
             // 
             this.txtPesquisar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
             this.txtPesquisar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.txtPesquisar.BorderColor = System.Drawing.Color.MediumSlateBlue;
+            this.txtPesquisar.BorderColor = System.Drawing.Color.LightSkyBlue;
             this.txtPesquisar.BorderSize = 2;
             this.txtPesquisar.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtPesquisar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -78,7 +78,7 @@ namespace CRUD___Adriano.Features.Vendas.View
             // btnPesquisar
             // 
             this.btnPesquisar.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnPesquisar.FlatAppearance.BorderColor = System.Drawing.Color.MediumSlateBlue;
+            this.btnPesquisar.FlatAppearance.BorderColor = System.Drawing.Color.LightSkyBlue;
             this.btnPesquisar.FlatAppearance.BorderSize = 2;
             this.btnPesquisar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPesquisar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -95,6 +95,8 @@ namespace CRUD___Adriano.Features.Vendas.View
             // 
             this.gridView.AllowUserToAddRows = false;
             this.gridView.AllowUserToDeleteRows = false;
+            this.gridView.AllowUserToResizeColumns = false;
+            this.gridView.AllowUserToResizeRows = false;
             this.gridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.gridView.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -118,9 +120,10 @@ namespace CRUD___Adriano.Features.Vendas.View
             this.gridView.DefaultCellStyle = dataGridViewCellStyle2;
             this.gridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridView.EnableHeadersVisualStyles = false;
-            this.gridView.GridColor = System.Drawing.Color.SteelBlue;
+            this.gridView.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
             this.gridView.Location = new System.Drawing.Point(0, 36);
             this.gridView.Name = "gridView";
+            this.gridView.RowHeadersVisible = false;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(66)))), ((int)(((byte)(91)))));
             dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.SteelBlue;
