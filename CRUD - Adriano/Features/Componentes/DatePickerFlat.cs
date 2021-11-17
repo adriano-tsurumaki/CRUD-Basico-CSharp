@@ -14,9 +14,7 @@ namespace CRUD___Adriano.Features.Componentes
 
         private bool droppedDown = false;
         private Image calendarIcon = Properties.Resources.calendarWhite;
-        private RectangleF iconButtonArea;
         private const int calendarIconWidth = 38;
-        private const int arrowIconWidth = 17;
 
         public Color SkinColor 
         { 
