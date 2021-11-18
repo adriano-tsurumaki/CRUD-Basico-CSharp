@@ -55,8 +55,13 @@ namespace CRUD___Adriano.Features.Vendas.Controller
         private void EventDefinirCliente(ClienteModel clienteModelSelecionado) =>
             _clienteModelSelecionado = clienteModelSelecionado;
 
-        private void EventEnviarProduto(VendaProdutoModel vendaProdutoSelecionado) =>
+        private void EventEnviarProduto(VendaProdutoModel vendaProdutoSelecionado)
+        {
+            if (_controllerDescontoVenda.FoiAplicadoDescontoGeral() && MessageBox.Show("Já foi aplicado um desconto geral no pedido, deseja cancelar este desconto?", "Aviso", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                AplicarDescontoGeral(0);
+            
             _controllerCarrinhoVenda.AdicionarProdutoNoCarrinho(vendaProdutoSelecionado);
+        }
 
         private void EventHabilitarUcDesconto() =>
             AdicionarControl(_frmVendaPrincipal.pnlLeftCentral, _controllerDescontoVenda.RetornarUserControl());

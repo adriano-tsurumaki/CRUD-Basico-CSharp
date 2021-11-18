@@ -6,11 +6,18 @@ namespace CRUD___Adriano.Features.Vendas.Controller
     {
         private readonly UcDescontoVenda _ucDescontoVenda;
 
+        private bool _foiAplicadoDescontoGeral;
+
         public DescontoVendaController()
         {
-            _ucDescontoVenda = new UcDescontoVenda();
+            _ucDescontoVenda = new UcDescontoVenda(this);
+            _foiAplicadoDescontoGeral = false;
         }
 
         public UcDescontoVenda RetornarUserControl() => _ucDescontoVenda;
+
+        public void DefinirQueFoiAplicadoODescontoGeral() => _foiAplicadoDescontoGeral = true;
+
+        public bool FoiAplicadoDescontoGeral() => _foiAplicadoDescontoGeral;
     }
 }

@@ -1,4 +1,5 @@
 ﻿using CRUD___Adriano.Features.ValueObject.Porcentagens;
+using CRUD___Adriano.Features.Vendas.Controller;
 using CRUD___Adriano.Features.Vendas.Enum;
 using System;
 using System.Windows.Forms;
@@ -10,12 +11,15 @@ namespace CRUD___Adriano.Features.Vendas.View
         public delegate void DesabilitarHandler();
         public delegate void PegarDescontoHandler(TipoDescontoEnum tipoDesconto, Porcentagem porcentagem);
 
+        private DescontoVendaController _controller;
+
         public event DesabilitarHandler EventDesabilitar;
         public event PegarDescontoHandler EventPegarDesconto;
 
-        public UcDescontoVenda()
+        public UcDescontoVenda(DescontoVendaController controller)
         {
             InitializeComponent();
+            _controller = controller;
         }
 
         private void LblVoltar_Click(object sender, EventArgs e) =>
@@ -28,6 +32,9 @@ namespace CRUD___Adriano.Features.Vendas.View
         {
             var tipoDesconto = checkDescontoGeral.Checked ? TipoDescontoEnum.Geral : TipoDescontoEnum.Unidade;
             double.TryParse(txtDesconto.Texto, out double desconto);
+
+            if (tipoDesconto == TipoDescontoEnum.Geral)
+                _controller.DefinirQueFoiAplicadoODescontoGeral();
 
             EventPegarDesconto?.Invoke(tipoDesconto, desconto);
             EventDesabilitar?.Invoke();
