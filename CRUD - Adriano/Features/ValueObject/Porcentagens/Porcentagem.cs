@@ -13,7 +13,7 @@ namespace CRUD___Adriano.Features.ValueObject.Porcentagens
 
         public Porcentagem(int valor) => _valor = valor;
 
-        public Porcentagem(double valor) => _valor = Math.Round(valor * 100, 2);
+        public Porcentagem(double valor) => _valor = valor;
 
         // TODO: Aplicar formatação da string correta na porcentagem e os testes unitários
         public Porcentagem(string valor)

@@ -12,6 +12,7 @@ namespace CRUD___Adriano.Features.Vendas.Controller
         private readonly VendaDao _vendaDao;
         private readonly UcCarrinhoVenda _ucCarrinhoVenda;
         private BindingList<VendaProdutoModel> _vendaProdutosBinding;
+        private VendaProdutoModel _produtoSelecionadoParaDesconto;
 
         public CarrinhoVendaController(VendaDao vendaDao)
         {
@@ -49,5 +50,16 @@ namespace CRUD___Adriano.Features.Vendas.Controller
         }
 
         public UcCarrinhoVenda RetornarUserControl() => _ucCarrinhoVenda;
+
+        public void AtribuirProdutoSelecionadoParaDesconto(VendaProdutoModel vendaProdutoSelecionado) =>
+            _produtoSelecionadoParaDesconto = vendaProdutoSelecionado;
+
+        public VendaProdutoModel RetornarVendaProdutoSelecionadoParaDesconto() => 
+            _produtoSelecionadoParaDesconto;
+
+        public BindingList<VendaProdutoModel> RetornarListasDeProdutosParaDesconto() => _vendaProdutosBinding;
+
+        public void AtualizarCarrinho() =>
+            _ucCarrinhoVenda.AtualizarCarrinho();
     }
 }

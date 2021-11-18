@@ -10,6 +10,8 @@ namespace CRUD___Adriano.Features.Vendas.View
 {
     public partial class UcCarrinhoVenda : UserControl
     {
+        public delegate void HabilitarUserControlHandler();
+
         public event HabilitarUserControlHandler EventHabilitarUcDesconto;
 
         private readonly CarrinhoVendaController _controller;
@@ -120,6 +122,11 @@ namespace CRUD___Adriano.Features.Vendas.View
             _controller.AtualizarSubTotal();
         }
 
+        public void AtualizarCarrinho()
+        {
+            gridView.Refresh();
+        }
+
         private void GridView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (!(gridView.Rows[e.RowIndex].DataBoundItem is VendaProdutoModel model) || !gridView.Columns[e.ColumnIndex].DataPropertyName.Contains(".")) return;
@@ -195,13 +202,15 @@ namespace CRUD___Adriano.Features.Vendas.View
 
         private void MenuPopup_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
+            var vendaProdutoSelecionado = gridView.CurrentRow.DataBoundItem as VendaProdutoModel;
             switch (e.ClickedItem.Name)
             {
                 case "Desconto":
+                    _controller.AtribuirProdutoSelecionadoParaDesconto(vendaProdutoSelecionado);
                     EventHabilitarUcDesconto?.Invoke();
                     break;
                 case "Deletar":
-                    _vendaProdutosBinding.Remove(gridView.CurrentRow.DataBoundItem as VendaProdutoModel);
+                    _vendaProdutosBinding.Remove(vendaProdutoSelecionado);
                     break;
                 default:
                     return;
