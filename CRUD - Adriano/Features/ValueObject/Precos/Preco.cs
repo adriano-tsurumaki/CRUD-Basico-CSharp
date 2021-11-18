@@ -36,22 +36,22 @@ namespace CRUD___Adriano.Features.ValueObject.Precos
         public static implicit operator Preco(double preco) => new Preco(preco);
         public static implicit operator Preco(string preco) => new Preco(preco);
 
-        public static Preco operator +(Preco precoA, Preco precoB) => new Preco((double)Math.Round(precoA.Valor + precoB.Valor, 2));
-        public static Preco operator -(Preco precoA, Preco precoB) => new Preco((double)Math.Round(precoA.Valor - precoB.Valor, 2));
-        public static Preco operator %(Preco precoA, Preco precoB) => new Preco((double)Math.Round(precoA.Valor % precoB.Valor, 2));
-        public static Preco operator *(Preco precoA, Preco precoB) => new Preco((double)Math.Round(precoA.Valor * precoB.Valor, 2));
-        public static Preco operator /(Preco precoA, Preco precoB) => new Preco((double)Math.Round(precoA.Valor / precoB.Valor, 2));
+        public static Preco operator +(Preco precoA, Preco precoB) => new Preco(Math.Round(precoA.Valor + precoB.Valor, 2));
+        public static Preco operator -(Preco precoA, Preco precoB) => new Preco(Math.Round(precoA.Valor - precoB.Valor, 2));
+        public static Preco operator %(Preco precoA, Preco precoB) => new Preco(Math.Round(precoA.Valor % precoB.Valor, 2));
+        public static Preco operator *(Preco precoA, Preco precoB) => new Preco(Math.Round(precoA.Valor * precoB.Valor, 2));
+        public static Preco operator /(Preco precoA, Preco precoB) => new Preco(Math.Round(precoA.Valor / precoB.Valor, 2));
 
         public static Preco operator *(Preco preco, Porcentagem porcentagem) 
-            => new Preco((double)Math.Round(preco.Valor * porcentagem.Valor));
+            => new Preco(Math.Round(preco.Valor * porcentagem.Valor, 2));
 
         public static Preco operator *(Preco preco, int inteiro)
-            => new Preco((double)Math.Round(preco.Valor * inteiro));
+            => new Preco(Math.Round(preco.Valor * inteiro, 2));
 
         public static Preco operator *(Preco preco, double dobro)
-            => new Preco((double)Math.Round(preco.Valor * dobro));
+            => new Preco(Math.Round(preco.Valor * dobro, 2));
 
         public static Preco operator *(Preco preco, float flutuante)
-            => new Preco((double)Math.Round(preco.Valor * flutuante));
+            => new Preco(Math.Round(preco.Valor * flutuante, 2));
     }
 }

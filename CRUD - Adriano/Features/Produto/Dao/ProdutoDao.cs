@@ -1,8 +1,6 @@
 ﻿using CRUD___Adriano.Features.Produto.Model;
 using CRUD___Adriano.Features.Produto.Sql;
-using CRUD___Adriano.Features.Vendas.Model;
 using Dapper;
-using System;
 using System.Data;
 
 namespace CRUD___Adriano.Features.Produto.Dao
