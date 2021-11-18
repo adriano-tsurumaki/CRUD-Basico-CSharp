@@ -52,7 +52,7 @@ namespace CRUD___Adriano.Features.Vendas.View
                 return;
             }
 
-            if (vendaProdutoModelSelecionado.Vazio())
+            if (!vendaProdutoModelSelecionado.Vazio())
                 EventEnviarProduto?.Invoke(vendaProdutoModelSelecionado);
 
             txtPesquisar.Texto = string.Empty;
@@ -162,7 +162,7 @@ namespace CRUD___Adriano.Features.Vendas.View
 
             var vendaProdutoModelSelecionado = _controller.PesquisarProdutoPeloId((gridView.CurrentRow.DataBoundItem as VendaProdutoModel).Id);
 
-            if (vendaProdutoModelSelecionado.Vazio())
+            if (!vendaProdutoModelSelecionado.Vazio())
                 EventEnviarProduto?.Invoke(vendaProdutoModelSelecionado);
 
             txtPesquisar.Texto = string.Empty;
