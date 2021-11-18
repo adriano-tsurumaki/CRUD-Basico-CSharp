@@ -10,7 +10,7 @@ namespace CRUD___Adriano.Features.Vendas.View
 {
     public partial class UcVendaFooter : UserControl
     {
-        public UcVendaFooter()
+        public UcVendaFooter(Controller.VendaFooterController vendaFooterController)
         {
             InitializeComponent();
         }

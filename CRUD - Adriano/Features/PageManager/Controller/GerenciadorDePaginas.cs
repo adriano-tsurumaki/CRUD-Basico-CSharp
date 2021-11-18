@@ -51,16 +51,16 @@ namespace CRUD___Adriano.Features.Controller.PageManager
         private void AtribuirEventos()
         {
             _ucBotaoAnterior = new UcPreviousButton();
-            _ucBotaoAnterior.btnPrevious.Click += new EventHandler(BtnAnterior_Click);
+            _ucBotaoAnterior.btnPrevious.Click += BtnAnterior_Click;
 
             _ucBotaoProximo = new UcNextButton();
-            _ucBotaoProximo.btnNext.Click += new EventHandler(BtnProximo_Click);
+            _ucBotaoProximo.btnNext.Click += BtnProximo_Click;
 
             _ucBotaoConfirmar = new UcConfirmButton();
-            _ucBotaoConfirmar.btnConfirm.Click += new EventHandler(BtnConfirmar_Click);
+            _ucBotaoConfirmar.btnConfirm.Click += BtnConfirmar_Click;
 
             _ucBotaoCancelar = new UcCancelButton();
-            _ucBotaoCancelar.btnCancel.Click += new EventHandler(BtnCancelar_Click);
+            _ucBotaoCancelar.btnCancel.Click += BtnCancelar_Click;
         }
 
         public void AdicionarControl(Panel panel, UserControl formFilha)

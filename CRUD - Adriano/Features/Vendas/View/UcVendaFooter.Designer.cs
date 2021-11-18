@@ -29,19 +29,66 @@ namespace CRUD___Adriano.Features.Vendas.View
         /// </summary>
         private void InitializeComponent()
         {
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.pnlBottomsRight = new System.Windows.Forms.Panel();
+            this.pnlBottomLeft = new System.Windows.Forms.Panel();
+            this.pnlBottomRight = new System.Windows.Forms.Panel();
+            this.panel1.SuspendLayout();
+            this.pnlBottomsRight.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.pnlBottomsRight);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(867, 61);
+            this.panel1.TabIndex = 1;
+            // 
+            // pnlBottomsRight
+            // 
+            this.pnlBottomsRight.Controls.Add(this.pnlBottomLeft);
+            this.pnlBottomsRight.Controls.Add(this.pnlBottomRight);
+            this.pnlBottomsRight.Dock = System.Windows.Forms.DockStyle.Right;
+            this.pnlBottomsRight.Location = new System.Drawing.Point(521, 0);
+            this.pnlBottomsRight.Name = "pnlBottomsRight";
+            this.pnlBottomsRight.Size = new System.Drawing.Size(346, 61);
+            this.pnlBottomsRight.TabIndex = 1;
+            // 
+            // pnlBottomLeft
+            // 
+            this.pnlBottomLeft.Location = new System.Drawing.Point(25, 10);
+            this.pnlBottomLeft.Name = "pnlBottomLeft";
+            this.pnlBottomLeft.Size = new System.Drawing.Size(144, 38);
+            this.pnlBottomLeft.TabIndex = 1;
+            // 
+            // pnlBottomRight
+            // 
+            this.pnlBottomRight.Location = new System.Drawing.Point(191, 10);
+            this.pnlBottomRight.Name = "pnlBottomRight";
+            this.pnlBottomRight.Size = new System.Drawing.Size(144, 38);
+            this.pnlBottomRight.TabIndex = 0;
             // 
             // UcVendaFooter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
+            this.Controls.Add(this.panel1);
             this.Name = "UcVendaFooter";
-            this.Size = new System.Drawing.Size(867, 103);
+            this.Size = new System.Drawing.Size(867, 61);
+            this.panel1.ResumeLayout(false);
+            this.pnlBottomsRight.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel pnlBottomsRight;
+        public System.Windows.Forms.Panel pnlBottomLeft;
+        public System.Windows.Forms.Panel pnlBottomRight;
     }
 }
