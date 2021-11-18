@@ -1,7 +1,6 @@
 ﻿using CRUD___Adriano.Features.ValueObject.Porcentagens;
 using CRUD___Adriano.Features.Vendas.Enum;
 using System;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace CRUD___Adriano.Features.Vendas.View
@@ -31,6 +30,13 @@ namespace CRUD___Adriano.Features.Vendas.View
             double.TryParse(txtDesconto.Texto, out double desconto);
 
             EventPegarDesconto?.Invoke(tipoDesconto, desconto);
+            EventDesabilitar?.Invoke();
+        }
+
+        private void BtnLimparTodosDescontos_Click(object sender, EventArgs e)
+        {
+            EventPegarDesconto?.Invoke(TipoDescontoEnum.Geral, 0);
+            EventDesabilitar?.Invoke();
         }
     }
 }

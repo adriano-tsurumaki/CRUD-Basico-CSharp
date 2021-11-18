@@ -35,7 +35,7 @@ namespace CRUD___Adriano.Features.Vendas.View
             this.txtDesconto = new CRUD___Adriano.Features.Componentes.TextBoxFlat();
             this.lblDesconto = new System.Windows.Forms.Label();
             this.btnConfirm = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnLimparTodosDescontos = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.pnlTopo.SuspendLayout();
             this.SuspendLayout();
@@ -124,20 +124,21 @@ namespace CRUD___Adriano.Features.Vendas.View
             this.btnConfirm.UseVisualStyleBackColor = false;
             this.btnConfirm.Click += new System.EventHandler(this.BtnConfirm_Click);
             // 
-            // button1
+            // btnLimparTodosDescontos
             // 
-            this.button1.BackColor = System.Drawing.Color.Orange;
-            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(32, 198);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(322, 39);
-            this.button1.TabIndex = 16;
-            this.button1.Text = "Desabilitar todos os descontos";
-            this.button1.UseVisualStyleBackColor = false;
+            this.btnLimparTodosDescontos.BackColor = System.Drawing.Color.Orange;
+            this.btnLimparTodosDescontos.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnLimparTodosDescontos.FlatAppearance.BorderSize = 0;
+            this.btnLimparTodosDescontos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLimparTodosDescontos.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnLimparTodosDescontos.ForeColor = System.Drawing.Color.White;
+            this.btnLimparTodosDescontos.Location = new System.Drawing.Point(32, 198);
+            this.btnLimparTodosDescontos.Name = "btnLimparTodosDescontos";
+            this.btnLimparTodosDescontos.Size = new System.Drawing.Size(322, 39);
+            this.btnLimparTodosDescontos.TabIndex = 16;
+            this.btnLimparTodosDescontos.Text = "Limpar todos os descontos";
+            this.btnLimparTodosDescontos.UseVisualStyleBackColor = false;
+            this.btnLimparTodosDescontos.Click += new System.EventHandler(this.BtnLimparTodosDescontos_Click);
             // 
             // btnCancel
             // 
@@ -161,7 +162,7 @@ namespace CRUD___Adriano.Features.Vendas.View
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
             this.Controls.Add(this.btnCancel);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnLimparTodosDescontos);
             this.Controls.Add(this.btnConfirm);
             this.Controls.Add(this.lblDesconto);
             this.Controls.Add(this.txtDesconto);
@@ -183,7 +184,7 @@ namespace CRUD___Adriano.Features.Vendas.View
         private Componentes.TextBoxFlat txtDesconto;
         private System.Windows.Forms.Label lblDesconto;
         public System.Windows.Forms.Button btnConfirm;
-        public System.Windows.Forms.Button button1;
+        public System.Windows.Forms.Button btnLimparTodosDescontos;
         public System.Windows.Forms.Button btnCancel;
     }
 }

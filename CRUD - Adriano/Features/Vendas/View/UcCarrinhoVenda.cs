@@ -117,6 +117,7 @@ namespace CRUD___Adriano.Features.Vendas.View
             gridView.Columns.Add(precoLiquidoColuna);
 
             _vendaProdutosBinding = new BindingList<VendaProdutoModel>(vendaProdutosBinding);
+
             gridView.AutoGenerateColumns = false;
             gridView.DataSource = vendaProdutosBinding;
             _controller.AtualizarSubTotal();
@@ -124,6 +125,7 @@ namespace CRUD___Adriano.Features.Vendas.View
 
         public void AtualizarCarrinho()
         {
+            _controller.AtualizarSubTotal();
             gridView.Refresh();
         }
 
@@ -169,9 +171,9 @@ namespace CRUD___Adriano.Features.Vendas.View
 
         private void GridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            var senderGrid = sender as DataGridView;
+            var nomeDaColuna = (sender as DataGridView).Columns[e.ColumnIndex].Name;
 
-            if (senderGrid.Columns[e.ColumnIndex].Name != "Quantidade") return;
+            if (nomeDaColuna != "Quantidade") return;
 
             _controller.AtualizarSubTotal();
         }
@@ -180,8 +182,7 @@ namespace CRUD___Adriano.Features.Vendas.View
 
         private void GridView_MouseDown(object sender, MouseEventArgs e)
         {
-
-            if (e.Button == MouseButtons.Right && gridView.HitTest(e.X, e.Y).RowIndex >= 0 )
+            if (e.Button == MouseButtons.Right && gridView.HitTest(e.X, e.Y).RowIndex >= 0)
             {
                 var mouseXY = gridView.HitTest(e.X, e.Y);
                 
@@ -207,7 +208,7 @@ namespace CRUD___Adriano.Features.Vendas.View
             {
                 case "Desconto":
                     _controller.AtribuirProdutoSelecionadoParaDesconto(vendaProdutoSelecionado);
-                    EventHabilitarUcDesconto?.Invoke();
+                    HabilitarUcDesconto();
                     break;
                 case "Deletar":
                     _vendaProdutosBinding.Remove(vendaProdutoSelecionado);
@@ -216,6 +217,11 @@ namespace CRUD___Adriano.Features.Vendas.View
                     return;
             }
             _controller.AtualizarSubTotal();
+        }
+
+        public void HabilitarUcDesconto()
+        {
+            EventHabilitarUcDesconto?.Invoke();
         }
     }
 }
