@@ -4,6 +4,7 @@ using CRUD___Adriano.Features.ValueObject.Porcentagens;
 using CRUD___Adriano.Features.Vendas.Enum;
 using CRUD___Adriano.Features.Vendas.Model;
 using CRUD___Adriano.Features.Vendas.View;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace CRUD___Adriano.Features.Vendas.Controller
@@ -57,10 +58,8 @@ namespace CRUD___Adriano.Features.Vendas.Controller
         private void EventEnviarProduto(VendaProdutoModel vendaProdutoSelecionado) =>
             _controllerCarrinhoVenda.AdicionarProdutoNoCarrinho(vendaProdutoSelecionado);
 
-        private void EventHabilitarUcDesconto()
-        {
+        private void EventHabilitarUcDesconto() =>
             AdicionarControl(_frmVendaPrincipal.pnlLeftCentral, _controllerDescontoVenda.RetornarUserControl());
-        }
 
         private void EventDesabilitarUcDesconto() =>
             AdicionarControl(_frmVendaPrincipal.pnlLeftCentral, _controllerPesquisarProduto.RetornarUserControl());
@@ -76,13 +75,14 @@ namespace CRUD___Adriano.Features.Vendas.Controller
 
         private void AplicarDescontoGeral(Porcentagem porcentagem)
         {
-            _controllerCarrinhoVenda.RetornarListasDeProdutosParaDesconto();
+            foreach (var item in _controllerCarrinhoVenda.RetornarListasDeProdutosParaDesconto())
+                item.Desconto = item.PrecoVenda * porcentagem;
         }
 
         private void AplicarDescontoUnitario(Porcentagem porcentagem)
         {
             var produtoSelecionado = _controllerCarrinhoVenda.RetornarVendaProdutoSelecionadoParaDesconto();
-            produtoSelecionado.Desconto += produtoSelecionado.PrecoVenda * porcentagem;
+            produtoSelecionado.Desconto = produtoSelecionado.PrecoVenda * porcentagem;
         }
 
         public void AdicionarControl(Panel panel, UserControl formFilha)

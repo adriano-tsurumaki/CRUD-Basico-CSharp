@@ -3,12 +3,12 @@
     public static class VendaSql
     {
         public readonly static string SelecionarProdutoVendaPorId =
-            @"select id, nome, preco_bruto as PrecoVenda from Produto where id = @id and ativo = 1";
+            @"select id, nome, preco_bruto as PrecoBruto, lucro from Produto where id = @id and ativo = 1";
 
         public readonly static string SelecionarProdutoVendaPeloNome =
-            @"select id, nome, preco_bruto as PrecoVenda from Produto where nome Like @nome + '%' and ativo = 1";
+            @"select id, nome, preco_bruto as PrecoBruto, lucro from Produto where nome Like @nome + '%' and ativo = 1";
 
         public static readonly string ListarTodosParaVenda =
-            @"select id, nome, preco_bruto as PrecoVenda from Produto";
+            @"select id, nome, preco_bruto as PrecoBruto, lucro from Produto";
     }
 }

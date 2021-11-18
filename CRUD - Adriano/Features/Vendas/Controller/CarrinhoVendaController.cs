@@ -44,8 +44,8 @@ namespace CRUD___Adriano.Features.Vendas.Controller
             Preco total = 0;
 
             foreach (var vendaProdutoModel in _vendaProdutosBinding)
-                total += ((vendaProdutoModel.PrecoVenda - vendaProdutoModel.Desconto) *
-                        vendaProdutoModel.Quantidade);
+                total += vendaProdutoModel.PrecoLiquido;
+
             return total.Formatado;
         }
 
