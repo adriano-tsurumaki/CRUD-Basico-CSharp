@@ -23,6 +23,8 @@ namespace CRUD___Adriano.Features.Vendas.Controller
         {
             _ucVendaFoooter = new UcVendaFooter(this);
             AtribuirEventos();
+            AdicionarControl(_ucVendaFoooter.pnlBottomRight, _ucBotaoProximo);
+            AdicionarControl(_ucVendaFoooter.pnlBottomLeft, _ucBotaoCancelar);
         }
 
         private void AtribuirEventos()
@@ -51,11 +53,13 @@ namespace CRUD___Adriano.Features.Vendas.Controller
         private void BtnProximo_Click(object sender, EventArgs e)
         {
             EventAvancar?.Invoke();
+            AtualizarRodape(2);
         }
 
         private void BtnAnterior_Click(object sender, EventArgs e)
         {
             EventVoltar?.Invoke();
+            AtualizarRodape(1);
         }
 
         public void AtualizarRodape(int indice)
