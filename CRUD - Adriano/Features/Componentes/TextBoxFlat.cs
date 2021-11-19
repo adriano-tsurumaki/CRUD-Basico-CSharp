@@ -110,6 +110,13 @@ namespace CRUD___Adriano.Features.Componentes
             set => textBox1.Text = value; 
         }
 
+        [Category("Customizado")]
+        public bool ReadOnly
+        {
+            get => textBox1.ReadOnly;
+            set => textBox1.ReadOnly = value;
+        }
+
         public int SelectionStart
         {
             get => textBox1.SelectionStart;
