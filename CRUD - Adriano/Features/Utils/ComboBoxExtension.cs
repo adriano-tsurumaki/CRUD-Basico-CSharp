@@ -14,8 +14,7 @@ namespace CRUD___Adriano.Features.Utils
             if (!typeof(T).IsEnum)
                 throw new Exception("T não é um tipo enum");
 
-            var listaDeEnum = new List<string>();
-            listaDeEnum.Add("Selecione uma opção");
+            var listaDeEnum = new List<string> { "Selecione uma opção" };
 
             foreach (Enum item in Enum.GetValues(typeof(T)))
             {

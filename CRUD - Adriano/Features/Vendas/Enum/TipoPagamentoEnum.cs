@@ -11,6 +11,6 @@ namespace CRUD___Adriano.Features.Vendas.Enum
         [Description("Crédito")]
         Credito = 3,
         [Description("Cheque")]
-        Cheque = 2,
+        Cheque = 4,
     }
 }
