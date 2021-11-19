@@ -18,6 +18,7 @@ namespace CRUD___Adriano.Features.Vendas.Controller
         private DescontoVendaController _controllerDescontoVenda;
         private VendaFooterController _controllerVendaFooter;
         private FormaPagamentoController _controllerFormaPagamento;
+        private ListaPagamentoController _controllerListaPagamento;
 
         private VendaModel _vendaModel;
 
@@ -51,6 +52,9 @@ namespace CRUD___Adriano.Features.Vendas.Controller
             
             _controllerFormaPagamento = ConfigNinject.ObterInstancia<FormaPagamentoController>();
             _controllerFormaPagamento.AdicionarModel(_vendaModel);
+
+            _controllerListaPagamento = ConfigNinject.ObterInstancia<ListaPagamentoController>();
+            _controllerListaPagamento.AdicionarModel(_vendaModel.ListaPagamentos);
         }
 
         private void DefinirEventosDosUserControls()
@@ -68,7 +72,7 @@ namespace CRUD___Adriano.Features.Vendas.Controller
         }
 
         private void EventDefinirCliente(ClienteModel clienteModelSelecionado) =>
-            _vendaModel.Cliente = clienteModelSelecionado;
+            _vendaModel.DefinirCliente(clienteModelSelecionado);
 
         private void EventEnviarProduto(VendaProdutoModel vendaProdutoSelecionado)
         {
@@ -114,6 +118,7 @@ namespace CRUD___Adriano.Features.Vendas.Controller
         private void EventAvancar()
         {
             AdicionarControl(_frmVendaPrincipal.pnlLeftCentral, _controllerFormaPagamento.RetornarUserControl());
+            AdicionarControl(_frmVendaPrincipal.pnlRightCentral, _controllerListaPagamento.RetornarUserControl());
             _controllerFormaPagamento.AtualizarValoresTotais(_vendaModel);
         }
 
@@ -122,6 +127,7 @@ namespace CRUD___Adriano.Features.Vendas.Controller
             foreach (var pagamento in listaFormaPagamentos)
                 _vendaModel.ListaPagamentos.Add(pagamento);
             _controllerFormaPagamento.AtualizarValoresTotais(_vendaModel);
+            _controllerListaPagamento.Atualizar();
         }
 
         public void AdicionarControl(Panel panel, UserControl formFilha)

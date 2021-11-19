@@ -8,12 +8,16 @@ namespace CRUD___Adriano.Features.Vendas.Model
 {
     public class VendaModel
     {
-        public ColaboradorModel Colaborador { get; set; }
-        public ClienteModel Cliente { get; set; }
-        public IList<VendaProdutoModel> ListaDeProdutos { get; set; }
-        public IList<FormaPagamentoModel> ListaPagamentos { get; set; }
+        public ColaboradorModel Colaborador { get; private set; }
+        public ClienteModel Cliente { get; private set; }
+        public IList<VendaProdutoModel> ListaDeProdutos { get; }
+        public IList<FormaPagamentoModel> ListaPagamentos { get; }
         public Preco ValorTotal { get => ListaDeProdutos.Sum(x => x.PrecoLiquido.Valor); }
         public Preco ValorPago { get => ListaPagamentos.Sum(x => x.ValorAPagar.Valor); }
+
+        public void DefinirColaborador(ColaboradorModel colaborador) => Colaborador = colaborador;
+
+        public void DefinirCliente(ClienteModel cliente) => Cliente = cliente;
 
         public VendaModel()
         {
