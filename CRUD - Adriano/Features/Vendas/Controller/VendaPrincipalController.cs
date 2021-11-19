@@ -4,7 +4,7 @@ using CRUD___Adriano.Features.ValueObject.Porcentagens;
 using CRUD___Adriano.Features.Vendas.Enum;
 using CRUD___Adriano.Features.Vendas.Model;
 using CRUD___Adriano.Features.Vendas.View;
-using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace CRUD___Adriano.Features.Vendas.Controller
@@ -19,12 +19,12 @@ namespace CRUD___Adriano.Features.Vendas.Controller
         private VendaFooterController _controllerVendaFooter;
         private FormaPagamentoController _controllerFormaPagamento;
 
-
-        private ClienteModel _clienteModelSelecionado;
+        private VendaModel _vendaModel;
 
         public VendaPrincipalController()
         {
             _frmVendaPrincipal = new FrmVendaPrincipal(this);
+            _vendaModel = new VendaModel();
 
             InstanciarControllers();
 
@@ -41,11 +41,16 @@ namespace CRUD___Adriano.Features.Vendas.Controller
         private void InstanciarControllers()
         {
             _controllerPesquisarProduto = ConfigNinject.ObterInstancia<PesquisarProdutoController>();
+            
             _controllerCarrinhoVenda = ConfigNinject.ObterInstancia<CarrinhoVendaController>();
+            _controllerCarrinhoVenda.AdicionarModel(_vendaModel.ListaDeProdutos);
+
             _controllerVendaHeader = ConfigNinject.ObterInstancia<VendaHeaderController>();
             _controllerDescontoVenda = ConfigNinject.ObterInstancia<DescontoVendaController>();
             _controllerVendaFooter = ConfigNinject.ObterInstancia<VendaFooterController>();
+            
             _controllerFormaPagamento = ConfigNinject.ObterInstancia<FormaPagamentoController>();
+            _controllerFormaPagamento.AdicionarModel(_vendaModel);
         }
 
         private void DefinirEventosDosUserControls()
@@ -58,10 +63,12 @@ namespace CRUD___Adriano.Features.Vendas.Controller
             _controllerDescontoVenda.RetornarUserControl().EventPegarDesconto += EventPegarDesconto;
             _controllerVendaFooter.EventAvancar += EventAvancar;
             _controllerVendaFooter.EventVoltar += EventVoltar;
+
+            _controllerFormaPagamento.RetornarUserControl().EventAdicionarPagamento += EventAdicionarPagamento;
         }
 
         private void EventDefinirCliente(ClienteModel clienteModelSelecionado) =>
-            _clienteModelSelecionado = clienteModelSelecionado;
+            _vendaModel.Cliente = clienteModelSelecionado;
 
         private void EventEnviarProduto(VendaProdutoModel vendaProdutoSelecionado)
         {
@@ -100,13 +107,21 @@ namespace CRUD___Adriano.Features.Vendas.Controller
 
         private void EventVoltar()
         {
-            AdicionarControl(_frmVendaPrincipal.pnlLeftCentral, _controllerFormaPagamento.RetornarUserControl());
+            AdicionarControl(_frmVendaPrincipal.pnlLeftCentral, _controllerPesquisarProduto.RetornarUserControl());
+            AdicionarControl(_frmVendaPrincipal.pnlRightCentral, _controllerCarrinhoVenda.RetornarUserControl());
         }
 
         private void EventAvancar()
         {
-            AdicionarControl(_frmVendaPrincipal.pnlLeftCentral, _controllerPesquisarProduto.RetornarUserControl());
-            AdicionarControl(_frmVendaPrincipal.pnlRightCentral, _controllerCarrinhoVenda.RetornarUserControl());
+            AdicionarControl(_frmVendaPrincipal.pnlLeftCentral, _controllerFormaPagamento.RetornarUserControl());
+            _controllerFormaPagamento.AtualizarValoresTotais(_vendaModel);
+        }
+
+        private void EventAdicionarPagamento(IList<FormaPagamentoModel> listaFormaPagamentos)
+        {
+            foreach (var pagamento in listaFormaPagamentos)
+                _vendaModel.ListaPagamentos.Add(pagamento);
+            _controllerFormaPagamento.AtualizarValoresTotais(_vendaModel);
         }
 
         public void AdicionarControl(Panel panel, UserControl formFilha)
