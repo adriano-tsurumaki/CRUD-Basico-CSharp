@@ -13,10 +13,12 @@ namespace CRUD___Adriano.Features.Vendas.Model
         public IList<VendaProdutoModel> ListaDeProdutos { get; set; }
         public IList<FormaPagamentoModel> ListaPagamentos { get; set; }
         public Preco ValorTotal { get => ListaDeProdutos.Sum(x => x.PrecoLiquido.Valor); }
+        public Preco ValorPago { get => ListaPagamentos.Sum(x => x.ValorAPagar.Valor); }
 
         public VendaModel()
         {
             ListaDeProdutos = new List<VendaProdutoModel>();
+            ListaPagamentos = new List<FormaPagamentoModel>();
         }
     }
 }
