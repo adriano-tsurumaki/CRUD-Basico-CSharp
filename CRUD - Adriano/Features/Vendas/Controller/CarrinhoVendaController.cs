@@ -1,7 +1,7 @@
 ﻿using CRUD___Adriano.Features.ValueObject.Precos;
-using CRUD___Adriano.Features.Vendas.Dao;
 using CRUD___Adriano.Features.Vendas.Model;
 using CRUD___Adriano.Features.Vendas.View;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 
@@ -9,20 +9,21 @@ namespace CRUD___Adriano.Features.Vendas.Controller
 {
     public class CarrinhoVendaController
     {
-        private readonly VendaDao _vendaDao;
         private readonly UcCarrinhoVenda _ucCarrinhoVenda;
         private BindingList<VendaProdutoModel> _vendaProdutosBinding;
         private VendaProdutoModel _produtoSelecionadoParaDesconto;
 
-        public CarrinhoVendaController(VendaDao vendaDao)
+        public CarrinhoVendaController()
         {
-            _vendaDao = vendaDao;
             _vendaProdutosBinding = new BindingList<VendaProdutoModel>();
             _ucCarrinhoVenda = new UcCarrinhoVenda(this);
-            AdicionarModel();
         }
 
-        public void AdicionarModel() => _ucCarrinhoVenda.BindModel(_vendaProdutosBinding);
+        public void AdicionarModel(IList<VendaProdutoModel> listaDeProdutos)
+        {
+            _vendaProdutosBinding = new BindingList<VendaProdutoModel>(listaDeProdutos);
+            _ucCarrinhoVenda.BindModel(_vendaProdutosBinding);
+        }
 
         public void AdicionarProdutoNoCarrinho(VendaProdutoModel vendaProdutoModel)
         {
