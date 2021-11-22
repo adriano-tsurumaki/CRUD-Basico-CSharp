@@ -138,23 +138,33 @@ namespace CRUD___Adriano.Features.Vendas.Controller
             _controllerFormaPagamento.AtualizarValoresTotais(_vendaModel);
         }
 
-        private void EventCancelar()
-        {
-            
-        }
+        private void EventCancelar() =>
+            CancelarVenda();
 
         private void EventVoltar()
         {
+            _controllerVendaFooter.AtualizarRodape(1);
+
             AdicionarControl(_frmVendaPrincipal.pnlLeftCentral, _controllerPesquisarProduto.RetornarUserControl());
             AdicionarControl(_frmVendaPrincipal.pnlRightCentral, _controllerCarrinhoVenda.RetornarUserControl());
         }
 
         private void EventAvancar()
         {
+            if (!PossuiItensNoCarrinho())
+            {
+                MessageBox.Show("Não é possível prosseguir quando não possui itens no carrinho!");
+                return;
+            }
+
+            _controllerVendaFooter.AtualizarRodape(2);
             AdicionarControl(_frmVendaPrincipal.pnlLeftCentral, _controllerFormaPagamento.RetornarUserControl());
             AdicionarControl(_frmVendaPrincipal.pnlRightCentral, _controllerListaPagamento.RetornarUserControl());
             _controllerFormaPagamento.AtualizarValoresTotais(_vendaModel);
         }
+
+        private bool PossuiItensNoCarrinho() =>
+            _controllerCarrinhoVenda.PossuiItensNoCarrinho();
 
         private void EventConfirmar()
         {
@@ -224,9 +234,16 @@ namespace CRUD___Adriano.Features.Vendas.Controller
             switch (e.KeyCode)
             {
                 case Keys.Escape:
-                    _frmVendaPrincipal.Close();
+                    CancelarVenda();
                     break;
             }
+        }
+
+        private void CancelarVenda()
+        {
+            if (MessageBox.Show("Deseja cancelar a venda?", "Confirmação", MessageBoxButtons.YesNo) != DialogResult.Yes) return;
+
+            _frmVendaPrincipal.Close();
         }
     }
 }

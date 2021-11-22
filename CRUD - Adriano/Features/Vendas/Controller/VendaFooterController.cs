@@ -43,27 +43,17 @@ namespace CRUD___Adriano.Features.Vendas.Controller
             _ucBotaoCancelar.btnCancel.Click += BtnCancelar_Click;
         }
 
-        private void BtnCancelar_Click(object sender, EventArgs e)
-        {
+        private void BtnCancelar_Click(object sender, EventArgs e) =>
             EventCancelar?.Invoke();
-        }
 
-        private void BtnAnterior_Click(object sender, EventArgs e)
-        {
+        private void BtnAnterior_Click(object sender, EventArgs e) =>
             EventVoltar?.Invoke();
-            AtualizarRodape(1);
-        }
 
-        private void BtnProximo_Click(object sender, EventArgs e)
-        {
+        private void BtnProximo_Click(object sender, EventArgs e) =>
             EventAvancar?.Invoke();
-            AtualizarRodape(2);
-        }
 
-        private void BtnConfirmar_Click(object sender, EventArgs e)
-        {
+        private void BtnConfirmar_Click(object sender, EventArgs e) =>
             EventConfirmar?.Invoke();
-        }
 
         public void AtualizarRodape(int indice)
         {

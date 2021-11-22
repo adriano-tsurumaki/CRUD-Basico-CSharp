@@ -61,5 +61,8 @@ namespace CRUD___Adriano.Features.Vendas.Controller
 
         public void AtualizarCarrinho() =>
             _ucCarrinhoVenda.AtualizarCarrinho();
+
+        public bool PossuiItensNoCarrinho() =>
+            _vendaProdutosBinding.Count > 0;
     }
 }
