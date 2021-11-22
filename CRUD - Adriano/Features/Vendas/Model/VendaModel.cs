@@ -1,6 +1,4 @@
-﻿using CRUD___Adriano.Features.Cadastro.Produto.Model;
-using CRUD___Adriano.Features.Colaborador.Model;
-using CRUD___Adriano.Features.ValueObject.Precos;
+﻿using CRUD___Adriano.Features.ValueObject.Precos;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -8,16 +6,18 @@ namespace CRUD___Adriano.Features.Vendas.Model
 {
     public class VendaModel
     {
-        public ColaboradorModel Colaborador { get; private set; }
-        public ClienteModel Cliente { get; private set; }
+        public int IdColaborador { get; private set; }
+        public int IdCliente { get; private set; }
         public IList<VendaProdutoModel> ListaDeProdutos { get; }
         public IList<FormaPagamentoModel> ListaPagamentos { get; }
-        public Preco ValorTotal { get => ListaDeProdutos.Sum(x => x.PrecoLiquido.Valor); }
+        public Preco DescontoTotal { get => ListaDeProdutos.Sum(x => x.Desconto.Valor); }
+        public Preco ValorBrutoTotal { get => ListaDeProdutos.Sum(x => x.PrecoBruto.Valor); }
+        public Preco ValorLiquidoTotal { get => ListaDeProdutos.Sum(x => x.PrecoLiquido.Valor); }
         public Preco ValorPago { get => ListaPagamentos.Sum(x => x.ValorAPagar.Valor); }
 
-        public void DefinirColaborador(ColaboradorModel colaborador) => Colaborador = colaborador;
+        public void DefinirColaborador(int  idColaborador) => IdColaborador = idColaborador;
 
-        public void DefinirCliente(ClienteModel cliente) => Cliente = cliente;
+        public void DefinirCliente(int idCliente) => IdCliente = idCliente;
 
         public VendaModel()
         {

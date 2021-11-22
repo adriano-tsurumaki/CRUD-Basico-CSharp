@@ -141,7 +141,7 @@ namespace CRUD___Adriano.Features.Colaborador.Controller
             return new ColaboradorModel();
         }
 
-        public ColaboradorModel SelecionarSomenteIdENome(int id)
+        public ColaboradorModel SelecionarPeloIdSomenteIdENome(int id)
         {
             try
             {
@@ -152,11 +152,6 @@ namespace CRUD___Adriano.Features.Colaborador.Controller
                 MessageBox.Show(excecao.Message, "Erro ao buscar o colaborador");
             }
             return new ColaboradorModel();
-        }
-
-        public ColaboradorModel SelecionarPeloIdSomenteIdENome(int id)
-        {
-            throw new NotImplementedException();
         }
     }
 }

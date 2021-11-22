@@ -160,7 +160,7 @@ namespace CRUD___Adriano.Features.Vendas.View
             if (gridView.CurrentRow == null)
                 return;
 
-            var vendaProdutoModelSelecionado = _controller.PesquisarProdutoPeloId((gridView.CurrentRow.DataBoundItem as VendaProdutoModel).Id);
+            var vendaProdutoModelSelecionado = _controller.PesquisarProdutoPeloId((gridView.CurrentRow.DataBoundItem as VendaProdutoModel).IdProduto);
 
             if (!vendaProdutoModelSelecionado.Vazio())
                 EventEnviarProduto?.Invoke(vendaProdutoModelSelecionado);

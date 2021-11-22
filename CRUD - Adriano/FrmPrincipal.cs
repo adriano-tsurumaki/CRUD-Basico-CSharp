@@ -153,7 +153,7 @@ namespace CRUD___Adriano
         private void BtnVendas_Click(object sender, EventArgs e)
         {
             LimparPanel();
-            new VendaPrincipalController();
+            ConfigNinject.ObterInstancia<VendaPrincipalController>();
         }
 
         private void TrocarVisibilidade(Panel subMenu) =>

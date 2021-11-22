@@ -1,14 +1,14 @@
 ﻿using CRUD___Adriano.Features.ValueObject.Porcentagens;
 using CRUD___Adriano.Features.ValueObject.Precos;
-using System;
 
 namespace CRUD___Adriano.Features.Vendas.Model
 {
     public class VendaProdutoModel
     {
         public int Id { get; set; }
+        public int IdProduto { get; set; }
+        public int IdVenda { get; set; }
         public string Nome { get; set; }
-        public DateTime DataEmissao { get; }
         public Preco Desconto { get; set; }
         public int Quantidade { get; set; }
         public Preco PrecoBruto { get; set; }
@@ -17,7 +17,6 @@ namespace CRUD___Adriano.Features.Vendas.Model
 
         public VendaProdutoModel()
         {
-            DataEmissao = DateTime.Now;
             Quantidade = 1;
         }
 

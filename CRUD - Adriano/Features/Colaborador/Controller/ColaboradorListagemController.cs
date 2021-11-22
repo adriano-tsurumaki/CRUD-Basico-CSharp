@@ -91,7 +91,7 @@ namespace CRUD___Adriano.Features.Colaborador.Controller
         public void SelecionarPeloId(BindingList<ColaboradorModel> colaboradoresBinding, int id)
         {
             colaboradoresBinding.Clear();
-            var colaboradorModel = _colaboradorController.SelecionarSomenteIdENome(id);
+            var colaboradorModel = _colaboradorController.SelecionarPeloIdSomenteIdENome(id);
             if (colaboradorModel == null) return;
 
             colaboradoresBinding.Add(colaboradorModel);

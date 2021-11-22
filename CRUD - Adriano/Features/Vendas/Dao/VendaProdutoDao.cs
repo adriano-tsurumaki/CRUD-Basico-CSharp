@@ -1,7 +1,6 @@
 ﻿using CRUD___Adriano.Features.Vendas.Model;
 using CRUD___Adriano.Features.Vendas.Sql;
 using Dapper;
-using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;

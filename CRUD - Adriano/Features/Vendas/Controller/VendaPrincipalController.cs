@@ -1,9 +1,12 @@
 ﻿using CRUD___Adriano.Features.Cadastro.Produto.Model;
 using CRUD___Adriano.Features.IoC;
+using CRUD___Adriano.Features.Usuario.Model;
 using CRUD___Adriano.Features.ValueObject.Porcentagens;
+using CRUD___Adriano.Features.Vendas.Dao;
 using CRUD___Adriano.Features.Vendas.Enum;
 using CRUD___Adriano.Features.Vendas.Model;
 using CRUD___Adriano.Features.Vendas.View;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
@@ -12,6 +15,8 @@ namespace CRUD___Adriano.Features.Vendas.Controller
 {
     public class VendaPrincipalController
     {
+        private readonly VendaDao _vendaDao;
+        
         private readonly FrmVendaPrincipal _frmVendaPrincipal;
         private VendaHeaderController _controllerVendaHeader;
         private PesquisarProdutoController _controllerPesquisarProduto;
@@ -23,8 +28,10 @@ namespace CRUD___Adriano.Features.Vendas.Controller
 
         private readonly VendaModel _vendaModel;
 
-        public VendaPrincipalController()
+        public VendaPrincipalController(VendaDao vendaDao)
         {
+            _vendaDao = vendaDao;
+
             _frmVendaPrincipal = new FrmVendaPrincipal(this);
             _vendaModel = new VendaModel();
 
@@ -60,20 +67,27 @@ namespace CRUD___Adriano.Features.Vendas.Controller
 
         private void DefinirEventosDosUserControls()
         {
-            _controllerVendaHeader.RetornarUserControl().EventDefinirCliente += EventDefinirCliente;
+            _controllerVendaHeader.RetornarUserControl().EventDefinirIdCliente += EventDefinirCliente;
+            _controllerVendaHeader.RetornarUserControl().EventDefinirIdColaborador += EventDefinirColaborador;
+
             _controllerPesquisarProduto.RetornarUserControl().EventEnviarProduto += EventEnviarProduto;
             _controllerCarrinhoVenda.RetornarUserControl().EventHabilitarUcDesconto += EventHabilitarUcDesconto;
             _controllerDescontoVenda.RetornarUserControl().EventDesabilitar += EventDesabilitarUcDesconto;
 
             _controllerDescontoVenda.RetornarUserControl().EventPegarDesconto += EventPegarDesconto;
-            _controllerVendaFooter.EventAvancar += EventAvancar;
+            _controllerVendaFooter.EventCancelar += EventCancelar;
             _controllerVendaFooter.EventVoltar += EventVoltar;
+            _controllerVendaFooter.EventAvancar += EventAvancar;
+            _controllerVendaFooter.EventConfirmar += EventConfirmar;
 
             _controllerFormaPagamento.RetornarUserControl().EventAdicionarPagamento += EventAdicionarPagamento;
         }
 
-        private void EventDefinirCliente(ClienteModel clienteModelSelecionado) =>
-            _vendaModel.DefinirCliente(clienteModelSelecionado);
+        private void EventDefinirCliente(UsuarioModel clienteModelSelecionado) =>
+            _vendaModel.DefinirCliente(clienteModelSelecionado.IdUsuario);
+
+        private void EventDefinirColaborador(UsuarioModel colaboradorModelSelecionado) =>
+            _vendaModel.DefinirColaborador(colaboradorModelSelecionado.IdUsuario);
 
         private void EventEnviarProduto(VendaProdutoModel vendaProdutoSelecionado)
         {
@@ -110,6 +124,25 @@ namespace CRUD___Adriano.Features.Vendas.Controller
             produtoSelecionado.Desconto = produtoSelecionado.PrecoVenda * porcentagem;
         }
 
+        private void EventAdicionarPagamento(IList<FormaPagamentoModel> listaFormaPagamentos)
+        {
+            var valorPago = listaFormaPagamentos.Sum(x => x.ValorAPagar.Valor) + _vendaModel.ValorPago;
+
+            if (valorPago > _vendaModel.ValorLiquidoTotal)
+            {
+                MessageBox.Show("Valor inserido é maior que o valor restante a ser pago!");
+                return;
+            }
+
+            _controllerListaPagamento.AdicionarPagamentosNaLista(listaFormaPagamentos);
+            _controllerFormaPagamento.AtualizarValoresTotais(_vendaModel);
+        }
+
+        private void EventCancelar()
+        {
+            
+        }
+
         private void EventVoltar()
         {
             AdicionarControl(_frmVendaPrincipal.pnlLeftCentral, _controllerPesquisarProduto.RetornarUserControl());
@@ -123,18 +156,41 @@ namespace CRUD___Adriano.Features.Vendas.Controller
             _controllerFormaPagamento.AtualizarValoresTotais(_vendaModel);
         }
 
-        private void EventAdicionarPagamento(IList<FormaPagamentoModel> listaFormaPagamentos)
+        private void EventConfirmar()
         {
-            var valorPago = listaFormaPagamentos.Sum(x => x.ValorAPagar.Valor) + _vendaModel.ValorPago;
+            if (!ValidarModel()) return;
 
-            if (valorPago > _vendaModel.ValorTotal)
+            if (MessageBox.Show("Deseja efetuar a venda?", "Confirmação", MessageBoxButtons.YesNo) != DialogResult.Yes) return;
+
+            try
             {
-                MessageBox.Show("Valor inserido é maior que o valor restante a ser pago!");
-                return;
+                _vendaDao.EfetuarVenda(_vendaModel);
+            }
+            catch (Exception excecao)
+            {
+                MessageBox.Show(excecao.Message, "Erro ao efetuar a venda!");
+            }
+        }
+
+        private bool ValidarModel()
+        {
+            if (_vendaModel.IdCliente == 0)
+            {
+                MessageBox.Show("Selecione um cliente!", "Aviso");
+                return false;
+            }
+            if (_vendaModel.IdColaborador == 0)
+            {
+                MessageBox.Show("Selecione um funcionário!", "Aviso");
+                return false;
+            }
+            if (_vendaModel.ListaPagamentos.Count == 0 || _vendaModel.ValorPago != _vendaModel.ValorLiquidoTotal)
+            {
+                MessageBox.Show("Efetue o pagamento total!", "Aviso");
+                return false;
             }
 
-            _controllerListaPagamento.AdicionarPagamentosNaLista(listaFormaPagamentos);
-            _controllerFormaPagamento.AtualizarValoresTotais(_vendaModel);
+            return true;
         }
 
         public void AdicionarControl(Panel panel, UserControl formFilha)

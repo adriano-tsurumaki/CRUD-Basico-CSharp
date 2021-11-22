@@ -1,6 +1,8 @@
 ﻿using CRUD___Adriano.Features.Cadastro.Produto.Model;
+using CRUD___Adriano.Features.Colaborador.Model;
 using CRUD___Adriano.Features.IoC;
 using CRUD___Adriano.Features.Usuario.Controller;
+using CRUD___Adriano.Features.Usuario.Model;
 using System;
 using System.Windows.Forms;
 
@@ -8,8 +10,9 @@ namespace CRUD___Adriano.Features.Vendas.View
 {
     public partial class UcVendaHeader : UserControl
     {
-        public delegate void DefinirClienteHandler(ClienteModel clienteModelSelecionado);
-        public event DefinirClienteHandler EventDefinirCliente;
+        public delegate void DefinirIdUsuarioHandler(UsuarioModel usuarioModelSelecionado);
+        public event DefinirIdUsuarioHandler EventDefinirIdCliente;
+        public event DefinirIdUsuarioHandler EventDefinirIdColaborador;
 
         public UcVendaHeader()
         {
@@ -25,7 +28,15 @@ namespace CRUD___Adriano.Features.Vendas.View
             var clienteModel = ConfigNinject.ObterInstancia<BuscarUsuarioController<ClienteModel>>()
                 .DefinirTituloDoForm("Listagem de Clientes").RetornarUsuarioSelecionado();
             lblCliente.Text = clienteModel.Nome;
-            EventDefinirCliente?.Invoke(clienteModel);
+            EventDefinirIdCliente?.Invoke(clienteModel);
+        }
+
+        private void lblVendedor_Click(object sender, EventArgs e)
+        {
+            var colaboradorModel = ConfigNinject.ObterInstancia<BuscarUsuarioController<ColaboradorModel>>()
+                .DefinirTituloDoForm("Listagem de Colaboradores").RetornarUsuarioSelecionado();
+            lblVendedor.Text = colaboradorModel.Nome;
+            EventDefinirIdColaborador?.Invoke(colaboradorModel);
         }
     }
 }

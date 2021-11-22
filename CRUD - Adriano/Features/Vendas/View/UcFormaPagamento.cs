@@ -27,8 +27,8 @@ namespace CRUD___Adriano.Features.Vendas.View
 
         public void AtualizarValoresTotais(VendaModel vendaModel)
         {
-            lblValorTotal.Text = $"Valor total: {vendaModel.ValorTotal.Formatado}";
-            lblValorRestante.Text = $"Valor restante: {(vendaModel.ValorTotal - vendaModel.ValorPago).Formatado}";
+            lblValorTotal.Text = $"Valor total: {vendaModel.ValorLiquidoTotal.Formatado}";
+            lblValorRestante.Text = $"Valor restante: {(vendaModel.ValorLiquidoTotal - vendaModel.ValorPago).Formatado}";
         }
 
         private void BtnConfirm_Click(object sender, EventArgs e)

@@ -7,10 +7,11 @@ namespace CRUD___Adriano.Features.Vendas.Controller
 {
     public class VendaFooterController
     {
-        public delegate void AvancarHandler();
-        public delegate void VoltarHandler();
-        public event AvancarHandler EventAvancar;
-        public event VoltarHandler EventVoltar;
+        public delegate void ButtonHandler();
+        public event ButtonHandler EventCancelar;
+        public event ButtonHandler EventVoltar;
+        public event ButtonHandler EventAvancar;
+        public event ButtonHandler EventConfirmar;
 
         private readonly UcVendaFooter _ucVendaFoooter;
 
@@ -44,10 +45,13 @@ namespace CRUD___Adriano.Features.Vendas.Controller
 
         private void BtnCancelar_Click(object sender, EventArgs e)
         {
+            EventCancelar?.Invoke();
         }
 
-        private void BtnConfirmar_Click(object sender, EventArgs e)
+        private void BtnAnterior_Click(object sender, EventArgs e)
         {
+            EventVoltar?.Invoke();
+            AtualizarRodape(1);
         }
 
         private void BtnProximo_Click(object sender, EventArgs e)
@@ -56,10 +60,9 @@ namespace CRUD___Adriano.Features.Vendas.Controller
             AtualizarRodape(2);
         }
 
-        private void BtnAnterior_Click(object sender, EventArgs e)
+        private void BtnConfirmar_Click(object sender, EventArgs e)
         {
-            EventVoltar?.Invoke();
-            AtualizarRodape(1);
+            EventConfirmar?.Invoke();
         }
 
         public void AtualizarRodape(int indice)
