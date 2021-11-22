@@ -5,6 +5,7 @@ using CRUD___Adriano.Features.Vendas.Enum;
 using CRUD___Adriano.Features.Vendas.Model;
 using CRUD___Adriano.Features.Vendas.View;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace CRUD___Adriano.Features.Vendas.Controller
@@ -124,8 +125,16 @@ namespace CRUD___Adriano.Features.Vendas.Controller
 
         private void EventAdicionarPagamento(IList<FormaPagamentoModel> listaFormaPagamentos)
         {
-            _controllerFormaPagamento.AtualizarValoresTotais(_vendaModel);
+            var valorPago = listaFormaPagamentos.Sum(x => x.ValorAPagar.Valor) + _vendaModel.ValorPago;
+
+            if (valorPago > _vendaModel.ValorTotal)
+            {
+                MessageBox.Show("Valor inserido é maior que o valor restante a ser pago!");
+                return;
+            }
+
             _controllerListaPagamento.AdicionarPagamentosNaLista(listaFormaPagamentos);
+            _controllerFormaPagamento.AtualizarValoresTotais(_vendaModel);
         }
 
         public void AdicionarControl(Panel panel, UserControl formFilha)

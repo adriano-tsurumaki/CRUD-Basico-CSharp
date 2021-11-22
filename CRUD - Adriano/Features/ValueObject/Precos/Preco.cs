@@ -53,5 +53,17 @@ namespace CRUD___Adriano.Features.ValueObject.Precos
 
         public static Preco operator *(Preco preco, float flutuante)
             => new Preco(Math.Round(preco.Valor * flutuante, 2));
+
+        public static bool operator >(Preco precoA, Preco precoB)
+            => precoA.Valor > precoB.Valor;
+
+        public static bool operator <(Preco precoA, Preco precoB)
+            => precoA.Valor < precoB.Valor;
+
+        public static bool operator ==(Preco precoA, Preco precoB)
+            => precoA.Valor == precoB.Valor;
+
+        public static bool operator !=(Preco precoA, Preco precoB)
+            => precoA.Valor != precoB.Valor;
     }
 }
