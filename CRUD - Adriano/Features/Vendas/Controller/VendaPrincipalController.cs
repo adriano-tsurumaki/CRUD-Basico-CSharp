@@ -11,7 +11,7 @@ namespace CRUD___Adriano.Features.Vendas.Controller
 {
     public class VendaPrincipalController
     {
-        private FrmVendaPrincipal _frmVendaPrincipal;
+        private readonly FrmVendaPrincipal _frmVendaPrincipal;
         private VendaHeaderController _controllerVendaHeader;
         private PesquisarProdutoController _controllerPesquisarProduto;
         private CarrinhoVendaController _controllerCarrinhoVenda;
@@ -20,7 +20,7 @@ namespace CRUD___Adriano.Features.Vendas.Controller
         private FormaPagamentoController _controllerFormaPagamento;
         private ListaPagamentoController _controllerListaPagamento;
 
-        private VendaModel _vendaModel;
+        private readonly VendaModel _vendaModel;
 
         public VendaPrincipalController()
         {
@@ -124,10 +124,8 @@ namespace CRUD___Adriano.Features.Vendas.Controller
 
         private void EventAdicionarPagamento(IList<FormaPagamentoModel> listaFormaPagamentos)
         {
-            foreach (var pagamento in listaFormaPagamentos)
-                _vendaModel.ListaPagamentos.Add(pagamento);
             _controllerFormaPagamento.AtualizarValoresTotais(_vendaModel);
-            _controllerListaPagamento.Atualizar();
+            _controllerListaPagamento.AdicionarPagamentosNaLista(listaFormaPagamentos);
         }
 
         public void AdicionarControl(Panel panel, UserControl formFilha)

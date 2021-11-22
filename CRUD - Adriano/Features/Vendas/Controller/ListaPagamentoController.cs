@@ -23,9 +23,13 @@ namespace CRUD___Adriano.Features.Vendas.Controller
             _ucListaPagamento.BindModel(_formaPagamentosBinding); 
         }
 
-        public void Atualizar()
+        public void AdicionarPagamentosNaLista(IList<FormaPagamentoModel> listaFormaPagamentos)
         {
-            _ucListaPagamento.Atualizar();
+            foreach (var pagamento in listaFormaPagamentos)
+            {
+                pagamento.PosicaoPagamento = _formaPagamentosBinding.Count + 1;
+                _formaPagamentosBinding.Add(pagamento);
+            }
         }
     }
 }

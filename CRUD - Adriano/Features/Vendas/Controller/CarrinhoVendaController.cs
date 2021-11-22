@@ -15,7 +15,6 @@ namespace CRUD___Adriano.Features.Vendas.Controller
 
         public CarrinhoVendaController()
         {
-            _vendaProdutosBinding = new BindingList<VendaProdutoModel>();
             _ucCarrinhoVenda = new UcCarrinhoVenda(this);
         }
 

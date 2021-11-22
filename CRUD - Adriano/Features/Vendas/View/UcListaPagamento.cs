@@ -2,6 +2,7 @@
 using System;
 using System.ComponentModel;
 using System.Drawing;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace CRUD___Adriano.Features.Vendas.View
@@ -39,11 +40,12 @@ namespace CRUD___Adriano.Features.Vendas.View
             {
                 CellTemplate = celula,
                 Name = "Valor pago",
-                DataPropertyName = "ValorAPagar",
+                DataPropertyName = "ValorAPagar.Formatado",
                 AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill,
                 DefaultCellStyle = new DataGridViewCellStyle
                 {
                     Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point),
+                    ForeColor = Color.Crimson,
                     BackColor = Color.FromArgb(23, 31, 32),
                     SelectionForeColor = Color.Black,
                     SelectionBackColor = Color.LightSeaGreen,
@@ -60,7 +62,7 @@ namespace CRUD___Adriano.Features.Vendas.View
                 DefaultCellStyle = new DataGridViewCellStyle
                 {
                     Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point),
-                    ForeColor = Color.Crimson,
+                    ForeColor = Color.DodgerBlue,
                     BackColor = Color.FromArgb(23, 31, 32),
                     SelectionBackColor = Color.LightSeaGreen,
                     Padding = new Padding(2)
@@ -110,9 +112,41 @@ namespace CRUD___Adriano.Features.Vendas.View
             gridView.DataSource = listaFormaPagamento;
         }
 
-        internal void Atualizar()
+        private void GridView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            gridView.Refresh();
+            if (!(gridView.Rows[e.RowIndex].DataBoundItem is FormaPagamentoModel) || !gridView.Columns[e.ColumnIndex].DataPropertyName.Contains(".")) return;
+
+            e.Value = BindProperty(gridView.Rows[e.RowIndex].DataBoundItem, gridView.Columns[e.ColumnIndex].DataPropertyName);
+        }
+
+        private object BindProperty(object propriedade, string nomeDaPropriedade)
+        {
+            string valorDeRetorno = "";
+
+            if (nomeDaPropriedade.Contains("."))
+            {
+                var leftPropertyName = nomeDaPropriedade.Substring(0, nomeDaPropriedade.IndexOf("."));
+                var arrayDePropriedades = propriedade.GetType().GetProperties();
+                foreach (var informacaoDaPropriedade in arrayDePropriedades)
+                {
+                    if (informacaoDaPropriedade.Name == leftPropertyName)
+                    {
+                        valorDeRetorno = (string)BindProperty(
+                          informacaoDaPropriedade.GetValue(propriedade, null),
+                          nomeDaPropriedade[(nomeDaPropriedade.IndexOf(".") + 1)..]);
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                Type tipoDePropriedade;
+                PropertyInfo informacaoDaPropriedade;
+                tipoDePropriedade = propriedade.GetType();
+                informacaoDaPropriedade = tipoDePropriedade.GetProperty(nomeDaPropriedade);
+                valorDeRetorno = informacaoDaPropriedade.GetValue(propriedade, null).ToString();
+            }
+            return valorDeRetorno;
         }
     }
 }
