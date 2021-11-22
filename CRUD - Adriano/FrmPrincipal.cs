@@ -156,6 +156,13 @@ namespace CRUD___Adriano
             ConfigNinject.ObterInstancia<VendaPrincipalController>();
         }
 
+        private void BtnListagemVenda_Click(object sender, EventArgs e)
+        {
+            LimparPanel();
+            lblTitulo.Text = "Listagem de vendas";
+            DocaForm(ConfigNinject.ObterInstancia<VendaListagemController>().RetornarFormulario());
+        }
+
         private void TrocarVisibilidade(Panel subMenu) =>
             subMenu.Visible = !subMenu.Visible;
 

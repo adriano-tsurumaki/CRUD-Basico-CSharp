@@ -16,7 +16,7 @@ namespace CRUD___Adriano.Features.ValueObject.Precos
 
         public Preco(double preco)
         {
-            _preco = preco;
+            _preco = Math.Round(preco, 2);
         }
 
         public Preco(string preco)

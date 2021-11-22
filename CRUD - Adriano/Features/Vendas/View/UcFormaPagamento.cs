@@ -4,6 +4,7 @@ using CRUD___Adriano.Features.Vendas.Enum;
 using CRUD___Adriano.Features.Vendas.Model;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace CRUD___Adriano.Features.Vendas.View
@@ -77,6 +78,11 @@ namespace CRUD___Adriano.Features.Vendas.View
                         PosicaoParcela = posicaoParcela
                     });
                 }
+                Preco valorSerPago = listaFormaPagamento.Sum(x => x.ValorAPagar.Valor);
+                Preco valorTotal = txtValorASerPago.Texto.DoubleOuZero();
+                Preco diferencaDeConversao = valorTotal - valorSerPago;
+
+                listaFormaPagamento.Last().ValorAPagar += diferencaDeConversao;
             }
 
             EventAdicionarPagamento?.Invoke(listaFormaPagamento);

@@ -175,6 +175,8 @@ namespace CRUD___Adriano.Features.Vendas.Controller
             try
             {
                 _vendaDao.EfetuarVenda(_vendaModel);
+                MessageBox.Show("Venda efetuada com sucesso!");
+                _frmVendaPrincipal.Close();
             }
             catch (Exception excecao)
             {
