@@ -57,6 +57,7 @@ namespace CRUD___Adriano.Features.Cliente.View
             this.txtQuantidadeClientes.Name = "txtQuantidadeClientes";
             this.txtQuantidadeClientes.Padding = new System.Windows.Forms.Padding(7);
             this.txtQuantidadeClientes.PasswordChar = false;
+            this.txtQuantidadeClientes.ReadOnly = false;
             this.txtQuantidadeClientes.SelectionLength = 0;
             this.txtQuantidadeClientes.SelectionStart = 0;
             this.txtQuantidadeClientes.Size = new System.Drawing.Size(250, 36);
@@ -130,6 +131,7 @@ namespace CRUD___Adriano.Features.Cliente.View
             this.txtQuantidadeColaboradores.Name = "txtQuantidadeColaboradores";
             this.txtQuantidadeColaboradores.Padding = new System.Windows.Forms.Padding(7);
             this.txtQuantidadeColaboradores.PasswordChar = false;
+            this.txtQuantidadeColaboradores.ReadOnly = false;
             this.txtQuantidadeColaboradores.SelectionLength = 0;
             this.txtQuantidadeColaboradores.SelectionStart = 0;
             this.txtQuantidadeColaboradores.Size = new System.Drawing.Size(250, 36);
@@ -178,6 +180,7 @@ namespace CRUD___Adriano.Features.Cliente.View
             this.txtQuantidadeFornecedores.Name = "txtQuantidadeFornecedores";
             this.txtQuantidadeFornecedores.Padding = new System.Windows.Forms.Padding(7);
             this.txtQuantidadeFornecedores.PasswordChar = false;
+            this.txtQuantidadeFornecedores.ReadOnly = false;
             this.txtQuantidadeFornecedores.SelectionLength = 0;
             this.txtQuantidadeFornecedores.SelectionStart = 0;
             this.txtQuantidadeFornecedores.Size = new System.Drawing.Size(250, 36);
@@ -208,9 +211,9 @@ namespace CRUD___Adriano.Features.Cliente.View
             this.lblQuantidadeProdutos.ForeColor = System.Drawing.Color.MediumSlateBlue;
             this.lblQuantidadeProdutos.Location = new System.Drawing.Point(12, 300);
             this.lblQuantidadeProdutos.Name = "lblQuantidadeProdutos";
-            this.lblQuantidadeProdutos.Size = new System.Drawing.Size(523, 21);
+            this.lblQuantidadeProdutos.Size = new System.Drawing.Size(492, 21);
             this.lblQuantidadeProdutos.TabIndex = 10;
-            this.lblQuantidadeProdutos.Text = "Digite a quantidade de fornecedores que deseja gerar aleatoriamente.";
+            this.lblQuantidadeProdutos.Text = "Digite a quantidade de produtos que deseja gerar aleatoriamente.";
             // 
             // txtQuantidadeProdutos
             // 
@@ -226,6 +229,7 @@ namespace CRUD___Adriano.Features.Cliente.View
             this.txtQuantidadeProdutos.Name = "txtQuantidadeProdutos";
             this.txtQuantidadeProdutos.Padding = new System.Windows.Forms.Padding(7);
             this.txtQuantidadeProdutos.PasswordChar = false;
+            this.txtQuantidadeProdutos.ReadOnly = false;
             this.txtQuantidadeProdutos.SelectionLength = 0;
             this.txtQuantidadeProdutos.SelectionStart = 0;
             this.txtQuantidadeProdutos.Size = new System.Drawing.Size(250, 36);

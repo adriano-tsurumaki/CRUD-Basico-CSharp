@@ -84,10 +84,10 @@ namespace CRUD___Adriano.Features.Vendas.Controller
         }
 
         private void EventDefinirCliente(UsuarioModel clienteModelSelecionado) =>
-            _vendaModel.DefinirCliente(clienteModelSelecionado.IdUsuario);
+            _vendaModel.DefinirIdCliente(clienteModelSelecionado.IdUsuario);
 
         private void EventDefinirColaborador(UsuarioModel colaboradorModelSelecionado) =>
-            _vendaModel.DefinirColaborador(colaboradorModelSelecionado.IdUsuario);
+            _vendaModel.DefinirIdColaborador(colaboradorModelSelecionado.IdUsuario);
 
         private void EventEnviarProduto(VendaProdutoModel vendaProdutoSelecionado)
         {
@@ -186,12 +186,12 @@ namespace CRUD___Adriano.Features.Vendas.Controller
 
         private bool ValidarModel()
         {
-            if (_vendaModel.IdCliente == 0)
+            if (_vendaModel.Cliente.IdUsuario == 0)
             {
                 MessageBox.Show("Selecione um cliente!", "Aviso");
                 return false;
             }
-            if (_vendaModel.IdColaborador == 0)
+            if (_vendaModel.Colaborador.IdUsuario == 0)
             {
                 MessageBox.Show("Selecione um funcionário!", "Aviso");
                 return false;

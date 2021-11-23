@@ -6,13 +6,13 @@ namespace CRUD___Adriano.Features.Vendas.Sql
     public static class VendaSql
     {
         public readonly static string SelecionarProdutoVendaPorId =
-            @"select id as IdProduto, nome, preco_bruto as PrecoBruto, lucro from Produto where id = @id and ativo = 1 and quantidade > 1";
+            @"select id as IdProduto, nome, preco_bruto as PrecoBruto, lucro from Produto where id = @id and ativo = 1 and quantidade > 0";
 
         public readonly static string SelecionarProdutoVendaPeloNome =
-            @"select id as IdProduto, nome, preco_bruto as PrecoBruto, lucro from Produto where nome Like @nome + '%' and ativo = 1 and quantidade > 1";
+            @"select id as IdProduto, nome, preco_bruto as PrecoBruto, lucro from Produto where nome Like @nome + '%' and ativo = 1 and quantidade > 0";
 
         public static readonly string ListarTodosParaVenda =
-            @"select id as IdProduto, nome, preco_bruto as PrecoBruto, lucro from Produto and quantidade > 1";
+            @"select id as IdProduto, nome, preco_bruto as PrecoBruto, lucro from Produto where quantidade > 0";
 
         public static readonly string InserirVenda =
             @"insert into Venda (id_cliente, id_colaborador, preco_bruto_total, desconto_total, preco_liquido_total)
@@ -34,8 +34,8 @@ namespace CRUD___Adriano.Features.Vendas.Sql
 
             parametros.AddDynamicParams(new
             {
-                vendaModel.IdCliente,
-                vendaModel.IdColaborador,
+                IdCliente = vendaModel.Cliente.IdUsuario,
+                IdColaborador = vendaModel.Colaborador.IdUsuario,
                 PrecoBrutoTotal = vendaModel.ValorBrutoTotal.Valor,
                 DescontoTotal = vendaModel.DescontoTotal.Valor,
                 PrecoLiquidoTotal = vendaModel.ValorLiquidoTotal.Valor,
