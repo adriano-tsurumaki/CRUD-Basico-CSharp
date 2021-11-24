@@ -141,7 +141,10 @@ namespace CRUD___Adriano.Features.Vendas.Dao
                 venda.DefinirCliente(_conexao.QuerySingleOrDefault<ClienteModel>(@"select u.id as IdUsuario, u.nome from Venda v inner join Usuario u on u.id = v.id_cliente where v.id = @id", new { id }));
                 venda.DefinirColaborador(_conexao.QuerySingleOrDefault<ColaboradorModel>(@"select u.id as IdUsuario, u.nome from Venda v inner join Usuario u on u.id = v.id_colaborador where v.id = @id", new { id }));
 
-                foreach (var item in _conexao.Query<VendaProdutoModel>("select id, desconto, quantidade, preco_bruto as PrecoBruto, lucro from VendaProduto where id_venda = @id", new { id }).ToList())
+                foreach (var item in _conexao.Query<VendaProdutoModel>(@"select v.id, p.nome, v.desconto, v.quantidade, v.preco_bruto as PrecoBruto, v.lucro 
+                from VendaProduto v
+                inner join Produto p on p.id = v.id_produto
+                where id_venda = @id", new { id }).ToList())
                     venda.ListaDeProdutos.Add(item);
 
                 foreach (var pagamento in _conexao.Query<FormaPagamentoModel>(@"select id, posicao_pagamento as PosicaoPagamento, valor_pago as ValorAPagar, tipo_pagamento as TipoPagamento, quantidade_parcelas as QuantidadeParcelas, posicao_parcela as PosicaoParcela from FormaPagamento where id_venda = @id", new { id }).ToList())
@@ -155,8 +158,11 @@ namespace CRUD___Adriano.Features.Vendas.Dao
             }
         }
 
-        public void AtualizarVenda(VendaModel vendaModel)
+        public void AtualizarVenda(VendaModel vendaModelModificado)
         {
+            var vendaModelAntigo = Selecionar(vendaModelModificado.Id);
+
+
         }
     }
 }

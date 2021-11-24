@@ -47,6 +47,8 @@ namespace CRUD___Adriano.Features.Vendas.Controller
         {
             _vendaModel = vendaModel;
             InicializarConfiguracoes();
+            _controllerVendaHeader.DefinirLabelCliente(vendaModel.Cliente.Nome);
+            _controllerVendaHeader.DefinirLabelColaborador(vendaModel.Colaborador.Nome);
             _tipoCrud = ControllerEnum.Atualizar;
             _frmVendaPrincipal.ShowDialog();
         }

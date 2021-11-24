@@ -105,7 +105,7 @@ namespace CRUD___Adriano.Features.Vendas.View
             {
                 CellTemplate = celula,
                 Name = "clnId",
-                DataPropertyName = "Id",
+                DataPropertyName = "IdProduto",
                 AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill,
                 DefaultCellStyle = new DataGridViewCellStyle
                 {

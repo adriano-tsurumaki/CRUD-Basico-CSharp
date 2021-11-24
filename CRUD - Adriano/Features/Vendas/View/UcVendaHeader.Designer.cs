@@ -65,7 +65,7 @@ namespace CRUD___Adriano.Features.Vendas.View
             this.lblVendedor.TabIndex = 2;
             this.lblVendedor.Text = "Administrador";
             this.lblVendedor.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblVendedor.Click += new System.EventHandler(this.lblVendedor_Click);
+            this.lblVendedor.Click += new System.EventHandler(this.LblVendedor_Click);
             // 
             // lblTituloVendedor
             // 

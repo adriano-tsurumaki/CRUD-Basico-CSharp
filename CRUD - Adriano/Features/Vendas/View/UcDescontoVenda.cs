@@ -35,7 +35,7 @@ namespace CRUD___Adriano.Features.Vendas.View
             if (tipoDesconto == TipoDescontoEnum.Geral)
                 _controller.DefinirQueFoiAplicadoODescontoGeral();
 
-            EventPegarDesconto?.Invoke(tipoDesconto, desconto);
+            EventPegarDesconto?.Invoke(tipoDesconto, desconto / 100);
             EventDesabilitar?.Invoke();
         }
 
