@@ -1,5 +1,4 @@
-﻿using CRUD___Adriano.Features.ValueObject.Porcentagens;
-using CRUD___Adriano.Features.Vendas.Controller;
+﻿using CRUD___Adriano.Features.Vendas.Controller;
 using CRUD___Adriano.Features.Vendas.Enum;
 using System;
 using System.Windows.Forms;
@@ -9,7 +8,7 @@ namespace CRUD___Adriano.Features.Vendas.View
     public partial class UcDescontoVenda : UserControl
     {
         public delegate void DesabilitarHandler();
-        public delegate void PegarDescontoHandler(TipoDescontoEnum tipoDesconto, Porcentagem porcentagem);
+        public delegate void PegarDescontoHandler(TipoDescontoEnum tipoDesconto, double porcentagem);
 
         private DescontoVendaController _controller;
 

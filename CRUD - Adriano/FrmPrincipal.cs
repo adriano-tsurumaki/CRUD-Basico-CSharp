@@ -14,7 +14,6 @@ using CRUD___Adriano.Features.Produto.Controller;
 using CRUD___Adriano.Features.Produto.Model;
 using CRUD___Adriano.Features.Usuario.Controller;
 using CRUD___Adriano.Features.Vendas.Controller;
-using CRUD___Adriano.Features.Vendas.View;
 using System;
 using System.Windows.Forms;
 

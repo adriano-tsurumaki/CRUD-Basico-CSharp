@@ -29,7 +29,7 @@ namespace CRUD___Adriano.Features.Produto.View
             txtCodigoBarras.DataBindings.Add("Texto", produtoModel, "CodigoBarras");
             txtNome.DataBindings.Add("Texto", produtoModel, "Nome");
             txtPrecoBruto.Texto = produtoModel.PrecoBruto.Formatado;
-            txtLucro.Texto = produtoModel.Lucro.Formatado;
+            txtLucro.Texto = produtoModel.Lucro.ToString();
             txtQuantidade.DataBindings.Add("Texto", produtoModel, "Quantidade");
         }
 
@@ -67,7 +67,7 @@ namespace CRUD___Adriano.Features.Produto.View
             }
 
             _produtoModel.PrecoBruto = txtPrecoBruto.Texto;
-            _produtoModel.Lucro = txtLucro.Texto;
+            _produtoModel.Lucro = txtLucro.Texto.PorcentoOuZero();
             return true;
         }
 

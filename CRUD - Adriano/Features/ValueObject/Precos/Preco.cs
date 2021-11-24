@@ -1,5 +1,4 @@
 ﻿using CRUD___Adriano.Features.Utils;
-using CRUD___Adriano.Features.ValueObject.Porcentagens;
 using System;
 using System.Globalization;
 using System.Text.RegularExpressions;
@@ -41,9 +40,6 @@ namespace CRUD___Adriano.Features.ValueObject.Precos
         public static Preco operator %(Preco precoA, Preco precoB) => new Preco(Math.Round(precoA.Valor % precoB.Valor, 2));
         public static Preco operator *(Preco precoA, Preco precoB) => new Preco(Math.Round(precoA.Valor * precoB.Valor, 2));
         public static Preco operator /(Preco precoA, Preco precoB) => new Preco(Math.Round(precoA.Valor / precoB.Valor, 2));
-
-        public static Preco operator *(Preco preco, Porcentagem porcentagem) 
-            => new Preco(Math.Round(preco.Valor * porcentagem.Valor, 2));
 
         public static Preco operator *(Preco preco, int inteiro)
             => new Preco(Math.Round(preco.Valor * inteiro, 2));

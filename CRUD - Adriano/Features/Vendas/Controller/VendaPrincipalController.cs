@@ -1,7 +1,5 @@
-﻿using CRUD___Adriano.Features.Cadastro.Produto.Model;
-using CRUD___Adriano.Features.IoC;
+﻿using CRUD___Adriano.Features.IoC;
 using CRUD___Adriano.Features.Usuario.Model;
-using CRUD___Adriano.Features.ValueObject.Porcentagens;
 using CRUD___Adriano.Features.Vendas.Dao;
 using CRUD___Adriano.Features.Vendas.Enum;
 using CRUD___Adriano.Features.Vendas.Model;
@@ -103,7 +101,7 @@ namespace CRUD___Adriano.Features.Vendas.Controller
         private void EventDesabilitarUcDesconto() =>
             AdicionarControl(_frmVendaPrincipal.pnlLeftCentral, _controllerPesquisarProduto.RetornarUserControl());
 
-        private void EventPegarDesconto(TipoDescontoEnum tipoDesconto, Porcentagem porcentagem)
+        private void EventPegarDesconto(TipoDescontoEnum tipoDesconto, double porcentagem)
         {
             if (tipoDesconto == TipoDescontoEnum.Geral)
                 AplicarDescontoGeral(porcentagem);
@@ -112,13 +110,13 @@ namespace CRUD___Adriano.Features.Vendas.Controller
             _controllerCarrinhoVenda.AtualizarCarrinho();
         }
 
-        private void AplicarDescontoGeral(Porcentagem porcentagem)
+        private void AplicarDescontoGeral(double porcentagem)
         {
             foreach (var item in _controllerCarrinhoVenda.RetornarListasDeProdutosParaDesconto())
                 item.Desconto = item.PrecoVenda * porcentagem;
         }
 
-        private void AplicarDescontoUnitario(Porcentagem porcentagem)
+        private void AplicarDescontoUnitario(double porcentagem)
         {
             var produtoSelecionado = _controllerCarrinhoVenda.RetornarVendaProdutoSelecionadoParaDesconto();
             produtoSelecionado.Desconto = produtoSelecionado.PrecoVenda * porcentagem;

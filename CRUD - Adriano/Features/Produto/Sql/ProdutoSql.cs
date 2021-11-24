@@ -27,7 +27,7 @@ namespace CRUD___Adriano.Features.Produto.Sql
                 produtoModel.CodigoBarras,
                 produtoModel.Nome,
                 PrecoBruto = produtoModel.PrecoBruto.Valor,
-                Lucro = produtoModel.Lucro.Valor,
+                produtoModel.Lucro,
                 produtoModel.Quantidade
             });
 

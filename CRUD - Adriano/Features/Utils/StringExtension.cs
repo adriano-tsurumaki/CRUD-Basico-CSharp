@@ -20,6 +20,12 @@ namespace CRUD___Adriano.Features.Utils
             return resultado;
         }
 
+        public static double PorcentoOuZero(this string valor)
+        {
+            double.TryParse(valor, out double resultado);
+            return resultado / 100;
+        }
+
         public static float FloatOuZero(this string valor)
         {
             float.TryParse(valor, out float resultado);

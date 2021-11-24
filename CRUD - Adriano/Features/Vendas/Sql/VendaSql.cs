@@ -55,7 +55,7 @@ namespace CRUD___Adriano.Features.Vendas.Sql
                 Desconto = vendaProdutoModel.Desconto.Valor,
                 vendaProdutoModel.Quantidade,
                 PrecoBruto = vendaProdutoModel.PrecoBruto.Valor,
-                Lucro = vendaProdutoModel.Lucro.Valor,
+                vendaProdutoModel.Lucro,
                 PrecoLiquido = vendaProdutoModel.PrecoLiquido.Valor,
             });
 
