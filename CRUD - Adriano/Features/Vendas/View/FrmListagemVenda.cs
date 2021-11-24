@@ -54,7 +54,7 @@ namespace CRUD___Adriano.Features.Vendas.View
                 CellTemplate = celula,
                 Name = "clnDescontoTotal",
                 HeaderText = "Desconto",
-                DataPropertyName = "DescontoTotal.Valor",
+                DataPropertyName = "DescontoTotal.Formatado",
                 ReadOnly = true,
             };
             
@@ -63,7 +63,7 @@ namespace CRUD___Adriano.Features.Vendas.View
                 CellTemplate = celula,
                 Name = "clnValorTotal",
                 HeaderText = "Valor total",
-                DataPropertyName = "ValorLiquidoTotal.Valor",
+                DataPropertyName = "ValorLiquidoTotal.Formatado",
                 ReadOnly = true,
             };
 
@@ -136,18 +136,40 @@ namespace CRUD___Adriano.Features.Vendas.View
         private void BtnPesquisar_Click(object sender, System.EventArgs e) =>
             PesquisarDeAcordoComOTexto();
 
-        private void TxtPesquisar_KeyDown(object sender, KeyEventArgs e)
+        private void TxtPesquisar__KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode != Keys.Enter) return;
+
             PesquisarDeAcordoComOTexto();
         }
 
         private void PesquisarDeAcordoComOTexto()
         {
-            if (txtPesquisar.NuloOuVazio())
-                return;
-            else if (txtPesquisar.Texto == "%")
+            if (txtPesquisar.NuloOuVazio()) return;
+
+            if (txtPesquisar.Texto == "%")
                 _controller.ListarTodos();
+        }
+
+        private void GridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var senderGrid = sender as DataGridView;
+
+            if (e.RowIndex < 0) return;
+
+            if (!(senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn botao)) return;
+
+            var vendaSelecionado = gridView.CurrentRow.DataBoundItem as VendaModel;
+
+            if (botao.Name.Equals("Excluir"))
+            {
+                if (MessageBox.Show("Deseja realmente excluir?", "Aviso", MessageBoxButtons.YesNo) == DialogResult.No) return;
+
+                if (_controller.ExcluirVenda(vendaSelecionado))
+                    MessageBox.Show("Excluído com sucesso");
+            }
+            else if (botao.Name.Equals("Alterar"))
+                _controller.AlterarVenda(vendaSelecionado.Id);
         }
     }
 }

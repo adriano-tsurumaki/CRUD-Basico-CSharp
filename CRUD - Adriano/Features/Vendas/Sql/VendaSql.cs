@@ -14,6 +14,15 @@ namespace CRUD___Adriano.Features.Vendas.Sql
         public static readonly string ListarTodosParaVenda =
             @"select id as IdProduto, nome, preco_bruto as PrecoBruto, lucro from Produto where quantidade > 0";
 
+        public static readonly string ListarTodos = @"select v.id, v.data_emissao as DataEmissao,
+            v.id as split, cl.nome, 
+            v.id as split, co.nome,
+		    v.id as split, vp.desconto, vp.quantidade, vp.preco_bruto as PrecoBruto, vp.lucro
+		    from Venda v
+            inner join Usuario cl on cl.id = v.id_cliente
+            inner join Usuario co on co.id = v.id_colaborador
+		    inner join VendaProduto vp on vp.id_venda = v.id";
+
         public static readonly string InserirVenda =
             @"insert into Venda (id_cliente, id_colaborador, preco_bruto_total, desconto_total, preco_liquido_total)
             output inserted.id
@@ -27,6 +36,27 @@ namespace CRUD___Adriano.Features.Vendas.Sql
             @"insert into FormaPagamento (id_venda, posicao_pagamento, valor_pago, tipo_pagamento, quantidade_parcelas, posicao_parcela)
             values (@IdVenda, @PosicaoPagamento, @ValorPago, @TipoPagamento, @QuantidadeParcelas, @PosicaoParcela)";
 
+        public static readonly string RemoverVenda =
+            @"delete from Venda where id = @Id";
+
+        public static readonly string RemoverVendaProduto =
+            @"delete from VendaProduto where id_venda = @Id";
+
+        public static readonly string RemoverFormaPagamento =
+            @"delete from FormaPagamento where id_venda = @Id";
+
+        public static readonly string Selecionar =
+            @"select v.id, v.data_emissao as DataEmissao,
+            v.id as split, cl.id as IdUsuario, cl.nome, 
+            v.id as split, co.id as IdUsuario, co.nome,
+		    v.id as split, vp.desconto, vp.quantidade, vp.preco_bruto as PrecoBruto, vp.lucro,
+			v.id as split, fp.id, fp.posicao_pagamento as PosicaoPagamento, fp.valor_pago as ValorAPagar, fp.tipo_pagamento as TipoPagamento, fp.quantidade_parcelas as QuantidadeParcelas, fp.posicao_parcela as PosicaoParcela
+		    from Venda v
+            inner join Usuario cl on cl.id = v.id_cliente
+            inner join Usuario co on co.id = v.id_colaborador
+		    inner join VendaProduto vp on vp.id_venda = v.id
+			inner join FormaPagamento fp on fp.id_venda = v.id
+			where v.id = @id";
 
         public static DynamicParameters RetornarParametroDinamicoParaInserirUm(VendaModel vendaModel)
         {

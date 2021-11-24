@@ -23,7 +23,7 @@ namespace CRUD___Adriano.Features.Vendas.View
 
         private void TxtPesquisar__KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode != Keys.Enter || txtPesquisar.NuloOuVazio()) return;
+            if (e.KeyCode != Keys.Enter) return;
 
             PesquisarProduto();
         }

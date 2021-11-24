@@ -1,8 +1,8 @@
-﻿using CRUD___Adriano.Features.Vendas.Dao;
+﻿using CRUD___Adriano.Features.IoC;
+using CRUD___Adriano.Features.Vendas.Dao;
 using CRUD___Adriano.Features.Vendas.Model;
 using CRUD___Adriano.Features.Vendas.View;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
 
@@ -36,6 +36,37 @@ namespace CRUD___Adriano.Features.Vendas.Controller
             {
                 MessageBox.Show(excecao.Message, "Erro ao listar todas as vendas");
             }
+        }
+
+        public bool ExcluirVenda(VendaModel vendaSelecionado)
+        {
+            try
+            {
+                _vendaDao.Remover(vendaSelecionado.Id);
+                _vendaModelBindings.Remove(vendaSelecionado);
+                return true;
+            }
+            catch (Exception excecao)
+            {
+                MessageBox.Show(excecao.Message, "Erro ao tentar remover a venda!");
+            }
+
+            return false;
+        }
+
+        public bool AlterarVenda(int id)
+        {
+            try
+            {
+                ConfigNinject.ObterInstancia<VendaPrincipalController>().Start(_vendaDao.Selecionar(id));
+                return true;
+            }
+            catch (Exception excecao)
+            {
+                MessageBox.Show(excecao.Message, "Erro ao tentar remover a venda!");
+            }
+
+            return false;
         }
     }
 }

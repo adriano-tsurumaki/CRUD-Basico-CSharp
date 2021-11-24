@@ -1,4 +1,5 @@
-﻿using CRUD___Adriano.Features.IoC;
+﻿using CRUD___Adriano.Features.Factory;
+using CRUD___Adriano.Features.IoC;
 using CRUD___Adriano.Features.Usuario.Model;
 using CRUD___Adriano.Features.Vendas.Dao;
 using CRUD___Adriano.Features.Vendas.Enum;
@@ -23,16 +24,35 @@ namespace CRUD___Adriano.Features.Vendas.Controller
         private VendaFooterController _controllerVendaFooter;
         private FormaPagamentoController _controllerFormaPagamento;
         private ListaPagamentoController _controllerListaPagamento;
+        private ControllerEnum _tipoCrud;
 
-        private readonly VendaModel _vendaModel;
+        private VendaModel _vendaModel;
 
         public VendaPrincipalController(VendaDao vendaDao)
         {
             _vendaDao = vendaDao;
 
             _frmVendaPrincipal = new FrmVendaPrincipal(this);
-            _vendaModel = new VendaModel();
+        }
 
+        public void Start()
+        {
+            _vendaModel = new VendaModel();
+            InicializarConfiguracoes();
+            _tipoCrud = ControllerEnum.Salvar;
+            _frmVendaPrincipal.ShowDialog();
+        }
+
+        public void Start(VendaModel vendaModel)
+        {
+            _vendaModel = vendaModel;
+            InicializarConfiguracoes();
+            _tipoCrud = ControllerEnum.Atualizar;
+            _frmVendaPrincipal.ShowDialog();
+        }
+
+        public void InicializarConfiguracoes()
+        {
             InstanciarControllers();
 
             AdicionarControl(_frmVendaPrincipal.pnlHeader, _controllerVendaHeader.RetornarUserControl());
@@ -41,8 +61,6 @@ namespace CRUD___Adriano.Features.Vendas.Controller
             AdicionarControl(_frmVendaPrincipal.pnlFooter, _controllerVendaFooter.RetornarUserControl());
 
             DefinirEventosDosUserControls();
-
-            _frmVendaPrincipal.ShowDialog();
         }
 
         private void InstanciarControllers()
@@ -168,6 +186,19 @@ namespace CRUD___Adriano.Features.Vendas.Controller
         {
             if (!ValidarModel()) return;
 
+            switch (_tipoCrud)
+            {
+                case ControllerEnum.Salvar:
+                    EfetuarVenda();
+                    break;
+                case ControllerEnum.Atualizar:
+                    AtualizarVenda();
+                    break;
+            }
+        }
+
+        private void EfetuarVenda()
+        {
             if (MessageBox.Show("Deseja efetuar a venda?", "Confirmação", MessageBoxButtons.YesNo) != DialogResult.Yes) return;
 
             try
@@ -179,6 +210,22 @@ namespace CRUD___Adriano.Features.Vendas.Controller
             catch (Exception excecao)
             {
                 MessageBox.Show(excecao.Message, "Erro ao efetuar a venda!");
+            }
+        }
+
+        private void AtualizarVenda()
+        {
+            if (MessageBox.Show("Deseja atualizar a venda?", "Confirmação", MessageBoxButtons.YesNo) != DialogResult.Yes) return;
+
+            try
+            {
+                _vendaDao.AtualizarVenda(_vendaModel);
+                MessageBox.Show("Venda atualizada com sucesso!");
+                _frmVendaPrincipal.Close();
+            }
+            catch (Exception excecao)
+            {
+                MessageBox.Show(excecao.Message, "Erro ao atualizar a venda!");
             }
         }
 

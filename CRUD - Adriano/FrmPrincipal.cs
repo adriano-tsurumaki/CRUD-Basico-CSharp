@@ -152,7 +152,7 @@ namespace CRUD___Adriano
         private void BtnVendas_Click(object sender, EventArgs e)
         {
             LimparPanel();
-            ConfigNinject.ObterInstancia<VendaPrincipalController>();
+            ConfigNinject.ObterInstancia<VendaPrincipalController>().Start();
         }
 
         private void BtnListagemVenda_Click(object sender, EventArgs e)
