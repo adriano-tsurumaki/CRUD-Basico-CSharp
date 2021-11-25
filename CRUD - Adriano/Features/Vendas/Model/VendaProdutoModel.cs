@@ -20,5 +20,17 @@ namespace CRUD___Adriano.Features.Vendas.Model
         }
 
         public Preco PrecoLiquido { get => (PrecoVenda - Desconto) * Quantidade; }
+
+        public static bool operator ==(VendaProdutoModel produtoModelA, VendaProdutoModel produtoModelB) => 
+            produtoModelA.Id == produtoModelB.Id && produtoModelA.IdProduto == produtoModelB.IdProduto &&
+            produtoModelA.IdVenda == produtoModelB.IdVenda && produtoModelA.Nome == produtoModelB.Nome &&
+            produtoModelA.Desconto == produtoModelB.Desconto && produtoModelA.Quantidade == produtoModelB.Quantidade &&
+            produtoModelA.PrecoBruto == produtoModelB.PrecoBruto && produtoModelA.Lucro == produtoModelB.Lucro;
+
+        public static bool operator !=(VendaProdutoModel produtoModelA, VendaProdutoModel produtoModelB) =>
+            produtoModelA.Id != produtoModelB.Id || produtoModelA.IdProduto != produtoModelB.IdProduto ||
+            produtoModelA.IdVenda != produtoModelB.IdVenda || produtoModelA.Nome != produtoModelB.Nome ||
+            produtoModelA.Desconto != produtoModelB.Desconto || produtoModelA.Quantidade != produtoModelB.Quantidade ||
+            produtoModelA.PrecoBruto != produtoModelB.PrecoBruto || produtoModelA.Lucro != produtoModelB.Lucro;
     }
 }
