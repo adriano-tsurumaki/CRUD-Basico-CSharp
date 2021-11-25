@@ -1,5 +1,6 @@
 ﻿using CRUD___Adriano.Features.Vendas.Model;
 using CRUD___Adriano.Features.Vendas.View;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 
@@ -12,7 +13,7 @@ namespace CRUD___Adriano.Features.Vendas.Controller
 
         public ListaPagamentoController()
         {
-            _ucListaPagamento = new UcListaPagamento();
+            _ucListaPagamento = new UcListaPagamento(this);
         }
 
         public UcListaPagamento RetornarUserControl() => _ucListaPagamento;
@@ -30,6 +31,11 @@ namespace CRUD___Adriano.Features.Vendas.Controller
                 pagamento.PosicaoPagamento = _formaPagamentosBinding.Count + 1;
                 _formaPagamentosBinding.Add(pagamento);
             }
+        }
+
+        public void RemoverDaLista(FormaPagamentoModel formaPagamentoSelecionado)
+        {
+            _formaPagamentosBinding.Remove(formaPagamentoSelecionado);
         }
     }
 }

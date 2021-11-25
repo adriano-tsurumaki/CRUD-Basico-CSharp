@@ -99,6 +99,8 @@ namespace CRUD___Adriano.Features.Vendas.Controller
             _controllerVendaFooter.EventConfirmar += EventConfirmar;
 
             _controllerFormaPagamento.RetornarUserControl().EventAdicionarPagamento += EventAdicionarPagamento;
+
+            _controllerListaPagamento.RetornarUserControl().EventAtualizarFormaPagamento += EventAtualizarFormaPagamento;
         }
 
         private void EventDefinirCliente(UsuarioModel clienteModelSelecionado) =>
@@ -155,6 +157,9 @@ namespace CRUD___Adriano.Features.Vendas.Controller
             _controllerListaPagamento.AdicionarPagamentosNaLista(listaFormaPagamentos);
             _controllerFormaPagamento.AtualizarValoresTotais(_vendaModel);
         }
+
+        private void EventAtualizarFormaPagamento() =>
+            _controllerFormaPagamento.AtualizarValoresTotais(_vendaModel);
 
         private void EventCancelar() =>
             CancelarVenda();

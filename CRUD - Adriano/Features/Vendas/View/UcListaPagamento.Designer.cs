@@ -72,6 +72,7 @@ namespace CRUD___Adriano.Features.Vendas.View
             this.gridView.Size = new System.Drawing.Size(643, 490);
             this.gridView.TabIndex = 7;
             this.gridView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.GridView_CellFormatting);
+            this.gridView.MouseDown += new System.Windows.Forms.MouseEventHandler(this.GridView_MouseDown);
             // 
             // UcListaPagamento
             // 

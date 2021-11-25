@@ -1,4 +1,5 @@
-﻿using CRUD___Adriano.Features.Vendas.Model;
+﻿using CRUD___Adriano.Features.Vendas.Controller;
+using CRUD___Adriano.Features.Vendas.Model;
 using System;
 using System.ComponentModel;
 using System.Drawing;
@@ -9,9 +10,17 @@ namespace CRUD___Adriano.Features.Vendas.View
 {
     public partial class UcListaPagamento : UserControl
     {
-        public UcListaPagamento()
+        public delegate void AtualizarFormaPagamentoHandler();
+
+        public event AtualizarFormaPagamentoHandler EventAtualizarFormaPagamento;
+
+        private readonly ListaPagamentoController _controller;
+        private BindingList<FormaPagamentoModel> _listaFormaPagamento;
+
+        public UcListaPagamento(ListaPagamentoController controller)
         {
             InitializeComponent();
+            _controller = controller;
         }
 
         public void BindModel(BindingList<FormaPagamentoModel> listaFormaPagamento)
@@ -109,7 +118,8 @@ namespace CRUD___Adriano.Features.Vendas.View
             gridView.Columns.Add(posicaoParcelaColuna);
 
             gridView.AutoGenerateColumns = false;
-            gridView.DataSource = listaFormaPagamento;
+            _listaFormaPagamento = listaFormaPagamento;
+            gridView.DataSource = _listaFormaPagamento;
         }
 
         private void GridView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -147,6 +157,46 @@ namespace CRUD___Adriano.Features.Vendas.View
                 valorDeRetorno = informacaoDaPropriedade.GetValue(propriedade, null).ToString();
             }
             return valorDeRetorno;
+        }
+
+        private void GridView_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right && gridView.HitTest(e.X, e.Y).RowIndex >= 0)
+            {
+                var mouseXY = gridView.HitTest(e.X, e.Y);
+
+                gridView.ClearSelection();
+                gridView.Rows[mouseXY.RowIndex].Selected = true;
+
+                var menuPopup = new ContextMenuStrip();
+
+                menuPopup.ItemClicked += MenuPopup_ItemClicked;
+
+                var item = new ToolStripMenuItem();
+
+                menuPopup.Items.Add("Deletar").Name = "Deletar";
+                menuPopup.Show(gridView, new Point(e.X, e.Y));
+            }
+        }
+
+        private void MenuPopup_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            var formaPagamentoSelecionado = gridView.CurrentRow.DataBoundItem as FormaPagamentoModel;
+            switch (e.ClickedItem.Name)
+            {
+                case "Deletar":
+                    _listaFormaPagamento.Remove(formaPagamentoSelecionado);
+                    break;
+                default:
+                    return;
+            }
+
+            EventAtualizarFormaPagamento?.Invoke();
+        }
+
+        private void gridView_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+
         }
     }
 }
