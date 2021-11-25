@@ -13,16 +13,42 @@ namespace CRUD___Adriano.Features.Vendas.Controller
         private readonly VendaDao _vendaDao;
         private readonly FrmListagemVenda _frmListagemVenda;
         private BindingList<VendaModel> _vendaModelBindings;
+        private Panel _dock;
 
-        public VendaListagemController(VendaDao vendaDao)
+        public VendaListagemController(VendaDao vendaDao, Panel dock)
         {
             _vendaDao = vendaDao;
             _frmListagemVenda = new FrmListagemVenda(this);
             _vendaModelBindings = new BindingList<VendaModel>();
             _frmListagemVenda.BindModel(_vendaModelBindings);
+            _dock = dock;
         }
 
         public FrmListagemVenda RetornarFormulario() => _frmListagemVenda;
+
+        public void AbrirFormDeDetalhes(int id)
+        {
+            var vendaModelSelecionado = _vendaDao.Selecionar(id);
+
+            if (_dock == null)
+            {
+                new FrmDetalhesVenda(vendaModelSelecionado).Show();
+                return;
+            }
+
+            var frmDetalhesVenda = new FrmDetalhesVenda(vendaModelSelecionado)
+            {
+                TopLevel = false,
+                FormBorderStyle = FormBorderStyle.None,
+                Dock = DockStyle.Fill
+            };
+
+            _dock.Controls.Add(frmDetalhesVenda);
+            _dock.Tag = frmDetalhesVenda;
+
+            frmDetalhesVenda.BringToFront();
+            frmDetalhesVenda.Show();
+        }
 
         public void ListarTodos()
         {

@@ -38,12 +38,12 @@ namespace CRUD___Adriano.Features.Vendas.View
             this.btnPesquisar = new System.Windows.Forms.Button();
             this.pnlRight = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.lblDataFinal = new System.Windows.Forms.Label();
+            this.lblDataInicio = new System.Windows.Forms.Label();
             this.dtDataInicio = new System.Windows.Forms.DateTimePicker();
             this.dtDataFinal = new System.Windows.Forms.DateTimePicker();
             this.lblFiltro = new System.Windows.Forms.Label();
             this.pnlBotoes = new System.Windows.Forms.Panel();
-            this.lblDataInicio = new System.Windows.Forms.Label();
-            this.lblDataFinal = new System.Windows.Forms.Label();
             this.btnFiltrar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.gridView)).BeginInit();
             this.pnlPesquisa.SuspendLayout();
@@ -92,6 +92,7 @@ namespace CRUD___Adriano.Features.Vendas.View
             this.gridView.Size = new System.Drawing.Size(774, 471);
             this.gridView.TabIndex = 3;
             this.gridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridView_CellContentClick);
+            this.gridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridView_CellDoubleClick);
             this.gridView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.GridView_CellFormatting);
             // 
             // pnlPesquisa
@@ -170,6 +171,28 @@ namespace CRUD___Adriano.Features.Vendas.View
             this.panel2.Size = new System.Drawing.Size(219, 443);
             this.panel2.TabIndex = 4;
             // 
+            // lblDataFinal
+            // 
+            this.lblDataFinal.AutoSize = true;
+            this.lblDataFinal.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblDataFinal.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.lblDataFinal.Location = new System.Drawing.Point(123, 69);
+            this.lblDataFinal.Name = "lblDataFinal";
+            this.lblDataFinal.Size = new System.Drawing.Size(37, 19);
+            this.lblDataFinal.TabIndex = 4;
+            this.lblDataFinal.Text = "Final";
+            // 
+            // lblDataInicio
+            // 
+            this.lblDataInicio.AutoSize = true;
+            this.lblDataInicio.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblDataInicio.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.lblDataInicio.Location = new System.Drawing.Point(19, 69);
+            this.lblDataInicio.Name = "lblDataInicio";
+            this.lblDataInicio.Size = new System.Drawing.Size(41, 19);
+            this.lblDataInicio.TabIndex = 3;
+            this.lblDataInicio.Text = "Inicio";
+            // 
             // dtDataInicio
             // 
             this.dtDataInicio.CustomFormat = "dd/MM/yyyy";
@@ -205,28 +228,6 @@ namespace CRUD___Adriano.Features.Vendas.View
             this.pnlBotoes.Name = "pnlBotoes";
             this.pnlBotoes.Size = new System.Drawing.Size(219, 64);
             this.pnlBotoes.TabIndex = 3;
-            // 
-            // lblDataInicio
-            // 
-            this.lblDataInicio.AutoSize = true;
-            this.lblDataInicio.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblDataInicio.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblDataInicio.Location = new System.Drawing.Point(19, 69);
-            this.lblDataInicio.Name = "lblDataInicio";
-            this.lblDataInicio.Size = new System.Drawing.Size(41, 19);
-            this.lblDataInicio.TabIndex = 3;
-            this.lblDataInicio.Text = "Inicio";
-            // 
-            // lblDataFinal
-            // 
-            this.lblDataFinal.AutoSize = true;
-            this.lblDataFinal.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblDataFinal.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblDataFinal.Location = new System.Drawing.Point(123, 69);
-            this.lblDataFinal.Name = "lblDataFinal";
-            this.lblDataFinal.Size = new System.Drawing.Size(37, 19);
-            this.lblDataFinal.TabIndex = 4;
-            this.lblDataFinal.Text = "Final";
             // 
             // btnFiltrar
             // 

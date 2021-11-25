@@ -43,18 +43,18 @@ namespace CRUD___Adriano.Features.Cliente.Controller
                 return;
             }
 
-            var frmAlterarCliente = new FrmDetalhesCliente(clienteModelSelecionado)
+            var frmDetalhesCliente = new FrmDetalhesCliente(clienteModelSelecionado)
             {
                 TopLevel = false,
                 FormBorderStyle = FormBorderStyle.None,
                 Dock = DockStyle.Fill
             };
 
-            _dock.Controls.Add(frmAlterarCliente);
-            _dock.Tag = frmAlterarCliente;
+            _dock.Controls.Add(frmDetalhesCliente);
+            _dock.Tag = frmDetalhesCliente;
 
-            frmAlterarCliente.BringToFront();
-            frmAlterarCliente.Show();
+            frmDetalhesCliente.BringToFront();
+            frmDetalhesCliente.Show();
         }
 
         public bool ExcluirCliente(int id) =>

@@ -14,6 +14,7 @@ using CRUD___Adriano.Features.Produto.Controller;
 using CRUD___Adriano.Features.Produto.Model;
 using CRUD___Adriano.Features.Usuario.Controller;
 using CRUD___Adriano.Features.Vendas.Controller;
+using CRUD___Adriano.Features.Vendas.Dao;
 using System;
 using System.Windows.Forms;
 
@@ -159,7 +160,7 @@ namespace CRUD___Adriano
         {
             LimparPanel();
             lblTitulo.Text = "Listagem de vendas";
-            DocaForm(ConfigNinject.ObterInstancia<VendaListagemController>().RetornarFormulario());
+            DocaForm(new VendaListagemController(ConfigNinject.ObterInstancia<VendaDao>(), pnlChild).RetornarFormulario());
         }
 
         private void TrocarVisibilidade(Panel subMenu) =>

@@ -171,5 +171,18 @@ namespace CRUD___Adriano.Features.Vendas.View
             else if (botao.Name.Equals("Alterar"))
                 _controller.AlterarVenda(vendaSelecionado.Id);
         }
+
+        private void GridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var senderGrid = sender as DataGridView;
+
+            if ((senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn &&
+                e.RowIndex >= 0) || gridView.CurrentRow == null)
+                return;
+
+            var vendaModelSelecionado = gridView.CurrentRow.DataBoundItem as VendaModel;
+
+            _controller.AbrirFormDeDetalhes(vendaModelSelecionado.Id);
+        }
     }
 }
