@@ -5,6 +5,7 @@ namespace CRUD___Adriano.Features.Vendas.Model
 {
     public class FormaPagamentoModel
     {
+        public int Id { get; set; }
         public int IdVenda { get; set; }
         public int PosicaoPagamento { get; set; }
         public Preco ValorAPagar { get; set; }

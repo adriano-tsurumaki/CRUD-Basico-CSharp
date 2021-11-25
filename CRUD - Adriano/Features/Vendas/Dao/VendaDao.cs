@@ -26,7 +26,8 @@ namespace CRUD___Adriano.Features.Vendas.Dao
                 _conexao.Open();
                 using var transacao = _conexao.BeginTransaction();
 
-                AtualizarEstoques(vendaModel.ListaDeProdutos, transacao);
+                foreach (var item in vendaModel.ListaDeProdutos)
+                    AtualizarEstoque(item, transacao);
 
                 var idVenda = GerarVendaERetornarId(vendaModel, transacao);
 
@@ -36,10 +37,10 @@ namespace CRUD___Adriano.Features.Vendas.Dao
                     CriarVendaProduto(item, transacao);
                 }
 
-                foreach (var item in vendaModel.ListaPagamentos)
+                foreach (var itemPagamento in vendaModel.ListaPagamentos)
                 {
-                    item.IdVenda = idVenda;
-                    CriarFormaPagamento(item, transacao);
+                    itemPagamento.IdVenda = idVenda;
+                    CriarFormaPagamento(itemPagamento, transacao);
                 }
 
                 transacao.Commit();
@@ -50,13 +51,10 @@ namespace CRUD___Adriano.Features.Vendas.Dao
             }
         }
 
-        private void AtualizarEstoques(IList<VendaProdutoModel> listaDeProdutos, IDbTransaction transacao)
+        private void AtualizarEstoque(VendaProdutoModel item, IDbTransaction transacao)
         {
-            foreach (var item in listaDeProdutos)
-            {
-                var quantidadeEstoque = _conexao.QuerySingle<int>(ProdutoSql.SelecionarQuantidade, new { id = item.IdProduto }, transacao);
-                _conexao.Execute(ProdutoSql.AtualizarEstoque, new { Quantidade = quantidadeEstoque - item.Quantidade, id = item.IdProduto }, transacao);
-            }
+            var quantidadeEstoque = _conexao.QuerySingle<int>(ProdutoSql.SelecionarQuantidade, new { id = item.IdProduto }, transacao);
+            _conexao.Execute(ProdutoSql.AtualizarEstoque, new { Quantidade = quantidadeEstoque - item.Quantidade, id = item.IdProduto }, transacao);
         }
 
         private int GerarVendaERetornarId(VendaModel vendaModel, IDbTransaction transacao)
@@ -138,16 +136,13 @@ namespace CRUD___Adriano.Features.Vendas.Dao
                 _conexao.Open();
                 var venda = _conexao.QuerySingleOrDefault<VendaModel>(@"select id, data_emissao from Venda where id = @id", new { id });
 
-                venda.DefinirCliente(_conexao.QuerySingleOrDefault<ClienteModel>(@"select u.id as IdUsuario, u.nome from Venda v inner join Usuario u on u.id = v.id_cliente where v.id = @id", new { id }));
-                venda.DefinirColaborador(_conexao.QuerySingleOrDefault<ColaboradorModel>(@"select u.id as IdUsuario, u.nome from Venda v inner join Usuario u on u.id = v.id_colaborador where v.id = @id", new { id }));
+                venda.DefinirCliente(_conexao.QuerySingleOrDefault<ClienteModel>(VendaSql.SelecionarClientePeloIdVenda, new { id }));
+                venda.DefinirColaborador(_conexao.QuerySingleOrDefault<ColaboradorModel>(VendaSql.SelecionarColaboradorPeloIdVenda, new { id }));
 
-                foreach (var item in _conexao.Query<VendaProdutoModel>(@"select v.id, p.nome, v.desconto, v.quantidade, v.preco_bruto as PrecoBruto, v.lucro 
-                from VendaProduto v
-                inner join Produto p on p.id = v.id_produto
-                where id_venda = @id", new { id }).ToList())
+                foreach (var item in _conexao.Query<VendaProdutoModel>(VendaSql.ListarTodosVendaProdutos, new { id }).ToList())
                     venda.ListaDeProdutos.Add(item);
 
-                foreach (var pagamento in _conexao.Query<FormaPagamentoModel>(@"select id, posicao_pagamento as PosicaoPagamento, valor_pago as ValorAPagar, tipo_pagamento as TipoPagamento, quantidade_parcelas as QuantidadeParcelas, posicao_parcela as PosicaoParcela from FormaPagamento where id_venda = @id", new { id }).ToList())
+                foreach (var pagamento in _conexao.Query<FormaPagamentoModel>(VendaSql.ListarTodasFormaPagamentos, new { id }).ToList())
                     venda.ListaPagamentos.Add(pagamento);
 
                 return venda;
@@ -158,11 +153,135 @@ namespace CRUD___Adriano.Features.Vendas.Dao
             }
         }
 
-        public void AtualizarVenda(VendaModel vendaModelModificado)
+        public void AtualizarVenda(VendaModel vendaModelAlterado)
         {
-            var vendaModelAntigo = Selecionar(vendaModelModificado.Id);
+            var vendaModelAntigo = Selecionar(vendaModelAlterado.Id);
 
+            try
+            {
+                _conexao.Open();
+                using var transacao = _conexao.BeginTransaction();
 
+                AtualizarClienteNaVenda(vendaModelAntigo.Cliente, vendaModelAlterado.Cliente, vendaModelAlterado.Id, transacao);
+                AtualizarColaboradorNaVenda(vendaModelAntigo.Colaborador, vendaModelAlterado.Colaborador, vendaModelAlterado.Id, transacao);
+                AtualizarProdutosNaVenda(vendaModelAlterado.Id, vendaModelAntigo.ListaDeProdutos, vendaModelAlterado.ListaDeProdutos, transacao);
+                AtualizarFormaPagamentosNaVenda(vendaModelAlterado.Id, vendaModelAntigo.ListaPagamentos, vendaModelAlterado.ListaPagamentos, transacao);
+
+                _conexao.Execute(@"
+                update Venda set
+                preco_bruto_total = @PrecoBrutoTotal,
+                desconto_total = @DescontoTotal,
+                preco_liquido_total = @PrecoLiquidoTotal",
+                    VendaSql.RetornarParametroDinamicoParaInserirUm(vendaModelAlterado), transacao);
+
+                transacao.Commit();
+            }
+            finally
+            {
+                _conexao.Close();
+            }
+        }
+
+        private void AtualizarClienteNaVenda(ClienteModel clienteAntigo, ClienteModel clienteAlterado, int idVenda, IDbTransaction transacao)
+        {
+            if (clienteAntigo.IdUsuario == clienteAlterado.IdUsuario) return;
+
+            _conexao.Execute("update Venda set id_cliente = @IdCliente where id = @Id", new { IdCliente = clienteAlterado.IdUsuario, Id = idVenda }, transacao);
+        }
+
+        private void AtualizarColaboradorNaVenda(ColaboradorModel colaboradorAntigo, ColaboradorModel colaboradorAlterado, int idVenda, IDbTransaction transacao)
+        {
+            if (colaboradorAntigo.IdUsuario == colaboradorAlterado.IdUsuario) return;
+
+            _conexao.Execute("update Venda set id_colaborador = @IdColaborador where id = @Id", new { IdColaborador = colaboradorAlterado.IdUsuario, Id = idVenda }, transacao);
+        }
+
+        private void AtualizarProdutosNaVenda(int idVenda, IList<VendaProdutoModel> listaDeProdutosAntigo, IList<VendaProdutoModel> listaDeProdutosAlterado, IDbTransaction transacao)
+        {
+            foreach(var itemAlterado in listaDeProdutosAlterado)
+            {
+                if (itemAlterado.Id == 0)
+                {
+                    itemAlterado.IdVenda = idVenda;
+                    AtualizarEstoque(itemAlterado, transacao);
+                    CriarVendaProduto(itemAlterado, transacao);
+                    continue;
+                }
+
+                var itemAntigo = listaDeProdutosAntigo.First(x => x.Id == itemAlterado.Id);
+                if (itemAntigo != itemAlterado)
+                    AtualizarVendaProduto(itemAlterado, transacao);
+
+                listaDeProdutosAntigo.Remove(itemAntigo);
+            }
+
+            foreach(var itemRestante in listaDeProdutosAntigo)
+                RemoverVendaProduto(itemRestante, transacao);
+        }
+
+        private void AtualizarVendaProduto(VendaProdutoModel itemAlterado, IDbTransaction transacao)
+        {
+            AtualizarEstoqueParaVendaAtualizada(itemAlterado, transacao);
+            _conexao.Execute(@"
+            update VendaProduto 
+            set desconto = @Desconto, 
+            quantidade = @Quantidade, 
+            preco_bruto = @PrecoBruto, 
+            lucro = @Lucro,
+            preco_liquido = @PrecoLiquido where id = @Id", VendaSql.RetornarParametroDinamicoParaInserirUm(itemAlterado), transacao);
+        }
+
+        private void AtualizarEstoqueParaVendaAtualizada(VendaProdutoModel itemAlterado, IDbTransaction transacao)
+        {
+            var quantidadeEstoque = _conexao.QuerySingle<int>(ProdutoSql.SelecionarQuantidade, new { id = itemAlterado.IdProduto }, transacao);
+            var quantidadeItemAntigo = _conexao.QuerySingle<int>(VendaSql.SelecionarQuantidadeVendaProduto, new { id = itemAlterado.Id }, transacao);
+
+            _conexao.Execute(ProdutoSql.AtualizarEstoque, new { Quantidade = quantidadeEstoque + quantidadeItemAntigo - itemAlterado.Quantidade, id = itemAlterado.IdProduto }, transacao);
+        }
+
+        private void RemoverVendaProduto(VendaProdutoModel itemAlterado, IDbTransaction transacao)
+        {
+            AtualizarEstoqueParaRemoverVenda(itemAlterado, transacao);
+            _conexao.Execute("delete from VendaProduto where id = @Id", new { itemAlterado.Id }, transacao);
+        }
+
+        private void AtualizarEstoqueParaRemoverVenda(VendaProdutoModel itemAlterado, IDbTransaction transacao)
+        {
+            var quantidadeEstoque = _conexao.QuerySingle<int>(ProdutoSql.SelecionarQuantidade, new { id = itemAlterado.IdProduto }, transacao);
+            _conexao.Execute(ProdutoSql.AtualizarEstoque, new { Quantidade = quantidadeEstoque + itemAlterado.Quantidade, id = itemAlterado.IdProduto }, transacao);
+        }
+
+        private void AtualizarFormaPagamentosNaVenda(int idVenda, IList<FormaPagamentoModel> listaPagamentosAntigo, IList<FormaPagamentoModel> listaPagamentosAlterado, IDbTransaction transacao)
+        {
+            foreach (var itemAlterado in listaPagamentosAlterado)
+            {
+                if (itemAlterado.Id == 0)
+                {
+                    itemAlterado.IdVenda = idVenda;
+                    CriarFormaPagamento(itemAlterado, transacao);
+                    continue;
+                }
+
+                var itemAntigo = listaPagamentosAntigo.First(x => x.Id == itemAlterado.Id);
+                if (itemAntigo != itemAlterado)
+                    AtualizarFormaPagamento(itemAlterado, transacao);
+
+                    listaPagamentosAntigo.Remove(itemAntigo);
+            }
+
+            foreach (var itemRestante in listaPagamentosAntigo)
+                RemoverFormaPagamento(itemRestante, transacao);
+
+        }
+
+        private void AtualizarFormaPagamento(FormaPagamentoModel itemAlterado, IDbTransaction transacao)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        private void RemoverFormaPagamento(FormaPagamentoModel itemRestante, IDbTransaction transacao)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

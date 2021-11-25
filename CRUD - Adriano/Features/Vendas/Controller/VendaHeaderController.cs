@@ -1,5 +1,4 @@
 ﻿using CRUD___Adriano.Features.Vendas.View;
-using System;
 
 namespace CRUD___Adriano.Features.Vendas.Controller
 {

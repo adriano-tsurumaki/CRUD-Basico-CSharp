@@ -59,6 +59,7 @@ namespace CRUD___Adriano.Features.Vendas.Controller
             try
             {
                 ConfigNinject.ObterInstancia<VendaPrincipalController>().Start(_vendaDao.Selecionar(id));
+                ListarTodos();
                 return true;
             }
             catch (Exception excecao)

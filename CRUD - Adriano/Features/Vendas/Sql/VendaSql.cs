@@ -58,12 +58,40 @@ namespace CRUD___Adriano.Features.Vendas.Sql
 			inner join FormaPagamento fp on fp.id_venda = v.id
 			where v.id = @id";
 
+        public static readonly string SelecionarClientePeloIdVenda =
+            @"select u.id as IdUsuario, u.nome 
+            from Venda v 
+            inner join Usuario u on u.id = v.id_cliente 
+            where v.id = @id";
+
+        public static readonly string SelecionarColaboradorPeloIdVenda =
+            @"select u.id as IdUsuario, u.nome 
+            from Venda v 
+            inner join Usuario u on u.id = v.id_colaborador 
+            where v.id = @id";
+
+        public static readonly string ListarTodosVendaProdutos =
+            @"select v.id, v.id_produto as IdProduto, v.id_venda as IdVenda, p.nome, v.desconto, v.quantidade, v.preco_bruto as PrecoBruto, v.lucro 
+                from VendaProduto v
+                inner join Produto p on p.id = v.id_produto
+                where id_venda = @id";
+
+        public static readonly string ListarTodasFormaPagamentos =
+            @"select id, posicao_pagamento as PosicaoPagamento, valor_pago as ValorAPagar, 
+            tipo_pagamento as TipoPagamento, quantidade_parcelas as QuantidadeParcelas, posicao_parcela as PosicaoParcela 
+            from FormaPagamento where id_venda = @id";
+
+        public static readonly string SelecionarQuantidadeVendaProduto =
+            @"select quantidade from VendaProduto where id = @id";
+
+
         public static DynamicParameters RetornarParametroDinamicoParaInserirUm(VendaModel vendaModel)
         {
             var parametros = new DynamicParameters();
 
             parametros.AddDynamicParams(new
             {
+                vendaModel.Id,
                 IdCliente = vendaModel.Cliente.IdUsuario,
                 IdColaborador = vendaModel.Colaborador.IdUsuario,
                 PrecoBrutoTotal = vendaModel.ValorBrutoTotal.Valor,
@@ -80,6 +108,7 @@ namespace CRUD___Adriano.Features.Vendas.Sql
 
             parametros.AddDynamicParams(new
             {
+                vendaProdutoModel.Id,
                 vendaProdutoModel.IdProduto,
                 vendaProdutoModel.IdVenda,
                 Desconto = vendaProdutoModel.Desconto.Valor,
