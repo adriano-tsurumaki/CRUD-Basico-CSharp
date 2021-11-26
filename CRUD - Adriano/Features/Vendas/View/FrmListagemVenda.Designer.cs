@@ -157,6 +157,7 @@ namespace CRUD___Adriano.Features.Vendas.View
             this.pnlRight.Name = "pnlRight";
             this.pnlRight.Size = new System.Drawing.Size(219, 507);
             this.pnlRight.TabIndex = 5;
+            this.pnlRight.Visible = false;
             // 
             // panel2
             // 

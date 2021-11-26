@@ -89,7 +89,7 @@ namespace CRUD___Adriano.Features.Produto.Controller
         {
             try
             {
-                return _produtoDao.InativarProduto(id);
+                return _produtoDao.TrocarStatusDoProduto(id);
             }
             catch (Exception excecao)
             {

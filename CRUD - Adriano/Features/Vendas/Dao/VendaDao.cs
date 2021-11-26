@@ -276,12 +276,10 @@ namespace CRUD___Adriano.Features.Vendas.Dao
 
         private void AtualizarFormaPagamento(FormaPagamentoModel itemAlterado, IDbTransaction transacao)
         {
-            throw new System.NotImplementedException();
         }
 
         private void RemoverFormaPagamento(FormaPagamentoModel itemRestante, IDbTransaction transacao)
         {
-            throw new System.NotImplementedException();
         }
     }
 }

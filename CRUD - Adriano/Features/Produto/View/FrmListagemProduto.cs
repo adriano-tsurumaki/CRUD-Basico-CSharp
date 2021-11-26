@@ -69,8 +69,8 @@ namespace CRUD___Adriano.Features.Produto.View
             DataGridViewButtonColumn botaoExcluirColuna = new DataGridViewButtonColumn()
             {
                 CellTemplate = new DataGridViewButtonCell(),
-                HeaderText = "Excluir",
-                Name = "Excluir"
+                HeaderText = "Ativar/Inativar",
+                Name = "Trocar"
             };
 
             gridView.Columns.Add(idColuna);
@@ -95,15 +95,12 @@ namespace CRUD___Adriano.Features.Produto.View
 
             var produtoModelSelecionado = gridView.CurrentRow.DataBoundItem as ProdutoModel;
 
-            if (botao.Name.Equals("Excluir"))
+            if (botao.Name.Equals("Trocar"))
             {
-                if (MessageBox.Show("Deseja realmente excluir?", "Aviso", MessageBoxButtons.YesNo) == DialogResult.No) return;
+                if (MessageBox.Show("Deseja realmente ativar/inativar?", "Aviso", MessageBoxButtons.YesNo) == DialogResult.No) return;
 
-                if (_controller.ExcluirProduto(produtoModelSelecionado.Id))
-                {
-                    _produtosBinding.Remove(produtoModelSelecionado);
-                    MessageBox.Show("Excluído com sucesso");
-                }
+                if (_controller.TrocarStatusDoProduto(produtoModelSelecionado.Id))
+                    MessageBox.Show("Sucesso");
             }
             else if (botao.Name.Equals("Alterar"))
                 _controller.AlterarProduto(produtoModelSelecionado.Id);

@@ -103,13 +103,15 @@ namespace CRUD___Adriano.Features.Produto.Dao
             }
         }
 
-        public bool InativarProduto(int id)
+        public bool TrocarStatusDoProduto(int id)
         {
             try
             {
                 _conexao.Open();
 
-                _conexao.Query("update Produto set ativo = 0 where id = @Id", new { id });
+                var status = _conexao.QueryFirstOrDefault<bool>("select ativo from Produto where id = @Id", new { id });
+
+                _conexao.Query("update Produto set ativo = @Ativo where id = @Id", new { Ativo = !status, id });
 
                 return true;
             }

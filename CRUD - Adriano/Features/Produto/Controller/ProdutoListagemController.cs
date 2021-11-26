@@ -56,7 +56,7 @@ namespace CRUD___Adriano.Features.Produto.Controller
                 produtosBinding.Add(clienteModel);
         }
 
-        public bool ExcluirProduto(int id) =>
+        public bool TrocarStatusDoProduto(int id) =>
             _produtoController.Remover(id);
 
         public void AlterarProduto(int id)
