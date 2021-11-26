@@ -99,6 +99,11 @@ namespace CRUD___Adriano.Features.Vendas.View
                 txtQuantidadeParcelas.ReadOnly = true;
                 txtQuantidadeParcelas.Texto = "0";
             }
+            else if (tipoPagamento == TipoPagamentoEnum.Debito)
+            {
+                txtQuantidadeParcelas.ReadOnly = true;
+                txtQuantidadeParcelas.Texto = "1";
+            }
             else
             {
                 txtQuantidadeParcelas.ReadOnly = false;

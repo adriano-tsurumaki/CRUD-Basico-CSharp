@@ -201,6 +201,9 @@ namespace CRUD___Adriano.Features.Vendas.View
 
                     foreach (var pagamento in listaPagamentoParaExclusao)
                         _listaFormaPagamento.Remove(pagamento);
+
+                    for (int i = 0; i < _listaFormaPagamento.Count; i++)
+                        _listaFormaPagamento[i].PosicaoPagamento = i + 1;
                     break;
                 default:
                     return;
