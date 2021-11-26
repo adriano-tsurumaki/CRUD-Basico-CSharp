@@ -170,7 +170,7 @@ namespace CRUD___Adriano.Features.Cliente.Dao
                 _conexao.Open();
                 using var transacao = _conexao.BeginTransaction();
 
-                _conexao.Execute(UsuarioSql.Atualizar, clienteModel, transacao);
+                _conexao.Execute(UsuarioSql.Atualizar, UsuarioSql.RetornarParametroDinamicoParaInserirUm(clienteModel), transacao);
                 _conexao.Execute(ClienteSql.AtualizarCliente(clienteModel), clienteModel, transacao);
                 _conexao.Execute(EnderecoSql.Atualizar(clienteModel.Endereco), clienteModel.Endereco, transacao);
 

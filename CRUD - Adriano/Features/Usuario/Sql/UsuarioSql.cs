@@ -27,6 +27,7 @@ namespace CRUD___Adriano.Features.Usuario.Sql
             var parametros = new DynamicParameters();
 
             parametros.AddDynamicParams(new {
+                usuarioModel.IdUsuario,
                 usuarioModel.Nome,
                 usuarioModel.Sobrenome,
                 Cpf = usuarioModel.Cpf.ToString(),
