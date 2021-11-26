@@ -74,6 +74,7 @@ namespace CRUD___Adriano.Features.Produto.View
             this.txtPesquisar.TabIndex = 1;
             this.txtPesquisar.Texto = "";
             this.txtPesquisar.UnderlinedStyle = false;
+            this.txtPesquisar._KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtPesquisar__KeyDown);
             // 
             // btnPesquisar
             // 
@@ -89,6 +90,7 @@ namespace CRUD___Adriano.Features.Produto.View
             this.btnPesquisar.TabIndex = 2;
             this.btnPesquisar.Text = "Pesquisar";
             this.btnPesquisar.UseVisualStyleBackColor = true;
+            this.btnPesquisar.Click += new System.EventHandler(this.BtnPesquisar_Click);
             // 
             // gridView
             // 
@@ -128,6 +130,8 @@ namespace CRUD___Adriano.Features.Produto.View
             this.gridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gridView.Size = new System.Drawing.Size(800, 414);
             this.gridView.TabIndex = 4;
+            this.gridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridView_CellContentClick);
+            this.gridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridView_CellDoubleClick);
             // 
             // FrmListagemProduto
             // 

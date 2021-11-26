@@ -16,34 +16,86 @@ namespace CRUD___Adriano.Features.Produto.Controller
             _produtoDao = produtoDao;
         }
 
-        public bool Atualizar(ProdutoModel entidade)
+        public bool Atualizar(ProdutoModel produtoModel)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                return _produtoDao.AtualizarProduto(produtoModel);
+            }
+            catch (Exception excecao)
+            {
+                MessageBox.Show(excecao.Message, "Erro ao atualizar o produto");
+            }
+            return false;
         }
 
         public IList<ProdutoModel> Listar()
         {
-            throw new System.NotImplementedException();
-        }
+            try
+            {
+                return _produtoDao.ListarTodosOsProdutos();
+            }
+            catch (Exception excecao)
+            {
+                MessageBox.Show(excecao.Message, "Erro ao listar produtos");
+            }
 
-        public IList<ProdutoModel> ListarPelaQuantidadeSomenteIdENome(int quantidade)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public IList<ProdutoModel> ListarPeloNomeSomenteIdENome(string nome)
-        {
-            throw new System.NotImplementedException();
+            return new List<ProdutoModel>();
         }
 
         public IList<ProdutoModel> ListarSomenteIdENome()
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                return _produtoDao.ListarTodosOsProdutosSomenteIdENome();
+            }
+            catch (Exception excecao)
+            {
+                MessageBox.Show(excecao.Message, "Erro ao listar produtos");
+            }
+
+            return new List<ProdutoModel>();
+        }
+
+        public IList<ProdutoModel> ListarPeloNomeSomenteIdENome(string nome)
+        {
+            try
+            {
+                return _produtoDao.ListarProdutosPeloNomeSomenteIdENome(nome);
+            }
+            catch (Exception excecao)
+            {
+                MessageBox.Show(excecao.Message, "Erro ao listar produtos");
+            }
+
+            return new List<ProdutoModel>();
+        }
+
+        public IList<ProdutoModel> ListarPelaQuantidadeSomenteIdENome(int quantidade)
+        {
+            try
+            {
+                return _produtoDao.ListarPelaQuantidadeSomenteIdENome(quantidade);
+            }
+            catch (Exception excecao)
+            {
+                MessageBox.Show(excecao.Message, "Erro ao listar produtos");
+            }
+
+            return new List<ProdutoModel>();
         }
 
         public bool Remover(int id)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                return _produtoDao.InativarProduto(id);
+            }
+            catch (Exception excecao)
+            {
+                MessageBox.Show(excecao.Message, "Erro ao inativar o produto");
+            }
+            return false;
         }
 
         public bool Salvar(ProdutoModel produtoModel)
@@ -61,12 +113,28 @@ namespace CRUD___Adriano.Features.Produto.Controller
 
         public ProdutoModel Selecionar(int id)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                return _produtoDao.SelecionarProduto(id);
+            }
+            catch (Exception excecao)
+            {
+                MessageBox.Show(excecao.Message, "Erro ao buscar o produto");
+            }
+            return new ProdutoModel();
         }
 
         public ProdutoModel SelecionarPeloIdSomenteIdENome(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return _produtoDao.SelecionarProdutoSomenteIdENome(id);
+            }
+            catch (Exception excecao)
+            {
+                MessageBox.Show(excecao.Message, "Erro ao buscar o produto");
+            }
+            return new ProdutoModel();
         }
 
         public bool SalvarLista(IList<ProdutoModel> listaDeProdutos)

@@ -192,6 +192,7 @@ namespace CRUD___Adriano
             this.btnListagemProduto.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnListagemProduto.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnListagemProduto.UseVisualStyleBackColor = true;
+            this.btnListagemProduto.Click += new System.EventHandler(this.BtnListagemProduto_Click);
             // 
             // btnListagemFornecedor
             // 

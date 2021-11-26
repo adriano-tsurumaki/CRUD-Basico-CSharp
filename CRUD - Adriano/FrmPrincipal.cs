@@ -124,6 +124,17 @@ namespace CRUD___Adriano
             pageManager.Mostrar();
         }
 
+        private void BtnListagemProduto_Click(object sender, EventArgs e)
+        {
+            LimparPanel();
+            lblTitulo.Text = "Listagem de produto";
+            DocaForm(
+                new ProdutoListagemController(
+                    ConfigNinject.ObterInstancia<ProdutoController>(),
+                    pnlChild)
+                .RetornarFormulario());
+        }
+
         private void BtnAtalho_Click(object sender, EventArgs e)
         {
             LimparPanel();
