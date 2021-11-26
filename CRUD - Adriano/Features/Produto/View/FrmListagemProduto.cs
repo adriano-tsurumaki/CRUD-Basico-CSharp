@@ -53,8 +53,8 @@ namespace CRUD___Adriano.Features.Produto.View
             DataGridViewTextBoxColumn ativoColuna = new DataGridViewTextBoxColumn()
             {
                 CellTemplate = celula,
-                Name = "clnAtivo",
-                HeaderText = "Ativo",
+                Name = "clnStatus",
+                HeaderText = "Status",
                 DataPropertyName = "Ativo",
                 ReadOnly = true,
             };
@@ -145,6 +145,14 @@ namespace CRUD___Adriano.Features.Produto.View
                 _controller.SelecionarPeloId(_produtosBinding, txtPesquisar.Texto.IntOuZero());
             else
                 _controller.ListarPeloNomeSomenteIdENome(_produtosBinding, txtPesquisar.Texto);
+        }
+
+        private void GridView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (!(gridView.Rows[e.RowIndex].DataBoundItem is ProdutoModel model)) return;
+
+            if (gridView.Columns[e.ColumnIndex].DataPropertyName == "Ativo")
+                e.Value = model.Ativo ? "Ativo" : "Inativo";
         }
     }
 }

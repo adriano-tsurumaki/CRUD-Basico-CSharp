@@ -132,6 +132,7 @@ namespace CRUD___Adriano.Features.Produto.View
             this.gridView.TabIndex = 4;
             this.gridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridView_CellContentClick);
             this.gridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridView_CellDoubleClick);
+            this.gridView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.GridView_CellFormatting);
             // 
             // FrmListagemProduto
             // 

@@ -258,9 +258,14 @@ namespace CRUD___Adriano.Features.Vendas.Controller
                 MessageBox.Show("Selecione um funcionário!", "Aviso");
                 return false;
             }
-            if (_vendaModel.ListaPagamentos.Count == 0 || _vendaModel.ValorPago != _vendaModel.ValorLiquidoTotal)
+            if (_vendaModel.ListaPagamentos.Count == 0 || _vendaModel.ValorPago < _vendaModel.ValorLiquidoTotal)
             {
                 MessageBox.Show("Efetue o pagamento total!", "Aviso");
+                return false;
+            }
+            if (_vendaModel.ValorPago > _vendaModel.ValorLiquidoTotal)
+            {
+                MessageBox.Show("Valor pago é maior que o valor total da venda!", "Aviso");
                 return false;
             }
 
