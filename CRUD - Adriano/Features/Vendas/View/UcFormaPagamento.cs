@@ -75,7 +75,7 @@ namespace CRUD___Adriano.Features.Vendas.View
                         QuantidadeParcelas = quantidadeParcelas,
                         TipoPagamento = cbFormaPagamento.PegarEnumPorDescricao<TipoPagamentoEnum>(),
                         ValorAPagar = valorParcelado,
-                        PosicaoParcela = posicaoParcela
+                        PosicaoParcela = posicaoParcela,
                     });
                 }
                 Preco valorSerPago = listaFormaPagamento.Sum(x => x.ValorAPagar.Valor);

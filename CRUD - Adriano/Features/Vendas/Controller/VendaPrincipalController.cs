@@ -154,6 +154,16 @@ namespace CRUD___Adriano.Features.Vendas.Controller
                 return;
             }
 
+            int ordemPagamento;
+
+            if (_vendaModel.ListaPagamentos.Count == 0)
+                ordemPagamento = 1;
+            else
+                ordemPagamento = _vendaModel.ListaPagamentos.Last().OrdemPagamento + 1;
+
+            foreach (var item in listaFormaPagamentos)
+                item.OrdemPagamento = ordemPagamento;
+
             _controllerListaPagamento.AdicionarPagamentosNaLista(listaFormaPagamentos);
             _controllerFormaPagamento.AtualizarValoresTotais(_vendaModel);
         }

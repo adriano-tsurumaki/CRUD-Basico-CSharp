@@ -12,7 +12,7 @@ namespace CRUD___Adriano.Features.Vendas.Sql
             @"select id as IdProduto, nome, preco_bruto as PrecoBruto, lucro from Produto where nome Like @nome + '%' and ativo = 1 and quantidade > 0";
 
         public static readonly string ListarTodosParaVenda =
-            @"select id as IdProduto, nome, preco_bruto as PrecoBruto, lucro from Produto where quantidade > 0";
+            @"select id as IdProduto, nome, preco_bruto as PrecoBruto, lucro from Produto where quantidade > 0 and ativo = 1";
 
         public static readonly string ListarTodos = @"select v.id, v.data_emissao as DataEmissao,
             v.id as split, cl.nome, 

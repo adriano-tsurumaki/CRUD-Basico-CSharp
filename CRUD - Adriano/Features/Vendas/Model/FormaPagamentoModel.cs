@@ -12,5 +12,6 @@ namespace CRUD___Adriano.Features.Vendas.Model
         public TipoPagamentoEnum TipoPagamento { get; set; }
         public int QuantidadeParcelas { get; set; }
         public string PosicaoParcela { get; set; }
+        public int OrdemPagamento { get; set; }
     }
 }

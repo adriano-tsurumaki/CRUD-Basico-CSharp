@@ -1,6 +1,7 @@
 ﻿using CRUD___Adriano.Features.Vendas.Controller;
 using CRUD___Adriano.Features.Vendas.Model;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Reflection;
@@ -124,9 +125,15 @@ namespace CRUD___Adriano.Features.Vendas.View
 
         private void GridView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (!(gridView.Rows[e.RowIndex].DataBoundItem is FormaPagamentoModel) || !gridView.Columns[e.ColumnIndex].DataPropertyName.Contains(".")) return;
-
-            e.Value = BindProperty(gridView.Rows[e.RowIndex].DataBoundItem, gridView.Columns[e.ColumnIndex].DataPropertyName);
+            try
+            {
+                if (!(gridView.Rows[e.RowIndex].DataBoundItem is FormaPagamentoModel) || !gridView.Columns[e.ColumnIndex].DataPropertyName.Contains(".")) return;
+                e.Value = BindProperty(gridView.Rows[e.RowIndex].DataBoundItem, gridView.Columns[e.ColumnIndex].DataPropertyName);
+            }
+            catch
+            {
+                return;
+            }
         }
 
         private object BindProperty(object propriedade, string nomeDaPropriedade)
@@ -182,21 +189,24 @@ namespace CRUD___Adriano.Features.Vendas.View
         private void MenuPopup_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
             var formaPagamentoSelecionado = gridView.CurrentRow.DataBoundItem as FormaPagamentoModel;
+
             switch (e.ClickedItem.Name)
             {
                 case "Deletar":
-                    _listaFormaPagamento.Remove(formaPagamentoSelecionado);
+                    var listaPagamentoParaExclusao = new List<FormaPagamentoModel>();
+
+                    foreach (var pagamento in _listaFormaPagamento)
+                        if (pagamento.OrdemPagamento == formaPagamentoSelecionado.OrdemPagamento)
+                            listaPagamentoParaExclusao.Add(pagamento);
+
+                    foreach (var pagamento in listaPagamentoParaExclusao)
+                        _listaFormaPagamento.Remove(pagamento);
                     break;
                 default:
                     return;
             }
 
             EventAtualizarFormaPagamento?.Invoke();
-        }
-
-        private void gridView_DataError(object sender, DataGridViewDataErrorEventArgs e)
-        {
-
         }
     }
 }
