@@ -33,8 +33,8 @@ namespace CRUD___Adriano.Features.Vendas.Sql
             values (@IdProduto, @IdVenda, @Desconto, @Quantidade, @PrecoBruto, @Lucro, @PrecoLiquido)";
         
         public static readonly string InserirFormaPagamento =
-            @"insert into FormaPagamento (id_venda, posicao_pagamento, valor_pago, tipo_pagamento, quantidade_parcelas, posicao_parcela)
-            values (@IdVenda, @PosicaoPagamento, @ValorPago, @TipoPagamento, @QuantidadeParcelas, @PosicaoParcela)";
+            @"insert into FormaPagamento (id_venda, posicao_pagamento, valor_pago, tipo_pagamento, quantidade_parcelas, posicao_parcela, ordem_pagamento)
+            values (@IdVenda, @PosicaoPagamento, @ValorPago, @TipoPagamento, @QuantidadeParcelas, @PosicaoParcela, @OrdemPagamento)";
 
         public static readonly string RemoverVenda =
             @"delete from Venda where id = @Id";
@@ -78,7 +78,8 @@ namespace CRUD___Adriano.Features.Vendas.Sql
 
         public static readonly string ListarTodasFormaPagamentos =
             @"select id, posicao_pagamento as PosicaoPagamento, valor_pago as ValorAPagar, 
-            tipo_pagamento as TipoPagamento, quantidade_parcelas as QuantidadeParcelas, posicao_parcela as PosicaoParcela 
+            tipo_pagamento as TipoPagamento, quantidade_parcelas as QuantidadeParcelas, posicao_parcela as PosicaoParcela,
+            ordem_pagamento as OrdemPagamento
             from FormaPagamento where id_venda = @id";
 
         public static readonly string SelecionarQuantidadeVendaProduto =
@@ -127,12 +128,14 @@ namespace CRUD___Adriano.Features.Vendas.Sql
 
             parametros.AddDynamicParams(new
             {
+                formaPagamentoModel.Id,
                 formaPagamentoModel.IdVenda,
                 formaPagamentoModel.PosicaoPagamento,
                 ValorPago = formaPagamentoModel.ValorAPagar.Valor,
                 formaPagamentoModel.TipoPagamento,
                 formaPagamentoModel.QuantidadeParcelas,
-                formaPagamentoModel.PosicaoParcela
+                formaPagamentoModel.PosicaoParcela,
+                formaPagamentoModel.OrdemPagamento,
             });
 
             return parametros;

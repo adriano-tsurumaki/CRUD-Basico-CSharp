@@ -276,10 +276,20 @@ namespace CRUD___Adriano.Features.Vendas.Dao
 
         private void AtualizarFormaPagamento(FormaPagamentoModel itemAlterado, IDbTransaction transacao)
         {
+            _conexao.Execute(@"
+            update FormaPagamento 
+            set posicao_pagamento = @PosicaoPagamento, 
+            valor_pago = @ValorPago, 
+            tipo_pagamento = @TipoPagamento, 
+            quantidade_parcelas = @QuantidadeParcelas,
+            posicao_parcela = @PosicaoParcela,
+            ordem_pagamento = @OrdemPagamento
+            where id = @Id", VendaSql.RetornarParametroDinamicoParaInserirUm(itemAlterado), transacao);
         }
 
         private void RemoverFormaPagamento(FormaPagamentoModel itemRestante, IDbTransaction transacao)
         {
+            _conexao.Execute(@"delete from FormaPagamento where id = @Id", VendaSql.RetornarParametroDinamicoParaInserirUm(itemRestante), transacao);
         }
     }
 }

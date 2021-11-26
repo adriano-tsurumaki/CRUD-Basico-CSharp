@@ -13,5 +13,17 @@ namespace CRUD___Adriano.Features.Vendas.Model
         public int QuantidadeParcelas { get; set; }
         public string PosicaoParcela { get; set; }
         public int OrdemPagamento { get; set; }
+
+        public static bool operator ==(FormaPagamentoModel pagamentoModelA, FormaPagamentoModel pagamentoModelB) =>
+            pagamentoModelA.Id == pagamentoModelB.Id && pagamentoModelA.IdVenda == pagamentoModelB.IdVenda &&
+            pagamentoModelA.PosicaoPagamento == pagamentoModelB.PosicaoPagamento && pagamentoModelA.ValorAPagar == pagamentoModelB.ValorAPagar &&
+            pagamentoModelA.TipoPagamento == pagamentoModelB.TipoPagamento && pagamentoModelA.QuantidadeParcelas == pagamentoModelB.QuantidadeParcelas &&
+            pagamentoModelA.PosicaoParcela == pagamentoModelB.PosicaoParcela && pagamentoModelA.OrdemPagamento == pagamentoModelB.OrdemPagamento;
+
+        public static bool operator !=(FormaPagamentoModel pagamentoModelA, FormaPagamentoModel pagamentoModelB) =>
+            pagamentoModelA.Id != pagamentoModelB.Id || pagamentoModelA.IdVenda != pagamentoModelB.IdVenda ||
+            pagamentoModelA.PosicaoPagamento != pagamentoModelB.PosicaoPagamento || pagamentoModelA.ValorAPagar != pagamentoModelB.ValorAPagar ||
+            pagamentoModelA.TipoPagamento != pagamentoModelB.TipoPagamento || pagamentoModelA.QuantidadeParcelas != pagamentoModelB.QuantidadeParcelas ||
+            pagamentoModelA.PosicaoParcela != pagamentoModelB.PosicaoParcela || pagamentoModelA.OrdemPagamento != pagamentoModelB.OrdemPagamento;
     }
 }
