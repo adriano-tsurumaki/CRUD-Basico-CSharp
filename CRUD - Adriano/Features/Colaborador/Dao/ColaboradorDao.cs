@@ -210,7 +210,7 @@ namespace CRUD___Adriano.Features.Colaborador.Dao
                 _conexao.Open();
                 using var transacao = _conexao.BeginTransaction();
 
-                _conexao.Execute(UsuarioSql.Atualizar, colaboradorModel, transacao);
+                _conexao.Execute(UsuarioSql.Atualizar, UsuarioSql.RetornarParametroDinamicoParaInserirUm(colaboradorModel), transacao);
                 _conexao.Execute(ColaboradorSql.Atualizar, colaboradorModel, transacao);
                 _conexao.Execute(EnderecoSql.Atualizar(colaboradorModel.Endereco), colaboradorModel.Endereco, transacao);
                 _conexao.Execute(sqlAtualizarDadosBancarios, colaboradorModel.DadosBancarios, transacao);
