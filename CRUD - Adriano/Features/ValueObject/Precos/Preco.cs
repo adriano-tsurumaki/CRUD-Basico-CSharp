@@ -1,4 +1,5 @@
 ﻿using CRUD___Adriano.Features.Utils;
+using FluentValidation.Results;
 using System;
 using System.Globalization;
 using System.Text.RegularExpressions;
@@ -10,6 +11,9 @@ namespace CRUD___Adriano.Features.ValueObject.Precos
         private double _preco;
 
         public double Valor { get => _preco; }
+
+        public override string ToString() =>
+            _preco.ToString();
 
         public string Formatado { get => _preco.ToString("C", CultureInfo.CurrentCulture); }
 
@@ -30,6 +34,11 @@ namespace CRUD___Adriano.Features.ValueObject.Precos
                 valorString = valorString.Length > 2 ? valorString.Insert(valorString.Length - 2, ",") : valorString;
                 _preco = valorString.DoubleOuZero();
             }
+        }
+
+        public ValidationResult ValidarTudo()
+        {
+            return new PrecoValidator().Validate(this);
         }
 
         public static implicit operator Preco(double preco) => new Preco(preco);
