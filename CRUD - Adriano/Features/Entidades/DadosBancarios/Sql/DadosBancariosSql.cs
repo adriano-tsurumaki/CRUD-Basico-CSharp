@@ -12,5 +12,20 @@
 			inner join Colaborador c on c.id = db.id_colaborador
 			inner join Usuario u on u.id = c.id_usuario
             where u.id = @id";
+
+        public static readonly string Atualizar =
+            @"update DadosBancarios set
+            agencia = @Agencia,
+            conta = @Conta,
+            tipo_conta = @TipoConta,
+            banco = @Banco
+            where id_colaborador = @IdColaborador";
+
+        public static readonly string ListarTodos =
+            @"select u.id as IdUsuario, 
+            u.id as split, db.agencia, db.conta, db.tipo_conta as TipoConta, db.banco
+            from Colaborador c
+            inner join Usuario u on u.id = c.id_usuario
+            inner join DadosBancarios db on db.id_colaborador = c.id";
     }
 }

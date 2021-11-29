@@ -18,21 +18,6 @@ namespace CRUD___Adriano.Features.Colaborador.Dao
 {
     public class ColaboradorDao
     {
-        public static readonly string sqlListarTodosOsDadosBancariosDosColaboradores =
-            @"select u.id as IdUsuario, 
-            u.id as split, db.agencia, db.conta, db.tipo_conta as TipoConta, db.banco
-            from Colaborador c
-            inner join Usuario u on u.id = c.id_usuario
-            inner join DadosBancarios db on db.id_colaborador = c.id";
-
-        public static readonly string sqlAtualizarDadosBancarios =
-            @"update DadosBancarios set
-            agencia = @Agencia,
-            conta = @Conta,
-            tipo_conta = @TipoConta,
-            banco = @Banco
-            where id_colaborador = @IdColaborador";
-
         private IDbConnection _conexao;
 
         public ColaboradorDao(IDbConnection conexao)
@@ -70,7 +55,6 @@ namespace CRUD___Adriano.Features.Colaborador.Dao
             {
                 _conexao.Close();
             }
-            
         }
 
         public IList<ColaboradorModel> ListarColaborador()
@@ -99,7 +83,7 @@ namespace CRUD___Adriano.Features.Colaborador.Dao
                     splitOn: "split");
 
                 _conexao.Query<ColaboradorModel, DadosBancariosModel, ColaboradorModel>(
-                    sqlListarTodosOsDadosBancariosDosColaboradores,
+                    DadosBancariosSql.ListarTodos,
                     (colaboradorModel, dadosBancariosModel) =>
                     MapearListagemDeDadosBancariosDosColaboradores(colaboradorModel, dadosBancariosModel, dicionarioColaborador),
                     splitOn: "split");
@@ -213,7 +197,7 @@ namespace CRUD___Adriano.Features.Colaborador.Dao
                 _conexao.Execute(UsuarioSql.Atualizar, UsuarioSql.RetornarParametroDinamicoDaModel(colaboradorModel), transacao);
                 _conexao.Execute(ColaboradorSql.Atualizar, ColaboradorSql.RetornarParametroDinamicoDaModel(colaboradorModel), transacao);
                 _conexao.Execute(EnderecoSql.Atualizar(colaboradorModel.Endereco), colaboradorModel.Endereco, transacao);
-                _conexao.Execute(sqlAtualizarDadosBancarios, colaboradorModel.DadosBancarios, transacao);
+                _conexao.Execute(DadosBancariosSql.Atualizar, colaboradorModel.DadosBancarios, transacao);
 
                 foreach (var email in colaboradorModel.Emails)
                 {
