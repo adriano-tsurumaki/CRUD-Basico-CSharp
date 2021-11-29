@@ -474,6 +474,7 @@ namespace CRUD___Adriano
             this.Controls.Add(this.pnlChild);
             this.Controls.Add(this.pnlTitlebar);
             this.Controls.Add(this.pnlSideMenu);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.KeyPreview = true;
             this.MaximumSize = new System.Drawing.Size(1200, 750);
             this.Name = "FrmPrincipal";

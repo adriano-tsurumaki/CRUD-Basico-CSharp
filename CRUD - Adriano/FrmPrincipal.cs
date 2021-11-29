@@ -218,7 +218,7 @@ namespace CRUD___Adriano
             }
             catch(Exception excecao)
             {
-                MessageBox.Show(excecao.Message, "Ocorre um erro ao tentar deslogar");
+                MessageBox.Show(excecao.Message, "Ocorreu um erro ao tentar deslogar");
             }
         }
 
@@ -231,7 +231,7 @@ namespace CRUD___Adriano
             catch(Exception excecao)
             {
                 lblUsuarioLogado.Text = string.Empty;
-                MessageBox.Show(excecao.Message, "Ocorre um erro ao tentar buscar o nome do usuário logado");
+                MessageBox.Show(excecao.Message, "Ocorreu um erro ao tentar buscar o nome do usuário logado");
             }
         }
     }
