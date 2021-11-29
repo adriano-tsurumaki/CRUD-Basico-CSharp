@@ -68,7 +68,7 @@ namespace CRUD___Adriano.Features.Configuration
                 .RuleFor(c => c.Sexo, f => f.Person.Gender == Bogus.DataSets.Name.Gender.Male ? UsuarioSexoEnum.Masculino : UsuarioSexoEnum.Feminino)
                 .RuleFor(c => c.DadosBancarios, _ => dadosBancariosFaker)
                 .RuleFor(c => c.Salario, _ => new Random().Next(900, 2500).ToString())
-                .RuleFor(c => c.Comissao, _ => string.Format("{0:0.00}", new Random().NextDouble()).Replace(",", "."))
+                .RuleFor(c => c.Comissao, _ => Math.Round(new Random().NextDouble(), 2))
                 .RuleFor(c => c.Endereco, _ => enderecoFaker)
                 .RuleFor(c => c.Emails, _ => emailFaker.Generate(new Random().Next(1, 10)))
                 .RuleFor(c => c.Telefones, _ => telefoneFaker.Generate(new Random().Next(1, 10)));

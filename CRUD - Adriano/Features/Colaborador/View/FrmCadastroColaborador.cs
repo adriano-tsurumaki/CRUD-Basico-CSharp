@@ -3,6 +3,7 @@ using CRUD___Adriano.Features.Colaborador.Model;
 using CRUD___Adriano.Features.Factory;
 using CRUD___Adriano.Features.Interface;
 using CRUD___Adriano.Features.Utils;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace CRUD___Adriano.Features.Colaborador.View
@@ -22,21 +23,42 @@ namespace CRUD___Adriano.Features.Colaborador.View
         // TODO: Mostrar mensagens de erro
         public bool ValidarComponentes()
         {
-            if (txtSalario.NuloOuVazio() || txtComissao.NuloOuVazio() ||
-                txtAgencia.NuloOuVazio() || txtConta.NuloOuVazio() ||
+            if (txtAgencia.NuloOuVazio() || txtConta.NuloOuVazio() ||
                 txtBanco.NuloOuVazio() || !cbTipoConta.EstaSelecionado())
             {
+                MessageBox.Show("Preencha os campos obrigatórios");
                 return false;
             }
 
+            if (!ValidarSalario() || !ValidarComissao()) return false;
+
             _colaboradorModel.DadosBancarios.TipoConta = cbTipoConta.PegarEnumPorDescricao<TipoContaEnum>();
+            _colaboradorModel.Comissao = txtComissao.Texto.DoubleOuZero() / 100;
 
+            return true;
+        }
 
-            var salario = txtSalario.Texto.RetornarSomenteTextoEmNumeros();
-            var comissao = txtComissao.Texto.RetornarSomenteTextoEmNumeros();
+        private bool ValidarSalario()
+        {
+            if (txtSalario.NuloOuVazio()) return false;
 
-            _colaboradorModel.Salario = salario.Length > 2 ? salario.Insert(salario.Length - 2, ".") : salario;
-            _colaboradorModel.Comissao = comissao.Length > 2 ? comissao.Insert(comissao.Length - 2, ".") : comissao;
+            var resultado = _colaboradorModel.Salario.ValidarTudo();
+
+            if (resultado.IsValid) return true;
+
+            MessageBox.Show(resultado.Errors[0].ErrorMessage);
+            return false;
+        }
+
+        private bool ValidarComissao()
+        {
+            if (txtComissao.NuloOuVazio()) return false;
+
+            if (_colaboradorModel.Comissao >= 1)
+            {
+                MessageBox.Show("A comissão não deve ser igual ou ultrapassar os 100%");
+                return false;
+            }
 
             return true;
         }
@@ -44,8 +66,8 @@ namespace CRUD___Adriano.Features.Colaborador.View
         public void BindModel(ref ColaboradorModel colaboradorModel)
         {
             _colaboradorModel = colaboradorModel;
-            txtSalario.DataBindings.Add("Texto", colaboradorModel, "Salario");
-            txtComissao.DataBindings.Add("Texto", colaboradorModel, "Comissao");
+            txtSalario.DataBindings.Add("Texto", colaboradorModel, "Salario.Formatado");
+            txtComissao.Texto = (colaboradorModel.Comissao * 100).ToString();
             txtAgencia.DataBindings.Add("Texto", colaboradorModel.DadosBancarios, "Agencia");
             txtConta.DataBindings.Add("Texto", colaboradorModel.DadosBancarios, "Conta");
             txtBanco.DataBindings.Add("Texto", colaboradorModel.DadosBancarios, "Banco");
@@ -74,6 +96,7 @@ namespace CRUD___Adriano.Features.Colaborador.View
 
             txtSalario.SelectionLength = 0;
             txtSalario.Texto = textoFormatado;
+            _colaboradorModel.Salario = txtSalario.Texto;
         }
 
         private bool evitarLoopConta;
@@ -102,27 +125,9 @@ namespace CRUD___Adriano.Features.Colaborador.View
             txtConta.Texto = textoFormatado;
         }
 
-        private bool evitarLoopComissao;
-
         private void TxtComissao__TextChanged(object sender, System.EventArgs e)
         {
-            if (evitarLoopComissao)
-            {
-                txtComissao.SelectionStart = txtComissao.Texto.Length;
-                evitarLoopComissao = false;
-                return;
-            }
-
-            var textoFormatado = txtComissao.Texto.RetornarSomenteTextoEmNumeros() + "%";
-
-            if (textoFormatado.Length > 3)
-                textoFormatado = textoFormatado.Insert(textoFormatado.Length - 3, ",");
-
-            if (textoFormatado != txtComissao.Texto)
-                evitarLoopComissao = true;
-
-            txtComissao.SelectionLength = 0;
-            txtComissao.Texto = textoFormatado;
+            _colaboradorModel.Comissao = txtComissao.Texto.DoubleOuZero() / 100;
         }
 
         private bool evitarLoopAgencia;

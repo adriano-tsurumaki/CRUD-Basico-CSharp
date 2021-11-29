@@ -70,5 +70,11 @@ namespace CRUD___Adriano.Features.ValueObject.Precos
 
         public static bool operator !=(Preco precoA, Preco precoB)
             => precoA.Valor != precoB.Valor;
+
+        public override bool Equals(object obj) =>
+            base.Equals(obj);
+
+        public override int GetHashCode() =>
+            base.GetHashCode();
     }
 }
