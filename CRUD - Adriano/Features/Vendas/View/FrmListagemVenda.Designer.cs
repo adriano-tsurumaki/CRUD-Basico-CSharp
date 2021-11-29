@@ -37,7 +37,9 @@ namespace CRUD___Adriano.Features.Vendas.View
             this.txtPesquisar = new CRUD___Adriano.Features.Componentes.TextBoxFlat();
             this.btnPesquisar = new System.Windows.Forms.Button();
             this.pnlRight = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.pnlFiltro = new System.Windows.Forms.Panel();
+            this.txtValorVenda = new System.Windows.Forms.TextBox();
+            this.lblValor = new System.Windows.Forms.Label();
             this.lblDataFinal = new System.Windows.Forms.Label();
             this.lblDataInicio = new System.Windows.Forms.Label();
             this.dtDataInicio = new System.Windows.Forms.DateTimePicker();
@@ -45,10 +47,11 @@ namespace CRUD___Adriano.Features.Vendas.View
             this.lblFiltro = new System.Windows.Forms.Label();
             this.pnlBotoes = new System.Windows.Forms.Panel();
             this.btnFiltrar = new System.Windows.Forms.Button();
+            this.cbComparador = new CRUD___Adriano.Features.Componentes.ComboBoxFlat();
             ((System.ComponentModel.ISupportInitialize)(this.gridView)).BeginInit();
             this.pnlPesquisa.SuspendLayout();
             this.pnlRight.SuspendLayout();
-            this.panel2.SuspendLayout();
+            this.pnlFiltro.SuspendLayout();
             this.pnlBotoes.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -89,7 +92,7 @@ namespace CRUD___Adriano.Features.Vendas.View
             this.gridView.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.gridView.RowTemplate.Height = 25;
             this.gridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridView.Size = new System.Drawing.Size(774, 471);
+            this.gridView.Size = new System.Drawing.Size(759, 471);
             this.gridView.TabIndex = 3;
             this.gridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridView_CellContentClick);
             this.gridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridView_CellDoubleClick);
@@ -103,7 +106,7 @@ namespace CRUD___Adriano.Features.Vendas.View
             this.pnlPesquisa.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlPesquisa.Location = new System.Drawing.Point(0, 0);
             this.pnlPesquisa.Name = "pnlPesquisa";
-            this.pnlPesquisa.Size = new System.Drawing.Size(774, 36);
+            this.pnlPesquisa.Size = new System.Drawing.Size(759, 36);
             this.pnlPesquisa.TabIndex = 4;
             // 
             // txtPesquisar
@@ -125,7 +128,7 @@ namespace CRUD___Adriano.Features.Vendas.View
             this.txtPesquisar.ReadOnly = false;
             this.txtPesquisar.SelectionLength = 0;
             this.txtPesquisar.SelectionStart = 0;
-            this.txtPesquisar.Size = new System.Drawing.Size(682, 36);
+            this.txtPesquisar.Size = new System.Drawing.Size(667, 36);
             this.txtPesquisar.TabIndex = 1;
             this.txtPesquisar.Texto = "";
             this.txtPesquisar.UnderlinedStyle = false;
@@ -139,7 +142,7 @@ namespace CRUD___Adriano.Features.Vendas.View
             this.btnPesquisar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPesquisar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnPesquisar.ForeColor = System.Drawing.Color.White;
-            this.btnPesquisar.Location = new System.Drawing.Point(682, 0);
+            this.btnPesquisar.Location = new System.Drawing.Point(667, 0);
             this.btnPesquisar.Name = "btnPesquisar";
             this.btnPesquisar.Size = new System.Drawing.Size(92, 36);
             this.btnPesquisar.TabIndex = 2;
@@ -150,34 +153,54 @@ namespace CRUD___Adriano.Features.Vendas.View
             // pnlRight
             // 
             this.pnlRight.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
-            this.pnlRight.Controls.Add(this.panel2);
+            this.pnlRight.Controls.Add(this.pnlFiltro);
             this.pnlRight.Controls.Add(this.pnlBotoes);
             this.pnlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pnlRight.Location = new System.Drawing.Point(774, 0);
+            this.pnlRight.Location = new System.Drawing.Point(759, 0);
             this.pnlRight.Name = "pnlRight";
-            this.pnlRight.Size = new System.Drawing.Size(219, 507);
+            this.pnlRight.Size = new System.Drawing.Size(234, 507);
             this.pnlRight.TabIndex = 5;
-            this.pnlRight.Visible = false;
             // 
-            // panel2
+            // pnlFiltro
             // 
-            this.panel2.Controls.Add(this.lblDataFinal);
-            this.panel2.Controls.Add(this.lblDataInicio);
-            this.panel2.Controls.Add(this.dtDataInicio);
-            this.panel2.Controls.Add(this.dtDataFinal);
-            this.panel2.Controls.Add(this.lblFiltro);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(0, 0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(219, 443);
-            this.panel2.TabIndex = 4;
+            this.pnlFiltro.Controls.Add(this.cbComparador);
+            this.pnlFiltro.Controls.Add(this.txtValorVenda);
+            this.pnlFiltro.Controls.Add(this.lblValor);
+            this.pnlFiltro.Controls.Add(this.lblDataFinal);
+            this.pnlFiltro.Controls.Add(this.lblDataInicio);
+            this.pnlFiltro.Controls.Add(this.dtDataInicio);
+            this.pnlFiltro.Controls.Add(this.dtDataFinal);
+            this.pnlFiltro.Controls.Add(this.lblFiltro);
+            this.pnlFiltro.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlFiltro.Location = new System.Drawing.Point(0, 0);
+            this.pnlFiltro.Name = "pnlFiltro";
+            this.pnlFiltro.Size = new System.Drawing.Size(234, 443);
+            this.pnlFiltro.TabIndex = 4;
+            // 
+            // txtValorVenda
+            // 
+            this.txtValorVenda.Location = new System.Drawing.Point(18, 242);
+            this.txtValorVenda.Name = "txtValorVenda";
+            this.txtValorVenda.Size = new System.Drawing.Size(200, 23);
+            this.txtValorVenda.TabIndex = 8;
+            // 
+            // lblValor
+            // 
+            this.lblValor.AutoSize = true;
+            this.lblValor.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblValor.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.lblValor.Location = new System.Drawing.Point(18, 179);
+            this.lblValor.Name = "lblValor";
+            this.lblValor.Size = new System.Drawing.Size(100, 19);
+            this.lblValor.TabIndex = 7;
+            this.lblValor.Text = "Valor da venda";
             // 
             // lblDataFinal
             // 
             this.lblDataFinal.AutoSize = true;
             this.lblDataFinal.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblDataFinal.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblDataFinal.Location = new System.Drawing.Point(123, 69);
+            this.lblDataFinal.Location = new System.Drawing.Point(18, 117);
             this.lblDataFinal.Name = "lblDataFinal";
             this.lblDataFinal.Size = new System.Drawing.Size(37, 19);
             this.lblDataFinal.TabIndex = 4;
@@ -188,7 +211,7 @@ namespace CRUD___Adriano.Features.Vendas.View
             this.lblDataInicio.AutoSize = true;
             this.lblDataInicio.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblDataInicio.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblDataInicio.Location = new System.Drawing.Point(19, 69);
+            this.lblDataInicio.Location = new System.Drawing.Point(18, 69);
             this.lblDataInicio.Name = "lblDataInicio";
             this.lblDataInicio.Size = new System.Drawing.Size(41, 19);
             this.lblDataInicio.TabIndex = 3;
@@ -197,17 +220,17 @@ namespace CRUD___Adriano.Features.Vendas.View
             // dtDataInicio
             // 
             this.dtDataInicio.CustomFormat = "dd/MM/yyyy";
-            this.dtDataInicio.Location = new System.Drawing.Point(19, 91);
+            this.dtDataInicio.Location = new System.Drawing.Point(18, 91);
             this.dtDataInicio.Name = "dtDataInicio";
-            this.dtDataInicio.Size = new System.Drawing.Size(87, 23);
+            this.dtDataInicio.Size = new System.Drawing.Size(188, 23);
             this.dtDataInicio.TabIndex = 1;
             // 
             // dtDataFinal
             // 
             this.dtDataFinal.CustomFormat = "dd/MM/yyyy";
-            this.dtDataFinal.Location = new System.Drawing.Point(123, 91);
+            this.dtDataFinal.Location = new System.Drawing.Point(18, 139);
             this.dtDataFinal.Name = "dtDataFinal";
-            this.dtDataFinal.Size = new System.Drawing.Size(87, 23);
+            this.dtDataFinal.Size = new System.Drawing.Size(188, 23);
             this.dtDataFinal.TabIndex = 2;
             // 
             // lblFiltro
@@ -227,7 +250,7 @@ namespace CRUD___Adriano.Features.Vendas.View
             this.pnlBotoes.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.pnlBotoes.Location = new System.Drawing.Point(0, 443);
             this.pnlBotoes.Name = "pnlBotoes";
-            this.pnlBotoes.Size = new System.Drawing.Size(219, 64);
+            this.pnlBotoes.Size = new System.Drawing.Size(234, 64);
             this.pnlBotoes.TabIndex = 3;
             // 
             // btnFiltrar
@@ -243,11 +266,31 @@ namespace CRUD___Adriano.Features.Vendas.View
             this.btnFiltrar.TabIndex = 0;
             this.btnFiltrar.Text = "Filtrar";
             this.btnFiltrar.UseVisualStyleBackColor = false;
+            this.btnFiltrar.Click += new System.EventHandler(this.BtnFiltrar_Click);
+            // 
+            // cbComparador
+            // 
+            this.cbComparador.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.cbComparador.BorderColor = System.Drawing.Color.MediumSlateBlue;
+            this.cbComparador.BorderSize = 1;
+            this.cbComparador.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
+            this.cbComparador.ForeColor = System.Drawing.Color.DimGray;
+            this.cbComparador.IconColor = System.Drawing.Color.MediumSlateBlue;
+            this.cbComparador.ListBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(228)))), ((int)(((byte)(245)))));
+            this.cbComparador.ListTextColor = System.Drawing.Color.DimGray;
+            this.cbComparador.Location = new System.Drawing.Point(18, 206);
+            this.cbComparador.MinimumSize = new System.Drawing.Size(200, 30);
+            this.cbComparador.Name = "cbComparador";
+            this.cbComparador.Padding = new System.Windows.Forms.Padding(1);
+            this.cbComparador.Size = new System.Drawing.Size(200, 30);
+            this.cbComparador.TabIndex = 9;
+            this.cbComparador.Texto = "";
             // 
             // FrmListagemVenda
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
             this.ClientSize = new System.Drawing.Size(993, 507);
             this.Controls.Add(this.gridView);
             this.Controls.Add(this.pnlPesquisa);
@@ -258,8 +301,8 @@ namespace CRUD___Adriano.Features.Vendas.View
             ((System.ComponentModel.ISupportInitialize)(this.gridView)).EndInit();
             this.pnlPesquisa.ResumeLayout(false);
             this.pnlRight.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
+            this.pnlFiltro.ResumeLayout(false);
+            this.pnlFiltro.PerformLayout();
             this.pnlBotoes.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -275,10 +318,13 @@ namespace CRUD___Adriano.Features.Vendas.View
         private System.Windows.Forms.DateTimePicker dtDataFinal;
         private System.Windows.Forms.DateTimePicker dtDataInicio;
         private System.Windows.Forms.Label lblFiltro;
-        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel pnlFiltro;
         private System.Windows.Forms.Panel pnlBotoes;
         private System.Windows.Forms.Label lblDataFinal;
         private System.Windows.Forms.Label lblDataInicio;
         private System.Windows.Forms.Button btnFiltrar;
+        private System.Windows.Forms.Label lblValor;
+        private System.Windows.Forms.TextBox txtValorVenda;
+        private Componentes.ComboBoxFlat cbComparador;
     }
 }

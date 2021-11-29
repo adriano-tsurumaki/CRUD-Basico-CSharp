@@ -1,6 +1,7 @@
 ﻿using CRUD___Adriano.Features.IoC;
 using CRUD___Adriano.Features.Vendas.Dao;
 using CRUD___Adriano.Features.Vendas.Model;
+using CRUD___Adriano.Features.Vendas.Sql;
 using CRUD___Adriano.Features.Vendas.View;
 using System;
 using System.ComponentModel;
@@ -56,6 +57,20 @@ namespace CRUD___Adriano.Features.Vendas.Controller
             {
                 _vendaModelBindings.Clear();
                 foreach (var venda in _vendaDao.ListarTodosParaListagem())
+                    _vendaModelBindings.Add(venda);
+            }
+            catch (Exception excecao)
+            {
+                MessageBox.Show(excecao.Message, "Erro ao listar todas as vendas");
+            }
+        }
+
+        public void ListarTodos(FiltroVendaSql _filtroVendaSql)
+        {
+            try
+            {
+                _vendaModelBindings.Clear();
+                foreach (var venda in _vendaDao.ListarTodosParaListagem(_filtroVendaSql))
                     _vendaModelBindings.Add(venda);
             }
             catch (Exception excecao)

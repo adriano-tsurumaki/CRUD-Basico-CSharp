@@ -93,6 +93,27 @@ namespace CRUD___Adriano.Features.Vendas.Dao
             }
         }
 
+        public IList<VendaModel> ListarTodosParaListagem(FiltroVendaSql filtroVendaSql)
+        {
+            try
+            {
+                _conexao.Open();
+
+                var dicionarioVenda = new Dictionary<int, VendaModel>();
+                _conexao.Query<VendaModel, ClienteModel, ColaboradorModel, VendaProdutoModel, VendaModel>(
+                    VendaSql.ListarTodos + filtroVendaSql.GerarSql(),
+                    (vendaModel, clienteModel, colaboradorModel, vendaProdutoModel) =>
+                        MapearListagemDeVenda(vendaModel, clienteModel, colaboradorModel, vendaProdutoModel, dicionarioVenda),
+                    splitOn: "split", param: ProdutoSql.RetornarParametroDinamicoParaListagemComFiltro(filtroVendaSql)).ToList();
+
+                return dicionarioVenda.Values.ToList();
+            }
+            finally
+            {
+                _conexao.Close();
+            }
+        }
+
         private VendaModel MapearListagemDeVenda(VendaModel vendaModel, ClienteModel clienteModel, ColaboradorModel colaboradorModel, 
             VendaProdutoModel vendaProdutoModel, Dictionary<int, VendaModel> dicionarioVenda)
         {

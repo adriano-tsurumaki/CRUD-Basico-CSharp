@@ -244,7 +244,7 @@ namespace CRUD___Adriano.Features.Cliente.View
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(563, 442);
             this.Controls.Add(this.btnCadastrarProdutos);
             this.Controls.Add(this.lblQuantidadeProdutos);
             this.Controls.Add(this.txtQuantidadeProdutos);

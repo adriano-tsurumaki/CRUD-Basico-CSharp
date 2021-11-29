@@ -1,5 +1,8 @@
 ﻿using CRUD___Adriano.Features.Produto.Model;
+using CRUD___Adriano.Features.Vendas.Sql;
 using Dapper;
+using System;
+using System.Data;
 
 namespace CRUD___Adriano.Features.Produto.Sql
 {
@@ -65,6 +68,21 @@ namespace CRUD___Adriano.Features.Produto.Sql
                 produtoModel.Ativo,
                 produtoModel.Lucro,
                 produtoModel.Quantidade
+            });
+
+            return parametros;
+        }
+
+        public static DynamicParameters RetornarParametroDinamicoParaListagemComFiltro(FiltroVendaSql filtroVendaSql)
+        {
+            var parametros = new DynamicParameters();
+
+            parametros.AddDynamicParams(new
+            {
+                filtroVendaSql.DataFinal,
+                filtroVendaSql.DataInicio,
+                filtroVendaSql.TipoComparador,
+                ValorVenda = filtroVendaSql.ValorVenda.Valor
             });
 
             return parametros;
