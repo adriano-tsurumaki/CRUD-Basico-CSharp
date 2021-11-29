@@ -1,4 +1,5 @@
-﻿using CRUD___Adriano.Features.Factory;
+﻿using CRUD___Adriano.Features.Cliente.Dao;
+using CRUD___Adriano.Features.Factory;
 using CRUD___Adriano.Features.IoC;
 using CRUD___Adriano.Features.Usuario.Model;
 using CRUD___Adriano.Features.Vendas.Dao;
@@ -201,8 +202,8 @@ namespace CRUD___Adriano.Features.Vendas.Controller
 
         private void EventConfirmar()
         {
-            if (!ValidarModel()) return;
-
+            if (!ValidarModel() || !VerificarSeClientePodePagarOValorAPrazo()) return;
+            
             switch (_tipoCrud)
             {
                 case ControllerEnum.Salvar:
@@ -212,6 +213,57 @@ namespace CRUD___Adriano.Features.Vendas.Controller
                     AtualizarVenda();
                     break;
             }
+        }
+
+        private bool ValidarModel()
+        {
+            if (_vendaModel.Cliente.IdUsuario == 0)
+            {
+                MessageBox.Show("Selecione um cliente!", "Aviso");
+                return false;
+            }
+            if (_vendaModel.Colaborador.IdUsuario == 0)
+            {
+                MessageBox.Show("Selecione um funcionário!", "Aviso");
+                return false;
+            }
+            if (_vendaModel.ListaPagamentos.Count == 0 || _vendaModel.ValorPago < _vendaModel.ValorLiquidoTotal)
+            {
+                MessageBox.Show("Efetue o pagamento total!", "Aviso");
+                return false;
+            }
+            if (_vendaModel.ValorPago > _vendaModel.ValorLiquidoTotal)
+            {
+                MessageBox.Show("Valor pago é maior que o valor total da venda!", "Aviso");
+                return false;
+            }
+
+            return true;
+        }
+
+        private bool VerificarSeClientePodePagarOValorAPrazo()
+        {
+            if (!_vendaModel.ListaPagamentos.Any(x => x.TipoPagamento == TipoPagamentoEnum.Credito || x.TipoPagamento == TipoPagamentoEnum.Cheque)) return true;
+
+            try
+            {
+                double valorLimite = ConfigNinject.ObterInstancia<ClienteDao>().RetornarValorLimite(_vendaModel.Cliente.IdUsuario);
+
+                var valorTotalAPrazo = _vendaModel.ListaPagamentos.Where(x => x.TipoPagamento == TipoPagamentoEnum.Credito || x.TipoPagamento == TipoPagamentoEnum.Cheque).Sum(x => x.ValorAPagar.Valor);
+
+                if (valorTotalAPrazo > valorLimite)
+                {
+                    MessageBox.Show("O Valor a prazo a ser pago é maior que o valor limite do cliente", "Aviso");
+                    MessageBox.Show($"Valor limite: {valorLimite:c}", "Aviso");
+                    return false;
+                }
+            }
+            catch (Exception excecao)
+            {
+                MessageBox.Show(excecao.Message, "Erro ao tentar buscar o limite de crédito do cliente!");
+            }
+
+            return true;
         }
 
         private void EfetuarVenda()
@@ -244,32 +296,6 @@ namespace CRUD___Adriano.Features.Vendas.Controller
             {
                 MessageBox.Show(excecao.Message, "Erro ao atualizar a venda!");
             }
-        }
-
-        private bool ValidarModel()
-        {
-            if (_vendaModel.Cliente.IdUsuario == 0)
-            {
-                MessageBox.Show("Selecione um cliente!", "Aviso");
-                return false;
-            }
-            if (_vendaModel.Colaborador.IdUsuario == 0)
-            {
-                MessageBox.Show("Selecione um funcionário!", "Aviso");
-                return false;
-            }
-            if (_vendaModel.ListaPagamentos.Count == 0 || _vendaModel.ValorPago < _vendaModel.ValorLiquidoTotal)
-            {
-                MessageBox.Show("Efetue o pagamento total!", "Aviso");
-                return false;
-            }
-            if (_vendaModel.ValorPago > _vendaModel.ValorLiquidoTotal)
-            {
-                MessageBox.Show("Valor pago é maior que o valor total da venda!", "Aviso");
-                return false;
-            }
-
-            return true;
         }
 
         public void AdicionarControl(Panel panel, UserControl formFilha)

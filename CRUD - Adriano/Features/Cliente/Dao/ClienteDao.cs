@@ -204,5 +204,18 @@ namespace CRUD___Adriano.Features.Cliente.Dao
                 _conexao.Close();
             }
         }
+
+        public double RetornarValorLimite(int idUsuario)
+        {
+            try
+            {
+                _conexao.Open();
+                return _conexao.QuerySingleOrDefault<double>("select valor_limite from Cliente where id_usuario = @idUsuario", new { idUsuario });
+            }
+            finally
+            {
+                _conexao.Close();
+            }
+        }
     }
 }
