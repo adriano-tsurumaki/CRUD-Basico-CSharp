@@ -11,7 +11,7 @@ namespace Teste_Unitário.Sql
         [DataTestMethod]
         [DynamicData(nameof(Lista_para_Deveria_retornar_sql_inserir_corretamente), DynamicDataSourceType.Method)]
         public void Deveria_retornar_sql_inserir_corretamente(ClienteModel clienteModel, string sqlEsperado) =>
-            Assert.AreEqual(ClienteSql.InserirCliente(clienteModel), sqlEsperado);
+            Assert.AreEqual(ClienteSql.Inserir(clienteModel), sqlEsperado);
 
         public static IEnumerable<object[]> Lista_para_Deveria_retornar_sql_inserir_corretamente() =>
             new List<object[]>

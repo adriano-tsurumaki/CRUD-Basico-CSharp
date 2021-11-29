@@ -46,7 +46,7 @@ namespace CRUD___Adriano.Features.Colaborador.Dao
             {
                 _conexao.Open();
                 using var transacao = _conexao.BeginTransaction();
-                colaboradorModel.IdUsuario = (int)_conexao.ExecuteScalar(UsuarioSql.Inserir, UsuarioSql.RetornarParametroDinamicoParaInserirUm(colaboradorModel), transacao);
+                colaboradorModel.IdUsuario = (int)_conexao.ExecuteScalar(UsuarioSql.Inserir, UsuarioSql.RetornarParametroDinamicoDaModel(colaboradorModel), transacao);
 
                 colaboradorModel.DadosBancarios.IdColaborador = (int)_conexao.ExecuteScalar(ColaboradorSql.Inserir, colaboradorModel, transacao);
 
@@ -210,7 +210,7 @@ namespace CRUD___Adriano.Features.Colaborador.Dao
                 _conexao.Open();
                 using var transacao = _conexao.BeginTransaction();
 
-                _conexao.Execute(UsuarioSql.Atualizar, colaboradorModel, transacao);
+                _conexao.Execute(UsuarioSql.Atualizar, UsuarioSql.RetornarParametroDinamicoDaModel(colaboradorModel), transacao);
                 _conexao.Execute(ColaboradorSql.Atualizar, colaboradorModel, transacao);
                 _conexao.Execute(EnderecoSql.Atualizar(colaboradorModel.Endereco), colaboradorModel.Endereco, transacao);
                 _conexao.Execute(sqlAtualizarDadosBancarios, colaboradorModel.DadosBancarios, transacao);

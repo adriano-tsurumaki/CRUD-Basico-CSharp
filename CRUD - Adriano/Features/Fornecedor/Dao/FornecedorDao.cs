@@ -27,7 +27,7 @@ namespace CRUD___Adriano.Features.Fornecedor.Dao
                 _conexao.Open();
                 using var transacao = _conexao.BeginTransaction();
 
-                fornecedorModel.IdUsuario = (int)_conexao.ExecuteScalar(UsuarioSql.Inserir, UsuarioSql.RetornarParametroDinamicoParaInserirUm(fornecedorModel), transacao);
+                fornecedorModel.IdUsuario = (int)_conexao.ExecuteScalar(UsuarioSql.Inserir, UsuarioSql.RetornarParametroDinamicoDaModel(fornecedorModel), transacao);
 
                 _conexao.Execute(FornecedorSql.InserirFornecedor(fornecedorModel), FornecedorSql.RetornarParametroDinamicoParaInserirUm(fornecedorModel), transacao);
 

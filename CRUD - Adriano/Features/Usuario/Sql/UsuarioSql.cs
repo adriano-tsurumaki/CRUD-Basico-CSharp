@@ -22,7 +22,7 @@ namespace CRUD___Adriano.Features.Usuario.Sql
             data_nascimento = @DataNascimento
             where id = @IdUsuario";
 
-        public static DynamicParameters RetornarParametroDinamicoParaInserirUm(UsuarioModel usuarioModel)
+        public static DynamicParameters RetornarParametroDinamicoDaModel(UsuarioModel usuarioModel)
         {
             var parametros = new DynamicParameters();
 
