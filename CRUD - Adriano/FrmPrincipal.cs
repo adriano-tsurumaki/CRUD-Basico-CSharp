@@ -27,6 +27,7 @@ namespace CRUD___Adriano
         public FrmPrincipal()
         {
             InitializeComponent();
+            DocaForm(ConfigNinject.ObterInstancia<DashboardController>().RetornarFormulario());
             EsconderSubmenu();
         }
 
@@ -41,7 +42,7 @@ namespace CRUD___Adriano
         private void BtnClienteCadastro_Click(object sender, EventArgs e)
         {
             LimparPanel();
-            pnlVendaSubmenu.Text = "Cadastro de cliente";
+            lblTitulo.Text = "Cadastro de cliente";
             var pageManager = new GerenciadorDePaginas<ClienteModel>(
                 pnlChild,
                 ConfigNinject.ObterInstancia<ClienteController>(),
@@ -58,7 +59,7 @@ namespace CRUD___Adriano
         private void BtnClientesListagem_Click(object sender, EventArgs e)
         {
             LimparPanel();
-            pnlVendaSubmenu.Text = "Listagem de clientes";
+            lblTitulo.Text = "Listagem de clientes";
             DocaForm(
                 new ClienteListagemController(
                     ConfigNinject.ObterInstancia<ClienteController>(),
@@ -69,7 +70,7 @@ namespace CRUD___Adriano
         private void BtnCadastroFuncionario_Click(object sender, EventArgs e)
         {
             LimparPanel();
-            pnlVendaSubmenu.Text = "Cadastro de colaborador";
+            lblTitulo.Text = "Cadastro de colaborador";
             var pageManager = new GerenciadorDePaginas<ColaboradorModel>(
                 pnlChild,
                 ConfigNinject.ObterInstancia<ColaboradorController>(),
@@ -86,7 +87,7 @@ namespace CRUD___Adriano
         private void BtnListagemFuncionario_Click(object sender, EventArgs e)
         {
             LimparPanel();
-            pnlVendaSubmenu.Text = "Listagem de Funcionários";
+            lblTitulo.Text = "Listagem de Funcionários";
             DocaForm(
                 new ColaboradorListagemController(
                     ConfigNinject.ObterInstancia<ColaboradorController>(),
@@ -97,7 +98,7 @@ namespace CRUD___Adriano
         private void BtnCadastroFornecedor_Click(object sender, EventArgs e)
         {
             LimparPanel();
-            pnlVendaSubmenu.Text = "Cadastro de fornecedor";
+            lblTitulo.Text = "Cadastro de fornecedor";
             var pageManager = new GerenciadorDePaginas<FornecedorModel>(
                 pnlChild,
                 ConfigNinject.ObterInstancia<FornecedorController>(),
@@ -114,7 +115,7 @@ namespace CRUD___Adriano
         private void BtnCadastroProduto_Click(object sender, EventArgs e)
         {
             LimparPanel();
-            pnlVendaSubmenu.Text = "Cadastro de produto";
+            lblTitulo.Text = "Cadastro de produto";
             var pageManager = new GerenciadorDePaginas<ProdutoModel>(
                 pnlChild,
                 ConfigNinject.ObterInstancia<ProdutoController>(),
@@ -129,14 +130,14 @@ namespace CRUD___Adriano
         private void BtnAtalho_Click(object sender, EventArgs e)
         {
             LimparPanel();
-            pnlVendaSubmenu.Text = "Atalhos";
+            lblTitulo.Text = "Atalhos";
             DocaForm(ConfigNinject.ObterInstancia<AtalhoController>().RetornarFormulario());
         }
 
         private void LblNomeEmpresa_Click(object sender, EventArgs e)
         {
             LimparPanel();
-            pnlVendaSubmenu.Text = "Dashboard";
+            lblTitulo.Text = "Dashboard";
             DocaForm(ConfigNinject.ObterInstancia<DashboardController>().RetornarFormulario());
         }
 
@@ -161,7 +162,7 @@ namespace CRUD___Adriano
         private void BtnListagemProduto_Click_1(object sender, EventArgs e)
         {
             LimparPanel();
-            pnlVendaSubmenu.Text = "Listagem de produto";
+            lblTitulo.Text = "Listagem de produto";
             DocaForm(
                 new ProdutoListagemController(
                     ConfigNinject.ObterInstancia<ProdutoController>(),
@@ -184,7 +185,7 @@ namespace CRUD___Adriano
         private void BtnListagemVenda_Click(object sender, EventArgs e)
         {
             LimparPanel();
-            pnlVendaSubmenu.Text = "Listagem de vendas";
+            lblTitulo.Text = "Listagem de vendas";
             DocaForm(new VendaListagemController(ConfigNinject.ObterInstancia<VendaDao>(), pnlChild).RetornarFormulario());
         }
 
@@ -203,7 +204,7 @@ namespace CRUD___Adriano
 
         private void PnlChild_ControlRemoved(object sender, ControlEventArgs e)
         {
-            pnlVendaSubmenu.Text = "";
+            lblTitulo.Text = "";
         }
 
         private void LimparPanel() => pnlChild.Controls.Clear();

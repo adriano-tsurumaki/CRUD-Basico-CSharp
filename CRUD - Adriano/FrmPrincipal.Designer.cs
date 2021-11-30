@@ -34,6 +34,7 @@ namespace CRUD___Adriano
             this.btnLogout = new System.Windows.Forms.Button();
             this.btnAtalho = new System.Windows.Forms.Button();
             this.pnlVendaSubmenu = new System.Windows.Forms.Panel();
+            this.btnListagemVenda = new System.Windows.Forms.Button();
             this.btnIniciarVenda = new System.Windows.Forms.Button();
             this.btnVendas = new System.Windows.Forms.Button();
             this.pnlProdutoSubmenu = new System.Windows.Forms.Panel();
@@ -41,7 +42,6 @@ namespace CRUD___Adriano
             this.btnCadastroProduto = new System.Windows.Forms.Button();
             this.btnProduto = new System.Windows.Forms.Button();
             this.pnlListagemSubmenu = new System.Windows.Forms.Panel();
-            this.btnListagemVenda = new System.Windows.Forms.Button();
             this.btnListagemFornecedor = new System.Windows.Forms.Button();
             this.btnListagemFuncionario = new System.Windows.Forms.Button();
             this.btnListagemCliente = new System.Windows.Forms.Button();
@@ -57,6 +57,7 @@ namespace CRUD___Adriano
             this.lblNomeEmpresa = new System.Windows.Forms.Label();
             this.pnlTitlebar = new System.Windows.Forms.Panel();
             this.pnlChild = new System.Windows.Forms.Panel();
+            this.lblTitulo = new System.Windows.Forms.Label();
             this.pnlSideMenu.SuspendLayout();
             this.pnlVendaSubmenu.SuspendLayout();
             this.pnlProdutoSubmenu.SuspendLayout();
@@ -64,6 +65,7 @@ namespace CRUD___Adriano
             this.pnlCadastroSubmenu.SuspendLayout();
             this.pnlUsuarioLogado.SuspendLayout();
             this.panelLogo.SuspendLayout();
+            this.pnlTitlebar.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlSideMenu
@@ -137,6 +139,26 @@ namespace CRUD___Adriano
             this.pnlVendaSubmenu.Name = "pnlVendaSubmenu";
             this.pnlVendaSubmenu.Size = new System.Drawing.Size(203, 126);
             this.pnlVendaSubmenu.TabIndex = 12;
+            // 
+            // btnListagemVenda
+            // 
+            this.btnListagemVenda.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnListagemVenda.FlatAppearance.BorderSize = 0;
+            this.btnListagemVenda.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnListagemVenda.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnListagemVenda.ForeColor = System.Drawing.Color.Gainsboro;
+            this.btnListagemVenda.Image = global::CRUD___Adriano.Properties.Resources.list;
+            this.btnListagemVenda.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnListagemVenda.Location = new System.Drawing.Point(0, 60);
+            this.btnListagemVenda.Name = "btnListagemVenda";
+            this.btnListagemVenda.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.btnListagemVenda.Size = new System.Drawing.Size(203, 60);
+            this.btnListagemVenda.TabIndex = 4;
+            this.btnListagemVenda.Text = "Listar";
+            this.btnListagemVenda.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnListagemVenda.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnListagemVenda.UseVisualStyleBackColor = true;
+            this.btnListagemVenda.Click += new System.EventHandler(this.BtnListagemVenda_Click);
             // 
             // btnIniciarVenda
             // 
@@ -260,26 +282,6 @@ namespace CRUD___Adriano
             this.pnlListagemSubmenu.Name = "pnlListagemSubmenu";
             this.pnlListagemSubmenu.Size = new System.Drawing.Size(203, 187);
             this.pnlListagemSubmenu.TabIndex = 6;
-            // 
-            // btnListagemVenda
-            // 
-            this.btnListagemVenda.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnListagemVenda.FlatAppearance.BorderSize = 0;
-            this.btnListagemVenda.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnListagemVenda.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnListagemVenda.ForeColor = System.Drawing.Color.Gainsboro;
-            this.btnListagemVenda.Image = global::CRUD___Adriano.Properties.Resources.list;
-            this.btnListagemVenda.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnListagemVenda.Location = new System.Drawing.Point(0, 60);
-            this.btnListagemVenda.Name = "btnListagemVenda";
-            this.btnListagemVenda.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.btnListagemVenda.Size = new System.Drawing.Size(203, 60);
-            this.btnListagemVenda.TabIndex = 4;
-            this.btnListagemVenda.Text = "Listar";
-            this.btnListagemVenda.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnListagemVenda.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnListagemVenda.UseVisualStyleBackColor = true;
-            this.btnListagemVenda.Click += new System.EventHandler(this.BtnListagemVenda_Click);
             // 
             // btnListagemFornecedor
             // 
@@ -503,6 +505,7 @@ namespace CRUD___Adriano
             // pnlTitlebar
             // 
             this.pnlTitlebar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
+            this.pnlTitlebar.Controls.Add(this.lblTitulo);
             this.pnlTitlebar.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlTitlebar.Location = new System.Drawing.Point(220, 0);
             this.pnlTitlebar.Name = "pnlTitlebar";
@@ -518,6 +521,18 @@ namespace CRUD___Adriano
             this.pnlChild.Size = new System.Drawing.Size(964, 636);
             this.pnlChild.TabIndex = 4;
             this.pnlChild.ControlRemoved += new System.Windows.Forms.ControlEventHandler(this.PnlChild_ControlRemoved);
+            // 
+            // lblTitulo
+            // 
+            this.lblTitulo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblTitulo.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblTitulo.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.lblTitulo.Location = new System.Drawing.Point(0, 0);
+            this.lblTitulo.Name = "lblTitulo";
+            this.lblTitulo.Size = new System.Drawing.Size(964, 75);
+            this.lblTitulo.TabIndex = 0;
+            this.lblTitulo.Text = "Dashboard";
+            this.lblTitulo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // FrmPrincipal
             // 
@@ -541,6 +556,7 @@ namespace CRUD___Adriano
             this.pnlCadastroSubmenu.ResumeLayout(false);
             this.pnlUsuarioLogado.ResumeLayout(false);
             this.panelLogo.ResumeLayout(false);
+            this.pnlTitlebar.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -574,6 +590,7 @@ namespace CRUD___Adriano
         private System.Windows.Forms.Button btnListagemProduto;
         private System.Windows.Forms.Panel pnlVendaSubmenu;
         private System.Windows.Forms.Button btnIniciarVenda;
+        private System.Windows.Forms.Label lblTitulo;
     }
 }
 
