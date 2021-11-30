@@ -1,7 +1,6 @@
 ﻿using CRUD___Adriano.Features.Cliente.Dao;
 using CRUD___Adriano.Features.Colaborador.Dao;
 using CRUD___Adriano.Features.Dashboards.Enum;
-using CRUD___Adriano.Features.Dashboards.Sql;
 using CRUD___Adriano.Features.Dashboards.View;
 using CRUD___Adriano.Features.Vendas.Dao;
 using System;
