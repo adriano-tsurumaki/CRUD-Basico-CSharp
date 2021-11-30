@@ -8,6 +8,7 @@ using CRUD___Adriano.Features.Entidades.Telefone.Model;
 using CRUD___Adriano.Features.Entidades.Telefone.Sql;
 using CRUD___Adriano.Features.Usuario.Sql;
 using Dapper;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -140,6 +141,19 @@ namespace CRUD___Adriano.Features.Cliente.Dao
 
         public int SelecionarQuantidadeDeTodosOsClientes() =>
             _conexao.QuerySingleOrDefault<int>(ClienteSql.SelecionarQuantidadeDeTodos);
+
+        public DateTime SelecionarDataDeNascimento(int idUsuario)
+        {
+            try
+            {
+                _conexao.Open();
+                return _conexao.QuerySingleOrDefault<DateTime>("select u.data_nascimento from Cliente c inner join Usuario u on u.id = c.id_usuario where u.id = @idUsuario", new { idUsuario });
+            }
+            finally
+            {
+                _conexao.Close();
+            }
+        }
 
         public bool RemoverCliente(int id)
         {
