@@ -76,7 +76,7 @@ namespace CRUD___Adriano.Features.Vendas.Dao
                         break;
                     case PeriodoVenda.Ontem:
                         filtro.DataInicio = DateTime.Now.AddDays(-1).ZerarHorario();
-                        filtro.DataFinal = DateTime.Now.ZerarHorario();
+                        filtro.DataFinal = DateTime.Now.AddDays(-1).ZerarHorario();
                         break;
                     case PeriodoVenda.EstaSemana:
                         filtro.DataInicio = DateTime.Now.PrimeiroDiaDaSemana();

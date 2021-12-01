@@ -16,7 +16,7 @@ namespace CRUD___Adriano.Features.Vendas.Sql
             var sql = new StringBuilder(" where ");
 
             if (!DateMinOuMax(DataInicio) && !DateMinOuMax(DataFinal))
-                sql.Append("data_emissao >= @DataInicio and data_emissao <= @DataFinal and");
+                sql.Append("data_emissao between @DataInicio and @DataFinal and");
 
             if (TipoComparador == 0) return sql.Remove(sql.Length - 4, 4).ToString();
 
