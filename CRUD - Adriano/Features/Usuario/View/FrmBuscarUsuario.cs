@@ -69,6 +69,9 @@ namespace CRUD___Adriano.Features.Usuario.View
             _controller.AtribuirUsuarioSelecionado(gridView.CurrentRow.DataBoundItem as T);
         }
 
+        private void BtnPesquisar_Click(object sender, System.EventArgs e) =>
+            PesquisarDeAcordoComOTexto();
+
         private void TxtPesquisar__KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode != Keys.Enter) return;

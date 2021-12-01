@@ -1,5 +1,4 @@
 ﻿using CRUD___Adriano.Features.ValueObject.Precos;
-using Microsoft.Extensions.DependencyInjection;
 using System.Net;
 using System.Net.Mail;
 
