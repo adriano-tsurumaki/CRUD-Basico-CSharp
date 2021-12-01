@@ -1,4 +1,5 @@
 ﻿using CRUD___Adriano.Features.Cliente.Dao;
+using CRUD___Adriano.Features.Email.Controller;
 using CRUD___Adriano.Features.Factory;
 using CRUD___Adriano.Features.IoC;
 using CRUD___Adriano.Features.Usuario.Model;
@@ -107,6 +108,8 @@ namespace CRUD___Adriano.Features.Vendas.Controller
         private void EventDefinirCliente(UsuarioModel clienteModelSelecionado)
         {
             _vendaModel.DefinirIdCliente(clienteModelSelecionado.IdUsuario);
+            _vendaModel.DefinirNomeCliente(clienteModelSelecionado.Nome);
+
             if (VerificarSeClienteFazAniversario())
                 MessageBox.Show($"{clienteModelSelecionado.Nome} faz aniversário hoje!", "Parabéns!!!!!");
         }
@@ -299,6 +302,10 @@ namespace CRUD___Adriano.Features.Vendas.Controller
             try
             {
                 _vendaDao.EfetuarVenda(_vendaModel);
+                
+                if (MessageBox.Show("Deseja efetuar a venda?", "Confirmação", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    EmailSenderController.EnviarConfirmacaoDaCompra(_vendaModel.Cliente.Nome, _vendaModel.ValorPago);
+
                 MessageBox.Show("Venda efetuada com sucesso!");
                 _frmVendaPrincipal.Close();
             }
