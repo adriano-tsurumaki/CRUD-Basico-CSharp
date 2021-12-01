@@ -16,6 +16,7 @@ using CRUD___Adriano.Features.Usuario.Controller;
 using CRUD___Adriano.Features.Vendas.Controller;
 using CRUD___Adriano.Features.Vendas.Dao;
 using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace CRUD___Adriano
@@ -29,6 +30,7 @@ namespace CRUD___Adriano
             InitializeComponent();
             DocaForm(ConfigNinject.ObterInstancia<DashboardController>().RetornarFormulario());
             EsconderSubmenu();
+            CarregarTitleBar();
         }
 
         private void EsconderSubmenu()
@@ -251,5 +253,44 @@ namespace CRUD___Adriano
                 MessageBox.Show(excecao.Message, "Ocorreu um erro ao tentar buscar o nome do usuário logado");
             }
         }
+
+        private void CarregarTitleBar()
+        {
+            pnlTitleBar.MouseDown += PnlTitleBar_MouseDown;
+            pnlTitleBar.MouseUp += PnlTitleBar_MouseUp;
+            pnlTitleBar.MouseMove += PnlTitleBar_MouseMove;
+        }
+
+        private bool drag = false;
+        private Point startPoint = new Point(0, 0);
+
+        private void PnlTitleBar_MouseDown(object sender, MouseEventArgs e)
+        {
+            drag = true;
+            startPoint = e.Location;
+        }
+
+        private void PnlTitleBar_MouseUp(object sender, MouseEventArgs e)
+        {
+            drag = false;
+        }
+
+        private void PnlTitleBar_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (!drag) return;
+
+            Point p1 = new Point(e.X, e.Y);
+            Point p2 = this.PointToScreen(p1);
+            Point p3 = new Point(p2.X - this.startPoint.X,
+                                 p2.Y - this.startPoint.Y);
+
+            Location = p3;
+        }
+
+        private void BtnFechar_Click(object sender, EventArgs e) =>
+            Close();
+
+        private void BtnMinimizar_Click(object sender, EventArgs e) =>
+            WindowState = FormWindowState.Minimized;
     }
 }

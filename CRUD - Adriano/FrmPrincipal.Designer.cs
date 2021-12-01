@@ -55,9 +55,13 @@ namespace CRUD___Adriano
             this.lblUsuarioLogado = new System.Windows.Forms.Label();
             this.panelLogo = new System.Windows.Forms.Panel();
             this.lblNomeEmpresa = new System.Windows.Forms.Label();
-            this.pnlTitlebar = new System.Windows.Forms.Panel();
-            this.pnlChild = new System.Windows.Forms.Panel();
+            this.pnlTitle = new System.Windows.Forms.Panel();
             this.lblTitulo = new System.Windows.Forms.Label();
+            this.pnlChild = new System.Windows.Forms.Panel();
+            this.pnlTitleBar = new System.Windows.Forms.Panel();
+            this.pnlRightButtons = new System.Windows.Forms.Panel();
+            this.btnMinimizar = new System.Windows.Forms.PictureBox();
+            this.btnFechar = new System.Windows.Forms.PictureBox();
             this.pnlSideMenu.SuspendLayout();
             this.pnlVendaSubmenu.SuspendLayout();
             this.pnlProdutoSubmenu.SuspendLayout();
@@ -65,7 +69,11 @@ namespace CRUD___Adriano
             this.pnlCadastroSubmenu.SuspendLayout();
             this.pnlUsuarioLogado.SuspendLayout();
             this.panelLogo.SuspendLayout();
-            this.pnlTitlebar.SuspendLayout();
+            this.pnlTitle.SuspendLayout();
+            this.pnlTitleBar.SuspendLayout();
+            this.pnlRightButtons.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btnMinimizar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnFechar)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlSideMenu
@@ -85,9 +93,9 @@ namespace CRUD___Adriano
             this.pnlSideMenu.Controls.Add(this.pnlUsuarioLogado);
             this.pnlSideMenu.Controls.Add(this.panelLogo);
             this.pnlSideMenu.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnlSideMenu.Location = new System.Drawing.Point(0, 0);
+            this.pnlSideMenu.Location = new System.Drawing.Point(0, 28);
             this.pnlSideMenu.Name = "pnlSideMenu";
-            this.pnlSideMenu.Size = new System.Drawing.Size(220, 711);
+            this.pnlSideMenu.Size = new System.Drawing.Size(220, 683);
             this.pnlSideMenu.TabIndex = 2;
             // 
             // btnLogout
@@ -502,25 +510,15 @@ namespace CRUD___Adriano
             this.lblNomeEmpresa.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblNomeEmpresa.Click += new System.EventHandler(this.LblNomeEmpresa_Click);
             // 
-            // pnlTitlebar
+            // pnlTitle
             // 
-            this.pnlTitlebar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
-            this.pnlTitlebar.Controls.Add(this.lblTitulo);
-            this.pnlTitlebar.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlTitlebar.Location = new System.Drawing.Point(220, 0);
-            this.pnlTitlebar.Name = "pnlTitlebar";
-            this.pnlTitlebar.Size = new System.Drawing.Size(964, 75);
-            this.pnlTitlebar.TabIndex = 3;
-            // 
-            // pnlChild
-            // 
-            this.pnlChild.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
-            this.pnlChild.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlChild.Location = new System.Drawing.Point(220, 75);
-            this.pnlChild.Name = "pnlChild";
-            this.pnlChild.Size = new System.Drawing.Size(964, 636);
-            this.pnlChild.TabIndex = 4;
-            this.pnlChild.ControlRemoved += new System.Windows.Forms.ControlEventHandler(this.PnlChild_ControlRemoved);
+            this.pnlTitle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
+            this.pnlTitle.Controls.Add(this.lblTitulo);
+            this.pnlTitle.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlTitle.Location = new System.Drawing.Point(220, 28);
+            this.pnlTitle.Name = "pnlTitle";
+            this.pnlTitle.Size = new System.Drawing.Size(964, 75);
+            this.pnlTitle.TabIndex = 3;
             // 
             // lblTitulo
             // 
@@ -534,14 +532,67 @@ namespace CRUD___Adriano
             this.lblTitulo.Text = "Dashboard";
             this.lblTitulo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // pnlChild
+            // 
+            this.pnlChild.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
+            this.pnlChild.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlChild.Location = new System.Drawing.Point(220, 103);
+            this.pnlChild.Name = "pnlChild";
+            this.pnlChild.Size = new System.Drawing.Size(964, 608);
+            this.pnlChild.TabIndex = 4;
+            this.pnlChild.ControlRemoved += new System.Windows.Forms.ControlEventHandler(this.PnlChild_ControlRemoved);
+            // 
+            // pnlTitleBar
+            // 
+            this.pnlTitleBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(58)))));
+            this.pnlTitleBar.Controls.Add(this.pnlRightButtons);
+            this.pnlTitleBar.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlTitleBar.Location = new System.Drawing.Point(0, 0);
+            this.pnlTitleBar.Name = "pnlTitleBar";
+            this.pnlTitleBar.Size = new System.Drawing.Size(1184, 28);
+            this.pnlTitleBar.TabIndex = 4;
+            // 
+            // pnlRightButtons
+            // 
+            this.pnlRightButtons.Controls.Add(this.btnMinimizar);
+            this.pnlRightButtons.Controls.Add(this.btnFechar);
+            this.pnlRightButtons.Dock = System.Windows.Forms.DockStyle.Right;
+            this.pnlRightButtons.Location = new System.Drawing.Point(1084, 0);
+            this.pnlRightButtons.Name = "pnlRightButtons";
+            this.pnlRightButtons.Size = new System.Drawing.Size(100, 28);
+            this.pnlRightButtons.TabIndex = 0;
+            // 
+            // btnMinimizar
+            // 
+            this.btnMinimizar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.btnMinimizar.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnMinimizar.Location = new System.Drawing.Point(10, 0);
+            this.btnMinimizar.Name = "btnMinimizar";
+            this.btnMinimizar.Size = new System.Drawing.Size(45, 28);
+            this.btnMinimizar.TabIndex = 1;
+            this.btnMinimizar.TabStop = false;
+            this.btnMinimizar.Click += new System.EventHandler(this.BtnMinimizar_Click);
+            // 
+            // btnFechar
+            // 
+            this.btnFechar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.btnFechar.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnFechar.Location = new System.Drawing.Point(55, 0);
+            this.btnFechar.Name = "btnFechar";
+            this.btnFechar.Size = new System.Drawing.Size(45, 28);
+            this.btnFechar.TabIndex = 0;
+            this.btnFechar.TabStop = false;
+            this.btnFechar.Click += new System.EventHandler(this.BtnFechar_Click);
+            // 
             // FrmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1184, 711);
             this.Controls.Add(this.pnlChild);
-            this.Controls.Add(this.pnlTitlebar);
+            this.Controls.Add(this.pnlTitle);
             this.Controls.Add(this.pnlSideMenu);
+            this.Controls.Add(this.pnlTitleBar);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.KeyPreview = true;
             this.MaximumSize = new System.Drawing.Size(1200, 750);
@@ -556,7 +607,11 @@ namespace CRUD___Adriano
             this.pnlCadastroSubmenu.ResumeLayout(false);
             this.pnlUsuarioLogado.ResumeLayout(false);
             this.panelLogo.ResumeLayout(false);
-            this.pnlTitlebar.ResumeLayout(false);
+            this.pnlTitle.ResumeLayout(false);
+            this.pnlTitleBar.ResumeLayout(false);
+            this.pnlRightButtons.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.btnMinimizar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnFechar)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -573,7 +628,7 @@ namespace CRUD___Adriano
         private System.Windows.Forms.Button btnListagemFuncionario;
         private System.Windows.Forms.Button btnListagemCliente;
         private System.Windows.Forms.Button btnListagem;
-        private System.Windows.Forms.Panel pnlTitlebar;
+        private System.Windows.Forms.Panel pnlTitle;
         private System.Windows.Forms.Panel pnlChild;
         private System.Windows.Forms.Label lblNomeEmpresa;
         private System.Windows.Forms.Button btnAtalho;
@@ -591,6 +646,10 @@ namespace CRUD___Adriano
         private System.Windows.Forms.Panel pnlVendaSubmenu;
         private System.Windows.Forms.Button btnIniciarVenda;
         private System.Windows.Forms.Label lblTitulo;
+        private System.Windows.Forms.Panel pnlTitleBar;
+        private System.Windows.Forms.Panel pnlRightButtons;
+        private System.Windows.Forms.PictureBox btnMinimizar;
+        private System.Windows.Forms.PictureBox btnFechar;
     }
 }
 
