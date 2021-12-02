@@ -16,6 +16,8 @@ using CRUD___Adriano.Features.Produto.Model;
 using CRUD___Adriano.Features.Usuario.Enum;
 using CRUD___Adriano.Features.Utils;
 using CRUD___Adriano.Features.ValueObject.Cnpj;
+using CRUD___Adriano.Features.Vendas.Controller;
+using CRUD___Adriano.Features.Vendas.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -178,5 +180,19 @@ namespace CRUD___Adriano.Features.Configuration
 
         public static bool VerificarSeMesPossui31Dias(int mes) =>
             mes == 1 || mes == 3 || mes == 5 || mes == 7 || mes == 8 || mes == 10 || mes == 12;
+
+        public static IList<VendaModel> RetornarListaDeVenda(int quantidade)
+        {
+            var vendaFaker = new Faker<VendaModel>();
+
+            return vendaFaker.Generate(quantidade);
+        }
+
+        public static IList<VendaProdutoModel> RetornarListaDeVendaProduto(int quantidade)
+        {
+            var vendaProdutoFaker = new Faker<VendaProdutoModel>();
+
+            return vendaProdutoFaker.Generate(quantidade);
+        }
     }
 }
