@@ -2,6 +2,7 @@
 using CRUD___Adriano.Features.Factory;
 using CRUD___Adriano.Features.Interface;
 using CRUD___Adriano.Features.Utils;
+using CRUD___Adriano.Features.ValueObject.Precos;
 using System.Windows.Forms;
 
 namespace CRUD___Adriano.Features.Cliente.View
@@ -18,20 +19,28 @@ namespace CRUD___Adriano.Features.Cliente.View
             _controllerPage = controllerPage;
         }
 
-        // TODO: Mostrar mensagens de erro
         public bool ValidarComponentes()
         {
-            if (txtValorLimite.NuloOuVazio()) return false;
-
-            var valorLimite = txtValorLimite.Texto.RetornarSomenteTextoEmNumeros();
-            _clienteModel.ValorLimite = valorLimite.Length > 2 ? valorLimite.Insert(valorLimite.Length - 2, ".") : valorLimite;
+            if (!ValidarValorLimite()) return false;
 
             return true;
         }
 
+        private bool ValidarValorLimite()
+        {
+            if (txtValorLimite.NuloOuVazio()) return false;
+
+            var resultado = _clienteModel.ValorLimite.ValidarTudo();
+
+            if (resultado.IsValid) return true;
+
+            MessageBox.Show(resultado.Errors[0].ErrorMessage);
+            return false;
+        }
+
         public void BindModel(ref ClienteModel clienteModel)
         {
-            txtValorLimite.DataBindings.Add("Texto", clienteModel, "ValorLimite");
+            txtValorLimite.DataBindings.Add("Texto", clienteModel, "ValorLimite.Formatado");
             txtObservacao.DataBindings.Add("Texto", clienteModel, "Observacao");
             _clienteModel = clienteModel;
         }
@@ -57,6 +66,7 @@ namespace CRUD___Adriano.Features.Cliente.View
 
             txtValorLimite.SelectionLength = 0;
             txtValorLimite.Texto = textoFormatado;
+            _clienteModel.ValorLimite = txtValorLimite.Texto;
         }
 
         private void TxtObservacao__TextChanged(object sender, System.EventArgs e) =>

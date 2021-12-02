@@ -1,4 +1,6 @@
 ﻿using CRUD___Adriano.Features.Cadastro.Produto.Model;
+using Dapper;
+using System;
 using System.Text;
 
 namespace CRUD___Adriano.Features.Cliente.Sql
@@ -28,6 +30,21 @@ namespace CRUD___Adriano.Features.Cliente.Sql
             from Cliente c
 			inner join Usuario u on u.id = c.id_usuario";
 
+        public static DynamicParameters RetornarParametroDinamicoDaModel(ClienteModel clienteModel)
+        {
+            var parametros = new DynamicParameters();
+
+            parametros.AddDynamicParams(new
+            {
+                clienteModel.IdUsuario,
+                clienteModel.Id,
+                ValorLimite = clienteModel.ValorLimite.Valor,
+                clienteModel.Observacao
+            });
+
+            return parametros;
+        }
+
         public static readonly string SelecionarComCamposSomenteIdENome =
             @"select u.id as IdUsuario, u.nome
 			from Cliente c
@@ -43,7 +60,7 @@ namespace CRUD___Adriano.Features.Cliente.Sql
         public static readonly string SelecionarQuantidadeDeTodos =
             @"select count(*) from Cliente";
 
-        public static string InserirCliente(ClienteModel clienteModel)
+        public static string Inserir(ClienteModel clienteModel)
         {
             var insertSql = new StringBuilder("insert into Cliente(id_usuario, valor_limite");
             var valuesSql = new StringBuilder("values (@IdUsuario, @ValorLimite");
@@ -59,7 +76,7 @@ namespace CRUD___Adriano.Features.Cliente.Sql
             return string.Join(' ', insertSql, valuesSql);
         }
 
-        public static string AtualizarCliente(ClienteModel clienteModel)
+        public static string Atualizar(ClienteModel clienteModel)
         {
             var updateSql = new StringBuilder(@"update Cliente set 
             valor_limite = @ValorLimite");

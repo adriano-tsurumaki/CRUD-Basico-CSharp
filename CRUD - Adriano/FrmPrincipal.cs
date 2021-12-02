@@ -16,6 +16,7 @@ using CRUD___Adriano.Features.Usuario.Controller;
 using CRUD___Adriano.Features.Vendas.Controller;
 using CRUD___Adriano.Features.Vendas.Dao;
 using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace CRUD___Adriano
@@ -27,13 +28,17 @@ namespace CRUD___Adriano
         public FrmPrincipal()
         {
             InitializeComponent();
+            DocaForm(ConfigNinject.ObterInstancia<DashboardController>().RetornarFormulario());
             EsconderSubmenu();
+            CarregarTitleBar();
         }
 
         private void EsconderSubmenu()
         {
             pnlCadastroSubmenu.Visible = false;
             pnlListagemSubmenu.Visible = false;
+            pnlProdutoSubmenu.Visible = false;
+            pnlVendaSubmenu.Visible = false;
         }
 
         private void BtnClienteCadastro_Click(object sender, EventArgs e)
@@ -124,17 +129,6 @@ namespace CRUD___Adriano
             pageManager.Mostrar();
         }
 
-        private void BtnListagemProduto_Click(object sender, EventArgs e)
-        {
-            LimparPanel();
-            lblTitulo.Text = "Listagem de produto";
-            DocaForm(
-                new ProdutoListagemController(
-                    ConfigNinject.ObterInstancia<ProdutoController>(),
-                    pnlChild)
-                .RetornarFormulario());
-        }
-
         private void BtnAtalho_Click(object sender, EventArgs e)
         {
             LimparPanel();
@@ -161,7 +155,30 @@ namespace CRUD___Adriano
             EsconderSubmenusRestantes(pnlListagemSubmenu);
         }
 
+        private void BtnProduto_Click(object sender, EventArgs e)
+        {
+            TrocarVisibilidade(pnlProdutoSubmenu);
+            EsconderSubmenusRestantes(pnlProdutoSubmenu);
+        }
+
+        private void BtnListagemProduto_Click_1(object sender, EventArgs e)
+        {
+            LimparPanel();
+            lblTitulo.Text = "Listagem de produto";
+            DocaForm(
+                new ProdutoListagemController(
+                    ConfigNinject.ObterInstancia<ProdutoController>(),
+                    pnlChild)
+                .RetornarFormulario());
+        }
+
         private void BtnVendas_Click(object sender, EventArgs e)
+        {
+            TrocarVisibilidade(pnlVendaSubmenu);
+            EsconderSubmenusRestantes(pnlVendaSubmenu);
+        }
+
+        private void BtnIniciarVenda_Click(object sender, EventArgs e)
         {
             LimparPanel();
             ConfigNinject.ObterInstancia<VendaPrincipalController>().Start();
@@ -182,6 +199,8 @@ namespace CRUD___Adriano
             var visibilidade = submenu.Visible;
             pnlCadastroSubmenu.Visible = false;
             pnlListagemSubmenu.Visible = false;
+            pnlProdutoSubmenu.Visible = false;
+            pnlVendaSubmenu.Visible = false;
             submenu.Visible = visibilidade;
         }
 
@@ -218,7 +237,7 @@ namespace CRUD___Adriano
             }
             catch(Exception excecao)
             {
-                MessageBox.Show(excecao.Message, "Ocorre um erro ao tentar deslogar");
+                MessageBox.Show(excecao.Message, "Ocorreu um erro ao tentar deslogar");
             }
         }
 
@@ -231,8 +250,47 @@ namespace CRUD___Adriano
             catch(Exception excecao)
             {
                 lblUsuarioLogado.Text = string.Empty;
-                MessageBox.Show(excecao.Message, "Ocorre um erro ao tentar buscar o nome do usuário logado");
+                MessageBox.Show(excecao.Message, "Ocorreu um erro ao tentar buscar o nome do usuário logado");
             }
         }
+
+        private void CarregarTitleBar()
+        {
+            pnlTitleBar.MouseDown += PnlTitleBar_MouseDown;
+            pnlTitleBar.MouseUp += PnlTitleBar_MouseUp;
+            pnlTitleBar.MouseMove += PnlTitleBar_MouseMove;
+        }
+
+        private bool drag = false;
+        private Point startPoint = new Point(0, 0);
+
+        private void PnlTitleBar_MouseDown(object sender, MouseEventArgs e)
+        {
+            drag = true;
+            startPoint = e.Location;
+        }
+
+        private void PnlTitleBar_MouseUp(object sender, MouseEventArgs e)
+        {
+            drag = false;
+        }
+
+        private void PnlTitleBar_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (!drag) return;
+
+            Point p1 = new Point(e.X, e.Y);
+            Point p2 = this.PointToScreen(p1);
+            Point p3 = new Point(p2.X - this.startPoint.X,
+                                 p2.Y - this.startPoint.Y);
+
+            Location = p3;
+        }
+
+        private void BtnFechar_Click(object sender, EventArgs e) =>
+            Close();
+
+        private void BtnMinimizar_Click(object sender, EventArgs e) =>
+            WindowState = FormWindowState.Minimized;
     }
 }

@@ -1,9 +1,12 @@
 ﻿using CRUD___Adriano.Features.Cadastro.Produto.Model;
 using CRUD___Adriano.Features.Colaborador.Model;
+using CRUD___Adriano.Features.Dashboards.Enum;
 using CRUD___Adriano.Features.Produto.Sql;
+using CRUD___Adriano.Features.Utils;
 using CRUD___Adriano.Features.Vendas.Model;
 using CRUD___Adriano.Features.Vendas.Sql;
 using Dapper;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -57,6 +60,58 @@ namespace CRUD___Adriano.Features.Vendas.Dao
             _conexao.Execute(ProdutoSql.AtualizarEstoque, new { Quantidade = quantidadeEstoque - item.Quantidade, id = item.IdProduto }, transacao);
         }
 
+        public int SelecionarQuantidadeDeVendasEfetuadasPorPeriodo(PeriodoVenda periodoVenda)
+        {
+            try
+            {
+                _conexao.Open();
+
+                var filtro = new FiltroVendaSql();
+
+                switch (periodoVenda)
+                {
+                    case PeriodoVenda.Hoje:
+                        filtro.DataInicio = DateTime.Now.ZerarHorario();
+                        filtro.DataFinal = DateTime.Now.ZerarHorario();
+                        break;
+                    case PeriodoVenda.Ontem:
+                        filtro.DataInicio = DateTime.Now.AddDays(-1).ZerarHorario();
+                        filtro.DataFinal = DateTime.Now.AddDays(-1).ZerarHorario();
+                        break;
+                    case PeriodoVenda.EstaSemana:
+                        filtro.DataInicio = DateTime.Now.PrimeiroDiaDaSemana();
+                        filtro.DataFinal = DateTime.Now;
+                        break;
+                    case PeriodoVenda.MesAtual:
+                        filtro.DataInicio = DateTime.Now.PrimeiroDiaDoMes();
+                        filtro.DataFinal = DateTime.Now;
+                        break;
+                    case PeriodoVenda.MesPassado:
+                        filtro.DataInicio = DateTime.Now.MesAnterior(1).PrimeiroDiaDoMes();
+                        filtro.DataFinal = DateTime.Now.MesAnterior(1).UltimoDiaDoMes();
+                        break;
+                    case PeriodoVenda.Ultimos3Meses:
+                        filtro.DataInicio = DateTime.Now.MesAnterior(3).PrimeiroDiaDoMes();
+                        filtro.DataFinal = DateTime.Now;
+                        break;
+                    case PeriodoVenda.AnoAtual:
+                        filtro.DataInicio = DateTime.Now.PrimeiroDiaDoAno();
+                        filtro.DataFinal = DateTime.Now;
+                        break;
+                    case PeriodoVenda.AnoPassado:
+                        filtro.DataInicio = DateTime.Now.AnoAnterior(1).PrimeiroDiaDoAno();
+                        filtro.DataFinal = DateTime.Now.AnoAnterior(1).UltimoDiaDoAno();
+                        break;
+                }
+                
+                return _conexao.QuerySingleOrDefault<int>("select count(*) from Venda" + filtro.GerarSql(), param: ProdutoSql.RetornarParametroDinamicoParaListagemComFiltro(filtro));
+            }
+            finally
+            {
+                _conexao.Close();
+            }
+        }
+
         private int GerarVendaERetornarId(VendaModel vendaModel, IDbTransaction transacao)
         {
             return _conexao.ExecuteScalar<int>(VendaSql.InserirVenda, VendaSql.RetornarParametroDinamicoParaInserirUm(vendaModel), transacao);
@@ -84,6 +139,27 @@ namespace CRUD___Adriano.Features.Vendas.Dao
                     (vendaModel, clienteModel, colaboradorModel, vendaProdutoModel) => 
                         MapearListagemDeVenda(vendaModel, clienteModel, colaboradorModel, vendaProdutoModel, dicionarioVenda),
                     splitOn: "split").ToList();
+
+                return dicionarioVenda.Values.ToList();
+            }
+            finally
+            {
+                _conexao.Close();
+            }
+        }
+
+        public IList<VendaModel> ListarTodosParaListagem(FiltroVendaSql filtroVendaSql)
+        {
+            try
+            {
+                _conexao.Open();
+
+                var dicionarioVenda = new Dictionary<int, VendaModel>();
+                _conexao.Query<VendaModel, ClienteModel, ColaboradorModel, VendaProdutoModel, VendaModel>(
+                    VendaSql.ListarTodos + filtroVendaSql.GerarSql(),
+                    (vendaModel, clienteModel, colaboradorModel, vendaProdutoModel) =>
+                        MapearListagemDeVenda(vendaModel, clienteModel, colaboradorModel, vendaProdutoModel, dicionarioVenda),
+                    splitOn: "split", param: ProdutoSql.RetornarParametroDinamicoParaListagemComFiltro(filtroVendaSql)).ToList();
 
                 return dicionarioVenda.Values.ToList();
             }

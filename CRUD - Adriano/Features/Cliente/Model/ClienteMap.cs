@@ -9,7 +9,7 @@ namespace CRUD___Adriano.Features.Cliente.Model
         {
             ToTable("Cliente");
             Map(x => x.Id).ToColumn("id", caseSensitive: false).IsKey();
-            Map(x => x.ValorLimite).ToColumn("valor_limite", caseSensitive: false);
+            Map(x => x.ValorLimite.Valor).ToColumn("valor_limite", caseSensitive: false);
         }
     }
 }

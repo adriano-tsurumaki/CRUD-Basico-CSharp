@@ -8,6 +8,7 @@ using CRUD___Adriano.Features.Entidades.Telefone.Model;
 using CRUD___Adriano.Features.Entidades.Telefone.Sql;
 using CRUD___Adriano.Features.Usuario.Sql;
 using Dapper;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -30,9 +31,9 @@ namespace CRUD___Adriano.Features.Cliente.Dao
                 _conexao.Open();
                 using var transacao = _conexao.BeginTransaction();
 
-                clienteModel.IdUsuario = (int)_conexao.ExecuteScalar(UsuarioSql.Inserir, UsuarioSql.RetornarParametroDinamicoParaInserirUm(clienteModel), transacao);
+                clienteModel.IdUsuario = (int)_conexao.ExecuteScalar(UsuarioSql.Inserir, UsuarioSql.RetornarParametroDinamicoDaModel(clienteModel), transacao);
 
-                _conexao.Execute(ClienteSql.InserirCliente(clienteModel), clienteModel, transacao);
+                _conexao.Execute(ClienteSql.Inserir(clienteModel), ClienteSql.RetornarParametroDinamicoDaModel(clienteModel), transacao);
 
                 clienteModel.Endereco.IdUsuario = clienteModel.IdUsuario;
 
@@ -141,6 +142,19 @@ namespace CRUD___Adriano.Features.Cliente.Dao
         public int SelecionarQuantidadeDeTodosOsClientes() =>
             _conexao.QuerySingleOrDefault<int>(ClienteSql.SelecionarQuantidadeDeTodos);
 
+        public DateTime SelecionarDataDeNascimento(int idUsuario)
+        {
+            try
+            {
+                _conexao.Open();
+                return _conexao.QuerySingleOrDefault<DateTime>("select u.data_nascimento from Cliente c inner join Usuario u on u.id = c.id_usuario where u.id = @idUsuario", new { idUsuario });
+            }
+            finally
+            {
+                _conexao.Close();
+            }
+        }
+
         public bool RemoverCliente(int id)
         {
             try
@@ -170,8 +184,8 @@ namespace CRUD___Adriano.Features.Cliente.Dao
                 _conexao.Open();
                 using var transacao = _conexao.BeginTransaction();
 
-                _conexao.Execute(UsuarioSql.Atualizar, UsuarioSql.RetornarParametroDinamicoParaInserirUm(clienteModel), transacao);
-                _conexao.Execute(ClienteSql.AtualizarCliente(clienteModel), clienteModel, transacao);
+                _conexao.Execute(UsuarioSql.Atualizar, UsuarioSql.RetornarParametroDinamicoDaModel(clienteModel), transacao);
+                _conexao.Execute(ClienteSql.Atualizar(clienteModel), ClienteSql.RetornarParametroDinamicoDaModel(clienteModel), transacao);
                 _conexao.Execute(EnderecoSql.Atualizar(clienteModel.Endereco), clienteModel.Endereco, transacao);
 
                 foreach (var email in clienteModel.Emails)
@@ -198,6 +212,19 @@ namespace CRUD___Adriano.Features.Cliente.Dao
                 transacao.Commit();
 
                 return true;
+            }
+            finally
+            {
+                _conexao.Close();
+            }
+        }
+
+        public double RetornarValorLimite(int idUsuario)
+        {
+            try
+            {
+                _conexao.Open();
+                return _conexao.QuerySingleOrDefault<double>("select valor_limite from Cliente where id_usuario = @idUsuario", new { idUsuario });
             }
             finally
             {

@@ -26,6 +26,7 @@ namespace CRUD___Adriano.Features.Vendas.Model
 
         public void DefinirCliente(ClienteModel clienteModel) => Cliente = clienteModel;
         public void DefinirIdCliente(int idCliente) => Cliente.IdUsuario = idCliente;
+        public void DefinirNomeCliente(string nome) => Cliente.Nome = nome;
 
 
         public VendaModel()

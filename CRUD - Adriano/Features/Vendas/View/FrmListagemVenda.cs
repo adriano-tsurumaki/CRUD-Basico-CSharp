@@ -1,6 +1,7 @@
 ﻿using CRUD___Adriano.Features.Utils;
 using CRUD___Adriano.Features.Vendas.Controller;
 using CRUD___Adriano.Features.Vendas.Model;
+using CRUD___Adriano.Features.Vendas.Sql;
 using System;
 using System.ComponentModel;
 using System.Reflection;
@@ -11,11 +12,15 @@ namespace CRUD___Adriano.Features.Vendas.View
     public partial class FrmListagemVenda : Form
     {
         private readonly VendaListagemController _controller;
+        private FiltroVendaSql _filtroVendaSql;
 
         public FrmListagemVenda(VendaListagemController controller)
         {
             InitializeComponent();
             _controller = controller;
+            _filtroVendaSql = new FiltroVendaSql();
+            cbComparador.AtribuirPeloEnum<ComparadorEnum>();
+
         }
 
         public void BindModel(BindingList<VendaModel> vendaModelBindings)
@@ -183,6 +188,24 @@ namespace CRUD___Adriano.Features.Vendas.View
             var vendaModelSelecionado = gridView.CurrentRow.DataBoundItem as VendaModel;
 
             _controller.AbrirFormDeDetalhes(vendaModelSelecionado.Id);
+        }
+
+        private void BtnFiltrar_Click(object sender, EventArgs e)
+        {
+            if (dtDataInicio.Value > dtDataFinal.Value)
+            {
+                MessageBox.Show("A data de início não pode ser maior que a data final");
+                return;
+            }
+
+            _filtroVendaSql.DataInicio = dtDataInicio.Value;
+            _filtroVendaSql.DataFinal = dtDataFinal.Value;
+            
+            if (cbComparador.EstaSelecionado())
+                _filtroVendaSql.TipoComparador = cbComparador.PegarEnumPorDescricao<ComparadorEnum>();
+
+            _filtroVendaSql.ValorVenda = txtValorVenda.Text;
+            _controller.ListarTodos(_filtroVendaSql);
         }
     }
 }

@@ -93,6 +93,7 @@ namespace CRUD___Adriano.Features.Usuario.View
             this.btnPesquisar.TabIndex = 2;
             this.btnPesquisar.Text = "Pesquisar";
             this.btnPesquisar.UseVisualStyleBackColor = true;
+            this.btnPesquisar.Click += new System.EventHandler(this.BtnPesquisar_Click);
             // 
             // gridView
             // 

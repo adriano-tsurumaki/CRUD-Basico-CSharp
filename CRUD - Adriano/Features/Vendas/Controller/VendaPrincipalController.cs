@@ -1,4 +1,6 @@
-﻿using CRUD___Adriano.Features.Factory;
+﻿using CRUD___Adriano.Features.Cliente.Dao;
+using CRUD___Adriano.Features.Email.Controller;
+using CRUD___Adriano.Features.Factory;
 using CRUD___Adriano.Features.IoC;
 using CRUD___Adriano.Features.Usuario.Model;
 using CRUD___Adriano.Features.Vendas.Dao;
@@ -103,8 +105,36 @@ namespace CRUD___Adriano.Features.Vendas.Controller
             _controllerListaPagamento.RetornarUserControl().EventAtualizarFormaPagamento += EventAtualizarFormaPagamento;
         }
 
-        private void EventDefinirCliente(UsuarioModel clienteModelSelecionado) =>
+        private void EventDefinirCliente(UsuarioModel clienteModelSelecionado)
+        {
             _vendaModel.DefinirIdCliente(clienteModelSelecionado.IdUsuario);
+            _vendaModel.DefinirNomeCliente(clienteModelSelecionado.Nome);
+
+            if (VerificarSeClienteFazAniversario())
+                MessageBox.Show($"{clienteModelSelecionado.Nome} faz aniversário hoje!", "Parabéns!!!!!");
+        }
+
+
+        private bool VerificarSeClienteFazAniversario()
+        {
+            var dataNascimento = SelecionarDataDeNascimento();
+
+            return dataNascimento.Month == DateTime.Now.Month && dataNascimento.Day == DateTime.Now.Day;
+        }
+
+        private DateTime SelecionarDataDeNascimento()
+        {
+            try
+            {
+                return ConfigNinject.ObterInstancia<ClienteDao>().SelecionarDataDeNascimento(_vendaModel.Cliente.IdUsuario);
+            }
+            catch(Exception excecao)
+            {
+                MessageBox.Show(excecao.Message, "Houve um erro ao verificar a data de nascimento do cliente!");
+            }
+
+            return DateTime.MinValue;
+        }
 
         private void EventDefinirColaborador(UsuarioModel colaboradorModelSelecionado) =>
             _vendaModel.DefinirIdColaborador(colaboradorModelSelecionado.IdUsuario);
@@ -201,8 +231,8 @@ namespace CRUD___Adriano.Features.Vendas.Controller
 
         private void EventConfirmar()
         {
-            if (!ValidarModel()) return;
-
+            if (!ValidarModel() || !VerificarSeClientePodePagarOValorAPrazo()) return;
+            
             switch (_tipoCrud)
             {
                 case ControllerEnum.Salvar:
@@ -211,38 +241,6 @@ namespace CRUD___Adriano.Features.Vendas.Controller
                 case ControllerEnum.Atualizar:
                     AtualizarVenda();
                     break;
-            }
-        }
-
-        private void EfetuarVenda()
-        {
-            if (MessageBox.Show("Deseja efetuar a venda?", "Confirmação", MessageBoxButtons.YesNo) != DialogResult.Yes) return;
-
-            try
-            {
-                _vendaDao.EfetuarVenda(_vendaModel);
-                MessageBox.Show("Venda efetuada com sucesso!");
-                _frmVendaPrincipal.Close();
-            }
-            catch (Exception excecao)
-            {
-                MessageBox.Show(excecao.Message, "Erro ao efetuar a venda!");
-            }
-        }
-
-        private void AtualizarVenda()
-        {
-            if (MessageBox.Show("Deseja atualizar a venda?", "Confirmação", MessageBoxButtons.YesNo) != DialogResult.Yes) return;
-
-            try
-            {
-                _vendaDao.AtualizarVenda(_vendaModel);
-                MessageBox.Show("Venda atualizada com sucesso!");
-                _frmVendaPrincipal.Close();
-            }
-            catch (Exception excecao)
-            {
-                MessageBox.Show(excecao.Message, "Erro ao atualizar a venda!");
             }
         }
 
@@ -272,6 +270,67 @@ namespace CRUD___Adriano.Features.Vendas.Controller
             return true;
         }
 
+        private bool VerificarSeClientePodePagarOValorAPrazo()
+        {
+            if (!_vendaModel.ListaPagamentos.Any(x => x.TipoPagamento == TipoPagamentoEnum.Credito || x.TipoPagamento == TipoPagamentoEnum.Cheque)) return true;
+
+            try
+            {
+                double valorLimite = ConfigNinject.ObterInstancia<ClienteDao>().RetornarValorLimite(_vendaModel.Cliente.IdUsuario);
+
+                var valorTotalAPrazo = _vendaModel.ListaPagamentos.Where(x => x.TipoPagamento == TipoPagamentoEnum.Credito || x.TipoPagamento == TipoPagamentoEnum.Cheque).Sum(x => x.ValorAPagar.Valor);
+
+                if (valorTotalAPrazo > valorLimite)
+                {
+                    MessageBox.Show("O Valor a prazo a ser pago é maior que o valor limite do cliente", "Aviso");
+                    MessageBox.Show($"Valor limite: {valorLimite:c}", "Aviso");
+                    return false;
+                }
+            }
+            catch (Exception excecao)
+            {
+                MessageBox.Show(excecao.Message, "Erro ao tentar buscar o limite de crédito do cliente!");
+            }
+
+            return true;
+        }
+
+        private void EfetuarVenda()
+        {
+            if (MessageBox.Show("Deseja efetuar a venda?", "Confirmação", MessageBoxButtons.YesNo) != DialogResult.Yes) return;
+
+            try
+            {
+                _vendaDao.EfetuarVenda(_vendaModel);
+                
+                if (MessageBox.Show("Deseja efetuar a venda?", "Confirmação", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    EmailSenderController.EnviarConfirmacaoDaCompra(_vendaModel.Cliente.Nome, _vendaModel.ValorPago);
+
+                MessageBox.Show("Venda efetuada com sucesso!");
+                _frmVendaPrincipal.Close();
+            }
+            catch (Exception excecao)
+            {
+                MessageBox.Show(excecao.Message, "Erro ao efetuar a venda!");
+            }
+        }
+
+        private void AtualizarVenda()
+        {
+            if (MessageBox.Show("Deseja atualizar a venda?", "Confirmação", MessageBoxButtons.YesNo) != DialogResult.Yes) return;
+
+            try
+            {
+                _vendaDao.AtualizarVenda(_vendaModel);
+                MessageBox.Show("Venda atualizada com sucesso!");
+                _frmVendaPrincipal.Close();
+            }
+            catch (Exception excecao)
+            {
+                MessageBox.Show(excecao.Message, "Erro ao atualizar a venda!");
+            }
+        }
+
         public void AdicionarControl(Panel panel, UserControl formFilha)
         {
             panel.Controls.Add(formFilha);
@@ -280,22 +339,6 @@ namespace CRUD___Adriano.Features.Vendas.Controller
             formFilha.Dock = DockStyle.Fill;
             formFilha.BringToFront();
             formFilha.Show();
-        }
-
-        public void AdicionarControl(Panel panel, Form formFilha)
-        {
-            panel.Controls.Clear();
-
-            formFilha.TopLevel = false;
-            formFilha.FormBorderStyle = FormBorderStyle.None;
-            formFilha.Dock = DockStyle.Fill;
-
-            panel.Controls.Add(formFilha);
-            panel.Tag = formFilha;
-
-            formFilha.BringToFront();
-            formFilha.Show();
-            formFilha.Focus();
         }
 
         public void GerenciarKeyDown(object sender, KeyEventArgs e)

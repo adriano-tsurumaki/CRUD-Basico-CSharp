@@ -1,4 +1,7 @@
-﻿namespace CRUD___Adriano.Features.Colaborador.Sql
+﻿using CRUD___Adriano.Features.Colaborador.Model;
+using Dapper;
+
+namespace CRUD___Adriano.Features.Colaborador.Sql
 {
     public static class ColaboradorSql
     {
@@ -50,5 +53,20 @@
             salario = @Salario,
             comissao = @Comissao
             where id_usuario = @IdUsuario";
+
+        public static DynamicParameters RetornarParametroDinamicoDaModel(ColaboradorModel colaboradorModel)
+        {
+            var parametros = new DynamicParameters();
+
+            parametros.AddDynamicParams(new
+            {
+                colaboradorModel.IdUsuario,
+                colaboradorModel.Id,
+                Salario = colaboradorModel.Salario.Valor,
+                colaboradorModel.Comissao
+            });
+
+            return parametros;
+        }
     }
 }
