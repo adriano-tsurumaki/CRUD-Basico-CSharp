@@ -12,6 +12,7 @@ using CRUD___Adriano.Features.Fornecedor.Model;
 using CRUD___Adriano.Features.IoC;
 using CRUD___Adriano.Features.Produto.Controller;
 using CRUD___Adriano.Features.Produto.Model;
+using CRUD___Adriano.Features.Relatório.Controller;
 using CRUD___Adriano.Features.Usuario.Controller;
 using CRUD___Adriano.Features.Vendas.Controller;
 using CRUD___Adriano.Features.Vendas.Dao;
@@ -39,6 +40,7 @@ namespace CRUD___Adriano
             pnlListagemSubmenu.Visible = false;
             pnlProdutoSubmenu.Visible = false;
             pnlVendaSubmenu.Visible = false;
+            pnlRelatorioVendaSubmenu.Visible = false;
         }
 
         private void BtnClienteCadastro_Click(object sender, EventArgs e)
@@ -191,6 +193,19 @@ namespace CRUD___Adriano
             DocaForm(new VendaListagemController(ConfigNinject.ObterInstancia<VendaDao>(), pnlChild).RetornarFormulario());
         }
 
+        private void BtnRelatorioVenda_Click(object sender, EventArgs e)
+        {
+            TrocarVisibilidade(pnlRelatorioVendaSubmenu);
+            EsconderSubmenusRestantes(pnlRelatorioVendaSubmenu);
+        }
+
+        private void BtnRelatorioVendaProduto_Click(object sender, EventArgs e)
+        {
+            LimparPanel();
+            lblTitulo.Text = "Relatório de vendas";
+            DocaForm(ConfigNinject.ObterInstancia<RelatorioVendaProdutoController>().RetornarFormulario());
+        }
+
         private void TrocarVisibilidade(Panel subMenu) =>
             subMenu.Visible = !subMenu.Visible;
 
@@ -201,6 +216,7 @@ namespace CRUD___Adriano
             pnlListagemSubmenu.Visible = false;
             pnlProdutoSubmenu.Visible = false;
             pnlVendaSubmenu.Visible = false;
+            pnlRelatorioVendaSubmenu.Visible = false;
             submenu.Visible = visibilidade;
         }
 

@@ -33,6 +33,10 @@ namespace CRUD___Adriano
             this.pnlSideMenu = new System.Windows.Forms.Panel();
             this.btnLogout = new System.Windows.Forms.Button();
             this.btnAtalho = new System.Windows.Forms.Button();
+            this.pnlRelatorioVendaSubmenu = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
+            this.btnRelatorioVendaProduto = new System.Windows.Forms.Button();
+            this.btnRelatorioVenda = new System.Windows.Forms.Button();
             this.pnlVendaSubmenu = new System.Windows.Forms.Panel();
             this.btnListagemVenda = new System.Windows.Forms.Button();
             this.btnIniciarVenda = new System.Windows.Forms.Button();
@@ -63,6 +67,7 @@ namespace CRUD___Adriano
             this.btnMinimizar = new System.Windows.Forms.PictureBox();
             this.btnFechar = new System.Windows.Forms.PictureBox();
             this.pnlSideMenu.SuspendLayout();
+            this.pnlRelatorioVendaSubmenu.SuspendLayout();
             this.pnlVendaSubmenu.SuspendLayout();
             this.pnlProdutoSubmenu.SuspendLayout();
             this.pnlListagemSubmenu.SuspendLayout();
@@ -82,6 +87,8 @@ namespace CRUD___Adriano
             this.pnlSideMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(76)))));
             this.pnlSideMenu.Controls.Add(this.btnLogout);
             this.pnlSideMenu.Controls.Add(this.btnAtalho);
+            this.pnlSideMenu.Controls.Add(this.pnlRelatorioVendaSubmenu);
+            this.pnlSideMenu.Controls.Add(this.btnRelatorioVenda);
             this.pnlSideMenu.Controls.Add(this.pnlVendaSubmenu);
             this.pnlSideMenu.Controls.Add(this.btnVendas);
             this.pnlSideMenu.Controls.Add(this.pnlProdutoSubmenu);
@@ -106,7 +113,7 @@ namespace CRUD___Adriano
             this.btnLogout.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnLogout.ForeColor = System.Drawing.Color.Gainsboro;
             this.btnLogout.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnLogout.Location = new System.Drawing.Point(0, 1035);
+            this.btnLogout.Location = new System.Drawing.Point(0, 1221);
             this.btnLogout.Name = "btnLogout";
             this.btnLogout.Padding = new System.Windows.Forms.Padding(6, 0, 0, 0);
             this.btnLogout.Size = new System.Drawing.Size(203, 46);
@@ -126,7 +133,7 @@ namespace CRUD___Adriano
             this.btnAtalho.ForeColor = System.Drawing.Color.Gainsboro;
             this.btnAtalho.Image = ((System.Drawing.Image)(resources.GetObject("btnAtalho.Image")));
             this.btnAtalho.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAtalho.Location = new System.Drawing.Point(0, 975);
+            this.btnAtalho.Location = new System.Drawing.Point(0, 1161);
             this.btnAtalho.Name = "btnAtalho";
             this.btnAtalho.Padding = new System.Windows.Forms.Padding(6, 0, 0, 0);
             this.btnAtalho.Size = new System.Drawing.Size(203, 60);
@@ -136,6 +143,76 @@ namespace CRUD___Adriano
             this.btnAtalho.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnAtalho.UseVisualStyleBackColor = true;
             this.btnAtalho.Click += new System.EventHandler(this.BtnAtalho_Click);
+            // 
+            // pnlRelatorioVendaSubmenu
+            // 
+            this.pnlRelatorioVendaSubmenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(32)))), ((int)(((byte)(39)))));
+            this.pnlRelatorioVendaSubmenu.Controls.Add(this.button1);
+            this.pnlRelatorioVendaSubmenu.Controls.Add(this.btnRelatorioVendaProduto);
+            this.pnlRelatorioVendaSubmenu.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlRelatorioVendaSubmenu.Location = new System.Drawing.Point(0, 1035);
+            this.pnlRelatorioVendaSubmenu.Name = "pnlRelatorioVendaSubmenu";
+            this.pnlRelatorioVendaSubmenu.Size = new System.Drawing.Size(203, 126);
+            this.pnlRelatorioVendaSubmenu.TabIndex = 13;
+            // 
+            // button1
+            // 
+            this.button1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.button1.ForeColor = System.Drawing.Color.Gainsboro;
+            this.button1.Image = global::CRUD___Adriano.Properties.Resources.list;
+            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button1.Location = new System.Drawing.Point(0, 60);
+            this.button1.Name = "button1";
+            this.button1.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.button1.Size = new System.Drawing.Size(203, 60);
+            this.button1.TabIndex = 4;
+            this.button1.Text = "Clientes";
+            this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // btnRelatorioVendaProduto
+            // 
+            this.btnRelatorioVendaProduto.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnRelatorioVendaProduto.FlatAppearance.BorderSize = 0;
+            this.btnRelatorioVendaProduto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRelatorioVendaProduto.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnRelatorioVendaProduto.ForeColor = System.Drawing.Color.Gainsboro;
+            this.btnRelatorioVendaProduto.Image = ((System.Drawing.Image)(resources.GetObject("btnRelatorioVendaProduto.Image")));
+            this.btnRelatorioVendaProduto.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnRelatorioVendaProduto.Location = new System.Drawing.Point(0, 0);
+            this.btnRelatorioVendaProduto.Name = "btnRelatorioVendaProduto";
+            this.btnRelatorioVendaProduto.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.btnRelatorioVendaProduto.Size = new System.Drawing.Size(203, 60);
+            this.btnRelatorioVendaProduto.TabIndex = 1;
+            this.btnRelatorioVendaProduto.Text = "Produtos";
+            this.btnRelatorioVendaProduto.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnRelatorioVendaProduto.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnRelatorioVendaProduto.UseVisualStyleBackColor = true;
+            this.btnRelatorioVendaProduto.Click += new System.EventHandler(this.BtnRelatorioVendaProduto_Click);
+            // 
+            // btnRelatorioVenda
+            // 
+            this.btnRelatorioVenda.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnRelatorioVenda.FlatAppearance.BorderSize = 0;
+            this.btnRelatorioVenda.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRelatorioVenda.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnRelatorioVenda.ForeColor = System.Drawing.Color.Gainsboro;
+            this.btnRelatorioVenda.Image = ((System.Drawing.Image)(resources.GetObject("btnRelatorioVenda.Image")));
+            this.btnRelatorioVenda.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnRelatorioVenda.Location = new System.Drawing.Point(0, 975);
+            this.btnRelatorioVenda.Name = "btnRelatorioVenda";
+            this.btnRelatorioVenda.Padding = new System.Windows.Forms.Padding(6, 0, 0, 0);
+            this.btnRelatorioVenda.Size = new System.Drawing.Size(203, 60);
+            this.btnRelatorioVenda.TabIndex = 13;
+            this.btnRelatorioVenda.Text = "Relatório de venda";
+            this.btnRelatorioVenda.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnRelatorioVenda.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnRelatorioVenda.UseVisualStyleBackColor = true;
+            this.btnRelatorioVenda.Click += new System.EventHandler(this.BtnRelatorioVenda_Click);
             // 
             // pnlVendaSubmenu
             // 
@@ -601,6 +678,7 @@ namespace CRUD___Adriano
             this.Text = "Principal";
             this.Load += new System.EventHandler(this.FrmPrincipal_Load);
             this.pnlSideMenu.ResumeLayout(false);
+            this.pnlRelatorioVendaSubmenu.ResumeLayout(false);
             this.pnlVendaSubmenu.ResumeLayout(false);
             this.pnlProdutoSubmenu.ResumeLayout(false);
             this.pnlListagemSubmenu.ResumeLayout(false);
@@ -650,6 +728,10 @@ namespace CRUD___Adriano
         private System.Windows.Forms.Panel pnlRightButtons;
         private System.Windows.Forms.PictureBox btnMinimizar;
         private System.Windows.Forms.PictureBox btnFechar;
+        private System.Windows.Forms.Panel pnlRelatorioVendaSubmenu;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnRelatorioVendaProduto;
+        private System.Windows.Forms.Button btnRelatorioVenda;
     }
 }
 
