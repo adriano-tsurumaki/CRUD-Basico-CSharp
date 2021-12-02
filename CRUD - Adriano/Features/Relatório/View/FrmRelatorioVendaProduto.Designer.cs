@@ -29,12 +29,19 @@ namespace CRUD___Adriano.Features.Relatório.View
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmRelatorioVendaProduto));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmRelatorioVendaProduto));
             this.pnlRight = new System.Windows.Forms.Panel();
             this.pnlFiltro = new System.Windows.Forms.Panel();
+            this.btnPesquisarProduto = new System.Windows.Forms.Button();
+            this.btnDeselecionarProduto = new System.Windows.Forms.Button();
+            this.txtProduto = new System.Windows.Forms.Label();
+            this.lblProduto = new System.Windows.Forms.Label();
+            this.btnPesquisarCliente = new System.Windows.Forms.Button();
+            this.btnDeselecionarCliente = new System.Windows.Forms.Button();
+            this.txtCliente = new System.Windows.Forms.Label();
             this.lblCliente = new System.Windows.Forms.Label();
             this.lblDataFinal = new System.Windows.Forms.Label();
             this.lblDataInicio = new System.Windows.Forms.Label();
@@ -45,13 +52,6 @@ namespace CRUD___Adriano.Features.Relatório.View
             this.btnFiltrar = new System.Windows.Forms.Button();
             this.gridView = new System.Windows.Forms.DataGridView();
             this.pnlTotalizadores = new System.Windows.Forms.Panel();
-            this.txtCliente = new System.Windows.Forms.Label();
-            this.btnDeselecionarCliente = new System.Windows.Forms.Button();
-            this.btnPesquisarCliente = new System.Windows.Forms.Button();
-            this.btnPesquisarProduto = new System.Windows.Forms.Button();
-            this.btnDeselecionarProduto = new System.Windows.Forms.Button();
-            this.txtProduto = new System.Windows.Forms.Label();
-            this.lblProduto = new System.Windows.Forms.Label();
             this.pnlRight.SuspendLayout();
             this.pnlFiltro.SuspendLayout();
             this.pnlBotoes.SuspendLayout();
@@ -89,6 +89,93 @@ namespace CRUD___Adriano.Features.Relatório.View
             this.pnlFiltro.Name = "pnlFiltro";
             this.pnlFiltro.Size = new System.Drawing.Size(234, 637);
             this.pnlFiltro.TabIndex = 4;
+            // 
+            // btnPesquisarProduto
+            // 
+            this.btnPesquisarProduto.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke;
+            this.btnPesquisarProduto.FlatAppearance.BorderSize = 2;
+            this.btnPesquisarProduto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPesquisarProduto.Image = ((System.Drawing.Image)(resources.GetObject("btnPesquisarProduto.Image")));
+            this.btnPesquisarProduto.Location = new System.Drawing.Point(187, 232);
+            this.btnPesquisarProduto.Name = "btnPesquisarProduto";
+            this.btnPesquisarProduto.Size = new System.Drawing.Size(23, 25);
+            this.btnPesquisarProduto.TabIndex = 15;
+            this.btnPesquisarProduto.UseVisualStyleBackColor = true;
+            this.btnPesquisarProduto.Click += new System.EventHandler(this.BtnPesquisarProduto_Click);
+            // 
+            // btnDeselecionarProduto
+            // 
+            this.btnDeselecionarProduto.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke;
+            this.btnDeselecionarProduto.FlatAppearance.BorderSize = 2;
+            this.btnDeselecionarProduto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDeselecionarProduto.Image = ((System.Drawing.Image)(resources.GetObject("btnDeselecionarProduto.Image")));
+            this.btnDeselecionarProduto.Location = new System.Drawing.Point(158, 232);
+            this.btnDeselecionarProduto.Name = "btnDeselecionarProduto";
+            this.btnDeselecionarProduto.Size = new System.Drawing.Size(23, 25);
+            this.btnDeselecionarProduto.TabIndex = 14;
+            this.btnDeselecionarProduto.UseVisualStyleBackColor = true;
+            this.btnDeselecionarProduto.Click += new System.EventHandler(this.BtnDeselecionarProduto_Click);
+            // 
+            // txtProduto
+            // 
+            this.txtProduto.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.txtProduto.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.txtProduto.ForeColor = System.Drawing.Color.Black;
+            this.txtProduto.Location = new System.Drawing.Point(18, 232);
+            this.txtProduto.Name = "txtProduto";
+            this.txtProduto.Size = new System.Drawing.Size(134, 25);
+            this.txtProduto.TabIndex = 13;
+            this.txtProduto.Text = "Não selecionado";
+            this.txtProduto.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblProduto
+            // 
+            this.lblProduto.AutoSize = true;
+            this.lblProduto.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblProduto.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.lblProduto.Location = new System.Drawing.Point(18, 201);
+            this.lblProduto.Name = "lblProduto";
+            this.lblProduto.Size = new System.Drawing.Size(59, 19);
+            this.lblProduto.TabIndex = 12;
+            this.lblProduto.Text = "Produto";
+            // 
+            // btnPesquisarCliente
+            // 
+            this.btnPesquisarCliente.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke;
+            this.btnPesquisarCliente.FlatAppearance.BorderSize = 2;
+            this.btnPesquisarCliente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPesquisarCliente.Image = ((System.Drawing.Image)(resources.GetObject("btnPesquisarCliente.Image")));
+            this.btnPesquisarCliente.Location = new System.Drawing.Point(187, 300);
+            this.btnPesquisarCliente.Name = "btnPesquisarCliente";
+            this.btnPesquisarCliente.Size = new System.Drawing.Size(23, 25);
+            this.btnPesquisarCliente.TabIndex = 11;
+            this.btnPesquisarCliente.UseVisualStyleBackColor = true;
+            this.btnPesquisarCliente.Click += new System.EventHandler(this.BtnPesquisarCliente_Click);
+            // 
+            // btnDeselecionarCliente
+            // 
+            this.btnDeselecionarCliente.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke;
+            this.btnDeselecionarCliente.FlatAppearance.BorderSize = 2;
+            this.btnDeselecionarCliente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDeselecionarCliente.Image = ((System.Drawing.Image)(resources.GetObject("btnDeselecionarCliente.Image")));
+            this.btnDeselecionarCliente.Location = new System.Drawing.Point(158, 300);
+            this.btnDeselecionarCliente.Name = "btnDeselecionarCliente";
+            this.btnDeselecionarCliente.Size = new System.Drawing.Size(23, 25);
+            this.btnDeselecionarCliente.TabIndex = 10;
+            this.btnDeselecionarCliente.UseVisualStyleBackColor = true;
+            this.btnDeselecionarCliente.Click += new System.EventHandler(this.BtnDeselecionarCliente_Click);
+            // 
+            // txtCliente
+            // 
+            this.txtCliente.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.txtCliente.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.txtCliente.ForeColor = System.Drawing.Color.Black;
+            this.txtCliente.Location = new System.Drawing.Point(18, 300);
+            this.txtCliente.Name = "txtCliente";
+            this.txtCliente.Size = new System.Drawing.Size(134, 25);
+            this.txtCliente.TabIndex = 9;
+            this.txtCliente.Text = "Não selecionado";
+            this.txtCliente.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblCliente
             // 
@@ -172,6 +259,7 @@ namespace CRUD___Adriano.Features.Relatório.View
             this.btnFiltrar.TabIndex = 0;
             this.btnFiltrar.Text = "Filtrar";
             this.btnFiltrar.UseVisualStyleBackColor = false;
+            this.btnFiltrar.Click += new System.EventHandler(this.BtnFiltrar_Click);
             // 
             // gridView
             // 
@@ -220,89 +308,6 @@ namespace CRUD___Adriano.Features.Relatório.View
             this.pnlTotalizadores.Name = "pnlTotalizadores";
             this.pnlTotalizadores.Size = new System.Drawing.Size(1087, 64);
             this.pnlTotalizadores.TabIndex = 10;
-            // 
-            // txtCliente
-            // 
-            this.txtCliente.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.txtCliente.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtCliente.ForeColor = System.Drawing.Color.Black;
-            this.txtCliente.Location = new System.Drawing.Point(18, 300);
-            this.txtCliente.Name = "txtCliente";
-            this.txtCliente.Size = new System.Drawing.Size(134, 25);
-            this.txtCliente.TabIndex = 9;
-            this.txtCliente.Text = "Não selecionado";
-            this.txtCliente.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // btnDeselecionarCliente
-            // 
-            this.btnDeselecionarCliente.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke;
-            this.btnDeselecionarCliente.FlatAppearance.BorderSize = 2;
-            this.btnDeselecionarCliente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDeselecionarCliente.Image = ((System.Drawing.Image)(resources.GetObject("btnDeselecionarCliente.Image")));
-            this.btnDeselecionarCliente.Location = new System.Drawing.Point(158, 300);
-            this.btnDeselecionarCliente.Name = "btnDeselecionarCliente";
-            this.btnDeselecionarCliente.Size = new System.Drawing.Size(23, 25);
-            this.btnDeselecionarCliente.TabIndex = 10;
-            this.btnDeselecionarCliente.UseVisualStyleBackColor = true;
-            // 
-            // btnPesquisarCliente
-            // 
-            this.btnPesquisarCliente.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke;
-            this.btnPesquisarCliente.FlatAppearance.BorderSize = 2;
-            this.btnPesquisarCliente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPesquisarCliente.Image = ((System.Drawing.Image)(resources.GetObject("btnPesquisarCliente.Image")));
-            this.btnPesquisarCliente.Location = new System.Drawing.Point(187, 300);
-            this.btnPesquisarCliente.Name = "btnPesquisarCliente";
-            this.btnPesquisarCliente.Size = new System.Drawing.Size(23, 25);
-            this.btnPesquisarCliente.TabIndex = 11;
-            this.btnPesquisarCliente.UseVisualStyleBackColor = true;
-            // 
-            // btnPesquisarProduto
-            // 
-            this.btnPesquisarProduto.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke;
-            this.btnPesquisarProduto.FlatAppearance.BorderSize = 2;
-            this.btnPesquisarProduto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPesquisarProduto.Image = ((System.Drawing.Image)(resources.GetObject("btnPesquisarProduto.Image")));
-            this.btnPesquisarProduto.Location = new System.Drawing.Point(187, 232);
-            this.btnPesquisarProduto.Name = "btnPesquisarProduto";
-            this.btnPesquisarProduto.Size = new System.Drawing.Size(23, 25);
-            this.btnPesquisarProduto.TabIndex = 15;
-            this.btnPesquisarProduto.UseVisualStyleBackColor = true;
-            // 
-            // btnDeselecionarProduto
-            // 
-            this.btnDeselecionarProduto.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke;
-            this.btnDeselecionarProduto.FlatAppearance.BorderSize = 2;
-            this.btnDeselecionarProduto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDeselecionarProduto.Image = ((System.Drawing.Image)(resources.GetObject("btnDeselecionarProduto.Image")));
-            this.btnDeselecionarProduto.Location = new System.Drawing.Point(158, 232);
-            this.btnDeselecionarProduto.Name = "btnDeselecionarProduto";
-            this.btnDeselecionarProduto.Size = new System.Drawing.Size(23, 25);
-            this.btnDeselecionarProduto.TabIndex = 14;
-            this.btnDeselecionarProduto.UseVisualStyleBackColor = true;
-            // 
-            // txtProduto
-            // 
-            this.txtProduto.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.txtProduto.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtProduto.ForeColor = System.Drawing.Color.Black;
-            this.txtProduto.Location = new System.Drawing.Point(18, 232);
-            this.txtProduto.Name = "txtProduto";
-            this.txtProduto.Size = new System.Drawing.Size(134, 25);
-            this.txtProduto.TabIndex = 13;
-            this.txtProduto.Text = "Não selecionado";
-            this.txtProduto.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // lblProduto
-            // 
-            this.lblProduto.AutoSize = true;
-            this.lblProduto.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblProduto.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblProduto.Location = new System.Drawing.Point(18, 201);
-            this.lblProduto.Name = "lblProduto";
-            this.lblProduto.Size = new System.Drawing.Size(59, 19);
-            this.lblProduto.TabIndex = 12;
-            this.lblProduto.Text = "Produto";
             // 
             // FrmRelatorioVendaProduto
             // 

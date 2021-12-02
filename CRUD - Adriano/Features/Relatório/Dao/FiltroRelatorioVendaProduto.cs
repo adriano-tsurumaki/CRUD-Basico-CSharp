@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Dapper;
+using System;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -76,5 +77,20 @@ namespace CRUD___Adriano.Features.Relatório.Dao
         }
 
         public bool DateMinOuMax(DateTime dateTime) => dateTime == DateTime.MinValue || dateTime == DateTime.MaxValue;
+
+        public DynamicParameters RetornarParametroDinamico()
+        {
+            var parametros = new DynamicParameters();
+
+            parametros.AddDynamicParams(new
+            {
+                IdProduto,
+                IdCliente,
+                DataInicio,
+                DataFinal
+            });
+
+            return parametros;
+        }
     }
 }

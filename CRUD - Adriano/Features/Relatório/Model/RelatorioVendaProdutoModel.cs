@@ -14,6 +14,5 @@ namespace CRUD___Adriano.Features.Relatório.Model
         public double LucroTotalPorcentagem { get; set; }
         public Preco LucroTotal { get; set; }
         public Preco PrecoLiquidoTotal { get; set; }
-        public Preco PrecoTotalCusto { get; set; }
     }
 }
