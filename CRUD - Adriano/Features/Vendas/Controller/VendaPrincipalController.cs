@@ -142,8 +142,11 @@ namespace CRUD___Adriano.Features.Vendas.Controller
         private void EventEnviarProduto(VendaProdutoModel vendaProdutoSelecionado)
         {
             if (_controllerDescontoVenda.FoiAplicadoDescontoGeral() && MessageBox.Show("Já foi aplicado um desconto geral no pedido, deseja cancelar este desconto?", "Aviso", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                AplicarDescontoGeral(0);
-            
+            {
+                AplicarDescontoGeral(0, _controllerCarrinhoVenda.RetornarListasDeProdutosParaDesconto());
+                _controllerDescontoVenda.DefinirQueNaoFoiAplicadoODescontoGeral();
+            }
+
             _controllerCarrinhoVenda.AdicionarProdutoNoCarrinho(vendaProdutoSelecionado);
         }
 
@@ -156,23 +159,33 @@ namespace CRUD___Adriano.Features.Vendas.Controller
         private void EventPegarDesconto(TipoDescontoEnum tipoDesconto, double porcentagem)
         {
             if (tipoDesconto == TipoDescontoEnum.Geral)
-                AplicarDescontoGeral(porcentagem);
-            else
-                AplicarDescontoUnitario(porcentagem);
+            {
+                AplicarDescontoGeral(porcentagem, _controllerCarrinhoVenda.RetornarListasDeProdutosParaDesconto());
+                _controllerCarrinhoVenda.AtualizarCarrinho();
+                return;
+            }
+
+            if (_controllerDescontoVenda.FoiAplicadoDescontoGeral() && MessageBox.Show("Já foi aplicado um desconto geral no pedido, deseja cancelar este desconto?", "Aviso", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                AplicarDescontoGeral(0, _controllerCarrinhoVenda.RetornarListasDeProdutosParaDesconto());
+                AplicarDescontoUnitario(porcentagem, _controllerCarrinhoVenda.RetornarVendaProdutoSelecionadoParaDesconto());
+                _controllerDescontoVenda.DefinirQueNaoFoiAplicadoODescontoGeral();
+                _controllerCarrinhoVenda.AtualizarCarrinho();
+                return;
+            }
+            
+            AplicarDescontoUnitario(porcentagem, _controllerCarrinhoVenda.RetornarVendaProdutoSelecionadoParaDesconto());
             _controllerCarrinhoVenda.AtualizarCarrinho();
         }
 
-        private void AplicarDescontoGeral(double porcentagem)
+        public static void AplicarDescontoGeral(double porcentagem, IList<VendaProdutoModel> listaDeProdutos)
         {
-            foreach (var item in _controllerCarrinhoVenda.RetornarListasDeProdutosParaDesconto())
+            foreach (var item in listaDeProdutos)
                 item.Desconto = item.PrecoVenda * porcentagem;
         }
 
-        private void AplicarDescontoUnitario(double porcentagem)
-        {
-            var produtoSelecionado = _controllerCarrinhoVenda.RetornarVendaProdutoSelecionadoParaDesconto();
+        public static void AplicarDescontoUnitario(double porcentagem, VendaProdutoModel produtoSelecionado) =>
             produtoSelecionado.Desconto = produtoSelecionado.PrecoVenda * porcentagem;
-        }
 
         private void EventAdicionarPagamento(IList<FormaPagamentoModel> listaFormaPagamentos)
         {

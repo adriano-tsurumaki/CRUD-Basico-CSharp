@@ -18,6 +18,8 @@ namespace CRUD___Adriano.Features.Vendas.Controller
 
         public void DefinirQueFoiAplicadoODescontoGeral() => _foiAplicadoDescontoGeral = true;
 
+        public void DefinirQueNaoFoiAplicadoODescontoGeral() => _foiAplicadoDescontoGeral = false;
+
         public bool FoiAplicadoDescontoGeral() => _foiAplicadoDescontoGeral;
     }
 }
