@@ -1,10 +1,9 @@
 ﻿using CRUD___Adriano.Features.Utils;
-using CRUD___Adriano.Features.ValueObject.Precos;
+using CRUD___Adriano.Features.Vendas.Controller;
 using CRUD___Adriano.Features.Vendas.Enum;
 using CRUD___Adriano.Features.Vendas.Model;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace CRUD___Adriano.Features.Vendas.View
@@ -51,39 +50,10 @@ namespace CRUD___Adriano.Features.Vendas.View
             }
             // TODO: Fazer validações
 
-            var quantidadeParcelas = txtQuantidadeParcelas.Texto.IntOuZero();
-            var listaFormaPagamento = new List<FormaPagamentoModel>();
-
-            if (quantidadeParcelas == 0)
-            {
-                listaFormaPagamento.Add(new FormaPagamentoModel
-                {
-                    QuantidadeParcelas = quantidadeParcelas,
-                    TipoPagamento = cbFormaPagamento.PegarEnumPorDescricao<TipoPagamentoEnum>(),
-                    ValorAPagar = txtValorASerPago.Texto.DoubleOuZero(),
-                    PosicaoParcela = "0",
-                });
-            }
-            else
-            {
-                for (var posicao = 1; posicao <= quantidadeParcelas; posicao++)
-                {
-                    var posicaoParcela = $"{posicao}/{quantidadeParcelas}";
-                    Preco valorParcelado = txtValorASerPago.Texto.DoubleOuZero() / quantidadeParcelas;
-                    listaFormaPagamento.Add(new FormaPagamentoModel
-                    {
-                        QuantidadeParcelas = quantidadeParcelas,
-                        TipoPagamento = cbFormaPagamento.PegarEnumPorDescricao<TipoPagamentoEnum>(),
-                        ValorAPagar = valorParcelado,
-                        PosicaoParcela = posicaoParcela,
-                    });
-                }
-                Preco valorSerPago = listaFormaPagamento.Sum(x => x.ValorAPagar.Valor);
-                Preco valorTotal = txtValorASerPago.Texto.DoubleOuZero();
-                Preco diferencaDeConversao = valorTotal - valorSerPago;
-
-                listaFormaPagamento.Last().ValorAPagar += diferencaDeConversao;
-            }
+            var listaFormaPagamento = FormaPagamentoController.GerarListaFormaPagamento(
+                txtQuantidadeParcelas.Texto.IntOuZero(),
+                cbFormaPagamento.PegarEnumPorDescricao<TipoPagamentoEnum>(),
+                txtValorASerPago.Texto.DoubleOuZero());
 
             EventAdicionarPagamento?.Invoke(listaFormaPagamento);
         }
