@@ -46,11 +46,12 @@ namespace CRUD___Adriano.Features.IoC
             kernel.Bind(typeof(IControllerBase<ClienteModel>)).To<ClienteController>();
             kernel.Bind(typeof(IControllerBase<ColaboradorModel>)).To<ColaboradorModel>();
             kernel.Bind(typeof(IControllerBase<FornecedorModel>)).To<FornecedorModel>();
+            kernel.Bind(typeof(IControllerBase<ProdutoModel>)).To<ProdutoController>();
+
 
             kernel.Bind(typeof(IControllerListarIdNome<ClienteModel>)).To<ClienteController>();
             kernel.Bind(typeof(IControllerListarIdNome<ColaboradorModel>)).To<ColaboradorController>();
             kernel.Bind(typeof(IControllerListarIdNome<FornecedorModel>)).To<FornecedorController>();
-            
             kernel.Bind(typeof(IControllerListarIdNome<ProdutoModel>)).To<ProdutoController>();
 
             //Database

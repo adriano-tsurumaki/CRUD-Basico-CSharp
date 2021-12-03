@@ -40,6 +40,12 @@ namespace CRUD___Adriano.Features.Relatório.Controller
         public void DefinirIdProdutoNoFiltro(int idProduto) =>
             _filtro.IdProduto = idProduto;
 
+        public void DefinirDataInicioNoFiltro(DateTime dataInicio) =>
+            _filtro.DataInicio = dataInicio;
+
+        public void DefinirDataFinalNoFiltro(DateTime dataFinal) =>
+            _filtro.DataFinal = dataFinal;
+
         public FrmRelatorioVendaProduto RetornarFormulario() => _frmRelatorioVendaProduto;
     }
 }
