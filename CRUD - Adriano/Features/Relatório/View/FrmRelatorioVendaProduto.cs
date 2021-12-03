@@ -2,9 +2,11 @@
 using CRUD___Adriano.Features.IoC;
 using CRUD___Adriano.Features.Produto.Model;
 using CRUD___Adriano.Features.Relatório.Controller;
+using CRUD___Adriano.Features.Relatório.Model;
 using CRUD___Adriano.Features.Usuario.Controller;
 using CRUD___Adriano.Features.Utils;
 using System;
+using System.ComponentModel;
 using System.Windows.Forms;
 
 namespace CRUD___Adriano.Features.Relatório.View
@@ -17,7 +19,24 @@ namespace CRUD___Adriano.Features.Relatório.View
         {
             InitializeComponent();
             _controller = controller;
-            gridView.DataSource = _controller.ListarTodosProdutosPeloFiltro();
+            CustomizandoGrid();
+        }
+
+        private void CustomizandoGrid()
+        {
+            DataGridViewCell celula = new DataGridViewTextBoxCell();
+
+            gridView.TextBoxColumnPadrao(celula, "Id", "IdProduto", true);
+            gridView.TextBoxColumnPadrao(celula, "Nome", "NomeProduto", true);
+            gridView.TextBoxColumnPadrao(celula, "Quantidade", "Quantidade", true);
+            gridView.TextBoxColumnPadrao(celula, "Preço bruto total", "PrecoBrutoTotal.Formatado", true);
+            gridView.TextBoxColumnPadrao(celula, "Total de desconto", "DescontoTotal.Formatado", true);
+            gridView.TextBoxColumnPadrao(celula, "Lucro total (%)", "LucroTotalPorcentagem", true);
+            gridView.TextBoxColumnPadrao(celula, "Lucro total", "LucroTotal.Formatado", true);
+            gridView.TextBoxColumnPadrao(celula, "Preço líquido total", "PrecoLiquidoTotal.Formatado", true);
+
+            gridView.AutoGenerateColumns = false;
+            gridView.DataSource = new BindingList<RelatorioVendaProdutoModel>(_controller.ListarTodosProdutosPeloFiltro());
         }
 
         private void BtnAbrirFiltro_Click(object sender, System.EventArgs e) =>
@@ -80,6 +99,21 @@ namespace CRUD___Adriano.Features.Relatório.View
             }
 
             gridView.DataSource = _controller.ListarTodosProdutosPeloFiltro();
+        }
+
+        private void GridView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (!(gridView.Rows[e.RowIndex].DataBoundItem is RelatorioVendaProdutoModel model)) return;
+
+            if (gridView.Columns[e.ColumnIndex].DataPropertyName == "LucroTotalPorcentagem")
+            {
+                e.Value = $"{Math.Round(model.LucroTotalPorcentagem, 2)} %";
+                return;
+            }
+
+            if (!gridView.Columns[e.ColumnIndex].DataPropertyName.Contains(".")) return;
+
+            e.Value = gridView.BindProperty(gridView.Rows[e.RowIndex].DataBoundItem, gridView.Columns[e.ColumnIndex].DataPropertyName);
         }
     }
 }

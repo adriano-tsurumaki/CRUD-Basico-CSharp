@@ -32,41 +32,41 @@ namespace CRUD___Adriano.Features.Relatório.View
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmRelatorioVendaProduto));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlRight = new System.Windows.Forms.Panel();
             this.pnlFiltro = new System.Windows.Forms.Panel();
-            this.btnPesquisarProduto = new System.Windows.Forms.Button();
-            this.btnDeselecionarProduto = new System.Windows.Forms.Button();
-            this.txtProduto = new System.Windows.Forms.Label();
+            this.panel3 = new System.Windows.Forms.Panel();
             this.lblProduto = new System.Windows.Forms.Label();
-            this.btnPesquisarCliente = new System.Windows.Forms.Button();
-            this.btnDeselecionarCliente = new System.Windows.Forms.Button();
-            this.txtCliente = new System.Windows.Forms.Label();
             this.lblCliente = new System.Windows.Forms.Label();
-            this.lblDataFinal = new System.Windows.Forms.Label();
+            this.txtCliente = new System.Windows.Forms.Label();
+            this.btnPesquisarProduto = new System.Windows.Forms.Button();
+            this.btnDeselecionarCliente = new System.Windows.Forms.Button();
+            this.btnDeselecionarProduto = new System.Windows.Forms.Button();
+            this.btnPesquisarCliente = new System.Windows.Forms.Button();
+            this.txtProduto = new System.Windows.Forms.Label();
+            this.pnlFiltroData = new System.Windows.Forms.Panel();
             this.lblDataInicio = new System.Windows.Forms.Label();
-            this.dtDataInicio = new System.Windows.Forms.DateTimePicker();
             this.dtDataFinal = new System.Windows.Forms.DateTimePicker();
+            this.dtDataInicio = new System.Windows.Forms.DateTimePicker();
+            this.lblDataFinal = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.checkDataFiltro = new System.Windows.Forms.CheckBox();
             this.lblFiltro = new System.Windows.Forms.Label();
             this.pnlBotoes = new System.Windows.Forms.Panel();
             this.btnFiltrar = new System.Windows.Forms.Button();
             this.gridView = new System.Windows.Forms.DataGridView();
             this.pnlTotalizadores = new System.Windows.Forms.Panel();
             this.btnAbrirFiltro = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.pnlFiltroData = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.checkDataFiltro = new System.Windows.Forms.CheckBox();
             this.pnlRight.SuspendLayout();
             this.pnlFiltro.SuspendLayout();
+            this.panel3.SuspendLayout();
+            this.pnlFiltroData.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.pnlBotoes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridView)).BeginInit();
             this.pnlTotalizadores.SuspendLayout();
-            this.panel1.SuspendLayout();
-            this.pnlFiltroData.SuspendLayout();
-            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlRight
@@ -79,6 +79,7 @@ namespace CRUD___Adriano.Features.Relatório.View
             this.pnlRight.Name = "pnlRight";
             this.pnlRight.Size = new System.Drawing.Size(234, 701);
             this.pnlRight.TabIndex = 6;
+            this.pnlRight.Visible = false;
             // 
             // pnlFiltro
             // 
@@ -90,6 +91,56 @@ namespace CRUD___Adriano.Features.Relatório.View
             this.pnlFiltro.Name = "pnlFiltro";
             this.pnlFiltro.Size = new System.Drawing.Size(234, 637);
             this.pnlFiltro.TabIndex = 4;
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.lblProduto);
+            this.panel3.Controls.Add(this.lblCliente);
+            this.panel3.Controls.Add(this.txtCliente);
+            this.panel3.Controls.Add(this.btnPesquisarProduto);
+            this.panel3.Controls.Add(this.btnDeselecionarCliente);
+            this.panel3.Controls.Add(this.btnDeselecionarProduto);
+            this.panel3.Controls.Add(this.btnPesquisarCliente);
+            this.panel3.Controls.Add(this.txtProduto);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel3.Location = new System.Drawing.Point(0, 254);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(234, 168);
+            this.panel3.TabIndex = 18;
+            // 
+            // lblProduto
+            // 
+            this.lblProduto.AutoSize = true;
+            this.lblProduto.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblProduto.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.lblProduto.Location = new System.Drawing.Point(18, 23);
+            this.lblProduto.Name = "lblProduto";
+            this.lblProduto.Size = new System.Drawing.Size(59, 19);
+            this.lblProduto.TabIndex = 12;
+            this.lblProduto.Text = "Produto";
+            // 
+            // lblCliente
+            // 
+            this.lblCliente.AutoSize = true;
+            this.lblCliente.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblCliente.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.lblCliente.Location = new System.Drawing.Point(18, 91);
+            this.lblCliente.Name = "lblCliente";
+            this.lblCliente.Size = new System.Drawing.Size(51, 19);
+            this.lblCliente.TabIndex = 7;
+            this.lblCliente.Text = "Cliente";
+            // 
+            // txtCliente
+            // 
+            this.txtCliente.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.txtCliente.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.txtCliente.ForeColor = System.Drawing.Color.Black;
+            this.txtCliente.Location = new System.Drawing.Point(18, 122);
+            this.txtCliente.Name = "txtCliente";
+            this.txtCliente.Size = new System.Drawing.Size(134, 25);
+            this.txtCliente.TabIndex = 9;
+            this.txtCliente.Text = "Não selecionado";
+            this.txtCliente.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // btnPesquisarProduto
             // 
@@ -104,6 +155,19 @@ namespace CRUD___Adriano.Features.Relatório.View
             this.btnPesquisarProduto.UseVisualStyleBackColor = true;
             this.btnPesquisarProduto.Click += new System.EventHandler(this.BtnPesquisarProduto_Click);
             // 
+            // btnDeselecionarCliente
+            // 
+            this.btnDeselecionarCliente.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke;
+            this.btnDeselecionarCliente.FlatAppearance.BorderSize = 2;
+            this.btnDeselecionarCliente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDeselecionarCliente.Image = ((System.Drawing.Image)(resources.GetObject("btnDeselecionarCliente.Image")));
+            this.btnDeselecionarCliente.Location = new System.Drawing.Point(158, 122);
+            this.btnDeselecionarCliente.Name = "btnDeselecionarCliente";
+            this.btnDeselecionarCliente.Size = new System.Drawing.Size(23, 25);
+            this.btnDeselecionarCliente.TabIndex = 10;
+            this.btnDeselecionarCliente.UseVisualStyleBackColor = true;
+            this.btnDeselecionarCliente.Click += new System.EventHandler(this.BtnDeselecionarCliente_Click);
+            // 
             // btnDeselecionarProduto
             // 
             this.btnDeselecionarProduto.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke;
@@ -116,29 +180,6 @@ namespace CRUD___Adriano.Features.Relatório.View
             this.btnDeselecionarProduto.TabIndex = 14;
             this.btnDeselecionarProduto.UseVisualStyleBackColor = true;
             this.btnDeselecionarProduto.Click += new System.EventHandler(this.BtnDeselecionarProduto_Click);
-            // 
-            // txtProduto
-            // 
-            this.txtProduto.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.txtProduto.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtProduto.ForeColor = System.Drawing.Color.Black;
-            this.txtProduto.Location = new System.Drawing.Point(18, 54);
-            this.txtProduto.Name = "txtProduto";
-            this.txtProduto.Size = new System.Drawing.Size(134, 25);
-            this.txtProduto.TabIndex = 13;
-            this.txtProduto.Text = "Não selecionado";
-            this.txtProduto.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // lblProduto
-            // 
-            this.lblProduto.AutoSize = true;
-            this.lblProduto.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblProduto.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblProduto.Location = new System.Drawing.Point(18, 23);
-            this.lblProduto.Name = "lblProduto";
-            this.lblProduto.Size = new System.Drawing.Size(59, 19);
-            this.lblProduto.TabIndex = 12;
-            this.lblProduto.Text = "Produto";
             // 
             // btnPesquisarCliente
             // 
@@ -153,52 +194,30 @@ namespace CRUD___Adriano.Features.Relatório.View
             this.btnPesquisarCliente.UseVisualStyleBackColor = true;
             this.btnPesquisarCliente.Click += new System.EventHandler(this.BtnPesquisarCliente_Click);
             // 
-            // btnDeselecionarCliente
+            // txtProduto
             // 
-            this.btnDeselecionarCliente.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke;
-            this.btnDeselecionarCliente.FlatAppearance.BorderSize = 2;
-            this.btnDeselecionarCliente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDeselecionarCliente.Image = ((System.Drawing.Image)(resources.GetObject("btnDeselecionarCliente.Image")));
-            this.btnDeselecionarCliente.Location = new System.Drawing.Point(158, 122);
-            this.btnDeselecionarCliente.Name = "btnDeselecionarCliente";
-            this.btnDeselecionarCliente.Size = new System.Drawing.Size(23, 25);
-            this.btnDeselecionarCliente.TabIndex = 10;
-            this.btnDeselecionarCliente.UseVisualStyleBackColor = true;
-            this.btnDeselecionarCliente.Click += new System.EventHandler(this.BtnDeselecionarCliente_Click);
+            this.txtProduto.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.txtProduto.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.txtProduto.ForeColor = System.Drawing.Color.Black;
+            this.txtProduto.Location = new System.Drawing.Point(18, 54);
+            this.txtProduto.Name = "txtProduto";
+            this.txtProduto.Size = new System.Drawing.Size(134, 25);
+            this.txtProduto.TabIndex = 13;
+            this.txtProduto.Text = "Não selecionado";
+            this.txtProduto.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // txtCliente
+            // pnlFiltroData
             // 
-            this.txtCliente.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.txtCliente.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtCliente.ForeColor = System.Drawing.Color.Black;
-            this.txtCliente.Location = new System.Drawing.Point(18, 122);
-            this.txtCliente.Name = "txtCliente";
-            this.txtCliente.Size = new System.Drawing.Size(134, 25);
-            this.txtCliente.TabIndex = 9;
-            this.txtCliente.Text = "Não selecionado";
-            this.txtCliente.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // lblCliente
-            // 
-            this.lblCliente.AutoSize = true;
-            this.lblCliente.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblCliente.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblCliente.Location = new System.Drawing.Point(18, 91);
-            this.lblCliente.Name = "lblCliente";
-            this.lblCliente.Size = new System.Drawing.Size(51, 19);
-            this.lblCliente.TabIndex = 7;
-            this.lblCliente.Text = "Cliente";
-            // 
-            // lblDataFinal
-            // 
-            this.lblDataFinal.AutoSize = true;
-            this.lblDataFinal.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblDataFinal.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblDataFinal.Location = new System.Drawing.Point(18, 84);
-            this.lblDataFinal.Name = "lblDataFinal";
-            this.lblDataFinal.Size = new System.Drawing.Size(37, 19);
-            this.lblDataFinal.TabIndex = 4;
-            this.lblDataFinal.Text = "Final";
+            this.pnlFiltroData.Controls.Add(this.lblDataInicio);
+            this.pnlFiltroData.Controls.Add(this.dtDataFinal);
+            this.pnlFiltroData.Controls.Add(this.dtDataInicio);
+            this.pnlFiltroData.Controls.Add(this.lblDataFinal);
+            this.pnlFiltroData.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlFiltroData.Location = new System.Drawing.Point(0, 101);
+            this.pnlFiltroData.Name = "pnlFiltroData";
+            this.pnlFiltroData.Size = new System.Drawing.Size(234, 153);
+            this.pnlFiltroData.TabIndex = 17;
+            this.pnlFiltroData.Visible = false;
             // 
             // lblDataInicio
             // 
@@ -211,6 +230,15 @@ namespace CRUD___Adriano.Features.Relatório.View
             this.lblDataInicio.TabIndex = 3;
             this.lblDataInicio.Text = "Inicio";
             // 
+            // dtDataFinal
+            // 
+            this.dtDataFinal.CustomFormat = "dd/MM/yyyy";
+            this.dtDataFinal.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtDataFinal.Location = new System.Drawing.Point(18, 115);
+            this.dtDataFinal.Name = "dtDataFinal";
+            this.dtDataFinal.Size = new System.Drawing.Size(134, 23);
+            this.dtDataFinal.TabIndex = 2;
+            // 
             // dtDataInicio
             // 
             this.dtDataInicio.CustomFormat = "dd/MM/yyyy";
@@ -220,14 +248,39 @@ namespace CRUD___Adriano.Features.Relatório.View
             this.dtDataInicio.Size = new System.Drawing.Size(134, 23);
             this.dtDataInicio.TabIndex = 1;
             // 
-            // dtDataFinal
+            // lblDataFinal
             // 
-            this.dtDataFinal.CustomFormat = "dd/MM/yyyy";
-            this.dtDataFinal.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtDataFinal.Location = new System.Drawing.Point(18, 115);
-            this.dtDataFinal.Name = "dtDataFinal";
-            this.dtDataFinal.Size = new System.Drawing.Size(134, 23);
-            this.dtDataFinal.TabIndex = 2;
+            this.lblDataFinal.AutoSize = true;
+            this.lblDataFinal.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblDataFinal.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.lblDataFinal.Location = new System.Drawing.Point(18, 84);
+            this.lblDataFinal.Name = "lblDataFinal";
+            this.lblDataFinal.Size = new System.Drawing.Size(37, 19);
+            this.lblDataFinal.TabIndex = 4;
+            this.lblDataFinal.Text = "Final";
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.checkDataFiltro);
+            this.panel1.Controls.Add(this.lblFiltro);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(234, 101);
+            this.panel1.TabIndex = 16;
+            // 
+            // checkDataFiltro
+            // 
+            this.checkDataFiltro.AutoSize = true;
+            this.checkDataFiltro.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.checkDataFiltro.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.checkDataFiltro.Location = new System.Drawing.Point(18, 72);
+            this.checkDataFiltro.Name = "checkDataFiltro";
+            this.checkDataFiltro.Size = new System.Drawing.Size(119, 23);
+            this.checkDataFiltro.TabIndex = 1;
+            this.checkDataFiltro.Text = "Filtrar por data";
+            this.checkDataFiltro.UseVisualStyleBackColor = true;
+            this.checkDataFiltro.CheckedChanged += new System.EventHandler(this.CheckDataFiltro_CheckedChanged);
             // 
             // lblFiltro
             // 
@@ -270,39 +323,40 @@ namespace CRUD___Adriano.Features.Relatório.View
             this.gridView.AllowUserToDeleteRows = false;
             this.gridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.gridView.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle7.Padding = new System.Windows.Forms.Padding(2);
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(2);
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.gridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.HotTrack;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gridView.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.HotTrack;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gridView.DefaultCellStyle = dataGridViewCellStyle2;
             this.gridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridView.EnableHeadersVisualStyles = false;
             this.gridView.GridColor = System.Drawing.Color.SteelBlue;
             this.gridView.Location = new System.Drawing.Point(0, 0);
             this.gridView.Name = "gridView";
             this.gridView.RowHeadersVisible = false;
-            dataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(66)))), ((int)(((byte)(91)))));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.SteelBlue;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.White;
-            this.gridView.RowsDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(66)))), ((int)(((byte)(91)))));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.SteelBlue;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.White;
+            this.gridView.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.gridView.RowTemplate.Height = 25;
             this.gridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gridView.Size = new System.Drawing.Size(1087, 637);
             this.gridView.TabIndex = 8;
+            this.gridView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.GridView_CellFormatting);
             // 
             // pnlTotalizadores
             // 
@@ -328,58 +382,6 @@ namespace CRUD___Adriano.Features.Relatório.View
             this.btnAbrirFiltro.UseVisualStyleBackColor = false;
             this.btnAbrirFiltro.Click += new System.EventHandler(this.BtnAbrirFiltro_Click);
             // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.checkDataFiltro);
-            this.panel1.Controls.Add(this.lblFiltro);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(234, 101);
-            this.panel1.TabIndex = 16;
-            // 
-            // pnlFiltroData
-            // 
-            this.pnlFiltroData.Controls.Add(this.lblDataInicio);
-            this.pnlFiltroData.Controls.Add(this.dtDataFinal);
-            this.pnlFiltroData.Controls.Add(this.dtDataInicio);
-            this.pnlFiltroData.Controls.Add(this.lblDataFinal);
-            this.pnlFiltroData.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlFiltroData.Location = new System.Drawing.Point(0, 101);
-            this.pnlFiltroData.Name = "pnlFiltroData";
-            this.pnlFiltroData.Size = new System.Drawing.Size(234, 153);
-            this.pnlFiltroData.TabIndex = 17;
-            this.pnlFiltroData.Visible = false;
-            // 
-            // panel3
-            // 
-            this.panel3.Controls.Add(this.lblProduto);
-            this.panel3.Controls.Add(this.lblCliente);
-            this.panel3.Controls.Add(this.txtCliente);
-            this.panel3.Controls.Add(this.btnPesquisarProduto);
-            this.panel3.Controls.Add(this.btnDeselecionarCliente);
-            this.panel3.Controls.Add(this.btnDeselecionarProduto);
-            this.panel3.Controls.Add(this.btnPesquisarCliente);
-            this.panel3.Controls.Add(this.txtProduto);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel3.Location = new System.Drawing.Point(0, 254);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(234, 168);
-            this.panel3.TabIndex = 18;
-            // 
-            // checkDataFiltro
-            // 
-            this.checkDataFiltro.AutoSize = true;
-            this.checkDataFiltro.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.checkDataFiltro.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.checkDataFiltro.Location = new System.Drawing.Point(18, 72);
-            this.checkDataFiltro.Name = "checkDataFiltro";
-            this.checkDataFiltro.Size = new System.Drawing.Size(119, 23);
-            this.checkDataFiltro.TabIndex = 1;
-            this.checkDataFiltro.Text = "Filtrar por data";
-            this.checkDataFiltro.UseVisualStyleBackColor = true;
-            this.checkDataFiltro.CheckedChanged += new System.EventHandler(this.CheckDataFiltro_CheckedChanged);
-            // 
             // FrmRelatorioVendaProduto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -393,15 +395,15 @@ namespace CRUD___Adriano.Features.Relatório.View
             this.Text = "FrmRelatorioVenda";
             this.pnlRight.ResumeLayout(false);
             this.pnlFiltro.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
+            this.pnlFiltroData.ResumeLayout(false);
+            this.pnlFiltroData.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.pnlBotoes.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridView)).EndInit();
             this.pnlTotalizadores.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            this.pnlFiltroData.ResumeLayout(false);
-            this.pnlFiltroData.PerformLayout();
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
             this.ResumeLayout(false);
 
         }

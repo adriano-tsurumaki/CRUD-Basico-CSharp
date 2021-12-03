@@ -1,12 +1,15 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace CRUD___Adriano.Features.Utils
 {
     public static class GridViewExtension
     {
-        public static DataGridViewTextBoxColumn TextBoxColumnPadrao(DataGridViewCell cellTemplate, string nome, string nomeDaPropriedade, bool apenasLeitura) =>
-            new DataGridViewTextBoxColumn()
+        public static void TextBoxColumnPadrao(this DataGridView gridView, DataGridViewCell cellTemplate, string nome, string nomeDaPropriedade, bool apenasLeitura)
+        {
+            gridView.Columns.Add(new DataGridViewTextBoxColumn()
             {
                 CellTemplate = cellTemplate,
                 Name = nome,
@@ -20,6 +23,37 @@ namespace CRUD___Adriano.Features.Utils
                     Padding = new Padding(2)
                 },
                 ReadOnly = apenasLeitura,
-            };
+            });
+        }
+
+        public static object BindProperty(this DataGridView gridView, object propriedade, string nomeDaPropriedade)
+        {
+            string valorDeRetorno = "";
+
+            if (nomeDaPropriedade.Contains("."))
+            {
+                var leftPropertyName = nomeDaPropriedade.Substring(0, nomeDaPropriedade.IndexOf("."));
+                var arrayDePropriedades = propriedade.GetType().GetProperties();
+                foreach (var informacaoDaPropriedade in arrayDePropriedades)
+                {
+                    if (informacaoDaPropriedade.Name == leftPropertyName)
+                    {
+                        valorDeRetorno = (string)gridView.BindProperty(
+                          informacaoDaPropriedade.GetValue(propriedade, null),
+                          nomeDaPropriedade[(nomeDaPropriedade.IndexOf(".") + 1)..]);
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                Type tipoDePropriedade;
+                PropertyInfo informacaoDaPropriedade;
+                tipoDePropriedade = propriedade.GetType();
+                informacaoDaPropriedade = tipoDePropriedade.GetProperty(nomeDaPropriedade);
+                valorDeRetorno = informacaoDaPropriedade.GetValue(propriedade, null).ToString();
+            }
+            return valorDeRetorno;
+        }
     }
 }

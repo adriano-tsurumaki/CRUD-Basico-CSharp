@@ -291,7 +291,9 @@ namespace CRUD___Adriano.Features.Vendas.Controller
             {
                 double valorLimite = ConfigNinject.ObterInstancia<ClienteDao>().RetornarValorLimite(_vendaModel.Cliente.IdUsuario);
 
-                var valorTotalAPrazo = _vendaModel.ListaPagamentos.Where(x => x.TipoPagamento == TipoPagamentoEnum.Credito || x.TipoPagamento == TipoPagamentoEnum.Cheque).Sum(x => x.ValorAPagar.Valor);
+                var valorTotalAPrazo = _vendaModel.ListaPagamentos
+                    .Where(x => x.TipoPagamento == TipoPagamentoEnum.Credito || x.TipoPagamento == TipoPagamentoEnum.Cheque)
+                    .Sum(x => x.ValorAPagar.Valor);
 
                 if (valorTotalAPrazo > valorLimite)
                 {
