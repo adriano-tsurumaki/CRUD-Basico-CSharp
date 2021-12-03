@@ -1,4 +1,6 @@
-﻿using Dapper;
+﻿using CRUD___Adriano.Features.Relatório.Model;
+using CRUD___Adriano.Features.Utils;
+using Dapper;
 using System;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -30,14 +32,14 @@ namespace CRUD___Adriano.Features.Relatório.Dao
             var precoBrutoTotal = $"sum({vendaProdutoAlias}.preco_bruto * {vendaProdutoAlias}.quantidade)";
 
             select.Append($@"
-                p.id as IdProduto, 
-                p.nome as NomeProduto,
-                sum({vendaProdutoAlias}.quantidade) as Quantidade,
-                {precoBrutoTotal} as PrecoBrutoTotal, 
-                sum({vendaProdutoAlias}.desconto * {vendaProdutoAlias}.quantidade) as DescontoTotal,
-                {lucroTotal} as LucroTotal,
-                {lucroTotal} / {precoBrutoTotal} * 100 as LucroTotalPorcentagem, 
-                sum({vendaProdutoAlias}.preco_liquido) as PrecoLiquidoTotal");
+                p.id as {nameof(RelatorioVendaProdutoModel.IdProduto)}, 
+                p.nome as {nameof(RelatorioVendaProdutoModel.NomeProduto)},
+                sum({vendaProdutoAlias}.quantidade) as {nameof(RelatorioVendaProdutoModel.Quantidade)},
+                {precoBrutoTotal} as {nameof(RelatorioVendaProdutoModel.PrecoBrutoTotal)}, 
+                sum({vendaProdutoAlias}.desconto * {vendaProdutoAlias}.quantidade) as {nameof(RelatorioVendaProdutoModel.DescontoTotal)},
+                {lucroTotal} as {nameof(RelatorioVendaProdutoModel.LucroTotal)},
+                {lucroTotal} / {precoBrutoTotal} * 100 as {nameof(RelatorioVendaProdutoModel.LucroTotalPorcentagem)}, 
+                sum({vendaProdutoAlias}.preco_liquido) as {nameof(RelatorioVendaProdutoModel.PrecoLiquidoTotal)}");
 
             innerJoin.AppendLine($"inner join Produto {produtoAlias} on {produtoAlias}.id = {vendaProdutoAlias}.id_produto");
 
@@ -46,7 +48,7 @@ namespace CRUD___Adriano.Features.Relatório.Dao
 
             if (IdCliente != 0)
             {
-                select.AppendLine($", {usuarioAlias}.nome as NomeCliente, {usuarioAlias}.id as IdCliente");
+                select.AppendLine($", {usuarioAlias}.nome as {nameof(RelatorioVendaProdutoModel.NomeCliente)}, {usuarioAlias}.id as {nameof(RelatorioVendaProdutoModel.IdCliente)}");
                 innerJoin.AppendLine($"inner join Usuario {usuarioAlias} on {usuarioAlias}.id = {vendaAlias}.id_cliente");
                 groupBy.AppendLine($", {usuarioAlias}.id, {usuarioAlias}.nome");
                 having.AppendLine($"{usuarioAlias}.id = @IdCliente and ");
@@ -86,8 +88,8 @@ namespace CRUD___Adriano.Features.Relatório.Dao
             {
                 IdProduto,
                 IdCliente,
-                DataInicio,
-                DataFinal
+                DataInicio = DataInicio.ZerarHorario(),
+                DataFinal = DataFinal.ZerarHorario()
             });
 
             return parametros;

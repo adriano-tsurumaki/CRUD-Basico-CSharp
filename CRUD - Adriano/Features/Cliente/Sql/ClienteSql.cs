@@ -1,6 +1,5 @@
 ﻿using CRUD___Adriano.Features.Cadastro.Produto.Model;
 using Dapper;
-using System;
 using System.Text;
 
 namespace CRUD___Adriano.Features.Cliente.Sql
