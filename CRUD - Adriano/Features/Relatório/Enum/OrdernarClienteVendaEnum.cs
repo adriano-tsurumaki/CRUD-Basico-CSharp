@@ -13,7 +13,10 @@ namespace CRUD___Adriano.Features.Relatório.Enum
         [Description("Total de desconto")]
         TotalDesconto = 3,
 
+        [Description("Total bruto")]
+        TotalBruto = 4,
+
         [Description("Total líquido")]
-        TotalLiquido = 4,
+        TotalLiquido = 5,
     }
 }

@@ -202,8 +202,15 @@ namespace CRUD___Adriano
         private void BtnRelatorioVendaProduto_Click(object sender, EventArgs e)
         {
             LimparPanel();
-            lblTitulo.Text = "Relatório de vendas";
+            lblTitulo.Text = "Relatório de produtos na venda";
             DocaForm(ConfigNinject.ObterInstancia<RelatorioVendaProdutoController>().RetornarFormulario());
+        }
+
+        private void BtnRelatorioVendaCliente_Click(object sender, EventArgs e)
+        {
+            LimparPanel();
+            lblTitulo.Text = "Relatório de clientes na venda";
+            DocaForm(ConfigNinject.ObterInstancia<RelatorioVendaClienteController>().RetornarFormulario());
         }
 
         private void TrocarVisibilidade(Panel subMenu) =>

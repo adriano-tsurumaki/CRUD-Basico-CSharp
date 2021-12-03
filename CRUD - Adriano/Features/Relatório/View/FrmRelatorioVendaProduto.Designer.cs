@@ -392,7 +392,7 @@ namespace CRUD___Adriano.Features.Relatório.View
             this.Controls.Add(this.pnlTotalizadores);
             this.Controls.Add(this.pnlRight);
             this.Name = "FrmRelatorioVendaProduto";
-            this.Text = "FrmRelatorioVenda";
+            this.Text = "Relatório de produto na venda";
             this.pnlRight.ResumeLayout(false);
             this.pnlFiltro.ResumeLayout(false);
             this.panel3.ResumeLayout(false);

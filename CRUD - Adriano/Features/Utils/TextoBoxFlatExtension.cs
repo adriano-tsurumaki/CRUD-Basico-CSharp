@@ -9,5 +9,8 @@ namespace CRUD___Adriano.Features.Utils
 
         public static bool Numerico(this TextBoxFlat textoBox) =>
             int.TryParse(textoBox.Texto, out _);
+
+        public static bool Monetario(this TextBoxFlat textoBox) =>
+            double.TryParse(textoBox.Texto, out _);
     }
 }
