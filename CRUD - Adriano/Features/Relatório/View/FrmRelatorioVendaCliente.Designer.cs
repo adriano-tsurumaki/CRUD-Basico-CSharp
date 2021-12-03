@@ -38,7 +38,7 @@ namespace CRUD___Adriano.Features.Relatório.View
             this.panel3 = new System.Windows.Forms.Panel();
             this.cbOrdernador = new CRUD___Adriano.Features.Componentes.ComboBoxFlat();
             this.lblOrdenar = new System.Windows.Forms.Label();
-            this.lblQuantidade = new System.Windows.Forms.Label();
+            this.lblLimite = new System.Windows.Forms.Label();
             this.txtQuantidade = new CRUD___Adriano.Features.Componentes.TextBoxFlat();
             this.txtValor = new CRUD___Adriano.Features.Componentes.TextBoxFlat();
             this.lblValor = new System.Windows.Forms.Label();
@@ -97,7 +97,7 @@ namespace CRUD___Adriano.Features.Relatório.View
             // 
             this.panel3.Controls.Add(this.cbOrdernador);
             this.panel3.Controls.Add(this.lblOrdenar);
-            this.panel3.Controls.Add(this.lblQuantidade);
+            this.panel3.Controls.Add(this.lblLimite);
             this.panel3.Controls.Add(this.txtQuantidade);
             this.panel3.Controls.Add(this.txtValor);
             this.panel3.Controls.Add(this.lblValor);
@@ -141,16 +141,16 @@ namespace CRUD___Adriano.Features.Relatório.View
             this.lblOrdenar.TabIndex = 17;
             this.lblOrdenar.Text = "Ordenar por";
             // 
-            // lblQuantidade
+            // lblLimite
             // 
-            this.lblQuantidade.AutoSize = true;
-            this.lblQuantidade.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblQuantidade.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblQuantidade.Location = new System.Drawing.Point(18, 96);
-            this.lblQuantidade.Name = "lblQuantidade";
-            this.lblQuantidade.Size = new System.Drawing.Size(81, 19);
-            this.lblQuantidade.TabIndex = 16;
-            this.lblQuantidade.Text = "Quantidade";
+            this.lblLimite.AutoSize = true;
+            this.lblLimite.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblLimite.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.lblLimite.Location = new System.Drawing.Point(18, 96);
+            this.lblLimite.Name = "lblLimite";
+            this.lblLimite.Size = new System.Drawing.Size(76, 19);
+            this.lblLimite.TabIndex = 16;
+            this.lblLimite.Text = "Limitar por";
             // 
             // txtQuantidade
             // 
@@ -446,6 +446,7 @@ namespace CRUD___Adriano.Features.Relatório.View
             this.gridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gridView.Size = new System.Drawing.Size(1035, 697);
             this.gridView.TabIndex = 12;
+            this.gridView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.GridView_CellFormatting);
             // 
             // FrmRelatorioVendaCliente
             // 
@@ -497,7 +498,7 @@ namespace CRUD___Adriano.Features.Relatório.View
         private System.Windows.Forms.DataGridView gridView;
         private Componentes.ComboBoxFlat cbOrdernador;
         private System.Windows.Forms.Label lblOrdenar;
-        private System.Windows.Forms.Label lblQuantidade;
+        private System.Windows.Forms.Label lblLimite;
         private Componentes.TextBoxFlat txtQuantidade;
         private Componentes.TextBoxFlat txtValor;
         private System.Windows.Forms.Label lblValor;

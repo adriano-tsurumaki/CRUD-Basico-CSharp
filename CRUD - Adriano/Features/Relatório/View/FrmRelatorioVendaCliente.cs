@@ -2,10 +2,12 @@
 using CRUD___Adriano.Features.IoC;
 using CRUD___Adriano.Features.Relatório.Controller;
 using CRUD___Adriano.Features.Relatório.Enum;
+using CRUD___Adriano.Features.Relatório.Model;
 using CRUD___Adriano.Features.Usuario.Controller;
 using CRUD___Adriano.Features.Utils;
 using CRUD___Adriano.Features.Vendas.Sql;
 using System;
+using System.ComponentModel;
 using System.Windows.Forms;
 
 namespace CRUD___Adriano.Features.Relatório.View
@@ -20,6 +22,21 @@ namespace CRUD___Adriano.Features.Relatório.View
             _controller = controller;
             cbComparador.AtribuirPeloEnum<ComparadorEnum>();
             cbOrdernador.AtribuirPeloEnum<OrdernarClienteVendaEnum>();
+            CustomizandoGrid();
+        }
+
+        private void CustomizandoGrid()
+        {
+            DataGridViewCell celula = new DataGridViewTextBoxCell();
+
+            gridView.TextBoxColumnPadrao(celula, "Nome", "NomeCliente", true);
+            gridView.TextBoxColumnPadrao(celula, "Quantidade", "QuantidadeVendas", true);
+            gridView.TextBoxColumnPadrao(celula, "Desconto total", "TotalBruto.Formatado", true);
+            gridView.TextBoxColumnPadrao(celula, "Total bruto", "DescontoTotal.Formatado", true);
+            gridView.TextBoxColumnPadrao(celula, "Total Líquido", "TotalLiquido.Formatado", true);
+
+            gridView.AutoGenerateColumns = false;
+            gridView.DataSource = new BindingList<RelatorioVendaClienteModel>(_controller.ListarTodosProdutosPeloFiltro());
         }
 
         private void BtnAbrirFiltro_Click(object sender, System.EventArgs e) =>
@@ -44,15 +61,9 @@ namespace CRUD___Adriano.Features.Relatório.View
 
         private void BtnFiltrar_Click(object sender, System.EventArgs e)
         {
-            if (!txtQuantidade.NuloOuVazio() && !txtQuantidade.Numerico() && txtCliente.Text != "Não selecionado")
+            if (!txtQuantidade.NuloOuVazio() && !txtQuantidade.Numerico())
             {
                 MessageBox.Show("O campo quantidade deve ser numérico!");
-                return;
-            }
-
-            if (!txtQuantidade.NuloOuVazio() && txtCliente.Text == "Não selecionado")
-            {
-                MessageBox.Show("O campo quantidade está preenchido mas não foi selecionado o cliente!");
                 return;
             }
 
@@ -79,7 +90,6 @@ namespace CRUD___Adriano.Features.Relatório.View
                 _controller.DefinirDataFinalNoFiltro(DateTime.MinValue);
             }
 
-
             _controller.DefinirLimiteClienteNoFiltro(txtQuantidade.Texto.IntOuZero());
 
             if (cbComparador.EstaSelecionado())
@@ -90,10 +100,17 @@ namespace CRUD___Adriano.Features.Relatório.View
             if (cbOrdernador.EstaSelecionado())
                 _controller.DefinirTipoOrdernacaoNoFiltro(cbOrdernador.PegarEnumPorDescricao<OrdernarClienteVendaEnum>());
 
-            gridView.DataSource = _controller.ListarTodosProdutosPeloFiltro();
+            gridView.DataSource = new BindingList<RelatorioVendaClienteModel>(_controller.ListarTodosProdutosPeloFiltro());
         }
 
         private void CheckDataFiltro_CheckedChanged(object sender, System.EventArgs e) =>
             pnlFiltroData.Visible = checkDataFiltro.Checked;
+
+        private void GridView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (!(gridView.Rows[e.RowIndex].DataBoundItem is RelatorioVendaClienteModel model) || !gridView.Columns[e.ColumnIndex].DataPropertyName.Contains(".")) return;
+
+            e.Value = gridView.BindProperty(gridView.Rows[e.RowIndex].DataBoundItem, gridView.Columns[e.ColumnIndex].DataPropertyName);
+        }
     }
 }

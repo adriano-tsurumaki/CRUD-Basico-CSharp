@@ -50,7 +50,7 @@ namespace CRUD___Adriano.Features.Relatório.Controller
             _filtro.DataFinal = dataFinal;
 
         public void DefinirLimiteClienteNoFiltro(int limite) =>
-            _filtro.QuantidadeCliente = limite;
+            _filtro.LimiteQuantidadeCliente = limite;
 
         public void DefinirTipoComparadorNoFiltro(ComparadorEnum tipoComparador) =>
             _filtro.TipoComparador = tipoComparador;

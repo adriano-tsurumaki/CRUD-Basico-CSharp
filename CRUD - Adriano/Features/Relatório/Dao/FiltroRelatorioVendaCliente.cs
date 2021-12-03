@@ -14,7 +14,7 @@ namespace CRUD___Adriano.Features.Relatório.Dao
         public DateTime DataInicio { get; set; }
         public DateTime DataFinal { get; set; }
         public int IdCliente { get; set; }
-        public int QuantidadeCliente { get; set; }
+        public int LimiteQuantidadeCliente { get; set; }
         public ComparadorEnum TipoComparador{ get; set; }
         public Preco PrecoSelecionado { get; set; }
         public OrdernarClienteVendaEnum TipoOrdernar { get; set; }
@@ -32,8 +32,8 @@ namespace CRUD___Adriano.Features.Relatório.Dao
             var having = new StringBuilder("having ");
             var orderBy = new StringBuilder();
 
-            if (QuantidadeCliente > 0)
-                select.Append($"top {QuantidadeCliente} ");
+            if (LimiteQuantidadeCliente > 0)
+                select.Append($"top {LimiteQuantidadeCliente} ");
 
             var precoBrutoTotal = $"sum({vendaAlias}.preco_bruto_total)";
             var descontoTotal = $"sum({vendaAlias}.desconto_total)";
@@ -118,7 +118,7 @@ namespace CRUD___Adriano.Features.Relatório.Dao
                 DataInicio = DataInicio.ZerarHorario(),
                 DataFinal = DataFinal.ZerarHorario(),
                 PrecoSelecionado = PrecoSelecionado.Valor,
-                QuantidadeCliente,
+                LimiteQuantidadeCliente,
             });
 
             return parametros;
