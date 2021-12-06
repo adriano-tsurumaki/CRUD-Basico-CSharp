@@ -4,7 +4,6 @@ using Dapper;
 using System;
 using System.Data;
 using System.Text;
-using System.Text.RegularExpressions;
 
 namespace CRUD___Adriano.Features.Relatório.Dao
 {
@@ -99,13 +98,13 @@ namespace CRUD___Adriano.Features.Relatório.Dao
             }
         }
 
-        public void FormatarStringHaving(StringBuilder having)
+        private void FormatarStringHaving(StringBuilder having)
         {
             if (having.ToString() == "having ") having.Clear();
             else if (having.ToString()[(having.Length - 4)..] == "and ") having.Remove(having.Length - 5, 4);
         }
 
-        public void FormatarStringWhere(StringBuilder where)
+        private void FormatarStringWhere(StringBuilder where)
         {
             if (where.ToString() == "where ") where.Clear();
         }
