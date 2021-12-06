@@ -5,6 +5,7 @@ using CRUD___Adriano.Features.ValueObject.Precos;
 using CRUD___Adriano.Features.Vendas.Sql;
 using Dapper;
 using System;
+using System.Data;
 using System.Text;
 
 namespace CRUD___Adriano.Features.Relatório.Dao
@@ -20,11 +21,16 @@ namespace CRUD___Adriano.Features.Relatório.Dao
         public OrdernarClienteVendaEnum TipoOrdernar { get; set; }
         public bool OrdernarCrescente { get; set; }
 
+        private const string vendaAlias = "v";
+        private const string usuarioAlias = "u";
+
+        private DynamicParameters _parametros;
+
+        public FiltroRelatorioVendaCliente() =>
+            _parametros = new DynamicParameters();
+
         public string GerarSql()
         {
-            var vendaAlias = "v";
-            var usuarioAlias = "u";
-
             var select = new StringBuilder("select ");
             var from = new StringBuilder($"from Venda {vendaAlias} inner join Usuario {usuarioAlias} on {usuarioAlias}.id = {vendaAlias}.id_cliente");
             var where = new StringBuilder();
@@ -32,8 +38,7 @@ namespace CRUD___Adriano.Features.Relatório.Dao
             var having = new StringBuilder("having ");
             var orderBy = new StringBuilder();
 
-            if (LimiteQuantidadeCliente > 0)
-                select.Append($"top {LimiteQuantidadeCliente} ");
+            GerarFiltroPorLimiteDeCliente(select);
 
             var precoBrutoTotal = $"sum({vendaAlias}.preco_bruto_total)";
             var descontoTotal = $"sum({vendaAlias}.desconto_total)";
@@ -45,16 +50,61 @@ namespace CRUD___Adriano.Features.Relatório.Dao
                 {precoBrutoTotal} as {nameof(RelatorioVendaClienteModel.TotalBruto)},
                 {descontoTotal} as {nameof(RelatorioVendaClienteModel.DescontoTotal)},
                 {precoLiquidoTotal} as {nameof(RelatorioVendaClienteModel.TotalLiquido)}");
+            
+            GerarFiltroPorData(where);
 
-            if (!DateMinOuMax(DataInicio) && !DateMinOuMax(DataFinal))
-                where.Append($"where {vendaAlias}.data_emissao between @DataInicio and @DataFinal");
+            GerarFiltroPorCliente(select, groupBy, having);
 
-            if (IdCliente != 0)
+            GerarFiltroPorComparacao(having, precoLiquidoTotal);
+
+            if (TipoOrdernar == 0)
             {
-                select.Append($", {usuarioAlias}.id");
-                groupBy.Append($", {usuarioAlias}.id");
-                having.Append($"{usuarioAlias}.id = @IdCliente and ");
+                if (having.ToString() == "having ") having.Clear();
+                else if (having.ToString()[(having.Length - 4)..] == "and ") having.Remove(having.Length - 5, 4);
+
+                return $"{select} {from} {where} {groupBy} {having} {orderBy}";
             }
+
+            GerarFiltroPorOrdenacao(orderBy, descontoTotal, precoBrutoTotal, precoLiquidoTotal);
+
+            orderBy.Append(OrdernarCrescente ? "asc" : "desc");
+
+            FormatarStringHaving(having);
+
+            return $"{select} {from} {where} {groupBy} {having} {orderBy}";
+        }
+
+        private void GerarFiltroPorLimiteDeCliente(StringBuilder select)
+        {
+            if (LimiteQuantidadeCliente <= 0) return;
+
+            select.Append($"top {LimiteQuantidadeCliente} ");
+        }
+
+        private void GerarFiltroPorData(StringBuilder where)
+        {
+            if (DataInicio.DateMinOuMax() || DataFinal.DateMinOuMax()) return;
+
+            where.Append($"where {vendaAlias}.data_emissao between @DataInicio and @DataFinal");
+
+            _parametros.Add($"@{nameof(DataInicio)}", DataInicio.ZerarHorario(), DbType.DateTime, ParameterDirection.Input);
+            _parametros.Add($"@{nameof(DataFinal)}", DataFinal.ZerarHorario(), DbType.DateTime, ParameterDirection.Input);
+        }
+
+        private void GerarFiltroPorCliente(StringBuilder select, StringBuilder groupBy, StringBuilder having)
+        {
+            if (IdCliente == 0) return;
+
+            select.Append($", {usuarioAlias}.id");
+            groupBy.Append($", {usuarioAlias}.id");
+            having.Append($"{usuarioAlias}.id = @IdCliente and ");
+
+            _parametros.Add($"@{nameof(IdCliente)}", IdCliente, DbType.Int32, ParameterDirection.Input);
+        }
+
+        private void GerarFiltroPorComparacao(StringBuilder having, string precoLiquidoTotal)
+        {
+            if (TipoComparador == 0) return;
 
             switch (TipoComparador)
             {
@@ -72,14 +122,11 @@ namespace CRUD___Adriano.Features.Relatório.Dao
                     break;
             }
 
-            if (TipoOrdernar == 0)
-            {
-                if (having.ToString() == "having ") having.Clear();
-                else if (having.ToString()[(having.Length - 4)..] == "and ") having.Remove(having.Length - 5, 4);
+            _parametros.Add($"@{nameof(PrecoSelecionado)}", PrecoSelecionado.Valor, DbType.Double, ParameterDirection.Input);
+        }
 
-                return $"{select} {from} {where} {groupBy} {having} {orderBy}";
-            }
-
+        private void GerarFiltroPorOrdenacao(StringBuilder orderBy, string descontoTotal, string precoBrutoTotal, string precoLiquidoTotal)
+        {
             switch (TipoOrdernar)
             {
                 case OrdernarClienteVendaEnum.Cliente:
@@ -98,31 +145,15 @@ namespace CRUD___Adriano.Features.Relatório.Dao
                     orderBy.Append($"order by {precoLiquidoTotal} ");
                     break;
             }
+        }
 
-            orderBy.Append(OrdernarCrescente ? "asc" : "desc");
-
+        private void FormatarStringHaving(StringBuilder having)
+        {
             if (having.ToString() == "having ") having.Clear();
             else if (having.ToString()[(having.Length - 4)..] == "and ") having.Remove(having.Length - 5, 4);
-
-            return $"{select} {from} {where} {groupBy} {having} {orderBy}";
         }
 
-        public DynamicParameters RetornarParametroDinamico()
-        {
-            var parametros = new DynamicParameters();
-
-            parametros.AddDynamicParams(new
-            {
-                IdCliente,
-                DataInicio = DataInicio.ZerarHorario(),
-                DataFinal = DataFinal.ZerarHorario(),
-                PrecoSelecionado = PrecoSelecionado.Valor,
-                LimiteQuantidadeCliente,
-            });
-
-            return parametros;
-        }
-
-        public bool DateMinOuMax(DateTime dateTime) => dateTime == DateTime.MinValue || dateTime == DateTime.MaxValue;
+        public DynamicParameters RetornarParametroDinamico() =>
+            _parametros;
     }
 }
