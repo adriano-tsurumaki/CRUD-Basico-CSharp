@@ -231,5 +231,18 @@ namespace CRUD___Adriano.Features.Cliente.Dao
                 _conexao.Close();
             }
         }
+
+        public double RetornarValorLimiteRestante(int idUsuario)
+        {
+            try
+            {
+                _conexao.Open();
+                return _conexao.QuerySingleOrDefault<ClienteModel>(ClienteSql.ValorLimiteRestante, new { idUsuario }).ValorLimite.Valor;
+            }
+            finally
+            {
+                _conexao.Close();
+            }
+        }
     }
 }

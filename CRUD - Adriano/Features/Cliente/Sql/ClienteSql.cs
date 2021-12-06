@@ -59,6 +59,14 @@ namespace CRUD___Adriano.Features.Cliente.Sql
         public static readonly string SelecionarQuantidadeDeTodos =
             @"select count(*) from Cliente";
 
+        public static readonly string ValorLimiteRestante = 
+            @"select u.nome, c.valor_limite - sum(fp.valor_pago) as ValorLimite from Venda v
+            inner join Usuario u on u.id = v.id_cliente
+            inner join Cliente c on c.id_usuario = u.id
+            inner join FormaPagamento fp on fp.id_venda = v.id
+            where fp.tipo_pagamento <> 1 and fp.tipo_pagamento <> 2 and u.id = @IdUsuario
+            group by u.nome, c.valor_limite";
+
         public static string Inserir(ClienteModel clienteModel)
         {
             var insertSql = new StringBuilder("insert into Cliente(id_usuario, valor_limite");

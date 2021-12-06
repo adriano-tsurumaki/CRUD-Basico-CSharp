@@ -289,7 +289,7 @@ namespace CRUD___Adriano.Features.Vendas.Controller
 
             try
             {
-                double valorLimite = ConfigNinject.ObterInstancia<ClienteDao>().RetornarValorLimite(_vendaModel.Cliente.IdUsuario);
+                double valorLimite = ConfigNinject.ObterInstancia<ClienteDao>().RetornarValorLimiteRestante(_vendaModel.Cliente.IdUsuario);
 
                 var valorTotalAPrazo = _vendaModel.ListaPagamentos
                     .Where(x => x.TipoPagamento == TipoPagamentoEnum.Credito || x.TipoPagamento == TipoPagamentoEnum.Cheque)
@@ -298,7 +298,7 @@ namespace CRUD___Adriano.Features.Vendas.Controller
                 if (valorTotalAPrazo > valorLimite)
                 {
                     MessageBox.Show("O Valor a prazo a ser pago é maior que o valor limite do cliente", "Aviso");
-                    MessageBox.Show($"Valor limite: {valorLimite:c}", "Aviso");
+                    MessageBox.Show($"Valor limite restante: {valorLimite:c}", "Aviso");
                     return false;
                 }
             }
