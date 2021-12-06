@@ -38,16 +38,13 @@ namespace CRUD___Adriano.Features.Utils
         public static DateTime UltimoDiaDoAno(this DateTime date) =>
             new DateTime(date.Year, 12, 31);
 
-        public static DateTime MesAnterior(this DateTime date, int intervalo)
-        {
-            date = ZerarHorario(date);
-            return date.AddMonths(-intervalo);
-        }
+        public static DateTime MesAnterior(this DateTime date, int intervalo) =>
+            date.ZerarHorario().AddMonths(-intervalo);
 
-        public static DateTime AnoAnterior(this DateTime date, int intervalo)
-        {
-            date = ZerarHorario(date);
-            return date.AddYears(-intervalo);
-        }
+        public static DateTime AnoAnterior(this DateTime date, int intervalo) =>
+            date.ZerarHorario().AddYears(-intervalo);
+
+        public static bool DateMinOuMax(this DateTime dateTime) => 
+            dateTime == DateTime.MinValue || dateTime == DateTime.MaxValue;
     }
 }

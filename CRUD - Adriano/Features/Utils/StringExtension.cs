@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace CRUD___Adriano.Features.Utils
@@ -31,5 +32,11 @@ namespace CRUD___Adriano.Features.Utils
             float.TryParse(valor, out float resultado);
             return resultado;
         }
+
+        public static string RemoverExcessoDeEspaçoEmBranco(this string valor) =>
+            new Regex(@"\s\s+").Replace(valor, " ");
+
+        public static string RemoverExcessoDeEspaçoEmBranco(this StringBuilder valor) => 
+            new Regex(@"\s\s+").Replace(valor.ToString(), " ");
     }
 }
