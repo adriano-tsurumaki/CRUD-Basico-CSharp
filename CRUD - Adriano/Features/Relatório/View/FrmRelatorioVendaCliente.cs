@@ -31,8 +31,8 @@ namespace CRUD___Adriano.Features.Relatório.View
 
             gridView.TextBoxColumnPadrao(celula, "Nome", "NomeCliente", true);
             gridView.TextBoxColumnPadrao(celula, "Quantidade", "QuantidadeVendas", true);
-            gridView.TextBoxColumnPadrao(celula, "Desconto total", "TotalBruto.Formatado", true);
-            gridView.TextBoxColumnPadrao(celula, "Total bruto", "DescontoTotal.Formatado", true);
+            gridView.TextBoxColumnPadrao(celula, "Total bruto", "TotalBruto.Formatado", true);
+            gridView.TextBoxColumnPadrao(celula, "Desconto total", "DescontoTotal.Formatado", true);
             gridView.TextBoxColumnPadrao(celula, "Total Líquido", "TotalLiquido.Formatado", true);
 
             gridView.AutoGenerateColumns = false;
@@ -99,6 +99,8 @@ namespace CRUD___Adriano.Features.Relatório.View
 
             if (cbOrdernador.EstaSelecionado())
                 _controller.DefinirTipoOrdernacaoNoFiltro(cbOrdernador.PegarEnumPorDescricao<OrdernarClienteVendaEnum>());
+
+            _controller.DefinirOrdernarCrescente(checkCrescente.Checked);
 
             gridView.DataSource = new BindingList<RelatorioVendaClienteModel>(_controller.ListarTodosProdutosPeloFiltro());
         }

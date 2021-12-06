@@ -75,8 +75,7 @@ namespace CRUD___Adriano.Features.Relatório.Dao
             if (TipoOrdernar == 0)
             {
                 if (having.ToString() == "having ") having.Clear();
-                else if (having.ToString()[(having.Length - 4)..] == "and \r\n") having.Remove(having.Length - 5, 4);
-
+                else if (having.ToString()[(having.Length - 4)..] == "and ") having.Remove(having.Length - 5, 4);
 
                 return $"{select} {from} {where} {groupBy} {having} {orderBy}";
             }
@@ -103,7 +102,7 @@ namespace CRUD___Adriano.Features.Relatório.Dao
             orderBy.Append(OrdernarCrescente ? "asc" : "desc");
 
             if (having.ToString() == "having ") having.Clear();
-            else if (having.ToString()[(having.Length - 4)..] == "and \r\n") having.Remove(having.Length - 5, 4);
+            else if (having.ToString()[(having.Length - 4)..] == "and ") having.Remove(having.Length - 5, 4);
 
             return $"{select} {from} {where} {groupBy} {having} {orderBy}";
         }

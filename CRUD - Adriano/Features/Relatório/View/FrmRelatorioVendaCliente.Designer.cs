@@ -36,6 +36,7 @@ namespace CRUD___Adriano.Features.Relatório.View
             this.pnlRight = new System.Windows.Forms.Panel();
             this.pnlFiltro = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.checkCrescente = new System.Windows.Forms.CheckBox();
             this.cbOrdernador = new CRUD___Adriano.Features.Componentes.ComboBoxFlat();
             this.lblOrdenar = new System.Windows.Forms.Label();
             this.lblLimite = new System.Windows.Forms.Label();
@@ -84,6 +85,7 @@ namespace CRUD___Adriano.Features.Relatório.View
             // 
             // pnlFiltro
             // 
+            this.pnlFiltro.AutoScroll = true;
             this.pnlFiltro.Controls.Add(this.panel3);
             this.pnlFiltro.Controls.Add(this.pnlFiltroData);
             this.pnlFiltro.Controls.Add(this.pnlFiltroCampos);
@@ -95,6 +97,7 @@ namespace CRUD___Adriano.Features.Relatório.View
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.checkCrescente);
             this.panel3.Controls.Add(this.cbOrdernador);
             this.panel3.Controls.Add(this.lblOrdenar);
             this.panel3.Controls.Add(this.lblLimite);
@@ -109,8 +112,20 @@ namespace CRUD___Adriano.Features.Relatório.View
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(0, 254);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(234, 383);
+            this.panel3.Size = new System.Drawing.Size(234, 415);
             this.panel3.TabIndex = 18;
+            // 
+            // checkCrescente
+            // 
+            this.checkCrescente.AutoSize = true;
+            this.checkCrescente.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.checkCrescente.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.checkCrescente.Location = new System.Drawing.Point(18, 378);
+            this.checkCrescente.Name = "checkCrescente";
+            this.checkCrescente.Size = new System.Drawing.Size(88, 23);
+            this.checkCrescente.TabIndex = 19;
+            this.checkCrescente.Text = "Crescente";
+            this.checkCrescente.UseVisualStyleBackColor = true;
             // 
             // cbOrdernador
             // 
@@ -411,6 +426,7 @@ namespace CRUD___Adriano.Features.Relatório.View
             // 
             this.gridView.AllowUserToAddRows = false;
             this.gridView.AllowUserToDeleteRows = false;
+            this.gridView.AllowUserToResizeRows = false;
             this.gridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.gridView.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -503,5 +519,6 @@ namespace CRUD___Adriano.Features.Relatório.View
         private Componentes.TextBoxFlat txtValor;
         private System.Windows.Forms.Label lblValor;
         private Componentes.ComboBoxFlat cbComparador;
+        private System.Windows.Forms.CheckBox checkCrescente;
     }
 }

@@ -60,5 +60,8 @@ namespace CRUD___Adriano.Features.Relatório.Controller
 
         public void DefinirTipoOrdernacaoNoFiltro(OrdernarClienteVendaEnum tipoOrdenacao) =>
             _filtro.TipoOrdernar = tipoOrdenacao;
+
+        public void DefinirOrdernarCrescente(bool ordernarCrescente) =>
+            _filtro.OrdernarCrescente = ordernarCrescente;
     }
 }
