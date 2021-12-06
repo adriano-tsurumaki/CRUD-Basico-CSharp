@@ -47,40 +47,84 @@ namespace CRUD___Adriano.Features.Relatório.View
             var clienteModel = ConfigNinject.ObterInstancia<BuscarUsuarioController<ClienteModel>>()
                 .DefinirTituloDoForm("Listagem de Clientes").RetornarUsuarioSelecionado();
 
-            if (clienteModel.IdUsuario == 0) return;
+            if (clienteModel.IdUsuario == 0)
+            {
+                HabilitarOuDesabilitarFiltragemEmLista(true);
+                return;
+            }
 
             txtCliente.Text = clienteModel.Nome;
             _controller.DefinirIdClienteNoFiltro(clienteModel.IdUsuario);
+            HabilitarOuDesabilitarFiltragemEmLista(false);
         }
 
         private void BtnDeselecionarCliente_Click(object sender, System.EventArgs e)
         {
             txtCliente.Text = "Não selecionado";
             _controller.DefinirIdClienteNoFiltro(0);
+            HabilitarOuDesabilitarFiltragemEmLista(true);
+        }
+
+        private void HabilitarOuDesabilitarFiltragemEmLista(bool habilitar)
+        {
+            pnlLimitarCliente.Visible = habilitar;
+            pnlOrdernarPor.Visible = habilitar;
         }
 
         private void BtnFiltrar_Click(object sender, System.EventArgs e)
         {
-            if (!txtQuantidade.NuloOuVazio() && !txtQuantidade.Numerico())
-            {
-                MessageBox.Show("O campo quantidade deve ser numérico!");
-                return;
-            }
-
+            if (ValidarCampos()) return;
+            
             if (cbComparador.EstaSelecionado() && !txtValor.Monetario())
             {
                 MessageBox.Show("O campo de valor deve estar preenchido e ser numérico para filtrar!");
                 return;
             }
 
+            AtribuirFiltroDeData();
+            AtribuirLimiteQuantidadeCliente();
+
+            if (pnlLimitarCliente.Visible)
+                _controller.DefinirLimiteClienteNoFiltro(txtQuantidade.Texto.IntOuZero());
+            else
+                _controller.DefinirLimiteClienteNoFiltro(0);
+
+            if (cbComparador.EstaSelecionado())
+                _controller.DefinirTipoComparadorNoFiltro(cbComparador.PegarEnumPorDescricao<ComparadorEnum>());
+
+            _controller.DefinirValorNoFiltro(txtValor.Texto.DoubleOuZero());
+
+            if (cbOrdernador.EstaSelecionado() && pnlOrdernarPor.Visible)
+                _controller.DefinirTipoOrdernacaoNoFiltro(cbOrdernador.PegarEnumPorDescricao<OrdernarClienteVendaEnum>());
+            else
+                _controller.DefinirTipoOrdernacaoNoFiltro(0);
+
+            _controller.DefinirOrdernarCrescente(checkCrescente.Checked);
+
+            gridView.DataSource = new BindingList<RelatorioVendaClienteModel>(_controller.ListarTodosProdutosPeloFiltro());
+        }
+
+        private bool ValidarCampos()
+        {
+            if (checkDataFiltro.Checked && dtDataInicio.Value.ZerarHorario() > dtDataFinal.Value.ZerarHorario())
+            {
+                MessageBox.Show("A data de início não pode ser maior que a data final");
+                return false;
+            }
+
+            if (!txtQuantidade.NuloOuVazio() && !txtQuantidade.Numerico() && pnlLimitarCliente.Visible)
+            {
+                MessageBox.Show("O campo quantidade deve ser numérico!");
+                return false;
+            }
+
+            return true;
+        }
+
+        private void AtribuirFiltroDeData()
+        {
             if (checkDataFiltro.Checked)
             {
-                if (dtDataInicio.Value.ZerarHorario() > dtDataFinal.Value.ZerarHorario())
-                {
-                    MessageBox.Show("A data de início não pode ser maior que a data final");
-                    return;
-                }
-
                 _controller.DefinirDataInicioNoFiltro(dtDataInicio.Value);
                 _controller.DefinirDataFinalNoFiltro(dtDataFinal.Value);
             }
@@ -89,20 +133,10 @@ namespace CRUD___Adriano.Features.Relatório.View
                 _controller.DefinirDataInicioNoFiltro(DateTime.MinValue);
                 _controller.DefinirDataFinalNoFiltro(DateTime.MinValue);
             }
+        }
 
-            _controller.DefinirLimiteClienteNoFiltro(txtQuantidade.Texto.IntOuZero());
-
-            if (cbComparador.EstaSelecionado())
-                _controller.DefinirTipoComparadorNoFiltro(cbComparador.PegarEnumPorDescricao<ComparadorEnum>());
-
-            _controller.DefinirValorNoFiltro(txtValor.Texto.DoubleOuZero());
-
-            if (cbOrdernador.EstaSelecionado())
-                _controller.DefinirTipoOrdernacaoNoFiltro(cbOrdernador.PegarEnumPorDescricao<OrdernarClienteVendaEnum>());
-
-            _controller.DefinirOrdernarCrescente(checkCrescente.Checked);
-
-            gridView.DataSource = new BindingList<RelatorioVendaClienteModel>(_controller.ListarTodosProdutosPeloFiltro());
+        private void AtribuirLimiteQuantidadeCliente()
+        {
         }
 
         private void CheckDataFiltro_CheckedChanged(object sender, System.EventArgs e) =>

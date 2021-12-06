@@ -35,15 +35,18 @@ namespace CRUD___Adriano.Features.Relatório.View
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlRight = new System.Windows.Forms.Panel();
             this.pnlFiltro = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
+            this.pnlOrdernarPor = new System.Windows.Forms.Panel();
             this.checkCrescente = new System.Windows.Forms.CheckBox();
-            this.cbOrdernador = new CRUD___Adriano.Features.Componentes.ComboBoxFlat();
             this.lblOrdenar = new System.Windows.Forms.Label();
-            this.lblLimite = new System.Windows.Forms.Label();
-            this.txtQuantidade = new CRUD___Adriano.Features.Componentes.TextBoxFlat();
+            this.cbOrdernador = new CRUD___Adriano.Features.Componentes.ComboBoxFlat();
+            this.pnlValorSelecionado = new System.Windows.Forms.Panel();
             this.txtValor = new CRUD___Adriano.Features.Componentes.TextBoxFlat();
             this.lblValor = new System.Windows.Forms.Label();
             this.cbComparador = new CRUD___Adriano.Features.Componentes.ComboBoxFlat();
+            this.pnlLimitarCliente = new System.Windows.Forms.Panel();
+            this.txtQuantidade = new CRUD___Adriano.Features.Componentes.TextBoxFlat();
+            this.lblLimite = new System.Windows.Forms.Label();
+            this.pnlCliente = new System.Windows.Forms.Panel();
             this.lblCliente = new System.Windows.Forms.Label();
             this.txtCliente = new System.Windows.Forms.Label();
             this.btnDeselecionarCliente = new System.Windows.Forms.Button();
@@ -63,7 +66,10 @@ namespace CRUD___Adriano.Features.Relatório.View
             this.gridView = new System.Windows.Forms.DataGridView();
             this.pnlRight.SuspendLayout();
             this.pnlFiltro.SuspendLayout();
-            this.panel3.SuspendLayout();
+            this.pnlOrdernarPor.SuspendLayout();
+            this.pnlValorSelecionado.SuspendLayout();
+            this.pnlLimitarCliente.SuspendLayout();
+            this.pnlCliente.SuspendLayout();
             this.pnlFiltroData.SuspendLayout();
             this.pnlFiltroCampos.SuspendLayout();
             this.pnlBotoes.SuspendLayout();
@@ -77,55 +83,60 @@ namespace CRUD___Adriano.Features.Relatório.View
             this.pnlRight.Controls.Add(this.pnlFiltro);
             this.pnlRight.Controls.Add(this.pnlBotoes);
             this.pnlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pnlRight.Location = new System.Drawing.Point(1035, 0);
+            this.pnlRight.Location = new System.Drawing.Point(1020, 0);
             this.pnlRight.Name = "pnlRight";
-            this.pnlRight.Size = new System.Drawing.Size(234, 761);
+            this.pnlRight.Size = new System.Drawing.Size(249, 761);
             this.pnlRight.TabIndex = 7;
             this.pnlRight.Visible = false;
             // 
             // pnlFiltro
             // 
             this.pnlFiltro.AutoScroll = true;
-            this.pnlFiltro.Controls.Add(this.panel3);
+            this.pnlFiltro.Controls.Add(this.pnlOrdernarPor);
+            this.pnlFiltro.Controls.Add(this.pnlValorSelecionado);
+            this.pnlFiltro.Controls.Add(this.pnlLimitarCliente);
+            this.pnlFiltro.Controls.Add(this.pnlCliente);
             this.pnlFiltro.Controls.Add(this.pnlFiltroData);
             this.pnlFiltro.Controls.Add(this.pnlFiltroCampos);
             this.pnlFiltro.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlFiltro.Location = new System.Drawing.Point(0, 0);
             this.pnlFiltro.Name = "pnlFiltro";
-            this.pnlFiltro.Size = new System.Drawing.Size(234, 697);
+            this.pnlFiltro.Size = new System.Drawing.Size(249, 697);
             this.pnlFiltro.TabIndex = 4;
             // 
-            // panel3
+            // pnlOrdernarPor
             // 
-            this.panel3.Controls.Add(this.checkCrescente);
-            this.panel3.Controls.Add(this.cbOrdernador);
-            this.panel3.Controls.Add(this.lblOrdenar);
-            this.panel3.Controls.Add(this.lblLimite);
-            this.panel3.Controls.Add(this.txtQuantidade);
-            this.panel3.Controls.Add(this.txtValor);
-            this.panel3.Controls.Add(this.lblValor);
-            this.panel3.Controls.Add(this.cbComparador);
-            this.panel3.Controls.Add(this.lblCliente);
-            this.panel3.Controls.Add(this.txtCliente);
-            this.panel3.Controls.Add(this.btnDeselecionarCliente);
-            this.panel3.Controls.Add(this.btnPesquisarCliente);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel3.Location = new System.Drawing.Point(0, 254);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(234, 415);
-            this.panel3.TabIndex = 18;
+            this.pnlOrdernarPor.Controls.Add(this.checkCrescente);
+            this.pnlOrdernarPor.Controls.Add(this.lblOrdenar);
+            this.pnlOrdernarPor.Controls.Add(this.cbOrdernador);
+            this.pnlOrdernarPor.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlOrdernarPor.Location = new System.Drawing.Point(0, 588);
+            this.pnlOrdernarPor.Name = "pnlOrdernarPor";
+            this.pnlOrdernarPor.Size = new System.Drawing.Size(232, 120);
+            this.pnlOrdernarPor.TabIndex = 21;
             // 
             // checkCrescente
             // 
             this.checkCrescente.AutoSize = true;
             this.checkCrescente.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.checkCrescente.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.checkCrescente.Location = new System.Drawing.Point(18, 378);
+            this.checkCrescente.Location = new System.Drawing.Point(18, 87);
             this.checkCrescente.Name = "checkCrescente";
             this.checkCrescente.Size = new System.Drawing.Size(88, 23);
             this.checkCrescente.TabIndex = 19;
             this.checkCrescente.Text = "Crescente";
             this.checkCrescente.UseVisualStyleBackColor = true;
+            // 
+            // lblOrdenar
+            // 
+            this.lblOrdenar.AutoSize = true;
+            this.lblOrdenar.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblOrdenar.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.lblOrdenar.Location = new System.Drawing.Point(18, 14);
+            this.lblOrdenar.Name = "lblOrdenar";
+            this.lblOrdenar.Size = new System.Drawing.Size(85, 19);
+            this.lblOrdenar.TabIndex = 17;
+            this.lblOrdenar.Text = "Ordenar por";
             // 
             // cbOrdernador
             // 
@@ -137,7 +148,7 @@ namespace CRUD___Adriano.Features.Relatório.View
             this.cbOrdernador.IconColor = System.Drawing.Color.MediumSlateBlue;
             this.cbOrdernador.ListBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(228)))), ((int)(((byte)(245)))));
             this.cbOrdernador.ListTextColor = System.Drawing.Color.DimGray;
-            this.cbOrdernador.Location = new System.Drawing.Point(18, 327);
+            this.cbOrdernador.Location = new System.Drawing.Point(18, 36);
             this.cbOrdernador.MinimumSize = new System.Drawing.Size(200, 30);
             this.cbOrdernador.Name = "cbOrdernador";
             this.cbOrdernador.Padding = new System.Windows.Forms.Padding(1);
@@ -145,48 +156,16 @@ namespace CRUD___Adriano.Features.Relatório.View
             this.cbOrdernador.TabIndex = 18;
             this.cbOrdernador.Texto = "";
             // 
-            // lblOrdenar
+            // pnlValorSelecionado
             // 
-            this.lblOrdenar.AutoSize = true;
-            this.lblOrdenar.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblOrdenar.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblOrdenar.Location = new System.Drawing.Point(18, 305);
-            this.lblOrdenar.Name = "lblOrdenar";
-            this.lblOrdenar.Size = new System.Drawing.Size(85, 19);
-            this.lblOrdenar.TabIndex = 17;
-            this.lblOrdenar.Text = "Ordenar por";
-            // 
-            // lblLimite
-            // 
-            this.lblLimite.AutoSize = true;
-            this.lblLimite.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblLimite.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblLimite.Location = new System.Drawing.Point(18, 96);
-            this.lblLimite.Name = "lblLimite";
-            this.lblLimite.Size = new System.Drawing.Size(76, 19);
-            this.lblLimite.TabIndex = 16;
-            this.lblLimite.Text = "Limitar por";
-            // 
-            // txtQuantidade
-            // 
-            this.txtQuantidade.BackColor = System.Drawing.SystemColors.Window;
-            this.txtQuantidade.BorderColor = System.Drawing.Color.LightSkyBlue;
-            this.txtQuantidade.BorderSize = 2;
-            this.txtQuantidade.ForeColor = System.Drawing.Color.DimGray;
-            this.txtQuantidade.Location = new System.Drawing.Point(18, 119);
-            this.txtQuantidade.Margin = new System.Windows.Forms.Padding(4);
-            this.txtQuantidade.MaxLength = 32767;
-            this.txtQuantidade.Multiline = false;
-            this.txtQuantidade.Name = "txtQuantidade";
-            this.txtQuantidade.Padding = new System.Windows.Forms.Padding(7);
-            this.txtQuantidade.PasswordChar = false;
-            this.txtQuantidade.ReadOnly = false;
-            this.txtQuantidade.SelectionLength = 0;
-            this.txtQuantidade.SelectionStart = 0;
-            this.txtQuantidade.Size = new System.Drawing.Size(200, 30);
-            this.txtQuantidade.TabIndex = 15;
-            this.txtQuantidade.Texto = "";
-            this.txtQuantidade.UnderlinedStyle = false;
+            this.pnlValorSelecionado.Controls.Add(this.txtValor);
+            this.pnlValorSelecionado.Controls.Add(this.lblValor);
+            this.pnlValorSelecionado.Controls.Add(this.cbComparador);
+            this.pnlValorSelecionado.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlValorSelecionado.Location = new System.Drawing.Point(0, 435);
+            this.pnlValorSelecionado.Name = "pnlValorSelecionado";
+            this.pnlValorSelecionado.Size = new System.Drawing.Size(232, 153);
+            this.pnlValorSelecionado.TabIndex = 20;
             // 
             // txtValor
             // 
@@ -194,7 +173,7 @@ namespace CRUD___Adriano.Features.Relatório.View
             this.txtValor.BorderColor = System.Drawing.Color.LightSkyBlue;
             this.txtValor.BorderSize = 2;
             this.txtValor.ForeColor = System.Drawing.Color.DimGray;
-            this.txtValor.Location = new System.Drawing.Point(18, 247);
+            this.txtValor.Location = new System.Drawing.Point(18, 95);
             this.txtValor.Margin = new System.Windows.Forms.Padding(4);
             this.txtValor.MaxLength = 32767;
             this.txtValor.Multiline = false;
@@ -214,7 +193,7 @@ namespace CRUD___Adriano.Features.Relatório.View
             this.lblValor.AutoSize = true;
             this.lblValor.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblValor.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblValor.Location = new System.Drawing.Point(18, 168);
+            this.lblValor.Location = new System.Drawing.Point(18, 16);
             this.lblValor.Name = "lblValor";
             this.lblValor.Size = new System.Drawing.Size(40, 19);
             this.lblValor.TabIndex = 13;
@@ -230,13 +209,67 @@ namespace CRUD___Adriano.Features.Relatório.View
             this.cbComparador.IconColor = System.Drawing.Color.MediumSlateBlue;
             this.cbComparador.ListBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(228)))), ((int)(((byte)(245)))));
             this.cbComparador.ListTextColor = System.Drawing.Color.DimGray;
-            this.cbComparador.Location = new System.Drawing.Point(18, 201);
+            this.cbComparador.Location = new System.Drawing.Point(18, 49);
             this.cbComparador.MinimumSize = new System.Drawing.Size(200, 30);
             this.cbComparador.Name = "cbComparador";
             this.cbComparador.Padding = new System.Windows.Forms.Padding(1);
             this.cbComparador.Size = new System.Drawing.Size(200, 30);
             this.cbComparador.TabIndex = 12;
             this.cbComparador.Texto = "";
+            // 
+            // pnlLimitarCliente
+            // 
+            this.pnlLimitarCliente.Controls.Add(this.txtQuantidade);
+            this.pnlLimitarCliente.Controls.Add(this.lblLimite);
+            this.pnlLimitarCliente.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlLimitarCliente.Location = new System.Drawing.Point(0, 352);
+            this.pnlLimitarCliente.Name = "pnlLimitarCliente";
+            this.pnlLimitarCliente.Size = new System.Drawing.Size(232, 83);
+            this.pnlLimitarCliente.TabIndex = 19;
+            // 
+            // txtQuantidade
+            // 
+            this.txtQuantidade.BackColor = System.Drawing.SystemColors.Window;
+            this.txtQuantidade.BorderColor = System.Drawing.Color.LightSkyBlue;
+            this.txtQuantidade.BorderSize = 2;
+            this.txtQuantidade.ForeColor = System.Drawing.Color.DimGray;
+            this.txtQuantidade.Location = new System.Drawing.Point(18, 36);
+            this.txtQuantidade.Margin = new System.Windows.Forms.Padding(4);
+            this.txtQuantidade.MaxLength = 32767;
+            this.txtQuantidade.Multiline = false;
+            this.txtQuantidade.Name = "txtQuantidade";
+            this.txtQuantidade.Padding = new System.Windows.Forms.Padding(7);
+            this.txtQuantidade.PasswordChar = false;
+            this.txtQuantidade.ReadOnly = false;
+            this.txtQuantidade.SelectionLength = 0;
+            this.txtQuantidade.SelectionStart = 0;
+            this.txtQuantidade.Size = new System.Drawing.Size(200, 30);
+            this.txtQuantidade.TabIndex = 15;
+            this.txtQuantidade.Texto = "";
+            this.txtQuantidade.UnderlinedStyle = false;
+            // 
+            // lblLimite
+            // 
+            this.lblLimite.AutoSize = true;
+            this.lblLimite.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblLimite.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.lblLimite.Location = new System.Drawing.Point(18, 13);
+            this.lblLimite.Name = "lblLimite";
+            this.lblLimite.Size = new System.Drawing.Size(76, 19);
+            this.lblLimite.TabIndex = 16;
+            this.lblLimite.Text = "Limitar por";
+            // 
+            // pnlCliente
+            // 
+            this.pnlCliente.Controls.Add(this.lblCliente);
+            this.pnlCliente.Controls.Add(this.txtCliente);
+            this.pnlCliente.Controls.Add(this.btnDeselecionarCliente);
+            this.pnlCliente.Controls.Add(this.btnPesquisarCliente);
+            this.pnlCliente.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlCliente.Location = new System.Drawing.Point(0, 254);
+            this.pnlCliente.Name = "pnlCliente";
+            this.pnlCliente.Size = new System.Drawing.Size(232, 98);
+            this.pnlCliente.TabIndex = 18;
             // 
             // lblCliente
             // 
@@ -296,7 +329,7 @@ namespace CRUD___Adriano.Features.Relatório.View
             this.pnlFiltroData.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlFiltroData.Location = new System.Drawing.Point(0, 101);
             this.pnlFiltroData.Name = "pnlFiltroData";
-            this.pnlFiltroData.Size = new System.Drawing.Size(234, 153);
+            this.pnlFiltroData.Size = new System.Drawing.Size(232, 153);
             this.pnlFiltroData.TabIndex = 17;
             this.pnlFiltroData.Visible = false;
             // 
@@ -347,7 +380,7 @@ namespace CRUD___Adriano.Features.Relatório.View
             this.pnlFiltroCampos.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlFiltroCampos.Location = new System.Drawing.Point(0, 0);
             this.pnlFiltroCampos.Name = "pnlFiltroCampos";
-            this.pnlFiltroCampos.Size = new System.Drawing.Size(234, 101);
+            this.pnlFiltroCampos.Size = new System.Drawing.Size(232, 101);
             this.pnlFiltroCampos.TabIndex = 16;
             // 
             // checkDataFiltro
@@ -380,7 +413,7 @@ namespace CRUD___Adriano.Features.Relatório.View
             this.pnlBotoes.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.pnlBotoes.Location = new System.Drawing.Point(0, 697);
             this.pnlBotoes.Name = "pnlBotoes";
-            this.pnlBotoes.Size = new System.Drawing.Size(234, 64);
+            this.pnlBotoes.Size = new System.Drawing.Size(249, 64);
             this.pnlBotoes.TabIndex = 3;
             // 
             // btnFiltrar
@@ -404,7 +437,7 @@ namespace CRUD___Adriano.Features.Relatório.View
             this.pnlTotalizadores.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.pnlTotalizadores.Location = new System.Drawing.Point(0, 697);
             this.pnlTotalizadores.Name = "pnlTotalizadores";
-            this.pnlTotalizadores.Size = new System.Drawing.Size(1035, 64);
+            this.pnlTotalizadores.Size = new System.Drawing.Size(1020, 64);
             this.pnlTotalizadores.TabIndex = 11;
             // 
             // btnAbrirFiltro
@@ -415,7 +448,7 @@ namespace CRUD___Adriano.Features.Relatório.View
             this.btnAbrirFiltro.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAbrirFiltro.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnAbrirFiltro.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btnAbrirFiltro.Location = new System.Drawing.Point(970, 0);
+            this.btnAbrirFiltro.Location = new System.Drawing.Point(955, 0);
             this.btnAbrirFiltro.Name = "btnAbrirFiltro";
             this.btnAbrirFiltro.Size = new System.Drawing.Size(65, 64);
             this.btnAbrirFiltro.TabIndex = 16;
@@ -460,7 +493,7 @@ namespace CRUD___Adriano.Features.Relatório.View
             this.gridView.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.gridView.RowTemplate.Height = 25;
             this.gridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridView.Size = new System.Drawing.Size(1035, 697);
+            this.gridView.Size = new System.Drawing.Size(1020, 697);
             this.gridView.TabIndex = 12;
             this.gridView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.GridView_CellFormatting);
             // 
@@ -477,8 +510,14 @@ namespace CRUD___Adriano.Features.Relatório.View
             this.Text = "Relatório de cliente na venda";
             this.pnlRight.ResumeLayout(false);
             this.pnlFiltro.ResumeLayout(false);
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
+            this.pnlOrdernarPor.ResumeLayout(false);
+            this.pnlOrdernarPor.PerformLayout();
+            this.pnlValorSelecionado.ResumeLayout(false);
+            this.pnlValorSelecionado.PerformLayout();
+            this.pnlLimitarCliente.ResumeLayout(false);
+            this.pnlLimitarCliente.PerformLayout();
+            this.pnlCliente.ResumeLayout(false);
+            this.pnlCliente.PerformLayout();
             this.pnlFiltroData.ResumeLayout(false);
             this.pnlFiltroData.PerformLayout();
             this.pnlFiltroCampos.ResumeLayout(false);
@@ -494,7 +533,7 @@ namespace CRUD___Adriano.Features.Relatório.View
 
         private System.Windows.Forms.Panel pnlRight;
         private System.Windows.Forms.Panel pnlFiltro;
-        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel pnlCliente;
         private System.Windows.Forms.Label lblCliente;
         private System.Windows.Forms.Label txtCliente;
         private System.Windows.Forms.Button btnDeselecionarCliente;
@@ -514,11 +553,14 @@ namespace CRUD___Adriano.Features.Relatório.View
         private System.Windows.Forms.DataGridView gridView;
         private Componentes.ComboBoxFlat cbOrdernador;
         private System.Windows.Forms.Label lblOrdenar;
-        private System.Windows.Forms.Label lblLimite;
-        private Componentes.TextBoxFlat txtQuantidade;
         private Componentes.TextBoxFlat txtValor;
         private System.Windows.Forms.Label lblValor;
         private Componentes.ComboBoxFlat cbComparador;
         private System.Windows.Forms.CheckBox checkCrescente;
+        private System.Windows.Forms.Panel pnlOrdernarPor;
+        private System.Windows.Forms.Panel pnlValorSelecionado;
+        private System.Windows.Forms.Panel pnlLimitarCliente;
+        private Componentes.TextBoxFlat txtQuantidade;
+        private System.Windows.Forms.Label lblLimite;
     }
 }
