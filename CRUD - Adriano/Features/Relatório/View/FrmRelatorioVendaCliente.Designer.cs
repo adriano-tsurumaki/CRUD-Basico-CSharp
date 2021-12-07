@@ -29,13 +29,13 @@ namespace CRUD___Adriano.Features.Relatório.View
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmRelatorioVendaCliente));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlRight = new System.Windows.Forms.Panel();
             this.pnlFiltro = new System.Windows.Forms.Panel();
             this.pnlOrdernarPor = new System.Windows.Forms.Panel();
@@ -49,6 +49,8 @@ namespace CRUD___Adriano.Features.Relatório.View
             this.pnlLimitarCliente = new System.Windows.Forms.Panel();
             this.txtQuantidade = new CRUD___Adriano.Features.Componentes.TextBoxFlat();
             this.lblLimite = new System.Windows.Forms.Label();
+            this.pnlListagemCliente = new System.Windows.Forms.Panel();
+            this.gridViewClienteFiltro = new System.Windows.Forms.DataGridView();
             this.pnlCliente = new System.Windows.Forms.Panel();
             this.lblCliente = new System.Windows.Forms.Label();
             this.txtCliente = new System.Windows.Forms.Label();
@@ -67,21 +69,19 @@ namespace CRUD___Adriano.Features.Relatório.View
             this.pnlTotalizadores = new System.Windows.Forms.Panel();
             this.btnAbrirFiltro = new System.Windows.Forms.Button();
             this.gridView = new System.Windows.Forms.DataGridView();
-            this.pnlListagemCliente = new System.Windows.Forms.Panel();
-            this.gridViewClienteFiltro = new System.Windows.Forms.DataGridView();
             this.pnlRight.SuspendLayout();
             this.pnlFiltro.SuspendLayout();
             this.pnlOrdernarPor.SuspendLayout();
             this.pnlValorSelecionado.SuspendLayout();
             this.pnlLimitarCliente.SuspendLayout();
+            this.pnlListagemCliente.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewClienteFiltro)).BeginInit();
             this.pnlCliente.SuspendLayout();
             this.pnlFiltroData.SuspendLayout();
             this.pnlFiltroCampos.SuspendLayout();
             this.pnlBotoes.SuspendLayout();
             this.pnlTotalizadores.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridView)).BeginInit();
-            this.pnlListagemCliente.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridViewClienteFiltro)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlRight
@@ -266,6 +266,58 @@ namespace CRUD___Adriano.Features.Relatório.View
             this.lblLimite.Size = new System.Drawing.Size(76, 19);
             this.lblLimite.TabIndex = 16;
             this.lblLimite.Text = "Limitar por";
+            // 
+            // pnlListagemCliente
+            // 
+            this.pnlListagemCliente.Controls.Add(this.gridViewClienteFiltro);
+            this.pnlListagemCliente.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlListagemCliente.Location = new System.Drawing.Point(0, 352);
+            this.pnlListagemCliente.Name = "pnlListagemCliente";
+            this.pnlListagemCliente.Size = new System.Drawing.Size(232, 98);
+            this.pnlListagemCliente.TabIndex = 19;
+            this.pnlListagemCliente.Visible = false;
+            // 
+            // gridViewClienteFiltro
+            // 
+            this.gridViewClienteFiltro.AllowUserToAddRows = false;
+            this.gridViewClienteFiltro.AllowUserToDeleteRows = false;
+            this.gridViewClienteFiltro.AllowUserToResizeRows = false;
+            this.gridViewClienteFiltro.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.gridViewClienteFiltro.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(2);
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gridViewClienteFiltro.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.gridViewClienteFiltro.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.HotTrack;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gridViewClienteFiltro.DefaultCellStyle = dataGridViewCellStyle2;
+            this.gridViewClienteFiltro.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridViewClienteFiltro.EnableHeadersVisualStyles = false;
+            this.gridViewClienteFiltro.GridColor = System.Drawing.Color.SteelBlue;
+            this.gridViewClienteFiltro.Location = new System.Drawing.Point(0, 0);
+            this.gridViewClienteFiltro.Name = "gridViewClienteFiltro";
+            this.gridViewClienteFiltro.RowHeadersVisible = false;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(66)))), ((int)(((byte)(91)))));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.SteelBlue;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.White;
+            this.gridViewClienteFiltro.RowsDefaultCellStyle = dataGridViewCellStyle3;
+            this.gridViewClienteFiltro.RowTemplate.Height = 25;
+            this.gridViewClienteFiltro.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.gridViewClienteFiltro.Size = new System.Drawing.Size(232, 98);
+            this.gridViewClienteFiltro.TabIndex = 13;
+            this.gridViewClienteFiltro.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridViewClienteFiltro_CellContentClick);
             // 
             // pnlCliente
             // 
@@ -506,57 +558,6 @@ namespace CRUD___Adriano.Features.Relatório.View
             this.gridView.TabIndex = 12;
             this.gridView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.GridView_CellFormatting);
             // 
-            // pnlListagemCliente
-            // 
-            this.pnlListagemCliente.Controls.Add(this.gridViewClienteFiltro);
-            this.pnlListagemCliente.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlListagemCliente.Location = new System.Drawing.Point(0, 352);
-            this.pnlListagemCliente.Name = "pnlListagemCliente";
-            this.pnlListagemCliente.Size = new System.Drawing.Size(232, 98);
-            this.pnlListagemCliente.TabIndex = 19;
-            // 
-            // gridViewClienteFiltro
-            // 
-            this.gridViewClienteFiltro.AllowUserToAddRows = false;
-            this.gridViewClienteFiltro.AllowUserToDeleteRows = false;
-            this.gridViewClienteFiltro.AllowUserToResizeRows = false;
-            this.gridViewClienteFiltro.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.gridViewClienteFiltro.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(2);
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gridViewClienteFiltro.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.gridViewClienteFiltro.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.HotTrack;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gridViewClienteFiltro.DefaultCellStyle = dataGridViewCellStyle2;
-            this.gridViewClienteFiltro.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridViewClienteFiltro.EnableHeadersVisualStyles = false;
-            this.gridViewClienteFiltro.GridColor = System.Drawing.Color.SteelBlue;
-            this.gridViewClienteFiltro.Location = new System.Drawing.Point(0, 0);
-            this.gridViewClienteFiltro.Name = "gridViewClienteFiltro";
-            this.gridViewClienteFiltro.RowHeadersVisible = false;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(66)))), ((int)(((byte)(91)))));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.SteelBlue;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.White;
-            this.gridViewClienteFiltro.RowsDefaultCellStyle = dataGridViewCellStyle3;
-            this.gridViewClienteFiltro.RowTemplate.Height = 25;
-            this.gridViewClienteFiltro.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridViewClienteFiltro.Size = new System.Drawing.Size(232, 98);
-            this.gridViewClienteFiltro.TabIndex = 13;
-            this.gridViewClienteFiltro.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridViewClienteFiltro_CellContentClick);
-            // 
             // FrmRelatorioVendaCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -576,6 +577,8 @@ namespace CRUD___Adriano.Features.Relatório.View
             this.pnlValorSelecionado.PerformLayout();
             this.pnlLimitarCliente.ResumeLayout(false);
             this.pnlLimitarCliente.PerformLayout();
+            this.pnlListagemCliente.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewClienteFiltro)).EndInit();
             this.pnlCliente.ResumeLayout(false);
             this.pnlCliente.PerformLayout();
             this.pnlFiltroData.ResumeLayout(false);
@@ -585,8 +588,6 @@ namespace CRUD___Adriano.Features.Relatório.View
             this.pnlBotoes.ResumeLayout(false);
             this.pnlTotalizadores.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridView)).EndInit();
-            this.pnlListagemCliente.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.gridViewClienteFiltro)).EndInit();
             this.ResumeLayout(false);
 
         }

@@ -58,7 +58,7 @@ namespace CRUD___Adriano.Features.Relatório.View
             var clienteModel = ConfigNinject.ObterInstancia<BuscarUsuarioController<ClienteModel>>()
                 .DefinirTituloDoForm("Listagem de Clientes").RetornarUsuarioSelecionado();
 
-            if (_controller.PossuiClienteNaListaDoFiltro(clienteModel.IdUsuario)) return;
+            if (_controller.PossuiClienteNaListaDoFiltro(clienteModel.IdUsuario) || clienteModel.IdUsuario == 0) return;
 
             if (!_controller.PossuiClientesSelecionadosNoFiltro() && clienteModel.IdUsuario == 0)
             {
@@ -75,19 +75,25 @@ namespace CRUD___Adriano.Features.Relatório.View
 
         private void BtnDeselecionarCliente_Click(object sender, System.EventArgs e)
         {
+            if (!_controller.PossuiClientesSelecionadosNoFiltro()) return;
+
             var clienteModelSelecionado = gridViewClienteFiltro.CurrentRow.DataBoundItem as ClienteModel;
 
             _bindingClientes.Remove(clienteModelSelecionado);
             _controller.RemoverIdClienteNoFiltro(clienteModelSelecionado.IdUsuario);
             
             if (!_controller.PossuiClientesSelecionadosNoFiltro())
+            {
+                txtCliente.Text = "Não selecionado";
                 HabilitarFiltragemEmLista(true);
+            }
         }
 
         private void HabilitarFiltragemEmLista(bool habilitar)
         {
             pnlLimitarCliente.Visible = habilitar;
             pnlOrdernarPor.Visible = habilitar;
+            pnlListagemCliente.Visible = !habilitar;
         }
 
         private void BtnFiltrar_Click(object sender, System.EventArgs e)
