@@ -69,6 +69,14 @@ namespace CRUD___Adriano.Features.Relatório.View
             this.pnlTotalizadores = new System.Windows.Forms.Panel();
             this.btnAbrirFiltro = new System.Windows.Forms.Button();
             this.gridView = new System.Windows.Forms.DataGridView();
+            this.lblQuantidadeTotal = new System.Windows.Forms.Label();
+            this.lblTotalBruto = new System.Windows.Forms.Label();
+            this.lblDescontoTotal = new System.Windows.Forms.Label();
+            this.lblTotalLiquido = new System.Windows.Forms.Label();
+            this.txtQuantidadeTotal = new System.Windows.Forms.Label();
+            this.txtTotalBruto = new System.Windows.Forms.Label();
+            this.txtTotalLiquido = new System.Windows.Forms.Label();
+            this.txtDescontoTotal = new System.Windows.Forms.Label();
             this.pnlRight.SuspendLayout();
             this.pnlFiltro.SuspendLayout();
             this.pnlOrdernarPor.SuspendLayout();
@@ -493,11 +501,19 @@ namespace CRUD___Adriano.Features.Relatório.View
             // 
             // pnlTotalizadores
             // 
+            this.pnlTotalizadores.Controls.Add(this.txtTotalLiquido);
+            this.pnlTotalizadores.Controls.Add(this.txtDescontoTotal);
+            this.pnlTotalizadores.Controls.Add(this.txtTotalBruto);
+            this.pnlTotalizadores.Controls.Add(this.txtQuantidadeTotal);
+            this.pnlTotalizadores.Controls.Add(this.lblTotalLiquido);
+            this.pnlTotalizadores.Controls.Add(this.lblDescontoTotal);
+            this.pnlTotalizadores.Controls.Add(this.lblTotalBruto);
+            this.pnlTotalizadores.Controls.Add(this.lblQuantidadeTotal);
             this.pnlTotalizadores.Controls.Add(this.btnAbrirFiltro);
             this.pnlTotalizadores.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlTotalizadores.Location = new System.Drawing.Point(0, 697);
+            this.pnlTotalizadores.Location = new System.Drawing.Point(0, 686);
             this.pnlTotalizadores.Name = "pnlTotalizadores";
-            this.pnlTotalizadores.Size = new System.Drawing.Size(1020, 64);
+            this.pnlTotalizadores.Size = new System.Drawing.Size(1020, 75);
             this.pnlTotalizadores.TabIndex = 11;
             // 
             // btnAbrirFiltro
@@ -511,7 +527,7 @@ namespace CRUD___Adriano.Features.Relatório.View
             this.btnAbrirFiltro.Image = ((System.Drawing.Image)(resources.GetObject("btnAbrirFiltro.Image")));
             this.btnAbrirFiltro.Location = new System.Drawing.Point(955, 0);
             this.btnAbrirFiltro.Name = "btnAbrirFiltro";
-            this.btnAbrirFiltro.Size = new System.Drawing.Size(65, 64);
+            this.btnAbrirFiltro.Size = new System.Drawing.Size(65, 75);
             this.btnAbrirFiltro.TabIndex = 16;
             this.btnAbrirFiltro.UseVisualStyleBackColor = false;
             this.btnAbrirFiltro.Click += new System.EventHandler(this.BtnAbrirFiltro_Click);
@@ -554,9 +570,97 @@ namespace CRUD___Adriano.Features.Relatório.View
             this.gridView.RowsDefaultCellStyle = dataGridViewCellStyle6;
             this.gridView.RowTemplate.Height = 25;
             this.gridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridView.Size = new System.Drawing.Size(1020, 697);
+            this.gridView.Size = new System.Drawing.Size(1020, 686);
             this.gridView.TabIndex = 12;
             this.gridView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.GridView_CellFormatting);
+            // 
+            // lblQuantidadeTotal
+            // 
+            this.lblQuantidadeTotal.AutoSize = true;
+            this.lblQuantidadeTotal.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblQuantidadeTotal.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.lblQuantidadeTotal.Location = new System.Drawing.Point(12, 16);
+            this.lblQuantidadeTotal.Name = "lblQuantidadeTotal";
+            this.lblQuantidadeTotal.Size = new System.Drawing.Size(120, 19);
+            this.lblQuantidadeTotal.TabIndex = 17;
+            this.lblQuantidadeTotal.Text = "Quantidade total: ";
+            // 
+            // lblTotalBruto
+            // 
+            this.lblTotalBruto.AutoSize = true;
+            this.lblTotalBruto.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblTotalBruto.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.lblTotalBruto.Location = new System.Drawing.Point(12, 38);
+            this.lblTotalBruto.Name = "lblTotalBruto";
+            this.lblTotalBruto.Size = new System.Drawing.Size(79, 19);
+            this.lblTotalBruto.TabIndex = 18;
+            this.lblTotalBruto.Text = "Total bruto:";
+            // 
+            // lblDescontoTotal
+            // 
+            this.lblDescontoTotal.AutoSize = true;
+            this.lblDescontoTotal.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblDescontoTotal.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.lblDescontoTotal.Location = new System.Drawing.Point(319, 16);
+            this.lblDescontoTotal.Name = "lblDescontoTotal";
+            this.lblDescontoTotal.Size = new System.Drawing.Size(102, 19);
+            this.lblDescontoTotal.TabIndex = 19;
+            this.lblDescontoTotal.Text = "Desconto total:";
+            // 
+            // lblTotalLiquido
+            // 
+            this.lblTotalLiquido.AutoSize = true;
+            this.lblTotalLiquido.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblTotalLiquido.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.lblTotalLiquido.Location = new System.Drawing.Point(319, 38);
+            this.lblTotalLiquido.Name = "lblTotalLiquido";
+            this.lblTotalLiquido.Size = new System.Drawing.Size(90, 19);
+            this.lblTotalLiquido.TabIndex = 20;
+            this.lblTotalLiquido.Text = "Total líquido: ";
+            // 
+            // txtQuantidadeTotal
+            // 
+            this.txtQuantidadeTotal.AutoSize = true;
+            this.txtQuantidadeTotal.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.txtQuantidadeTotal.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.txtQuantidadeTotal.Location = new System.Drawing.Point(138, 16);
+            this.txtQuantidadeTotal.Name = "txtQuantidadeTotal";
+            this.txtQuantidadeTotal.Size = new System.Drawing.Size(33, 19);
+            this.txtQuantidadeTotal.TabIndex = 21;
+            this.txtQuantidadeTotal.Text = "100";
+            // 
+            // txtTotalBruto
+            // 
+            this.txtTotalBruto.AutoSize = true;
+            this.txtTotalBruto.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.txtTotalBruto.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.txtTotalBruto.Location = new System.Drawing.Point(138, 38);
+            this.txtTotalBruto.Name = "txtTotalBruto";
+            this.txtTotalBruto.Size = new System.Drawing.Size(72, 19);
+            this.txtTotalBruto.TabIndex = 22;
+            this.txtTotalBruto.Text = "R$ 100,00";
+            // 
+            // txtTotalLiquido
+            // 
+            this.txtTotalLiquido.AutoSize = true;
+            this.txtTotalLiquido.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.txtTotalLiquido.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.txtTotalLiquido.Location = new System.Drawing.Point(427, 38);
+            this.txtTotalLiquido.Name = "txtTotalLiquido";
+            this.txtTotalLiquido.Size = new System.Drawing.Size(72, 19);
+            this.txtTotalLiquido.TabIndex = 24;
+            this.txtTotalLiquido.Text = "R$ 100,00";
+            // 
+            // txtDescontoTotal
+            // 
+            this.txtDescontoTotal.AutoSize = true;
+            this.txtDescontoTotal.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.txtDescontoTotal.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.txtDescontoTotal.Location = new System.Drawing.Point(427, 16);
+            this.txtDescontoTotal.Name = "txtDescontoTotal";
+            this.txtDescontoTotal.Size = new System.Drawing.Size(72, 19);
+            this.txtDescontoTotal.TabIndex = 23;
+            this.txtDescontoTotal.Text = "R$ 100,00";
             // 
             // FrmRelatorioVendaCliente
             // 
@@ -587,6 +691,7 @@ namespace CRUD___Adriano.Features.Relatório.View
             this.pnlFiltroCampos.PerformLayout();
             this.pnlBotoes.ResumeLayout(false);
             this.pnlTotalizadores.ResumeLayout(false);
+            this.pnlTotalizadores.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridView)).EndInit();
             this.ResumeLayout(false);
 
@@ -627,5 +732,13 @@ namespace CRUD___Adriano.Features.Relatório.View
         private System.Windows.Forms.Label lblLimite;
         private System.Windows.Forms.Panel pnlListagemCliente;
         private System.Windows.Forms.DataGridView gridViewClienteFiltro;
+        private System.Windows.Forms.Label lblTotalLiquido;
+        private System.Windows.Forms.Label lblDescontoTotal;
+        private System.Windows.Forms.Label lblTotalBruto;
+        private System.Windows.Forms.Label lblQuantidadeTotal;
+        private System.Windows.Forms.Label txtTotalLiquido;
+        private System.Windows.Forms.Label txtDescontoTotal;
+        private System.Windows.Forms.Label txtTotalBruto;
+        private System.Windows.Forms.Label txtQuantidadeTotal;
     }
 }

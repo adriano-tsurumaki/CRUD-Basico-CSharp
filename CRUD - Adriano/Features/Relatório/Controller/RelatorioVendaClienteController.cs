@@ -4,7 +4,7 @@ using CRUD___Adriano.Features.Relatório.Model;
 using CRUD___Adriano.Features.Relatório.View;
 using CRUD___Adriano.Features.Vendas.Sql;
 using System;
-using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -15,11 +15,13 @@ namespace CRUD___Adriano.Features.Relatório.Controller
         private FiltroRelatorioVendaCliente _filtro;
         private readonly RelatorioVendaClienteDao _relatorioVendaClienteDao;
         private readonly FrmRelatorioVendaCliente _frmRelatorioClienteProduto;
+        private readonly BindingList<RelatorioVendaClienteModel> _bindingRelatorioVendaCliente;
 
         public RelatorioVendaClienteController(RelatorioVendaClienteDao relatorioVendaProdutoDao)
         {
             _filtro = new FiltroRelatorioVendaCliente();
             _relatorioVendaClienteDao = relatorioVendaProdutoDao;
+            _bindingRelatorioVendaCliente = new BindingList<RelatorioVendaClienteModel>();
             _frmRelatorioClienteProduto = new FrmRelatorioVendaCliente(this);
         }
 
@@ -58,18 +60,33 @@ namespace CRUD___Adriano.Features.Relatório.Controller
         public void DefinirOrdernarCrescente(bool ordernarCrescente) =>
             _filtro.OrdernarCrescente = ordernarCrescente;
 
-        public IList<RelatorioVendaClienteModel> ListarTodosProdutosPeloFiltro()
+        public void AtualizarLista()
         {
             try
             {
-                return _relatorioVendaClienteDao.ListarVendaClientesPeloFiltro(_filtro);
+                _bindingRelatorioVendaCliente.Clear();
+
+                foreach (var relatorio in _relatorioVendaClienteDao.ListarVendaClientesPeloFiltro(_filtro))
+                    _bindingRelatorioVendaCliente.Add(relatorio);
             }
             catch (Exception excecao)
             {
                 MessageBox.Show(excecao.Message, "Erro ao tentar listar os produtos");
             }
-
-            return new List<RelatorioVendaClienteModel>();
         }
+
+        public BindingList<RelatorioVendaClienteModel> RetornarBindingRelatorioVendaCliente() => _bindingRelatorioVendaCliente;
+
+        public string RetornarQuantidadeTotalDaLista() =>
+            _bindingRelatorioVendaCliente.ToList().Sum(x => x.QuantidadeVendas).ToString();
+
+        public string RetornarTotalBrutoDaLista() =>
+            _bindingRelatorioVendaCliente.ToList().Sum(x => x.TotalBruto.Valor).ToString("c");
+
+        public string RetornarDescontoTotalDaLista() =>
+            _bindingRelatorioVendaCliente.ToList().Sum(x => x.DescontoTotal.Valor).ToString("c");
+
+        public string RetornarTotalLiquidoDaLista() =>
+            _bindingRelatorioVendaCliente.ToList().Sum(x => x.TotalLiquido.Valor).ToString("c");
     }
 }

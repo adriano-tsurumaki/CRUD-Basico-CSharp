@@ -39,9 +39,10 @@ namespace CRUD___Adriano.Features.Relatório.View
             gridView.TextBoxColumnPadrao(celulaGridView, "Total Líquido", "TotalLiquido.Formatado", true);
 
             gridView.AutoGenerateColumns = false;
-            gridView.DataSource = new BindingList<RelatorioVendaClienteModel>(_controller.ListarTodosProdutosPeloFiltro());
+            gridView.DataSource = _controller.RetornarBindingRelatorioVendaCliente();
+            _controller.AtualizarLista();
+            AtualizarTotalizadores();
 
-            
             DataGridViewCell celulaGridViewFiltroCliente = new DataGridViewTextBoxCell();
 
             gridViewClienteFiltro.TextBoxColumnPadrao(celulaGridViewFiltroCliente, "Id", "IdUsuario", true);
@@ -102,7 +103,7 @@ namespace CRUD___Adriano.Features.Relatório.View
 
             AtribuirFiltroDeData();
 
-            if (_controller.PossuiClientesSelecionadosNoFiltro())
+            if (!_controller.PossuiClientesSelecionadosNoFiltro())
             {
                 _controller.DefinirLimiteClienteNoFiltro(txtQuantidade.Texto.IntOuZero());
 
@@ -114,9 +115,11 @@ namespace CRUD___Adriano.Features.Relatório.View
                 _controller.DefinirLimiteClienteNoFiltro(0);
 
             AtribuirFiltroComparador();
+
             _controller.DefinirValorNoFiltro(txtValor.Texto.DoubleOuZero());
-            
-            gridView.DataSource = new BindingList<RelatorioVendaClienteModel>(_controller.ListarTodosProdutosPeloFiltro());
+
+            _controller.AtualizarLista();
+            AtualizarTotalizadores();
         }
 
         private bool ValidarCampos()
@@ -170,6 +173,14 @@ namespace CRUD___Adriano.Features.Relatório.View
                 _controller.DefinirTipoOrdernacaoNoFiltro(cbOrdernador.PegarEnumPorDescricao<OrdernarClienteVendaEnum>());
             else
                 _controller.DefinirTipoOrdernacaoNoFiltro(0);
+        }
+
+        private void AtualizarTotalizadores()
+        {
+            txtQuantidadeTotal.Text = _controller.RetornarQuantidadeTotalDaLista();
+            txtTotalBruto.Text = _controller.RetornarTotalBrutoDaLista();
+            txtDescontoTotal.Text = _controller.RetornarDescontoTotalDaLista();
+            txtTotalLiquido.Text = _controller.RetornarTotalLiquidoDaLista();
         }
 
         private void CheckDataFiltro_CheckedChanged(object sender, System.EventArgs e) =>
