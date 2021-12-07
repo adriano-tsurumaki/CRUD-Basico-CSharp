@@ -30,6 +30,9 @@ namespace CRUD___Adriano.Features.Relatório.View
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmRelatorioVendaCliente));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -64,6 +67,8 @@ namespace CRUD___Adriano.Features.Relatório.View
             this.pnlTotalizadores = new System.Windows.Forms.Panel();
             this.btnAbrirFiltro = new System.Windows.Forms.Button();
             this.gridView = new System.Windows.Forms.DataGridView();
+            this.pnlListagemCliente = new System.Windows.Forms.Panel();
+            this.gridViewClienteFiltro = new System.Windows.Forms.DataGridView();
             this.pnlRight.SuspendLayout();
             this.pnlFiltro.SuspendLayout();
             this.pnlOrdernarPor.SuspendLayout();
@@ -75,6 +80,8 @@ namespace CRUD___Adriano.Features.Relatório.View
             this.pnlBotoes.SuspendLayout();
             this.pnlTotalizadores.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridView)).BeginInit();
+            this.pnlListagemCliente.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewClienteFiltro)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlRight
@@ -95,6 +102,7 @@ namespace CRUD___Adriano.Features.Relatório.View
             this.pnlFiltro.Controls.Add(this.pnlOrdernarPor);
             this.pnlFiltro.Controls.Add(this.pnlValorSelecionado);
             this.pnlFiltro.Controls.Add(this.pnlLimitarCliente);
+            this.pnlFiltro.Controls.Add(this.pnlListagemCliente);
             this.pnlFiltro.Controls.Add(this.pnlCliente);
             this.pnlFiltro.Controls.Add(this.pnlFiltroData);
             this.pnlFiltro.Controls.Add(this.pnlFiltroCampos);
@@ -110,7 +118,7 @@ namespace CRUD___Adriano.Features.Relatório.View
             this.pnlOrdernarPor.Controls.Add(this.lblOrdenar);
             this.pnlOrdernarPor.Controls.Add(this.cbOrdernador);
             this.pnlOrdernarPor.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlOrdernarPor.Location = new System.Drawing.Point(0, 588);
+            this.pnlOrdernarPor.Location = new System.Drawing.Point(0, 686);
             this.pnlOrdernarPor.Name = "pnlOrdernarPor";
             this.pnlOrdernarPor.Size = new System.Drawing.Size(232, 120);
             this.pnlOrdernarPor.TabIndex = 21;
@@ -162,7 +170,7 @@ namespace CRUD___Adriano.Features.Relatório.View
             this.pnlValorSelecionado.Controls.Add(this.lblValor);
             this.pnlValorSelecionado.Controls.Add(this.cbComparador);
             this.pnlValorSelecionado.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlValorSelecionado.Location = new System.Drawing.Point(0, 435);
+            this.pnlValorSelecionado.Location = new System.Drawing.Point(0, 533);
             this.pnlValorSelecionado.Name = "pnlValorSelecionado";
             this.pnlValorSelecionado.Size = new System.Drawing.Size(232, 153);
             this.pnlValorSelecionado.TabIndex = 20;
@@ -222,7 +230,7 @@ namespace CRUD___Adriano.Features.Relatório.View
             this.pnlLimitarCliente.Controls.Add(this.txtQuantidade);
             this.pnlLimitarCliente.Controls.Add(this.lblLimite);
             this.pnlLimitarCliente.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlLimitarCliente.Location = new System.Drawing.Point(0, 352);
+            this.pnlLimitarCliente.Location = new System.Drawing.Point(0, 450);
             this.pnlLimitarCliente.Name = "pnlLimitarCliente";
             this.pnlLimitarCliente.Size = new System.Drawing.Size(232, 83);
             this.pnlLimitarCliente.TabIndex = 19;
@@ -442,12 +450,13 @@ namespace CRUD___Adriano.Features.Relatório.View
             // 
             // btnAbrirFiltro
             // 
-            this.btnAbrirFiltro.BackColor = System.Drawing.Color.LightSeaGreen;
+            this.btnAbrirFiltro.BackColor = System.Drawing.Color.DarkSlateGray;
             this.btnAbrirFiltro.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnAbrirFiltro.FlatAppearance.BorderSize = 0;
             this.btnAbrirFiltro.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAbrirFiltro.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnAbrirFiltro.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.btnAbrirFiltro.Image = ((System.Drawing.Image)(resources.GetObject("btnAbrirFiltro.Image")));
             this.btnAbrirFiltro.Location = new System.Drawing.Point(955, 0);
             this.btnAbrirFiltro.Name = "btnAbrirFiltro";
             this.btnAbrirFiltro.Size = new System.Drawing.Size(65, 64);
@@ -462,6 +471,57 @@ namespace CRUD___Adriano.Features.Relatório.View
             this.gridView.AllowUserToResizeRows = false;
             this.gridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.gridView.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.Padding = new System.Windows.Forms.Padding(2);
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            this.gridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.HotTrack;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gridView.DefaultCellStyle = dataGridViewCellStyle5;
+            this.gridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridView.EnableHeadersVisualStyles = false;
+            this.gridView.GridColor = System.Drawing.Color.SteelBlue;
+            this.gridView.Location = new System.Drawing.Point(0, 0);
+            this.gridView.Name = "gridView";
+            this.gridView.RowHeadersVisible = false;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(66)))), ((int)(((byte)(91)))));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.SteelBlue;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.White;
+            this.gridView.RowsDefaultCellStyle = dataGridViewCellStyle6;
+            this.gridView.RowTemplate.Height = 25;
+            this.gridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.gridView.Size = new System.Drawing.Size(1020, 697);
+            this.gridView.TabIndex = 12;
+            this.gridView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.GridView_CellFormatting);
+            // 
+            // pnlListagemCliente
+            // 
+            this.pnlListagemCliente.Controls.Add(this.gridViewClienteFiltro);
+            this.pnlListagemCliente.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlListagemCliente.Location = new System.Drawing.Point(0, 352);
+            this.pnlListagemCliente.Name = "pnlListagemCliente";
+            this.pnlListagemCliente.Size = new System.Drawing.Size(232, 98);
+            this.pnlListagemCliente.TabIndex = 19;
+            // 
+            // gridViewClienteFiltro
+            // 
+            this.gridViewClienteFiltro.AllowUserToAddRows = false;
+            this.gridViewClienteFiltro.AllowUserToDeleteRows = false;
+            this.gridViewClienteFiltro.AllowUserToResizeRows = false;
+            this.gridViewClienteFiltro.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.gridViewClienteFiltro.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
@@ -470,8 +530,8 @@ namespace CRUD___Adriano.Features.Relatório.View
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.gridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gridViewClienteFiltro.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.gridViewClienteFiltro.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.HotTrack;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -479,23 +539,23 @@ namespace CRUD___Adriano.Features.Relatório.View
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gridView.DefaultCellStyle = dataGridViewCellStyle2;
-            this.gridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridView.EnableHeadersVisualStyles = false;
-            this.gridView.GridColor = System.Drawing.Color.SteelBlue;
-            this.gridView.Location = new System.Drawing.Point(0, 0);
-            this.gridView.Name = "gridView";
-            this.gridView.RowHeadersVisible = false;
+            this.gridViewClienteFiltro.DefaultCellStyle = dataGridViewCellStyle2;
+            this.gridViewClienteFiltro.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridViewClienteFiltro.EnableHeadersVisualStyles = false;
+            this.gridViewClienteFiltro.GridColor = System.Drawing.Color.SteelBlue;
+            this.gridViewClienteFiltro.Location = new System.Drawing.Point(0, 0);
+            this.gridViewClienteFiltro.Name = "gridViewClienteFiltro";
+            this.gridViewClienteFiltro.RowHeadersVisible = false;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(66)))), ((int)(((byte)(91)))));
             dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.SteelBlue;
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.White;
-            this.gridView.RowsDefaultCellStyle = dataGridViewCellStyle3;
-            this.gridView.RowTemplate.Height = 25;
-            this.gridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridView.Size = new System.Drawing.Size(1020, 697);
-            this.gridView.TabIndex = 12;
-            this.gridView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.GridView_CellFormatting);
+            this.gridViewClienteFiltro.RowsDefaultCellStyle = dataGridViewCellStyle3;
+            this.gridViewClienteFiltro.RowTemplate.Height = 25;
+            this.gridViewClienteFiltro.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.gridViewClienteFiltro.Size = new System.Drawing.Size(232, 98);
+            this.gridViewClienteFiltro.TabIndex = 13;
+            this.gridViewClienteFiltro.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridViewClienteFiltro_CellContentClick);
             // 
             // FrmRelatorioVendaCliente
             // 
@@ -525,6 +585,8 @@ namespace CRUD___Adriano.Features.Relatório.View
             this.pnlBotoes.ResumeLayout(false);
             this.pnlTotalizadores.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridView)).EndInit();
+            this.pnlListagemCliente.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewClienteFiltro)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -562,5 +624,7 @@ namespace CRUD___Adriano.Features.Relatório.View
         private System.Windows.Forms.Panel pnlLimitarCliente;
         private Componentes.TextBoxFlat txtQuantidade;
         private System.Windows.Forms.Label lblLimite;
+        private System.Windows.Forms.Panel pnlListagemCliente;
+        private System.Windows.Forms.DataGridView gridViewClienteFiltro;
     }
 }

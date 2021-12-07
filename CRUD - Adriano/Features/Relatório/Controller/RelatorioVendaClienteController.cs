@@ -5,6 +5,7 @@ using CRUD___Adriano.Features.Relatório.View;
 using CRUD___Adriano.Features.Vendas.Sql;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace CRUD___Adriano.Features.Relatório.Controller
@@ -22,26 +23,19 @@ namespace CRUD___Adriano.Features.Relatório.Controller
             _frmRelatorioClienteProduto = new FrmRelatorioVendaCliente(this);
         }
 
-        public void DefinirIdClienteNoFiltro(int idUsuario)
-        {
-            _filtro.IdCliente = idUsuario;
-        }
-
         public FrmRelatorioVendaCliente RetornarFormulario() => _frmRelatorioClienteProduto;
 
-        public IList<RelatorioVendaClienteModel> ListarTodosProdutosPeloFiltro()
-        {
-            try
-            {
-                return _relatorioVendaClienteDao.ListarVendaClientesPeloFiltro(_filtro);
-            }
-            catch (Exception excecao)
-            {
-                MessageBox.Show(excecao.Message, "Erro ao tentar listar os produtos");
-            }
+        public void AdicionarIdClienteNoFiltro(int idUsuario) =>
+            _filtro.ListaIdClientes.Add(idUsuario);
 
-            return new List<RelatorioVendaClienteModel>();
-        }
+        public void RemoverIdClienteNoFiltro(int idUsuario) =>
+            _filtro.ListaIdClientes.Remove(idUsuario);
+
+        public bool PossuiClientesSelecionadosNoFiltro() =>
+            _filtro.ListaIdClientes.Count > 0;
+
+        public bool PossuiClienteNaListaDoFiltro(int idUsuario) =>
+            _filtro.ListaIdClientes.Any(x => x == idUsuario);
 
         public void DefinirDataInicioNoFiltro(DateTime dataInicio) =>
             _filtro.DataInicio = dataInicio;
@@ -63,5 +57,19 @@ namespace CRUD___Adriano.Features.Relatório.Controller
 
         public void DefinirOrdernarCrescente(bool ordernarCrescente) =>
             _filtro.OrdernarCrescente = ordernarCrescente;
+
+        public IList<RelatorioVendaClienteModel> ListarTodosProdutosPeloFiltro()
+        {
+            try
+            {
+                return _relatorioVendaClienteDao.ListarVendaClientesPeloFiltro(_filtro);
+            }
+            catch (Exception excecao)
+            {
+                MessageBox.Show(excecao.Message, "Erro ao tentar listar os produtos");
+            }
+
+            return new List<RelatorioVendaClienteModel>();
+        }
     }
 }

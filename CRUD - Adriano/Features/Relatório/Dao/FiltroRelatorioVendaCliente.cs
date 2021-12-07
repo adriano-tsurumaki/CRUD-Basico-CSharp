@@ -5,6 +5,7 @@ using CRUD___Adriano.Features.ValueObject.Precos;
 using CRUD___Adriano.Features.Vendas.Sql;
 using Dapper;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Text;
 
@@ -14,7 +15,7 @@ namespace CRUD___Adriano.Features.Relatório.Dao
     {
         public DateTime DataInicio { get; set; }
         public DateTime DataFinal { get; set; }
-        public int IdCliente { get; set; }
+        public IList<int> ListaIdClientes{ get; set; }
         public int LimiteQuantidadeCliente { get; set; }
         public ComparadorEnum TipoComparador{ get; set; }
         public Preco PrecoSelecionado { get; set; }
@@ -26,8 +27,11 @@ namespace CRUD___Adriano.Features.Relatório.Dao
 
         private DynamicParameters _parametros;
 
-        public FiltroRelatorioVendaCliente() =>
+        public FiltroRelatorioVendaCliente()
+        {
+            ListaIdClientes = new List<int>();
             _parametros = new DynamicParameters();
+        }
 
         public string GerarSql()
         {
@@ -93,13 +97,13 @@ namespace CRUD___Adriano.Features.Relatório.Dao
 
         private void GerarFiltroPorCliente(StringBuilder select, StringBuilder groupBy, StringBuilder having)
         {
-            if (IdCliente == 0) return;
+            if (ListaIdClientes.Count == 0) return;
 
             select.Append($", {usuarioAlias}.id");
             groupBy.Append($", {usuarioAlias}.id");
-            having.Append($"{usuarioAlias}.id = @IdCliente and ");
+            having.Append($"{usuarioAlias}.id in  @{nameof(ListaIdClientes)} and ");
 
-            _parametros.Add($"@{nameof(IdCliente)}", IdCliente, DbType.Int32, ParameterDirection.Input);
+            _parametros.Add($"@{nameof(ListaIdClientes)}", ListaIdClientes);
         }
 
         private void GerarFiltroPorComparacao(StringBuilder having, string precoLiquidoTotal)

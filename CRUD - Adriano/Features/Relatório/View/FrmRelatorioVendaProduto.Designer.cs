@@ -369,12 +369,13 @@ namespace CRUD___Adriano.Features.Relatório.View
             // 
             // btnAbrirFiltro
             // 
-            this.btnAbrirFiltro.BackColor = System.Drawing.Color.LightSeaGreen;
+            this.btnAbrirFiltro.BackColor = System.Drawing.Color.DarkSlateGray;
             this.btnAbrirFiltro.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnAbrirFiltro.FlatAppearance.BorderSize = 0;
             this.btnAbrirFiltro.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAbrirFiltro.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnAbrirFiltro.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.btnAbrirFiltro.Image = ((System.Drawing.Image)(resources.GetObject("btnAbrirFiltro.Image")));
             this.btnAbrirFiltro.Location = new System.Drawing.Point(1022, 0);
             this.btnAbrirFiltro.Name = "btnAbrirFiltro";
             this.btnAbrirFiltro.Size = new System.Drawing.Size(65, 64);

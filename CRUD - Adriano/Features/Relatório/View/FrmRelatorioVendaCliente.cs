@@ -15,6 +15,8 @@ namespace CRUD___Adriano.Features.Relatório.View
     public partial class FrmRelatorioVendaCliente : Form
     {
         private readonly RelatorioVendaClienteController _controller;
+        private ClienteModel _clienteFiltroSelecionado;
+        private readonly BindingList<ClienteModel> _bindingClientes;
 
         public FrmRelatorioVendaCliente(RelatorioVendaClienteController controller)
         {
@@ -22,21 +24,30 @@ namespace CRUD___Adriano.Features.Relatório.View
             _controller = controller;
             cbComparador.AtribuirPeloEnum<ComparadorEnum>();
             cbOrdernador.AtribuirPeloEnum<OrdernarClienteVendaEnum>();
+            _bindingClientes = new BindingList<ClienteModel>();
             CustomizandoGrid();
         }
 
         private void CustomizandoGrid()
         {
-            DataGridViewCell celula = new DataGridViewTextBoxCell();
+            DataGridViewCell celulaGridView = new DataGridViewTextBoxCell();
 
-            gridView.TextBoxColumnPadrao(celula, "Nome", "NomeCliente", true);
-            gridView.TextBoxColumnPadrao(celula, "Quantidade", "QuantidadeVendas", true);
-            gridView.TextBoxColumnPadrao(celula, "Total bruto", "TotalBruto.Formatado", true);
-            gridView.TextBoxColumnPadrao(celula, "Desconto total", "DescontoTotal.Formatado", true);
-            gridView.TextBoxColumnPadrao(celula, "Total Líquido", "TotalLiquido.Formatado", true);
+            gridView.TextBoxColumnPadrao(celulaGridView, "Nome", "NomeCliente", true);
+            gridView.TextBoxColumnPadrao(celulaGridView, "Quantidade", "QuantidadeVendas", true);
+            gridView.TextBoxColumnPadrao(celulaGridView, "Total bruto", "TotalBruto.Formatado", true);
+            gridView.TextBoxColumnPadrao(celulaGridView, "Desconto total", "DescontoTotal.Formatado", true);
+            gridView.TextBoxColumnPadrao(celulaGridView, "Total Líquido", "TotalLiquido.Formatado", true);
 
             gridView.AutoGenerateColumns = false;
             gridView.DataSource = new BindingList<RelatorioVendaClienteModel>(_controller.ListarTodosProdutosPeloFiltro());
+
+            
+            DataGridViewCell celulaGridViewFiltroCliente = new DataGridViewTextBoxCell();
+
+            gridViewClienteFiltro.TextBoxColumnPadrao(celulaGridViewFiltroCliente, "Id", "IdUsuario", true);
+            gridViewClienteFiltro.TextBoxColumnPadrao(celulaGridViewFiltroCliente, "Nome", "Nome", true);
+            gridViewClienteFiltro.AutoGenerateColumns = false;
+            gridViewClienteFiltro.DataSource = _bindingClientes;
         }
 
         private void BtnAbrirFiltro_Click(object sender, System.EventArgs e) =>
@@ -47,25 +58,33 @@ namespace CRUD___Adriano.Features.Relatório.View
             var clienteModel = ConfigNinject.ObterInstancia<BuscarUsuarioController<ClienteModel>>()
                 .DefinirTituloDoForm("Listagem de Clientes").RetornarUsuarioSelecionado();
 
-            if (clienteModel.IdUsuario == 0)
+            if (_controller.PossuiClienteNaListaDoFiltro(clienteModel.IdUsuario)) return;
+
+            if (!_controller.PossuiClientesSelecionadosNoFiltro() && clienteModel.IdUsuario == 0)
             {
-                HabilitarOuDesabilitarFiltragemEmLista(true);
+                HabilitarFiltragemEmLista(true);
                 return;
             }
 
             txtCliente.Text = clienteModel.Nome;
-            _controller.DefinirIdClienteNoFiltro(clienteModel.IdUsuario);
-            HabilitarOuDesabilitarFiltragemEmLista(false);
+            _bindingClientes.Add(clienteModel);
+            _controller.AdicionarIdClienteNoFiltro(clienteModel.IdUsuario);
+            
+            HabilitarFiltragemEmLista(false);
         }
 
         private void BtnDeselecionarCliente_Click(object sender, System.EventArgs e)
         {
-            txtCliente.Text = "Não selecionado";
-            _controller.DefinirIdClienteNoFiltro(0);
-            HabilitarOuDesabilitarFiltragemEmLista(true);
+            var clienteModelSelecionado = gridViewClienteFiltro.CurrentRow.DataBoundItem as ClienteModel;
+
+            _bindingClientes.Remove(clienteModelSelecionado);
+            _controller.RemoverIdClienteNoFiltro(clienteModelSelecionado.IdUsuario);
+            
+            if (!_controller.PossuiClientesSelecionadosNoFiltro())
+                HabilitarFiltragemEmLista(true);
         }
 
-        private void HabilitarOuDesabilitarFiltragemEmLista(bool habilitar)
+        private void HabilitarFiltragemEmLista(bool habilitar)
         {
             pnlLimitarCliente.Visible = habilitar;
             pnlOrdernarPor.Visible = habilitar;
@@ -77,7 +96,7 @@ namespace CRUD___Adriano.Features.Relatório.View
 
             AtribuirFiltroDeData();
 
-            if (txtCliente.Text == "Não selecionado")
+            if (_controller.PossuiClientesSelecionadosNoFiltro())
             {
                 _controller.DefinirLimiteClienteNoFiltro(txtQuantidade.Texto.IntOuZero());
 
@@ -152,9 +171,18 @@ namespace CRUD___Adriano.Features.Relatório.View
 
         private void GridView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (!(gridView.Rows[e.RowIndex].DataBoundItem is RelatorioVendaClienteModel model) || !gridView.Columns[e.ColumnIndex].DataPropertyName.Contains(".")) return;
+            if (!(gridView.Rows[e.RowIndex].DataBoundItem is RelatorioVendaClienteModel) || !gridView.Columns[e.ColumnIndex].DataPropertyName.Contains(".")) return;
 
             e.Value = gridView.BindProperty(gridView.Rows[e.RowIndex].DataBoundItem, gridView.Columns[e.ColumnIndex].DataPropertyName);
+        }
+
+        private void GridViewClienteFiltro_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (gridView.CurrentRow == null) return;
+
+            _clienteFiltroSelecionado = gridViewClienteFiltro.CurrentRow.DataBoundItem as ClienteModel;
+
+            txtCliente.Text = _clienteFiltroSelecionado.Nome;
         }
     }
 }
