@@ -73,34 +73,24 @@ namespace CRUD___Adriano.Features.Relatório.View
 
         private void BtnFiltrar_Click(object sender, System.EventArgs e)
         {
-            if (ValidarCampos()) return;
-            
-            if (cbComparador.EstaSelecionado() && !txtValor.Monetario())
-            {
-                MessageBox.Show("O campo de valor deve estar preenchido e ser numérico para filtrar!");
-                return;
-            }
+            if (!ValidarCampos()) return;
 
             AtribuirFiltroDeData();
-            AtribuirLimiteQuantidadeCliente();
 
-            if (pnlLimitarCliente.Visible)
+            if (txtCliente.Text == "Não selecionado")
+            {
                 _controller.DefinirLimiteClienteNoFiltro(txtQuantidade.Texto.IntOuZero());
+
+                AtribuirFiltroOrdenador();
+
+                _controller.DefinirOrdernarCrescente(checkCrescente.Checked);
+            }
             else
                 _controller.DefinirLimiteClienteNoFiltro(0);
 
-            if (cbComparador.EstaSelecionado())
-                _controller.DefinirTipoComparadorNoFiltro(cbComparador.PegarEnumPorDescricao<ComparadorEnum>());
-
+            AtribuirFiltroComparador();
             _controller.DefinirValorNoFiltro(txtValor.Texto.DoubleOuZero());
-
-            if (cbOrdernador.EstaSelecionado() && pnlOrdernarPor.Visible)
-                _controller.DefinirTipoOrdernacaoNoFiltro(cbOrdernador.PegarEnumPorDescricao<OrdernarClienteVendaEnum>());
-            else
-                _controller.DefinirTipoOrdernacaoNoFiltro(0);
-
-            _controller.DefinirOrdernarCrescente(checkCrescente.Checked);
-
+            
             gridView.DataSource = new BindingList<RelatorioVendaClienteModel>(_controller.ListarTodosProdutosPeloFiltro());
         }
 
@@ -115,6 +105,12 @@ namespace CRUD___Adriano.Features.Relatório.View
             if (!txtQuantidade.NuloOuVazio() && !txtQuantidade.Numerico() && pnlLimitarCliente.Visible)
             {
                 MessageBox.Show("O campo quantidade deve ser numérico!");
+                return false;
+            }
+
+            if (cbComparador.EstaSelecionado() && !txtValor.Monetario())
+            {
+                MessageBox.Show("O campo de valor deve estar preenchido e ser numérico para filtrar!");
                 return false;
             }
 
@@ -135,8 +131,20 @@ namespace CRUD___Adriano.Features.Relatório.View
             }
         }
 
-        private void AtribuirLimiteQuantidadeCliente()
+        public void AtribuirFiltroComparador()
         {
+            if (cbComparador.EstaSelecionado())
+                _controller.DefinirTipoComparadorNoFiltro(cbComparador.PegarEnumPorDescricao<ComparadorEnum>());
+            else
+                _controller.DefinirTipoComparadorNoFiltro(0);
+        }
+
+        private void AtribuirFiltroOrdenador()
+        {
+            if (cbOrdernador.EstaSelecionado() && pnlOrdernarPor.Visible)
+                _controller.DefinirTipoOrdernacaoNoFiltro(cbOrdernador.PegarEnumPorDescricao<OrdernarClienteVendaEnum>());
+            else
+                _controller.DefinirTipoOrdernacaoNoFiltro(0);
         }
 
         private void CheckDataFiltro_CheckedChanged(object sender, System.EventArgs e) =>
