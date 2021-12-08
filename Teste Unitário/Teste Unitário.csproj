@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BuildQuery\BuildQuery.csproj" />
     <ProjectReference Include="..\CRUD - Adriano\CRUD - Adriano.csproj" />
   </ItemGroup>
 

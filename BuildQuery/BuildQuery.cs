@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace CRUD___Adriano.Features.BuildQuery
+namespace BuildQuery
 {
     public partial class BuildQuery<T> where T : class, new()
     {
@@ -30,7 +31,7 @@ namespace CRUD___Adriano.Features.BuildQuery
                     "Expression '{0}' refers to a method, not a property.",
                     propriedade.ToString()));
 
-            var informacaoDaPropriedade = membro.Member as PropertyInfo; 
+            var informacaoDaPropriedade = membro.Member as PropertyInfo;
             if (informacaoDaPropriedade == null)
                 throw new ArgumentException(string.Format(
                     "Expression '{0}' refers to a field, not a property.",
@@ -52,7 +53,18 @@ namespace CRUD___Adriano.Features.BuildQuery
         {
             Type tipo = typeof(TOtherTable);
 
-            var membro = propriedade.Body as MemberExpression;
+            var lambda = propriedade as LambdaExpression;
+
+            MemberExpression membro;
+
+            if (lambda.Body is UnaryExpression)
+            {
+                var unaryExpression = lambda.Body as UnaryExpression;
+                membro = unaryExpression.Operand as MemberExpression;
+            }
+            else
+                membro = propriedade.Body as MemberExpression;
+
 
             if (membro == null)
                 throw new ArgumentException(string.Format(
@@ -81,13 +93,23 @@ namespace CRUD___Adriano.Features.BuildQuery
         {
             var tipo = typeof(TOtherTable);
 
-            innerJoinNomes.Add(tipo.Name);
+            innerJoinNomes.Add(tipo.FullName);
 
             return this;
         }
 
         public string Build()
         {
+            foreach (var propriedade in propriedadesDasOutrasTabelas)
+            {
+                if (!innerJoinNomes.Any(x => x == propriedade.ReflectedType.FullName))
+                {
+                    throw new ArgumentException(string.Format(
+                    "Não foi especificado a tabela para a coluna {0}",
+                    propriedade.Name));
+                }
+            }
+
             return "";
         }
     }
