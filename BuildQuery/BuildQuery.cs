@@ -10,15 +10,15 @@ namespace BuildQuery
 {
     public partial class BuildQuery<TPrincipalTable> where TPrincipalTable : class
     {
-        private IList<PropertyInfo> _propriedadesDaTabelaPrincipal;
-        private IList<PropertyInfo> _propriedadesDasOutrasTabelas;
+        private Dictionary<PropertyInfo, string> _propriedadesDaTabelaPrincipal;
+        private Dictionary<PropertyInfo, string> _propriedadesDasOutrasTabelas;
 
         private IList<InnerJoinBuilder> _listInnerJoin;
 
         public BuildQuery()
         {
-            _propriedadesDaTabelaPrincipal = new List<PropertyInfo>();
-            _propriedadesDasOutrasTabelas = new List<PropertyInfo>();
+            _propriedadesDaTabelaPrincipal = new Dictionary<PropertyInfo, string>();
+            _propriedadesDasOutrasTabelas = new Dictionary<PropertyInfo, string>();
 
             Type tipo = typeof(TPrincipalTable);
 
@@ -44,12 +44,30 @@ namespace BuildQuery
             var informacaoDaPropriedade = ValidarERetornarPropriedadeDaTabela(tipo, membro, propriedade);
 
             if (tipo.IsSubclassOf(informacaoDaPropriedade.ReflectedType))
-                _propriedadesDasOutrasTabelas.Add(informacaoDaPropriedade);
+                _propriedadesDasOutrasTabelas.Add(informacaoDaPropriedade, informacaoDaPropriedade.Name);
             else
-                _propriedadesDaTabelaPrincipal.Add(informacaoDaPropriedade);
+                _propriedadesDaTabelaPrincipal.Add(informacaoDaPropriedade, informacaoDaPropriedade.Name);
 
             return this;
         }
+
+        public BuildQuery<TPrincipalTable> Select<TProperty>(Expression<Func<TPrincipalTable, TProperty>> propriedade, string nomeDaColuna)
+        {
+            Type tipo = typeof(TPrincipalTable);
+
+            var membro = propriedade.Body as MemberExpression;
+
+            var informacaoDaPropriedade = ValidarERetornarPropriedadeDaTabela(tipo, membro, propriedade);
+
+            if (tipo.IsSubclassOf(informacaoDaPropriedade.ReflectedType))
+                _propriedadesDasOutrasTabelas.Add(informacaoDaPropriedade, nomeDaColuna);
+            else
+                _propriedadesDaTabelaPrincipal.Add(informacaoDaPropriedade, nomeDaColuna);
+
+            return this;
+
+        }
+
 
         public BuildQuery<TPrincipalTable> SelectOut<TOtherTable>(Expression<Func<TOtherTable, object>> propriedade)
         {
@@ -59,7 +77,9 @@ namespace BuildQuery
 
             var membro = RetornarMemberExpression(propriedade, lambda);
 
-            _propriedadesDasOutrasTabelas.Add(ValidarERetornarPropriedadeDaTabela(tipo, membro, lambda));
+            var informacaoDaPropriedade = ValidarERetornarPropriedadeDaTabela(tipo, membro, lambda);
+
+            _propriedadesDasOutrasTabelas.Add(informacaoDaPropriedade, informacaoDaPropriedade.Name);
 
             return this;
         }
@@ -93,6 +113,7 @@ namespace BuildQuery
             var build = new StringBuilder();
 
             build.AppendLine(select.ToString());
+            build.AppendLine(from.ToString());
             build.AppendLine(innerJoin.ToString());
 
             return TrimAllExcessWhiteSpace(build.ToString());
@@ -100,29 +121,38 @@ namespace BuildQuery
 
         private StringBuilder BuildSelect()
         {
-            var select = new StringBuilder();
+            var select = new StringBuilder("select ");
 
             var alias = _listInnerJoin.Where(x => x.Principal).First().Alias;
 
             foreach (var item in _propriedadesDaTabelaPrincipal)
             {
-                select.AppendLine($"{alias}.{item.Name},");
+                select.AppendLine($"{alias}.{item.Value},");
             }
 
             foreach (var item in _propriedadesDasOutrasTabelas)
             {
-                var aliasOther = _listInnerJoin.Where(x => x.FullName == item.ReflectedType.FullName).First().Alias;
-                select.AppendLine($"{aliasOther}.{item.Name},");
+                var aliasOther = _listInnerJoin.Where(x => x.FullName == item.Key.ReflectedType.FullName).First().Alias;
+                select.AppendLine($"{aliasOther}.{item.Value},");
             }
 
-            select.Remove(select.Length - 1, 1);
+            select.Remove(select.Length - 3, 3);
 
             return select;
         }
 
         private StringBuilder BuildFrom()
         {
-            return new StringBuilder();
+            var from = new StringBuilder("from ");
+
+            var alias = _listInnerJoin.First(x => x.Principal).Alias;
+
+            if (BuildQueryMapper.GetDictionary().TryGetValue(typeof(TPrincipalTable).FullName, out string nome))
+                from.AppendLine($"{nome} as {alias}");
+            else
+                throw new ArgumentException("");
+
+            return from;
         }
 
         private StringBuilder BuildInnerJoin()
@@ -133,7 +163,10 @@ namespace BuildQuery
             {
                 if (item.Principal) continue;
 
-                innerJoin.AppendLine(item.On);
+                if (BuildQueryMapper.GetDictionary().TryGetValue(item.FullName, out string nome))
+                    innerJoin.AppendLine($"inner join {nome} as {item.Alias} on {item.On}");
+                else
+                    throw new ArgumentException("");
             }
 
             return innerJoin;

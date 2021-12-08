@@ -49,11 +49,11 @@ namespace BuildQuery
         {
             foreach (var propriedade in _propriedadesDasOutrasTabelas)
             {
-                if (!_listInnerJoin.Any(x => x.FullName == propriedade.ReflectedType.FullName))
+                if (!_listInnerJoin.Any(x => x.FullName == propriedade.Key.ReflectedType.FullName))
                 {
                     throw new ArgumentException(string.Format(
                     "Não foi especificado a tabela {0} para a coluna {1}",
-                    propriedade.ReflectedType.Name, propriedade.Name));
+                    propriedade.Key.ReflectedType.Name, propriedade.Key.Name));
                 }
             }
         }
