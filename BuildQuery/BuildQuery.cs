@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Text;
+using System.Text.RegularExpressions;
 
 namespace BuildQuery
 {
@@ -84,8 +86,61 @@ namespace BuildQuery
         {
             ValidarInnerJoins();
 
-            return "";
+            var select = BuildSelect();
+            var from = BuildFrom();
+            var innerJoin = BuildInnerJoin();
+
+            var build = new StringBuilder();
+
+            build.AppendLine(select.ToString());
+            build.AppendLine(innerJoin.ToString());
+
+            return TrimAllExcessWhiteSpace(build.ToString());
         }
+
+        private StringBuilder BuildSelect()
+        {
+            var select = new StringBuilder();
+
+            var alias = _listInnerJoin.Where(x => x.Principal).First().Alias;
+
+            foreach (var item in _propriedadesDaTabelaPrincipal)
+            {
+                select.AppendLine($"{alias}.{item.Name},");
+            }
+
+            foreach (var item in _propriedadesDasOutrasTabelas)
+            {
+                var aliasOther = _listInnerJoin.Where(x => x.FullName == item.ReflectedType.FullName).First().Alias;
+                select.AppendLine($"{aliasOther}.{item.Name},");
+            }
+
+            select.Remove(select.Length - 1, 1);
+
+            return select;
+        }
+
+        private StringBuilder BuildFrom()
+        {
+            return new StringBuilder();
+        }
+
+        private StringBuilder BuildInnerJoin()
+        {
+            var innerJoin = new StringBuilder();
+
+            foreach (var item in _listInnerJoin)
+            {
+                if (item.Principal) continue;
+
+                innerJoin.AppendLine(item.On);
+            }
+
+            return innerJoin;
+        }
+
+        private string TrimAllExcessWhiteSpace(string valor) =>
+            new Regex(@"\s\s+").Replace(valor, " ");
     }
 
     public class InnerJoinBuilder
