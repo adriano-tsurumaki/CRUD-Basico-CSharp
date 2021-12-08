@@ -6,111 +6,132 @@ using System.Reflection;
 
 namespace BuildQuery
 {
-    public partial class BuildQuery<T> where T : class, new()
+    public partial class BuildQuery<TPrincipalTable> where TPrincipalTable : class
     {
-        private IList<PropertyInfo> propriedadesDaTabelaPrincipal;
-        private IList<PropertyInfo> propriedadesDasOutrasTabelas;
+        private IList<PropertyInfo> _propriedadesDaTabelaPrincipal;
+        private IList<PropertyInfo> _propriedadesDasOutrasTabelas;
 
-        private IList<string> innerJoinNomes;
+        private IList<InnerJoinBuilder> _listInnerJoin;
 
         public BuildQuery()
         {
-            propriedadesDaTabelaPrincipal = new List<PropertyInfo>();
-            propriedadesDasOutrasTabelas = new List<PropertyInfo>();
-            innerJoinNomes = new List<string>();
+            _propriedadesDaTabelaPrincipal = new List<PropertyInfo>();
+            _propriedadesDasOutrasTabelas = new List<PropertyInfo>();
+
+            Type tipo = typeof(TPrincipalTable);
+
+            var innerJoin = new InnerJoinBuilder
+            {
+                FullName = tipo.FullName,
+                Name = tipo.Name,
+                Principal = true
+            };
+
+            innerJoin.SetAlias(innerJoin.GenerateAlias());
+
+            _listInnerJoin = new List<InnerJoinBuilder>();
+            _listInnerJoin.Add(innerJoin);
         }
 
-        public BuildQuery<T> Select<TProperty>(Expression<Func<T, TProperty>> propriedade)
+        public BuildQuery<TPrincipalTable> Select<TProperty>(Expression<Func<TPrincipalTable, TProperty>> propriedade)
         {
-            Type tipo = typeof(T);
+            Type tipo = typeof(TPrincipalTable);
 
             var membro = propriedade.Body as MemberExpression;
 
-            if (membro == null)
-                throw new ArgumentException(string.Format(
-                    "Expression '{0}' refers to a method, not a property.",
-                    propriedade.ToString()));
+            var informacaoDaPropriedade = ValidarERetornarPropriedadeDaTabela(tipo, membro, propriedade);
 
-            var informacaoDaPropriedade = membro.Member as PropertyInfo;
-            if (informacaoDaPropriedade == null)
-                throw new ArgumentException(string.Format(
-                    "Expression '{0}' refers to a field, not a property.",
-                    propriedade.ToString()));
-
-            if (tipo != informacaoDaPropriedade.ReflectedType &&
-                !tipo.IsSubclassOf(informacaoDaPropriedade.ReflectedType))
-                throw new ArgumentException(string.Format(
-                    "Expression '{0}' refers to a property that is not from type {1}.",
-                    propriedade.ToString(),
-                    tipo));
-
-            propriedadesDaTabelaPrincipal.Add(informacaoDaPropriedade);
+            if (tipo.IsSubclassOf(informacaoDaPropriedade.ReflectedType))
+                _propriedadesDasOutrasTabelas.Add(informacaoDaPropriedade);
+            else
+                _propriedadesDaTabelaPrincipal.Add(informacaoDaPropriedade);
 
             return this;
         }
 
-        public BuildQuery<T> SelectOut<TOtherTable>(Expression<Func<TOtherTable, object>> propriedade)
+        public BuildQuery<TPrincipalTable> SelectOut<TOtherTable>(Expression<Func<TOtherTable, object>> propriedade)
         {
             Type tipo = typeof(TOtherTable);
 
             var lambda = propriedade as LambdaExpression;
 
-            MemberExpression membro;
+            var membro = RetornarMemberExpression(propriedade, lambda);
 
-            if (lambda.Body is UnaryExpression)
-            {
-                var unaryExpression = lambda.Body as UnaryExpression;
-                membro = unaryExpression.Operand as MemberExpression;
-            }
-            else
-                membro = propriedade.Body as MemberExpression;
-
-
-            if (membro == null)
-                throw new ArgumentException(string.Format(
-                    "Expression '{0}' refers to a method, not a property.",
-                    propriedade.ToString()));
-
-            var informacaoDaPropriedade = membro.Member as PropertyInfo;
-            if (informacaoDaPropriedade == null)
-                throw new ArgumentException(string.Format(
-                    "Expression '{0}' refers to a field, not a property.",
-                    propriedade.ToString()));
-
-            if (tipo != informacaoDaPropriedade.ReflectedType &&
-                !tipo.IsSubclassOf(informacaoDaPropriedade.ReflectedType))
-                throw new ArgumentException(string.Format(
-                    "Expression '{0}' refers to a property that is not from type {1}.",
-                    propriedade.ToString(),
-                    tipo));
-
-            propriedadesDasOutrasTabelas.Add(informacaoDaPropriedade);
+            _propriedadesDasOutrasTabelas.Add(ValidarERetornarPropriedadeDaTabela(tipo, membro, lambda));
 
             return this;
         }
 
-        public BuildQuery<T> InnerJoin<TOtherTable>()
+        public BuildQuery<TPrincipalTable> InnerJoin<TOtherTable>(
+            Expression<Func<TOtherTable, object>> expressaoOtherTable,
+            Expression<Func<TPrincipalTable, object>> expressaoPrincipalTable)
         {
-            var tipo = typeof(TOtherTable);
+            ValidateInnerJoin(expressaoOtherTable, expressaoPrincipalTable);
 
-            innerJoinNomes.Add(tipo.FullName);
+            return this;
+        }
+
+        public BuildQuery<TPrincipalTable> InnerJoin<TOtherTable, TComparedTable>(
+            Expression<Func<TOtherTable, object>> expressaoOtherTable,
+            Expression<Func<TComparedTable, object>> expressaoComparedTable)
+        {
+            ValidateInnerJoin(expressaoOtherTable, expressaoComparedTable);
 
             return this;
         }
 
         public string Build()
         {
-            foreach (var propriedade in propriedadesDasOutrasTabelas)
-            {
-                if (!innerJoinNomes.Any(x => x == propriedade.ReflectedType.FullName))
-                {
-                    throw new ArgumentException(string.Format(
-                    "Não foi especificado a tabela para a coluna {0}",
-                    propriedade.Name));
-                }
-            }
+            ValidarInnerJoins();
 
             return "";
+        }
+    }
+
+    public class InnerJoinBuilder
+    {
+        public bool Principal { get; set; }
+        public string FullName { get; set; }
+        public string Name { get; set; }
+        public string KeyPrimary { get; private set; }
+        public string KeyCompared { get; private set; }
+        public string Alias { get; private set; }
+        public string AliasCompared { get; private set; }
+        public string On 
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(Alias))
+                    throw new ArgumentException(string.Format("Não foi gerado o apelido para o {0}", FullName));
+                else
+                    return string.Format("{0}.{1} = {2}.{3}", Alias, KeyPrimary, AliasCompared, KeyCompared);
+            }
+        }
+
+        public InnerJoinBuilder()
+        {
+            Principal = false;
+        }
+
+        public void SetKeyPrimary(string keyPrimary) =>
+            KeyPrimary = keyPrimary;
+
+        public void SetKeyCompared(string keyCompared) =>
+            KeyCompared = keyCompared;
+
+        public void SetAlias(string alias) =>
+            Alias = alias;
+
+        public void SetAliasCompared(string aliasCompared) =>
+            AliasCompared = aliasCompared;
+
+        public string GenerateAlias()
+        {
+            var random = new Random();
+
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdeghijklmnorpqrstuvwxyz";
+            return new string(Enumerable.Repeat(chars, 3)
+                .Select(s => s[random.Next(s.Length)]).ToArray());
         }
     }
 }
