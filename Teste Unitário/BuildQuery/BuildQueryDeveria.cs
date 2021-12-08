@@ -12,8 +12,10 @@ namespace Teste_Unitário.BuildQuery
         public void Teste()
         {
             var query = new BuildQuery<ClienteModel>()
-                .Select(c => c.Cpf)
-                .SelectOut<EnderecoModel>(e => e.Bairro);
+                .Select(c => c.Id)
+                .SelectOut<EnderecoModel>(e => e.Bairro)
+                .InnerJoin<EnderecoModel>()
+                .Build();
         }
     }
 }

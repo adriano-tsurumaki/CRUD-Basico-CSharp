@@ -1,18 +1,22 @@
-﻿using CRUD___Adriano.Features.Cadastro.Produto.Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Reflection;
 
 namespace CRUD___Adriano.Features.BuildQuery
 {
-    public class BuildQuery<T> where T : class, new()
+    public partial class BuildQuery<T> where T : class, new()
     {
-        private IList<PropertyInfo> propriedadesDaTabela;
+        private IList<PropertyInfo> propriedadesDaTabelaPrincipal;
+        private IList<PropertyInfo> propriedadesDasOutrasTabelas;
+
+        private IList<string> innerJoinNomes;
 
         public BuildQuery()
         {
-            propriedadesDaTabela = new List<PropertyInfo>();
+            propriedadesDaTabelaPrincipal = new List<PropertyInfo>();
+            propriedadesDasOutrasTabelas = new List<PropertyInfo>();
+            innerJoinNomes = new List<string>();
         }
 
         public BuildQuery<T> Select<TProperty>(Expression<Func<T, TProperty>> propriedade)
@@ -39,12 +43,12 @@ namespace CRUD___Adriano.Features.BuildQuery
                     propriedade.ToString(),
                     tipo));
 
-            propriedadesDaTabela.Add(informacaoDaPropriedade);
+            propriedadesDaTabelaPrincipal.Add(informacaoDaPropriedade);
 
             return this;
         }
 
-        public BuildQuery<T> SelectOut<TOtherTable>(Expression<Func<TOtherTable, IComparable>> propriedade)
+        public BuildQuery<T> SelectOut<TOtherTable>(Expression<Func<TOtherTable, object>> propriedade)
         {
             Type tipo = typeof(TOtherTable);
 
@@ -68,9 +72,23 @@ namespace CRUD___Adriano.Features.BuildQuery
                     propriedade.ToString(),
                     tipo));
 
-            propriedadesDaTabela.Add(informacaoDaPropriedade);
+            propriedadesDasOutrasTabelas.Add(informacaoDaPropriedade);
 
             return this;
+        }
+
+        public BuildQuery<T> InnerJoin<TOtherTable>()
+        {
+            var tipo = typeof(TOtherTable);
+
+            innerJoinNomes.Add(tipo.Name);
+
+            return this;
+        }
+
+        public string Build()
+        {
+            return "";
         }
     }
 }
