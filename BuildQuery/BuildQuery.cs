@@ -68,7 +68,6 @@ namespace BuildQuery
 
         }
 
-
         public BuildQuery<TPrincipalTable> SelectOut<TOtherTable>(Expression<Func<TOtherTable, object>> propriedade)
         {
             Type tipo = typeof(TOtherTable);

@@ -19,9 +19,14 @@ namespace Teste_Unitário.BuildQuery
             BuildQueryMapper.AddTable<EnderecoModel>("Endereco");
             BuildQueryMapper.AddTable<TelefoneModel>("Telefone");
 
+            BuildQueryMapper.Initialize(config =>
+            {
+                config.AddMap<ClienteModel>();
+            });
+
             var query = new BuildQuery<ClienteModel>()
                 .Select(c => c.Id)
-                .Select(c => c.IdUsuario)
+                .Select(c => c.IdUsuario, "id_usuario")
                 .SelectOut<EnderecoModel>(e => e.Bairro)
                 .SelectOut<EnderecoModel>(e => e.Numero)
                 .InnerJoin<UsuarioModel>(u => u.IdUsuario, e => e.IdUsuario)
