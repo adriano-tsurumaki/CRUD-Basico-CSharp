@@ -1,10 +1,9 @@
 ﻿using BuildQuery;
+using BuildQuery.Mapping;
 using CRUD___Adriano.Features.Cadastro.Produto.Model;
 using CRUD___Adriano.Features.Entidades.Endereco.Model;
-using CRUD___Adriano.Features.Entidades.Telefone.Model;
 using CRUD___Adriano.Features.Usuario.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Collections.Generic;
 
 namespace Teste_Unitário.BuildQuery
 {
@@ -14,16 +13,12 @@ namespace Teste_Unitário.BuildQuery
         [TestMethod]
         public void Teste()
         {
-            BuildQueryMapper.AddTable<ClienteModel>("Cliente");
-            BuildQueryMapper.AddTable<UsuarioModel>("Usuario");
-            BuildQueryMapper.AddTable<EnderecoModel>("Endereco");
-            BuildQueryMapper.AddTable<TelefoneModel>("Telefone");
-
             BuildQueryMapper.Initialize(config =>
             {
-                config.AddMap<ClienteModel>();
+                config.AddMap(new UsuarioMap());
+                config.AddMap(new ClienteMap());
             });
-
+             
             var query = new BuildQuery<ClienteModel>()
                 .Select(c => c.Id)
                 .Select(c => c.IdUsuario, "id_usuario")
@@ -32,10 +27,28 @@ namespace Teste_Unitário.BuildQuery
                 .InnerJoin<UsuarioModel>(u => u.IdUsuario, e => e.IdUsuario)
                 .InnerJoin<EnderecoModel, UsuarioModel>(e => e.IdUsuario, u => u.IdUsuario)
                 .Build();
+        }
+    }
 
-            var lista = new List<EnderecoModel>();
+    public class UsuarioMap : EntityMap<UsuarioModel>
+    {
+        public UsuarioMap()
+        {
+            ToTable("Usuario");
+            Map(x => x.Cpf).ToColumn("cpf");
+            Map(x => x.DataNascimento).ToColumn("data_nascimento");
+            Map(x => x.Emails).ToColumn("data_nascimento");
+        }
+    }
 
-            //lista.Any(x => x.Bairro);
+    public class ClienteMap : EntityMap<ClienteModel>
+    {
+        public ClienteMap()
+        {
+            ToTable("Usuario");
+            Map(x => x.Cpf).ToColumn("cpf");
+            Map(x => x.DataNascimento).ToColumn("data_nascimento");
+            Map(x => x.Emails).ToColumn("data_nascimento");
         }
     }
 }

@@ -146,10 +146,10 @@ namespace BuildQuery
 
             var alias = _listInnerJoin.First(x => x.Principal).Alias;
 
-            if (BuildQueryMapper.GetDictionary().TryGetValue(typeof(TPrincipalTable).FullName, out string nome))
-                from.AppendLine($"{nome} as {alias}");
-            else
-                throw new ArgumentException("");
+            //if (BuildQueryMapper.GetDictionary().TryGetValue(typeof(TPrincipalTable).FullName, out string nome))
+            //    from.AppendLine($"{nome} as {alias}");
+            //else
+            //    throw new ArgumentException("");
 
             return from;
         }
@@ -162,10 +162,10 @@ namespace BuildQuery
             {
                 if (item.Principal) continue;
 
-                if (BuildQueryMapper.GetDictionary().TryGetValue(item.FullName, out string nome))
-                    innerJoin.AppendLine($"inner join {nome} as {item.Alias} on {item.On}");
-                else
-                    throw new ArgumentException("");
+                //if (BuildQueryMapper.GetDictionary().TryGetValue(item.FullName, out string nome))
+                //    innerJoin.AppendLine($"inner join {nome} as {item.Alias} on {item.On}");
+                //else
+                //    throw new ArgumentException("");
             }
 
             return innerJoin;
@@ -216,8 +216,8 @@ namespace BuildQuery
         {
             var random = new Random();
 
-            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdeghijklmnorpqrstuvwxyz";
-            return new string(Enumerable.Repeat(chars, 3)
+            const string chars = "abcdeghijklmnorpqrstuvwxyz";
+            return new string(Enumerable.Repeat(chars, 2)
                 .Select(s => s[random.Next(s.Length)]).ToArray());
         }
     }
