@@ -1,5 +1,5 @@
 ﻿using BuildQuery;
-using BuildQuery.Mapping;
+using BuildQuery.EntityMapping;
 using CRUD___Adriano.Features.Cadastro.Produto.Model;
 using CRUD___Adriano.Features.Entidades.Endereco.Model;
 using CRUD___Adriano.Features.Usuario.Model;
@@ -46,9 +46,9 @@ namespace Teste_Unitário.BuildQuery
         public ClienteMap()
         {
             ToTable("Usuario");
-            Map(x => x.Cpf).ToColumn("cpf");
-            Map(x => x.DataNascimento).ToColumn("data_nascimento");
-            Map(x => x.Emails).ToColumn("data_nascimento");
+            Map(x => x.Id).ToColumn("cpf");
+            Map(x => x.ValorLimite).ToColumn("data_nascimento");
+            Map(x => x.Observacao).ToColumn("data_nascimento");
         }
     }
 }

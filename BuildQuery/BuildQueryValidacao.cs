@@ -72,7 +72,7 @@ namespace BuildQuery
             var propOtherTable = ValidarERetornarPropriedadeDaTabela(tipoOtherTable, membroOtherTable, lambdaOtherTable);
             var propComparedTable = ValidarERetornarPropriedadeDaTabela(tipoComparedTable, membroComparedTable, lambdaComparedTable);
 
-            var innerJoin = new InnerJoinBuilder
+            var innerJoin = new InnerJoinModel
             {
                 FullName = tipoOtherTable.FullName,
                 Name = tipoOtherTable.Name
@@ -99,7 +99,7 @@ namespace BuildQuery
             _listInnerJoin.Add(innerJoin);
         }
 
-        private void GenerateAlias(InnerJoinBuilder innerJoin)
+        private void GenerateAlias(InnerJoinModel innerJoin)
         {
             while (true)
             {

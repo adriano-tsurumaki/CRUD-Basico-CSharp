@@ -13,7 +13,7 @@ namespace BuildQuery
         private Dictionary<PropertyInfo, string> _propriedadesDaTabelaPrincipal;
         private Dictionary<PropertyInfo, string> _propriedadesDasOutrasTabelas;
 
-        private IList<InnerJoinBuilder> _listInnerJoin;
+        private IList<InnerJoinModel> _listInnerJoin;
 
         public BuildQuery()
         {
@@ -22,7 +22,7 @@ namespace BuildQuery
 
             Type tipo = typeof(TPrincipalTable);
 
-            var innerJoin = new InnerJoinBuilder
+            var innerJoin = new InnerJoinModel
             {
                 FullName = tipo.FullName,
                 Name = tipo.Name,
@@ -31,8 +31,7 @@ namespace BuildQuery
 
             innerJoin.SetAlias(innerJoin.GenerateAlias());
 
-            _listInnerJoin = new List<InnerJoinBuilder>();
-            _listInnerJoin.Add(innerJoin);
+            _listInnerJoin = new List<InnerJoinModel> { innerJoin };
         }
 
         public BuildQuery<TPrincipalTable> Select<TProperty>(Expression<Func<TPrincipalTable, TProperty>> propriedade)
@@ -146,8 +145,8 @@ namespace BuildQuery
 
             var alias = _listInnerJoin.First(x => x.Principal).Alias;
 
-            //if (BuildQueryMapper.GetDictionary().TryGetValue(typeof(TPrincipalTable).FullName, out string nome))
-            //    from.AppendLine($"{nome} as {alias}");
+            if (BuildQueryMapper.GetTables().TryGetValue(typeof(TPrincipalTable), out var nome))
+                from.AppendLine($"{nome.TableName} as {alias}");
             //else
             //    throw new ArgumentException("");
 
@@ -175,7 +174,7 @@ namespace BuildQuery
             new Regex(@"\s\s+").Replace(valor, " ");
     }
 
-    public class InnerJoinBuilder
+    public class InnerJoinModel
     {
         public bool Principal { get; set; }
         public string FullName { get; set; }
@@ -195,7 +194,7 @@ namespace BuildQuery
             }
         }
 
-        public InnerJoinBuilder()
+        public InnerJoinModel()
         {
             Principal = false;
         }

@@ -59,8 +59,5 @@ namespace BuildQuery.Util
                 }
             }
         }
-
-        public static bool IsSubclassOf(Type type, PropertyInfo propertyInfo) =>
-            type.IsSubclassOf(propertyInfo.ReflectedType);
     }
 }

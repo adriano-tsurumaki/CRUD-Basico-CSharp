@@ -1,4 +1,4 @@
-﻿using BuildQuery.Mapping;
+﻿using BuildQuery.EntityMapping;
 using System;
 using System.Collections.Generic;
 
@@ -15,6 +15,6 @@ namespace BuildQuery
             configure(_configuration);
         }
 
-        public static Dictionary<Type, IEntityMap> GetDictionary() => TableMaps;
+        public static Dictionary<Type, IEntityMap> GetTables() => TableMaps;
     }
 }

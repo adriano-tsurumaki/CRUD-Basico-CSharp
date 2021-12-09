@@ -5,11 +5,13 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace BuildQuery.Mapping
+namespace BuildQuery.EntityMapping
 {
     public interface IEntityMap
     {
         IList<PropertyMap> PropertyMaps { get; }
+
+        string TableName { get; }
     }
 
     public abstract class EntityMap<TEntity> : IEntityMap where TEntity : class
@@ -46,19 +48,5 @@ namespace BuildQuery.Mapping
         }
 
         private PropertyMap GeneratePropertyMap(PropertyInfo propertyInfo) => new PropertyMap(propertyInfo);
-    }
-
-    public class PropertyMap 
-    {
-        public string ColumnName { get; private set; }
-
-        public PropertyInfo PropertyInfo { get; }
-
-        public PropertyMap(PropertyInfo propertyInfo)
-        {
-            PropertyInfo = propertyInfo;
-        }
-
-        public void ToColumn(string columnName) => ColumnName = columnName;
     }
 }
