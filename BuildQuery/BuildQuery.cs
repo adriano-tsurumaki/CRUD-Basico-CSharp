@@ -51,7 +51,43 @@ namespace BuildQuery
                 var select = new SelectModel
                 {
                     Type = tipo,
-                    PropertyInfo = informacaoDaPropriedade
+                    PropertyInfo = informacaoDaPropriedade,
+                    ColumnName = informacaoDaPropriedade.Name
+                };
+
+                if (!tipo.IsSubclassOf(informacaoDaPropriedade.ReflectedType))
+                    select.Principal = true;
+
+                _listSelects.Add(select);
+            }
+
+            return this;
+        }
+
+
+        public BuildQuery<TPrincipalTable> Select(string names, params Expression<Func<TPrincipalTable, object>>[] argsPropriedades)
+        {
+            var listNames = names.Split(",");
+
+            if (listNames.Count() != argsPropriedades.Count())
+                throw new ArgumentException($"A quantidade de nomes estabelecidos não é igual a quantidade de propriedades passadas no parâmetros");
+
+            var zip = listNames.Zip(argsPropriedades, (n, a) => new { name = n, propriedade = a });
+
+            foreach (var arquivo in zip)
+            {
+                Type tipo = typeof(TPrincipalTable);
+
+                var informacaoDaPropriedade = ReflectionHelper.GetMemberInfo(arquivo.propriedade) as PropertyInfo;
+
+                if (informacaoDaPropriedade.MemberType != MemberTypes.Property)
+                    throw new ArgumentException($"A expressão {informacaoDaPropriedade} não é uma propriedade, é {informacaoDaPropriedade.MemberType}!");
+
+                var select = new SelectModel
+                {
+                    Type = tipo,
+                    PropertyInfo = informacaoDaPropriedade,
+                    ColumnName = arquivo.name.Trim()
                 };
 
                 if (!tipo.IsSubclassOf(informacaoDaPropriedade.ReflectedType))

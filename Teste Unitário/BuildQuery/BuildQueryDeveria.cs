@@ -16,12 +16,12 @@ namespace Teste_Unitário.BuildQuery
             BuildQueryMapper.Initialize(config =>
             {
                 config.AddMap(new UsuarioMap());
-                config.AddMap(new ClienteMap());
                 config.AddMap(new EnderecoMap());
             });
              
             var query = new BuildQuery<ClienteModel>()
                 .Select(c => c.ValorLimite)
+                .Select("id_lokao, observacao_lokao", c => c.Id, c => c.Observacao)
                 .SelectOut<UsuarioModel>(u => u.IdUsuario, u => u.Nome, u => u.Sobrenome)
                 .SelectOut<UsuarioModel>(u => u.Sexo, u => u.Cpf, u => u.DataNascimento)
                 .SelectOut<EnderecoModel>(e => e.IdUsuario, e => e.Logradouro, e => e.Cep, e => e.Bairro)

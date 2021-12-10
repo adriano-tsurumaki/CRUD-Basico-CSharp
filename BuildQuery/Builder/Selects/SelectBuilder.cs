@@ -18,7 +18,9 @@ namespace BuildQuery.Builder.Selects
 
         public string Build(Dictionary<Type, string> dictionaryAlias)
         {
-            return "";
+            dictionaryAlias.TryGetValue(_model.Type, out var alias);
+
+            return $"{alias}.{_model.ColumnName} as {_model.PropertyInfo.Name}, ";
         }
     }
 }
