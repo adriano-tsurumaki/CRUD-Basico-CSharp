@@ -17,13 +17,15 @@ namespace Teste_Unitário.BuildQuery
             {
                 config.AddMap(new UsuarioMap());
                 config.AddMap(new ClienteMap());
+                config.AddMap(new EnderecoMap());
             });
              
             var query = new BuildQuery<ClienteModel>()
-                .Select(c => c.Id)
-                .Select(c => c.IdUsuario, "id_usuario")
-                .SelectOut<EnderecoModel>(e => e.Bairro)
-                .SelectOut<EnderecoModel>(e => e.Numero)
+                .Select(c => c.ValorLimite)
+                .SelectOut<UsuarioModel>(u => u.IdUsuario, u => u.Nome, u => u.Sobrenome)
+                .SelectOut<UsuarioModel>(u => u.Sexo, u => u.Cpf, u => u.DataNascimento)
+                .SelectOut<EnderecoModel>(e => e.IdUsuario, e => e.Logradouro, e => e.Cep, e => e.Bairro)
+                .SelectOut<EnderecoModel>(e => e.Cidade, e => e.Uf, e => e.Complemento, e => e.Numero)
                 .InnerJoin<UsuarioModel>(u => u.IdUsuario, e => e.IdUsuario)
                 .InnerJoin<EnderecoModel, UsuarioModel>(e => e.IdUsuario, u => u.IdUsuario)
                 .Build();
@@ -35,9 +37,12 @@ namespace Teste_Unitário.BuildQuery
         public UsuarioMap()
         {
             ToTable("Usuario");
+            Map(x => x.IdUsuario).ToColumn("id");
+            Map(x => x.Nome).ToColumn("nome");
+            Map(x => x.Sobrenome).ToColumn("sobrenome");
             Map(x => x.Cpf).ToColumn("cpf");
+            Map(x => x.Sexo).ToColumn("sexo");
             Map(x => x.DataNascimento).ToColumn("data_nascimento");
-            Map(x => x.Emails).ToColumn("data_nascimento");
         }
     }
 
@@ -45,10 +50,28 @@ namespace Teste_Unitário.BuildQuery
     {
         public ClienteMap()
         {
-            ToTable("Usuario");
-            Map(x => x.Id).ToColumn("cpf");
-            Map(x => x.ValorLimite).ToColumn("data_nascimento");
-            Map(x => x.Observacao).ToColumn("data_nascimento");
+            ToTable("Cliente");
+            Map(x => x.Id).ToColumn("id");
+            Map(x => x.IdUsuario).ToColumn("id_usuario").IsBaseClass();
+            Map(x => x.ValorLimite).ToColumn("valor_limite");
+            Map(x => x.Observacao).ToColumn("observacao");
+        }
+    }
+
+    public class EnderecoMap : EntityMap<EnderecoModel>
+    {
+        public EnderecoMap()
+        {
+            ToTable("Endereco");
+            Map(x => x.Id).ToColumn("id");
+            Map(x => x.IdUsuario).ToColumn("id_usuario");
+            Map(x => x.Cep).ToColumn("cep");
+            Map(x => x.Logradouro).ToColumn("logradouro");
+            Map(x => x.Cidade).ToColumn("cidade");
+            Map(x => x.Uf).ToColumn("uf");
+            Map(x => x.Complemento).ToColumn("complemento");
+            Map(x => x.Bairro).ToColumn("bairro");
+            Map(x => x.Numero).ToColumn("numero");
         }
     }
 }

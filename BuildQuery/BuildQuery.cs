@@ -1,4 +1,5 @@
 ﻿using BuildQuery.Builder.Factory;
+using BuildQuery.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,50 +37,44 @@ namespace BuildQuery
             _listInnerJoin = new List<InnerJoinModel> { innerJoin };
         }
 
-        public BuildQuery<TPrincipalTable> Select<TProperty>(Expression<Func<TPrincipalTable, TProperty>> propriedade)
+        public BuildQuery<TPrincipalTable> Select(params Expression<Func<TPrincipalTable, object>>[] argsPropriedades)
         {
-            Type tipo = typeof(TPrincipalTable);
+            foreach(var propriedade in argsPropriedades)
+            {
+                Type tipo = typeof(TPrincipalTable);
 
-            var membro = propriedade.Body as MemberExpression;
+                var informacaoDaPropriedade = ReflectionHelper.GetMemberInfo(propriedade) as PropertyInfo;
 
-            var informacaoDaPropriedade = ValidarERetornarPropriedadeDaTabela(tipo, membro, propriedade);
+                if (informacaoDaPropriedade.MemberType != MemberTypes.Property)
+                    throw new ArgumentException($"A expressão {informacaoDaPropriedade} não é uma propriedade, é {informacaoDaPropriedade.MemberType}!");
 
-            if (tipo.IsSubclassOf(informacaoDaPropriedade.ReflectedType))
+                if (tipo.IsSubclassOf(informacaoDaPropriedade.ReflectedType))
+                    _propriedadesDasOutrasTabelas.Add(informacaoDaPropriedade, informacaoDaPropriedade.Name);
+                else
+                    _propriedadesDaTabelaPrincipal.Add(informacaoDaPropriedade, informacaoDaPropriedade.Name);
+            }
+
+            return this;
+        }
+
+        public BuildQuery<TPrincipalTable> SelectOut<TOtherTable>(params Expression<Func<TOtherTable, object>>[] argsPropriedade)
+        {
+            foreach (var propriedade in argsPropriedade)
+            {
+                Type tipo = typeof(TOtherTable);
+
+                var informacaoDaPropriedade = ReflectionHelper.GetMemberInfo(propriedade) as PropertyInfo;
+
+                if (informacaoDaPropriedade.MemberType != MemberTypes.Property)
+                    throw new ArgumentException($"A expressão {informacaoDaPropriedade} não é uma propriedade, é {informacaoDaPropriedade.MemberType}!");
+
+                if (tipo.IsSubclassOf(informacaoDaPropriedade.ReflectedType))
+                    _propriedadesDasOutrasTabelas.Add(informacaoDaPropriedade, informacaoDaPropriedade.Name);
+                else
+                    _propriedadesDaTabelaPrincipal.Add(informacaoDaPropriedade, informacaoDaPropriedade.Name);
+
                 _propriedadesDasOutrasTabelas.Add(informacaoDaPropriedade, informacaoDaPropriedade.Name);
-            else
-                _propriedadesDaTabelaPrincipal.Add(informacaoDaPropriedade, informacaoDaPropriedade.Name);
-
-            return this;
-        }
-
-        public BuildQuery<TPrincipalTable> Select<TProperty>(Expression<Func<TPrincipalTable, TProperty>> propriedade, string nomeDaColuna)
-        {
-            Type tipo = typeof(TPrincipalTable);
-
-            var membro = propriedade.Body as MemberExpression;
-
-            var informacaoDaPropriedade = ValidarERetornarPropriedadeDaTabela(tipo, membro, propriedade);
-
-            if (tipo.IsSubclassOf(informacaoDaPropriedade.ReflectedType))
-                _propriedadesDasOutrasTabelas.Add(informacaoDaPropriedade, nomeDaColuna);
-            else
-                _propriedadesDaTabelaPrincipal.Add(informacaoDaPropriedade, nomeDaColuna);
-
-            return this;
-
-        }
-
-        public BuildQuery<TPrincipalTable> SelectOut<TOtherTable>(Expression<Func<TOtherTable, object>> propriedade)
-        {
-            Type tipo = typeof(TOtherTable);
-
-            var lambda = propriedade as LambdaExpression;
-
-            var membro = RetornarMemberExpression(propriedade, lambda);
-
-            var informacaoDaPropriedade = ValidarERetornarPropriedadeDaTabela(tipo, membro, lambda);
-
-            _propriedadesDasOutrasTabelas.Add(informacaoDaPropriedade, informacaoDaPropriedade.Name);
+            }
 
             return this;
         }
