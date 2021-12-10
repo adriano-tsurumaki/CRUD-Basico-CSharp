@@ -15,6 +15,8 @@ namespace BuildQuery
             configure(_configuration);
         }
 
+        public static bool HasTableStored(Type table) => TableMaps.TryGetValue(table, out _);
+
         public static Dictionary<Type, IEntityMap> GetTables() => TableMaps;
     }
 }

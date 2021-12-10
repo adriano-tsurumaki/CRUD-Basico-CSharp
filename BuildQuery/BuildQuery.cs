@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BuildQuery.Builder.Factory;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -24,6 +25,7 @@ namespace BuildQuery
 
             var innerJoin = new InnerJoinModel
             {
+                Type = typeof(TPrincipalTable),
                 FullName = tipo.FullName,
                 Name = tipo.Name,
                 Principal = true
@@ -145,8 +147,8 @@ namespace BuildQuery
 
             var alias = _listInnerJoin.First(x => x.Principal).Alias;
 
-            if (BuildQueryMapper.GetTables().TryGetValue(typeof(TPrincipalTable), out var nome))
-                from.AppendLine($"{nome.TableName} as {alias}");
+            //if (BuildQueryMapper.GetTables().TryGetValue(typeof(TPrincipalTable), out var nome))
+            //    from.AppendLine($"{nome.TableName} as {alias}");
             //else
             //    throw new ArgumentException("");
 
@@ -157,15 +159,8 @@ namespace BuildQuery
         {
             var innerJoin = new StringBuilder();
 
-            foreach (var item in _listInnerJoin)
-            {
-                if (item.Principal) continue;
-
-                //if (BuildQueryMapper.GetDictionary().TryGetValue(item.FullName, out string nome))
-                //    innerJoin.AppendLine($"inner join {nome} as {item.Alias} on {item.On}");
-                //else
-                //    throw new ArgumentException("");
-            }
+            foreach(var item in new InnerJoinFactory().CreateBuilders(_listInnerJoin))
+                innerJoin.AppendLine(item.Build());
 
             return innerJoin;
         }
@@ -176,6 +171,7 @@ namespace BuildQuery
 
     public class InnerJoinModel
     {
+        public Type Type { get; set; }
         public bool Principal { get; set; }
         public string FullName { get; set; }
         public string Name { get; set; }

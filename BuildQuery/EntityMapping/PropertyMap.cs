@@ -17,14 +17,7 @@ namespace BuildQuery.EntityMapping
 
         public PropertyMap ToColumn(string columnName)
         {
-
             ColumnName = columnName;
-            return this;
-        }
-
-        public PropertyMap IsKey()
-        {
-            Key = true;
             return this;
         }
     }

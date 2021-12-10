@@ -74,6 +74,7 @@ namespace BuildQuery
 
             var innerJoin = new InnerJoinModel
             {
+                Type = typeof(TOtherTable),
                 FullName = tipoOtherTable.FullName,
                 Name = tipoOtherTable.Name
             };
