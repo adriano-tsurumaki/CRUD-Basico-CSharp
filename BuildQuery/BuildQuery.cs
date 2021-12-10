@@ -131,21 +131,20 @@ namespace BuildQuery
             foreach(var item in new SelectFactory().CreateBuilders(_listSelects))
                 select.AppendLine(item.Build(_dictionaryAlias));
 
+            select.Remove(select.Length - 4, 4);
+
             return select;
         }
 
         private StringBuilder BuildFrom()
         {
-            var from = new StringBuilder("from ");
+            var from = new StringBuilder();
 
-            //var alias = _listInnerJoins.First(x => x.Principal).Alias;
+            var tipo = typeof(TPrincipalTable);
 
-            //if (BuildQueryMapper.GetTables().TryGetValue(typeof(TPrincipalTable), out var nome))
-            //    from.AppendLine($"{nome.TableName} as {alias}");
-            //else
-            //    throw new ArgumentException("");
+            _dictionaryAlias.TryGetValue(tipo, out var alias);
 
-            return from;
+            return from.AppendLine(new FromFactory().CreateBuild(tipo).Build(tipo, alias));
         }
 
         private StringBuilder BuildInnerJoin()

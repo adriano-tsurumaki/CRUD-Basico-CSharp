@@ -3,7 +3,6 @@ using BuildQuery.Builder.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace BuildQuery.Builder.Selects
 {
@@ -26,7 +25,7 @@ namespace BuildQuery.Builder.Selects
 
             dictionaryAlias.TryGetValue(_model.Type, out var alias);
 
-            return new StringBuilder().AppendLine($"{alias}.{propertyMap.ColumnName} as {propertyMap.PropertyInfo.Name},").ToString();
+            return $"{alias}.{propertyMap.ColumnName} as {propertyMap.PropertyInfo.Name}, ";
         }
     }
 }
