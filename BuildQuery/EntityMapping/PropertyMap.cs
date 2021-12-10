@@ -6,7 +6,7 @@ namespace BuildQuery.EntityMapping
     {
         public string ColumnName { get; private set; }
 
-        public bool Key { get; private set; }
+        public bool AllowToUseBaseClass { get; private set; }
 
         public PropertyInfo PropertyInfo { get; }
 
@@ -18,6 +18,12 @@ namespace BuildQuery.EntityMapping
         public PropertyMap ToColumn(string columnName)
         {
             ColumnName = columnName;
+            return this;
+        }
+
+        public PropertyMap IsBaseClass()
+        {
+            AllowToUseBaseClass = true;
             return this;
         }
     }

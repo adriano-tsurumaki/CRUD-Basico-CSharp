@@ -34,9 +34,6 @@ namespace BuildQuery.EntityMapping
         {
             var propertyInfo = ReflectionHelper.GetMemberInfo(expression) as PropertyInfo;
 
-            if (typeof(TEntity).IsSubclassOf(propertyInfo.DeclaringType))
-                throw new Exception($"Propriedade {propertyInfo.Name} pertencente a classe pai! Utilize propriedades pertencente a classe {typeof(TEntity)}");
-
             if (PropertyMaps.Any(x => x.PropertyInfo == propertyInfo))
                 throw new Exception($"Detectado duplicação de mapeamento. A propriedade '{propertyInfo.Name}' já foi mapeado!");
 
