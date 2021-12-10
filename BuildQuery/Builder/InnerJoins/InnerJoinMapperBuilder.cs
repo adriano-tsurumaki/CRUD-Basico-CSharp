@@ -1,4 +1,6 @@
 ﻿using BuildQuery.Builder.Interfaces;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
@@ -15,7 +17,7 @@ namespace BuildQuery.Builder.InnerJoins
             _model = model;
         }
 
-        public string Build()
+        public string Build(Dictionary<Type, string> dictionaryAlias)
         {
             var entity = BuildQueryMapper.GetEntityMap(_model.Type);
 
@@ -23,7 +25,10 @@ namespace BuildQuery.Builder.InnerJoins
 
             var foreignKey = entity.PropertyMaps.Where(x => x.PropertyInfo.Name == _model.KeyCompared).First().ColumnName;
 
-            return new StringBuilder().AppendLine($"inner join {entity.TableName} as {_model.Alias} on {_model.Alias}.{primaryKey} = {_model.AliasCompared}.{foreignKey}").ToString();
+            dictionaryAlias.TryGetValue(_model.Type, out var alias);
+            dictionaryAlias.TryGetValue(_model.TypeCompared, out var aliasCompared);
+
+            return new StringBuilder().AppendLine($"inner join {entity.TableName} as {alias} on {alias}.{primaryKey} = {aliasCompared}.{foreignKey}").ToString();
         }
     }
 }

@@ -1,5 +1,7 @@
 ﻿using BuildQuery.Builder.Interfaces;
 using BuildQuery.Builder.Models;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
@@ -16,13 +18,15 @@ namespace BuildQuery.Builder.Selects
             _model = model;
         }
 
-        public string Build()
+        public string Build(Dictionary<Type, string> dictionaryAlias)
         {
             var entity = BuildQueryMapper.GetEntityMap(_model.Type);
 
             var columnName = entity.PropertyMaps.Where(x => x.PropertyInfo == _model.PropertyInfo).First().ColumnName;
 
-            return new StringBuilder().AppendLine($"{columnName} as {_model.Alias}, ").ToString();
+            dictionaryAlias.TryGetValue(_model.Type, out var alias);
+
+            return new StringBuilder().AppendLine($"{columnName} as {alias}, ").ToString();
         }
     }
 }

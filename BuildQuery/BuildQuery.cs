@@ -1,4 +1,5 @@
 ﻿using BuildQuery.Builder.Factory;
+using BuildQuery.Builder.Models;
 using BuildQuery.Util;
 using System;
 using System.Collections.Generic;
@@ -15,26 +16,39 @@ namespace BuildQuery
         private Dictionary<PropertyInfo, string> _propriedadesDaTabelaPrincipal;
         private Dictionary<PropertyInfo, string> _propriedadesDasOutrasTabelas;
 
-        private IList<InnerJoinModel> _listInnerJoin;
+        private Dictionary<Type, string> _dictionaryAlias;
+
+        private IList<SelectModel> _listSelects;
+
+        private IList<InnerJoinModel> _listInnerJoins;
 
         public BuildQuery()
         {
             _propriedadesDaTabelaPrincipal = new Dictionary<PropertyInfo, string>();
             _propriedadesDasOutrasTabelas = new Dictionary<PropertyInfo, string>();
+            _dictionaryAlias = new Dictionary<Type, string>();
 
             Type tipo = typeof(TPrincipalTable);
 
+            _dictionaryAlias.Add(tipo, GenerateAlias());
+
             var innerJoin = new InnerJoinModel
             {
-                Type = typeof(TPrincipalTable),
+                Type = tipo,
                 FullName = tipo.FullName,
                 Name = tipo.Name,
                 Principal = true
             };
 
-            innerJoin.SetAlias(innerJoin.GenerateAlias());
+            _listInnerJoins = new List<InnerJoinModel> { innerJoin };
 
-            _listInnerJoin = new List<InnerJoinModel> { innerJoin };
+            var select = new SelectModel
+            {
+                Type = tipo,
+                Principal = true,
+            };
+
+            _listSelects = new List<SelectModel> { select };
         }
 
         public BuildQuery<TPrincipalTable> Select(params Expression<Func<TPrincipalTable, object>>[] argsPropriedades)
@@ -48,10 +62,21 @@ namespace BuildQuery
                 if (informacaoDaPropriedade.MemberType != MemberTypes.Property)
                     throw new ArgumentException($"A expressão {informacaoDaPropriedade} não é uma propriedade, é {informacaoDaPropriedade.MemberType}!");
 
+                var select = new SelectModel
+                {
+                    Type = tipo,
+                    PropertyInfo = informacaoDaPropriedade
+                };
+
                 if (tipo.IsSubclassOf(informacaoDaPropriedade.ReflectedType))
                     _propriedadesDasOutrasTabelas.Add(informacaoDaPropriedade, informacaoDaPropriedade.Name);
                 else
+                {
+                    select.Principal = true;
                     _propriedadesDaTabelaPrincipal.Add(informacaoDaPropriedade, informacaoDaPropriedade.Name);
+                }
+
+                _listSelects.Add(select);
             }
 
             return this;
@@ -68,12 +93,21 @@ namespace BuildQuery
                 if (informacaoDaPropriedade.MemberType != MemberTypes.Property)
                     throw new ArgumentException($"A expressão {informacaoDaPropriedade} não é uma propriedade, é {informacaoDaPropriedade.MemberType}!");
 
+                var select = new SelectModel
+                {
+                    Type = tipo,
+                    PropertyInfo = informacaoDaPropriedade
+                };
+
                 if (tipo.IsSubclassOf(informacaoDaPropriedade.ReflectedType))
                     _propriedadesDasOutrasTabelas.Add(informacaoDaPropriedade, informacaoDaPropriedade.Name);
                 else
+                {
+                    select.Principal = true;
                     _propriedadesDaTabelaPrincipal.Add(informacaoDaPropriedade, informacaoDaPropriedade.Name);
+                }
 
-                _propriedadesDasOutrasTabelas.Add(informacaoDaPropriedade, informacaoDaPropriedade.Name);
+                _listSelects.Add(select);
             }
 
             return this;
@@ -111,27 +145,15 @@ namespace BuildQuery
             build.AppendLine(from.ToString());
             build.AppendLine(innerJoin.ToString());
 
-            return TrimAllExcessWhiteSpace(build.ToString());
+            return build.ToString();
         }
 
         private StringBuilder BuildSelect()
         {
-            var select = new StringBuilder("select ");
+            var select = new StringBuilder().AppendLine("select");
 
-            var alias = _listInnerJoin.Where(x => x.Principal).First().Alias;
-
-            foreach (var item in _propriedadesDaTabelaPrincipal)
-            {
-                select.AppendLine($"{alias}.{item.Value},");
-            }
-
-            foreach (var item in _propriedadesDasOutrasTabelas)
-            {
-                var aliasOther = _listInnerJoin.Where(x => x.FullName == item.Key.ReflectedType.FullName).First().Alias;
-                select.AppendLine($"{aliasOther}.{item.Value},");
-            }
-
-            select.Remove(select.Length - 3, 3);
+            foreach(var item in new SelectFactory().CreateBuilders(_listSelects))
+                select.AppendLine(item.Build(_dictionaryAlias));
 
             return select;
         }
@@ -140,7 +162,7 @@ namespace BuildQuery
         {
             var from = new StringBuilder("from ");
 
-            var alias = _listInnerJoin.First(x => x.Principal).Alias;
+            //var alias = _listInnerJoins.First(x => x.Principal).Alias;
 
             //if (BuildQueryMapper.GetTables().TryGetValue(typeof(TPrincipalTable), out var nome))
             //    from.AppendLine($"{nome.TableName} as {alias}");
@@ -154,37 +176,42 @@ namespace BuildQuery
         {
             var innerJoin = new StringBuilder();
 
-            foreach(var item in new InnerJoinFactory().CreateBuilders(_listInnerJoin))
-                innerJoin.AppendLine(item.Build());
+            foreach(var item in new InnerJoinFactory().CreateBuilders(_listInnerJoins))
+                innerJoin.AppendLine(item.Build(_dictionaryAlias));
 
             return innerJoin;
         }
 
         private string TrimAllExcessWhiteSpace(string valor) =>
             new Regex(@"\s\s+").Replace(valor, " ");
+
+        public string GenerateAlias()
+        {
+            const string chars = "abcdeghijklmnorpqrstuvwxyz";
+            while (true)
+            {
+                var random = new Random();
+
+                var alias = new string(Enumerable.Repeat(chars, 2).Select(s => s[random.Next(s.Length)]).ToArray());
+
+                if (!_dictionaryAlias.Any(x => x.Value == alias))
+                    return alias;
+                else
+                    return GenerateAlias();
+            }
+        }
     }
 
     public class InnerJoinModel
     {
         public string NameTable { get; set; }
         public Type Type { get; set; }
+        public Type TypeCompared { get; set; }
         public bool Principal { get; set; }
         public string FullName { get; set; }
         public string Name { get; set; }
         public string KeyPrimary { get; private set; }
         public string KeyCompared { get; private set; }
-        public string Alias { get; private set; }
-        public string AliasCompared { get; private set; }
-        public string On 
-        {
-            get
-            {
-                if (string.IsNullOrEmpty(Alias))
-                    throw new ArgumentException(string.Format("Não foi gerado o apelido para o {0}", FullName));
-                else
-                    return string.Format("{0}.{1} = {2}.{3}", Alias, KeyPrimary, AliasCompared, KeyCompared);
-            }
-        }
 
         public InnerJoinModel()
         {
@@ -196,20 +223,5 @@ namespace BuildQuery
 
         public void SetKeyCompared(string keyCompared) =>
             KeyCompared = keyCompared;
-
-        public void SetAlias(string alias) =>
-            Alias = alias;
-
-        public void SetAliasCompared(string aliasCompared) =>
-            AliasCompared = aliasCompared;
-
-        public string GenerateAlias()
-        {
-            var random = new Random();
-
-            const string chars = "abcdeghijklmnorpqrstuvwxyz";
-            return new string(Enumerable.Repeat(chars, 2)
-                .Select(s => s[random.Next(s.Length)]).ToArray());
-        }
     }
 }

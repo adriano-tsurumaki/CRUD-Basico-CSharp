@@ -50,7 +50,7 @@ namespace BuildQuery
         {
             foreach (var propriedade in _propriedadesDasOutrasTabelas)
             {
-                if (!_listInnerJoin.Any(x => x.FullName == propriedade.Key.ReflectedType.FullName))
+                if (!_listInnerJoins.Any(x => x.FullName == propriedade.Key.ReflectedType.FullName))
                 {
                     throw new ArgumentException(string.Format(
                     "Não foi especificado a tabela {0} para a coluna {1}",
@@ -83,35 +83,12 @@ namespace BuildQuery
             innerJoin.SetKeyPrimary(propOtherTable.Name);
             innerJoin.SetKeyCompared(propComparedTable.Name);
 
-            GenerateAlias(innerJoin);
-
-            if (!_listInnerJoin.Any(x => x.FullName == propComparedTable.ReflectedType.FullName) && !tipoComparedTable.IsSubclassOf(propComparedTable.ReflectedType))
-            {
+            if (!_listInnerJoins.Any(x => x.FullName == propComparedTable.ReflectedType.FullName) && !tipoComparedTable.IsSubclassOf(propComparedTable.ReflectedType))
                 throw new ArgumentException(string.Format(
                     "A tabela {0} não foi declarada",
                     propComparedTable.ReflectedType.FullName));
-            }
-            else
-            {
-                var innerJoinCompared = _listInnerJoin.Where(x => x.FullName == tipoComparedTable.FullName).First();
 
-                innerJoin.SetAliasCompared(innerJoinCompared.Alias);
-            }
-
-            _listInnerJoin.Add(innerJoin);
-        }
-
-        private void GenerateAlias(InnerJoinModel innerJoin)
-        {
-            while (true)
-            {
-                var alias = innerJoin.GenerateAlias();
-                if (!_listInnerJoin.Any(x => x.Alias == alias))
-                {
-                    innerJoin.SetAlias(alias);
-                    break;
-                }
-            }
+            _listInnerJoins.Add(innerJoin);
         }
     }
 }

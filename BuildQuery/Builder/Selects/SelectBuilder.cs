@@ -1,5 +1,7 @@
 ﻿using BuildQuery.Builder.Interfaces;
 using BuildQuery.Builder.Models;
+using System;
+using System.Collections.Generic;
 
 namespace BuildQuery.Builder.Selects
 {
@@ -14,7 +16,7 @@ namespace BuildQuery.Builder.Selects
             _model = model;
         }
 
-        public string Build()
+        public string Build(Dictionary<Type, string> dictionaryAlias)
         {
             return "";
         }
