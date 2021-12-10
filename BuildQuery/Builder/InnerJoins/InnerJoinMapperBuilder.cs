@@ -1,4 +1,5 @@
 ﻿using BuildQuery.Builder.Interfaces;
+using System.Linq;
 using System.Text;
 
 namespace BuildQuery.Builder.InnerJoins
@@ -18,7 +19,11 @@ namespace BuildQuery.Builder.InnerJoins
         {
             var entity = BuildQueryMapper.GetEntityMap(_model.Type);
 
-            return new StringBuilder().AppendLine($"inner join {entity.TableName} as {_model.Alias} on {_model.Alias}.{_model.KeyPrimary} = {_model.AliasCompared}.{_model.KeyCompared}").ToString();
+            var primaryKey = entity.PropertyMaps.Where(x => x.PropertyInfo.Name == _model.KeyPrimary).First().ColumnName;
+
+            var foreignKey = entity.PropertyMaps.Where(x => x.PropertyInfo.Name == _model.KeyCompared).First().ColumnName;
+
+            return new StringBuilder().AppendLine($"inner join {entity.TableName} as {_model.Alias} on {_model.Alias}.{primaryKey} = {_model.AliasCompared}.{foreignKey}").ToString();
         }
     }
 }
