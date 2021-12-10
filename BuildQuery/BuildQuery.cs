@@ -13,9 +13,6 @@ namespace BuildQuery
 {
     public partial class BuildQuery<TPrincipalTable> where TPrincipalTable : class
     {
-        private Dictionary<PropertyInfo, string> _propriedadesDaTabelaPrincipal;
-        private Dictionary<PropertyInfo, string> _propriedadesDasOutrasTabelas;
-
         private Dictionary<Type, string> _dictionaryAlias;
 
         private IList<SelectModel> _listSelects;
@@ -24,31 +21,20 @@ namespace BuildQuery
 
         public BuildQuery()
         {
-            _propriedadesDaTabelaPrincipal = new Dictionary<PropertyInfo, string>();
-            _propriedadesDasOutrasTabelas = new Dictionary<PropertyInfo, string>();
             _dictionaryAlias = new Dictionary<Type, string>();
 
             Type tipo = typeof(TPrincipalTable);
 
             _dictionaryAlias.Add(tipo, GenerateAlias());
 
-            var innerJoin = new InnerJoinModel
-            {
-                Type = tipo,
-                FullName = tipo.FullName,
-                Name = tipo.Name,
-                Principal = true
-            };
+            var innerJoin = new InnerJoinModel();
+
+            innerJoin.SetType(tipo);
+            innerJoin.SetPrincipal(true);
 
             _listInnerJoins = new List<InnerJoinModel> { innerJoin };
 
-            var select = new SelectModel
-            {
-                Type = tipo,
-                Principal = true,
-            };
-
-            _listSelects = new List<SelectModel> { select };
+            _listSelects = new List<SelectModel>();
         }
 
         public BuildQuery<TPrincipalTable> Select(params Expression<Func<TPrincipalTable, object>>[] argsPropriedades)
@@ -68,13 +54,8 @@ namespace BuildQuery
                     PropertyInfo = informacaoDaPropriedade
                 };
 
-                if (tipo.IsSubclassOf(informacaoDaPropriedade.ReflectedType))
-                    _propriedadesDasOutrasTabelas.Add(informacaoDaPropriedade, informacaoDaPropriedade.Name);
-                else
-                {
+                if (!tipo.IsSubclassOf(informacaoDaPropriedade.ReflectedType))
                     select.Principal = true;
-                    _propriedadesDaTabelaPrincipal.Add(informacaoDaPropriedade, informacaoDaPropriedade.Name);
-                }
 
                 _listSelects.Add(select);
             }
@@ -99,13 +80,8 @@ namespace BuildQuery
                     PropertyInfo = informacaoDaPropriedade
                 };
 
-                if (tipo.IsSubclassOf(informacaoDaPropriedade.ReflectedType))
-                    _propriedadesDasOutrasTabelas.Add(informacaoDaPropriedade, informacaoDaPropriedade.Name);
-                else
-                {
+                if (!tipo.IsSubclassOf(informacaoDaPropriedade.ReflectedType))
                     select.Principal = true;
-                    _propriedadesDaTabelaPrincipal.Add(informacaoDaPropriedade, informacaoDaPropriedade.Name);
-                }
 
                 _listSelects.Add(select);
             }
@@ -204,12 +180,10 @@ namespace BuildQuery
 
     public class InnerJoinModel
     {
-        public string NameTable { get; set; }
-        public Type Type { get; set; }
-        public Type TypeCompared { get; set; }
-        public bool Principal { get; set; }
-        public string FullName { get; set; }
-        public string Name { get; set; }
+        public string NameTable { get; private set; }
+        public Type Type { get; private set; }
+        public Type TypeCompared { get; private set; }
+        public bool Principal { get; private set; }
         public string KeyPrimary { get; private set; }
         public string KeyCompared { get; private set; }
 
@@ -217,6 +191,18 @@ namespace BuildQuery
         {
             Principal = false;
         }
+
+        public void SetNameTable(string nameTable) =>
+            NameTable = nameTable;
+
+        public void SetType(Type type) =>
+            Type = type;
+
+        public void SetTypeCompared(Type type) =>
+            TypeCompared = type;
+
+        public void SetPrincipal(bool principal) =>
+            Principal = principal;
 
         public void SetKeyPrimary(string keyPrimary) =>
             KeyPrimary = keyPrimary;

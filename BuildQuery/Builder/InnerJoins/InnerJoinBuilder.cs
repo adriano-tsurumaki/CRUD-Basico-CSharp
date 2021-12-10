@@ -18,7 +18,7 @@ namespace BuildQuery.Builder.InnerJoins
 
         public string Build(Dictionary<Type, string> dictionaryAlias)
         {
-            var nameTable = string.IsNullOrEmpty(_model.NameTable) ? _model.NameTable : _model.Name;
+            var nameTable = string.IsNullOrEmpty(_model.NameTable) ? _model.NameTable : _model.Type.Name;
 
             dictionaryAlias.TryGetValue(_model.Type, out var alias);
             dictionaryAlias.TryGetValue(_model.TypeCompared, out var aliasCompared);

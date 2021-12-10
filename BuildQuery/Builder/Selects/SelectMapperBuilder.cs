@@ -22,11 +22,11 @@ namespace BuildQuery.Builder.Selects
         {
             var entity = BuildQueryMapper.GetEntityMap(_model.Type);
 
-            var columnName = entity.PropertyMaps.Where(x => x.PropertyInfo == _model.PropertyInfo).First().ColumnName;
+            var propertyMap = entity.PropertyMaps.Where(x => x.PropertyInfo == _model.PropertyInfo).First();
 
             dictionaryAlias.TryGetValue(_model.Type, out var alias);
 
-            return new StringBuilder().AppendLine($"{columnName} as {alias}, ").ToString();
+            return new StringBuilder().AppendLine($"{alias}.{propertyMap.ColumnName} as {propertyMap.PropertyInfo.Name},").ToString();
         }
     }
 }
