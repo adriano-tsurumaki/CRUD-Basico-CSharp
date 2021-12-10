@@ -171,6 +171,7 @@ namespace BuildQuery
 
     public class InnerJoinModel
     {
+        public string NameTable { get; set; }
         public Type Type { get; set; }
         public bool Principal { get; set; }
         public string FullName { get; set; }
