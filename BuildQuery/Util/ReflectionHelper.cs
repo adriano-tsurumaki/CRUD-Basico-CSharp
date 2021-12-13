@@ -59,5 +59,25 @@ namespace BuildQuery.Util
                 }
             }
         }
+
+        public static Expression GetExpression(LambdaExpression lambda)
+        {
+            Expression expr = lambda;
+            while (true)
+            {
+                switch (expr.NodeType)
+                {
+                    case ExpressionType.Lambda:
+                        expr = ((LambdaExpression)expr).Body;
+                        break;
+
+                    case ExpressionType.Convert:
+                        return ((UnaryExpression)expr).Operand;
+
+                    default:
+                        return null;
+                }
+            }
+        }
     }
 }

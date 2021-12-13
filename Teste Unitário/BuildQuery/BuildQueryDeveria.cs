@@ -4,6 +4,9 @@ using CRUD___Adriano.Features.Cadastro.Produto.Model;
 using CRUD___Adriano.Features.Entidades.Endereco.Model;
 using CRUD___Adriano.Features.Usuario.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Teste_Unitário.BuildQuery
 {
@@ -22,13 +25,18 @@ namespace Teste_Unitário.BuildQuery
             var query = new BuildQuery<ClienteModel>()
                 .Select(c => c.ValorLimite)
                 .Select("id_lokao, observacao_lokao", c => c.Id, c => c.Observacao)
-                .SelectOut<UsuarioModel>(u => u.IdUsuario, u => u.Nome, u => u.Sobrenome)
-                .SelectOut<UsuarioModel>(u => u.Sexo, u => u.Cpf, u => u.DataNascimento)
-                .SelectOut<EnderecoModel>(e => e.IdUsuario, e => e.Logradouro, e => e.Cep, e => e.Bairro)
-                .SelectOut<EnderecoModel>(e => e.Cidade, e => e.Uf, e => e.Complemento, e => e.Numero)
+                .Select<UsuarioModel>(u => u.IdUsuario, u => u.Nome, u => u.Sobrenome)
+                .Select<UsuarioModel>(u => u.Sexo, u => u.Cpf, u => u.DataNascimento)
+                .Select<EnderecoModel>(e => e.IdUsuario, e => e.Logradouro, e => e.Cep, e => e.Bairro)
+                .Select<EnderecoModel>(e => e.Cidade, e => e.Uf, e => e.Complemento, e => e.Numero)
                 .InnerJoin<UsuarioModel>(u => u.IdUsuario, e => e.IdUsuario)
                 .InnerJoin<EnderecoModel, UsuarioModel>(e => e.IdUsuario, u => u.IdUsuario)
+                .Where<UsuarioModel>((x, y) => x.IdUsuario > y.IdUsuario && x.DataNascimento == DateTime.Now)
                 .Build();
+
+            var list = new List<ClienteModel>();
+
+            list.Any(x => x.Id == 12);
         }
     }
 

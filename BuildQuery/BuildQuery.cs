@@ -11,6 +11,8 @@ using System.Text.RegularExpressions;
 
 namespace BuildQuery
 {
+
+    //TODO: Mudar a chave do _dictionaryAlias para um GUID!
     public partial class BuildQuery<TPrincipalTable> where TPrincipalTable : class
     {
         private Dictionary<Type, string> _dictionaryAlias;
@@ -18,6 +20,8 @@ namespace BuildQuery
         private IList<SelectModel> _listSelects;
 
         private IList<InnerJoinModel> _listInnerJoins;
+
+        private IList<Expression> _listWheres;
 
         public BuildQuery()
         {
@@ -33,8 +37,8 @@ namespace BuildQuery
             innerJoin.SetPrincipal(true);
 
             _listInnerJoins = new List<InnerJoinModel> { innerJoin };
-
             _listSelects = new List<SelectModel>();
+            _listWheres = new List<Expression>();
         }
 
         public BuildQuery<TPrincipalTable> Select(params Expression<Func<TPrincipalTable, object>>[] argsPropriedades)
@@ -99,7 +103,7 @@ namespace BuildQuery
             return this;
         }
 
-        public BuildQuery<TPrincipalTable> SelectOut<TOtherTable>(params Expression<Func<TOtherTable, object>>[] argsPropriedade)
+        public BuildQuery<TPrincipalTable> Select<TOtherTable>(params Expression<Func<TOtherTable, object>>[] argsPropriedade)
         {
             foreach (var propriedade in argsPropriedade)
             {
@@ -129,7 +133,7 @@ namespace BuildQuery
             Expression<Func<TOtherTable, object>> expressaoOtherTable,
             Expression<Func<TPrincipalTable, object>> expressaoPrincipalTable)
         {
-            ValidateInnerJoin(expressaoOtherTable, expressaoPrincipalTable);
+            SetInnerJoin(expressaoOtherTable, expressaoPrincipalTable);
 
             return this;
         }
@@ -138,8 +142,32 @@ namespace BuildQuery
             Expression<Func<TOtherTable, object>> expressaoOtherTable,
             Expression<Func<TComparedTable, object>> expressaoComparedTable)
         {
-            ValidateInnerJoin(expressaoOtherTable, expressaoComparedTable);
+            SetInnerJoin(expressaoOtherTable, expressaoComparedTable);
 
+            return this;
+        }
+
+        public BuildQuery<TPrincipalTable> Where(
+            Expression<Func<TPrincipalTable, object>> expressaoPrincipalTable)
+        {
+            _listWheres.Add(ReflectionHelper.GetExpression(expressaoPrincipalTable));
+
+            return this;
+        }
+
+        public BuildQuery<TPrincipalTable> Where<TOtherTable>(
+            Expression<Func<TOtherTable, object>> expressaoOtherTable)
+        {
+            _listWheres.Add(ReflectionHelper.GetExpression(expressaoOtherTable));
+
+            return this;
+        }
+
+        public BuildQuery<TPrincipalTable> Where<TOtherTable>(
+            Expression<Func<TPrincipalTable, TOtherTable, object>> expressaoTwoTable)
+        {
+            _listWheres.Add(ReflectionHelper.GetExpression(expressaoTwoTable));
+            
             return this;
         }
 
@@ -150,12 +178,14 @@ namespace BuildQuery
             var select = BuildSelect();
             var from = BuildFrom();
             var innerJoin = BuildInnerJoin();
+            var where = BuildWhere();
 
             var build = new StringBuilder();
 
-            build.AppendLine(select.ToString());
-            build.AppendLine(from.ToString());
-            build.AppendLine(innerJoin.ToString());
+            build.Append(select.ToString());
+            build.Append(from.ToString());
+            build.Append(innerJoin.ToString());
+            build.Append(where.ToString());
 
             return build.ToString();
         }
@@ -191,6 +221,16 @@ namespace BuildQuery
                 innerJoin.AppendLine(item.Build(_dictionaryAlias));
 
             return innerJoin;
+        }
+
+        private StringBuilder BuildWhere()
+        {
+            var where = new StringBuilder().AppendLine("where");
+
+            foreach (var item in new WhereFactory().CreateBuilders(_dictionaryAlias.Keys.ToList()))
+                where.AppendLine(item.Build());
+
+            return where;
         }
 
         private string TrimAllExcessWhiteSpace(string valor) =>

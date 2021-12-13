@@ -21,7 +21,7 @@ namespace BuildQuery
             }
         }
 
-        private void ValidateInnerJoin<TOtherTable>(Expression<Func<TOtherTable, object>> expressaoOtherTable, object expressaoComparedTable)
+        private void SetInnerJoin<TOtherTable>(Expression<Func<TOtherTable, object>> expressaoOtherTable, object expressaoComparedTable)
         {
             var tipoTable = typeof(TOtherTable);
             var tipoComparedTable = typeof(TPrincipalTable);
