@@ -1,5 +1,6 @@
 ﻿using BuildQuery.Builder.InnerJoins;
 using BuildQuery.Builder.Interfaces;
+using BuildQuery.Builder.Models;
 using System.Collections.Generic;
 
 namespace BuildQuery.Builder.Factory

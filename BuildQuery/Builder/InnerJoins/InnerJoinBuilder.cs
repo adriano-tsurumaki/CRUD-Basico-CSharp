@@ -1,4 +1,5 @@
 ﻿using BuildQuery.Builder.Interfaces;
+using BuildQuery.Builder.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;

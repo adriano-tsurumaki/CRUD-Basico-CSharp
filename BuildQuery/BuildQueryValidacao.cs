@@ -1,4 +1,5 @@
-﻿using BuildQuery.Util;
+﻿using BuildQuery.Builder.Models;
+using BuildQuery.Util;
 using System;
 using System.Linq;
 using System.Linq.Expressions;
