@@ -1,26 +1,28 @@
 ﻿using BuildQuery.Builder.Interfaces;
 using BuildQuery.Builder.Models;
-using System;
-using System.Collections.Generic;
+using System.Text;
 
 namespace BuildQuery.Builder.Selects
 {
     public class SelectBuilder : ISelectClauseBuilder
     {
-        private readonly SelectModel _model;
+        private readonly TableModel _model;
 
-        public SelectModel Model => _model;
+        public TableModel Model => _model;
 
-        public SelectBuilder(SelectModel model)
+        public SelectBuilder(TableModel model)
         {
             _model = model;
         }
 
-        public string Build(Dictionary<Type, string> dictionaryAlias)
+        public string Build()
         {
-            dictionaryAlias.TryGetValue(_model.Type, out var alias);
+            var sql = new StringBuilder();
 
-            return $"{alias}.{_model.ColumnName} as {_model.PropertyInfo.Name}, ";
+            foreach (var select in _model.Selects)
+                sql.AppendLine($"{_model.Alias}.{select.ColumnName} as {select.PropertyInfo.Name},");
+
+            return sql.ToString();
         }
     }
 }

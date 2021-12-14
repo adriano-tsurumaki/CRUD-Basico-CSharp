@@ -31,7 +31,6 @@ namespace Teste_Unitário.BuildQuery
                 .Select<EnderecoModel>(e => e.Cidade, e => e.Uf, e => e.Complemento, e => e.Numero)
                 .InnerJoin<UsuarioModel>(u => u.IdUsuario, e => e.IdUsuario)
                 .InnerJoin<EnderecoModel, UsuarioModel>(e => e.IdUsuario, u => u.IdUsuario)
-                .Where<UsuarioModel>((x, y) => x.IdUsuario > y.IdUsuario && x.DataNascimento == DateTime.Now)
                 .Build();
 
             var list = new List<ClienteModel>();

@@ -6,7 +6,7 @@ namespace BuildQuery.Builder.Interfaces
 {
     public interface ISelectClauseBuilder
     {
-        public SelectModel Model { get; }
-        public string Build(Dictionary<Type, string> dictionaryAlias);
+        public TableModel Model { get; }
+        public string Build();
     }
 }

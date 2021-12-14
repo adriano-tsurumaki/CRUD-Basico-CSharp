@@ -23,6 +23,8 @@ namespace BuildQuery
 
         private IList<Expression> _listWheres;
 
+        private IList<TableModel> _tables;
+
         public BuildQuery()
         {
             _dictionaryAlias = new Dictionary<Type, string>();
@@ -39,6 +41,17 @@ namespace BuildQuery
             _listInnerJoins = new List<InnerJoinModel> { innerJoin };
             _listSelects = new List<SelectModel>();
             _listWheres = new List<Expression>();
+
+            _tables = new List<TableModel>
+            {
+                new TableModel
+                {
+                    Principal = true,
+                    Alias = GenerateAlias(),
+                    Name = tipo.Name,
+                    Type = tipo,
+                }
+            };
         }
 
         public BuildQuery<TPrincipalTable> Select(params Expression<Func<TPrincipalTable, object>>[] argsPropriedades)
@@ -51,13 +64,61 @@ namespace BuildQuery
 
                 if (informacaoDaPropriedade.MemberType != MemberTypes.Property)
                     throw new ArgumentException($"A expressão {informacaoDaPropriedade} não é uma propriedade, é {informacaoDaPropriedade.MemberType}!");
-
+                
                 var select = new SelectModel
                 {
                     Type = tipo,
                     PropertyInfo = informacaoDaPropriedade,
                     ColumnName = informacaoDaPropriedade.Name
                 };
+
+                //------------------------------------------------------------------------------
+                _tables.First(x => x.Principal == true).Selects.Add(select);
+                //------------------------------------------------------------------------------
+
+                if (!tipo.IsSubclassOf(informacaoDaPropriedade.ReflectedType))
+                    select.Principal = true;
+
+                _listSelects.Add(select);
+            }
+
+            return this;
+        }
+
+        public BuildQuery<TPrincipalTable> Select<TOtherTable>(params Expression<Func<TOtherTable, object>>[] argsPropriedade)
+        {
+            foreach (var propriedade in argsPropriedade)
+            {
+                Type tipo = typeof(TOtherTable);
+
+                var informacaoDaPropriedade = ReflectionHelper.GetMemberInfo(propriedade) as PropertyInfo;
+
+                if (informacaoDaPropriedade.MemberType != MemberTypes.Property)
+                    throw new ArgumentException($"A expressão {informacaoDaPropriedade} não é uma propriedade, é {informacaoDaPropriedade.MemberType}!");
+
+                var select = new SelectModel
+                {
+                    Type = tipo,
+                    PropertyInfo = informacaoDaPropriedade
+                };
+
+                //------------------------------------------------------------------------------
+                if (_tables.Any(x => x.Type == typeof(TOtherTable)))
+                    _tables.First(x => x.Type == typeof(TOtherTable)).Selects.Add(select);
+                else
+                {
+                    var table = new TableModel
+                    {
+                        Alias = GenerateAlias(),
+                        Name = tipo.Name,
+                        Type = tipo,
+                    };
+
+                    table.Selects.Add(select);
+
+                    _tables.Add(table);
+                }
+                //------------------------------------------------------------------------------
 
                 if (!tipo.IsSubclassOf(informacaoDaPropriedade.ReflectedType))
                     select.Principal = true;
@@ -94,31 +155,23 @@ namespace BuildQuery
                     ColumnName = arquivo.name.Trim()
                 };
 
-                if (!tipo.IsSubclassOf(informacaoDaPropriedade.ReflectedType))
-                    select.Principal = true;
-
-                _listSelects.Add(select);
-            }
-
-            return this;
-        }
-
-        public BuildQuery<TPrincipalTable> Select<TOtherTable>(params Expression<Func<TOtherTable, object>>[] argsPropriedade)
-        {
-            foreach (var propriedade in argsPropriedade)
-            {
-                Type tipo = typeof(TOtherTable);
-
-                var informacaoDaPropriedade = ReflectionHelper.GetMemberInfo(propriedade) as PropertyInfo;
-
-                if (informacaoDaPropriedade.MemberType != MemberTypes.Property)
-                    throw new ArgumentException($"A expressão {informacaoDaPropriedade} não é uma propriedade, é {informacaoDaPropriedade.MemberType}!");
-
-                var select = new SelectModel
+                //------------------------------------------------------------------------------
+                if (_tables.Any(x => x.Type == typeof(TPrincipalTable)))
+                    _tables.First(x => x.Type == typeof(TPrincipalTable)).Selects.Add(select);
+                else
                 {
-                    Type = tipo,
-                    PropertyInfo = informacaoDaPropriedade
-                };
+                    var table = new TableModel
+                    {
+                        Alias = GenerateAlias(),
+                        Name = tipo.Name,
+                        Type = tipo,
+                    };
+
+                    table.Selects.Add(select);
+
+                    _tables.Add(table);
+                }
+                //------------------------------------------------------------------------------
 
                 if (!tipo.IsSubclassOf(informacaoDaPropriedade.ReflectedType))
                     select.Principal = true;
@@ -145,7 +198,7 @@ namespace BuildQuery
             SetInnerJoin(expressaoOtherTable, expressaoComparedTable);
 
             return this;
-        }
+        } 
 
         public BuildQuery<TPrincipalTable> Where(
             Expression<Func<TPrincipalTable, object>> expressaoPrincipalTable)
@@ -184,7 +237,7 @@ namespace BuildQuery
 
             var build = new StringBuilder();
 
-            build.Append(select.ToString());
+            build.AppendLine(select.ToString());
             build.Append(from.ToString());
             build.Append(innerJoin.ToString());
             build.Append(where.ToString());
@@ -196,10 +249,10 @@ namespace BuildQuery
         {
             var select = new StringBuilder().AppendLine("select");
 
-            foreach(var item in new SelectFactory().CreateBuilders(_listSelects))
-                select.AppendLine(item.Build(_dictionaryAlias));
+            foreach(var item in new SelectFactory().CreateBuilders(_tables))
+                select.Append(item.Build());
 
-            select.Remove(select.Length - 4, 4);
+            select.Remove(select.Length - 3, 3);
 
             return select;
         }
