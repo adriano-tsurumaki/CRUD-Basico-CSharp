@@ -68,8 +68,7 @@ namespace BuildQuery.Util
                 switch (expr.NodeType)
                 {
                     case ExpressionType.Lambda:
-                        expr = ((LambdaExpression)expr).Body;
-                        break;
+                        return ((LambdaExpression)expr).Body;
 
                     case ExpressionType.Convert:
                         return ((UnaryExpression)expr).Operand;

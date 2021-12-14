@@ -11,8 +11,6 @@ using System.Text.RegularExpressions;
 
 namespace BuildQuery
 {
-
-    //TODO: Mudar a chave do _dictionaryAlias para um GUID!
     public partial class BuildQuery<TPrincipalTable> where TPrincipalTable : class
     {
         private Dictionary<Type, string> _dictionaryAlias;
@@ -60,9 +58,7 @@ namespace BuildQuery
                     ColumnName = informacaoDaPropriedade.Name
                 };
 
-                //------------------------------------------------------------------------------
                 _tables.First(x => x.Principal == true).Selects.Add(select);
-                //------------------------------------------------------------------------------
             }
 
             return this;
@@ -79,12 +75,8 @@ namespace BuildQuery
                 if (informacaoDaPropriedade.MemberType != MemberTypes.Property)
                     throw new ArgumentException($"A expressão {informacaoDaPropriedade} não é uma propriedade, é {informacaoDaPropriedade.MemberType}!");
 
-                var select = new SelectModel
-                {
-                    PropertyInfo = informacaoDaPropriedade
-                };
+                var select = new SelectModel { PropertyInfo = informacaoDaPropriedade };
 
-                //------------------------------------------------------------------------------
                 if (_tables.Any(x => x.Type == typeof(TOtherTable)))
                     _tables.First(x => x.Type == typeof(TOtherTable)).Selects.Add(select);
                 else
@@ -100,7 +92,6 @@ namespace BuildQuery
 
                     _tables.Add(table);
                 }
-                //------------------------------------------------------------------------------
             }
 
             return this;
@@ -131,7 +122,6 @@ namespace BuildQuery
                     ColumnName = arquivo.name.Trim()
                 };
 
-                //------------------------------------------------------------------------------
                 if (_tables.Any(x => x.Type == typeof(TPrincipalTable)))
                     _tables.First(x => x.Type == typeof(TPrincipalTable)).Selects.Add(select);
                 else
@@ -147,7 +137,6 @@ namespace BuildQuery
 
                     _tables.Add(table);
                 }
-                //------------------------------------------------------------------------------
             }
 
             return this;
@@ -172,19 +161,75 @@ namespace BuildQuery
         } 
 
         public BuildQuery<TPrincipalTable> Where(
-            Expression<Func<TPrincipalTable, object>> expressaoPrincipalTable)
+            Expression<Func<TPrincipalTable, bool>> expressaoPrincipalTable)
         {
-            _listWheres.Add(ReflectionHelper.GetExpression(expressaoPrincipalTable));
+            var whereModel = new WhereModel();
+
+            SplitInSmallBinaryExpression(ReflectionHelper.GetExpression(expressaoPrincipalTable), whereModel.BinaryExpressions);
+
+            _tables.First(x => x.Principal == true).Wheres.Add(whereModel);
+
+            return this;
+        }
+
+        public BuildQuery<TPrincipalTable> Where(
+            params Expression<Func<TPrincipalTable, object>>[] argsExpressions)
+        {
+            var whereModel = new WhereModel();
+
+            foreach (var expression in argsExpressions)
+                whereModel.Expressions.Add(ReflectionHelper.GetExpression(expression));
+
+            _tables.First(x => x.Principal == true).Wheres.Add(whereModel);
 
             return this;
         }
 
         public BuildQuery<TPrincipalTable> Where<TOtherTable>(
-            Expression<Func<TOtherTable, object>> expressaoOtherTable)
+            Expression<Func<TOtherTable, bool>> expressaoOtherTable)
         {
-            _listWheres.Add(ReflectionHelper.GetExpression(expressaoOtherTable));
+            var whereModel = new WhereModel();
+
+            SplitInSmallBinaryExpression(ReflectionHelper.GetExpression(expressaoOtherTable), whereModel.BinaryExpressions);
+            
+            _tables.First(x => x.Type == typeof(TOtherTable)).Wheres.Add(whereModel);
 
             return this;
+        }
+
+        public BuildQuery<TPrincipalTable> Where<TOtherTable>(
+            params Expression<Func<TOtherTable, object>>[] argsExpressions)
+        {
+            var whereModel = new WhereModel();
+
+            foreach (var expression in argsExpressions)
+                whereModel.Expressions.Add(ReflectionHelper.GetExpression(expression));
+
+            _tables.First(x => x.Type == typeof(TOtherTable)).Wheres.Add(whereModel);
+
+            return this;
+        }
+
+        public void SplitInSmallBinaryExpression(Expression expression, IList<BinaryExpression> list)
+        {
+            if (expression is BinaryExpression binaryExpression)
+            {
+                if (binaryExpression.Left is BinaryExpression)
+                    SplitInSmallBinaryExpression(binaryExpression.Left, list);
+                else
+                {
+                    list.Add(binaryExpression);
+                    return;
+                }
+
+                if (binaryExpression.Right is BinaryExpression)
+                    SplitInSmallBinaryExpression(binaryExpression.Right, list);
+                else
+                {
+                    list.Add(binaryExpression);
+                    return;
+                }
+            }
         }
 
         public BuildQuery<TPrincipalTable> Where<TOtherTable>(
@@ -192,14 +237,12 @@ namespace BuildQuery
         {
             _listWheres.Add(ReflectionHelper.GetExpression(expressaoTwoTable));
 
-            var i = expressaoTwoTable.Body as BinaryExpression;
-
             return this;
         }
 
         public string Build()
         {
-            ValidarInnerJoins();
+            ValidateJoins();
 
             var select = BuildSelect();
             var from = BuildFrom();

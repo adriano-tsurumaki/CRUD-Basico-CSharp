@@ -27,7 +27,7 @@ namespace BuildQuery
             _tables.First(x => x.Type == tipoTable).Joins.Add(innerJoin);
         }
 
-        private void ValidarInnerJoins()
+        private void ValidateJoins()
         {
             //foreach (var select in _listSelects)
             //{
