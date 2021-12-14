@@ -261,11 +261,9 @@ namespace BuildQuery
         {
             var from = new StringBuilder();
 
-            var tipo = typeof(TPrincipalTable);
+            var tablePrincipal = _tables.First(x => x.Principal == true);
 
-            _dictionaryAlias.TryGetValue(tipo, out var alias);
-
-            return from.AppendLine(new FromFactory().CreateBuild(tipo).Build(tipo, alias));
+            return from.AppendLine(new FromFactory().CreateBuild(tablePrincipal).Build());
         }
 
         private StringBuilder BuildInnerJoin()

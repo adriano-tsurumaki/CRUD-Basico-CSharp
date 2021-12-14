@@ -1,11 +1,20 @@
 ﻿using BuildQuery.Builder.Interfaces;
-using System;
+using BuildQuery.Builder.Models;
 
 namespace BuildQuery.Builder.Froms
 {
     public class FromBuilder : IFromClauseBuilder
     {
-        public string Build(Type type, string alias) =>
-            $"from {type.Name} as {alias}";
+        private readonly TableModel _tableModel;
+
+        public TableModel TableModel => _tableModel;
+
+        public FromBuilder(TableModel model)
+        {
+            _tableModel = model;
+        }
+
+        public string Build() =>
+            $"from {_tableModel.Name} as {_tableModel.Alias}";
     }
 }

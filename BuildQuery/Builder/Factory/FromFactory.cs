@@ -1,17 +1,17 @@
 ﻿using BuildQuery.Builder.Froms;
 using BuildQuery.Builder.Interfaces;
-using System;
+using BuildQuery.Builder.Models;
 
 namespace BuildQuery.Builder.Factory
 {
     public class FromFactory
     {
-        public IFromClauseBuilder CreateBuild(Type type)
+        public IFromClauseBuilder CreateBuild(TableModel table)
         {
-            if (BuildQueryMapper.HasTableStored(type))
-                return new FromMapperBuilder();
+            if (BuildQueryMapper.HasTableStored(table.Type))
+                return new FromMapperBuilder(table);
 
-            return new FromBuilder();
+            return new FromBuilder(table);
         }
     }
 }

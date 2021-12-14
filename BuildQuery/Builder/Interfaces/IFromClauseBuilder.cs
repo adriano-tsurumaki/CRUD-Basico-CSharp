@@ -1,9 +1,10 @@
-﻿using System;
+﻿using BuildQuery.Builder.Models;
 
 namespace BuildQuery.Builder.Interfaces
 {
     public interface IFromClauseBuilder
     {
-        public string Build(Type type, string alias);
+        public TableModel TableModel { get; }
+        public string Build();
     }
 }
