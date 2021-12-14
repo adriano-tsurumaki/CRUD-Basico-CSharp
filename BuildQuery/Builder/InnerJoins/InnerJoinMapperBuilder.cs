@@ -1,7 +1,5 @@
 ﻿using BuildQuery.Builder.Interfaces;
 using BuildQuery.Builder.Models;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
@@ -9,27 +7,31 @@ namespace BuildQuery.Builder.InnerJoins
 {
     public class InnerJoinMapperBuilder : IJoinClauseBuilder
     {
-        private readonly InnerJoinModel _model;
+        private readonly TableModel _tableModel;
 
-        public InnerJoinModel Model => _model;
+        public TableModel TableModel => _tableModel;
 
-        public InnerJoinMapperBuilder(InnerJoinModel model)
+        public InnerJoinMapperBuilder(TableModel tableModel)
         {
-            _model = model;
+            _tableModel = tableModel;
         }
 
-        public string Build(Dictionary<Type, string> dictionaryAlias)
+        public string Build()
         {
-            var entity = BuildQueryMapper.GetEntityMap(_model.Type);
+            var entity = BuildQueryMapper.GetEntityMap(_tableModel.Type);
 
-            var primaryKey = entity.PropertyMaps.Where(x => x.PropertyInfo.Name == _model.KeyPrimary).First().ColumnName;
+            var sql = new StringBuilder();
 
-            var foreignKey = entity.PropertyMaps.Where(x => x.PropertyInfo.Name == _model.KeyCompared).First().ColumnName;
+            foreach (var innerJoin in _tableModel.Joins)
+            {
+                var primaryKey = entity.PropertyMaps.Where(x => x.PropertyInfo.Name == innerJoin.KeyPrimary).First().ColumnName;
 
-            dictionaryAlias.TryGetValue(_model.Type, out var alias);
-            dictionaryAlias.TryGetValue(_model.TypeCompared, out var aliasCompared);
+                var foreignKey = entity.PropertyMaps.Where(x => x.PropertyInfo.Name == innerJoin.KeyCompared).First().ColumnName;
 
-            return new StringBuilder().AppendLine($"inner join {entity.TableName} as {alias} on {alias}.{primaryKey} = {aliasCompared}.{foreignKey}").ToString();
+                sql.AppendLine($"inner join {entity.TableName} as {_tableModel.Alias} on {_tableModel.Alias}.{primaryKey} = {innerJoin.AliasCompared}.{foreignKey}");
+            }
+
+            return sql.ToString();
         }
     }
 }

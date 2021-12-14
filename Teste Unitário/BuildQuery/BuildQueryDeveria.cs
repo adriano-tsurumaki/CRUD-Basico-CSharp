@@ -17,6 +17,7 @@ namespace Teste_Unitário.BuildQuery
         {
             BuildQueryMapper.Initialize(config =>
             {
+                config.AddMap(new ClienteMap());
                 config.AddMap(new UsuarioMap());
                 config.AddMap(new EnderecoMap());
             });

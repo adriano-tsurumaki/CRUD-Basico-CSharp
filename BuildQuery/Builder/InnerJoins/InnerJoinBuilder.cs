@@ -1,30 +1,30 @@
 ﻿using BuildQuery.Builder.Interfaces;
 using BuildQuery.Builder.Models;
-using System;
-using System.Collections.Generic;
 using System.Text;
 
 namespace BuildQuery.Builder.InnerJoins
 {
     public class InnerJoinBuilder : IJoinClauseBuilder
     {
-        private readonly InnerJoinModel _model;
+        private readonly TableModel _tableModel;
 
-        public InnerJoinModel Model => _model;
+        public TableModel TableModel => _tableModel;
 
-        public InnerJoinBuilder(InnerJoinModel model)
+        public InnerJoinBuilder(TableModel tableModel)
         {
-            _model = model;
+            _tableModel = tableModel;
         }
 
-        public string Build(Dictionary<Type, string> dictionaryAlias)
+        public string Build()
         {
-            var nameTable = string.IsNullOrEmpty(_model.NameTable) ? _model.NameTable : _model.Type.Name;
+            var sql = new StringBuilder();
 
-            dictionaryAlias.TryGetValue(_model.Type, out var alias);
-            dictionaryAlias.TryGetValue(_model.TypeCompared, out var aliasCompared);
+            foreach (var innerJoin in _tableModel.Joins)
+            {
+                sql.AppendLine($"inner join {_tableModel.Name} as {_tableModel.Alias} on {_tableModel.Alias}.{innerJoin.KeyPrimary} = {innerJoin.AliasCompared}.{innerJoin.KeyCompared}");
+            }
 
-            return new StringBuilder().AppendLine($"inner join {nameTable} as {alias} on {alias}.{_model.KeyPrimary} = {aliasCompared}.{_model.KeyCompared}").ToString();
+            return sql.ToString();
         }
     }
 }

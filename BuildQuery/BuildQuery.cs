@@ -17,8 +17,6 @@ namespace BuildQuery
     {
         private Dictionary<Type, string> _dictionaryAlias;
 
-        private IList<InnerJoinModel> _listInnerJoins;
-
         private IList<Expression> _listWheres;
 
         private IList<TableModel> _tables;
@@ -31,12 +29,6 @@ namespace BuildQuery
 
             _dictionaryAlias.Add(tipo, GenerateAlias());
 
-            var innerJoin = new InnerJoinModel();
-
-            innerJoin.SetType(tipo);
-            innerJoin.SetPrincipal(true);
-
-            _listInnerJoins = new List<InnerJoinModel> { innerJoin };
             _listWheres = new List<Expression>();
 
             _tables = new List<TableModel>
@@ -249,8 +241,8 @@ namespace BuildQuery
         {
             var innerJoin = new StringBuilder();
 
-            foreach(var item in new InnerJoinFactory().CreateBuilders(_listInnerJoins))
-                innerJoin.AppendLine(item.Build(_dictionaryAlias));
+            foreach (var item in new InnerJoinFactory().CreateBuilders(_tables))
+                innerJoin.AppendLine(item.Build());
 
             return innerJoin;
         }

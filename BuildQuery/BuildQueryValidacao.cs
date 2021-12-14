@@ -9,6 +9,24 @@ namespace BuildQuery
 {
     public partial class BuildQuery<TPrincipalTable>
     {
+        private void SetInnerJoin<TOtherTable>(Expression<Func<TOtherTable, object>> expressaoOtherTable, object expressaoComparedTable)
+        {
+            var tipoTable = typeof(TOtherTable);
+            var tipoComparedTable = typeof(TPrincipalTable);
+
+            var propOtherTable = ReflectionHelper.GetMemberInfo(expressaoOtherTable) as PropertyInfo;
+            var propComparedTable = ReflectionHelper.GetMemberInfo(expressaoComparedTable as LambdaExpression) as PropertyInfo;
+
+            var innerJoin = new JoinModel();
+
+            innerJoin.SetTypeCompared(tipoComparedTable);
+            innerJoin.SetKeyPrimary(propOtherTable.Name);
+            innerJoin.SetKeyCompared(propComparedTable.Name);
+            innerJoin.SetAliasCompared(_tables.First(x => x.Type == tipoComparedTable).Alias);
+
+            _tables.First(x => x.Type == tipoTable).Joins.Add(innerJoin);
+        }
+
         private void ValidarInnerJoins()
         {
             //foreach (var select in _listSelects)
@@ -20,31 +38,6 @@ namespace BuildQuery
             //        select.PropertyInfo.ReflectedType.Name, select.PropertyInfo.Name));
             //    }
             //}
-        }
-
-        private void SetInnerJoin<TOtherTable>(Expression<Func<TOtherTable, object>> expressaoOtherTable, object expressaoComparedTable)
-        {
-            var tipoTable = typeof(TOtherTable);
-            var tipoComparedTable = typeof(TPrincipalTable);
-
-            var propOtherTable = ReflectionHelper.GetMemberInfo(expressaoOtherTable) as PropertyInfo;
-            var propComparedTable = ReflectionHelper.GetMemberInfo(expressaoComparedTable as LambdaExpression) as PropertyInfo;
-
-            var innerJoin = new InnerJoinModel();
-
-            innerJoin.SetType(tipoTable);
-            innerJoin.SetTypeCompared(tipoComparedTable);
-            innerJoin.SetKeyPrimary(propOtherTable.Name);
-            innerJoin.SetKeyCompared(propComparedTable.Name);
-
-            if (!_listInnerJoins.Any(x => x.Type.FullName == propComparedTable.ReflectedType.FullName) && !tipoComparedTable.IsSubclassOf(propComparedTable.ReflectedType))
-                throw new ArgumentException(string.Format(
-                    "A tabela {0} não foi declarada",
-                    propComparedTable.ReflectedType.FullName));
-
-            _listInnerJoins.Add(innerJoin);
-
-            _dictionaryAlias.Add(tipoTable, GenerateAlias());
         }
     }
 }

@@ -7,14 +7,12 @@ namespace BuildQuery.Builder.Factory
 {
     public class InnerJoinFactory
     {
-        public IList<IJoinClauseBuilder> CreateBuilders(IList<InnerJoinModel> listModels)
+        public IList<IJoinClauseBuilder> CreateBuilders(IList<TableModel> tables)
         {
             var listBuilders = new List<IJoinClauseBuilder>();
 
-            foreach (var model in listModels)
+            foreach (var model in tables)
             {
-                if (model.Principal) continue;
-
                 if (BuildQueryMapper.HasTableStored(model.Type))
                     listBuilders.Add(new InnerJoinMapperBuilder(model));
                 else
