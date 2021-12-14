@@ -4,7 +4,6 @@ using CRUD___Adriano.Features.Cadastro.Produto.Model;
 using CRUD___Adriano.Features.Entidades.Endereco.Model;
 using CRUD___Adriano.Features.Usuario.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 

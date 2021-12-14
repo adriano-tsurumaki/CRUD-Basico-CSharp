@@ -11,15 +11,15 @@ namespace BuildQuery
     {
         private void ValidarInnerJoins()
         {
-            foreach (var select in _listSelects)
-            {
-                if (!_listInnerJoins.Any(x => x.Type.FullName == select.PropertyInfo.ReflectedType.FullName))
-                {
-                    throw new ArgumentException(string.Format(
-                    "Não foi especificado a tabela {0} para a coluna {1}",
-                    select.PropertyInfo.ReflectedType.Name, select.PropertyInfo.Name));
-                }
-            }
+            //foreach (var select in _listSelects)
+            //{
+            //    if (!_listInnerJoins.Any(x => x.Type.FullName == select.PropertyInfo.ReflectedType.FullName))
+            //    {
+            //        throw new ArgumentException(string.Format(
+            //        "Não foi especificado a tabela {0} para a coluna {1}",
+            //        select.PropertyInfo.ReflectedType.Name, select.PropertyInfo.Name));
+            //    }
+            //}
         }
 
         private void SetInnerJoin<TOtherTable>(Expression<Func<TOtherTable, object>> expressaoOtherTable, object expressaoComparedTable)

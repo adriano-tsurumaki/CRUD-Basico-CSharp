@@ -17,8 +17,6 @@ namespace BuildQuery
     {
         private Dictionary<Type, string> _dictionaryAlias;
 
-        private IList<SelectModel> _listSelects;
-
         private IList<InnerJoinModel> _listInnerJoins;
 
         private IList<Expression> _listWheres;
@@ -39,7 +37,6 @@ namespace BuildQuery
             innerJoin.SetPrincipal(true);
 
             _listInnerJoins = new List<InnerJoinModel> { innerJoin };
-            _listSelects = new List<SelectModel>();
             _listWheres = new List<Expression>();
 
             _tables = new List<TableModel>
@@ -67,7 +64,6 @@ namespace BuildQuery
                 
                 var select = new SelectModel
                 {
-                    Type = tipo,
                     PropertyInfo = informacaoDaPropriedade,
                     ColumnName = informacaoDaPropriedade.Name
                 };
@@ -75,11 +71,6 @@ namespace BuildQuery
                 //------------------------------------------------------------------------------
                 _tables.First(x => x.Principal == true).Selects.Add(select);
                 //------------------------------------------------------------------------------
-
-                if (!tipo.IsSubclassOf(informacaoDaPropriedade.ReflectedType))
-                    select.Principal = true;
-
-                _listSelects.Add(select);
             }
 
             return this;
@@ -98,7 +89,6 @@ namespace BuildQuery
 
                 var select = new SelectModel
                 {
-                    Type = tipo,
                     PropertyInfo = informacaoDaPropriedade
                 };
 
@@ -119,11 +109,6 @@ namespace BuildQuery
                     _tables.Add(table);
                 }
                 //------------------------------------------------------------------------------
-
-                if (!tipo.IsSubclassOf(informacaoDaPropriedade.ReflectedType))
-                    select.Principal = true;
-
-                _listSelects.Add(select);
             }
 
             return this;
@@ -150,7 +135,6 @@ namespace BuildQuery
 
                 var select = new SelectModel
                 {
-                    Type = tipo,
                     PropertyInfo = informacaoDaPropriedade,
                     ColumnName = arquivo.name.Trim()
                 };
@@ -172,11 +156,6 @@ namespace BuildQuery
                     _tables.Add(table);
                 }
                 //------------------------------------------------------------------------------
-
-                if (!tipo.IsSubclassOf(informacaoDaPropriedade.ReflectedType))
-                    select.Principal = true;
-
-                _listSelects.Add(select);
             }
 
             return this;
