@@ -294,7 +294,7 @@ namespace BuildQuery
         {
             var where = new StringBuilder().AppendLine("where");
 
-            foreach (var item in new WhereFactory().CreateBuilders(_dictionaryAlias.Keys.ToList()))
+            foreach (var item in new WhereFactory().CreateBuilders(_tables))
                 where.AppendLine(item.Build());
 
             return where;

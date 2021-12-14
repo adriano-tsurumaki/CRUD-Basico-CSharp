@@ -1,22 +1,22 @@
 ﻿using BuildQuery.Builder.Interfaces;
+using BuildQuery.Builder.Models;
 using BuildQuery.Builder.Where;
-using System;
 using System.Collections.Generic;
 
 namespace BuildQuery.Builder.Factory
 {
     public class WhereFactory
     {
-        public IList<IWhereClauseBuilder> CreateBuilders(IList<Type> listTypes)
+        public IList<IWhereClauseBuilder> CreateBuilders(IList<TableModel> tables)
         {
             var listBuilders = new List<IWhereClauseBuilder>();
 
-            foreach (var type in listTypes)
+            foreach (var model in tables)
             {
-                if (BuildQueryMapper.HasTableStored(type))
-                    listBuilders.Add(new WhereMapperBuilder());
+                if (BuildQueryMapper.HasTableStored(model.Type))
+                    listBuilders.Add(new WhereMapperBuilder(model));
                 else
-                    listBuilders.Add(new WhereBuilder());
+                    listBuilders.Add(new WhereBuilder(model));
             }
 
             return listBuilders;

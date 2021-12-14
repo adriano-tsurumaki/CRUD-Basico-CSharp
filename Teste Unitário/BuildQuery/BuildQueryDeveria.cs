@@ -32,9 +32,7 @@ namespace Teste_Unitário.BuildQuery
                 .Select<EnderecoModel>(e => e.Cidade, e => e.Uf, e => e.Complemento, e => e.Numero)
                 .InnerJoin<UsuarioModel>(u => u.IdUsuario, e => e.IdUsuario)
                 .InnerJoin<EnderecoModel, UsuarioModel>(e => e.IdUsuario, u => u.IdUsuario)
-                .Where(x => x.DataNascimento == DateTime.Now)
-                .Where(x => x.DataNascimento)
-                .Where<EnderecoModel>(x => x.Cidade == x.Cidade && x.Bairro == "Jd. América" || x.DataNascimento == DateTime.Now && x.Cep == "1234")
+                .Where<EnderecoModel>(x => x.Bairro == "Jd. América" || x.Cep == "1234")
                 .Where<EnderecoModel>(x => x.Cidade)
                 .Build();
 
