@@ -167,7 +167,9 @@ namespace BuildQuery
             Expression<Func<TPrincipalTable, TOtherTable, object>> expressaoTwoTable)
         {
             _listWheres.Add(ReflectionHelper.GetExpression(expressaoTwoTable));
-            
+
+            var i = expressaoTwoTable.Body as BinaryExpression;
+
             return this;
         }
 
