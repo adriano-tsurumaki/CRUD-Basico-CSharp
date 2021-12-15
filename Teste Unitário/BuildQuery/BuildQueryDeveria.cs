@@ -18,11 +18,11 @@ namespace Teste_Unitário.BuildQuery
         {
             BuildQueryMapper.Initialize(config =>
             {
-                config.AddMap(new ClienteMap());
+                //config.AddMap(new ClienteMap());
                 config.AddMap(new UsuarioMap());
                 config.AddMap(new EnderecoMap());
             });
-             
+
             var query = new BuildQuery<ClienteModel>()
                 .Select(c => c.ValorLimite)
                 .Select(c => c.Id, c => c.Observacao)
@@ -32,8 +32,8 @@ namespace Teste_Unitário.BuildQuery
                 .Select<EnderecoModel>(e => e.Cidade, e => e.Uf, e => e.Complemento, e => e.Numero)
                 .InnerJoin<UsuarioModel>(u => u.IdUsuario, e => e.IdUsuario)
                 .InnerJoin<EnderecoModel, UsuarioModel>(e => e.IdUsuario, u => u.IdUsuario)
-                .Where<EnderecoModel>(x => x.Bairro == "Jd. América" || x.Cep == "1234")
-                .Where<EnderecoModel>(x => x.Cidade)
+                .Where<UsuarioModel>(u => u.Nome == "Adriano" && u.Sobrenome == "Tsurumaki" || u.Sexo == CRUD___Adriano.Features.Usuario.Enum.UsuarioSexoEnum.Masculino)
+                .Where<EnderecoModel>(x => x.Cidade, u => u.Bairro)
                 .Build();
 
             var list = new List<ClienteModel>();
@@ -80,7 +80,7 @@ namespace Teste_Unitário.BuildQuery
             Map(x => x.Cidade).ToColumn("cidade");
             Map(x => x.Uf).ToColumn("uf");
             Map(x => x.Complemento).ToColumn("complemento");
-            Map(x => x.Bairro).ToColumn("bairro");
+            //Map(x => x.Bairro).ToColumn("bairro");
             Map(x => x.Numero).ToColumn("numero");
         }
     }

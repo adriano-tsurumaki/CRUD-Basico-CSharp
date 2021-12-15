@@ -8,11 +8,17 @@ namespace BuildQuery.EntityMapping
 
         public bool AllowToUseBaseClass { get; private set; }
 
-        public PropertyInfo PropertyInfo { get; }
+        public PropertyInfo PropertyInfo { get; private set; }
 
         public PropertyMap(PropertyInfo propertyInfo)
         {
             PropertyInfo = propertyInfo;
+        }
+
+        public PropertyMap SetPropertyInfo(PropertyInfo propertyInfo)
+        {
+            PropertyInfo = propertyInfo;
+            return this;
         }
 
         public PropertyMap ToColumn(string columnName)

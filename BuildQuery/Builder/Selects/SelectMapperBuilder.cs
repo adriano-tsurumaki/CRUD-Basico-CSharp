@@ -24,8 +24,16 @@ namespace BuildQuery.Builder.Selects
 
             foreach(var select in _model.Selects)
             {
-                var property = entity.PropertyMaps.First(x => x.PropertyInfo == select.PropertyInfo);
-                sql.AppendLine($"{_model.Alias}.{property.ColumnName} as {property.PropertyInfo.Name},");
+                var property = entity.PropertyMaps.FirstOrDefault(x => x.PropertyInfo == select.PropertyInfo);
+                
+                var propertyString = string.Empty;
+
+                if (property == null)
+                    propertyString = $"{select.ColumnName} as {select.PropertyInfo.Name}";
+                else
+                    propertyString = $"{property.ColumnName} as {property.PropertyInfo.Name}";
+
+                sql.AppendLine($"{_model.Alias}.{propertyString},");
             }
 
             return sql.ToString();

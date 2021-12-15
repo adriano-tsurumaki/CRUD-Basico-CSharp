@@ -7,18 +7,35 @@ namespace BuildQuery.Builder.Models
     public class WhereModel
     {
         public Type Type { get; set; }
-        public IList<BinaryExpression> BinaryExpressions { get; }
-        public IList<Expression> Expressions { get; set; }
-        public string OperatorInFinalLine { get; private set; }
+        public IList<ExpressionModel> ExpressionModels { get; }
 
         public WhereModel()
         {
-            BinaryExpressions = new List<BinaryExpression>();
-            Expressions = new List<Expression>();
-            OperatorInFinalLine = " and ";
+            ExpressionModels = new List<ExpressionModel>();
+        }
+    }
+
+    public class ExpressionModel
+    {
+        public Expression Expression { get; private set; }
+        public OperatorWhereEnum OperatorInFinalLine { get; private set; }
+
+        public void SetExpression(Expression expression)
+        {
+            Expression = expression;
         }
 
-        private string SetOpetarorInFinalLine(string operatorInFinalLine) =>
+        public void SetOperatorInFinalLine(OperatorWhereEnum operatorInFinalLine)
+        {
             OperatorInFinalLine = operatorInFinalLine;
+        }
+    }
+
+    public enum OperatorWhereEnum
+    {
+        NONE = 0,
+        AND = 1,
+        OR = 2,
+        NOT = 3
     }
 }

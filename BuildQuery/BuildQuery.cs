@@ -75,7 +75,11 @@ namespace BuildQuery
                 if (informacaoDaPropriedade.MemberType != MemberTypes.Property)
                     throw new ArgumentException($"A expressão {informacaoDaPropriedade} não é uma propriedade, é {informacaoDaPropriedade.MemberType}!");
 
-                var select = new SelectModel { PropertyInfo = informacaoDaPropriedade };
+                var select = new SelectModel 
+                { 
+                    PropertyInfo = informacaoDaPropriedade,
+                    ColumnName = informacaoDaPropriedade.Name
+                };
 
                 if (_tables.Any(x => x.Type == typeof(TOtherTable)))
                     _tables.First(x => x.Type == typeof(TOtherTable)).Selects.Add(select);
@@ -165,7 +169,7 @@ namespace BuildQuery
         {
             var whereModel = new WhereModel();
 
-            SplitInSmallBinaryExpression(ReflectionHelper.GetExpression(expressaoPrincipalTable), whereModel.BinaryExpressions);
+            SplitInSmallBinaryExpression(ReflectionHelper.GetExpression(expressaoPrincipalTable), whereModel.ExpressionModels, OperatorWhereEnum.NONE);
 
             _tables.First(x => x.Principal == true).Wheres.Add(whereModel);
 
@@ -178,7 +182,12 @@ namespace BuildQuery
             var whereModel = new WhereModel();
 
             foreach (var expression in argsExpressions)
-                whereModel.Expressions.Add(ReflectionHelper.GetExpression(expression));
+            {
+                var model = new ExpressionModel();
+                model.SetExpression(ReflectionHelper.GetExpression(expression));
+                whereModel.ExpressionModels.Add(model);
+            }
+
 
             _tables.First(x => x.Principal == true).Wheres.Add(whereModel);
 
@@ -190,7 +199,7 @@ namespace BuildQuery
         {
             var whereModel = new WhereModel();
 
-            SplitInSmallBinaryExpression(ReflectionHelper.GetExpression(expressaoOtherTable), whereModel.BinaryExpressions);
+            SplitInSmallBinaryExpression(ReflectionHelper.GetExpression(expressaoOtherTable), whereModel.ExpressionModels, OperatorWhereEnum.NONE);
             
             _tables.First(x => x.Type == typeof(TOtherTable)).Wheres.Add(whereModel);
 
@@ -203,41 +212,72 @@ namespace BuildQuery
             var whereModel = new WhereModel();
 
             foreach (var expression in argsExpressions)
-                whereModel.Expressions.Add(ReflectionHelper.GetExpression(expression));
+            {
+                var model = new ExpressionModel();
+                model.SetExpression(ReflectionHelper.GetExpression(expression));
+                whereModel.ExpressionModels.Add(model);
+            }
 
             _tables.First(x => x.Type == typeof(TOtherTable)).Wheres.Add(whereModel);
 
             return this;
         }
 
-        public void SplitInSmallBinaryExpression(Expression expression, IList<BinaryExpression> list)
+        public BuildQuery<TPrincipalTable> Where<TOtherTable>(
+            Expression<Func<TPrincipalTable, TOtherTable, object>> expressaoTwoTable)
+        {
+            //_listWheres.Add(ReflectionHelper.GetExpression(expressaoTwoTable));
+
+            return this;
+        }
+
+        private void SplitInSmallBinaryExpression(Expression expression, IList<ExpressionModel> list, OperatorWhereEnum operatorWhere)
         {
             if (expression is BinaryExpression binaryExpression)
             {
                 if (binaryExpression.Left is BinaryExpression)
-                    SplitInSmallBinaryExpression(binaryExpression.Left, list);
+                {
+                    SplitInSmallBinaryExpression(binaryExpression.Left, list, GetOperatorWhereEnum(binaryExpression.NodeType));
+                }
                 else
                 {
-                    list.Add(binaryExpression);
+                    var binaryExpressionModel = new ExpressionModel();
+
+                    binaryExpressionModel.SetExpression(binaryExpression);
+                    binaryExpressionModel.SetOperatorInFinalLine(operatorWhere);
+
+                    list.Add(binaryExpressionModel);
                     return;
                 }
 
                 if (binaryExpression.Right is BinaryExpression)
-                    SplitInSmallBinaryExpression(binaryExpression.Right, list);
+                {
+                    SplitInSmallBinaryExpression(binaryExpression.Right, list, operatorWhere);
+                }
                 else
                 {
-                    list.Add(binaryExpression);
+                    var binaryExpressionModel = new ExpressionModel();
+
+                    binaryExpressionModel.SetExpression(binaryExpression);
+                    binaryExpressionModel.SetOperatorInFinalLine(operatorWhere);
+
+                    list.Add(binaryExpressionModel);
                     return;
                 }
             }
         }
 
-        public BuildQuery<TPrincipalTable> Where<TOtherTable>(
-            Expression<Func<TPrincipalTable, TOtherTable, object>> expressaoTwoTable)
+        private OperatorWhereEnum GetOperatorWhereEnum(ExpressionType nodeType)
         {
-            _listWheres.Add(ReflectionHelper.GetExpression(expressaoTwoTable));
-
-            return this;
+            switch(nodeType)
+            {
+                case ExpressionType.OrElse:
+                    return OperatorWhereEnum.OR;
+                case ExpressionType.AndAlso:
+                    return OperatorWhereEnum.AND;
+                default:
+                    return OperatorWhereEnum.NONE;
+            }
         }
 
         public string Build()

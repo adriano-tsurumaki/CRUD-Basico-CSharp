@@ -1,5 +1,6 @@
 ﻿using BuildQuery.Builder.Interfaces;
 using BuildQuery.Builder.Models;
+using BuildQuery.EntityMapping;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -23,43 +24,89 @@ namespace BuildQuery.Builder.Where
         {
             var sql = new StringBuilder();
 
-            BuildBinaryExpression(_tableModel.Wheres.SelectMany(x => x.BinaryExpressions), sql);
+            var propertyMaps = BuildQueryMapper.GetEntityMap(_tableModel.Type).PropertyMaps;
 
-            BuildExpression(_tableModel.Wheres.SelectMany(x => x.Expressions), sql);
+            BuildExpression(_tableModel.Wheres.SelectMany(x => x.ExpressionModels), sql, propertyMaps);
 
             return sql.ToString();
         }
 
-        private void BuildBinaryExpression(IEnumerable<BinaryExpression> binaryExpressions, StringBuilder sql)
+        private void BuildExpression(IEnumerable<ExpressionModel> expressionModels, StringBuilder sql, IList<PropertyMap> propertyMaps)
         {
-            if (binaryExpressions.Count() == 0) return;
+            if (expressionModels.Count() == 0) return;
 
-            var entity = BuildQueryMapper.GetEntityMap(_tableModel.Type);
-
-            var propertyMaps = entity.PropertyMaps;
-
-            foreach (var binaryExpression in binaryExpressions)
+            foreach (var model in expressionModels)
             {
-                var propertyInfoLeft = GetPropertyInfoFromExpression(binaryExpression.Left);
-                var propertyInfoRight = GetPropertyInfoFromExpression(binaryExpression.Right);
-
-                if (propertyInfoLeft != null)
+                if (model.Expression is BinaryExpression binaryExpression)
                 {
-                    var propertyMapLeft =  propertyMaps.First(x => x.PropertyInfo == propertyInfoLeft);
-                }
+                    var operandLeft = GetOperandStringInExpression(binaryExpression.Left, propertyMaps);
+                    var operandRight = GetOperandStringInExpression(binaryExpression.Right, propertyMaps);
 
-                if (propertyInfoRight != null)
+                    switch (model.Expression.NodeType)
+                    {
+                        case ExpressionType.Equal:
+                            sql.AppendLine($"{operandLeft} = {operandRight}{GetStringInOperatorWhereEnum(model.OperatorInFinalLine)}");
+                            break;
+                    }
+                }
+                else if (model.Expression is MemberExpression memberExpression)
                 {
-                    var propertyMapRight =  propertyMaps.First(x => x.PropertyInfo == propertyInfoRight);
+                    var propertyInfo = memberExpression.Member as PropertyInfo;
+
+                    var propertyMapFromMapper = propertyMaps.FirstOrDefault(x => x.PropertyInfo == propertyInfo);
+                    if (propertyMapFromMapper != null)
+                        sql.AppendLine($"{_tableModel.Alias}.{propertyMapFromMapper.ColumnName} = @{propertyMapFromMapper.PropertyInfo.Name}{GetStringInOperatorWhereEnum(model.OperatorInFinalLine)}");
+                    else
+                        sql.AppendLine($"{_tableModel.Alias}.{propertyInfo.Name} = @{propertyInfo.Name}{GetStringInOperatorWhereEnum(model.OperatorInFinalLine)}");
                 }
+            }
+        }
 
+        private string GetOperandStringInExpression(Expression expression, IList<PropertyMap> propertyMapsFromMapper)
+        {
+            var propertyInfo = GetPropertyInfoFromExpression(expression);
+            
+            var operandString = string.Empty;
 
-                switch (binaryExpression.NodeType)
+            if (propertyInfo != null)
+            {
+                var propertyMapFromMapper = propertyMapsFromMapper.FirstOrDefault(x => x.PropertyInfo == propertyInfo);
+                if (propertyMapFromMapper == null)
+                    operandString = $"{_tableModel.Alias}.{propertyInfo.Name}";
+                else
+                    operandString = $"{_tableModel.Alias}.{propertyMapFromMapper.ColumnName}";
+            }
+            else
+            {
+                if (expression is ConstantExpression constantExpression)
                 {
-                    case ExpressionType.Equal:
-                        sql.AppendLine($"{_tableModel.Alias}.{propertyMapLeft.ColumnName} = {propertyInfoRight} &&");
-                        break;
+                    operandString = $"'{constantExpression.Value}'";
                 }
+                else if (expression is UnaryExpression unaryExpression)
+                {
+                    var propertyMapFromMapper = propertyMapsFromMapper.FirstOrDefault(x => x.PropertyInfo == (unaryExpression.Operand as MemberExpression).Member as PropertyInfo);
+                    if (propertyMapFromMapper == null)
+                        operandString = $"{_tableModel.Alias}.{(unaryExpression.Operand as MemberExpression).Member.Name}";
+                    else
+                        operandString = $"{_tableModel.Alias}.{propertyMapFromMapper.ColumnName}";
+                }
+            }
+
+            return operandString;
+        }
+
+        private string GetStringInOperatorWhereEnum(OperatorWhereEnum operatorInFinalLine)
+        {
+            switch (operatorInFinalLine)
+            {
+                case OperatorWhereEnum.OR:
+                    return " or ";
+                case OperatorWhereEnum.NOT:
+                    return " not ";
+                case OperatorWhereEnum.AND:
+                case OperatorWhereEnum.NONE:
+                default:
+                    return " and ";
             }
         }
 
@@ -71,16 +118,6 @@ namespace BuildQuery.Builder.Where
             }
 
             return null;
-        }
-
-        private void BuildExpression(IEnumerable<Expression> expressions, StringBuilder sql)
-        {
-            if (expressions.Count() == 0) return;
-            
-            foreach (var expression in expressions)
-            {
-
-            }
         }
     }
 }
