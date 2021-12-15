@@ -26,12 +26,9 @@ namespace BuildQuery.Builder.Selects
             {
                 var property = entity.PropertyMaps.FirstOrDefault(x => x.PropertyInfo == select.PropertyInfo);
                 
-                var propertyString = string.Empty;
-
-                if (property == null)
-                    propertyString = $"{select.ColumnName} as {select.PropertyInfo.Name}";
-                else
-                    propertyString = $"{property.ColumnName} as {property.PropertyInfo.Name}";
+                var propertyString = property is null ? 
+                    $"{select.ColumnName} as {select.GetColumnAlias()}" :
+                    $"{property.ColumnName} as {property.PropertyInfo.Name}";
 
                 sql.AppendLine($"{_model.Alias}.{propertyString},");
             }

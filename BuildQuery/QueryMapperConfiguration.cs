@@ -5,7 +5,6 @@ namespace BuildQuery
 {
     public class QueryMapperConfiguration
     {
-
         public void AddMap<TEntity>(EntityMap<TEntity> mapper) where TEntity : class
         {
             foreach (var propertyMap in mapper.PropertyMaps)

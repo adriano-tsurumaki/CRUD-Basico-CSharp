@@ -18,7 +18,7 @@ namespace Teste_Unitário.BuildQuery
         {
             BuildQueryMapper.Initialize(config =>
             {
-                //config.AddMap(new ClienteMap());
+                config.AddMap(new ClienteMap());
                 config.AddMap(new UsuarioMap());
                 config.AddMap(new EnderecoMap());
             });
@@ -26,8 +26,10 @@ namespace Teste_Unitário.BuildQuery
             var query = new BuildQuery<ClienteModel>()
                 .Select(c => c.ValorLimite)
                 .Select(c => c.Id, c => c.Observacao)
+                .Split()
                 .Select<UsuarioModel>(u => u.IdUsuario, u => u.Nome, u => u.Sobrenome)
                 .Select<UsuarioModel>(u => u.Sexo, u => u.Cpf, u => u.DataNascimento)
+                .Split()
                 .Select<EnderecoModel>(e => e.IdUsuario, e => e.Logradouro, e => e.Cep, e => e.Bairro)
                 .Select<EnderecoModel>(e => e.Cidade, e => e.Uf, e => e.Complemento, e => e.Numero)
                 .InnerJoin<UsuarioModel>(u => u.IdUsuario, e => e.IdUsuario)

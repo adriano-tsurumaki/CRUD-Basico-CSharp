@@ -20,7 +20,7 @@ namespace BuildQuery.Builder.Selects
             var sql = new StringBuilder();
 
             foreach (var select in _model.Selects)
-                sql.AppendLine($"{_model.Alias}.{select.ColumnName} as {select.PropertyInfo.Name},");
+                sql.AppendLine($"{_model.Alias}.{select.ColumnName} as {select.GetColumnAlias()},");
 
             return sql.ToString();
         }

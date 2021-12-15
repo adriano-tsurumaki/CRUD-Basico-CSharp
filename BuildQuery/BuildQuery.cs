@@ -13,32 +13,25 @@ namespace BuildQuery
 {
     public partial class BuildQuery<TPrincipalTable> where TPrincipalTable : class
     {
-        private Dictionary<Type, string> _dictionaryAlias;
-
-        private IList<Expression> _listWheres;
-
         private IList<TableModel> _tables;
+
+        public string Splitter { get; private set; }
 
         public BuildQuery()
         {
-            _dictionaryAlias = new Dictionary<Type, string>();
-
             Type tipo = typeof(TPrincipalTable);
 
-            _dictionaryAlias.Add(tipo, GenerateAlias());
+            Splitter = "split";
 
-            _listWheres = new List<Expression>();
+            _tables = new List<TableModel>();
 
-            _tables = new List<TableModel>
+            _tables.Add(new TableModel
             {
-                new TableModel
-                {
-                    Principal = true,
-                    Alias = GenerateAlias(),
-                    Name = tipo.Name,
-                    Type = tipo,
-                }
-            };
+                Principal = true,
+                Alias = GenerateAlias(),
+                Name = tipo.Name,
+                Type = tipo,
+            });
         }
 
         public BuildQuery<TPrincipalTable> Select(params Expression<Func<TPrincipalTable, object>>[] argsPropriedades)
@@ -101,7 +94,6 @@ namespace BuildQuery
             return this;
         }
 
-
         public BuildQuery<TPrincipalTable> Select(string names, params Expression<Func<TPrincipalTable, object>>[] argsPropriedades)
         {
             var listNames = names.Split(",");
@@ -142,6 +134,28 @@ namespace BuildQuery
                     _tables.Add(table);
                 }
             }
+
+            return this;
+        }
+
+        public BuildQuery<TPrincipalTable> Split()
+        {
+            var tipo = typeof(TPrincipalTable);
+
+            var tableModel = new TableModel()
+            {
+                Alias = _tables.First(x => x.Principal == true).Alias,
+                Type = tipo
+            };
+
+            var splitter = new SelectModel()
+            {
+                ColumnAlias = Splitter,
+                ColumnName = _tables.First().Selects.First().ColumnName,
+            };
+
+            tableModel.Selects.Add(splitter);
+            _tables.Add(tableModel);
 
             return this;
         }
@@ -187,7 +201,6 @@ namespace BuildQuery
                 model.SetExpression(ReflectionHelper.GetExpression(expression));
                 whereModel.ExpressionModels.Add(model);
             }
-
 
             _tables.First(x => x.Principal == true).Wheres.Add(whereModel);
 
@@ -352,7 +365,7 @@ namespace BuildQuery
 
                 var alias = new string(Enumerable.Repeat(chars, 2).Select(s => s[random.Next(s.Length)]).ToArray());
 
-                if (!_dictionaryAlias.Any(x => x.Value == alias))
+                if (!_tables.Any(x => x.Alias == alias))
                     return alias;
                 else
                     return GenerateAlias();
