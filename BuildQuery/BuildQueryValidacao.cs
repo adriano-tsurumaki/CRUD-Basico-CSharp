@@ -24,7 +24,19 @@ namespace BuildQuery
             innerJoin.SetKeyCompared(propComparedTable.Name);
             innerJoin.SetAliasCompared(_tables.First(x => x.Type == tipoComparedTable).Alias);
 
-            _tables.First(x => x.Type == tipoTable).Joins.Add(innerJoin);
+            if (_tables.Any(x => x.Type == tipoTable))
+                _tables.First(x => x.Type == tipoTable).Joins.Add(innerJoin);
+            else
+            {
+                var table = new TableModel
+                {
+                    Alias = GenerateAlias(),
+                    Name = tipoTable.Name,
+                    Type = tipoTable,
+                };
+
+                _tables.Add(table);
+            }
         }
 
         private void ValidateJoins()

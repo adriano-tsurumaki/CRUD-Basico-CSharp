@@ -138,6 +138,50 @@ namespace BuildQuery
             return this;
         }
 
+        public BuildQuery<TPrincipalTable> Select<TOtherTable>(string names, params Expression<Func<TOtherTable, object>>[] argsPropriedades)
+        {
+            var listNames = names.Split(",");
+
+            if (listNames.Count() != argsPropriedades.Count())
+                throw new ArgumentException($"A quantidade de nomes estabelecidos não é igual a quantidade de propriedades passadas no parâmetros");
+
+            var zip = listNames.Zip(argsPropriedades, (n, a) => new { name = n, propriedade = a });
+
+            foreach (var arquivo in zip)
+            {
+                Type tipo = typeof(TOtherTable);
+
+                var informacaoDaPropriedade = ReflectionHelper.GetMemberInfo(arquivo.propriedade) as PropertyInfo;
+
+                if (informacaoDaPropriedade.MemberType != MemberTypes.Property)
+                    throw new ArgumentException($"A expressão {informacaoDaPropriedade} não é uma propriedade, é {informacaoDaPropriedade.MemberType}!");
+
+                var select = new SelectModel
+                {
+                    PropertyInfo = informacaoDaPropriedade,
+                    ColumnName = arquivo.name.Trim()
+                };
+
+                if (_tables.Any(x => x.Type == typeof(TOtherTable)))
+                    _tables.First(x => x.Type == typeof(TOtherTable)).Selects.Add(select);
+                else
+                {
+                    var table = new TableModel
+                    {
+                        Alias = GenerateAlias(),
+                        Name = tipo.Name,
+                        Type = tipo,
+                    };
+
+                    table.Selects.Add(select);
+
+                    _tables.Add(table);
+                }
+            }
+
+            return this;
+        }
+
         public BuildQuery<TPrincipalTable> Split()
         {
             var tipo = typeof(TPrincipalTable);
