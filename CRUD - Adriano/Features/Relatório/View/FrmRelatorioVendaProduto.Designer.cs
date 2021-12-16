@@ -58,6 +58,16 @@ namespace CRUD___Adriano.Features.Relatório.View
             this.btnFiltrar = new System.Windows.Forms.Button();
             this.gridView = new System.Windows.Forms.DataGridView();
             this.pnlTotalizadores = new System.Windows.Forms.Panel();
+            this.txtTotalLucro = new System.Windows.Forms.Label();
+            this.lblTotalLucro = new System.Windows.Forms.Label();
+            this.txtTotalLiquido = new System.Windows.Forms.Label();
+            this.txtDescontoTotal = new System.Windows.Forms.Label();
+            this.txtTotalBruto = new System.Windows.Forms.Label();
+            this.txtQuantidadeTotal = new System.Windows.Forms.Label();
+            this.lblTotalLiquido = new System.Windows.Forms.Label();
+            this.lblDescontoTotal = new System.Windows.Forms.Label();
+            this.lblTotalBruto = new System.Windows.Forms.Label();
+            this.lblQuantidadeTotal = new System.Windows.Forms.Label();
             this.btnAbrirFiltro = new System.Windows.Forms.Button();
             this.pnlRight.SuspendLayout();
             this.pnlFiltro.SuspendLayout();
@@ -89,7 +99,7 @@ namespace CRUD___Adriano.Features.Relatório.View
             this.pnlFiltro.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlFiltro.Location = new System.Drawing.Point(0, 0);
             this.pnlFiltro.Name = "pnlFiltro";
-            this.pnlFiltro.Size = new System.Drawing.Size(234, 637);
+            this.pnlFiltro.Size = new System.Drawing.Size(234, 626);
             this.pnlFiltro.TabIndex = 4;
             // 
             // panel3
@@ -297,9 +307,9 @@ namespace CRUD___Adriano.Features.Relatório.View
             // 
             this.pnlBotoes.Controls.Add(this.btnFiltrar);
             this.pnlBotoes.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlBotoes.Location = new System.Drawing.Point(0, 637);
+            this.pnlBotoes.Location = new System.Drawing.Point(0, 626);
             this.pnlBotoes.Name = "pnlBotoes";
-            this.pnlBotoes.Size = new System.Drawing.Size(234, 64);
+            this.pnlBotoes.Size = new System.Drawing.Size(234, 75);
             this.pnlBotoes.TabIndex = 3;
             // 
             // btnFiltrar
@@ -354,18 +364,138 @@ namespace CRUD___Adriano.Features.Relatório.View
             this.gridView.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.gridView.RowTemplate.Height = 25;
             this.gridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridView.Size = new System.Drawing.Size(1087, 637);
+            this.gridView.Size = new System.Drawing.Size(1087, 626);
             this.gridView.TabIndex = 8;
             this.gridView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.GridView_CellFormatting);
             // 
             // pnlTotalizadores
             // 
             this.pnlTotalizadores.Controls.Add(this.btnAbrirFiltro);
+            this.pnlTotalizadores.Controls.Add(this.txtTotalLucro);
+            this.pnlTotalizadores.Controls.Add(this.lblTotalLucro);
+            this.pnlTotalizadores.Controls.Add(this.txtTotalLiquido);
+            this.pnlTotalizadores.Controls.Add(this.txtDescontoTotal);
+            this.pnlTotalizadores.Controls.Add(this.txtTotalBruto);
+            this.pnlTotalizadores.Controls.Add(this.txtQuantidadeTotal);
+            this.pnlTotalizadores.Controls.Add(this.lblTotalLiquido);
+            this.pnlTotalizadores.Controls.Add(this.lblDescontoTotal);
+            this.pnlTotalizadores.Controls.Add(this.lblTotalBruto);
+            this.pnlTotalizadores.Controls.Add(this.lblQuantidadeTotal);
             this.pnlTotalizadores.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlTotalizadores.Location = new System.Drawing.Point(0, 637);
+            this.pnlTotalizadores.Location = new System.Drawing.Point(0, 626);
             this.pnlTotalizadores.Name = "pnlTotalizadores";
-            this.pnlTotalizadores.Size = new System.Drawing.Size(1087, 64);
+            this.pnlTotalizadores.Size = new System.Drawing.Size(1087, 75);
             this.pnlTotalizadores.TabIndex = 10;
+            // 
+            // txtTotalLucro
+            // 
+            this.txtTotalLucro.AutoSize = true;
+            this.txtTotalLucro.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.txtTotalLucro.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.txtTotalLucro.Location = new System.Drawing.Point(612, 16);
+            this.txtTotalLucro.Name = "txtTotalLucro";
+            this.txtTotalLucro.Size = new System.Drawing.Size(72, 19);
+            this.txtTotalLucro.TabIndex = 34;
+            this.txtTotalLucro.Text = "R$ 100,00";
+            // 
+            // lblTotalLucro
+            // 
+            this.lblTotalLucro.AutoSize = true;
+            this.lblTotalLucro.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblTotalLucro.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.lblTotalLucro.Location = new System.Drawing.Point(516, 16);
+            this.lblTotalLucro.Name = "lblTotalLucro";
+            this.lblTotalLucro.Size = new System.Drawing.Size(79, 19);
+            this.lblTotalLucro.TabIndex = 33;
+            this.lblTotalLucro.Text = "Total lucro: ";
+            // 
+            // txtTotalLiquido
+            // 
+            this.txtTotalLiquido.AutoSize = true;
+            this.txtTotalLiquido.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.txtTotalLiquido.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.txtTotalLiquido.Location = new System.Drawing.Point(372, 38);
+            this.txtTotalLiquido.Name = "txtTotalLiquido";
+            this.txtTotalLiquido.Size = new System.Drawing.Size(72, 19);
+            this.txtTotalLiquido.TabIndex = 32;
+            this.txtTotalLiquido.Text = "R$ 100,00";
+            // 
+            // txtDescontoTotal
+            // 
+            this.txtDescontoTotal.AutoSize = true;
+            this.txtDescontoTotal.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.txtDescontoTotal.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.txtDescontoTotal.Location = new System.Drawing.Point(372, 16);
+            this.txtDescontoTotal.Name = "txtDescontoTotal";
+            this.txtDescontoTotal.Size = new System.Drawing.Size(72, 19);
+            this.txtDescontoTotal.TabIndex = 31;
+            this.txtDescontoTotal.Text = "R$ 100,00";
+            // 
+            // txtTotalBruto
+            // 
+            this.txtTotalBruto.AutoSize = true;
+            this.txtTotalBruto.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.txtTotalBruto.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.txtTotalBruto.Location = new System.Drawing.Point(138, 38);
+            this.txtTotalBruto.Name = "txtTotalBruto";
+            this.txtTotalBruto.Size = new System.Drawing.Size(72, 19);
+            this.txtTotalBruto.TabIndex = 30;
+            this.txtTotalBruto.Text = "R$ 100,00";
+            // 
+            // txtQuantidadeTotal
+            // 
+            this.txtQuantidadeTotal.AutoSize = true;
+            this.txtQuantidadeTotal.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.txtQuantidadeTotal.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.txtQuantidadeTotal.Location = new System.Drawing.Point(138, 16);
+            this.txtQuantidadeTotal.Name = "txtQuantidadeTotal";
+            this.txtQuantidadeTotal.Size = new System.Drawing.Size(33, 19);
+            this.txtQuantidadeTotal.TabIndex = 29;
+            this.txtQuantidadeTotal.Text = "100";
+            // 
+            // lblTotalLiquido
+            // 
+            this.lblTotalLiquido.AutoSize = true;
+            this.lblTotalLiquido.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblTotalLiquido.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.lblTotalLiquido.Location = new System.Drawing.Point(264, 38);
+            this.lblTotalLiquido.Name = "lblTotalLiquido";
+            this.lblTotalLiquido.Size = new System.Drawing.Size(90, 19);
+            this.lblTotalLiquido.TabIndex = 28;
+            this.lblTotalLiquido.Text = "Total líquido: ";
+            // 
+            // lblDescontoTotal
+            // 
+            this.lblDescontoTotal.AutoSize = true;
+            this.lblDescontoTotal.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblDescontoTotal.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.lblDescontoTotal.Location = new System.Drawing.Point(264, 16);
+            this.lblDescontoTotal.Name = "lblDescontoTotal";
+            this.lblDescontoTotal.Size = new System.Drawing.Size(102, 19);
+            this.lblDescontoTotal.TabIndex = 27;
+            this.lblDescontoTotal.Text = "Desconto total:";
+            // 
+            // lblTotalBruto
+            // 
+            this.lblTotalBruto.AutoSize = true;
+            this.lblTotalBruto.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblTotalBruto.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.lblTotalBruto.Location = new System.Drawing.Point(12, 38);
+            this.lblTotalBruto.Name = "lblTotalBruto";
+            this.lblTotalBruto.Size = new System.Drawing.Size(79, 19);
+            this.lblTotalBruto.TabIndex = 26;
+            this.lblTotalBruto.Text = "Total bruto:";
+            // 
+            // lblQuantidadeTotal
+            // 
+            this.lblQuantidadeTotal.AutoSize = true;
+            this.lblQuantidadeTotal.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblQuantidadeTotal.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.lblQuantidadeTotal.Location = new System.Drawing.Point(12, 16);
+            this.lblQuantidadeTotal.Name = "lblQuantidadeTotal";
+            this.lblQuantidadeTotal.Size = new System.Drawing.Size(120, 19);
+            this.lblQuantidadeTotal.TabIndex = 25;
+            this.lblQuantidadeTotal.Text = "Quantidade total: ";
             // 
             // btnAbrirFiltro
             // 
@@ -378,7 +508,7 @@ namespace CRUD___Adriano.Features.Relatório.View
             this.btnAbrirFiltro.Image = ((System.Drawing.Image)(resources.GetObject("btnAbrirFiltro.Image")));
             this.btnAbrirFiltro.Location = new System.Drawing.Point(1022, 0);
             this.btnAbrirFiltro.Name = "btnAbrirFiltro";
-            this.btnAbrirFiltro.Size = new System.Drawing.Size(65, 64);
+            this.btnAbrirFiltro.Size = new System.Drawing.Size(65, 75);
             this.btnAbrirFiltro.TabIndex = 16;
             this.btnAbrirFiltro.UseVisualStyleBackColor = false;
             this.btnAbrirFiltro.Click += new System.EventHandler(this.BtnAbrirFiltro_Click);
@@ -405,6 +535,7 @@ namespace CRUD___Adriano.Features.Relatório.View
             this.pnlBotoes.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridView)).EndInit();
             this.pnlTotalizadores.ResumeLayout(false);
+            this.pnlTotalizadores.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -435,5 +566,15 @@ namespace CRUD___Adriano.Features.Relatório.View
         private Panel pnlFiltroData;
         private Panel panel1;
         private CheckBox checkDataFiltro;
+        private Label txtTotalLiquido;
+        private Label txtDescontoTotal;
+        private Label txtTotalBruto;
+        private Label txtQuantidadeTotal;
+        private Label lblTotalLiquido;
+        private Label lblDescontoTotal;
+        private Label lblTotalBruto;
+        private Label lblQuantidadeTotal;
+        private Label txtTotalLucro;
+        private Label lblTotalLucro;
     }
 }
