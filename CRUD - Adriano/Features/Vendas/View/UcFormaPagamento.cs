@@ -48,6 +48,11 @@ namespace CRUD___Adriano.Features.Vendas.View
                 MessageBox.Show("Selecione uma forma de pagamento!");
                 return;
             }
+            if (txtValorASerPago.Texto.DoubleOuZero() <= 0)
+            {
+                MessageBox.Show("Valor a ser pago deve ser maior que zero!");
+                return;
+            }
             // TODO: Fazer validações
 
             var listaFormaPagamento = FormaPagamentoController.GerarListaFormaPagamento(

@@ -305,6 +305,7 @@ namespace CRUD___Adriano.Features.Vendas.Controller
             catch (Exception excecao)
             {
                 MessageBox.Show(excecao.Message, "Erro ao tentar buscar o limite de crédito do cliente!");
+                return false;
             }
 
             return true;
@@ -318,7 +319,7 @@ namespace CRUD___Adriano.Features.Vendas.Controller
             {
                 _vendaDao.EfetuarVenda(_vendaModel);
                 
-                if (MessageBox.Show("Deseja efetuar a venda?", "Confirmação", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                if (MessageBox.Show("Deseja enviar o comprovante por e-mail?", "Confirmação", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     EmailSenderController.EnviarConfirmacaoDaCompra(_vendaModel.Cliente.Nome, _vendaModel.ValorPago);
 
                 MessageBox.Show("Venda efetuada com sucesso!");
