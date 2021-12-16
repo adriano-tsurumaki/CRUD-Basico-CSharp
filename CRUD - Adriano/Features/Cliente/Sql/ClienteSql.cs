@@ -67,6 +67,9 @@ namespace CRUD___Adriano.Features.Cliente.Sql
             where fp.tipo_pagamento <> 1 and fp.tipo_pagamento <> 2 and u.id = @IdUsuario
             group by u.nome, c.valor_limite";
 
+        public static readonly string ValorLimite =
+            @"select valor_limite as ValorLimite from Cliente where id_usuario = @IdUsuario";
+
         public static string Inserir(ClienteModel clienteModel)
         {
             var insertSql = new StringBuilder("insert into Cliente(id_usuario, valor_limite");

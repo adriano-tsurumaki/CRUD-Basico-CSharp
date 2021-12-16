@@ -237,7 +237,11 @@ namespace CRUD___Adriano.Features.Cliente.Dao
             try
             {
                 _conexao.Open();
-                return _conexao.QuerySingleOrDefault<ClienteModel>(ClienteSql.ValorLimiteRestante, new { idUsuario }).ValorLimite.Valor;
+                var clienteModel = _conexao.QuerySingleOrDefault<ClienteModel>(ClienteSql.ValorLimiteRestante, new { idUsuario });
+                if (clienteModel is null)
+                    return _conexao.QuerySingleOrDefault<ClienteModel>(ClienteSql.ValorLimite, new { idUsuario }).ValorLimite.Valor;
+                else
+                    return clienteModel.ValorLimite.Valor;
             }
             finally
             {
