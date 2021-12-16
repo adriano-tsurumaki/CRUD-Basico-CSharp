@@ -11,12 +11,8 @@ namespace Teste_Unitário.Relatório.Dao
     {
         [DataTestMethod]
         [DynamicData(nameof(Lista_para_gerar_sql), DynamicDataSourceType.Method)]
-        public void Deveria_gerar_sql_filtrado_corretamente(FiltroRelatorioVendaProduto filtro, string sqlEsperado)
-        {
-            var teste = filtro.GerarSql();
-
+        public void Deveria_gerar_sql_filtrado_corretamente(FiltroRelatorioVendaProduto filtro, string sqlEsperado) =>
             Assert.AreEqual(filtro.GerarSql(), sqlEsperado.RemoverExcessoDeEspaçoEmBranco());
-        }
 
         public static IEnumerable<object[]> Lista_para_gerar_sql() =>
             new List<object[]>

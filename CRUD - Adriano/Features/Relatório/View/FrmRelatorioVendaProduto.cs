@@ -36,7 +36,9 @@ namespace CRUD___Adriano.Features.Relatório.View
             gridView.TextBoxColumnPadrao(celula, "Preço líquido total", "PrecoLiquidoTotal.Formatado", true);
 
             gridView.AutoGenerateColumns = false;
-            gridView.DataSource = new BindingList<RelatorioVendaProdutoModel>(_controller.ListarTodosProdutosPeloFiltro());
+            gridView.DataSource = _controller.RetornarBindingRelatorioVendaProduto();
+            _controller.AtualizarLista();
+            AtualizarTotalizadores();
         }
 
         private void BtnAbrirFiltro_Click(object sender, System.EventArgs e) =>
@@ -97,8 +99,17 @@ namespace CRUD___Adriano.Features.Relatório.View
                 _controller.DefinirDataInicioNoFiltro(DateTime.MinValue);
                 _controller.DefinirDataFinalNoFiltro(DateTime.MinValue);
             }
+            _controller.AtualizarLista();
+            AtualizarTotalizadores();
+        }
 
-            gridView.DataSource = _controller.ListarTodosProdutosPeloFiltro();
+        private void AtualizarTotalizadores()
+        {
+            txtQuantidadeTotal.Text = _controller.RetornarQuantidadeTotalDaLista();
+            txtTotalBruto.Text = _controller.RetornarTotalBrutoDaLista();
+            txtDescontoTotal.Text = _controller.RetornarDescontoTotalDaLista();
+            txtTotalLiquido.Text = _controller.RetornarTotalLiquidoDaLista();
+            txtTotalLucro.Text = _controller.RetornarTotalLucroDaLista();
         }
 
         private void GridView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
