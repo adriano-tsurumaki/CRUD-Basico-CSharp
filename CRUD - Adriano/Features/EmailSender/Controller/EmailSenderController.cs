@@ -31,7 +31,7 @@ namespace CRUD___Adriano.Features.Email.Controller
                 ("Venda efetuada com sucesso!", 
                 $@"Olá {nomeCliente}! Obrigado por comprar na loja Augusto Fashion. O valor total da compra foi de {valorDaCompra.Formatado}");
 
-            mensagem.To.Add("adrianotsurumaki@gmail.com");
+            mensagem.To.Add("hiagorhenrique1@gmail.com");
             cliente.Send(mensagem);
         }
     }

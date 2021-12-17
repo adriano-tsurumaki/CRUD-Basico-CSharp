@@ -17,68 +17,21 @@ namespace CRUD___Adriano.Features.Produto.View
         {
             InitializeComponent();
             _controller = controller;
+            gridView.ConfiguracaoHeaderPadrao();
+            gridView.ConfiguracaoPadrao();
         }
 
         internal void BindGrid(List<ProdutoModel> listaDeProdutos)
         {
             gridView.Columns.Clear();
             DataGridViewCell celula = new DataGridViewTextBoxCell();
-            DataGridViewTextBoxColumn idColuna = new DataGridViewTextBoxColumn()
-            {
-                CellTemplate = celula,
-                Name = "clnId",
-                HeaderText = "Id",
-                DataPropertyName = "Id",
-                ReadOnly = true,
-            };
 
-            DataGridViewTextBoxColumn nomeColuna = new DataGridViewTextBoxColumn()
-            {
-                CellTemplate = celula,
-                Name = "clnNome",
-                HeaderText = "Nome",
-                DataPropertyName = "Nome",
-                ReadOnly = true,
-            };
-
-            DataGridViewTextBoxColumn quantidadeColuna = new DataGridViewTextBoxColumn()
-            {
-                CellTemplate = celula,
-                Name = "clnQuantidade",
-                HeaderText = "Quantidade",
-                DataPropertyName = "Quantidade",
-                ReadOnly = true,
-            };
-
-            DataGridViewTextBoxColumn ativoColuna = new DataGridViewTextBoxColumn()
-            {
-                CellTemplate = celula,
-                Name = "clnStatus",
-                HeaderText = "Status",
-                DataPropertyName = "Ativo",
-                ReadOnly = true,
-            };
-
-            DataGridViewButtonColumn botaoAlterarColuna = new DataGridViewButtonColumn()
-            {
-                CellTemplate = new DataGridViewButtonCell(),
-                HeaderText = "Alterar",
-                Name = "Alterar"
-            };
-
-            DataGridViewButtonColumn botaoExcluirColuna = new DataGridViewButtonColumn()
-            {
-                CellTemplate = new DataGridViewButtonCell(),
-                HeaderText = "Ativar/Inativar",
-                Name = "Trocar"
-            };
-
-            gridView.Columns.Add(idColuna);
-            gridView.Columns.Add(nomeColuna);
-            gridView.Columns.Add(quantidadeColuna);
-            gridView.Columns.Add(ativoColuna);
-            gridView.Columns.Add(botaoAlterarColuna);
-            gridView.Columns.Add(botaoExcluirColuna);
+            gridView.TextBoxColumnPadrao(celula, "Id", "Id", true); 
+            gridView.TextBoxColumnPadrao(celula, "Nome", "Nome", true); 
+            gridView.TextBoxColumnPadrao(celula, "Quantidade", "Quantidade", true); 
+            gridView.TextBoxColumnPadrao(celula, "Status", "Ativo", true); 
+            gridView.ButtonColumnPadrao("Alterar"); 
+            gridView.ButtonColumnPadrao("Ativar/Inativar"); 
 
             _produtosBinding = new BindingList<ProdutoModel>(listaDeProdutos);
             gridView.AutoGenerateColumns = false;
@@ -95,7 +48,7 @@ namespace CRUD___Adriano.Features.Produto.View
 
             var produtoModelSelecionado = gridView.CurrentRow.DataBoundItem as ProdutoModel;
 
-            if (botao.Name.Equals("Trocar"))
+            if (botao.Name.Equals("Ativar/Inativar"))
             {
                 if (MessageBox.Show("Deseja realmente ativar/inativar?", "Aviso", MessageBoxButtons.YesNo) == DialogResult.No) return;
 
