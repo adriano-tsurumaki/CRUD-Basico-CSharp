@@ -19,6 +19,24 @@ namespace CRUD___Adriano.Features.Utils
             gridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
         }
 
+        public static void ConfiguracaoHeaderPadrao(this DataGridView gridView)
+        {
+            var cellHeaderStyle = new DataGridViewCellStyle
+            {
+                Alignment = DataGridViewContentAlignment.MiddleLeft,
+                BackColor = Color.FromArgb(23, 31, 32),
+                Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point),
+                ForeColor = Color.White,
+                Padding = new Padding(2),
+                SelectionBackColor = Color.FromArgb(23, 31, 32),
+                SelectionForeColor = SystemColors.HighlightText,
+                WrapMode = DataGridViewTriState.True
+            };
+
+            gridView.ColumnHeadersDefaultCellStyle = cellHeaderStyle;
+            gridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+        }
+
         public static void TextBoxColumnPadrao(this DataGridView gridView, DataGridViewCell cellTemplate, string nome, string nomeDaPropriedade, bool apenasLeitura)
         {
             gridView.Columns.Add(new DataGridViewTextBoxColumn()
