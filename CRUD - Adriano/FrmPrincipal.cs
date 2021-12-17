@@ -3,6 +3,7 @@ using CRUD___Adriano.Features.Cadastro.Produto.Model;
 using CRUD___Adriano.Features.Cliente.Controller;
 using CRUD___Adriano.Features.Colaborador.Controller;
 using CRUD___Adriano.Features.Colaborador.Model;
+using CRUD___Adriano.Features.Configuration.Login.Controller;
 using CRUD___Adriano.Features.Configuration.Login.Dao;
 using CRUD___Adriano.Features.Controller.PageManager;
 using CRUD___Adriano.Features.Dashboards.Controller;
@@ -256,6 +257,7 @@ namespace CRUD___Adriano
             try
             {
                 ConfigNinject.ObterInstancia<LoginDao>().Deslogar();
+                LoginConfig.VoltarATelaDeLogin = true;
                 Close();
             }
             catch(Exception excecao)
@@ -284,34 +286,35 @@ namespace CRUD___Adriano
             pnlTitleBar.MouseMove += PnlTitleBar_MouseMove;
         }
 
-        private bool drag = false;
-        private Point startPoint = new Point(0, 0);
+        private bool _drag = false;
+        private Point _startPoint = new Point(0, 0);
 
         private void PnlTitleBar_MouseDown(object sender, MouseEventArgs e)
         {
-            drag = true;
-            startPoint = e.Location;
+            _drag = true;
+            _startPoint = e.Location;
         }
 
-        private void PnlTitleBar_MouseUp(object sender, MouseEventArgs e)
-        {
-            drag = false;
-        }
+        private void PnlTitleBar_MouseUp(object sender, MouseEventArgs e) =>
+            _drag = false;
 
         private void PnlTitleBar_MouseMove(object sender, MouseEventArgs e)
         {
-            if (!drag) return;
+            if (!_drag) return;
 
             Point p1 = new Point(e.X, e.Y);
-            Point p2 = this.PointToScreen(p1);
-            Point p3 = new Point(p2.X - this.startPoint.X,
-                                 p2.Y - this.startPoint.Y);
+            Point p2 = PointToScreen(p1);
+            Point p3 = new Point(p2.X - _startPoint.X,
+                                 p2.Y - _startPoint.Y);
 
             Location = p3;
         }
 
-        private void BtnFechar_Click(object sender, EventArgs e) =>
+        private void BtnFechar_Click(object sender, EventArgs e)
+        {
+            LoginConfig.VoltarATelaDeLogin = false;
             Close();
+        }
 
         private void BtnMinimizar_Click(object sender, EventArgs e) =>
             WindowState = FormWindowState.Minimized;

@@ -534,7 +534,7 @@ namespace CRUD___Adriano
             this.btnCadastro.Padding = new System.Windows.Forms.Padding(6, 0, 0, 0);
             this.btnCadastro.Size = new System.Drawing.Size(203, 60);
             this.btnCadastro.TabIndex = 3;
-            this.btnCadastro.Text = "Cadastro de  usuário";
+            this.btnCadastro.Text = "Cadastro de usuário";
             this.btnCadastro.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnCadastro.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnCadastro.UseVisualStyleBackColor = true;

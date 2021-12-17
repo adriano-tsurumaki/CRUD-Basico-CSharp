@@ -31,7 +31,10 @@ namespace CRUD___Adriano.Features.Configuration.Login.View
         private void FrmLogin_Load(object sender, EventArgs e) =>
             _controller.VerificarSeExisteUsuarioJaConectado();
 
-        private void BtnSair_Click(object sender, EventArgs e) =>
+        private void BtnSair_Click(object sender, EventArgs e)
+        {
             DialogResult = DialogResult.Cancel;
+            LoginConfig.VoltarATelaDeLogin = false;
+        }
     }
 }

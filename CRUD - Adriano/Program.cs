@@ -23,10 +23,19 @@ namespace CRUD___Adriano
 
             ConfigNinject.Registrar(new SqlConexao());
 
-            var loginResultado = ConfigNinject.ObterInstancia<LoginController>().RetornarFormulario().ShowDialog();
+            while(true)
+            {
+                var loginResultado = ConfigNinject.ObterInstancia<LoginController>().RetornarFormulario().ShowDialog();
 
-            if (loginResultado == DialogResult.OK)
-                Application.Run(ConfigNinject.ObterInstancia<FrmPrincipal>());
+                if (loginResultado == DialogResult.OK)
+                    Application.Run(ConfigNinject.ObterInstancia<FrmPrincipal>());
+
+                if (!LoginConfig.VoltarATelaDeLogin)
+                {
+                    Application.Exit();
+                    break;
+                }
+            }
         }
     }
 }
