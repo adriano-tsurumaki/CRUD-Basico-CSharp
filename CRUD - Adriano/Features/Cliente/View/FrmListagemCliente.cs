@@ -18,48 +18,18 @@ namespace CRUD___Adriano.Features.Cliente.View
         {
             InitializeComponent();
             _controller = controller;
+            gridView.ConfiguracaoPadrao();
         }
 
         public void BindGrid(IList<ClienteModel> listaDeClientes)
         {
             gridView.Columns.Clear();
             DataGridViewCell celula = new DataGridViewTextBoxCell();
-            DataGridViewTextBoxColumn idColuna = new DataGridViewTextBoxColumn()
-            {
-                CellTemplate = celula,
-                Name = "clnId",
-                HeaderText = "Id",
-                DataPropertyName = "IdUsuario",
-                ReadOnly = true,
-            };
 
-            DataGridViewTextBoxColumn nomeColuna = new DataGridViewTextBoxColumn()
-            {
-                CellTemplate = celula,
-                Name = "clnNome",
-                HeaderText = "Nome",
-                DataPropertyName = "Nome",
-                ReadOnly = true,
-            };
-
-            DataGridViewButtonColumn botaoAlterarColuna = new DataGridViewButtonColumn()
-            {
-                CellTemplate = new DataGridViewButtonCell(),
-                HeaderText = "Alterar",
-                Name = "Alterar"
-            };
-
-            DataGridViewButtonColumn botaoExcluirColuna = new DataGridViewButtonColumn()
-            {
-                CellTemplate = new DataGridViewButtonCell(),
-                HeaderText = "Excluir",
-                Name = "Excluir"
-            };
-
-            gridView.Columns.Add(idColuna);
-            gridView.Columns.Add(nomeColuna);
-            gridView.Columns.Add(botaoAlterarColuna);
-            gridView.Columns.Add(botaoExcluirColuna);
+            gridView.TextBoxColumnPadrao(celula, "Id", "IdUsuario", true);
+            gridView.TextBoxColumnPadrao(celula, "Nome", "Nome", true);
+            gridView.ButtonColumnPadrao("Alterar");
+            gridView.ButtonColumnPadrao("Excluir");
 
             _clientesBinding = new BindingList<ClienteModel>(listaDeClientes);
             gridView.AutoGenerateColumns = false;
@@ -94,8 +64,8 @@ namespace CRUD___Adriano.Features.Cliente.View
         {
             var senderGrid = sender as DataGridView;
 
-            if ((senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn &&
-                e.RowIndex >= 0) || gridView.CurrentRow == null)
+            if ((senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0) || 
+                gridView.CurrentRow is null)
                 return;
 
             var clienteModelSelecionado = gridView.CurrentRow.DataBoundItem as ClienteModel;

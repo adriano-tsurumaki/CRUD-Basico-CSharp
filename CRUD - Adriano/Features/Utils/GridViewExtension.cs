@@ -7,6 +7,18 @@ namespace CRUD___Adriano.Features.Utils
 {
     public static class GridViewExtension
     {
+        public static void ConfiguracaoPadrao(this DataGridView gridView)
+        {
+            gridView.RowHeadersVisible = false;
+            gridView.AllowUserToAddRows = false;
+            gridView.AllowUserToDeleteRows = false;
+            gridView.AllowUserToOrderColumns = false;
+            gridView.AllowUserToResizeColumns = false;
+            gridView.AllowUserToResizeRows = false;
+            gridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            gridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+        }
+
         public static void TextBoxColumnPadrao(this DataGridView gridView, DataGridViewCell cellTemplate, string nome, string nomeDaPropriedade, bool apenasLeitura)
         {
             gridView.Columns.Add(new DataGridViewTextBoxColumn()
@@ -23,6 +35,16 @@ namespace CRUD___Adriano.Features.Utils
                     Padding = new Padding(2)
                 },
                 ReadOnly = apenasLeitura,
+            });
+        }
+        
+        public static void ButtonColumnPadrao(this DataGridView gridView, string nome)
+        {
+            gridView.Columns.Add(new DataGridViewButtonColumn()
+            {
+                CellTemplate = new DataGridViewButtonCell(),
+                HeaderText = nome,
+                Name = nome
             });
         }
 
