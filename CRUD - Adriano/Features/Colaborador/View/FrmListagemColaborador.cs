@@ -18,6 +18,8 @@ namespace CRUD___Adriano.Features.Colaborador.View
         {
             InitializeComponent();
             _controller = controller;
+            gridView.ConfiguracaoHeaderPadrao();
+            gridView.ConfiguracaoPadrao();
         }
 
         public void BindGrid(IList<ColaboradorModel> listaDeColaboradores)

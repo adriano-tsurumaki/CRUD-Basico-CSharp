@@ -18,6 +18,7 @@ namespace CRUD___Adriano.Features.Cliente.View
         {
             InitializeComponent();
             _controller = controller;
+            gridView.ConfiguracaoHeaderPadrao();
             gridView.ConfiguracaoPadrao();
         }
 
