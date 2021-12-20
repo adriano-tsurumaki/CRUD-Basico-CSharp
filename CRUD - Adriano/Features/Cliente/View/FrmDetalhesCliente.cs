@@ -31,7 +31,7 @@ namespace CRUD___Adriano.Features.Cliente.View
             lblLogradouro.Text = _clienteModel.Endereco.Logradouro;
             lblBairro.Text = _clienteModel.Endereco.Bairro;
             lblNumero.Text = _clienteModel.Endereco.Numero;
-            lblValorLimite.Text = $"R$ {(_clienteModel.ValorLimite.Formatado)}";
+            lblValorLimite.Text = _clienteModel.ValorLimite.Formatado;
             lblObservacao.Text = _clienteModel.Observacao;
             lblDataNascimento.Text = $"{_clienteModel.DataNascimento:dd/MM/yyyy}";
             lblEmails.Text = RetornarEmailsFormatado();
