@@ -318,9 +318,12 @@ namespace CRUD___Adriano.Features.Vendas.Controller
             try
             {
                 _vendaDao.EfetuarVenda(_vendaModel);
-                
+
                 if (MessageBox.Show("Deseja enviar o comprovante por e-mail?", "Confirmação", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                    EmailSenderController.EnviarConfirmacaoDaCompra(_vendaModel.Cliente.Nome, _vendaModel.ValorPago);
+                    EmailSenderController.EnviarConfirmacaoDaCompra(
+                        _vendaModel.Cliente.Nome, 
+                        _vendaModel.ValorPago,
+                        ConfigNinject.ObterInstancia<ClienteDao>().SelecionarEmail(_vendaModel.Cliente.IdUsuario));
 
                 MessageBox.Show("Venda efetuada com sucesso!");
                 _frmVendaPrincipal.Close();

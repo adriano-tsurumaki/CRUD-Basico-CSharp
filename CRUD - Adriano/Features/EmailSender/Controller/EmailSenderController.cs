@@ -1,4 +1,5 @@
-﻿using CRUD___Adriano.Features.ValueObject.Precos;
+﻿using CRUD___Adriano.Features.Entidades.Email.Model;
+using CRUD___Adriano.Features.ValueObject.Precos;
 using System.Net;
 using System.Net.Mail;
 
@@ -24,14 +25,14 @@ namespace CRUD___Adriano.Features.Email.Controller
                 Body = corpo
             };
 
-        public static void EnviarConfirmacaoDaCompra(string nomeCliente, Preco valorDaCompra)
+        public static void EnviarConfirmacaoDaCompra(string nomeCliente, Preco valorDaCompra, EmailModel emailModel)
         {
             var cliente = ConfiguracaoDoSmtpClient();
             var mensagem = ConfiguracaoDaMensagem
-                ("Venda efetuada com sucesso!", 
+                ("Venda efetuada com sucesso! (TESTE)", 
                 $@"Olá {nomeCliente}! Obrigado por comprar na loja Augusto Fashion. O valor total da compra foi de {valorDaCompra.Formatado}");
 
-            mensagem.To.Add("hiagorhenrique1@gmail.com");
+            mensagem.To.Add(emailModel.Nome);
             cliente.Send(mensagem);
         }
     }

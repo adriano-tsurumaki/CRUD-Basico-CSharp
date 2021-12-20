@@ -387,6 +387,7 @@ namespace CRUD___Adriano
             this.btnListagemFornecedor.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnListagemFornecedor.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnListagemFornecedor.UseVisualStyleBackColor = true;
+            this.btnListagemFornecedor.Visible = false;
             // 
             // btnListagemFuncionario
             // 
