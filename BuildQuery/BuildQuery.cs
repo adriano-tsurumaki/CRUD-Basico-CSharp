@@ -13,7 +13,7 @@ namespace BuildQuery
 {
     public partial class BuildQuery<TPrincipalTable> where TPrincipalTable : class
     {
-        private IList<TableModel> _tables;
+        private readonly IList<TableModel> _tables;
 
         public string Splitter { get; private set; }
 
@@ -393,6 +393,8 @@ namespace BuildQuery
 
             foreach (var item in new WhereFactory().CreateBuilders(_tables))
                 where.AppendLine(item.Build());
+
+            if (TrimAllExcessWhiteSpace(where.ToString()) == "where ") return new StringBuilder();
 
             return where;
         }

@@ -117,7 +117,7 @@ namespace CRUD___Adriano.Features.Cliente.Dao
         }
 
         public IList<ClienteModel> ListarTodosOsClientesSomenteIdENome() =>
-            _conexao.Query<ClienteModel>(ClienteSql.ListarTodosComCamposSomenteIdENome).ToList();
+            _conexao.Query<ClienteModel>(ClienteBuilderSql.ListarTodosComCamposSomenteIdENome()).ToList();
 
         public IList<ClienteModel> ListarPelaQuantidadeSomenteIdENome(int quantidade) =>
             _conexao.Query<ClienteModel>(ClienteSql.ListarPelaQuantidadeComCamposSomenteIdENome, new { quantidade }).ToList();

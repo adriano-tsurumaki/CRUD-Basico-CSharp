@@ -43,4 +43,8 @@
     <Folder Include="Features\Dashboards\Dao\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\BuildQuery\BuildQuery.csproj" />
+  </ItemGroup>
+
 </Project>

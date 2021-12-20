@@ -2,6 +2,7 @@ using CRUD___Adriano.Features;
 using CRUD___Adriano.Features.Configuration;
 using CRUD___Adriano.Features.Configuration.Login.Controller;
 using CRUD___Adriano.Features.IoC;
+using CRUD___Adriano.SqlMapper;
 using System;
 using System.Windows.Forms;
 
@@ -16,6 +17,7 @@ namespace CRUD___Adriano
         static void Main()
         {
             FluentMap.InicializarMap();
+            ConfigMap.InicializarMap();
 
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
