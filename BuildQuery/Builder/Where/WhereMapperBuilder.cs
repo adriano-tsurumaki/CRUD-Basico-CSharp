@@ -59,6 +59,16 @@ namespace BuildQuery.Builder.Where
                     else
                         sql.AppendLine($"{_tableModel.Alias}.{propertyInfo.Name} = @{propertyInfo.Name}{GetStringInOperatorWhereEnum(model.OperatorInFinalLine)}");
                 }
+                else if (model.Expression is UnaryExpression unaryExpression)
+                {
+                    var propertyInfo = (unaryExpression.Operand as MemberExpression).Member as PropertyInfo;
+
+                    var propertyMapFromMapper = propertyMaps.FirstOrDefault(x => x.PropertyInfo == propertyInfo);
+                    if (propertyMapFromMapper != null)
+                        sql.AppendLine($"{_tableModel.Alias}.{propertyMapFromMapper.ColumnName} = @{propertyMapFromMapper.PropertyInfo.Name}{GetStringInOperatorWhereEnum(model.OperatorInFinalLine)}");
+                    else
+                        sql.AppendLine($"{_tableModel.Alias}.{propertyInfo.Name} = @{propertyInfo.Name}{GetStringInOperatorWhereEnum(model.OperatorInFinalLine)}");
+                }
             }
         }
 

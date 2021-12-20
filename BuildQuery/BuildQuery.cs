@@ -396,6 +396,8 @@ namespace BuildQuery
 
             if (TrimAllExcessWhiteSpace(where.ToString()) == "where ") return new StringBuilder();
 
+            where.Remove(where.Length - 8, 8);
+
             return where;
         }
 
