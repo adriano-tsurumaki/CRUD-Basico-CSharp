@@ -11,5 +11,13 @@ namespace CRUD___Adriano.Features.Cliente.Sql
             .Select<UsuarioModel>(u => u.IdUsuario, u => u.Nome)
             .InnerJoin<UsuarioModel>(u => u.IdUsuario, c => c.IdUsuario)
             .Build();
+
+        public static string Selecionar() =>
+            new BuildQuery<ClienteModel>()
+            .Select(c => c.ValorLimite, c => c.Observacao)
+            .Select<UsuarioModel>(u => u.IdUsuario, u => u.Nome, u => u.Sobrenome, u => u.Sexo, u => u.Cpf, u => u.DataNascimento)
+            .InnerJoin<UsuarioModel>(u => u.IdUsuario, c => c.IdUsuario)
+            .Where<UsuarioModel>(u => u.IdUsuario)
+            .Build();
     }
 }

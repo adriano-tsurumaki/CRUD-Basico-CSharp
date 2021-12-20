@@ -59,6 +59,11 @@ namespace CRUD___Adriano.Features.Cliente.Sql
         public static readonly string SelecionarQuantidadeDeTodos =
             @"select count(*) from Cliente";
 
+        public static readonly string SelecionarEmail =
+            @"select e.id, e.nome from Email e
+            inner join Usuario u on u.id = e.id_usuario
+            where u.id = @id";
+
         public static readonly string ValorLimiteRestante = 
             @"select u.nome, c.valor_limite - sum(fp.valor_pago) as ValorLimite from Venda v
             inner join Usuario u on u.id = v.id_cliente
