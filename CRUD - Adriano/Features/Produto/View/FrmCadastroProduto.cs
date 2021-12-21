@@ -40,34 +40,64 @@ namespace CRUD___Adriano.Features.Produto.View
                 MessageBox.Show("Obrigatório selecionar um fornecedor para o produto!");
                 return false;
             }
-            else if (txtCodigoBarras.NuloOuVazio())
+
+            if (txtCodigoBarras.NuloOuVazio())
             {
                 MessageBox.Show("O campo codigo de barras não pode ser nula ou vazia!");
                 return false;
             }
-            else if (txtNome.NuloOuVazio())
+
+            if (txtNome.NuloOuVazio())
             {
                 MessageBox.Show("O campo nome não pode ser nula ou vazia!");
                 return false;
             }
-            else if (txtQuantidade.NuloOuVazio())
-            {
-                MessageBox.Show("O campo quantidade não pode ser nula ou vazia!");
-                return false;
-            }
-            else if (txtPrecoBruto.NuloOuVazio())
+
+            if (txtPrecoBruto.NuloOuVazio())
             {
                 MessageBox.Show("O campo preco bruto não pode ser nula ou vazia!");
                 return false;
             }
-            else if (txtLucro.NuloOuVazio())
+
+            if (!ValidarQuantidade() || !ValidarLucro()) return false;
+
+            _produtoModel.PrecoBruto = txtPrecoBruto.Texto;
+            _produtoModel.Lucro = txtLucro.Texto.PorcentoOuZero();
+
+            return true;
+        }
+
+        public bool ValidarQuantidade()
+        {
+            if (txtQuantidade.NuloOuVazio())
+            {
+                MessageBox.Show("O campo quantidade não pode ser nula ou vazia!");
+                return false;
+            }
+
+            if (txtQuantidade.Texto.DoubleOuZero() < 0)
+            {
+                MessageBox.Show("A quantidade não pode receber valor negativo!");
+                return false;
+            }
+
+            return true;
+        }
+
+        public bool ValidarLucro()
+        {
+            if (txtLucro.NuloOuVazio())
             {
                 MessageBox.Show("O campo lucro não pode ser nula ou vazia!");
                 return false;
             }
 
-            _produtoModel.PrecoBruto = txtPrecoBruto.Texto;
-            _produtoModel.Lucro = txtLucro.Texto.PorcentoOuZero();
+            if (txtLucro.Texto.DoubleOuZero() <= 0)
+            {
+                MessageBox.Show("O lucro não pode ser zero ou valor negativo!");
+                return false;
+            }
+
             return true;
         }
 
