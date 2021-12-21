@@ -15,6 +15,8 @@ namespace CRUD___Adriano.Features.Usuario.View
         {
             InitializeComponent();
             _controller = controller;
+            gridView.ConfiguracaoPadrao();
+            gridView.ConfiguracaoHeaderPadrao();
         }
 
         public void DefinirNomePrevio(string nome)

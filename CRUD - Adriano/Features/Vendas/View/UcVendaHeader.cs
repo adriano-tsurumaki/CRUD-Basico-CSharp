@@ -28,6 +28,9 @@ namespace CRUD___Adriano.Features.Vendas.View
         {
             var clienteModel = ConfigNinject.ObterInstancia<BuscarUsuarioController<ClienteModel>>()
                 .DefinirTituloDoForm("Listagem de Clientes").RetornarUsuarioSelecionado();
+
+            if (string.IsNullOrEmpty(clienteModel.Nome)) return;
+
             lblCliente.Text = clienteModel.Nome;
             EventDefinirIdCliente?.Invoke(clienteModel);
         }
@@ -36,6 +39,9 @@ namespace CRUD___Adriano.Features.Vendas.View
         {
             var colaboradorModel = ConfigNinject.ObterInstancia<BuscarUsuarioController<ColaboradorModel>>()
                 .DefinirTituloDoForm("Listagem de Colaboradores").RetornarUsuarioSelecionado();
+
+            if (string.IsNullOrEmpty(colaboradorModel.Nome)) return;
+
             lblVendedor.Text = colaboradorModel.Nome;
             EventDefinirIdColaborador?.Invoke(colaboradorModel);
         }
