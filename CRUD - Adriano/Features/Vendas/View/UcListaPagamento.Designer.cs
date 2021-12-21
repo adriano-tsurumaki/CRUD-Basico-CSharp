@@ -32,7 +32,10 @@ namespace CRUD___Adriano.Features.Vendas.View
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.gridView = new System.Windows.Forms.DataGridView();
+            this.pnlTituloListaPagamento = new System.Windows.Forms.Panel();
+            this.lblTituloListaPagamento = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.gridView)).BeginInit();
+            this.pnlTituloListaPagamento.SuspendLayout();
             this.SuspendLayout();
             // 
             // gridView
@@ -64,15 +67,37 @@ namespace CRUD___Adriano.Features.Vendas.View
             this.gridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridView.EnableHeadersVisualStyles = false;
             this.gridView.GridColor = System.Drawing.Color.WhiteSmoke;
-            this.gridView.Location = new System.Drawing.Point(0, 0);
+            this.gridView.Location = new System.Drawing.Point(0, 43);
             this.gridView.Name = "gridView";
             this.gridView.RowHeadersVisible = false;
             this.gridView.RowTemplate.Height = 25;
             this.gridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridView.Size = new System.Drawing.Size(643, 490);
+            this.gridView.Size = new System.Drawing.Size(643, 447);
             this.gridView.TabIndex = 7;
             this.gridView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.GridView_CellFormatting);
             this.gridView.MouseDown += new System.Windows.Forms.MouseEventHandler(this.GridView_MouseDown);
+            // 
+            // pnlTituloListaPagamento
+            // 
+            this.pnlTituloListaPagamento.Controls.Add(this.lblTituloListaPagamento);
+            this.pnlTituloListaPagamento.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlTituloListaPagamento.Location = new System.Drawing.Point(0, 0);
+            this.pnlTituloListaPagamento.Name = "pnlTituloListaPagamento";
+            this.pnlTituloListaPagamento.Size = new System.Drawing.Size(643, 43);
+            this.pnlTituloListaPagamento.TabIndex = 20;
+            // 
+            // lblTituloListaPagamento
+            // 
+            this.lblTituloListaPagamento.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblTituloListaPagamento.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblTituloListaPagamento.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblTituloListaPagamento.ForeColor = System.Drawing.Color.White;
+            this.lblTituloListaPagamento.Location = new System.Drawing.Point(0, 0);
+            this.lblTituloListaPagamento.Name = "lblTituloListaPagamento";
+            this.lblTituloListaPagamento.Size = new System.Drawing.Size(643, 43);
+            this.lblTituloListaPagamento.TabIndex = 1;
+            this.lblTituloListaPagamento.Text = "Lista de pagamento";
+            this.lblTituloListaPagamento.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // UcListaPagamento
             // 
@@ -80,9 +105,11 @@ namespace CRUD___Adriano.Features.Vendas.View
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
             this.Controls.Add(this.gridView);
+            this.Controls.Add(this.pnlTituloListaPagamento);
             this.Name = "UcListaPagamento";
             this.Size = new System.Drawing.Size(643, 490);
             ((System.ComponentModel.ISupportInitialize)(this.gridView)).EndInit();
+            this.pnlTituloListaPagamento.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -90,5 +117,7 @@ namespace CRUD___Adriano.Features.Vendas.View
         #endregion
 
         private System.Windows.Forms.DataGridView gridView;
+        private System.Windows.Forms.Panel pnlTituloListaPagamento;
+        internal System.Windows.Forms.Label lblTituloListaPagamento;
     }
 }

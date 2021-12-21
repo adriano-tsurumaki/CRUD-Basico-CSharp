@@ -37,14 +37,19 @@ namespace CRUD___Adriano.Features.Vendas.View
             this.btnConfirm = new System.Windows.Forms.Button();
             this.btnLimparTodosDescontos = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.pnlTituloDesconto = new System.Windows.Forms.Panel();
+            this.lblTituloDesconto = new System.Windows.Forms.Label();
+            this.pnlBody = new System.Windows.Forms.Panel();
             this.pnlTopo.SuspendLayout();
+            this.pnlTituloDesconto.SuspendLayout();
+            this.pnlBody.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlTopo
             // 
             this.pnlTopo.Controls.Add(this.lblVoltar);
             this.pnlTopo.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlTopo.Location = new System.Drawing.Point(0, 0);
+            this.pnlTopo.Location = new System.Drawing.Point(0, 43);
             this.pnlTopo.Name = "pnlTopo";
             this.pnlTopo.Size = new System.Drawing.Size(376, 37);
             this.pnlTopo.TabIndex = 0;
@@ -68,7 +73,7 @@ namespace CRUD___Adriano.Features.Vendas.View
             this.checkDescontoGeral.AutoSize = true;
             this.checkDescontoGeral.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.checkDescontoGeral.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.checkDescontoGeral.Location = new System.Drawing.Point(32, 66);
+            this.checkDescontoGeral.Location = new System.Drawing.Point(22, 24);
             this.checkDescontoGeral.Name = "checkDescontoGeral";
             this.checkDescontoGeral.Size = new System.Drawing.Size(147, 25);
             this.checkDescontoGeral.TabIndex = 1;
@@ -83,13 +88,14 @@ namespace CRUD___Adriano.Features.Vendas.View
             this.txtDesconto.BorderSize = 2;
             this.txtDesconto.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txtDesconto.ForeColor = System.Drawing.Color.DimGray;
-            this.txtDesconto.Location = new System.Drawing.Point(32, 135);
+            this.txtDesconto.Location = new System.Drawing.Point(22, 93);
             this.txtDesconto.Margin = new System.Windows.Forms.Padding(4);
             this.txtDesconto.MaxLength = 32767;
             this.txtDesconto.Multiline = false;
             this.txtDesconto.Name = "txtDesconto";
             this.txtDesconto.Padding = new System.Windows.Forms.Padding(7);
             this.txtDesconto.PasswordChar = false;
+            this.txtDesconto.ReadOnly = false;
             this.txtDesconto.SelectionLength = 0;
             this.txtDesconto.SelectionStart = 0;
             this.txtDesconto.Size = new System.Drawing.Size(138, 36);
@@ -102,7 +108,7 @@ namespace CRUD___Adriano.Features.Vendas.View
             this.lblDesconto.AutoSize = true;
             this.lblDesconto.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblDesconto.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblDesconto.Location = new System.Drawing.Point(32, 105);
+            this.lblDesconto.Location = new System.Drawing.Point(22, 63);
             this.lblDesconto.Name = "lblDesconto";
             this.lblDesconto.Size = new System.Drawing.Size(107, 21);
             this.lblDesconto.TabIndex = 4;
@@ -116,7 +122,7 @@ namespace CRUD___Adriano.Features.Vendas.View
             this.btnConfirm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnConfirm.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnConfirm.ForeColor = System.Drawing.Color.White;
-            this.btnConfirm.Location = new System.Drawing.Point(210, 66);
+            this.btnConfirm.Location = new System.Drawing.Point(200, 24);
             this.btnConfirm.Name = "btnConfirm";
             this.btnConfirm.Size = new System.Drawing.Size(144, 39);
             this.btnConfirm.TabIndex = 15;
@@ -132,7 +138,7 @@ namespace CRUD___Adriano.Features.Vendas.View
             this.btnLimparTodosDescontos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLimparTodosDescontos.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnLimparTodosDescontos.ForeColor = System.Drawing.Color.White;
-            this.btnLimparTodosDescontos.Location = new System.Drawing.Point(32, 198);
+            this.btnLimparTodosDescontos.Location = new System.Drawing.Point(22, 156);
             this.btnLimparTodosDescontos.Name = "btnLimparTodosDescontos";
             this.btnLimparTodosDescontos.Size = new System.Drawing.Size(322, 39);
             this.btnLimparTodosDescontos.TabIndex = 16;
@@ -148,7 +154,7 @@ namespace CRUD___Adriano.Features.Vendas.View
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnCancel.ForeColor = System.Drawing.Color.White;
-            this.btnCancel.Location = new System.Drawing.Point(210, 132);
+            this.btnCancel.Location = new System.Drawing.Point(200, 90);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(144, 39);
             this.btnCancel.TabIndex = 17;
@@ -156,23 +162,57 @@ namespace CRUD___Adriano.Features.Vendas.View
             this.btnCancel.UseVisualStyleBackColor = false;
             this.btnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
             // 
+            // pnlTituloDesconto
+            // 
+            this.pnlTituloDesconto.Controls.Add(this.lblTituloDesconto);
+            this.pnlTituloDesconto.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlTituloDesconto.Location = new System.Drawing.Point(0, 0);
+            this.pnlTituloDesconto.Name = "pnlTituloDesconto";
+            this.pnlTituloDesconto.Size = new System.Drawing.Size(376, 43);
+            this.pnlTituloDesconto.TabIndex = 18;
+            // 
+            // lblTituloDesconto
+            // 
+            this.lblTituloDesconto.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblTituloDesconto.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblTituloDesconto.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblTituloDesconto.ForeColor = System.Drawing.Color.White;
+            this.lblTituloDesconto.Location = new System.Drawing.Point(0, 0);
+            this.lblTituloDesconto.Name = "lblTituloDesconto";
+            this.lblTituloDesconto.Size = new System.Drawing.Size(376, 43);
+            this.lblTituloDesconto.TabIndex = 1;
+            this.lblTituloDesconto.Text = "Desconto";
+            this.lblTituloDesconto.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // pnlBody
+            // 
+            this.pnlBody.Controls.Add(this.btnCancel);
+            this.pnlBody.Controls.Add(this.checkDescontoGeral);
+            this.pnlBody.Controls.Add(this.btnLimparTodosDescontos);
+            this.pnlBody.Controls.Add(this.txtDesconto);
+            this.pnlBody.Controls.Add(this.btnConfirm);
+            this.pnlBody.Controls.Add(this.lblDesconto);
+            this.pnlBody.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlBody.Location = new System.Drawing.Point(0, 80);
+            this.pnlBody.Name = "pnlBody";
+            this.pnlBody.Size = new System.Drawing.Size(376, 218);
+            this.pnlBody.TabIndex = 19;
+            // 
             // UcDescontoVenda
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
-            this.Controls.Add(this.btnCancel);
-            this.Controls.Add(this.btnLimparTodosDescontos);
-            this.Controls.Add(this.btnConfirm);
-            this.Controls.Add(this.lblDesconto);
-            this.Controls.Add(this.txtDesconto);
-            this.Controls.Add(this.checkDescontoGeral);
+            this.Controls.Add(this.pnlBody);
             this.Controls.Add(this.pnlTopo);
+            this.Controls.Add(this.pnlTituloDesconto);
             this.Name = "UcDescontoVenda";
-            this.Size = new System.Drawing.Size(376, 255);
+            this.Size = new System.Drawing.Size(376, 298);
             this.pnlTopo.ResumeLayout(false);
+            this.pnlTituloDesconto.ResumeLayout(false);
+            this.pnlBody.ResumeLayout(false);
+            this.pnlBody.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -186,5 +226,8 @@ namespace CRUD___Adriano.Features.Vendas.View
         public System.Windows.Forms.Button btnConfirm;
         public System.Windows.Forms.Button btnLimparTodosDescontos;
         public System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Panel pnlTituloDesconto;
+        internal System.Windows.Forms.Label lblTituloDesconto;
+        private System.Windows.Forms.Panel pnlBody;
     }
 }
