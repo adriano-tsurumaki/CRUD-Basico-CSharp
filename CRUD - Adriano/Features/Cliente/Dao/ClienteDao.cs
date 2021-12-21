@@ -117,7 +117,7 @@ namespace CRUD___Adriano.Features.Cliente.Dao
         }
 
         public IList<ClienteModel> ListarTodosOsClientesSomenteIdENome() =>
-            _conexao.Query<ClienteModel>(ClienteBuilderSql.ListarTodosComCamposSomenteIdENome()).ToList();
+            _conexao.Query<ClienteModel>(ClienteSql.ListarTodosComCamposSomenteIdENome).ToList();
 
         public IList<ClienteModel> ListarPelaQuantidadeSomenteIdENome(int quantidade) =>
             _conexao.Query<ClienteModel>(ClienteSql.ListarPelaQuantidadeComCamposSomenteIdENome, new { quantidade }).ToList();
@@ -127,7 +127,7 @@ namespace CRUD___Adriano.Features.Cliente.Dao
 
         public ClienteModel SelecionarCliente(int id)
         {
-            var cliente = _conexao.QuerySingleOrDefault<ClienteModel>(ClienteBuilderSql.Selecionar(), new { IdUsuario = id });
+            var cliente = _conexao.QuerySingleOrDefault<ClienteModel>(ClienteSql.Selecionar, new { id });
 
             cliente.Endereco = _conexao.QuerySingleOrDefault<EnderecoModel>(EnderecoSql.SelecionarUm, new { id });
             cliente.Emails = _conexao.Query<EmailModel>(EmailSql.ListarTodosPorId, new { id }).ToList();
